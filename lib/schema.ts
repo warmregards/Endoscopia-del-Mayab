@@ -91,7 +91,7 @@ export function serviceJSONLD({
    ================ */
 
 export function joinUrl(base: string, rel: string) {
-  const b = (base || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const b = (base || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
   const r = rel.startsWith("/") ? rel : `/${rel}`
   return `${b}${r}`
 }

@@ -1,7 +1,7 @@
 // /lib/clinic.ts
 export const CLINIC = {
   name: "Endoscopia del Mayab",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, ""),
   phone: "+52 999 236 0153",
   streetAddress: "Hospital Amerimed Mérida, Consultorio 517, Chichí Suárez",
   postalCode: "97306",

@@ -15,7 +15,7 @@ export const metadata = metaFor("cierre_fistulas_clips")
 
 
 export default function CierreFistulasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
     <>

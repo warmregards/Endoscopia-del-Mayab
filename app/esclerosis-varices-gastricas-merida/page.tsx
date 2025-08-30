@@ -14,7 +14,7 @@ export const revalidate = 86400
 export const metadata = metaFor("esclerosis_varices_gastricas")
 
 export default function EsclerosisVaricesGastricasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
     <div className="min-h-screen bg-background">

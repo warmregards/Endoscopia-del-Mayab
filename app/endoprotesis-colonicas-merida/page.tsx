@@ -27,7 +27,7 @@ export const revalidate = 86400
 export const metadata = metaFor("endoprotesis_colonicas")
 
 export default function EndoprotesisColonicasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
     <>

@@ -30,7 +30,7 @@ export const revalidate = 86400
 export const metadata = metaFor("sutura_endoscopica")
 
 export default function SuturaEndoscopicaPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
     <>

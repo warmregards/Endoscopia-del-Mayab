@@ -14,7 +14,7 @@ export default function Faq({
   jsonldIdOverride,
 }: Props) {
   // Resolve base + path → stable @id for JSON‑LD
-  const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
   const { path } = routeKey ? ROUTES_SEO[routeKey] : { path: "/" }
 
   // Pick FAQs: explicit list wins, else by route

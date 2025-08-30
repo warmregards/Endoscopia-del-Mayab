@@ -28,7 +28,7 @@ export const revalidate = 86400
 export const metadata = metaFor("endoprotesis_biliares")
 
 export default function EndoprotesisBiliaresPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://endoscopiadelmayab.com").replace(/\/$/, "")
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
     <>

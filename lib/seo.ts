@@ -41,7 +41,7 @@ interface BuildMetaParams {
 // Constants & helpers
 // ─────────────────────────────────────────────
 const BRAND = "Endoscopia del Mayab"
-const DEFAULT_SITE = "https://endoscopiadelmayab.com"
+const DEFAULT_SITE = "https://www.endoscopiadelmayab.com"
 /** Make sure this file exists under /public (or change the path). */
 const DEFAULT_OG_REL = "/omar-open-graph.jpg"
 
