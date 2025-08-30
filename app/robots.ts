@@ -2,10 +2,13 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const host = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
+  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com"
+  const url = new URL(rawBase)
+  const host = url.hostname // ✅ just "www.endoscopiadelmayab.com"
+
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: [`${host}/sitemap.xml`],
+    sitemap: [`${url.origin}/sitemap.xml`],
     host,
   }
 }
