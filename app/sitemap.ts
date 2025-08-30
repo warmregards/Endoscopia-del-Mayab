@@ -15,15 +15,15 @@ type RouteCfg = {
 
 const routes: RouteCfg[] = [
   // Core
-  { path: "/", changeFrequency: "weekly", priority: 1.0 }, 🟢
-  { path: "/endoscopia-merida", changeFrequency: "weekly", priority: 0.9 }, 🟢
-  { path: "/colonoscopia-merida", changeFrequency: "weekly", priority: 0.9 }, 🟢
-  { path: "/panendoscopia-merida", changeFrequency: "weekly", priority: 0.85 }, 🟢
+  { path: "/", changeFrequency: "weekly", priority: 1.0 },
+  { path: "/endoscopia-merida", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/colonoscopia-merida", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/panendoscopia-merida", changeFrequency: "weekly", priority: 0.85 },
 
   // Terapéuticas / avanzadas
-  { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 }, 🟢
-  { path: "/ligadura-varices-esofagicas-merida", changeFrequency: "monthly", priority: 0.75 }, 🟢
-  { path: "/gastrostomia-endoscopica-peg-merida", changeFrequency: "monthly", priority: 0.75 }, 🟢
+  { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/ligadura-varices-esofagicas-merida", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/gastrostomia-endoscopica-peg-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/extraccion-cuerpos-extranos-endoscopia-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/dilatacion-esofagica-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/dilatacion-biliar-merida", changeFrequency: "monthly", priority: 0.7 },
@@ -33,14 +33,14 @@ const routes: RouteCfg[] = [
   { path: "/endoprotesis-duodenales-merida", changeFrequency: "monthly", priority: 0.7 },
   { path: "/endoprotesis-colonicas-merida", changeFrequency: "monthly", priority: 0.7 },
   { path: "/cierre-fistulas-clips-endoscopicos-merida", changeFrequency: "monthly", priority: 0.7 },
-  { path: "/sutura-endoscopica-merida", changeFrequency: "monthly", priority: 0.7 }, 🟢
+  { path: "/sutura-endoscopica-merida", changeFrequency: "monthly", priority: 0.7 },
   { path: "/diseccion-endoscopica-submucosa-esd-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/reseccion-endoscopica-mucosa-emr-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/apc-coagulacion-plasma-argon-merida", changeFrequency: "monthly", priority: 0.7 },
 
   // Otros
-  { path: "/retiro-balon-gastrico-merida", changeFrequency: "monthly", priority: 0.7 }, 🟢
-  { path: "/emergencias-digestivas-merida", changeFrequency: "weekly", priority: 0.85 }, 🟢
+  { path: "/retiro-balon-gastrico-merida", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/emergencias-digestivas-merida", changeFrequency: "weekly", priority: 0.85 },
   { path: "/consultas-digestivas-merida", changeFrequency: "weekly", priority: 0.8 },
 
   // Institucional
