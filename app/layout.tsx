@@ -116,7 +116,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ServiceJsonLdAuto />
         </Suspense>
 
-        <ScrollToTop />
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
 
 
         {/* A11y skip link */}

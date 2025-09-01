@@ -22,8 +22,6 @@ export const CLINIC = {
   specialties: ["Endoscopy"],
   aggregateRating: { ratingValue: 5.0, reviewCount: 18 },
   sameAs: [
-    "https://www.omar.doctor",
-    "https://www.doctoralia.com.mx/omar-quiroz/cirujano-bariatra-cirujano-general-endoscopista/yucatan",
     "https://www.youtube.com/channel/UCCENiT7n0qk8mXt-xBmRxxg",
     "https://www.facebook.com/dromarquiroz",
     "https://www.facebook.com/profile.php?id=61577159683148",
