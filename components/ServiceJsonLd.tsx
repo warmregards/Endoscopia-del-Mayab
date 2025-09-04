@@ -1,3 +1,4 @@
+// components/ServiceJsonLd.tsx  (SERVER COMPONENT)
 "use client";
 
 import Script from "next/script";
@@ -22,7 +23,7 @@ type Props = {
 
 export default function ServiceJsonLd({
   routeKey,
-  imageUrl = `${CLINIC.url}/omar-open`,
+  imageUrl = `${CLINIC.url}/omar-open-graph.jpg`,
   rating,
   pricingKeyOverride,
 }: Props) {

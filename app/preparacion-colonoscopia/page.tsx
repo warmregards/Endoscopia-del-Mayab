@@ -38,7 +38,7 @@ export default function DynamicColonoscopyPrep() {
     if (appointmentDate && appointmentTime && patientName) setShowInstructions(true);
   };
 
-  // ---- Print filename: "<first>-colonoscopia-<mes>-<día>-<HHmm>"
+  // ---- Print filename: "<first>-colonoscopia-<mes>-<d��a>-<HHmm>"
   const generateFileName = () => {
     const t = calculateTimes();
     if (!t || !patientName) return "colonoscopia";
