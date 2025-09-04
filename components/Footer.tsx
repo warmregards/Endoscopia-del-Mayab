@@ -74,6 +74,9 @@ export default function Footer() {
             <Link href="/contacto" className="block text-primary-foreground/80 hover:text-link transition-colors">
               Contacto
             </Link>
+            <Link href="https://www.omar.doctor" className="block text-primary-foreground/80 hover:text-link transition-colors">
+              Cirugia General
+            </Link>
           </div>
         </div>
 
