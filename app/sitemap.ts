@@ -23,6 +23,7 @@ const routes: RouteCfg[] = [
   // Terapéuticas / avanzadas
   { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 },
   { path: "/ligadura-varices-esofagicas-merida", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/ligadura-hemorroides-internas-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/gastrostomia-endoscopica-peg-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/extraccion-cuerpos-extranos-endoscopia-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/dilatacion-esofagica-merida", changeFrequency: "monthly", priority: 0.75 },

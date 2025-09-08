@@ -14,6 +14,7 @@ const ICON_MAP: Record<string, any> = {
   "cpre-merida": ShieldCheck,
 
   "ligadura-varices-esofagicas-merida": Zap,
+  "ligadura-hemorroides-internas-merida": Zap,
   "gastrostomia-endoscopica-peg-merida": Settings,
   "extraccion-cuerpos-extranos-endoscopia-merida": Settings,
   "dilatacion-esofagica-merida": Activity,
@@ -42,6 +43,7 @@ const SLUG_TO_PRICING: Record<string, ServiceKey> = {
   "cpre-merida": "cpre",
 
   "ligadura-varices-esofagicas-merida": "ligadura_varices",
+  "ligadura-hemorroides-internas-merida": "ligadura_hemorroides",
   "gastrostomia-endoscopica-peg-merida": "gastrostomia_peg",
   "extraccion-cuerpos-extranos-endoscopia-merida": "extraccion_cuerpos_extranos",
   "dilatacion-esofagica-merida": "dilatacion_esofagica",
@@ -76,7 +78,7 @@ const ADVANCED = new Set([
   "reseccion-endoscopica-mucosa-emr-merida", "retiro-balon-gastrico-merida", "apc-coagulacion-plasma-argon-merida",
 ])
 const THERAPEUTIC = new Set([
-  "ligadura-varices-esofagicas-merida", "gastrostomia-endoscopica-peg-merida",
+  "ligadura-varices-esofagicas-merida", "ligadura-hemorroides-internas-merida", "gastrostomia-endoscopica-peg-merida",
   "extraccion-cuerpos-extranos-endoscopia-merida", "dilatacion-esofagica-merida",
   "esclerosis-varices-gastricas-merida", "dilatacion-biliar-merida", "dilatacion-colonica-merida",
 ])

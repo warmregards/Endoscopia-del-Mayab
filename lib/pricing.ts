@@ -6,6 +6,7 @@ export type ServiceKey =
   | "panendoscopia"
   | "cpre"
   | "ligadura_varices"
+  | "ligadura_hemorroides"  
   | "gastrostomia_peg"
   | "extraccion_cuerpos_extranos"
   | "dilatacion_esofagica"
@@ -37,6 +38,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   colonoscopia: { from: 5000, currency: "MXN", label: "Colonoscopia" },
   panendoscopia: { from: 4500, currency: "MXN", label: "Panendoscopia" },
   cpre: { from: 24700, currency: "MXN", label: "CPRE" },
+  ligadura_hemorroides: { from: 17000, currency: "MXN", label: "Ligadura de hemorroides internas" },
   ligadura_varices: { from: 19000, currency: "MXN", label: "Ligadura de várices esofágicas" },
   gastrostomia_peg: { from: 19000, currency: "MXN", label: "Gastrostomía endoscópica (PEG)" },
   extraccion_cuerpos_extranos: { from: 9700, currency: "MXN", label: "Extracción de cuerpos extraños" },

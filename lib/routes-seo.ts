@@ -56,6 +56,13 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     descriptionExtra: "Prevención y control endoscópico de sangrado por várices.",
     key: "ligadura_varices",
   },
+  ligadura_hemorroides: {
+    service: "Ligadura de Hemorroides Internas",
+    path: "/ligadura-hemoroides-internas-merida",
+    titleSuffix: "Control de Hemoroides Internas",
+    descriptionExtra: "Prevención y control endoscópico de sangrado por hemmoroides.",
+    key: "ligadura_hemorroides",
+  },
   peg: {
     service: "Gastrostomía",
     path: "/gastrostomia-endoscopica-peg-merida",

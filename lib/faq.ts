@@ -235,6 +235,34 @@ export const ligaduraFaqs: FAQ[] = [
   },
 ]
 
+// LIGADURA DE HEMORROIDES FAQs - Grade 1-2 internal hemorrhoid treatment authority
+export const ligaduraHemorroidesFaqs: FAQ[] = [
+  {
+    question: "¿Qué es la ligadura de hemorroides internas y cuándo está indicada en Mérida?",
+    answer:
+      "La ligadura de hemorroides es un procedimiento que coloca bandas elásticas especiales en la base de hemorroides internas para cortar su irrigación sanguínea. Está indicada en hemorroides grado 1 (sangrado sin prolapso) y grado 2 (prolapso que regresa espontáneamente). Síntomas que requieren tratamiento: sangrado rectal persistente, dolor al sentarse, sensación de evacuación incompleta, prolapso recurrente. Las hemorroides grado 3-4 usualmente requieren cirugía abierta para resultados duraderos."
+  },
+  {
+    question: "¿Cuánto cuesta la ligadura de hemorroides en Hospital Amerimed, Mérida?",
+    answer: `El costo de ligadura de hemorroides en Mérida es desde ${price("ligadura_hemorroides")}  con precio fijo transparente. Incluye: consulta proctológica completa, sedación consciente, bandas especializadas, uso de quirófano en Hospital Amerimed, y seguimiento post-procedimiento por 30 días. Comparado con cirugía en hospitales grandes (Star Médica/Faro del Mayab) que cuesta $50,000-80,000 MXN, la ligadura es 70% más económica y ambulatoria.`
+  },
+  {
+    question: "¿Cómo se realiza la ligadura de hemorroides y cuánto dura en Mérida?",
+    answer:
+      "Procedimiento ambulatorio bajo sedación consciente en Hospital Amerimed. Se introduce un anoscopio para visualizar hemorroides internas, luego se coloca un ligador especial que aplica bandas elásticas en la base de cada hemorroide. Procedimiento dura 5-10 minutos, observación post-procedimiento 1-2 horas. Las bandas cortan irrigación sanguínea y las hemorroides se secan y caen naturalmente en 3-7 días sin que el paciente se dé cuenta. Técnica mínimamente invasiva sin cortes ni suturas."
+  },
+  {
+    question: "¿Qué tan efectiva es la ligadura vs cirugía de hemorroides en Mérida?",
+    answer:
+      "Ligadura tiene 85-90% efectividad en hemorroides grado 1 y 70-80% en grado 2, con mínimas complicaciones. Ventajas vs cirugía: sin hospitalización, retorno a actividades en 24-48 horas, sin dolor severo post-operatorio, costo 70% menor. La cirugía (hemorroidectomía) se reserva para grado 3-4 o cuando ligadura falla. Dr. Omar Quiroz tiene ventaja única: si durante ligadura detecta que necesitas cirugía, puede realizarla el mismo día en Hospital Amerimed sin esperas adicionales."
+  },
+  {
+    question: "¿Qué cuidados necesito después de ligadura de hemorroides en Mérida?",
+    answer:
+      "Recuperación típica 1-2 semanas con cuidados simples: evitar cargar peso >10kg por 2-3 semanas, mantener evacuaciones suaves con fibra y agua abundante, baños de asiento con agua tibia 2-3 veces al día, analgésicos suaves si hay molestias. Puedes bañarte normalmente y regresar a trabajo al día siguiente. Signos de alarma: sangrado abundante que no para en 2-3 días, dolor severo que no mejora, fiebre. Seguimiento incluido en precio sin costo adicional. Contacto directo Dr. Quiroz por 30 días."
+  },
+]
+
 // ------------------------------
 // SECONDARY / ADVANCED SERVICES
 // ------------------------------
@@ -760,6 +788,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   panendoscopia: panendoscopiaFaqs,
   cpre: cpreFaqs,
   ligadura: ligaduraFaqs,
+  ligadura_hemorroides: ligaduraHemorroidesFaqs,
   peg: gastrostomiaFaqs,
   extraccion: extraccionFaqs,
   dilatacion: dilatacionEsofagicaFaqs,

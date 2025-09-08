@@ -19,6 +19,7 @@ export const SERVICES: ServiceItem[] = [
 
   // Terapéuticos / avanzados
   { name: "Ligadura de Várices", slug: "ligadura-varices-esofagicas-merida", priceFrom: PRICING.ligadura_varices?.from },
+  { name: "Ligadura de Hemorroides", slug: "ligadura-hemorroides-internas-merida", priceFrom: PRICING.ligadura_hemorroides?.from },
   { name: "Gastrostomía", slug: "gastrostomia-endoscopica-peg-merida",       priceFrom: PRICING.gastrostomia_peg?.from },
   { name: "Extracción de Cuerpos Extraños", slug: "extraccion-cuerpos-extranos-endoscopia-merida", priceFrom: PRICING.extraccion_cuerpos_extranos?.from },
   { name: "Dilatación Esofágica", slug: "dilatacion-esofagica-merida",       priceFrom: PRICING.dilatacion_esofagica?.from },

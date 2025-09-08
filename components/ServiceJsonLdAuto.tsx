@@ -5,7 +5,7 @@ import ServiceJsonLd from "./ServiceJsonLd"
 import { ROUTES_SEO, type RouteKey } from "@/lib/routes-seo"
 
 const SERVICE_ROUTE_KEYS = new Set<RouteKey>([
-  "endoscopia","colonoscopia","panendoscopia","cpre","ligadura","peg","extraccion",
+  "endoscopia","colonoscopia","panendoscopia","cpre","ligadura","ligadura_hemorroides","peg","extraccion",
   "dilatacion","esclerosis_varices_gastricas","dilatacion_biliar","dilatacion_colonica",
   "endoprotesis_esofagicas","endoprotesis_biliares","endoprotesis_duodenales",
   "endoprotesis_colonicas","cierre_fistulas_clips","sutura_endoscopica","esd","emr",
