@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -33,11 +34,11 @@ export default function CierreFistulasPage() {
                   <span className="text-sm font-medium text-foreground">Procedimiento Avanzado</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Cierre de Fístulas con Clips Endoscópicos en Mérida | Dr. Omar Quiroz - Reparación Mínimamente Invasiva
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   El <strong>Cierre de Fístulas con Clips Endoscópicos</strong> en Mérida utiliza clips metálicos especializados para reparar perforaciones digestivas sin cirugía abierta. El Dr. Omar Quiroz realiza este procedimiento mínimamente invasivo en Hospital Amerimed. El precio varía según complejidad del caso, con costo transparente desde la consulta inicial.
                 </p>
 

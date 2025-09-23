@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("colonoscopia")
@@ -31,11 +32,11 @@ export default function ColonoscopiaPage() {
                   <span className="text-sm font-medium text-foreground">300+ Colonoscopias Anuales</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
                   Colonoscopia en Mérida - ${mxn(PRICING.colonoscopia.from)} Pesos Fijos | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-primary font-semibold">
+                <p className="`${inter.className} text-xl text-primary font-semibold`">
                   Prevención cáncer colorrectal con sedación consciente - Sin dolor, precio transparente
                 </p>
                 

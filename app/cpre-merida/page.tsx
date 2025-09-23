@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("cpre")
@@ -28,14 +29,14 @@ export default function CprePage() {
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent-light/20">
                   <Zap className="h-4 w-4 text-accent-strong" />
-                  <span className="text-sm font-medium text-foreground">100+ CPREs Anuales</span>
+                  <span className="text-sm font-medium text-foreground">50+ CPREs Anuales</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
-                  CPRE en Mérida - $24,700 Pesos Fijos | Dr. Omar Quiroz
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
+                  CPRE en Mérida - {mxn(PRICING.cpre.from)} Pesos Fijos | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-accent-strong font-semibold">
+                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                   Especialista en CPRE - Problemas biliares sin cirugía abierta
                 </p>
                 

@@ -25,6 +25,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -48,11 +49,11 @@ export default function EndoprotesisDuodenalesPage() {
                   <span className="text-sm font-medium text-green-700">Alternativa Paliativa No Quirúrgica</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Endoprótesis Duodenales en Mérida | Dr. Omar Quiroz - Tratamiento de Obstrucciones Duodenales
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   Las endoprótesis duodenales en Mérida son stents especializados que se colocan por endoscopia para 
                   tratar obstrucciones del duodeno. El Dr. Omar Quiroz realiza colocación de endoprótesis duodenales 
                   en Hospital Amerimed, Mérida, Yucatán, ofreciendo esta técnica paliativa para pacientes con 

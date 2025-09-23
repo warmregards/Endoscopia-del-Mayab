@@ -39,6 +39,7 @@ import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import Faq from "@/components/Faq"
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("consultas")
@@ -62,11 +63,11 @@ export default function ConsultasDigestivasPage() {
                   <span className="text-sm font-medium text-foreground">Consultas Digestivas Especializadas</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
                   Consultas Digestivas en Mérida - $800 | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-accent-strong font-semibold">
+                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                   No más "toma antiácidos y regresa en 6 meses" - Diagnóstico real y tratamiento efectivo
                 </p>
                 

@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -31,11 +32,11 @@ export default function DilatacionEsofagicaPage() {
                   <span className="text-sm font-medium text-blue-700">Alternativa a Cirugía Esofágica</span>
                 </div>
                 
-                <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+                <h1 className="`${montserrat.className} text-4xl sm:text-5xl font-bold text-gray-900 mb-6`">
                   Dilatación Esofágica en Mérida - {mxn(PRICING.dilatacion_esofagica.from)} | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="`${inter.className} text-xl text-gray-600 leading-relaxed`">
                   Tratamiento especializado para estenosis esofágica sin cirugía abierta. Balones graduados 
                   para dilatar el esófago de forma segura y efectiva.
                 </p>

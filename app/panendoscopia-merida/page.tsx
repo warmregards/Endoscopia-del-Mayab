@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("panendoscopia")
@@ -31,15 +32,15 @@ export default function PanendoscopiaPage() {
                   <span className="text-sm font-medium text-foreground">Estudio Completo Digestivo</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
                   Panendoscopia en Mérida - {mxn(PRICING.panendoscopia.from)} | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-accent-strong font-semibold">
+                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                   Endoscopia + Colonoscopia el mismo día - Diagnóstico completo digestivo
                 </p>
                 
-                <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
+                <div className="`${inter.className} space-y-4 text-lg text-foreground/80 leading-relaxed`">
                   <p>
                     ¿Síntomas digestivos arriba Y abajo? ¿Anemia sin causa? Panendoscopia evalúa todo el sistema digestivo en una sola cita con sedación.
                   </p>

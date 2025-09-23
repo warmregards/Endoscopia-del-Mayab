@@ -28,6 +28,7 @@ import ProceduresGrid from "@/components/ProceduresGrid"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("doctor")
@@ -51,11 +52,11 @@ export default function DoctorOmarQuirozPage() {
                   <span className="text-sm font-medium text-foreground">Triple Certificación CMCG</span>
                 </div>
                 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Dr. Omar Quiroz - Cirujano Bariátrico, General y Endoscopista en Mérida
                 </h1>
                 
-                <p className="text-xl text-accent-strong font-semibold">
+                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                   Más de 15 años transformando vidas en Mérida con procedimientos mínimamente invasivos y atención personalizada.
                 </p>
 

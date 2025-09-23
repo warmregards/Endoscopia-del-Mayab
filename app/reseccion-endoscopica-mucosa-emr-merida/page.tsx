@@ -24,6 +24,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -47,11 +48,11 @@ export default function EmrPage() {
                   <span className="text-sm font-medium text-blue-700">Alternativa a Cirugía de Pólipos</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Resección Endoscópica Mucosa (EMR) en Mérida | Dr. Omar Quiroz - Tratamiento de Pólipos Complejos
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La resección endoscópica mucosa (EMR) en Mérida es un procedimiento especializado para remover pólipos superficiales y lesiones pre-malignas sin cirugía abierta. El Dr. Omar Quiroz realiza EMR en Hospital Amerimed, Mérida, Yucatán, ofreciendo esta técnica de precisión con cotización personalizada según complejidad del caso.
                 </p>
 

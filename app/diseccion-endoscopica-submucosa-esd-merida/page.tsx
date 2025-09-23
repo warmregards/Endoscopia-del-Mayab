@@ -22,7 +22,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
-
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("esd")
@@ -46,11 +46,11 @@ export default function DilatacionSubmucosaPage() {
                   <span className="text-sm font-medium text-foreground">Técnica Oncológica Avanzada</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Dilatación Endoscópica Submucosa en Mérida | Dr. Omar Quiroz - Resección Completa de Lesiones
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La dilatación endoscópica submucosa en Mérida (ESD) es un procedimiento oncológico especializado para 
                   resección completa de lesiones submucosas sin cirugía abierta. El Dr. Omar Quiroz realiza disección 
                   submucosa en Hospital Amerimed, Mérida, Yucatán, ofreciendo esta técnica avanzada con precio bajo 

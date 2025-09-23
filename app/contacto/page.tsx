@@ -32,6 +32,7 @@ import ProceduresGrid from "@/components/ProceduresGrid"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400

@@ -24,6 +24,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -48,11 +49,11 @@ export default function LigaduraVaricesPage() {
                   <span className="text-sm font-medium text-red-700">Atención de emergencia disponible 24/7</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Ligadura de Várices Esofágicas en Mérida | Dr. Omar Quiroz
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   Procedimiento endoscópico para <strong>controlar y prevenir hemorragias por várices</strong>.
                   Atención inmediata en Hospital Amerimed (Mérida, Yucatán) y <strong>precio transparente</strong> desde {mxn(PRICING.ligadura_varices.from)}.
                 </p>

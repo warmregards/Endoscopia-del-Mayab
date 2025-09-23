@@ -23,6 +23,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("ligadura_hemorroides")
@@ -45,11 +46,11 @@ export default function LigaduraHemorroidesPage() {
                   <span className="text-sm font-medium text-blue-700">Alternativa Sin Cirugía</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Ligadura de Hemorroides Internas Mérida | Dr. Omar Quiroz - Tratamiento Sin Cirugía Mayor
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   ¿Sangrado rectal que te preocupa? ¿Hemorroides que duelen al sentarte? La ligadura de hemorroides internas en Mérida es una alternativa segura a la cirugía abierta. El Dr. Omar Quiroz trata hemorroides grado 1 y grado 2 en Hospital Amerimed usando bandas especiales que eliminan hemorroides sin cortes ni puntos.
                 </p>
                 

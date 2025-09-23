@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -34,10 +35,10 @@ export default function APCPage() {
 
               {/* Heading */}
               <div className="space-y-4">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-foreground leading-tight`">
                   <span className="text-accent-strong">APC</span> Coagulación con Plasma de Argón en Mérida
                 </h1>
-                <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed max-w-lg">
+                <p className="`${inter.className} text-lg sm:text-xl text-foreground/70 leading-relaxed max-w-lg`">
                   Tratamiento APC especializado en Mérida para hemostasia endoscópica efectiva. La coagulación con plasma de argón en Mérida ofrece control preciso de sangrado digestivo sin contacto directo con el tejido.
                 </p>
               </div>

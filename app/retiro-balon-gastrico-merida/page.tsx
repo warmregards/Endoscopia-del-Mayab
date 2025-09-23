@@ -24,6 +24,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -48,11 +49,11 @@ export default function RetiroBalonGastricoPage() {
             <span className="text-sm font-medium text-green-700">Procedimiento Bariátrico Especializado</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+          <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
             Retiro de Balón Gástrico en Mérida | Dr. Omar Quiroz - Extracción Segura con Sedación
           </h1>
 
-          <p className="text-lg text-foreground/80 leading-relaxed">
+          <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
             El retiro de balón gástrico en Mérida debe realizarse por un especialista experimentado. El Dr. Omar Quiroz realiza la extracción endoscópica en Hospital Amerimed, Mérida, Yucatán, con sedación profunda y protocolos de seguridad desde {mxn(PRICING.retiro_balon_gastrico.from)}.
           </p>
 

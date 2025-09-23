@@ -24,6 +24,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -47,11 +48,11 @@ export default function GastrostomiaEndoscopicaPEGPage() {
                   <span className="text-sm font-medium text-blue-700">Alimentación Segura</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Gastrostomía Endoscópica PEG en Mérida | Dr. Omar Quiroz - Alimentación Enteral Segura
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La gastrostomía endoscópica (PEG) en Mérida es el procedimiento gold standard para establecer acceso de alimentación enteral a largo plazo. El Dr. Omar Quiroz realiza colocación de PEG en Hospital Amerimed, Mérida, Yucatán, con técnica percutánea endoscópica desde {mxn(PRICING.gastrostomia_peg.from)}.
                 </p>
 

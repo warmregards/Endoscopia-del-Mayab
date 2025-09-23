@@ -20,6 +20,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -43,11 +44,11 @@ export default function EndoprotesisEsofagicasPage() {
                   <span className="text-sm font-medium text-blue-700">Stents Esofágicos Especializados</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Endoprótesis Esofágicas en Mérida | Dr. Omar Quiroz - Stent Esofágico para Estenosis y Fístulas
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   Las endoprótesis esofágicas en Mérida son stents metálicos autoexpandibles que el Dr. Omar Quiroz coloca por endoscopia para mantener abierto el esófago en casos de estenosis maligna, benigna o fístulas esofágicas. Este procedimiento especializado en Hospital Amerimed, Mérida, Yucatán, permite restaurar la deglución cuando las dilataciones no son suficientes, con precio personalizado según el tipo de prótesis requerida.
                 </p>
 

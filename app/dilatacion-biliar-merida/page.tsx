@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -33,11 +34,11 @@ export default function DilatacionBiliarPage() {
                   <span className="text-sm font-medium text-red-700">Urgencias Biliares 24/7</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Dilatación Biliar Endoscópica en Mérida | Dr. Omar Quiroz - Tratamiento Urgente de Estenosis Biliares
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La dilatación biliar endoscópica en Mérida es un procedimiento especializado para tratar estenosis de conductos biliares sin cirugía abierta. El Dr. Omar Quiroz realiza dilatación biliar en Hospital Amerimed, Mérida, Yucatán, ofreciendo esta técnica mínimamente invasiva con precio transparente desde $25,000 MXN.
                 </p>
 

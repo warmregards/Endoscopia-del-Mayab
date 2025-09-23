@@ -7,6 +7,7 @@ import ProceduresGrid from "@/components/ProceduresGrid"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("emergencias")
@@ -31,11 +32,11 @@ export default function EmergenciasDigestivasPage() {
                     <span className="text-sm font-medium text-foreground">Atención 24/7 Disponible</span>
                   </div>
 
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                  <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                     Emergencias Digestivas en Mérida – Atención Endoscópica Inmediata 24/7
                   </h1>
 
-                  <p className="text-xl text-accent-strong font-semibold">
+                  <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                     Dr. Omar Quiroz - Cirujano especialista disponible fines de semana cuando otros no están
                   </p>
 

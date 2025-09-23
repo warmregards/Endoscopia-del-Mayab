@@ -24,6 +24,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -47,11 +48,11 @@ export default function SuturaEndoscopicaPage() {
                   <span className="text-sm font-medium text-blue-700">Reparación Minimamente Invasiva</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Sutura Endoscópica en Mérida | Dr. Omar Quiroz - Reparación Segura de Perforaciones
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La sutura endoscópica en Mérida permite reparar defectos gastrointestinales sin cirugía abierta. 
                   El Dr. Omar Quiroz realiza sutura endoscópica en Hospital Amerimed, Mérida, Yucatán, utilizando 
                   dispositivos especializados para cerrar perforaciones, reforzar suturas y reparar fístulas con 

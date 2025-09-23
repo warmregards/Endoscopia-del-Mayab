@@ -27,6 +27,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -50,11 +51,11 @@ export default function ExtraccionCuerposExtranosPage() {
                   <span className="text-sm font-medium text-red-700">Atención de Emergencia 24/7</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
                   Extracción de Cuerpos Extraños Endoscopia Mérida | Dr. Omar Quiroz - Atención de Urgencia
                 </h1>
 
-                <p className="text-lg text-foreground/80 leading-relaxed">
+                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
                   La extracción endoscópica de cuerpos extraños en Mérida es un procedimiento de emergencia para retirar objetos atorados en esófago, estómago o duodeno. El Dr. Omar Quiroz realiza extracción de cuerpos extraños en Hospital Amerimed, Mérida, Yucatán, con disponibilidad de emergencia incluso fines de semana por {mxn(PRICING.extraccion_cuerpos_extranos.from)}.
                 </p>
 

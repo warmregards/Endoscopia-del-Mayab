@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 export const revalidate = 86400
 export const metadata = metaFor("endoscopia")
@@ -31,11 +32,11 @@ export default function EndoscopiaPage() {
                   <span className="text-sm font-medium text-foreground">500+ Endoscopias Anuales</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
                   Endoscopia en Mérida - {mxn(PRICING.endoscopia.from)} | Dr. Omar Quiroz
                 </h1>
                 
-                <p className="text-xl text-accent-strong font-semibold">
+                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
                   Endoscopia digestiva con sedación - Diagnóstico real de gastritis, úlceras y reflujo
                 </p>
                 

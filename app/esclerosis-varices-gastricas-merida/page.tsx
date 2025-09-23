@@ -8,6 +8,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
 
 
 export const revalidate = 86400
@@ -27,11 +28,11 @@ export default function EsclerosisVaricesGastricasPage() {
               <span>Control Especializado de Hemorragias</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight">
+            <h1 className="`${montserrat.className}text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight`">
               Esclerosis de Várices Gástricas en Mérida
             </h1>
             
-            <p className="text-xl text-foreground/80 leading-relaxed">
+            <p className="`${inter.className} text-xl text-foreground/80 leading-relaxed`">
               El Dr. Omar Quiroz ofrece tratamiento endoscópico especializado para el control de hemorragias por várices gástricas. Disponible 24/7 para emergencias en Hospital Amerimed, Mérida, Yucatán.
             </p>
 
