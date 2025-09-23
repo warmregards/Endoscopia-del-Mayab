@@ -41,36 +41,15 @@ export default function SiteHeader() {
             Endoscopia Mérida
           </Link>
 
-          {/* Servicios dropdown */}
-          <div className="relative group">
-            <button
-              type="button"
-              className="text-foreground/80 hover:text-link font-medium flex items-center"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Servicios
-              <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div className="absolute left-0 mt-2 w-56 bg-background rounded-md popover border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <div className="py-1">
-                {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className="block px-4 py-2 text-sm text-foreground/80 hover:bg-muted hover:text-foreground"
-                    data-cta="nav"
-                    data-cta-link={`service:${s.label}`}
-                  >
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
+          {/* Servicios link */}
+          <Link
+            href="/servicios"
+            className="text-foreground/80 hover:text-link font-medium flex items-center"
+            data-cta="nav"
+            data-cta-link="service:all"
+          >
+            Servicios
+          </Link>
           <Link
             href="/emergencias-digestivas-merida"
             className="text-foreground/80 hover:text-link font-medium"

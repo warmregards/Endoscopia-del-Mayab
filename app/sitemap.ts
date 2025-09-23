@@ -43,6 +43,7 @@ const routes: RouteCfg[] = [
   { path: "/retiro-balon-gastrico-merida", changeFrequency: "monthly", priority: 0.7 },
   { path: "/emergencias-digestivas-merida", changeFrequency: "weekly", priority: 0.85 },
   { path: "/consultas-digestivas-merida", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/servicios", changeFrequency: "weekly", priority: 0.8 },
 
   // Institucional
   { path: "/dr-omar-quiroz", changeFrequency: "monthly", priority: 0.7 },
