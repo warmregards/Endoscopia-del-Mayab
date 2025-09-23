@@ -325,7 +325,7 @@ export default function EndoscopiaPage() {
                 <span className="font-semibold text-foreground">Endoscopia por Reflujo</span>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 text-center">
                 <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
                   Endoscopia por Reflujo - Evalúa Daño Real del Esófago
                 </h2>
@@ -442,6 +442,26 @@ export default function EndoscopiaPage() {
         </div>
       </section>
 
+      {/* WHY CHOOSE US */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+            ¿Por Qué Elegir Endoscopia con Dr. Omar Quiroz?
+          </h2>
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+            Más de 15 años de experiencia, triple certificación y equipo Olympus 180 HD en Hospital Amerimed Mérida. Seguridad, precisión diagnóstica y precios claros en un solo lugar.
+          </p>
+          <div className="flex flex-wrap gap-6 justify-center">
+            <Link href="/colonoscopia-merida" className="text-accent-strong underline">
+              Ver costo de Colonoscopia
+            </Link>
+            <Link href="/cpre-merida" className="text-accent-strong underline">
+              Ver costo de CPRE
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* PROCEDURE SECTION */}
       <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -503,6 +523,23 @@ export default function EndoscopiaPage() {
               <span className="font-semibold text-foreground">Duración total:</span>
               <span className="text-foreground/70">15-25 minutos procedimiento</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RESULTS SECTION */}
+      <section className="py-16 sm:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+            Resultados y Tiempos de Entrega
+          </h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            Entregamos un reporte con fotos el mismo día del estudio, y resultados en USB inmediatos. Si se toman biopsias, el resultado de patología se entrega en 5–10 días, con consulta de revisión incluida.
+          </p>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
+            <Clock className="h-5 w-5 text-accent-strong" />
+            <span className="font-semibold text-foreground">Tiempo total:</span>
+            <span className="text-foreground/70">30-45 minutos</span>
           </div>
         </div>
       </section>

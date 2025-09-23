@@ -52,8 +52,49 @@ export default function EsclerosisVaricesGastricasPage() {
         </div>
       </section>
 
+      {/* PRICING SECTION */}
+      <section id="precio-varices-gastricas" className="py-16 sm:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+              Esclerosis de várices gástricas en Mérida: precio y qué incluye
+            </h2>
+            <p className="text-lg text-foreground/70">Desde {mxn(15000)} — sedación incluida</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
+            <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">¿Qué incluye?</h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                <span className="text-foreground/80">Sedación con anestesiólogo y monitoreo continuo</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                <span className="text-foreground/80">Endoscopia terapéutica con agente esclerosante</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                <span className="text-foreground/80">Materiales estándar y equipo Olympus HD</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                <span className="text-foreground/80">Primera valoración y plan de seguimiento</span>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-sm text-foreground/80">
+              <p>
+                <strong>Puede tener costo extra (según complejidad):</strong> mayor volumen de agente hemostático, dispositivos adicionales,
+                estancia hospitalaria/UCI, estudios de laboratorio/imagen y transfusiones. Siempre se explica y autoriza antes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHAT IS GASTRIC VARICES SCLEROTHERAPY */}
-      <section className="py-16 sm:py-24">
+      <section id="que-es" className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
@@ -128,7 +169,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* 4-STEP PROCESS */}
-      <section className="py-16 sm:py-24 bg-muted/30">
+      <section id="proceso" className="py-16 sm:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -196,14 +237,14 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* SYMPTOMS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="sintomas" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Reconoces Estos Síntomas de Sangrado por Várices Gástricas?
+              ¿Reconoces estos síntomas de sangrado por várices gástricas?
             </h2>
             <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Si tienes cirrosis y presentas estos síntomas, necesitas atención inmediata en Mérida
+              Si tienes cirrosis y presentas estos síntomas, busca atención inmediata
             </p>
           </div>
 
@@ -275,7 +316,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* PREPARATION SECTION */}
-      <section className="py-16 sm:py-24 bg-muted/30">
+      <section id="preparacion" className="py-16 sm:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -352,14 +393,14 @@ export default function EsclerosisVaricesGastricasPage() {
             <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
               <h3 className="font-semibold text-foreground mb-2">Casos de Emergencia</h3>
               <p className="text-foreground/80 text-sm">
-                Si sangras activamente, la preparación se modifica - prioridad es controlar hemorragia
+                        Si hay sangrado activo, la preparación se adapta: la prioridad es controlar la hemorragia de inmediato.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20">
               <h3 className="font-semibold text-foreground mb-2">Ubicación</h3>
               <p className="text-foreground/80 text-sm">
-                Hospital Amerimed, Chichí Suárez - estacionamiento gratuito
+                Hospital Amerimed, Chichí Suárez - estacionamiento disponible
               </p>
             </div>
           </div>
@@ -367,7 +408,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* RECOVERY SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="recuperacion" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -471,7 +512,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* CONTRAINDICATIONS SECTION */}
-      <section className="py-16 sm:py-24 bg-muted/30">
+      <section id="contraindicaciones" className="py-16 sm:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -538,7 +579,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* EMERGENCY VS ELECTIVE SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="urgente-o-cita" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -626,7 +667,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section className="py-16 sm:py-24">
+      <section id="ventaja-quirurgica" className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
@@ -806,7 +847,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* RELATED PROCEDURES */}
-      <section className="py-16 sm:py-24">
+      <section id="relacionados" className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -872,7 +913,7 @@ export default function EsclerosisVaricesGastricasPage() {
       </section>
 
       {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="faqs-esclerosis-varices" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Faq routeKey="esclerosis_varices_gastricas" />
         </div>

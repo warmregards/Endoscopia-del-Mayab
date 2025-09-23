@@ -9,25 +9,27 @@ import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
 import ScrollToTop from "@/components/ScrollToTop";
 
+// ✅ Use next/font; no extra <link> preconnects needed for fonts.
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-montserrat",
   weight: ["400", "600", "700", "900"],
+  variable: "--font-montserrat",
 });
+
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-open-sans",
   weight: ["400", "500", "600"],
+  variable: "--font-open-sans",
 });
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "");
 const isProd = process.env.NODE_ENV === "production";
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID; // ← public env var
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const defaultOg = `${siteUrl}/omar-open-graph.jpg`;
 
 export const metadata: Metadata = {
@@ -58,7 +60,6 @@ export const metadata: Metadata = {
         },
       }
     : { index: false, follow: false },
-  generator: "v0.app",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -68,18 +69,16 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     other: [{ rel: "manifest", url: "/site.webmanifest" }],
   },
+    generator: 'v0.app'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${montserrat.variable} ${openSans.variable}`}>
       <head>
-        {/* Perf preconnects */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* ❌ Remove Google Fonts preconnects — next/font inlines and preloads automatically. */}
 
-        {/* GTM (head) – only load in prod when ID exists */}
+        {/* GTM (head) – only in prod when ID exists */}
         {isProd && GTM_ID ? (
           <Script
             id="gtm-head"
@@ -97,8 +96,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ) : null}
       </head>
 
-      <body className="font-sans antialiased">
-        {/* GTM (noscript) */}
+      {/* ✅ Make Open Sans the default text font. Use Montserrat per-element for headings. */}
+      <body className={`${openSans.className} antialiased`}>
+        {/* GTM (noscript) first in body */}
         {isProd && GTM_ID ? (
           <noscript>
             <iframe
@@ -119,7 +119,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Suspense fallback={null}>
           <ScrollToTop />
         </Suspense>
-
 
         {/* A11y skip link */}
         <a

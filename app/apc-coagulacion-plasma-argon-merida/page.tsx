@@ -367,14 +367,15 @@ export default function APCPage() {
       </section>
 
       {/* COMPARISON SECTION */}
+      {/* COMPARISON SECTION (qualitative) */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              APC vs Otros métodos de hemostasia
+              APC y otras técnicas de hemostasia
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Comparación de la coagulación con plasma de argón con otras técnicas endoscópicas
+              Cada método tiene indicaciones específicas; el equipo elige la opción más adecuada para cada caso
             </p>
           </div>
 
@@ -383,184 +384,92 @@ export default function APCPage() {
               <thead className="bg-muted/50">
                 <tr>
                   <th className="px-6 py-4 text-left font-semibold text-foreground">Método</th>
-                  <th className="px-6 py-4 text-center font-semibold text-foreground">Precisión</th>
-                  <th className="px-6 py-4 text-center font-semibold text-foreground">Penetración</th>
-                  <th className="px-6 py-4 text-center font-semibold text-foreground">Riesgo perforación</th>
-                  <th className="px-6 py-4 text-center font-semibold text-foreground">Efectividad</th>
+                  <th className="px-6 py-4 text-center font-semibold text-foreground">Contacto</th>
+                  <th className="px-6 py-4 text-center font-semibold text-foreground">Profundidad</th>
+                  <th className="px-6 py-4 text-center font-semibold text-foreground">Usos habituales</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 <tr className="bg-accent-strong/5">
-                  <td className="px-6 py-4 font-semibold text-accent-strong">APC (Plasma de Argón)</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      Excelente
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center text-foreground/80">2-3mm</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      Muy bajo
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      95%
-                    </span>
-                  </td>
+                  <td className="px-6 py-4 font-semibold text-accent-strong">APC (plasma de argón)</td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Sin contacto</td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Superficial (autolimitante)</td>
+                  <td className="px-6 py-4 text-foreground/80 text-sm">Hemostasia y ablación superficial (angiodisplasias, Barrett selecto)</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-medium text-foreground">Electrocoagulación</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      Buena
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center text-foreground/80">4-6mm</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      Moderado
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      85%
-                    </span>
-                  </td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Con contacto</td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Intermedia</td>
+                  <td className="px-6 py-4 text-foreground/80 text-sm">Coagulación puntual dirigida</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-medium text-foreground">Láser</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      Excelente
-                    </span>
-                  </td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Sin contacto</td>
                   <td className="px-6 py-4 text-center text-foreground/80">Variable</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
-                      Alto
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      90%
-                    </span>
-                  </td>
+                  <td className="px-6 py-4 text-foreground/80 text-sm">Ablación selectiva en centros con disponibilidad</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 font-medium text-foreground">Clips metálicos</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      Buena
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center text-foreground/80">Mecánica</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      Bajo
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-                      80%
-                    </span>
-                    </td>
+                  <td className="px-6 py-4 font-medium text-foreground">Clips</td>
+                  <td className="px-6 py-4 text-center text-foreground/80">Mecánico</td>
+                  <td className="px-6 py-4 text-center text-foreground/80">N/A</td>
+                  <td className="px-6 py-4 text-foreground/80 text-sm">Cierre de vasos o defectos; complemento de terapia térmica</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div className="mt-8 p-6 rounded-2xl bg-accent-light/10 border border-accent-light/20">
-            <h4 className="font-semibold text-foreground mb-3">Ventajas del APC sobre otros métodos:</h4>
-            <div className="grid gap-3 md:grid-cols-2">
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground/80">No requiere contacto directo con el tejido</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground/80">Penetración tisular controlada y superficial</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground/80">Menor riesgo de perforación que electrocauterio</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground/80">Efectivo en superficies irregulares</span>
-              </div>
-            </div>
+            <h4 className="font-semibold text-foreground mb-2">Resumen</h4>
+            <p className="text-sm text-foreground/80">
+              El APC destaca por su coagulación uniforme sin contacto y penetración limitada. En algunos escenarios se combina con clips,
+              inyección o resección para optimizar resultados.
+            </p>
           </div>
         </div>
       </section>
 
       {/* SUCCESS RATES SECTION */}
+      {/* OUTCOMES SECTION (safe language) */}
       <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Tasas de éxito de APC
+              Resultados con APC
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Resultados clínicos de la coagulación con plasma de argón en diferentes indicaciones
+              Qué se puede esperar habitualmente con la coagulación con plasma de argón
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border border-green-200 dark:from-green-900/20 dark:to-green-800/20 dark:border-green-700/30 text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">95%</div>
-              <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">Hemostasia inmediata</h3>
-              <p className="text-sm text-green-700 dark:text-green-300">Control exitoso de sangrado digestivo agudo</p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 dark:from-blue-900/20 dark:to-blue-800/20 dark:border-blue-700/30 text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">88%</div>
-              <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">Sin resangrado</h3>
-              <p className="text-sm text-blue-700 dark:text-blue-300">Pacientes sin recurrencia a 30 días</p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 dark:from-purple-900/20 dark:to-purple-800/20 dark:border-purple-700/30 text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">92%</div>
-              <h3 className="font-semibold text-purple-800 dark:text-purple-200 mb-2">Ablación completa</h3>
-              <p className="text-sm text-purple-700 dark:text-purple-300">Eliminación exitosa de displasias y angiodisplasias</p>
-            </div>
+            {[
+              { title:"Control inicial del sangrado", desc:"Alta tasa de control en hemorragia digestiva durante el mismo procedimiento", badge:"Alto" },
+              { title:"Prevención de resangrado", desc:"Resultados favorables cuando se combina con tratamiento médico y seguimiento", badge:"Alto" },
+              { title:"Ablación de lesiones", desc:"Eficacia demostrada en angiodisplasias y lesiones superficiales seleccionadas", badge:"Alto" },
+            ].map((c)=>(
+              <div key={c.title} className="p-8 rounded-2xl bg-gradient-to-br from-muted/20 to-background border border-border text-center">
+                <div className="text-4xl font-bold text-primary mb-2">{c.badge}</div>
+                <h3 className="font-semibold text-foreground mb-2">{c.title}</h3>
+                <p className="text-sm text-foreground/80">{c.desc}</p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             <div className="p-6 rounded-2xl bg-background border border-border">
-              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Factores de éxito</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Tamaño de lesión:</strong> Mayor efectividad en lesiones &lt;2cm</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Localización:</strong> Excelentes resultados en estómago y colon</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Experiencia:</strong> Mejores resultados con endoscopista experimentado</span>
-                </li>
+              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Factores que influyen</h3>
+              <ul className="space-y-3 text-foreground/80 text-sm">
+                <li>• Tamaño y localización de la lesión</li>
+                <li>• Estado de la coagulación y comorbilidades</li>
+                <li>• Experiencia del equipo y soporte hospitalario</li>
               </ul>
             </div>
-
             <div className="p-6 rounded-2xl bg-background border border-border">
-              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Complicaciones mínimas</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Perforación:</strong> &lt;0.5% (vs 2-3% electrocoagulación)</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Estenosis:</strong> &lt;1% en procedimientos de ablación</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 mt-2"></div>
-                  <span className="text-foreground/80"><strong>Hospitalización:</strong> Mismo día en 90% de casos</span>
-                </li>
-              </ul>
+              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Seguridad</h3>
+              <p className="text-sm text-foreground/80">
+                El APC ofrece penetración tisular limitada y coagulación sin contacto. Como todo procedimiento, implica riesgos poco frecuentes
+                (sangrado, dolor, estenosis). Se explican y minimizan con protocolos de seguridad y seguimiento.
+              </p>
             </div>
           </div>
         </div>

@@ -195,14 +195,15 @@ export default function CprePage() {
       </section>
 
       {/* PRICING SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
+      {/* PRICING SECTION */}
+      <section id="precio-cpre-merida" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              CPRE Precio en Mérida - $24,700 Todo Incluido
+              CPRE en Mérida: costo y qué incluye — {mxn(PRICING.cpre.from)} todo incluido
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Costo CPRE fijo - Sin sorpresas ni cargos ocultos
+              Costo fijo para casos estándar (cálculos y esfinterotomía) — sin sorpresas.
             </p>
           </div>
 
@@ -216,7 +217,7 @@ export default function CprePage() {
 
             {/* Other Specialists */}
             <div className="p-6 rounded-2xl border border-border bg-background text-center order-1 md:order-2">
-              <div className="text-lg font-bold text-foreground/60 mb-2">Otros Especialistas</div>
+              <div className="text-lg font-bold text-foreground/60 mb-2">Otros especialistas</div>
               <div className="text-2xl font-bold text-foreground/60 line-through">$35,000+ pesos</div>
               <p className="text-sm text-foreground/50 mt-2">+ extras + estudios</p>
             </div>
@@ -230,7 +231,7 @@ export default function CprePage() {
           </div>
 
           {/* What's Included */}
-          <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
+          <div id="incluye-cpre" className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
             <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
               ¿Qué incluye exactamente?
             </h3>
@@ -246,11 +247,11 @@ export default function CprePage() {
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Extracción cálculos biliares</span>
+                <span className="text-foreground/80">Extracción de cálculos biliares</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Colocación stents si necesario</span>
+                <span className="text-foreground/80">Colocación de stents si necesario*</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
@@ -263,79 +264,114 @@ export default function CprePage() {
             </div>
 
             <div className="mt-6 p-4 rounded-xl bg-accent-light/10 border border-accent-light/20 text-center">
-              <h4 className="font-semibold text-foreground mb-2">¿Por qué más accesible?</h4>
               <p className="text-sm text-foreground/80">
-                Consulta independiente sin deudas hospitalarias. Acceso directo a fluoroscopía y quirófano sin sobrecargos administrativos.
+                <strong>Incluye:</strong> sedación, fluoroscopía, extracción de litos y materiales estándar.<br className="hidden sm:block" />
+                <strong>Puede tener costo extra:</strong> stent plástico/metálico o dispositivos especiales en casos complejos; te avisamos antes.
               </p>
+            </div>
+
+            {/* Mini FAQ de costo/ubicación (queries exactas) */}
+            <div className="mt-8 border-t border-border pt-6">
+              <h4 className="text-center font-semibold text-foreground mb-4">Preguntas frecuentes sobre costo de CPRE</h4>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="p-4 rounded-lg bg-background border border-border">
+                  <p className="font-medium">• cpre precio / cpre cuánto cuesta</p>
+                  <p className="text-sm text-foreground/70 mt-1">
+                    {mxn(PRICING.cpre.from)} pesos para casos estándar. Si se requieren stents o insumos especiales, se cotiza y autoriza antes.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg bg-background border border-border">
+                  <p className="font-medium">• costo cpre hospital</p>
+                  <p className="text-sm text-foreground/70 mt-1">
+                    En hospitales suele ser $30,000–$35,000+ por sobrecargos. Nuestra consulta independiente evita esos extras.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg bg-background border border-border">
+                  <p className="font-medium">• cpre playa del carmen</p>
+                  <p className="text-sm text-foreground/70 mt-1">
+                    Atendemos en Mérida. Pacientes de Playa del Carmen y la península viajan por disponibilidad y experiencia en casos complejos.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg bg-background border border-border">
+                  <p className="font-medium">• ¿Qué incluye el costo de CPRE?</p>
+                  <p className="text-sm text-foreground/70 mt-1">
+                    Sedación, fluoroscopía, extracción de litos y materiales estándar. Stents o accesorios especiales pueden cotizarse aparte.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SPYGLASS TECHNOLOGY */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Spyglass CPRE - Tecnología Avanzada Mérida
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Visualización directa de conductos biliares - Precisión máxima
-            </p>
-          </div>
+<section id="spyglass-cpre" className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center space-y-4 mb-16">
+      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+        CPRE con SpyGlass: costo y ventajas
+      </h2>
+      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+        Visualización directa de los conductos biliares = mayor precisión y menos complicaciones.
+      </p>
+    </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
-            {/* Technology Details */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-semibold text-foreground mb-4">SpyGlass Olympus - Ve Directamente</h3>
-                <div className="space-y-3 text-foreground/80">
-                  <p>• Otros endoscopistas trabajan "a ciegas" solo con rayos X</p>
-                  <p>• SpyGlass permite ver directamente dentro conductos</p>
-                  <p>• Mayor precisión extracción cálculos difíciles</p>
-                  <p>• Menos tiempo procedimiento, menos complicaciones</p>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                <h3 className="font-semibold text-foreground mb-4">Casos Complejos</h3>
-                <p className="text-foreground/80">
-                  Pacientes vienen después CPRE fallidas otros lugares. SpyGlass + experiencia Dr. Quiroz resuelve lo que otros no pueden.
-                </p>
-              </div>
-            </div>
-
-            {/* Benefits Grid */}
-            <div className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="p-4 rounded-xl border border-border bg-background text-center">
-                  <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <h4 className="font-semibold text-foreground mb-1">Mayor Precisión</h4>
-                  <p className="text-sm text-foreground/70">Extracción cálculos difíciles</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-border bg-background text-center">
-                  <Clock className="h-8 w-8 text-accent-strong mx-auto mb-2" />
-                  <h4 className="font-semibold text-foreground mb-1">Menos Tiempo</h4>
-                  <p className="text-sm text-foreground/70">Procedimiento más eficiente</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-border bg-background text-center">
-                  <ShieldCheck className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <h4 className="font-semibold text-foreground mb-1">Menos Riesgo</h4>
-                  <p className="text-sm text-foreground/70">Menor tasa complicaciones</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-border bg-background text-center">
-                  <Target className="h-8 w-8 text-accent-strong mx-auto mb-2" />
-                  <h4 className="font-semibold text-foreground mb-1">Mejores Resultados</h4>
-                  <p className="text-sm text-foreground/70">Éxito casos complejos</p>
-                </div>
-              </div>
-            </div>
+    <div className="grid gap-8 lg:grid-cols-2 items-center">
+      {/* Technology Details */}
+      <div className="space-y-6">
+        <div className="p-6 rounded-xl border border-border bg-background">
+          <h3 className="font-semibold text-foreground mb-4">SpyGlass Olympus — ver para tratar</h3>
+          <div className="space-y-3 text-foreground/80">
+            <p>• La CPRE tradicional depende solo de rayos X</p>
+            <p>• SpyGlass permite ver <em>dentro</em> del colédoco</p>
+            <p>• Facilita extracción de litos difíciles y estenosis</p>
+            <p>• Menos tiempo de procedimiento, menor riesgo</p>
           </div>
         </div>
-      </section>
+
+        <div className="p-6 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
+          <h3 className="font-semibold text-foreground mb-2">¿Impacta en el costo?</h3>
+          <p className="text-foreground/80">
+            Nuestro costo estándar cubre la mayoría de casos. Si SpyGlass requiere accesorios específicos (p. ej., ciertos stents),
+            lo <strong>cotizamos y autorizamos contigo</strong> antes de usarlo.{" "}
+            <Link href="#precio-cpre-merida" className="underline decoration-accent-strong/40 hover:decoration-accent-strong">
+              Ver costo y qué incluye
+            </Link>.
+          </p>
+        </div>
+      </div>
+
+      {/* Benefits Grid */}
+      <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="p-4 rounded-xl border border-border bg-background text-center">
+            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
+            <h4 className="font-semibold text-foreground mb-1">Mayor precisión</h4>
+            <p className="text-sm text-foreground/70">Litos difíciles y estenosis</p>
+          </div>
+
+          <div className="p-4 rounded-xl border border-border bg-background text-center">
+            <Clock className="h-8 w-8 text-accent-strong mx-auto mb-2" />
+            <h4 className="font-semibold text-foreground mb-1">Menos tiempo</h4>
+            <p className="text-sm text-foreground/70">Procedimiento más eficiente</p>
+          </div>
+
+          <div className="p-4 rounded-xl border border-border bg-background text-center">
+            <ShieldCheck className="h-8 w-8 text-primary mx-auto mb-2" />
+            <h4 className="font-semibold text-foreground mb-1">Menor riesgo</h4>
+            <p className="text-sm text-foreground/70">Baja tasa de complicaciones</p>
+          </div>
+
+          <div className="p-4 rounded-xl border border-border bg-background text-center">
+            <Target className="h-8 w-8 text-accent-strong mx-auto mb-2" />
+            <h4 className="font-semibold text-foreground mb-1">Mejores resultados</h4>
+            <p className="text-sm text-foreground/70">Casos de referencia resueltos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* PRIVATE PRACTICE BENEFITS */}
       <section className="py-16 sm:py-24 bg-background">
@@ -532,59 +568,81 @@ export default function CprePage() {
       </section>
 
       {/* WHEN YOU NEED CPRE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Cuándo Necesitas CPRE? - CPRE en Mérida Yucatán
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Indicaciones médicas para procedimiento CPRE
-            </p>
-          </div>
+<section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center space-y-4 mb-16">
+      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+        ¿Cuándo necesitas CPRE? - CPRE en Mérida Yucatán
+      </h2>
+      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+        Indicaciones médicas para el procedimiento
+      </p>
+    </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {/* Gallstones */}
-            <div className="p-6 rounded-xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Cálculos Conducto Biliar</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Piedras atoradas salida vesícula</p>
-                <p>• Dolor intenso + ictericia</p>
-                <p>• Náusea severa</p>
-              </div>
-            </div>
-
-            {/* Emergencies */}
-            <div className="p-6 rounded-xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Activity className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Emergencias Biliares</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Colangitis (infección)</p>
-                <p>• Pancreatitis por cálculos</p>
-                <p>• Ictericia severa</p>
-              </div>
-            </div>
-
-            {/* Pre-Surgery */}
-            <div className="p-6 rounded-xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <ShieldCheck className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Antes Cirugía Vesícula</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Limpiar conductos</p>
-                <p>• Evitar complicaciones</p>
-                <p>• Cirugía más segura</p>
-              </div>
-            </div>
-          </div>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* Gallstones */}
+      <div className="p-6 rounded-xl border border-border bg-background">
+        <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
+          <AlertTriangle className="h-6 w-6 text-accent-strong" />
         </div>
-      </section>
+        <h3 className="font-semibold text-foreground mb-3">Cálculos en conducto biliar</h3>
+        <div className="space-y-2 text-sm text-foreground/80">
+          <p>• Piedras atoradas a la salida de la vesícula</p>
+          <p>• Dolor intenso, ictericia</p>
+          <p>• Náusea severa</p>
+        </div>
+      </div>
+
+      {/* Emergencies */}
+      <div className="p-6 rounded-xl border border-border bg-background">
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+          <Activity className="h-6 w-6 text-primary" />
+        </div>
+        <h3 className="font-semibold text-foreground mb-3">Emergencias biliares</h3>
+        <div className="space-y-2 text-sm text-foreground/80">
+          <p>• Colangitis (infección)</p>
+          <p>• Pancreatitis por cálculos</p>
+          <p>• Ictericia severa</p>
+        </div>
+      </div>
+
+      {/* Pre-Surgery */}
+      <div className="p-6 rounded-xl border border-border bg-background">
+        <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
+          <ShieldCheck className="h-6 w-6 text-accent-strong" />
+        </div>
+        <h3 className="font-semibold text-foreground mb-3">Antes de cirugía de vesícula</h3>
+        <div className="space-y-2 text-sm text-foreground/80">
+          <p>• Limpiar conductos</p>
+          <p>• Evitar complicaciones</p>
+          <p>• Cirugía más segura</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Triage links */}
+    <div className="mt-10 text-center">
+      <p className="text-sm text-foreground/70">
+        ¿Síntomas altos (reflujo, gastritis)? Conoce la{" "}
+        <Link href="/endoscopia" className="underline decoration-primary/40 hover:decoration-primary">
+          endoscopia en Mérida (precio y qué incluye)
+        </Link>.
+      </p>
+      <p className="text-sm text-foreground/70 mt-2">
+        ¿Sangrado bajo o cambios en evacuaciones? Revisa la{" "}
+        <Link href="/colonoscopia" className="underline decoration-primary/40 hover:decoration-primary">
+          colonoscopia en Mérida (costo y preparación)
+        </Link>.
+      </p>
+      <p className="text-sm text-foreground/70 mt-2">
+        ¿Dudas comunes? Visita las{" "}
+        <Link href="#faqs-cpre" className="underline decoration-primary/40 hover:decoration-primary">
+          preguntas frecuentes
+        </Link>.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* PROCEDURE STEPS */}
       <section className="py-16 sm:py-24 bg-background">
@@ -652,7 +710,7 @@ export default function CprePage() {
       </section>
 
       {/* EMERGENCY CPRE */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="emergencias-cpre" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="space-y-6">
@@ -839,7 +897,7 @@ export default function CprePage() {
       </section>
 
       {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="faqs-cpre" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Faq routeKey="cpre" />
         </div>

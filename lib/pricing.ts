@@ -42,7 +42,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   ligadura_varices: { from: 19000, currency: "MXN", label: "Ligadura de várices esofágicas" },
   gastrostomia_peg: { from: 19000, currency: "MXN", label: "Gastrostomía endoscópica (PEG)" },
   extraccion_cuerpos_extranos: { from: 9700, currency: "MXN", label: "Extracción de cuerpos extraños" },
-  dilatacion_esofagica: { from: 15000, currency: "MXN", label: "Dilatación esof��gica" },
+  dilatacion_esofagica: { from: 15000, currency: "MXN", label: "Dilatación esofágica" },
   esclerosis_varices_gastricas: { from: 15000, currency: "MXN", label: "Esclerosis de várices gástricas" },
   dilatacion_biliar: { from: 25000, currency: "MXN", label: "Dilatación biliar" },
   dilatacion_colonica: { from: 15000, currency: "MXN", label: "Dilatación colónica" },
@@ -57,7 +57,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   esd:                       { currency: "MXN", label: "Disección endoscópica submucosa (ESD)" },
   emr:                       { currency: "MXN", label: "Resección endoscópica mucosa (EMR)" },
 
-  retiro_balon_gastrico: { from: 15000, currency: "MXN", label: "Retiro de balón gástrico" },
+  retiro_balon_gastrico: { from: 11900, currency: "MXN", label: "Retiro de balón gástrico" },
   apc: { from: 19000, currency: "MXN", label: "Coagulación con plasma de argón (APC)" },
 } as const
 

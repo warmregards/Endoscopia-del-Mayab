@@ -8,6 +8,8 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import GoogleReviews from "@/components/GoogleReviews";
+import { inter, montserrat } from "@/app/fonts";
+
 
 export const revalidate = 86400
 export const metadata = metaFor("home")
@@ -29,11 +31,11 @@ export default function Page() {
                   <span className="text-sm font-medium text-foreground">500+ Endoscopias | 300+ Colonoscopias Anuales</span>
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
+                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
                   Endoscopia y Colonoscopia en Mérida | Dr. Omar Quiroz - Precios Fijos
                 </h1>
                 
-                <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
+                <div className="`{inter.className} space-y-4 text-lg text-foreground/80 leading-relaxed`">
                   <p>
                     ¿Problemas digestivos y necesitas respuestas claras? Dr. Omar Quiroz realiza endoscopias y colonoscopias en Mérida con precios fijos transparentes.
                   </p>

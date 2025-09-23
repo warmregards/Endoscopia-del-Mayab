@@ -32,7 +32,7 @@ export default function ColonoscopiaPage() {
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight">
-                  Colonoscopia en Mérida - $5,000 Pesos Fijos | Dr. Omar Quiroz
+                  Colonoscopia en Mérida - ${mxn(PRICING.colonoscopia.from)} Pesos Fijos | Dr. Omar Quiroz
                 </h1>
                 
                 <p className="text-xl text-primary font-semibold">
@@ -41,7 +41,10 @@ export default function ColonoscopiaPage() {
                 
                 <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
                   <p>
-                    ¿45+ años sin colonoscopia? ¿Sangrado rectal o antecedentes familiares? Dr. Omar Quiroz detecta pólipos y cáncer temprano con colonoscopia cómoda.
+                    ¿45+ años sin colonoscopia? ... colonoscopia cómoda.{" "}
+                    <Link href="#precio-colonoscopia-merida" className="underline decoration-primary/40 hover:decoration-primary">
+                      Ver precio y qué incluye
+                    </Link>.
                   </p>
                 </div>
                 
@@ -205,11 +208,11 @@ export default function ColonoscopiaPage() {
       <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Precio Colonoscopia en Mérida - $5,000 Todo Incluido
+            <h2 id="precio-colonoscopia-merida" className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+              Precio de la colonoscopia en Mérida: ¿qué incluye? — {mxn(PRICING.colonoscopia.from)} todo incluido
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Sin cargos ocultos - Hospitales cobran $12,000+
+              Precio transparente con sedación y extracción de pólipos pequeños incluida. Sin cargos ocultos.
             </p>
           </div>
 
@@ -268,6 +271,13 @@ export default function ColonoscopiaPage() {
             </div>
 
             <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
+              <p className="text-sm text-foreground/80">
+                Incluye: sedación, equipo HD, reporte y extracción de pólipos pequeños. <br className="hidden sm:block"/>
+                Puede tener costo extra: biopsia o materiales especiales si se requieren (te avisamos antes).
+              </p>
+            </div>
+
+            <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
               <h4 className="font-semibold text-foreground mb-2">Biopsia pólipos: $1,000 extra (solo si necesaria)</h4>
               <p className="text-sm text-foreground/80">
                 Sin overhead hospitalario - Mismo equipo, precio real
@@ -277,8 +287,31 @@ export default function ColonoscopiaPage() {
         </div>
       </section>
 
+      {/* PREPARATION SECTION */}
+      <section className="py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto space-y-4">
+            <h2 id="preparacion-colonoscopia" className="text-2xl sm:text-3xl font-serif font-bold text-foreground">
+              Preparación para colonoscopia: guía rápida
+            </h2>
+            <ul className="list-disc pl-5 space-y-2 text-foreground/80">
+              <li>Dieta líquida clara el día anterior; evita bebidas rojas/moradas.</li>
+              <li>Laxante dividido en 2 tomas (tarde y madrugada) según indicación.</li>
+              <li>Medicamentos: consulta si tomas anticoagulantes o antidiabéticos.</li>
+              <li>El día del estudio: ayuno, acudir con acompañante y no conducir después.</li>
+            </ul>
+            <p className="text-sm text-foreground/70">
+              Te enviamos indicaciones por WhatsApp al agendar.{" "}
+              <Link href="#contacto-colonoscopia" className="underline decoration-primary/40 hover:decoration-primary">
+                Solicitar indicaciones ahora
+              </Link>.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* SEDATION COMFORT SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+      <section id="sedacion" className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -343,10 +376,15 @@ export default function ColonoscopiaPage() {
               </div>
               
               <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  Colonoscopia Merida - Especialista Local 15+ Años
+                <h2 id="por-que-elegirnos" className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
+                  ¿Por qué elegirnos para tu colonoscopia en Mérida?
                 </h2>
               </div>
+              <ul className="mt-3 space-y-2 text-foreground/80">
+                <li>• Sedación con <Link href="/endoscopia#sedacion" className="underline text-primary">anestesiólogo y monitoreo</Link> continuo</li>
+              <li>• Equipo Olympus 180 HD y <Link href="#deteccion-polipos" className="underline text-primary">extracción de pólipos</Link> en la misma sesión</li>
+                <li>• 15+ años de experiencia, complicaciones &lt;0.1%</li>
+              </ul>
             </div>
 
             {/* Experience Stats */}
@@ -396,59 +434,81 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* WHEN YOU NEED COLONOSCOPY */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Colonoscopia Precio Merida - ¿Cuándo Necesitas Una?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Prevención vs. síntomas - Cuándo es tu momento
-            </p>
-          </div>
+<section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center space-y-4 mb-16">
+      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+        Colonoscopia Precio Merida - ¿Cuándo Necesitas Una?
+      </h2>
+      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+        Prevención vs. síntomas - Cuándo es tu momento
+      </p>
+    </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Prevention */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <ShieldCheck className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Prevención (edad 45+)</h3>
-              <div className="space-y-3 text-foreground/80">
-                <p>• Primera colonoscopia: 45 años</p>
-                <p>• Antecedentes familiares: 10 años antes caso familiar</p>
-                <p>• Cada 10 años si colon normal</p>
-                <p>• Cada 3-5 años si pólipos previos</p>
-              </div>
-            </div>
-
-            {/* Symptoms */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-foreground mb-4">Síntomas Alarmantes</h3>
-              <div className="space-y-3 text-foreground/80">
-                <p>• Sangrado rectal (rojo o heces negras)</p>
-                <p>• Cambios intestinales súbitos</p>
-                <p>• Dolor abdominal + pérdida peso</p>
-                <p>• Anemia sin causa clara</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="max-w-2xl mx-auto p-6 rounded-xl bg-primary/10 border border-primary/20">
-              <h4 className="font-semibold text-foreground mb-3">Costo Real vs. Riesgo</h4>
-              <p className="text-foreground/80">
-                <strong>Colonoscopia preventiva:</strong> $5,000 cada 10 años = $500/año<br/>
-                <strong>Cáncer colorrectal:</strong> $500,000+ tratamiento + sufrimiento
-              </p>
-              <p className="text-primary font-semibold mt-2">¿Qué prefieres?</p>
-            </div>
-          </div>
+    <div className="grid gap-6 md:grid-cols-2">
+      {/* Prevention */}
+      <div className="p-8 rounded-2xl border border-border bg-background">
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+          <ShieldCheck className="h-6 w-6 text-primary" />
         </div>
-      </section>
+        <h3 className="text-xl font-serif font-bold text-foreground mb-4">Prevención (edad 45+)</h3>
+        <div className="space-y-3 text-foreground/80">
+          <p>• Primera colonoscopia: 45 años</p>
+          <p>• Antecedentes familiares: 10 años antes caso familiar</p>
+          <p>• Cada 10 años si colon normal</p>
+          <p>• Cada 3-5 años si pólipos previos</p>
+        </div>
+      </div>
+
+      {/* Symptoms */}
+      <div className="p-8 rounded-2xl border border-border bg-background">
+        <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
+          <AlertTriangle className="h-6 w-6 text-accent-strong" />
+        </div>
+        <h3 className="text-xl font-serif font-bold text-foreground mb-4">Síntomas Alarmantes</h3>
+        <div className="space-y-3 text-foreground/80">
+          <p>• Sangrado rectal (rojo o heces negras)</p>
+          <p>• Cambios intestinales súbitos</p>
+          <p>• Dolor abdominal + pérdida peso</p>
+          <p>• Anemia sin causa clara</p>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-12 text-center">
+      <div className="max-w-2xl mx-auto p-6 rounded-xl bg-primary/10 border border-primary/20">
+        <h4 className="font-semibold text-foreground mb-3">Costo Real vs. Riesgo</h4>
+        <p className="text-foreground/80">
+          <strong>Colonoscopia preventiva:</strong> $5,000 cada 10 años = $500/año<br/>
+          <strong>Cáncer colorrectal:</strong> $500,000+ tratamiento + sufrimiento
+        </p>
+        <p className="text-primary font-semibold mt-2">¿Qué prefieres?</p>
+      </div>
+
+      {/* RELATED LINKS / TRIAGE */}
+      <p className="text-sm text-foreground/70 mt-6 text-center">
+        ¿Síntomas altos (reflujo, gastritis)? Conoce la{" "}
+        <Link href="/endoscopia" className="underline decoration-primary/40 hover:decoration-primary">
+          endoscopia en Mérida (precio y qué incluye)
+        </Link>.
+      </p>
+
+      <p className="text-sm text-foreground/70 mt-2">
+        Ictericia u obstrucción biliar: evalúa{" "}
+        <Link href="/cpre" className="underline decoration-accent-strong/40 hover:decoration-accent-strong">
+          CPRE en Mérida (costo y proceso)
+        </Link>.
+      </p>
+
+      <p className="text-sm text-foreground/70 mt-2">
+        ¿Dudas comunes? Revisa las{" "}
+        <Link href="#faqs-colonoscopia" className="underline decoration-primary/40 hover:decoration-primary">
+          preguntas frecuentes
+        </Link>.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* PRIVATE PRACTICE BENEFITS */}
       <section className="py-16 sm:py-24 bg-background">
@@ -588,7 +648,7 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* POLYP DETECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
+      <section id="deteccion-polipos" className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
@@ -644,11 +704,11 @@ export default function ColonoscopiaPage() {
       <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Resultados Colonoscopia Inmediatos - Explicación Clara
+            <h2 id="resultados-y-tiempos" className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+              Resultados y tiempos: entrega en 20 minutos
             </h2>
             <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Dr. Quiroz explica hallazgos con fotos HD
+              Explicación con fotos HD al despertar y reporte escrito el mismo día; biopsias en 5–7 días.
             </p>
           </div>
 
@@ -710,7 +770,7 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
+      <section id="contacto-colonoscopia" className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
@@ -784,7 +844,7 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="faqs-colonoscopia" className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Faq routeKey="colonoscopia" />
         </div>
