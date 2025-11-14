@@ -2,6 +2,8 @@
 import { getGoogleReviews } from "@/lib/reviews";
 import { CLINIC } from "@/lib/clinic";
 
+const BLOCKED_REVIEW_TERMS = ["yazmin", "yasmin"]; // just in case of spelling variants
+
 type Props = {
   title?: string;
   /** Google sends max 5 reviews; we'll cap to [1..5]. Default 4 to keep layout tidy. */
@@ -14,7 +16,6 @@ export default async function GoogleReviews({
   limit = 4,
   className = "",
 }: Props) {
-  // Server-only env vars (DO NOT expose in client code)
   const placeId = process.env.GBP_PLACE_ID || "";
   const apiKey  = process.env.GOOGLE_PLACES_API_KEY || "";
 
@@ -27,7 +28,6 @@ export default async function GoogleReviews({
     return null;
   }
 
-  // Cap limit to Google’s max (5)
   const maxReviews = Math.max(1, Math.min(5, limit));
 
   const { reviews, rating, total, placeName, placeUrl, attribution } =
@@ -40,6 +40,14 @@ export default async function GoogleReviews({
     });
 
   if (!reviews.length) return null;
+
+  // 🔒 Filter out reviews that contain restricted terms (like the patient "Yazmin")
+  const safeReviews = reviews.filter((r) => {
+    const haystack = `${r.author_name} ${r.text ?? ""}`.toLowerCase();
+    return !BLOCKED_REVIEW_TERMS.some((term) => haystack.includes(term));
+  });
+
+  if (!safeReviews.length) return null;
 
   return (
     <section className={`py-16 bg-gradient-to-b from-muted/20 to-background ${className}`}>
@@ -69,11 +77,10 @@ export default async function GoogleReviews({
         </div>
 
         <ul className="grid gap-6 md:grid-cols-2">
-          {reviews.map((r, i) => (
+          {safeReviews.map((r, i) => (
             <li key={i} className="rounded-2xl border border-border bg-background p-5 shadow-sm">
               <div className="flex items-center gap-3 mb-2">
                 {r.profile_photo_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={r.profile_photo_url}
                     alt={r.author_name}
