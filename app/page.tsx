@@ -365,7 +365,7 @@ export default function Page() {
 
       {/* ── Section 6: FAQ ── */}
       <div className="bg-muted">
-        <Faq routeKey="home" maxVisible={6} />
+        <Faq routeKey="home" maxVisible={6} noSchema />
       </div>
 
       {/* ── Emergency Banner ── */}

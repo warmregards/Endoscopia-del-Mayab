@@ -8,8 +8,8 @@ import { faqSchema } from "@/lib/schema";
 import { pushFaqExpand } from "@/lib/gtm";
 
 type Props =
-  | { routeKey: RouteKey; faqs?: never; heading?: string; service?: string; maxVisible?: number }
-  | { routeKey?: never; faqs: FAQ[]; heading?: string; service?: string; maxVisible?: number };
+  | { routeKey: RouteKey; faqs?: never; heading?: string; service?: string; maxVisible?: number; noSchema?: boolean }
+  | { routeKey?: never; faqs: FAQ[]; heading?: string; service?: string; maxVisible?: number; noSchema?: boolean };
 
 export default function Faq({
   routeKey,
@@ -17,6 +17,7 @@ export default function Faq({
   heading = "Preguntas frecuentes",
   service,
   maxVisible = 6,
+  noSchema = false,
 }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -174,8 +175,8 @@ export default function Faq({
           </div>
         </div>
 
-        {/* JSON‑LD for rich results */}
-        {schema && (
+        {/* JSON‑LD for rich results (skip when already in page @graph) */}
+        {schema && !noSchema && (
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
