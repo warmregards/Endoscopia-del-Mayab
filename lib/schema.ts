@@ -1,298 +1,365 @@
-// lib/schema.ts
+// /lib/schema.ts
+// Centralized JSON-LD schema generation for all pages.
+// Consumes data from: clinic.ts, doctor.ts, services.ts, reviews.ts
+//
+// Architecture (per Project_Context_and_Decisions_v2.md):
+//   Global @graph (every page):
+//     - WebSite → publisher links to Organization
+//     - MedicalClinic → full NAP, geo, hours, hasOfferCatalog (all 27 services)
+//     - Physician → worksFor → MedicalClinic, knowsAbout, credentials
+//
+//   Per-procedure page (added to global):
+//     - MedicalProcedure → name, procedureType, offers (price)
+//     - FAQPage → question/answer pairs (Persona 5 fear-based queries)
+//
+// Usage in layout.tsx:
+//   <script type="application/ld+json"
+//     dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+//   />
+//
+// Usage in procedure page.tsx:
+//   <script type="application/ld+json"
+//     dangerouslySetInnerHTML={{ __html: JSON.stringify(procedureSchema({ ... })) }}
+//   />
 
-type CurrencyCode = "MXN"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { toSchemaOfferCatalog, SERVICES } from "@/lib/services"
+import type { ServiceKey } from "@/lib/pricing"
+import { PRICING, hasPrice } from "@/lib/pricing"
 
-/* =========================
-   Service (MedicalProcedure)
-   ========================= */
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
 
-export interface ServiceParams {
-  /** MUST already include "en Mérida" */
-  name: string
-  /** Absolute URL for the service page */
-  url: string
-  areaServed?: string // default "Mérida, Yucatán"
+const SITE_URL = CLINIC.url
+const CLINIC_ID = `${SITE_URL}#clinic`
+const PHYSICIAN_ID = `${SITE_URL}#physician`
+const WEBSITE_ID = `${SITE_URL}#website`
 
-  /** Preferred: reference the clinic entity injected by ClinicJsonLd */
-  provider?: { "@id": string } | Record<string, any>
+// ---------------------------------------------------------------------------
+// Utility
+// ---------------------------------------------------------------------------
 
-  /** Legacy fallback fields (used only if provider is not given) */
-  providerName?: string
-  providerUrl?: string
-  providerPhone?: string
-
-  priceFrom?: string // numeric-as-string
-  imageUrl?: string  // absolute or site-relative resolved earlier
-  specialties?: string[] // default ["Endoscopy"]
-  aggregateRating?: { ratingValue: number; reviewCount: number }
+/** Remove undefined/null/empty arrays/empty objects recursively for clean JSON-LD */
+function prune<T>(obj: T): T {
+  if (Array.isArray(obj)) {
+    const cleaned = obj.map(prune).filter((v) => v !== undefined && v !== null)
+    return cleaned as unknown as T
+  }
+  if (obj && typeof obj === "object" && !(obj instanceof Date)) {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+      const pv = prune(v)
+      if (pv === undefined || pv === null) continue
+      if (Array.isArray(pv) && pv.length === 0) continue
+      if (
+        typeof pv === "object" &&
+        pv !== null &&
+        !Array.isArray(pv) &&
+        Object.keys(pv).length === 0
+      )
+        continue
+      out[k] = pv
+    }
+    return out as unknown as T
+  }
+  return obj
 }
 
-export function serviceJSONLD({
-  name,
-  url,
-  areaServed = "Mérida, Yucatán",
-  provider,
-  // legacy fallbacks:
-  providerName,
-  providerUrl,
-  providerPhone,
-  priceFrom,
-  imageUrl,
-  specialties = ["Endoscopy"],
-  aggregateRating,
-}: ServiceParams) {
-  const schema: any = {
+// ---------------------------------------------------------------------------
+// Entity: WebSite
+// ---------------------------------------------------------------------------
+
+function websiteEntity() {
+  return {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: CLINIC.name,
+    url: SITE_URL,
+    publisher: { "@id": CLINIC_ID },
+    inLanguage: "es",
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Entity: MedicalClinic (Organization)
+// ---------------------------------------------------------------------------
+
+function clinicEntity() {
+  return {
+    "@type": "MedicalClinic",
+    "@id": CLINIC_ID,
+    name: CLINIC.name,
+    url: SITE_URL,
+    telephone: CLINIC.phone.schema,
+    image: `${SITE_URL}${CLINIC.imageUrl}`,
+    logo: `${SITE_URL}${CLINIC.logoUrl}`,
+    priceRange: CLINIC.priceRange,
+    foundingDate: CLINIC.openingDate,
+    // Schema.org: "Gastroenterology" is pragmatic closest. Dr. Quiroz actual specialty: Endoscopia Gastrointestinal (Cédula EGI230072)
+    medicalSpecialty: "Gastroenterology",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: CLINIC.address.streetAddress,
+      addressLocality: CLINIC.address.addressLocality,
+      addressRegion: CLINIC.address.addressRegion,
+      postalCode: CLINIC.address.postalCode,
+      addressCountry: CLINIC.address.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: CLINIC.geo.lat,
+      longitude: CLINIC.geo.lng,
+    },
+    hasMap: CLINIC.mapUrl,
+    openingHoursSpecification: CLINIC.hours.schema.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: `https://schema.org/${h.dayOfWeek}`,
+      opens: h.opens,
+      closes: h.closes,
+    })),
+    areaServed: [
+      {
+        "@type": "City",
+        name: CLINIC.areaServed.primary,
+      },
+      {
+        "@type": "State",
+        name: CLINIC.areaServed.region,
+      },
+      ...CLINIC.areaServed.secondaryRegions.map((r) => ({
+        "@type": "State" as const,
+        name: r,
+      })),
+    ],
+    sameAs: CLINIC.sameAs,
+    knowsAbout: CLINIC.knowsAbout,
+    hasOfferCatalog: toSchemaOfferCatalog(),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: CLINIC.aggregateRating.ratingValue,
+      reviewCount: CLINIC.aggregateRating.reviewCount,
+      bestRating: 5,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: CLINIC.phone.schema,
+      contactType: "customer service",
+      areaServed: "MX",
+      availableLanguage: ["es"],
+    },
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Entity: Physician
+// ---------------------------------------------------------------------------
+
+function physicianEntity() {
+  return {
+    "@type": "Physician",
+    "@id": PHYSICIAN_ID,
+    name: DOCTOR.name,
+    description: DOCTOR.schemaDescription,
+    image: `${SITE_URL}${DOCTOR.photos.headshot}`,
+    url: `${SITE_URL}${DOCTOR.profileUrl}`,
+    // Schema.org: "Gastroenterology" is pragmatic closest. Dr. Quiroz actual specialty: Endoscopia Gastrointestinal (Cédula EGI230072)
+    medicalSpecialty: DOCTOR.medicalSpecialty,
+    worksFor: { "@id": CLINIC_ID },
+    memberOf: DOCTOR.schemaMemberOf,
+    hasCredential: DOCTOR.schemaCredentials,
+    knowsAbout: DOCTOR.schemaKnowsAbout,
+    sameAs: DOCTOR.schemaSameAs.length > 0 ? DOCTOR.schemaSameAs : undefined,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Global @graph (every page via layout.tsx)
+// ---------------------------------------------------------------------------
+
+/**
+ * Generate the global JSON-LD @graph containing WebSite, MedicalClinic, and Physician.
+ * Inject this once in the root layout.
+ *
+ * @example
+ *   // app/layout.tsx
+ *   <script
+ *     type="application/ld+json"
+ *     dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+ *   />
+ */
+export function globalGraph() {
+  return prune({
+    "@context": "https://schema.org",
+    "@graph": [websiteEntity(), clinicEntity(), physicianEntity()],
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Per-Procedure Page: MedicalProcedure
+// ---------------------------------------------------------------------------
+
+export interface ProcedureSchemaParams {
+  /** Procedure name as it appears in H1, e.g. "Colonoscopia en Mérida" */
+  name: string
+  /** Page URL path, e.g. "/colonoscopia-merida" */
+  path: string
+  /** Pricing key to pull price from PRICING */
+  pricingKey?: ServiceKey
+  /** Plain-language description of the procedure */
+  description?: string
+  /** Body location where the procedure is performed */
+  bodyLocation?: string
+  /** How the procedure is performed (brief) */
+  howPerformed?: string
+  /** Preparation instructions (brief) */
+  preparation?: string
+  /** Follow-up instructions or intervals (brief) */
+  followUp?: string
+  /** Procedure type: Diagnostic, Therapeutic, or Surgical */
+  procedureType?: "Diagnostic" | "Therapeutic" | "Surgical"
+  /** Optional image URL (absolute or site-relative) */
+  image?: string
+}
+
+/**
+ * Generate MedicalProcedure JSON-LD for a procedure page.
+ * References the global clinic entity via @id.
+ *
+ * @example
+ *   procedureSchema({
+ *     name: "Colonoscopia en Mérida",
+ *     path: "/colonoscopia-merida",
+ *     pricingKey: "colonoscopia",
+ *     description: "Estudio del colon con cámara flexible...",
+ *     procedureType: "Diagnostic",
+ *   })
+ */
+export function procedureSchema(params: ProcedureSchemaParams) {
+  const {
+    name,
+    path,
+    pricingKey,
+    description,
+    bodyLocation,
+    howPerformed,
+    preparation,
+    followUp,
+    procedureType,
+    image,
+  } = params
+
+  const url = `${SITE_URL}${path}`
+  const imageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : `${SITE_URL}${image}`
+    : undefined
+
+  const hasFixedPrice = pricingKey && hasPrice(pricingKey)
+
+  return prune({
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
     name,
     url,
+    description,
     image: imageUrl,
+    bodyLocation,
+    howPerformed,
+    preparation,
+    followup: followUp,
+    procedureType: procedureType
+      ? `https://schema.org/${procedureType}Procedure`
+      : undefined,
     availableLanguage: ["es"],
-    areaServed: { "@type": "City", name: areaServed },
-    medicalSpecialty: specialties,
-  }
-
-  // Prefer referencing the single clinic entity by @id.
-  if (provider) {
-    schema.provider = provider
-  } else if (providerName) {
-    // Backward-compatible embedded clinic (used only if no provider was passed).
-    schema.provider = {
-      "@type": "MedicalClinic",
-      name: providerName,
-      url: providerUrl,
-      telephone: providerPhone,
-    }
-  }
-
-  if (priceFrom) {
-    schema.offers = {
-      "@type": "Offer",
-      priceCurrency: "MXN" as CurrencyCode,
-      price: priceFrom,
-      availability: "https://schema.org/InStock",
-      url,
-    }
-  }
-
-  if (aggregateRating) {
-    schema.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: aggregateRating.ratingValue,
-      reviewCount: aggregateRating.reviewCount,
-    }
-  }
-
-  return prune(schema)
-}
-
-/* ================
-   URL join helper
-   ================ */
-
-export function joinUrl(base: string, rel: string) {
-  const b = (base || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-  const r = rel.startsWith("/") ? rel : `/${rel}`
-  return `${b}${r}`
-}
-
-/* =========================
-   MedicalClinic (Organization)
-   ========================= */
-
-type OpeningRange = {
-  day: "Mo" | "Tu" | "We" | "Th" | "Fr" | "Sa" | "Su"
-  opens: string // "07:00"
-  closes: string // "19:00"
-}
-
-interface MedicalClinicParams {
-  /** Optional stable identifier to reference via "@id" (e.g. `${site}#clinic`) */
-  id?: string
-  name: string
-  url: string // absolute
-  phone: string
-  streetAddress: string
-  postalCode?: string
-  geo?: { lat: number; lng: number }
-  mapUrl?: string // absolute Google Maps link
-  /** Can be structured OpeningRange[] OR simple string[] like ["Mo-Su 07:00-19:00"] */
-  hours?: OpeningRange[] | string[]
-  sameAs?: string[]
-  logoUrl?: string // absolute
-  imageUrl?: string // absolute
-  priceRange?: string // e.g. "$$"
-  specialties?: string[] // default: ["Endoscopy"]
-  aggregateRating?: {
-    ratingValue: number
-    reviewCount: number
-  }
-  services?: Array<{
-    name: string // MUST include "en Mérida"
-    url: string // absolute
-    priceFrom?: string // numeric-as-string (e.g. "5940")
-  }>
-  secondaryServices?: string[]
-}
-
-function buildHours(hours?: OpeningRange[] | string[]) {
-  if (!hours) return {}
-  if (Array.isArray(hours) && typeof hours[0] === "string") {
-    return { openingHours: hours as string[] }
-  }
-  const openingHoursSpecification = (hours as OpeningRange[]).map(h => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: mapDay(h.day),
-    opens: h.opens,
-    closes: h.closes,
-  }))
-  return { openingHoursSpecification }
-}
-
-export function medicalClinicJSONLD(cfg: MedicalClinicParams) {
-  const {
-    id,
-    name, url, phone, streetAddress, postalCode, geo, mapUrl,
-    hours, sameAs = [], logoUrl, imageUrl, priceRange,
-    specialties = ["Endoscopy"], aggregateRating,
-    services = [], secondaryServices = [],
-  } = cfg
-
-  const hoursBlock = buildHours(hours)
-
-  const schema: any = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    ...(id ? { "@id": id } : {}),
-    name,
-    url,
-    telephone: phone,
-    image: imageUrl,
-    logo: logoUrl,
-    priceRange,
-    medicalSpecialty: specialties,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress,
-      addressLocality: "Mérida",
-      addressRegion: "Yucatán",
-      postalCode: postalCode || undefined,
-      addressCountry: "MX",
+    // Schema.org: "Gastroenterology" is pragmatic closest. Dr. Quiroz actual specialty: Endoscopia Gastrointestinal (Cédula EGI230072)
+    medicalSpecialty: "Gastroenterology",
+    provider: { "@id": CLINIC_ID },
+    areaServed: {
+      "@type": "City",
+      name: CLINIC.areaServed.primary,
+      containedInPlace: {
+        "@type": "State",
+        name: CLINIC.areaServed.region,
+      },
     },
-    ...hoursBlock,
-    sameAs: sameAs.length ? sameAs : undefined,
-    areaServed: { "@type": "City", name: "Mérida, Yucatán" },
-    hasMap: mapUrl,
-    geo: geo ? { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng } : undefined,
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: phone,
-        contactType: "customer service",
-        areaServed: "MX",
-        availableLanguage: ["es"],
-      },
-      {
-        "@type": "ContactPoint",
-        telephone: phone,
-        contactType: "appointments",
-        areaServed: "MX",
-        availableLanguage: ["es"],
-      },
-    ],
-  }
-
-  if (aggregateRating) {
-    schema.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: aggregateRating.ratingValue,
-      reviewCount: aggregateRating.reviewCount,
-    }
-  }
-
-  if (services.length) {
-    schema.makesOffer = services.map(svc => ({
-      "@type": "Offer",
-      priceCurrency: "MXN",
-      price: svc.priceFrom || undefined,
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "MedicalProcedure",
-        name: svc.name,
-        url: svc.url,
-        availableLanguage: ["es"],
-        areaServed: { "@type": "City", name: "Mérida, Yucatán" },
-        medicalSpecialty: specialties,
-      },
-    }))
-
-    schema.hasOfferCatalog = {
-      "@type": "OfferCatalog",
-      name: "Servicios de Endoscopia",
-      itemListElement: services.map((svc, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "MedicalProcedure",
-          name: svc.name,
-          url: svc.url,
-        },
-      })),
-    }
-  }
-
-  if (secondaryServices.length) {
-    schema.availableService = secondaryServices.map(raw => {
-      const name = /en Mérida/i.test(raw) ? raw : `${raw} en Mérida`
-      return {
-        "@type": "MedicalService",
-        name,
-        availableLanguage: ["es"],
-        areaServed: { "@type": "City", name: "Mérida, Yucatán" },
-      }
-    })
-  }
-
-  return prune(schema)
+    offers: hasFixedPrice
+      ? {
+          "@type": "Offer",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: PRICING[pricingKey!].from,
+            priceCurrency: "MXN",
+          },
+          availability: "https://schema.org/InStock",
+          url,
+        }
+      : undefined,
+  })
 }
 
-function mapDay(d: OpeningRange["day"]) {
+// ---------------------------------------------------------------------------
+// Per-Procedure Page: FAQPage
+// ---------------------------------------------------------------------------
+
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+/**
+ * Generate FAQPage JSON-LD from question/answer pairs.
+ * Targets Persona 5 (El Investigador) fear-based queries.
+ * Wins featured snippets for "¿Duele?", "¿Es peligroso?", etc.
+ *
+ * @example
+ *   faqSchema([
+ *     { question: "¿Duele la colonoscopia?", answer: "No, se realiza con sedación..." },
+ *     { question: "¿Cuánto cuesta?", answer: "Desde $5,000 MXN..." },
+ *   ])
+ */
+export function faqSchema(items: FaqItem[]) {
+  if (items.length === 0) return null
   return {
-    Mo: "https://schema.org/Monday",
-    Tu: "https://schema.org/Tuesday",
-    We: "https://schema.org/Wednesday",
-    Th: "https://schema.org/Thursday",
-    Fr: "https://schema.org/Friday",
-    Sa: "https://schema.org/Saturday",
-    Su: "https://schema.org/Sunday",
-  }[d]
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  }
 }
 
-/* =========
-   Utilities
-   ========= */
+// ---------------------------------------------------------------------------
+// Breadcrumb (optional, for procedure pages)
+// ---------------------------------------------------------------------------
 
-/** Remove undefined/null recursively for cleaner JSON-LD */
-function prune<T>(obj: T): T {
-  if (Array.isArray(obj)) {
-    // @ts-ignore – keep truthy items after pruning
-    return obj.map(prune).filter(Boolean) as T
+/**
+ * Generate BreadcrumbList JSON-LD.
+ *
+ * @example
+ *   breadcrumbSchema([
+ *     { name: "Inicio", path: "/" },
+ *     { name: "Colonoscopia en Mérida", path: "/colonoscopia-merida" },
+ *   ])
+ */
+export function breadcrumbSchema(
+  items: Array<{ name: string; path: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
   }
-  if (obj && typeof obj === "object") {
-    const out: Record<string, any> = {}
-    for (const [k, v] of Object.entries(obj as Record<string, any>)) {
-      const pv = prune(v)
-      if (
-        pv !== undefined &&
-        pv !== null &&
-        !(Array.isArray(pv) && pv.length === 0) &&
-        !(typeof pv === "object" && pv && Object.keys(pv as object).length === 0)
-      ) {
-        out[k] = pv
-      }
-    }
-    // @ts-ignore – cast back to T
-    return out as T
-  }
-  return obj
 }

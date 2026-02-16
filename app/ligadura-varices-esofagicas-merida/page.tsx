@@ -1,414 +1,426 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
+import Image from "next/image"
 import {
-  Stethoscope,
-  MapPin,
   CheckCircle2,
   ShieldCheck,
-  Microscope,
+  MapPin,
+  ArrowRight,
   Clock,
-  Heart,
   AlertTriangle,
-  Activity,
-  Target,
-  FileText,
-  Award,
-  Zap,
-  Users,
-  Phone,
-  ExternalLink,
 } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = metaFor("ligadura")
+export const metadata: import("next").Metadata = {
+  ...metaFor("ligadura_varices"),
+  other: {
+    "geo.region": "MX-YUC",
+    "geo.placename": "Mérida",
+    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
+    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
+  },
+}
+
+/* ── Related procedures ─────────────────────────────────────────────────── */
+
+const relatedProcedures = [
+  {
+    name: "Esclerosis de Várices Gástricas",
+    href: "/esclerosis-varices-gastricas-merida",
+    price: mxn(PRICING.esclerosis_varices_gastricas.from),
+    desc: "Inyección de cianoacrilato para várices del estómago. Tratamiento de primera línea para várices gástricas fúndicas.",
+  },
+  {
+    name: "CPRE",
+    href: "/cpre-merida",
+    price: mxn(PRICING.cpre.from),
+    desc: "Diagnóstico y tratamiento de complicaciones biliares en pacientes con hipertensión portal.",
+  },
+  {
+    name: "Coagulación APC",
+    href: "/apc-coagulacion-plasma-argon-merida",
+    price: mxn(PRICING.apc.from),
+    desc: "Control de sangrado y tratamiento de lesiones vasculares con plasma de argón.",
+  },
+]
+
+/* ══════════════════════════════════════════════════════════════════════════ */
 
 export default function LigaduraVaricesPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
     <>
-      {/* HERO SECTION */}
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-50 via-orange-50 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-100/30 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 border border-red-200">
-                  <AlertTriangle className="h-4 w-4 text-red-600" />
-                  <span className="text-sm font-medium text-red-700">Atención de emergencia disponible 24/7</span>
-                </div>
+      {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Ligadura de Várices Esofágicas en Mérida",
+              path: "/ligadura-varices-esofagicas-merida",
+              pricingKey: "ligadura_varices",
+              description:
+                "Colocación de bandas elásticas sobre várices esofágicas para prevenir y controlar sangrado por hipertensión portal. Procedimiento ambulatorio con sedación en Hospital Amerimed Mérida.",
+              bodyLocation: "Esófago",
+              howPerformed:
+                "Colocación de bandas elásticas mediante endoscopio terapéutico bajo sedación profunda",
+              preparation:
+                "Ayuno 8 horas, laboratorios de coagulación",
+              followUp:
+                "Dieta fría y blanda 24–48 horas, siguiente sesión en 2–4 semanas",
+              procedureType: "Therapeutic",
+            })
+          ),
+        }}
+      />
 
-                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
-                  Ligadura de Várices Esofágicas en Mérida | Dr. Omar Quiroz
-                </h1>
+      {/* ── JSON-LD: BreadcrumbList ───────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Ligadura de Várices Esofágicas", path: "/ligadura-varices-esofagicas-merida" },
+            ])
+          ),
+        }}
+      />
 
-                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
-                  Procedimiento endoscópico para <strong>controlar y prevenir hemorragias por várices</strong>.
-                  Atención inmediata en Hospital Amerimed (Mérida, Yucatán) y <strong>precio transparente</strong> desde {mxn(PRICING.ligadura_varices.from)}.
-                </p>
-
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-red-600" />
-                    <span>Control endoscópico en el mismo acto</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-red-600" />
-                    <span>Prevención de resangrado</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-red-600" />
-                    <span>Sedación con anestesiólogo</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-red-600" />
-                    <span>Disponibilidad 24/7 en Hospital Amerimed</span>
-                  </div>
-                </div>
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 1: HERO — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+            {/* Left: Content */}
+            <div className="flex-1 space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-sm font-medium text-red-700">
+                <AlertTriangle className="h-4 w-4 text-red-600" />
+                Atención de emergencia disponible 24/7
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                <CallButton service="ligadura varices" position="hero" />
-                <WhatsAppButton service="ligadura varices" position="hero" />
+              <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
+                Ligadura de Várices Esofágicas en Mérida
+              </h1>
+
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                Control y prevención de sangrado por várices esofágicas con
+                bandas elásticas. Procedimiento ambulatorio con sedación.
+              </p>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+                {[
+                  "Sedación incluida",
+                  "Hospital Amerimed Mérida",
+                  `${DOCTOR.name} – Endoscopista`,
+                ].map((chip) => (
+                  <div key={chip} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span>{chip}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Quick Info */}
-              <div className="flex flex-wrap gap-6 text-sm text-foreground/70">
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <WhatsAppButton
+                  service="ligadura varices"
+                  position="hero"
+                  procedureName="Ligadura de Várices Esofágicas"
+                  label="Agendar por WhatsApp"
+                  className="sm:px-8"
+                />
+                <CallButton
+                  service="ligadura varices"
+                  position="hero"
+                  variant="ghost"
+                />
+              </div>
+
+              {/* Location + Hours */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-red-600" />
-                  <span>Hospital Amerimed, Consultorio 517</span>
+                  <MapPin className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.address.display}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-red-600" />
-                  <span>Emergencias y procedimientos programados</span>
+                  <Clock className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.hours.display}</span>
                 </div>
               </div>
             </div>
 
-            {/* Stats Card - Right Side */}
-            <div className="lg:w-80 space-y-6">
-              <div className="p-8 rounded-2xl border border-border bg-background/80 backdrop-blur-sm shadow-lg">
-                <div className="space-y-6">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <Heart className="h-8 w-8 text-red-600" />
-                    </div>
-                    <h3 className="font-serif font-bold text-xl text-foreground mb-2">
-                      Control de hemorragia
-                    </h3>
-                    <p className="text-foreground/70 text-sm">
-                      Alta tasa de control inicial en hemorragia digestiva alta por várices.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div>
-                      <div className="text-xs text-foreground/70">Tiempo habitual</div>
-                      <div className="text-2xl font-bold text-red-600">20–45 min</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-foreground/70">Disponibilidad</div>
-                      <div className="text-2xl font-bold text-red-600">24/7</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-red-50 border border-red-200">
-                <div className="flex items-center gap-3 mb-2">
-                  <AlertTriangle className="h-5 w-5 text-red-600" />
-                  <span className="font-semibold text-foreground">Urgencia médica</span>
-                </div>
-                <p className="text-sm text-foreground/80">
-                  Si presentas vómito con sangre o evacuaciones negras, acude de inmediato. Atención en Hospital Amerimed.
-                </p>
-                <p className="mt-3 text-sm">
-                  <a href="tel:+529992360153" className="font-semibold text-red-600 underline underline-offset-4">Llamar 999 236 0153</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5-STEP PROCESS */}
-      {/* 5-STEP PROCESS */}
-      <section className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Ligadura de Várices: 5 Pasos
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Protocolo para detener la hemorragia y reducir el riesgo de resangrado
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { n: 1, t: "Estabilización", d: "Vía aérea, signos vitales y reposición de volumen si es necesario" },
-              { n: 2, t: "Sedación", d: "Sedación monitorizada por anestesiólogo para un procedimiento cómodo y seguro" },
-              { n: 3, t: "Endoscopia", d: "Localización precisa de las várices sangrantes" },
-              { n: 4, t: "Ligadura", d: "Colocación de bandas elásticas para ocluir la fuente del sangrado" },
-              { n: 5, t: "Monitoreo", d: "Observación y control de complicaciones; plan de prevención secundaria" },
-            ].map((s) => (
-              <div key={s.n} className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="w-12 h-12 rounded-full bg-red-600 text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                  {s.n}
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">{s.t}</h3>
-                <p className="text-sm text-foreground/80">{s.d}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-100 border border-red-200">
-              <Zap className="h-5 w-5 text-red-600" />
-              <span className="font-semibold text-foreground">Tiempo habitual:</span>
-              <span className="text-foreground/70">20–45 minutos (según número de várices)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Respaldo quirúrgico inmediato</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  Experiencia que marca la diferencia en hemorragia por várices
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  El Dr. Quiroz combina formación en cirugía y endoscopia terapéutica para <strong>manejar casos complejos</strong> y
-                  coordinar equipos en situaciones críticas. Si la ligadura no es suficiente, se activa de inmediato un plan
-                  integral con apoyo quirúrgico y cuidados intensivos.
-                </p>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="p-6 rounded-xl bg-muted/50 border border-border">
-                    <h4 className="font-semibold text-foreground mb-3">Lo complejo que atendemos</h4>
-                    <ul className="space-y-2 text-foreground/80">
-                      <li>• Hemorragia activa de alto gasto</li>
-                      <li>• Inestabilidad hemodinámica</li>
-                      <li>• Resangrado temprano</li>
-                      <li>• Lesiones difíciles de acceder</li>
-                    </ul>
-                  </div>
-
-                  <div className="p-6 rounded-xl bg-primary/5 border border-primary/20">
-                    <h4 className="font-semibold text-foreground mb-3">Cómo lo abordamos</h4>
-                    <ul className="space-y-2 text-foreground/80">
-                      <li>• Endoscopia terapéutica avanzada</li>
-                      <li>• Coordinación con UCI y banco de sangre</li>
-                      <li>• Protocolos de prevención secundaria</li>
-                      <li>• Comunicación continua con la familia</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="p-8 rounded-2xl bg-gradient-to-r from-red-50 to-orange-50 border border-red-200">
-                  <div className="text-center">
-                    <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
-                      <ShieldCheck className="h-8 w-8 text-red-600" />
-                    </div>
-                    <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                      Equipo y logística preparados 24/7
-                    </h3>
-                    <p className="text-foreground/80 leading-relaxed">
-                      Hospital Amerimed cuenta con anestesia, endoscopia, UCI y banco de sangre para manejar urgencias.
-                      El objetivo: controlar la hemorragia con rapidez y seguridad.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-            {/* PRICE TRANSPARENCY SECTION */}
-      <section className="py-16 sm:py-24 bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Costo de Ligadura de Várices en Mérida — desde {mxn(PRICING.ligadura_varices.from)}
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Precio claro para emergencias y procedimientos programados. En casos complejos, el costo puede ajustarse
-              según materiales y estancia hospitalaria.
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Base Price */}
-            <div className="p-8 rounded-2xl border border-border bg-background text-center">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <FileText className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Paquete base de ligadura
-              </h3>
-              <div className="text-3xl font-bold text-red-600 mb-2">{mxn(PRICING.ligadura_varices.from)}</div>
-              <p className="text-sm text-foreground/70 mb-4">Casos estándar (programado o urgente)</p>
-              <div className="text-left space-y-2 text-sm text-foreground/80">
-                <p>• Procedimiento endoscópico completo</p>
-                <p>• Sedación con anestesiólogo</p>
-                <p>• Dispositivo de ligadura (bandas)</p>
-                <p>• Vigilancia post-procedimiento</p>
-              </div>
-            </div>
-
-            {/* What's Included */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-                <CheckCircle2 className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">Incluye</h3>
-              <div className="space-y-3 text-foreground/80">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p>Valoración médica y preparación inmediata</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p>Sedación monitorizada</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p>Ligadura con bandas elásticas</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p>Observación post-procedimiento</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Emergency Availability */}
-            <div className="p-8 rounded-2xl border border-border bg-red-50">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
-                <AlertTriangle className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">Emergencias 24/7</h3>
-              <div className="space-y-4 text-foreground/80">
-                <p className="text-sm">
-                  Atención inmediata en Hospital Amerimed para hemorragia activa.
-                </p>
-                <div className="p-4 rounded-xl bg-background border border-red-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Phone className="h-4 w-4 text-red-600" />
-                    <span className="font-medium text-foreground">Línea de emergencias</span>
-                  </div>
-                  <p className="text-2xl font-bold">
-                    <a href="tel:+529992360153" className="text-red-600 hover:underline underline-offset-4">999 236 0153</a>
+            {/* Right: Price card */}
+            <div className="w-full lg:max-w-sm">
+              <div className="border border-border bg-card rounded-2xl shadow-md p-6 space-y-6">
+                <div className="text-center space-y-2">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {DOCTOR.name}
                   </p>
-                  <p className="text-xs text-foreground/70 mt-1">Respuesta inmediata para hemorragias digestivas</p>
+                  <p className="font-serif font-bold text-text-accent text-2xl md:text-3xl">
+                    {mxn(PRICING.ligadura_varices.from)}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Desde — sedación incluida
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    "Sedación con anestesiólogo",
+                    "Equipo endoscópico terapéutico",
+                    "Dispositivo de ligadura (bandas)",
+                    "Sala de recuperación",
+                    "Consulta pre-procedimiento",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                      <span className="text-sm text-foreground/80">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-muted rounded-xl p-4">
+                  <p className="text-xs text-muted-foreground">
+                    Pueden requerirse 2–4 sesiones. Lectura de patología{" "}
+                    {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional si se toman
+                    biopsias.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Payment Note */}
-          <div className="mt-8 text-center p-6 rounded-2xl bg-background border border-border">
-            <p className="text-foreground/70">
-              <strong>Nota:</strong> en emergencia, la prioridad es controlar la hemorragia. La parte administrativa se
-              coordina después con el hospital.
-            </p>
-          </div>
         </div>
       </section>
 
-            {/* WHEN IS LIGATION INDICATED */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                ¿Cuándo se indica la ligadura de várices?
-              </h2>
-              <p className="text-lg text-foreground/70">
-                Criterios clínicos habituales para decidir tratamiento endoscópico
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2: DEFINITION + INDICATIONS — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              ¿Qué es la ligadura de várices esofágicas?
+            </h2>
+
+            <div className="text-foreground/80 leading-relaxed space-y-4">
+              <p>
+                La ligadura consiste en colocar bandas elásticas sobre las
+                várices del esófago para estrangularlas y detener o prevenir el
+                sangrado. Las várices esofágicas se forman por hipertensión
+                portal, generalmente asociada a enfermedad hepática crónica.
+              </p>
+              <p>
+                Es el tratamiento estándar de primera línea para várices
+                esofágicas, tanto en emergencia (sangrado activo) como en
+                prevención (profilaxis primaria y secundaria). Se requieren
+                típicamente 2–4 sesiones separadas por 2–4 semanas hasta
+                erradicar las várices residuales, seguido de vigilancia
+                endoscópica periódica.
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="p-8 rounded-2xl border border-red-200 bg-red-50">
-                <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mb-6">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
+            {/* Cross-link to esclerosis */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+              <p className="text-foreground/80">
+                <span className="font-semibold text-foreground">
+                  ¿Tu médico indicó esclerosis de várices gástricas?
+                </span>{" "}
+                Las várices del estómago (fondo gástrico) no se tratan con
+                bandas — requieren inyección de cianoacrilato.{" "}
+                <Link
+                  href="/esclerosis-varices-gastricas-merida"
+                  className="text-primary font-medium hover:underline"
+                >
+                  Consulta nuestra página de esclerosis de várices gástricas
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 3: PRICING — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              ¿Cuánto cuesta la ligadura de várices en Mérida?
+            </h2>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <p className="font-serif font-bold text-text-accent text-3xl">
+                Desde {mxn(PRICING.ligadura_varices.from)}
+              </p>
+            </div>
+
+            <p className="text-foreground/80 leading-relaxed">
+              El precio incluye sedación profunda con anestesiólogo certificado,
+              equipo endoscópico terapéutico, dispositivo de ligadura con bandas
+              elásticas, sala de recuperación y consulta pre-procedimiento.
+              Pueden requerirse 2–4 sesiones separadas por 2–4 semanas, cada
+              una desde {mxn(PRICING.ligadura_varices.from)}.
+            </p>
+
+            {/* Biopsy differentiator */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+              <p className="text-foreground/80">
+                <span className="font-semibold text-foreground">
+                  Biopsias sin límite con tarifa única.
+                </span>{" "}
+                Si se toman biopsias, la lectura de patología tiene un costo
+                adicional de {mxn(ADDITIONAL_FEES.biopsy.amount)} — un solo
+                cobro sin importar cuántas biopsias se requieran.
+              </p>
+            </div>
+
+            <p className="text-sm text-muted-foreground">
+              <Link
+                href="/precios"
+                className="text-primary font-medium hover:underline"
+              >
+                Ver todos nuestros precios →
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 4: PREPARATION — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              Preparación y qué esperar
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Before */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  1
                 </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                  Indicaciones de emergencia
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Antes del procedimiento
                 </h3>
-                <ul className="space-y-3 text-foreground/80">
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-red-600 mt-0.5" /><span>Hemorragia digestiva alta por várices</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-red-600 mt-0.5" /><span>Vómito con sangre (hematemesis)</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-red-600 mt-0.5" /><span>Evacuaciones negras (melena) con inestabilidad</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-red-600 mt-0.5" /><span>Resangrado pese a manejo médico</span></li>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Ayuno de 8 horas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Laboratorios: biometría hemática y estudios de coagulación
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Ajuste de medicamentos según indicación del Dr. Quiroz
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Acudir con acompañante adulto</span>
+                  </li>
                 </ul>
               </div>
 
-              <div className="p-8 rounded-2xl border border-primary/20 bg-primary/5">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                  <Target className="h-6 w-6 text-primary" />
+              {/* During */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  2
                 </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                  Indicaciones programadas
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Durante (20–40 min)
                 </h3>
-                <ul className="space-y-3 text-foreground/80">
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary mt-0.5" /><span>Várices grandes (grado III–IV) en cirrosis</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary mt-0.5" /><span>Antecedente de sangrado por várices</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary mt-0.5" /><span>Profilaxis secundaria post-sangrado</span></li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary mt-0.5" /><span>Signos endoscópicos de alto riesgo</span></li>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Sedación profunda con anestesiólogo</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      El endoscopio terapéutico localiza las várices
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Colocación de bandas elásticas sobre cada várice
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Las bandas estrangulan la várice, deteniendo el flujo
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* After */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  3
+                </div>
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Recuperación
+                </h3>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Molestia leve al tragar 24–48 horas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Dieta fría y blanda el primer día</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Siguiente sesión en 2–4 semanas
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Endoscopia de vigilancia periódica
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
 
-            {/* Related Conditions */}
-            <div className="p-8 rounded-2xl bg-muted/30 border border-border">
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                Condiciones asociadas frecuentes
-              </h3>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mx-auto mb-3">
-                    <Heart className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <h4 className="font-semibold text-foreground mb-1">Cirrosis hepática</h4>
-                  <p className="text-sm text-foreground/70">Con hipertensión portal</p>
-                </div>
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mx-auto mb-3">
-                    <Activity className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <h4 className="font-semibold text-foreground mb-1">Hipertensión portal</h4>
-                  <p className="text-sm text-foreground/70">Refractaria a manejo médico</p>
-                </div>
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mx-auto mb-3">
-                    <Microscope className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <h4 className="font-semibold text-foreground mb-1">Resangrado</h4>
-                  <p className="text-sm text-foreground/70">Pese a profilaxis previa</p>
+            {/* Warning signs */}
+            <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    Señales de alarma — acudir de inmediato
+                  </h3>
+                  <p className="text-sm text-foreground/80">
+                    Vómito con sangre, evacuaciones negras, dolor intenso o
+                    fiebre. Escribe por WhatsApp al {CLINIC.phone.display} para
+                    valoración urgente.
+                  </p>
                 </div>
               </div>
             </div>
@@ -416,254 +428,150 @@ export default function LigaduraVaricesPage() {
         </div>
       </section>
 
-      {/* RECOVERY AND FOLLOW-UP */}
-<section className="py-16 sm:py-24 bg-muted/20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="max-w-4xl mx-auto">
-      <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-          Recuperación y seguimiento
-        </h2>
-        <p className="text-lg text-foreground/70">
-          Qué esperar después de la ligadura de várices
-        </p>
-      </div>
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 5: DOCTOR — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              Tu especialista: <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link>
+            </h2>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div className="p-6 rounded-2xl border border-border bg-background">
-          <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
-            <Clock className="h-6 w-6 text-green-600" />
-          </div>
-          <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-            Primeras 24 horas
-          </h3>
-          <ul className="space-y-2 text-sm text-foreground/80">
-            <li>• Observación 4–6 horas</li>
-            <li>• Dieta líquida inicial</li>
-            <li>• Control de náusea post-sedación</li>
-            <li>• Señales de alarma explicadas</li>
-          </ul>
-        </div>
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 bg-muted">
+                <Image
+                  src={DOCTOR.photos.headshot}
+                  alt={DOCTOR.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-        <div className="p-6 rounded-2xl border border-border bg-background">
-          <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
-            <Heart className="h-6 w-6 text-blue-600" />
-          </div>
-          <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-            Primera semana
-          </h3>
-          <ul className="space-y-2 text-sm text-foreground/80">
-            <li>• Dieta blanda progresiva</li>
-            <li>• Evitar irritantes (alcohol, picante, antiinflamatorios)</li>
-            <li>• Medicación para prevenir resangrado</li>
-            <li>• Actividad ligera</li>
-          </ul>
-        </div>
+              <div className="space-y-4">
+                <p className="text-foreground/80 leading-relaxed">
+                  {DOCTOR.bioShort} El Dr. Quiroz combina formación en cirugía y
+                  endoscopia terapéutica para manejar casos complejos de
+                  sangrado variceal. Atiende pacientes de toda la Península de
+                  Yucatán — incluyendo zonas como Cholul, Temozón Norte y
+                  Country Club. Si la ligadura no es suficiente, puede activar
+                  un plan integral con apoyo quirúrgico y cuidados intensivos en
+                  Hospital Amerimed.
+                </p>
 
-        <div className="p-6 rounded-2xl border border-border bg-background">
-          <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
-            <Target className="h-6 w-6 text-purple-600" />
-          </div>
-          <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-            Seguimiento
-          </h3>
-          <ul className="space-y-2 text-sm text-foreground/80">
-            <li>• Endoscopia de control en 1–3 meses</li>
-            <li>• Ajuste de medicamentos</li>
-            <li>• Sesiones adicionales si se requieren</li>
-            <li>• Plan de profilaxis secundaria</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Warning Signs */}
-      <div className="mt-12 p-8 rounded-2xl bg-red-50 border border-red-200">
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
-            <AlertTriangle className="h-6 w-6 text-red-600" />
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-xl font-serif font-semibold text-foreground">
-              Signos de alarma — acudir de inmediato
-            </h3>
-            <div className="grid gap-3 md:grid-cols-2">
-              {["Vómito con sangre fresca","Evacuaciones negras abundantes","Mareo o debilidad intensa","Dolor abdominal severo"].map((txt)=>(
-                <div key={txt} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-red-600" />
-                  <span className="text-foreground/80">{txt}</span>
+                {/* Credentials */}
+                <div className="flex flex-wrap gap-2">
+                  {DOCTOR.credentials.map((cred) => (
+                    <span
+                      key={cred}
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-accent-light text-xs font-medium text-foreground"
+                    >
+                      <ShieldCheck className="h-4 w-4 text-accent" />
+                      {cred}
+                    </span>
+                  ))}
                 </div>
+
+                <WhatsAppButton
+                  service="ligadura varices"
+                  position="doctor"
+                  procedureName="Ligadura de Várices Esofágicas"
+                  label="Consultar con el Dr. Quiroz"
+                  className="text-sm px-4 py-2"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 6: GOOGLE REVIEWS — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <GoogleReviews />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7: FAQ — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <Faq
+          routeKey="ligadura_varices"
+          service="ligadura varices"
+          heading="Preguntas frecuentes sobre ligadura de várices"
+        />
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 8: RELATED PROCEDURES — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <h2 className="text-xl md:text-2xl font-serif font-bold tracking-tight text-foreground">
+              Procedimientos relacionados
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProcedures.map((proc) => (
+                <Link
+                  key={proc.href}
+                  href={proc.href}
+                  className="group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+                >
+                  <h3 className="font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {proc.name}
+                  </h3>
+                  <p className="text-sm text-foreground/80 mb-4">{proc.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-text-accent">
+                      Desde {proc.price}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  </div>
+                </Link>
               ))}
             </div>
-            <div className="p-4 rounded-xl bg-background border border-red-200">
-              <p className="font-semibold text-foreground mb-1">Línea directa 24/7</p>
-              <p className="text-2xl font-bold">
-                <a href="tel:+529992360153" className="text-red-600 hover:underline underline-offset-4">999 236 0153</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 9: BOTTOM CTA — bg-primary
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-primary">
+        <div className="container-page section-padding">
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
+                ¿Necesitas valoración urgente?
+              </h2>
+              <p className="text-white/80 mt-2">
+                Si tienes sangrado digestivo o te indicaron ligadura de várices,
+                agenda tu cita hoy. El {DOCTOR.name} te responde personalmente.
               </p>
             </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <WhatsAppButton
+                service="ligadura varices"
+                position="bottom-cta"
+                procedureName="Ligadura de Várices Esofágicas"
+                label="Agendar por WhatsApp"
+                className="sm:px-10"
+              />
+              <CallButton
+                service="ligadura varices"
+                position="bottom-cta"
+                variant="inverse"
+              />
+            </div>
+
+            <address className="not-italic text-sm text-white/60">
+              {CLINIC.name} · {CLINIC.phone.display} ·{" "}
+              {CLINIC.address.display}
+            </address>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* RELATED PROCEDURES */}
-<section className="py-16 sm:py-24 bg-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center space-y-4 mb-16">
-      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-        Procedimientos relacionados en Mérida
-      </h2>
-      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-        Tratamientos complementarios para el manejo integral de la hipertensión portal
-      </p>
-    </div>
-
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <Link href="/esclerosis-varices-gastricas-merida" className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300 group">
-        <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
-          <Stethoscope className="h-8 w-8 text-blue-600" />
-        </div>
-        <h3 className="text-xl font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-          Esclerosis de várices gástricas
-        </h3>
-        <p className="text-foreground/80 mb-4">
-          Inyección de cianoacrilato para várices fúndicas grandes. Complementa la ligadura esofágica en casos seleccionados.
-        </p>
-        <p className="text-sm text-foreground/70">Desde {mxn(PRICING.esclerosis_varices_gastricas.from)}</p>
-      </Link>
-
-      <Link href="/cpre-merida" className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300 group">
-        <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mb-6">
-          <Activity className="h-8 w-8 text-green-600" />
-        </div>
-        <h3 className="text-xl font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-          CPRE (vías biliares y páncreas)
-        </h3>
-        <p className="text-foreground/80 mb-4">
-          Diagnóstico y tratamiento de complicaciones biliares en pacientes con hipertensión portal.
-        </p>
-        <p className="text-sm text-foreground/70">Desde {mxn(PRICING.cpre.from)}</p>
-      </Link>
-
-      <Link href="/emergencias-digestivas-merida" className="p-8 rounded-2xl border border-red-200 bg-red-50 hover:shadow-lg transition-all duration-300 group">
-        <div className="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center mb-6">
-          <AlertTriangle className="h-8 w-8 text-red-600" />
-        </div>
-        <h3 className="text-xl font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-          Endoscopia de emergencia
-        </h3>
-        <p className="text-foreground/80 mb-4">
-          Evaluación y tratamiento endoscópico inmediato 24/7 para hemorragia digestiva alta.
-        </p>
-        <p className="text-sm text-foreground/70">Hospital Amerimed</p>
-      </Link>
-    </div>
-  </div>
-</section>
-
-      {/* NEIGHBORHOODS SERVED */}
-<section className="py-16 sm:py-24 bg-muted/20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center space-y-4 mb-16">
-      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-        Atención a toda Mérida y zona metropolitana
-      </h2>
-      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-        Ligadura de várices disponible para pacientes de cualquier colonia
-      </p>
-    </div>
-
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 text-center">
-      {[
-        ["Centro Histórico","Acceso por Circuito Colonias"],
-        ["Montebello","Ruta por Prolongación Paseo Montejo"],
-        ["Altabrisa","~15 min por Periférico"],
-        ["Temozón Norte","Acceso por Periférico Norte"],
-        ["Cholul","Ruta por carretera Mérida–Progreso"],
-        ["García Ginerés","Cerca de Circuito y Reforma"],
-      ].map(([name,desc])=>(
-        <div key={name} className="p-4 rounded-xl bg-background border border-border">
-          <MapPin className="h-6 w-6 text-accent-strong mx-auto mb-2" />
-          <h3 className="font-semibold text-foreground mb-1">{name}</h3>
-          <p className="text-sm text-foreground/70">{desc}</p>
-        </div>
-      ))}
-    </div>
-
-    <div className="mt-12 text-center">
-      <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-background border border-border shadow-sm">
-        <MapPin className="h-6 w-6 text-accent-strong" />
-        <div className="text-left">
-          <p className="font-semibold text-foreground">Hospital Amerimed</p>
-          <p className="text-sm text-foreground/70">Chichí Suárez, Mérida, Yucatán</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* FINAL CTA */}
-<section className="py-16 sm:py-24 bg-gradient-to-r from-red-50 to-orange-50">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div className="space-y-8">
-      <div className="space-y-4">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-          ¿Necesitas ligadura de várices de emergencia?
-        </h2>
-        <p className="text-xl text-foreground/80">
-          No esperes. Atención 24/7 en Hospital Amerimed (Mérida).
-        </p>
-      </div>
-      
-      <div className="flex flex-wrap justify-center gap-6">
-        <div className="flex items-center gap-4 p-6 rounded-2xl bg-background border border-border shadow-sm">
-          <Phone className="h-8 w-8 text-red-600" />
-          <div className="text-left">
-            <p className="font-semibold text-foreground">Línea de emergencias</p>
-            <p className="text-2xl font-bold">
-              <a href="tel:+529992360153" className="text-red-600 hover:underline underline-offset-4">999 236 0153</a>
-            </p>
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-4 p-6 rounded-2xl bg-background border border-border shadow-sm">
-          <MapPin className="h-8 w-8 text-red-600" />
-          <div className="text-left">
-            <p className="font-semibold text-foreground">Ubicación</p>
-            <p className="text-foreground/70">Hospital Amerimed • Consultorio 517</p>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <CallButton service="ligadura varices" position="cta section" />
-        <WhatsAppButton service="ligadura varices" position="cta section" />
-      </div>
-    </div>
-  </div>
-</section>
-
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
-        </div>
-      </section>
-
-
-             {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
-        </div>
-      </section>
-
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="ligadura" />
         </div>
       </section>
     </>

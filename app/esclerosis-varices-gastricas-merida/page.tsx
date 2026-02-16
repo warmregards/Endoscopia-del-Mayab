@@ -1,845 +1,194 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
-import Image from "next/image"
+import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
-import { Heart, Clock, CheckCircle2, AlertTriangle, Stethoscope, Phone, MapPin, Star } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import Image from "next/image"
+import {
+  CheckCircle2,
+  ShieldCheck,
+  MapPin,
+  ArrowRight,
+  Clock,
+  AlertTriangle,
+} from "lucide-react"
 import Faq from "@/components/Faq"
-import CallButton from "@/components/CallButton";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import CallButton from "@/components/CallButton"
+import WhatsAppButton from "@/components/WhatsAppButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = metaFor("esclerosis_varices_gastricas")
+export const metadata: import("next").Metadata = {
+  ...metaFor("esclerosis_varices_gastricas"),
+  other: {
+    "geo.region": "MX-YUC",
+    "geo.placename": "Mérida",
+    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
+    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
+  },
+}
+
+/* ── Related procedures ─────────────────────────────────────────────────── */
+
+const relatedProcedures = [
+  {
+    name: "Ligadura de Várices Esofágicas",
+    href: "/ligadura-varices-esofagicas-merida",
+    price: mxn(PRICING.ligadura_varices.from),
+    desc: "Bandas elásticas para várices del esófago. Complementa la esclerosis en pacientes con várices en ambos sitios.",
+  },
+  {
+    name: "CPRE",
+    href: "/cpre-merida",
+    price: mxn(PRICING.cpre.from),
+    desc: "Diagnóstico y tratamiento de complicaciones biliares en pacientes con hipertensión portal.",
+  },
+  {
+    name: "Endoprótesis Esofágicas",
+    href: "/endoprotesis-esofagicas-merida",
+    price: "Cotización",
+    desc: "Stents esofágicos para estenosis y fístulas. Valoración individual por especialista.",
+  },
+]
+
+/* ══════════════════════════════════════════════════════════════════════════ */
 
 export default function EsclerosisVaricesGastricasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* HERO SECTION */}
-      <section className="pt-20 pb-12 sm:pt-24 sm:pb-16 bg-gradient-to-b from-accent-light/10 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="flex items-center justify-center gap-2 text-accent-strong font-medium">
-              <Heart className="h-5 w-5" />
-              <span>Control Especializado de Hemorragias</span>
-            </div>
-            
-            <h1 className="`${montserrat.className}text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight`">
-              Esclerosis de Várices Gástricas en Mérida
-            </h1>
-            
-            <p className="`${inter.className} text-xl text-foreground/80 leading-relaxed`">
-              El Dr. Omar Quiroz ofrece tratamiento endoscópico especializado para el control de hemorragias por várices gástricas. Disponible 24/7 para emergencias en Hospital Amerimed, Mérida, Yucatán.
-            </p>
+    <>
+      {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Esclerosis de Várices Gástricas en Mérida",
+              path: "/esclerosis-varices-gastricas-merida",
+              pricingKey: "esclerosis_varices_gastricas",
+              description:
+                "Inyección endoscópica de cianoacrilato para controlar y prevenir sangrado por várices gástricas fúndicas. Procedimiento ambulatorio con sedación en Hospital Amerimed Mérida.",
+              bodyLocation: "Estómago (fondo gástrico)",
+              howPerformed:
+                "Inyección de cianoacrilato (adhesivo tisular) a través de endoscopio bajo sedación profunda",
+              preparation:
+                "Ayuno 8 horas, laboratorios de coagulación y función hepática",
+              followUp:
+                "Observación 4–6 horas, dieta blanda 24–48 horas, endoscopia de control en 4–6 semanas",
+              procedureType: "Therapeutic",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Esclerosis de Várices Gástricas en Mérida", path: "/esclerosis-varices-gastricas-merida" },
+            ])
+          ),
+        }}
+      />
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="esclerosis varices" position="hero" />
-                      <WhatsAppButton service="esclerosis varices" position="hero" />
-                </div>
-            </div>
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 1: HERO — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+            {/* Left: Content */}
+            <div className="flex-1 space-y-6">
+              <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
+                Esclerosis de Várices Gástricas en Mérida
+              </h1>
 
-            <div className="pt-6 text-center">
-              <p className="text-foreground/60">
-                Desde <span className="font-bold text-accent-strong">{mxn(15000)}</span> • Sedación incluida
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                Inyección de cianoacrilato para sellar y controlar várices del
+                estómago. Tratamiento de primera línea para várices gástricas
+                fúndicas.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* PRICING SECTION */}
-      <section id="precio-varices-gastricas" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Esclerosis de várices gástricas en Mérida: precio y qué incluye
-            </h2>
-            <p className="text-lg text-foreground/70">Desde {mxn(15000)} — sedación incluida</p>
-          </div>
-
-          <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-            <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">¿Qué incluye?</h3>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                <span className="text-foreground/80">Sedación con anestesiólogo y monitoreo continuo</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                <span className="text-foreground/80">Endoscopia terapéutica con agente esclerosante</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                <span className="text-foreground/80">Materiales estándar y equipo Olympus HD</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                <span className="text-foreground/80">Primera valoración y plan de seguimiento</span>
-              </div>
-            </div>
-
-            <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-sm text-foreground/80">
-              <p>
-                <strong>Puede tener costo extra (según complejidad):</strong> mayor volumen de agente hemostático, dispositivos adicionales,
-                estancia hospitalaria/UCI, estudios de laboratorio/imagen y transfusiones. Siempre se explica y autoriza antes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT IS GASTRIC VARICES SCLEROTHERAPY */}
-      <section id="que-es" className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                  ¿Qué es la Esclerosis de Várices Gástricas?
-                </h2>
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  Las várices gástricas son venas dilatadas en la pared del estómago que se forman cuando la presión en el sistema portal aumenta, comúnmente en pacientes con cirrosis hepática.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <p className="text-foreground/80">
-                  La esclerosis de várices gástricas es un procedimiento endoscópico especializado donde el Dr. Quiroz inyecta agentes esclerosantes directamente en las várices sangrantes para sellarlas y controlar la hemorragia.
-                </p>
-                <p className="text-foreground/80">
-                  Este tratamiento es crucial en emergencias por sangrado digestivo alto y como medida preventiva en pacientes con várices de alto riesgo.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-gradient-to-r from-accent-light/10 to-accent-strong/10 border border-accent-strong/20">
-                <div className="flex items-start gap-4">
-                  <AlertTriangle className="h-6 w-6 text-accent-strong mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Atención de Emergencia</h3>
-                    <p className="text-foreground/80">
-                      El sangrado por várices gástricas es una urgencia médica. El Dr. Quiroz está disponible 24/7 en Hospital Amerimed para atención inmediata.
-                    </p>
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+                {[
+                  "Sedación incluida",
+                  "Hospital Amerimed Mérida",
+                  `${DOCTOR.name} – Endoscopista`,
+                ].map((chip) => (
+                  <div key={chip} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span>{chip}</span>
                   </div>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <WhatsAppButton
+                  service="esclerosis varices gastricas"
+                  position="hero"
+                  procedureName="Esclerosis de Várices Gástricas"
+                  label="Agendar por WhatsApp"
+                  className="sm:px-8"
+                />
+                <CallButton
+                  service="esclerosis varices gastricas"
+                  position="hero"
+                  variant="ghost"
+                />
+              </div>
+
+              {/* Location + hours */}
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.address.display}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.hours.display}</span>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-background/50">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                  ¿Cuándo se Necesita este Tratamiento?
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Sangrado activo por várices gástricas</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Prevención en várices de alto riesgo</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Pacientes con cirrosis e hipertensión portal</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Historia previa de sangrado digestivo</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20">
-                <div className="flex items-center gap-3 mb-3">
-                  <Star className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-foreground">Ventaja Quirúrgica del Dr. Quiroz</h3>
-                </div>
-                <p className="text-foreground/80">
-                  Su formación como cirujano le permite comprender la anatomía vascular compleja y manejar complicaciones técnicas durante el procedimiento.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4-STEP PROCESS */}
-      <section id="proceso" className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Proceso de Tratamiento en 4 Pasos
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Protocolo estructurado para el manejo seguro y efectivo de várices gástricas
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Step 1 */}
-            <div className="p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-strong">1</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Evaluación de Emergencia
-              </h3>
-              <p className="text-foreground/80">
-                Estabilización hemodinámica, evaluación de la severidad del sangrado y preparación para endoscopia urgente.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-strong">2</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Localización Endoscópica
-              </h3>
-              <p className="text-foreground/80">
-                Identificación precisa de las várices sangrantes mediante endoscopia diagnóstica bajo sedación profunda.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-strong">3</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Inyección Esclerosante
-              </h3>
-              <p className="text-foreground/80">
-                Aplicación controlada del agente esclerosante directamente en las várices para sellar el sangrado.
-              </p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-strong">4</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Monitoreo y Seguimiento
-              </h3>
-              <p className="text-foreground/80">
-                Observación hospitalaria, control de signos vitales y programación de endoscopia de seguimiento.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SYMPTOMS SECTION */}
-      <section id="sintomas" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Reconoces estos síntomas de sangrado por várices gástricas?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Si tienes cirrosis y presentas estos síntomas, busca atención inmediata
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {/* Hematemesis */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-red-500" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                ¿Vomitas sangre o "borra de café"?
-              </h3>
-              <p className="text-foreground/80 mb-3">
-                Hematemesis - sangre fresca en vómito
-              </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-sm font-medium text-red-600">
-                <AlertTriangle className="h-4 w-4" />
-                Emergencia médica - llama YA
-              </div>
-            </div>
-
-            {/* Melena */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-orange-500" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                ¿Evacuaciones negras y pegajosas?
-              </h3>
-              <p className="text-foreground/80 mb-3">
-                Melena - indica sangrado digestivo
-              </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-sm font-medium text-orange-600">
-                <AlertTriangle className="h-4 w-4" />
-                Señal de hemorragia interna
-              </div>
-            </div>
-
-            {/* Hypotension */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-                <Heart className="h-6 w-6 text-red-500" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                ¿Mareo severo y debilidad súbita?
-              </h3>
-              <p className="text-foreground/80 mb-3">
-                Pérdida de sangre, presión baja
-              </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-sm font-medium text-red-600">
-                <Heart className="h-4 w-4" />
-                Tu cuerpo perdiendo volumen
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20">
-            <div className="flex items-start gap-4">
-              <Phone className="h-6 w-6 text-red-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">PACIENTES EN MÉRIDA</h3>
-                <p className="text-foreground/80">
-                  Si tienes 2 o más síntomas + cirrosis, ve a Hospital Amerimed o llama <strong>(999) 236-0153</strong>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PREPARATION SECTION */}
-      <section id="preparacion" className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Preparación Simple para tu Tratamiento
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Instrucciones claras para mejores resultados
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {/* 48 Hours Before */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-strong">48h</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                48 horas antes
-              </h3>
-              <ul className="space-y-2 text-foreground/80">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Suspender anticoagulantes (con autorización médica)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Organizar acompañante</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Day Before */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Clock className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Día anterior
-              </h3>
-              <ul className="space-y-2 text-foreground/80">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Ayuno desde medianoche</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Solo líquidos claros hasta 8 horas antes</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Day Of */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-light/10 flex items-center justify-center mb-4">
-                <Stethoscope className="h-6 w-6 text-accent-light" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Día del procedimiento
-              </h3>
-              <ul className="space-y-2 text-foreground/80">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-light flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Ayuno completo (ni agua)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-light flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Llegar 1 hora antes</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
-              <h3 className="font-semibold text-foreground mb-2">Casos de Emergencia</h3>
-              <p className="text-foreground/80 text-sm">
-                        Si hay sangrado activo, la preparación se adapta: la prioridad es controlar la hemorragia de inmediato.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20">
-              <h3 className="font-semibold text-foreground mb-2">Ubicación</h3>
-              <p className="text-foreground/80 text-sm">
-                Hospital Amerimed, Chichí Suárez - estacionamiento disponible
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* RECOVERY SECTION */}
-      <section id="recuperacion" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Tu Recuperación Paso a Paso
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Cronología clara de qué esperar después del tratamiento
-            </p>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-3">
-            {/* First 8 Hours */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <Clock className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Primeras 8 horas - Hospital
-              </h3>
-              <ul className="space-y-2 text-foreground/80 mb-4">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Observación continua, solo hielos</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Normal: garganta irritada, ligero mareo</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Days 1-2 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-primary">1-2</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Días 1-2 - Hospitalización
-              </h3>
-              <ul className="space-y-2 text-foreground/80 mb-4">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Dieta líquidos → blandos gradualmente</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Medicamentos antiácidos</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Week 1 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-light/10 flex items-center justify-center mb-4">
-                <span className="font-bold text-accent-light">7d</span>
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Semana 1 - Casa
-              </h3>
-              <ul className="space-y-2 text-foreground/80 mb-4">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-light flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Actividades ligeras solamente</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-light flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">NO levantar peso, NO alcohol</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-light flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Cita control con Dr. Quiroz</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
-              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-red-500" />
-                Alerta Inmediata si tienes:
-              </h3>
-              <ul className="space-y-1 text-foreground/80 text-sm">
-                <li>• Vómito con sangre</li>
-                <li>• Evacuaciones negras nuevamente</li>
-                <li>• Mareo severo</li>
-              </ul>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20">
-              <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                <Phone className="h-5 w-5 text-primary" />
-                Contacto
-              </h3>
-              <p className="text-foreground/80 text-sm">
-                Hospital Amerimed 24/7 para emergencias post-tratamiento
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTRAINDICATIONS SECTION */}
-      <section id="contraindicaciones" className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Situaciones Donde NO es Seguro el Procedimiento
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Transparencia médica sobre cuándo evaluar otras opciones
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Absolute Contraindications */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-red-500" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                NO es posible si:
-              </h3>
-              <ul className="space-y-2 text-foreground/80 text-sm">
-                <li>• Coagulopatía severa no corregible</li>
-                <li>• Shock severo sin respuesta a tratamiento</li>
-                <li>• Obstrucción que impide paso del endoscopio</li>
-              </ul>
-            </div>
-
-            {/* Relative Contraindications */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
-                <Stethoscope className="h-6 w-6 text-orange-500" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Requiere evaluación especial:
-              </h3>
-              <ul className="space-y-2 text-foreground/80 text-sm">
-                <li>• Ascitis masiva</li>
-                <li>• Encefalopatía hepática severa</li>
-                <li>• Edad &gt;80 años con múltiples enfermedades</li>
-              </ul>
-            </div>
-
-            {/* Alternatives */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Heart className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Alternativas:
-              </h3>
-              <ul className="space-y-2 text-foreground/80 text-sm">
-                <li>• Taponamiento temporal</li>
-                <li>• Derivación TIPS</li>
-                <li>• Coordinación con otros especialistas</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20 text-center">
-            <p className="text-foreground/80">
-              Dr. Quiroz evalúa cada caso individualmente en Hospital Amerimed
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* EMERGENCY VS ELECTIVE SECTION */}
-      <section id="urgente-o-cita" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Es Urgente o Puedes Programar Cita?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Guía clara para tomar la decisión correcta
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            {/* Emergency */}
-            <div className="p-8 rounded-2xl border-2 border-red-500/30 bg-gradient-to-br from-red-500/5 to-red-500/10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center">
-                  <AlertTriangle className="h-6 w-6 text-red-500" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  🚨 EMERGENCIA - Llama YA
-                </h3>
-              </div>
-              
-              <div className="space-y-4">
-                <ul className="space-y-2 text-foreground/80">
-                  <li>• Vómito con sangre</li>
-                  <li>• Evacuaciones negras</li>
-                  <li>• Mareo severo, desmayos</li>
-                </ul>
-                
-                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
-                  <p className="text-foreground/80 text-sm font-medium">
-                    Hospital Amerimed 24/7 disponible
+            {/* Right: Price card */}
+            <div className="w-full lg:max-w-sm">
+              <div className="border border-border bg-card rounded-2xl shadow-md p-6 space-y-6">
+                <div className="text-center space-y-2">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {DOCTOR.name}
                   </p>
-                  <p className="text-foreground/80 text-sm">
-                    <strong>(999) 236-0153</strong>
+                  <p className="font-serif font-bold text-text-accent text-2xl md:text-3xl">
+                    {mxn(PRICING.esclerosis_varices_gastricas.from)}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Desde — sedación incluida
                   </p>
                 </div>
-              </div>
-            </div>
 
-            {/* Elective */}
-            <div className="p-8 rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
-                  <CheckCircle2 className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  📅 PROGRAMA CONSULTA
-                </h3>
-              </div>
-              
-              <div className="space-y-4">
-                <ul className="space-y-2 text-foreground/80">
-                  <li>• Várices conocidas sin sangrado</li>
-                  <li>• Cirrosis estable para evaluación</li>
-                  <li>• Seguimiento rutinario</li>
-                </ul>
-                
-                <div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
-                  <p className="text-foreground/80 text-sm font-medium">
-                    Mejor preparación = mejores resultados
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <div className="p-6 rounded-2xl bg-orange-500/10 border border-orange-500/20">
-              <h3 className="font-semibold text-foreground mb-2">Ante Duda</h3>
-              <p className="text-foreground/80 text-sm">
-                Siempre consulta - mejor prevenir que lamentar
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20">
-              <h3 className="font-semibold text-foreground mb-2">Contacto</h3>
-              <p className="text-foreground/80 text-sm">
-                <strong>Emergencia:</strong> Urgencias Hospital Amerimed<br/>
-                <strong>Consultas:</strong> WhatsApp (999) 236-0153
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section id="ventaja-quirurgica" className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                  La Ventaja Quirúrgica del Dr. Omar Quiroz
-                </h2>
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  Su formación dual como cirujano y endoscopista le permite manejar casos complejos de hemorragia por várices gástricas con mayor precisión y seguridad.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <Stethoscope className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Comprensión Anatómica Avanzada</h3>
-                    <p className="text-foreground/80">
-                      Conocimiento profundo de la circulación portal y las variantes anatómicas que pueden complicar el tratamiento.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <Clock className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Manejo de Emergencias 24/7</h3>
-                    <p className="text-foreground/80">
-                      Disponibilidad inmediata para casos de hemorragia digestiva alta por várices gástricas en Hospital Amerimed.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <Heart className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Técnicas Avanzadas</h3>
-                    <p className="text-foreground/80">
-                      Dominio de múltiples agentes esclerosantes y técnicas combinadas para casos refractarios al tratamiento inicial.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-gradient-to-br from-primary/5 to-accent-strong/5">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                  Infraestructura Hospitalaria Completa
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Unidad de Cuidados Intensivos disponible</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Banco de sangre 24 horas</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Anestesiólogos certificados</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Equipo endoscópico Olympus HD</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-accent-strong/10 border border-accent-strong/20">
-                <h3 className="font-semibold text-foreground mb-2">Para Familias en Mérida</h3>
-                <p className="text-foreground/80">
-                  Entendemos la urgencia de estos casos. Proporcionamos comunicación clara y constante a familiares durante todo el proceso de tratamiento.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TREATMENT EXPERIENCE & RECOVERY */}
-      <section className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué Esperar Durante el Tratamiento?
-            </h2>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl bg-background border border-border">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                  Durante el Procedimiento
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Sedación profunda monitorizada</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">No siente dolor durante el tratamiento</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Duración: 30-60 minutos típicamente</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Monitoreo continuo de signos vitales</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-background border border-border">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                  Recuperación Post-Procedimiento
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Observación hospitalaria 24-48 horas</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Dieta líquida inicial progresiva</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Medicación para reducir acidez gástrica</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground/80">Seguimiento endoscópico en 2-4 semanas</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                  Costo del Tratamiento
-                </h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-foreground/80">Esclerosis de várices gástricas</span>
-                    <span className="font-bold text-primary">{mxn(15000)}</span>
-                  </div>
-                  <div className="pt-3 border-t border-primary/20">
-                    <p className="text-foreground/70 text-sm">
-                      Incluye: Sedación, quirófano, materiales especializados y seguimiento inicial
-                    </p>
-                  </div>
-                  <div className="p-3 rounded-lg bg-accent-strong/10">
-                    <p className="text-foreground/80 text-sm">
-                      <strong>Casos de emergencia:</strong> El costo puede variar según la complejidad del sangrado y los materiales requeridos.
-                    </p>
-                  </div>
+                  {[
+                    "Sedación con anestesiólogo",
+                    "Cianoacrilato (adhesivo tisular)",
+                    "Equipo endoscópico especializado",
+                    "Sala de recuperación y observación",
+                    "Consulta pre-procedimiento",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                      <span className="text-sm text-foreground/80">{item}</span>
+                    </div>
+                  ))}
                 </div>
-              </div>
 
-              <div className="p-6 rounded-2xl bg-accent-strong/10 border border-accent-strong/20">
-                <h3 className="font-semibold text-foreground mb-3">Ubicación en Mérida</h3>
-                <div className="space-y-2 text-foreground/80">
-                  <p><strong>Hospital Amerimed</strong></p>
-                  <p>Consultorio 517 - Gastroenterología</p>
-                  <p>Chichí Suárez, Mérida, Yucatán</p>
-                  <p className="text-sm">Fácil acceso desde Centro, Montebello, Altabrisa, Temozon Norte, Cholul y García Ginerés</p>
+                <div className="bg-muted rounded-xl p-4">
+                  <p className="text-xs text-muted-foreground">
+                    Generalmente 1–2 sesiones. Lectura de patología{" "}
+                    {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional si se toman
+                    biopsias.
+                  </p>
                 </div>
               </div>
             </div>
@@ -847,80 +196,385 @@ export default function EsclerosisVaricesGastricasPage() {
         </div>
       </section>
 
-      {/* RELATED PROCEDURES */}
-      <section id="relacionados" className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Procedimientos Relacionados
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2: DEFINITION — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              ¿Qué es la esclerosis de várices gástricas?
             </h2>
-            <p className="text-lg text-foreground/70">
-              Otros tratamientos especializados para manejo de hemorragias digestivas
+
+            <div className="text-foreground/80 leading-relaxed space-y-4">
+              <p>
+                Las várices gástricas se forman en el estómago — especialmente en
+                el fondo gástrico — por hipertensión portal asociada a
+                enfermedad hepática. A diferencia de las várices esofágicas que
+                se tratan con bandas elásticas (ligadura), las várices gástricas
+                fúndicas requieren un abordaje diferente.
+              </p>
+              <p>
+                La esclerosis consiste en inyectar cianoacrilato (un adhesivo
+                tisular) directamente dentro de la várice a través del
+                endoscopio. El adhesivo se solidifica al contacto con la sangre,
+                sellando la várice y deteniendo o previniendo el sangrado. La
+                tasa de éxito en hemostasia supera el 90%.
+              </p>
+              <p>
+                Es el tratamiento de primera línea recomendado por guías
+                internacionales (AASLD, ASGE) para várices gástricas fúndicas.
+                Se realiza bajo sedación profunda con el mismo equipo
+                endoscópico.
+              </p>
+            </div>
+
+            {/* Cross-link to ligadura */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+              <p className="text-foreground/80">
+                <span className="font-semibold text-foreground">
+                  ¿Tu médico indicó ligadura de várices esofágicas?
+                </span>{" "}
+                La ligadura con bandas elásticas es el tratamiento para várices
+                del esófago, no del estómago.{" "}
+                <Link
+                  href="/ligadura-varices-esofagicas-merida"
+                  className="text-primary font-medium hover:underline"
+                >
+                  Consulta nuestra página de ligadura de várices esofágicas
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 3: PRICING — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              ¿Cuánto cuesta la esclerosis de várices gástricas en Mérida?
+            </h2>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <p className="font-serif font-bold text-text-accent text-3xl">
+                Desde {mxn(PRICING.esclerosis_varices_gastricas.from)}
+              </p>
+            </div>
+
+            <p className="text-foreground/80 leading-relaxed">
+              El precio incluye sedación profunda con anestesiólogo certificado,
+              cianoacrilato (adhesivo tisular), equipo endoscópico
+              especializado, sala de recuperación y observación
+              post-procedimiento (4–6 horas), y consulta pre-procedimiento.
+              Generalmente se resuelve en 1–2 sesiones, a diferencia de la
+              ligadura esofágica que puede requerir 2–4.
+            </p>
+
+            {/* Biopsy differentiator */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+              <p className="text-foreground/80">
+                <span className="font-semibold text-foreground">
+                  Biopsias sin límite con tarifa única.
+                </span>{" "}
+                Si se toman biopsias, la lectura de patología tiene un costo
+                adicional de {mxn(ADDITIONAL_FEES.biopsy.amount)} — un solo
+                cobro sin importar cuántas biopsias se requieran.
+              </p>
+            </div>
+
+            <p className="text-sm text-muted-foreground">
+              <Link
+                href="/precios"
+                className="text-primary font-medium hover:underline"
+              >
+                Ver todos nuestros precios →
+              </Link>
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Link
-              href="/ligadura-varices-esofagicas-merida"
-              className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300 group"
-            >
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                Ligadura de Várices Esofágicas
-              </h3>
-              <p className="text-foreground/80">
-                Tratamiento con bandas elásticas para várices del esófago sangrantes o de alto riesgo.
-              </p>
-            </Link>
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 4: PREPARATION — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              Preparación y qué esperar
+            </h2>
 
-            <Link
-              href="/cpre-merida"
-              className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300 group"
-            >
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                CPRE (Colangiopancreatografía)
-              </h3>
-              <p className="text-foreground/80">
-                Procedimiento diagnóstico y terapéutico para vías biliares y páncreas.
-              </p>
-            </Link>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Before */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  1
+                </div>
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Antes del procedimiento
+                </h3>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Ayuno de 8 horas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Laboratorios: biometría hemática, coagulación y función
+                      hepática
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Suspender anticoagulantes según indicación médica
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Acudir con acompañante adulto</span>
+                  </li>
+                </ul>
+              </div>
 
-            <Link
-              href="/emergencias-digestivas-merida"
-              className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300 group"
-            >
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                Emergencias Digestivas 24/7
-              </h3>
-              <p className="text-foreground/80">
-                Atención inmediata para hemorragias y urgencias endoscópicas.
-              </p>
-            </Link>
+              {/* During */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  2
+                </div>
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Durante (30–60 min)
+                </h3>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Sedación profunda con anestesiólogo</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      El endoscopio llega al estómago y localiza la várice
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Inyección de cianoacrilato en dosis controlada
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      El adhesivo se solidifica al contacto con la sangre
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* After */}
+              <div className="bg-card border border-border rounded-xl p-6">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  3
+                </div>
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Recuperación (4–6 h)
+                </h3>
+                <ul className="space-y-4 text-sm text-foreground/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Observación 4–6 horas en Hospital Amerimed
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>Dieta blanda las primeras 24–48 horas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      Endoscopia de control en 4–6 semanas
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Warning signs */}
+            <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    Señales de alarma — contactar inmediatamente
+                  </h3>
+                  <p className="text-sm text-foreground/80">
+                    Vómito con sangre, evacuaciones negras, dolor abdominal
+                    intenso o fiebre. Escribe por WhatsApp al{" "}
+                    {CLINIC.phone.display} para valoración urgente.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 5: DOCTOR — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
+              Tu especialista: <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link>
+            </h2>
+
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 bg-muted">
+                <Image
+                  src={DOCTOR.photos.headshot}
+                  alt={DOCTOR.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-foreground/80 leading-relaxed">
+                  {DOCTOR.bioShort} El Dr. Quiroz cuenta con amplia experiencia
+                  en urgencias digestivas y manejo de sangrado variceal,
+                  incluyendo la técnica de inyección de cianoacrilato para
+                  várices gástricas fúndicas. Cuando nos escribes, te contesta
+                  el Dr. Quiroz directamente. Atención en Hospital Amerimed,
+                  Mérida, Yucatán — a minutos de Cholul, Temozón Norte y
+                  Country Club.
+                </p>
+
+                {/* Credentials */}
+                <div className="flex flex-wrap gap-2">
+                  {DOCTOR.credentials.map((cred) => (
+                    <span
+                      key={cred}
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-accent-light text-xs font-medium text-foreground"
+                    >
+                      <ShieldCheck className="h-4 w-4 text-accent" />
+                      {cred}
+                    </span>
+                  ))}
+                </div>
+
+                <WhatsAppButton
+                  service="esclerosis varices gastricas"
+                  position="doctor"
+                  procedureName="Esclerosis de Várices Gástricas"
+                  label="Consultar con el Dr. Quiroz"
+                  className="text-sm px-4 py-2"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 6: GOOGLE REVIEWS — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <GoogleReviews />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7: FAQ — bg-muted
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <Faq
+          routeKey="esclerosis_varices_gastricas"
+          service="esclerosis varices gastricas"
+          heading="Preguntas frecuentes sobre esclerosis de várices gástricas"
+        />
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 8: RELATED PROCEDURES — bg-background
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <h2 className="text-xl md:text-2xl font-serif font-bold tracking-tight text-foreground">
+              Procedimientos relacionados
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProcedures.map((proc) => (
+                <Link
+                  key={proc.href}
+                  href={proc.href}
+                  className="group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+                >
+                  <h3 className="font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {proc.name}
+                  </h3>
+                  <p className="text-sm text-foreground/80 mb-4">{proc.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-text-accent">
+                      {proc.price.startsWith("$")
+                        ? `Desde ${proc.price}`
+                        : proc.price}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FAQ LIST COMPONENT */}
-      <section id="faqs-esclerosis-varices" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="esclerosis_varices_gastricas" />
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 9: BOTTOM CTA — bg-primary
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-primary">
+        <div className="container-page section-padding">
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
+                ¿Necesitas valoración urgente?
+              </h2>
+              <p className="text-white/80 mt-2">
+                Si tienes sangrado digestivo o te indicaron esclerosis de
+                várices gástricas, agenda tu cita hoy. El {DOCTOR.name} te
+                responde personalmente.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <WhatsAppButton
+                service="esclerosis varices gastricas"
+                position="bottom-cta"
+                procedureName="Esclerosis de Várices Gástricas"
+                label="Agendar por WhatsApp"
+                className="sm:px-10"
+              />
+              <CallButton
+                service="esclerosis varices gastricas"
+                position="bottom-cta"
+                variant="inverse"
+              />
+            </div>
+
+            <address className="not-italic text-sm text-white/60">
+              {CLINIC.name} · {CLINIC.phone.display} ·{" "}
+              {CLINIC.address.display}
+            </address>
+          </div>
         </div>
       </section>
-
-    
-    </div>
+    </>
   )
 }

@@ -1,31 +1,24 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { PRICING, mxn, displayFrom, ADDITIONAL_FEES, INCLUDED_IN_PRICE } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
+import Image from "next/image"
 import {
-  Stethoscope,
-  MapPin,
   CheckCircle2,
+  MapPin,
+  Clock,
   ShieldCheck,
   Microscope,
-  Clock,
-  Heart,
-  AlertTriangle,
-  Activity,
-  Target,
   FileText,
-  ExternalLink,
-  Award,
+  Target,
   Zap,
-  Users2,
-  Search,
 } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
 export const metadata = metaFor("emr")
@@ -35,105 +28,90 @@ export default function EmrPage() {
 
   return (
     <>
-{/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200">
-                  <Target className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm font-medium text-blue-700">Alternativa a Cirugía de Pólipos</span>
-                </div>
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(procedureSchema({
+            name: "Resección Endoscópica Mucosa (EMR)",
+            path: "/reseccion-endoscopica-mucosa-emr-merida",
+            pricingKey: "emr",
+            description: "Eliminación de pólipos y lesiones pre-malignas sin cirugía abierta mediante resección endoscópica mucosa en Mérida, Yucatán.",
+            procedureType: "Therapeutic",
+          })),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema([
+            { name: "Inicio", path: "/" },
+            { name: "Servicios", path: "/servicios" },
+            { name: "Resección Endoscópica Mucosa (EMR)", path: "/reseccion-endoscopica-mucosa-emr-merida" },
+          ])),
+        }}
+      />
 
-                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
-                  Resección Endoscópica Mucosa (EMR) en Mérida | Dr. Omar Quiroz - Tratamiento de Pólipos Complejos
-                </h1>
+      {/* SECTION 1: HERO — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+            {/* Content */}
+            <div className="flex-1 space-y-6">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
+                Resección Endoscópica Mucosa (EMR) en Mérida
+              </h1>
 
-                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
-                  La resección endoscópica mucosa (EMR) en Mérida es un procedimiento especializado para remover pólipos superficiales y lesiones pre-malignas sin cirugía abierta. El Dr. Omar Quiroz realiza EMR en Hospital Amerimed, Mérida, Yucatán, ofreciendo esta técnica de precisión con cotización personalizada según complejidad del caso.
-                </p>
+              <p className="text-lg text-foreground/80 leading-relaxed">
+                Eliminación de pólipos y lesiones pre-malignas sin cirugía abierta,
+                con cotización personalizada según tu caso.
+              </p>
 
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
+              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+                {[
+                  "Procedimiento ambulatorio",
+                  `${DOCTOR.worksFor.hospital}`,
+                  "Cotización personalizada",
+                  "Sin cirugía abierta",
+                ].map((badge) => (
+                  <div key={badge} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Procedimiento de día</span>
+                    <span>{badge}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Hospital Amerimed</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Cotización personalizada</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Sin cirugía abierta</span>
-                  </div>
-                </div>
+                ))}
+              </div>
 
-                 {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="reseccion emr" position="hero" />
-                      <WhatsAppButton service="reseccion emr" position="hero" />
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <WhatsAppButton service="resección endoscópica mucosa (EMR)" position="hero" />
+                <CallButton service="resección endoscópica mucosa (EMR)" position="hero" variant="ghost" />
               </div>
             </div>
 
-            {/* EMR Pricing Card - Right Side */}
-            <div className="flex-1 lg:max-w-md">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-strong/20 to-primary/20 rounded-3xl transform rotate-3" />
-                <div className="relative bg-background rounded-3xl p-8 border border-border shadow-2xl">
-                  <div className="text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-accent-strong/10 flex items-center justify-center mx-auto">
-                      <Microscope className="h-8 w-8 text-accent-strong" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium text-foreground/60">Dr. Omar Quiroz</div>
-                      <div className="text-2xl font-bold text-accent-strong">Cotización personalizada</div>
-                      <div className="text-sm text-foreground/80">Según tamaño y ubicación de pólipo</div>
-                    </div>
+            {/* Pricing Card */}
+            <div className="w-full lg:max-w-md">
+              <div className="bg-background rounded-2xl p-8 border border-border shadow-sm">
+                <div className="text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mx-auto">
+                    <Microscope className="h-8 w-8 text-accent-strong" />
                   </div>
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium text-muted-foreground">{DOCTOR.name}</div>
+                    <div className="text-2xl font-bold text-text-accent">{mxn(PRICING.emr.from)}</div>
+                    <div className="text-sm text-muted-foreground">Según complejidad del caso</div>
+                  </div>
+                </div>
 
-                  {/* What's Included */}
-                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-                    <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
-                      Procedimiento EMR incluye
-                    </h3>
-                    
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
+                <div className="mt-6 p-6 rounded-xl bg-muted border border-border">
+                  <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
+                    Incluye
+                  </h3>
+                  <div className="space-y-2">
+                    {INCLUDED_IN_PRICE.map((item) => (
+                      <div key={item} className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Sedación consciente segura</span>
+                        <span className="text-sm text-foreground/80">{item}</span>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Resección mucosa completa</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Análisis histopatológico</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Fotos HD del procedimiento</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Seguimiento personalizado</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 p-3 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                      <h4 className="font-semibold text-foreground mb-1 text-sm">¿Por qué varía el precio?</h4>
-                      <p className="text-xs text-foreground/80">
-                        Pólipos grandes o múltiples requieren más tiempo y técnica especializada.
-                      </p>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -142,462 +120,319 @@ export default function EmrPage() {
         </div>
       </section>
 
-      {/* PRICING & LOCATION */}
-      <section className="py-12 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto grid gap-8 md:grid-cols-2">
-            {/* Pricing */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="flex items-center gap-3 mb-4">
+      {/* SECTION 2: DEFINITION — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
+              ¿Qué es la Resección Endoscópica Mucosa?
+            </h2>
+            <p className="text-foreground/80 leading-relaxed mb-6">
+              Es un procedimiento que permite remover pólipos grandes y lesiones superficiales
+              del tubo digestivo usando un endoscopio, sin necesidad de cirugía abierta. Trata
+              pólipos complejos del colon, lesiones superficiales del estómago o esófago y
+              esófago de Barrett con displasia. Se realiza bajo sedación con anestesiólogo
+              certificado, dura entre 30 y 45 minutos y es ambulatorio — regresas a casa
+              el mismo día. En muchos casos, pacientes que otro médico envió a cirugía pueden
+              resolverse con EMR ambulatoria.
+            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border">
+              <Clock className="h-5 w-5 text-accent-strong" />
+              <span className="font-semibold text-foreground">30–45 minutos</span>
+              <span className="text-foreground/70">· Sedación segura · Ambulatorio</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: PRICING & LOCATION — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Costo de EMR en Mérida
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 max-w-4xl">
+            {/* Pricing Card */}
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <div className="flex items-center gap-2 mb-4">
                 <FileText className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  Costo EMR en Mérida
+                <h3 className="text-lg font-serif font-semibold text-foreground">
+                  Cotización Personalizada
                 </h3>
               </div>
-              <div className="space-y-3 text-foreground/80">
-                <p className="text-lg font-semibold text-accent-strong">
-                  {mxn(PRICING.emr.from)} - Cotización según caso
-                </p>
-                <p>El precio varía por:</p>
-                <ul className="text-sm space-y-1 ml-4">
-                  <li>• Número de lesiones a resecar</li>
-                  <li>• Localización anatómica</li>
-                  <li>• Complejidad histológica</li>
-                  <li>• Necesidad de técnicas especiales</li>
-                </ul>
-                <p className="text-sm">
-                  Incluye: Procedimiento completo, sedación, patología y seguimiento.
-                </p>
+              <p className="text-lg font-semibold text-text-accent mb-4">
+                {mxn(PRICING.emr.from)}
+              </p>
+              <p className="text-sm text-muted-foreground mb-4">
+                El precio varía según número de lesiones, localización anatómica,
+                complejidad y técnicas especiales requeridas.
+              </p>
+              <div className="space-y-2 mb-4">
+                <p className="text-sm font-semibold text-foreground">Incluye:</p>
+                {INCLUDED_IN_PRICE.map((item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
+                    <span className="text-sm text-foreground/80">{item}</span>
+                  </div>
+                ))}
               </div>
+              <p className="text-sm text-muted-foreground mb-4">
+                Lectura de patología: {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional
+              </p>
+              <Link
+                href="/precios"
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                Ver todos los precios →
+              </Link>
             </div>
 
-            {/* Location */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="flex items-center gap-3 mb-4">
+            {/* Location Card */}
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-serif font-semibold text-foreground">
+                <h3 className="text-lg font-serif font-semibold text-foreground">
                   Ubicación en Mérida
                 </h3>
               </div>
-              <div className="space-y-3 text-foreground/80">
+              <div className="space-y-4 text-sm text-foreground/80">
                 <div>
-                  <p className="font-semibold">Hospital Amerimed</p>
-                  <p className="text-sm">Consultorio 517, Chichí Suárez</p>
+                  <p className="font-semibold text-foreground">{DOCTOR.worksFor.hospital}</p>
+                  <p>{CLINIC.address.display}</p>
+                  <p className="text-muted-foreground">Mérida, Yucatán</p>
                 </div>
-                <div className="text-sm">
-                  <p><strong>Fácil acceso desde:</strong></p>
-                  <p>Centro Histórico, Montebello, Altabrisa, Temozón Norte, García Ginerés, Cholul</p>
+                <div>
+                  <p className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-primary" />
+                    <span>{CLINIC.hours.display}</span>
+                  </p>
                 </div>
-                <div className="text-sm">
-                  <p><strong>Ventajas del Hospital:</strong></p>
-                  <ul className="ml-4 space-y-1">
-                    <li>• Quirófanos con tecnología avanzada</li>
-                    <li>• Anestesiólogos certificados</li>
-                    <li>• Área de recuperación monitoreada</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3-STEP PROCESS */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Proceso de EMR en 3 Etapas
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Desde la evaluación inicial hasta la recuperación completa
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                1
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Evaluación Pre-Resección</h3>
-              <p className="text-sm text-foreground/80">Colonoscopia diagnóstica con cromoendoscopia para evaluar márgenes y profundidad</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-accent-strong-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                2
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Resección Endoscópica</h3>
-              <p className="text-sm text-foreground/80">Inyección submucosa, resección en asa y recuperación de espécimen completo</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-accent-strong-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                3
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Seguimiento Patológico</h3>
-              <p className="text-sm text-foreground/80">Evaluación histopatológica y vigilancia endoscópica según resultados</p>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <Clock className="h-5 w-5 text-accent-strong" />
-              <span className="font-semibold text-foreground">Duración</span>
-              <span className="text-foreground/70">- 30-45 minutos según complejidad</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Dr. Omar Quiroz - Ventaja Quirúrgica Única</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  ¿Por Qué la Experiencia Quirúrgica Marca la Diferencia en EMR?
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  Muchos endoscopistas en Mérida evitan casos complejos de EMR o los envían a cirugía cuando encuentran lesiones difíciles. <strong>El Dr. Quiroz es diferente</strong> - como cirujano especializado, maneja resecciones complejas que otros consideran "no resecables" endoscópicamente.
+                <p>
+                  <strong>Fácil acceso desde:</strong> Cholul, Temozón Norte,
+                  Altabrisa, Montebello, Centro Histórico, García Ginerés
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Surgical Benefits Grid */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Target className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Precisión Quirúrgica</h3>
-                    <p className="text-sm text-foreground/80">
-                      Técnica refinada por años de cirugía laparoscópica. Resecciones en bloque cuando otros fragmentan la lesión.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent-strong/10 flex items-center justify-center flex-shrink-0">
-                    <Microscope className="h-5 w-5 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Evaluación Oncológica</h3>
-                    <p className="text-sm text-foreground/80">
-                      Determina márgenes quirúrgicos apropiados y evalúa necesidad de tratamiento adicional con criterio oncológico.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Manejo de Complicaciones</h3>
-                    <p className="text-sm text-foreground/80">
-                      Experiencia quirúrgica para manejar perforaciones o sangrado inmediatamente, sin referir a otro especialista.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent-strong/10 flex items-center justify-center flex-shrink-0">
-                    <Users2 className="h-5 w-5 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Plan Integral</h3>
-                    <p className="text-sm text-foreground/80">
-                      Si EMR no es completa, planea segunda resección o cirugía laparoscópica sin cambiar de médico.
-                    </p>
-                  </div>
-                </div>
-              </div>
+      {/* SECTION 4: PREPARATION & RECOVERY — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Preparación y Recuperación
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3 max-w-5xl">
+            {/* Antes */}
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Antes</h3>
+              <ul className="space-y-2 text-sm text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Preparación intestinal (si colon)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Ayuno de 8 horas</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Revisión de medicamentos</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Consentimiento informado</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Success Story */}
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-accent-light/5 to-accent-strong/5 border border-primary/20">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                    Casos que Otros Consideran "Muy Complejos"
-                  </h3>
-                  <p className="text-foreground/80 mb-4">
-                    Pólipos de 3-4 cm en colon, lesiones laterally spreading tumors (LST), y adenomas vellosos que otros especialistas envían directamente a cirugía. El Dr. Quiroz evalúa cada caso individualmente para ofrecer la opción menos invasiva.
-                  </p>
-                  <p className="text-sm text-primary font-medium">
-                    "La clave está en saber cuándo EMR es suficiente y cuándo se necesita algo más" - Dr. Omar Quiroz
-                  </p>
-                </div>
-              </div>
+            {/* Durante */}
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Durante</h3>
+              <ul className="space-y-2 text-sm text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Sedación segura — no sentirás nada</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Duración: 30–45 minutos</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Fotos HD del procedimiento</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Alta el mismo día</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Después */}
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Después</h3>
+              <ul className="space-y-2 text-sm text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <ShieldCheck className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Día 1–2: Dieta líquida, actividad ligera</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ShieldCheck className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Día 3–7: Dieta suave, sin ejercicio intenso</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ShieldCheck className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Semana 2+: Actividad completa</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ShieldCheck className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
+                  <span>Patología: 7–10 días</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PATIENT EXPERIENCE */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué Esperar Durante la EMR?
+      {/* SECTION 5: DOCTOR — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Tu Especialista en Resección Endoscópica
+          </h2>
+          <div className="flex flex-col md:flex-row items-start gap-8 max-w-4xl">
+            <Image
+              src={DOCTOR.photos.headshot}
+              alt={DOCTOR.name}
+              width={280}
+              height={350}
+              className="rounded-2xl w-full max-w-[280px]"
+            />
+            <div className="space-y-4">
+              <Link href={DOCTOR.profileUrl}>
+                <h3 className="text-lg font-serif font-semibold text-foreground hover:text-primary transition-colors">
+                  {DOCTOR.name}
+                </h3>
+              </Link>
+              <p className="text-foreground/80 leading-relaxed">
+                {DOCTOR.bioShort}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {DOCTOR.credentials.slice(0, 4).map((cred) => (
+                  <span
+                    key={cred}
+                    className="inline-flex items-center px-4 py-2 rounded-xl bg-accent-light text-sm font-medium text-foreground"
+                  >
+                    {cred}
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                Como cirujano especializado, maneja resecciones complejas que otros
+                envían a cirugía. Si la EMR no es suficiente, planea el siguiente paso
+                sin cambiar de médico.
+              </p>
+              <WhatsAppButton service="EMR" position="doctor" className="text-sm" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: REVIEWS — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* SECTION 7: FAQ — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <Faq routeKey="emr" service="resección endoscópica mucosa (EMR)" />
+        </div>
+      </section>
+
+      {/* SECTION 8: CTA + RELATED — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          {/* CTA */}
+          <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Tienes Pólipos que Requieren Resección?
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Proceso detallado desde la llegada hasta el alta médica
+            <p className="text-lg text-foreground/80">
+              No todos los pólipos necesitan cirugía. Escríbenos para evaluar
+              si EMR es la opción adecuada para tu caso.
             </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-serif font-semibold text-foreground mb-4">Antes del Procedimiento</h3>
-                <div className="space-y-3 text-sm text-foreground/80">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p>Preparación intestinal 24 horas previas (colonoscopia)</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p>Ayuno de 8 horas antes del procedimiento</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p>Revisión de anticoagulantes y medicamentos</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p>Consentimiento informado detallado</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-serif font-semibold text-foreground mb-4">Durante la Resección</h3>
-                <div className="space-y-3 text-sm text-foreground/80">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-2 flex-shrink-0" />
-                    <p>Sedación profunda - no sentirás nada</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-2 flex-shrink-0" />
-                    <p>Localización exacta de la lesión</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-2 flex-shrink-0" />
-                    <p>Inyección submucosa para elevación</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-2 flex-shrink-0" />
-                    <p>Resección en asa con márgenes adecuados</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-serif font-semibold text-foreground mb-4">Después del Procedimiento</h3>
-                <div className="space-y-3 text-sm text-foreground/80">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
-                    <p>Recuperación en sala monitoreada 1-2 horas</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
-                    <p>Explicación de hallazgos con imágenes</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
-                    <p>Instrucciones de dieta y actividades</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
-                    <p>Alta el mismo día en la mayoría de casos</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-serif font-semibold text-foreground mb-4">Seguimiento y Resultados</h3>
-                <div className="space-y-3 text-sm text-foreground/80">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
-                    <p>Resultados de patología en 7-10 días</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
-                    <p>Cita de revisión para discutir histopatología</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
-                    <p>Plan de vigilancia endoscópica según resultados</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
-                    <p>Coordinación con oncología si es necesario</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Recovery Timeline */}
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border border-green-200">
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-4">
-                Cronología de Recuperación Post-EMR
-              </h3>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-1">Día 1-2</div>
-                  <p className="text-sm text-foreground/80">Dieta líquida, actividad ligera, observación de síntomas</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-1">Día 3-7</div>
-                  <p className="text-sm text-foreground/80">Dieta suave, actividades normales, evitar ejercicio intenso</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-1">Semana 2+</div>
-                  <p className="text-sm text-foreground/80">Actividad completa, seguimiento según patología</p>
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <WhatsAppButton service="resección endoscópica mucosa (EMR)" position="cta" />
+              <CallButton service="resección endoscópica mucosa (EMR)" position="cta" variant="ghost" />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* RELATED PROCEDURES */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+          {/* Related Procedures */}
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
               Procedimientos Relacionados
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Opciones complementarias para diagnóstico y tratamiento endoscópico
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Link href="/colonoscopia-merida" className="group p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Search className="h-6 w-6 text-primary" />
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                  Colonoscopia Diagnóstica
-                </h3>
-              </div>
-              <p className="text-sm text-foreground/80 mb-3">
-                Evaluación inicial para detectar pólipos y lesiones que requieren EMR.
-              </p>
-              <div className="text-sm text-primary font-medium">
-                Desde $5,000 MXN →
-              </div>
-            </Link>
-
-            <Link href="/diseccion-endoscopica-submucosa-esd-merida" className="group p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="h-6 w-6 text-accent-strong" />
-                <h3 className="font-semibold text-foreground group-hover:text-accent-strong transition-colors">
-                  Disección ESD
-                </h3>
-              </div>
-              <p className="text-sm text-foreground/80 mb-3">
-                Para lesiones complejas que requieren resección más extensa que EMR.
-              </p>
-              <div className="text-sm text-accent-strong font-medium">
-                Cotización personalizada →
-              </div>
-            </Link>
-
-            <Link href="/apc-coagulacion-plasma-argon-merida" className="group p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Zap className="h-6 w-6 text-blue-600" />
-                <h3 className="font-semibold text-foreground group-hover:text-blue-600 transition-colors">
-                  Coagulación APC
-                </h3>
-              </div>
-              <p className="text-sm text-foreground/80 mb-3">
-                Tratamiento complementario para márgenes post-resección.
-              </p>
-              <div className="text-sm text-blue-600 font-medium">
-                Desde $19,000 MXN →
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                ¿Tienes Pólipos que Requieren Resección?
-              </h2>
-              <p className="text-lg text-foreground/80">
-                No todos los pólipos necesitan cirugía. El Dr. Omar evalúa cada caso para determinar si EMR puede resolver tu situación de manera menos invasiva.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-accent-light/5 to-accent-strong/5 border border-primary/20">
-              <div className="space-y-4">
-                <div className="flex items-center justify-center gap-2">
-                  <Heart className="h-6 w-6 text-primary" />
-                  <span className="font-semibold text-foreground">Evaluación sin compromiso</span>
+            <div className="grid gap-6 md:grid-cols-3">
+              <Link
+                href="/colonoscopia-merida"
+                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Microscope className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    Colonoscopia Diagnóstica
+                  </h3>
                 </div>
-                <p className="text-foreground/80">
-                  Agenda una consulta para revisar tu caso específico. Muchos pacientes que otros médicos enviaron a cirugía pueden resolverse con EMR ambulatoria.
+                <p className="text-sm text-foreground/80 mb-4">
+                  Evaluación inicial para detectar pólipos y lesiones que requieren EMR.
                 </p>
-                 {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <CallButton service="reseccion emr" position="cta section" />
-                      <WhatsAppButton service="reseccion emr" position="cta section" />
-                </div>
-              </div>
-            </div>
+                <span className="text-sm font-medium text-text-accent">
+                  {displayFrom("colonoscopia")} →
+                </span>
+              </Link>
 
-            <div className="text-center text-sm text-foreground/70">
-              <p>
-                Evalúa todas tus opciones antes de considerar cirugía mayor.
-              </p>
+              <Link
+                href="/diseccion-endoscopica-submucosa-esd-merida"
+                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Target className="h-6 w-6 text-accent-strong" />
+                  <h3 className="font-semibold text-foreground group-hover:text-accent-strong transition-colors">
+                    Disección ESD
+                  </h3>
+                </div>
+                <p className="text-sm text-foreground/80 mb-4">
+                  Para lesiones complejas que requieren resección en-bloc.
+                </p>
+                <span className="text-sm font-medium text-text-accent">
+                  {displayFrom("esd")} →
+                </span>
+              </Link>
+
+              <Link
+                href="/apc-coagulacion-plasma-argon-merida"
+                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Zap className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    Coagulación APC
+                  </h3>
+                </div>
+                <p className="text-sm text-foreground/80 mb-4">
+                  Tratamiento complementario para hemostasia post-resección.
+                </p>
+                <span className="text-sm font-medium text-text-accent">
+                  {displayFrom("apc")} →
+                </span>
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
-        </div>
-      </section>
-
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
-        </div>
-      </section>
-
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="emr" />
         </div>
       </section>
     </>

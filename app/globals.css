@@ -1,221 +1,702 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-/* class-based dark + media fallback */
-@custom-variant dark (&:is(.dark *));
-:root { color-scheme: light dark; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENDOSCOPIA DEL MAYAB — MEDICAL DESIGN SYSTEM
+   Light mode only • 8-point grid • Professional healthcare aesthetic
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────
-   LIGHT THEME TOKENS (HSL numbers) - Clean & Medical
-   Brand: Navy #1D3882  → hsl(224 64% 31%)
-   Accent (Light Aqua): #28BDBD → hsl(180 65% 45%)  → use DARK text
-   Accent (Strong Teal): #17806D → hsl(169 70% 30%) → use WHITE text
-   ───────────────────────────── */
-:root {
-  /* Core brand - Brighter and more vibrant */
-  --primary: 224 76% 40%;           /* Brighter, more vibrant blue #2563EB */
-  --primary-foreground: 0 0% 100%;
+@layer theme {
+  :root {
+    /* ───────────────────────────────────────────────────────────────────────
+       TYPOGRAPHY SCALE — Medical precision with warmth
+       Montserrat (headings) + Open Sans (body)
+    ─────────────────────────────────────────────────────────────────────── */
+    --font-sans: var(--font-open-sans), "Helvetica Neue", Arial, sans-serif;
+    --font-serif: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
 
-  /* Back to the better green - no teal */
-  --accent-light: 169 80% 35%;      /* The original vibrant teal-green that looked good */
-  --accent-light-foreground: 0 0% 100%; /* White text */
-  --accent-strong: 169 80% 35%;     /* Same green for consistency */
-  --accent-strong-foreground: 0 0% 100%;
+    /* ───────────────────────────────────────────────────────────────────────
+       COLOR PALETTE — Clinical clarity meets coastal warmth
+       HSL triplets for Tailwind opacity modifiers (e.g., bg-primary/80)
+    ─────────────────────────────────────────────────────────────────────── */
 
-  /* Clean light neutrals */
-  --background: 0 0% 100%;          /* Pure white */
-  --foreground: 222 84% 4.9%;       /* Almost black */
-  --muted: 220 14% 96%;             /* Subtle gray #F8FAFC */
-  --muted-foreground: 215 16% 46%;  /* Medium gray */
-  --border: 220 13% 91%;            /* Light border #E2E8F0 */
-  --input: 220 13% 91%;
+    /* Brand Identity */
+    --brand-navy-50: 220 60% 97%;
+    --brand-navy-100: 222 55% 92%;
+    --brand-navy-300: 223 50% 75%;
+    --brand-navy-500: 224 76% 40%;      /* Primary navy */
+    --brand-navy-700: 224 80% 28%;
+    --brand-navy-900: 222 84% 15%;
 
-  /* Enhanced link colors */
-  --link: var(--primary);
-  --link-foreground: 0 0% 100%;
+    --brand-teal-50: 168 65% 97%;
+    --brand-teal-100: 169 70% 90%;
+    --brand-teal-300: 169 75% 60%;
+    --brand-teal-500: 169 80% 25%;      /* Accent teal */
+    --brand-teal-700: 169 80% 20%;
+    --brand-teal-900: 169 85% 12%;
 
-  /* Semantics */
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
+    /* Neutral Foundation */
+    --neutral-50: 210 20% 98%;
+    --neutral-100: 210 17% 95%;
+    --neutral-200: 214 15% 91%;
+    --neutral-300: 213 14% 84%;
+    --neutral-400: 215 13% 65%;
+    --neutral-500: 215 14% 50%;
+    --neutral-600: 215 16% 43%;
+    --neutral-700: 215 19% 35%;
+    --neutral-800: 217 24% 20%;
+    --neutral-900: 222 47% 11%;
 
-  /* Simplified charts */
-  --chart-1: 169 80% 35%;           /* Green */
-  --chart-2: 224 76% 40%;           /* Blue */
-  --chart-3: 0 72% 51%;             /* Red */
-  --chart-4: 38 92% 56%;            /* Orange */
-  --chart-5: 215 19% 35%;           /* Gray */
+    /* Clinical Accents */
+    --clinical-green: 142 76% 36%;      /* Success, safe */
+    --clinical-amber: 38 92% 50%;       /* Caution */
+    --clinical-red: 0 84% 60%;          /* Urgent */
+    --clinical-blue: 199 89% 48%;       /* Info */
 
-  /* Clean sidebar */
-  --sidebar: 0 0% 100%;
-  --sidebar-foreground: 222 84% 4.9%;
-  --sidebar-primary: 224 76% 40%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 169 80% 35%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 38 92% 56%;
-  --sidebar-muted: 220 14% 96%;
-  --sidebar-active: 169 80% 35%;
+    /* ───────────────────────────────────────────────────────────────────────
+       SEMANTIC TOKENS — Context-aware color assignments
+    ─────────────────────────────────────────────────────────────────────── */
 
-  /* Clean shadows - no green tint */
-  --radius: 0.5rem;
-  --radius-interactive: 0.625rem;
-  --shadow-1: 0 1px 3px hsl(0 0% 0% / 0.08);
-  --shadow-2: 0 4px 12px hsl(0 0% 0% / 0.12);
-  --shadow-3: 0 8px 32px hsl(0 0% 0% / 0.16);
+    /* Primary brand color */
+    --primary: var(--brand-navy-500);
+    --primary-hover: var(--brand-navy-700);
 
-  /* Focus ring */
-  --ring: 224 76% 40%;
+    /* Accent/action color */
+    --accent: var(--brand-teal-500);
+    --accent-hover: var(--brand-teal-700);
+    --accent-light: var(--brand-teal-50);
 
-  /* Footer - professional slate */
-  --footer: 215 28% 17%;            /* Dark slate #1E293B */
-  --footer-foreground: 210 40% 98%; /* Light text */
+    /* Surface colors */
+    --surface-base: 0 0% 100%;          /* White background */
+    --surface-raised: var(--neutral-50);
+    --surface-sunken: var(--neutral-100);
+    --surface-inverse: var(--neutral-900);
+
+    /* Text colors */
+    --text-primary: var(--neutral-900);
+    --text-secondary: var(--neutral-600);
+    --text-disabled: var(--neutral-400);
+    --text-inverse: 0 0% 100%;
+    --text-brand: var(--brand-navy-500);
+    --text-accent: var(--brand-teal-700);
+    --text-footer-label: 0 0% 85%;      /* Footer section labels (dimmer than body) */
+    --text-footer-accent: var(--brand-teal-100);  /* Footer accent text (bright teal) */
+
+    /* Interactive elements */
+    --action-primary: var(--brand-teal-500);
+    --action-primary-hover: var(--brand-teal-700);
+    --action-primary-text: 0 0% 100%;
+
+    --action-secondary: var(--brand-navy-500);
+    --action-secondary-hover: var(--brand-navy-700);
+    --action-secondary-text: 0 0% 100%;
+
+    /* Borders */
+    --border-light: var(--neutral-200);
+    --border-medium: var(--neutral-300);
+    --border-strong: var(--neutral-400);
+
+    /* State colors */
+    --success: var(--clinical-green);
+    --warning: var(--clinical-amber);
+    --error: var(--clinical-red);
+    --info: var(--clinical-blue);
+
+    /* ───────────────────────────────────────────────────────────────────────
+       SPATIAL SYSTEM — 8-point grid foundation
+    ─────────────────────────────────────────────────────────────────────── */
+    --space-0: 0;
+    --space-1: 0.25rem;   /* 4px — tight typography pairs only */
+    --space-2: 0.5rem;    /* 8px — minimum gap */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px — standard element gap */
+    --space-6: 1.5rem;    /* 24px — visual groups */
+    --space-8: 2rem;      /* 32px — section breaks */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px — major sections */
+    --space-16: 4rem;     /* 64px — dramatic spacing */
+    --space-20: 5rem;     /* 80px */
+    --space-24: 6rem;     /* 96px */
+
+    /* ───────────────────────────────────────────────────────────────────────
+       SHADOWS — Subtle depth for medical UI
+    ─────────────────────────────────────────────────────────────────────── */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.04);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.06);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+
+    /* ───────────────────────────────────────────────────────────────────────
+       ANIMATION — Smooth, professional transitions
+    ─────────────────────────────────────────────────────────────────────── */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 350ms;
+    --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
 }
 
-/* Dark mode - Only when explicitly .dark class is applied */
-.dark {
-  color-scheme: dark;
-  
-  --background: 222 47% 11%;      /* #0F172A - Dark slate */
-  --foreground: 210 40% 98%;      /* Light text */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TAILWIND THEME BRIDGE — Map CSS variables to Tailwind utilities
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* Brighter primary for affordance on dark */
-  --primary: 224 64% 50%;         /* Brighter navy for dark mode */
-  --primary-foreground: 0 0% 100%;
-
-  /* Accents adjusted for dark mode */
-  --accent-light: 180 65% 55%;    /* Slightly brighter aqua */
-  --accent-light-foreground: 222 47% 11%; /* Still dark text on aqua */
-  --accent-strong: 169 70% 35%;   /* Slightly brighter teal */
-  --accent-strong-foreground: 0 0% 100%;
-
-  /* Dark mode neutrals */
-  --muted: 215 25% 20%;           /* Dark gray */
-  --muted-foreground: 215 20% 72%; /* Light gray for secondary text */
-  --border: 215 25% 23%;          /* Subtle borders */
-  --input: 215 25% 18%;           /* Input backgrounds */
-
-  /* Dark mode links */
-  --link: 224 80% 65%;            /* Brighter blue for contrast */
-  --link-foreground: 0 0% 0%;
-
-  --ring: 38 92% 56%;             /* Keep bright focus ring */
-
-  --chart-1: 224 64% 55%;
-  --chart-2: 188 85% 55%;
-  --chart-3: 0 72% 60%;
-  --chart-4: 38 92% 60%;
-  --chart-5: 215 20% 75%;
-
-  /* Dark sidebar */
-  --sidebar: 215 25% 15%;
-  --sidebar-foreground: 210 40% 96%;
-  --sidebar-primary: 224 64% 50%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 180 65% 55%;
-  --sidebar-accent-foreground: 222 47% 11%;
-  --sidebar-border: 215 25% 20%;
-  --sidebar-ring: 38 92% 56%;
-  --sidebar-muted: 215 25% 18%;
-  --sidebar-active: 169 70% 40%;
-}
-
-/* ── Tailwind theme mapping (uses hsl(var(--token))) ── */
 @theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
+  /* Brand primitives */
+  --color-navy-50: hsl(var(--brand-navy-50));
+  --color-navy-100: hsl(var(--brand-navy-100));
+  --color-navy-300: hsl(var(--brand-navy-300));
+  --color-navy-500: hsl(var(--brand-navy-500));
+  --color-navy-700: hsl(var(--brand-navy-700));
+  --color-navy-900: hsl(var(--brand-navy-900));
 
+  --color-teal-50: hsl(var(--brand-teal-50));
+  --color-teal-100: hsl(var(--brand-teal-100));
+  --color-teal-300: hsl(var(--brand-teal-300));
+  --color-teal-500: hsl(var(--brand-teal-500));
+  --color-teal-700: hsl(var(--brand-teal-700));
+  --color-teal-900: hsl(var(--brand-teal-900));
+
+  /* Semantic tokens */
   --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  
-  --color-link: hsl(var(--link));
-  --color-link-foreground: hsl(var(--link-foreground));
-
+  --color-accent: hsl(var(--accent));
   --color-accent-light: hsl(var(--accent-light));
-  --color-accent-light-foreground: hsl(var(--accent-light-foreground));
 
-  --color-accent-strong: hsl(var(--accent-strong));
-  --color-accent-strong-foreground: hsl(var(--accent-strong-foreground));
+  --color-background: hsl(var(--surface-base));
+  --color-foreground: hsl(var(--text-primary));
+  --color-muted: hsl(var(--surface-sunken));
+  --color-muted-foreground: hsl(var(--text-secondary));
+  --color-footer: hsl(var(--surface-inverse));
 
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-card: hsl(var(--surface-base));
+  --color-border: hsl(var(--border-light));
+  --color-border-strong: hsl(var(--border-strong));
 
-  --color-chart-1: hsl(var(--chart-1));
-  --color-chart-2: hsl(var(--chart-2));
-  --color-chart-3: hsl(var(--chart-3));
-  --color-chart-4: hsl(var(--chart-4));
-  --color-chart-5: hsl(var(--chart-5));
+  --color-action-primary: hsl(var(--action-primary));
+  --color-action-secondary: hsl(var(--action-secondary));
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-interactive: var(--radius-interactive);
+  /* Text semantic colors */
+  --color-text-primary: hsl(var(--text-primary));
+  --color-text-secondary: hsl(var(--text-secondary));
+  --color-text-disabled: hsl(var(--text-disabled));
+  --color-text-inverse: hsl(var(--text-inverse));
+  --color-text-brand: hsl(var(--text-brand));
+  --color-text-accent: hsl(var(--text-accent));
+  --color-text-footer-label: hsl(var(--text-footer-label));
+  --color-text-footer-accent: hsl(var(--text-footer-accent));
 
-  --color-sidebar: hsl(var(--sidebar));
-  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
-  --color-sidebar-primary: hsl(var(--sidebar-primary));
-  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
-  --color-sidebar-accent: hsl(var(--sidebar-accent));
-  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
-  --color-sidebar-border: hsl(var(--sidebar-border));
-  --color-sidebar-ring: hsl(var(--sidebar-ring));
-  --color-sidebar-muted: hsl(var(--sidebar-muted));
-  --color-sidebar-active: hsl(var(--sidebar-active));
+  /* State colors */
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-error: hsl(var(--error));
+  --color-info: hsl(var(--info));
 
-  /* Footer */
-  --color-footer: hsl(var(--footer));
-  --color-footer-foreground: hsl(var(--footer-foreground));
+  /* Red scale (emergency sections) */
+  --color-red-50: 0 86% 97%;
+  --color-red-100: 0 93% 94%;
+  --color-red-200: 0 96% 89%;
+  --color-red-300: 0 94% 82%;
+  --color-red-600: 0 84% 60%;
+  --color-red-700: 0 73% 50%;
+  --color-red-800: 0 70% 35%;
+  --color-red-900: 0 63% 31%;
 
-  /* Fonts */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-  --font-serif: "Montserrat", ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New";
+  /* Amber scale (warning badges) */
+  --color-amber-500: hsl(var(--clinical-amber));
+  --color-amber-700: 36 77% 35%;
+
+  /* Green scale (success states, emergency WhatsApp) */
+  --color-green-50: 142 71% 97%;
+  --color-green-200: 141 79% 85%;
+  --color-green-600: 142 71% 45%;
+  --color-green-700: hsl(var(--clinical-green));
+  --color-green-800: 142 72% 29%;
+
+  /* Feedback colors (ratings & status indicators) */
+  --color-feedback-warning: hsl(var(--clinical-amber));
+  --color-feedback-success: hsl(var(--clinical-green));
+  --color-feedback-error: hsl(var(--clinical-red));
+
+  /* Radius tokens */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.25rem;  /* 20px */
+  --radius-full: 9999px;
 }
 
-/* ── Base layer / a11y polish ── */
-@layer base {
-  * { @apply border-border; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE STYLES — Document foundation
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-  html, body { height: 100%; }
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    text-rendering: optimizeLegibility;
+    @apply bg-background text-foreground;
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
   }
 
-  /* Accessible focus (no global outline on everything) */
+  /* Typography hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight text-foreground;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h1 {
+    @apply text-3xl font-extrabold;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+    letter-spacing: -0.022em;
+  }
+
+  h3 {
+    @apply text-xl font-semibold;
+    letter-spacing: -0.019em;
+  }
+
+  h4 {
+    @apply text-lg font-semibold;
+  }
+
+  p {
+    @apply text-base text-foreground;
+    margin-bottom: var(--space-4);
+  }
+
+  a {
+    @apply text-primary transition-colors duration-[var(--duration-fast)];
+    text-decoration: none;
+  }
+
+  a:hover {
+    @apply text-primary;
+    text-decoration: underline;
+  }
+
+  strong, b {
+    font-weight: 600;
+  }
+
+  /* Focus styles for accessibility */
   :focus-visible {
-    outline: none;
-    box-shadow:
-      0 0 0 2px hsl(var(--background)),
-      0 0 0 4px hsl(var(--ring) / 0.6);
-    border-radius: var(--radius-interactive);
+    @apply outline-2 outline-offset-2 outline-primary;
+    outline-style: solid;
   }
 
-  /* Headings */
-  h1 { @apply font-serif font-extrabold leading-tight tracking-tight; }
-  h2 { @apply font-serif font-bold leading-snug; }
-  h3 { @apply font-serif font-semibold leading-snug; }
-  h4,h5,h6 { @apply font-serif font-semibold; }
-
-  /* Elevation helpers */
-  .card    { box-shadow: var(--shadow-1); border-radius: var(--radius-lg); }
-  .popover { box-shadow: var(--shadow-2); border-radius: var(--radius-lg); }
-  .elevated{ box-shadow: var(--shadow-3); }
-
-  /* Selection color */
+  /* Selection styling */
   ::selection {
-    background: hsl(var(--primary) / 0.18);
-    color: hsl(var(--foreground));
+    @apply bg-accent/20 text-foreground;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES — Reusable patterns
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* Container system */
+  .container-page {
+    @apply mx-auto px-4 w-full;
+    max-width: 1280px;
   }
 
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .container-narrow {
+    @apply mx-auto px-4 w-full;
+    max-width: 960px;
+  }
+
+  /* Section spacing (8pt grid) */
+  .section-padding {
+    @apply py-12;
+  }
+
+  .section-padding-lg {
+    @apply py-16;
+  }
+
+  /* Glass morphism effect for cards */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-border shadow-md;
+  }
+
+  /* Smooth hover lift */
+  .hover-lift {
+    @apply transition-all duration-[var(--duration-base)];
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-navy-700 to-teal-600 bg-clip-text text-transparent;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium;
+    @apply bg-action-primary text-white hover:bg-teal-700;
+    @apply transition-all duration-[var(--duration-base)];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium;
+    @apply bg-action-secondary text-white hover:bg-navy-700;
+    @apply transition-all duration-[var(--duration-base)];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium;
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+    @apply transition-all duration-[var(--duration-base)];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium;
+    @apply bg-transparent hover:bg-muted;
+    @apply transition-all duration-[var(--duration-base)];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium;
+  }
+
+  .badge-accent {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-accent-light text-accent border border-accent/20;
+  }
+
+  .badge-success {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-green-50 text-green-700 border border-green-200;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-card border border-border rounded-xl shadow-sm;
+    @apply transition-shadow duration-[var(--duration-base)];
+  }
+
+  .card-hover {
+    @apply bg-card border border-border rounded-xl shadow-sm;
+    @apply transition-shadow duration-[var(--duration-base)];
+    @apply hover:shadow-md hover:border-accent/30;
+  }
+
+  /* Link styles */
+  .link-primary {
+    @apply text-primary hover:text-primary hover:underline;
+    @apply transition-colors duration-[var(--duration-fast)];
+  }
+
+  .link-accent {
+    @apply text-accent hover:text-teal-700 hover:underline;
+    @apply transition-colors duration-[var(--duration-fast)];
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Homepage-specific utilities */
+  .procedure-card {
+    @apply relative block bg-card rounded-xl border border-border shadow-sm p-6;
+    @apply hover:shadow-md hover:border-accent/30 transition-all;
+  }
+
+  .service-row {
+    @apply flex flex-col sm:flex-row sm:justify-between sm:items-center;
+    @apply px-4 py-4 bg-card hover:bg-muted/50 transition-colors;
+    @apply border-l-2 border-l-transparent hover:border-l-accent;
+  }
+
+  .badge-popular {
+    @apply absolute -top-2.5 left-4 inline-flex items-center;
+    @apply text-[11px] font-bold uppercase tracking-wide;
+    @apply px-2.5 py-0.5 rounded-full bg-primary text-white;
+  }
+
+  .badge-quote {
+    @apply text-[11px] font-semibold px-2.5 py-1 rounded-md;
+    @apply bg-amber-500/10 text-amber-700 border border-amber-500/20;
+  }
+
+  .rating-stars {
+    @apply flex gap-0.5;
+  }
+
+  .credential-chip {
+    @apply inline-flex items-center gap-1.5;
+    @apply text-xs sm:text-sm font-medium text-primary;
+  }
+
+  .emergency-banner {
+    @apply bg-red-50 border-y border-red-200;
+  }
+
+  .emergency-button {
+    @apply inline-flex items-center gap-2 px-6 py-2 rounded-xl;
+    @apply bg-red-600 text-white font-semibold;
+    @apply hover:bg-red-700 transition-colors text-sm;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENT PATTERNS — Common medical UI elements
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Price badge */
+  .price-badge {
+    @apply inline-flex items-baseline gap-1 rounded-lg bg-accent-light px-4 py-2;
+    @apply border border-accent/20;
+  }
+
+  .price-badge-amount {
+    @apply text-2xl font-bold text-accent;
+  }
+
+  .price-badge-currency {
+    @apply text-sm font-medium text-text-accent;
+  }
+
+  /* Trust signal */
+  .trust-signal {
+    @apply flex items-center gap-2 text-sm text-text-secondary;
+  }
+
+  /* Service card */
+  .service-card {
+    @apply bg-card border border-border rounded-xl shadow-sm p-6;
+    @apply transition-shadow duration-[var(--duration-base)];
+    @apply hover:shadow-md hover:border-accent/30;
+  }
+
+  .service-card-title {
+    @apply text-lg font-semibold text-foreground mb-2;
+  }
+
+  .service-card-description {
+    @apply text-sm text-text-secondary mb-4;
+  }
+
+  /* Feature list */
+  .feature-list {
+    @apply space-y-2;
+  }
+
+  .feature-item {
+    @apply flex items-start gap-3 text-sm;
+  }
+
+  .feature-icon {
+    @apply mt-0.5 h-5 w-5 shrink-0 text-accent;
+  }
+
+  /* FAQ item */
+  .faq-item {
+    @apply bg-card border border-border rounded-xl shadow-sm p-6;
+    @apply transition-shadow duration-[var(--duration-base)];
+  }
+
+  .faq-question {
+    @apply flex items-center justify-between gap-4 cursor-pointer;
+    @apply text-lg font-semibold text-foreground;
+  }
+
+  .faq-answer {
+    @apply mt-4 text-sm text-text-secondary leading-relaxed;
+  }
+
+  /* Section header */
+  .section-header {
+    @apply mb-8 text-center;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-foreground mb-3;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-text-secondary max-w-2xl mx-auto;
+  }
+
+  /* Trust signal bar */
+  .trust-bar {
+    @apply flex items-center gap-2 flex-wrap mb-6;
+  }
+
+  /* Doctor card */
+  .doctor-card {
+    @apply bg-muted rounded-2xl border border-border overflow-hidden;
+  }
+
+  .doctor-credential-bar {
+    @apply bg-primary/10 border-b border-border px-6 py-3;
+  }
+
+  /* Emergency components */
+  .emergency-section {
+    @apply bg-red-50 border-y border-red-200;
+  }
+
+  .emergency-heading {
+    @apply font-serif font-bold text-red-900 text-xl mb-1;
+  }
+
+  .emergency-text {
+    @apply text-red-800 text-sm;
+  }
+
+  /* CTA section */
+  .cta-section {
+    @apply bg-primary text-center;
+  }
+
+  .cta-heading {
+    @apply font-serif font-bold tracking-tight text-text-inverse text-2xl md:text-3xl mb-4;
+  }
+
+  .cta-subtext {
+    @apply text-text-inverse/80 mb-6;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — Smooth, purposeful motion
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn var(--duration-base) var(--easing-smooth);
+  }
+
+  .animate-slide-in {
+    animation: slideInFromRight var(--duration-slow) var(--easing-smooth);
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE TYPOGRAPHY — Mobile-first scaling
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 640px) {
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    @apply text-5xl;
+  }
+
+  .section-padding {
+    @apply py-16;
+  }
+
+  .section-padding-lg {
+    @apply py-24;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT STYLES — Clean medical records
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  body {
+    @apply text-black bg-white;
+  }
+
+  a {
+    @apply text-black no-underline;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .section-padding {
+    @apply py-4;
   }
 }

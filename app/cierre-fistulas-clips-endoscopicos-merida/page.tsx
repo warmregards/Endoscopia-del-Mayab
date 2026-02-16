@@ -1,775 +1,430 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
+import { DOCTOR } from "@/lib/doctor"
+import { CLINIC } from "@/lib/clinic"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { Stethoscope, MapPin, Phone, MessageCircle, Globe, CheckCircle2, ShieldCheck, Microscope, Hospital, Clock, Star, Award, Users, Heart, AlertTriangle, Activity, Calendar, Target, FileText, Search, Zap, Users2, Brain, Settings } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import { CheckCircle2, ShieldCheck, Clock, Heart, MapPin } from "lucide-react"
 import Faq from "@/components/Faq"
-import CallButton from "@/components/CallButton";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import CallButton from "@/components/CallButton"
+import WhatsAppButton from "@/components/WhatsAppButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = metaFor("cierre_fistulas_clips")
-
+export const metadata = metaFor("cierre_fistulas")
 
 export default function CierreFistulasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent-light/20">
-                  <Zap className="h-4 w-4 text-accent-strong" />
-                  <span className="text-sm font-medium text-foreground">Procedimiento Avanzado</span>
-                </div>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Cierre de Fístulas por Clips Endoscópicos en Mérida",
+              path: "/cierre-fistulas-clips-endoscopicos-merida",
+              pricingKey: "cierre_fistulas_clips",
+              description:
+                "Reparación mínimamente invasiva de perforaciones y fístulas del tracto digestivo con clips endoscópicos en Hospital Amerimed Mérida.",
+              procedureType: "Therapeutic",
+              bodyLocation: "Tracto digestivo",
+              howPerformed:
+                "Se introducen clips metálicos especializados mediante endoscopio flexible para cerrar perforaciones o fístulas sin necesidad de cirugía abierta.",
+              preparation:
+                "Ayuno de 12 horas para sólidos y 8 horas para líquidos. Estudios previos (tomografía o endoscopia diagnóstica). Acompañante obligatorio.",
+              followUp:
+                "Observación hospitalaria 2-4 horas, dieta líquida 24-48 horas, control endoscópico en 1-2 semanas.",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              {
+                name: "Cierre de Fístulas",
+                path: "/cierre-fistulas-clips-endoscopicos-merida",
+              },
+            ])
+          ),
+        }}
+      />
 
-                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
-                  Cierre de Fístulas con Clips Endoscópicos en Mérida | Dr. Omar Quiroz - Reparación Mínimamente Invasiva
-                </h1>
+      {/* SECTION 1: HERO — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
+              Cierre de Fístulas y Perforaciones Digestivas en Mérida
+            </h1>
 
-                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
-                  El <strong>Cierre de Fístulas con Clips Endoscópicos</strong> en Mérida utiliza clips metálicos especializados para reparar perforaciones digestivas sin cirugía abierta. El Dr. Omar Quiroz realiza este procedimiento mínimamente invasivo en Hospital Amerimed. El precio varía según complejidad del caso, con costo transparente desde la consulta inicial.
-                </p>
-
-                <p className="text-xl text-accent-strong font-semibold">
-                  Cierre endoscópico desde {mxn(PRICING.cierre_fistulas_clips.from)} - Alternativa mínimamente invasiva a cirugía abierta
-                </p>
-
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Sin cirugía abierta</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Recuperación rápida</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Hospital Amerimed</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Precio transparente</span>
-                  </div>
-                </div>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="cierre fistulas" position="hero" />
-                      <WhatsAppButton service="cierre fistulas" position="hero" />
-                </div>
-              </div>
-            </div>
-
-            
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT IS FISTULA CLOSURE SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué es el Cierre de Fístulas con Clips Endoscópicos?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Procedimiento mínimamente invasivo que utiliza clips metálicos especializados para cerrar perforaciones digestivas
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Reparación mínimamente invasiva de perforaciones y fístulas del
+              tracto digestivo con clips endoscópicos, sin cirugía abierta. El{" "}
+              {DOCTOR.name} realiza este procedimiento en Hospital Amerimed
+              Mérida, Yucatán — atendiendo pacientes de Cholul, Temozón,
+              Altabrisa y toda la península.
             </p>
-          </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center mb-16">
-            {/* Explanation */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-serif font-bold text-foreground">
-                  El <strong>Cierre de Fístulas con Clips Endoscópicos</strong> es una alternativa avanzada a la cirugía
-                </h3>
-                <p className="text-foreground/80 leading-relaxed">
-                  Este procedimiento utiliza clips metálicos especializados para cerrar perforaciones o fugas en el tracto digestivo sin necesidad de cirugía abierta.
-                </p>
-                <p className="text-foreground/80 leading-relaxed">
-                  <strong>Tipos de fístulas tratadas:</strong> Digestivas, esofágicas, gástricas, duodenales, colónicas
-                </p>
-                <p className="text-foreground/80 leading-relaxed">
-                  <strong>Ventaja sobre cirugía:</strong> Método más económico comparado con cirugía tradicional, con tiempo de recuperación reducido y menor riesgo de complicaciones.
-                </p>
-              </div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light/10 border border-accent-light/20 px-4 py-2">
+              <ShieldCheck className="h-4 w-4 text-text-accent" />
+              <span className="text-sm font-medium text-foreground">
+                Precio bajo cotización — Evaluación personalizada
+              </span>
             </div>
 
-            {/* Benefits Grid */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                  <CheckCircle2 className="h-6 w-6 text-accent-strong" />
+            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+              {[
+                "Sin cirugía abierta",
+                "Hospital Amerimed",
+                "Cotización personalizada",
+                "Atención directa del doctor",
+              ].map((badge) => (
+                <div key={badge} className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-text-accent" />
+                  <span>{badge}</span>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Mínimamente Invasivo</h4>
-                <p className="text-sm text-foreground/70">Sin incisiones grandes, solo acceso endoscópico</p>
-              </div>
+              ))}
+            </div>
 
-              <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">Recuperación Rápida</h4>
-                <p className="text-sm text-foreground/70">Menos tiempo hospitalario que cirugía abierta</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                  <ShieldCheck className="h-6 w-6 text-accent-strong" />
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">Menor Riesgo</h4>
-                <p className="text-sm text-foreground/70">Reducido riesgo de infección y complicaciones</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <Heart className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">Costo Menor</h4>
-                <p className="text-sm text-foreground/70">Más económico que cirugía tradicional</p>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <WhatsAppButton
+                service="cierre fistulas"
+                position="hero"
+                procedureName="Cierre de Fístulas"
+                variant="primary"
+              />
+              <CallButton
+                service="cierre fistulas"
+                position="hero"
+                variant="ghost"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHEN YOU NEED THIS PROCEDURE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Cuándo Necesitas Cierre de Fístulas Endoscópico?
+      {/* SECTION 2: DEFINITION + INDICATIONS — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Qué es el Cierre Endoscópico de Fístulas?
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Situaciones donde el cierre con clips puede ser la mejor opción terapéutica
+
+            <p className="text-muted-foreground leading-relaxed">
+              El cierre endoscópico utiliza clips metálicos especializados para
+              reparar perforaciones o fugas en el tracto digestivo sin necesidad
+              de cirugía abierta. Es una alternativa menos invasiva con tiempo de
+              recuperación más corto.
             </p>
-          </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {/* Perforación Post-Endoscopia */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-red-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Perforación Post-Endoscopia
-              </h3>
-              <p className="text-foreground/80 mb-4">
-                Complicación menor durante procedimiento endoscópico que requiere cierre inmediato.
+            <div className="space-y-2">
+              <p className="font-semibold text-foreground">
+                Este procedimiento está indicado para:
               </p>
-              <div className="text-sm text-red-600 font-medium">
-                → Tratamiento de urgencia disponible
-              </div>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  Perforación durante o después de una endoscopia
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  Fístulas post-quirúrgicas que no cicatrizan
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  Perforaciones espontáneas por úlceras o enfermedad inflamatoria
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  Dehiscencia de suturas que requiere refuerzo
+                </li>
+              </ul>
             </div>
 
-            {/* Fístulas Post-Quirúrgicas */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mb-4">
-                <Activity className="h-6 w-6 text-orange-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Fístulas Post-Quirúrgicas
-              </h3>
-              <p className="text-foreground/80 mb-4">
-                Fugas después de cirugía digestiva que no cicatrizan adecuadamente.
+            <div className="rounded-xl bg-accent-light/10 border border-accent/20 p-4">
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-foreground">Importante:</strong> No todas
+                las fístulas son candidatas para cierre endoscópico — se requiere
+                evaluación individual para determinar el mejor abordaje.
               </p>
-              <div className="text-sm text-orange-600 font-medium">
-                → Alternative a nueva cirugía
-              </div>
-            </div>
-
-            {/* Perforaciones Espontáneas */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center mb-4">
-                <Target className="h-6 w-6 text-yellow-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Perforaciones Espontáneas
-              </h3>
-              <p className="text-foreground/80 mb-4">
-                Por úlceras profundas o enfermedad inflamatoria intestinal severa.
-              </p>
-              <div className="text-sm text-yellow-600 font-medium">
-                → Evaluación caso por caso
-              </div>
-            </div>
-
-            {/* Dehiscencia de Suturas */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
-                <Settings className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Dehiscencia de Suturas
-              </h3>
-              <p className="text-foreground/80 mb-4">
-                Fallas en cicatrización post-operatoria que requieren refuerzo.
-              </p>
-              <div className="text-sm text-blue-600 font-medium">
-                → Refuerzo con clips especializados
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <AlertTriangle className="h-5 w-5 text-accent-strong" />
-              <span className="font-semibold text-foreground">Importante:</span>
-              <span className="text-foreground/70">No todas las fístulas son candidatas - evaluación individual requerida</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PROCEDURE PROCESS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Proceso del Cierre Endoscópico de Fístulas
+      {/* SECTION 3: PRICING / COTIZACIÓN — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Costo del Cierre de Fístulas en Mérida
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Procedimiento paso a paso con tecnología avanzada
+
+            <p className="text-muted-foreground leading-relaxed">
+              El costo del cierre de fístulas varía según la complejidad del
+              caso, el número de clips necesarios y la ubicación de la fístula.
+              Ofrecemos cotización personalizada sin compromiso después de una
+              evaluación inicial.
             </p>
-          </div>
 
-          <div className="grid gap-6 md:grid-cols-5">
-            {/* Step 1 */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                1
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Evaluación pre-procedimiento</h3>
-              <p className="text-sm text-foreground/80">Registro en Hospital Amerimed (10 min)</p>
+            <div className="space-y-2">
+              <h3 className="text-lg font-serif font-semibold text-foreground">
+                Qué incluye
+              </h3>
+              <ul className="space-y-2 text-muted-foreground">
+                {INCLUDED_IN_PRICE.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Step 2 */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                2
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Sedación segura</h3>
-              <p className="text-sm text-foreground/80">Anestesiólogo certificado (5 min)</p>
+            <div className="rounded-xl border border-border bg-muted p-4 space-y-1">
+              <p className="text-sm font-semibold text-foreground">
+                Costo adicional
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {ADDITIONAL_FEES.consultation.label}:{" "}
+                {mxn(ADDITIONAL_FEES.consultation.amount)}
+              </p>
             </div>
 
-            {/* Step 3 */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                3
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Localización endoscópica</h3>
-              <p className="text-sm text-foreground/80">Identificación precisa de la fístula (15 min)</p>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              <Link
+                href="/precios"
+                className="text-primary hover:underline font-medium"
+              >
+                Ver todos nuestros precios →
+              </Link>
+            </p>
 
-            {/* Step 4 */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                4
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Colocación de clips</h3>
-              <p className="text-sm text-foreground/80">Aplicación de clips metálicos especializados (20-40 min)</p>
-            </div>
-
-            {/* Step 5 */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                5
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Observación</h3>
-              <p className="text-sm text-foreground/80">Vigilancia post-procedimiento (30-60 min)</p>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <Zap className="h-5 w-5 text-accent-strong" />
-              <span className="font-semibold text-foreground">Duración total:</span>
-              <span className="text-foreground/70">45-90 minutos según complejidad del caso</span>
-            </div>
+            <WhatsAppButton
+              service="cotización cierre fistulas"
+              position="pricing"
+              label="Solicitar cotización"
+              variant="primary"
+            />
           </div>
         </div>
       </section>
 
-      {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Dr. Omar Quiroz - Ventaja Quirúrgica Única</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  ¿Por Qué la Experiencia Quirúrgica es Crucial en Cierre de Fístulas?
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  La mayoría de endoscopistas en Mérida envían casos complejos de cierre de fístulas a cirugía cuando los clips no son suficientes. <strong>El Dr. Quiroz es diferente</strong> - como cirujano especializado, puede manejar complicaciones que otros no pueden resolver y ofrecer soluciones quirúrgicas inmediatas si el cierre endoscópico no es exitoso.
-                </p>
-              </div>
-            </div>
-
-            {/* Advantages Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Casos Complejos</p>
-                    <p className="text-sm text-foreground/70">Maneja anatomía difícil que otros derivan</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Solución Inmediata</p>
-                    <p className="text-sm text-foreground/70">Cirugía laparoscópica si clips no son suficientes</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Coordinación Completa</p>
-                    <p className="text-sm text-foreground/70">Plan integrado endoscopia + cirugía si necesario</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Seguimiento Experto</p>
-                    <p className="text-sm text-foreground/70">Vigilancia de cicatrización con criterio quirúrgico</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PREPARATION & RECOVERY */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Preparación y Recuperación
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Instrucciones claras para mejores resultados
-            </p>
-          </div>
+      {/* SECTION 4: PREPARATION & RECOVERY — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Preparación y Recuperación
+          </h2>
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Preparación */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mb-6">
-                <Clock className="h-8 w-8 text-accent-strong" />
+            <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+              <div className="flex items-center gap-2">
+                <Clock className="h-6 w-6 text-text-accent" />
+                <h3 className="text-lg font-serif font-semibold text-foreground">
+                  Antes del procedimiento
+                </h3>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Preparación Pre-Procedimiento
-              </h3>
-              <div className="space-y-3 text-foreground/80">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <p><strong>Ayuno de 12 horas sólidos,</strong> 8 horas líquidos</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <p><strong>Medicamentos esenciales</strong> con sorbo mínimo</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <p><strong>Acompañante obligatorio</strong> para el alta</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <p><strong>Estudios previos:</strong> Tomografía o endoscopia diagnóstica</p>
-                </div>
-              </div>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Ayuno 12 h sólidos,</strong> 8 h líquidos
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Medicamentos esenciales</strong> con sorbo mínimo
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Acompañante obligatorio</strong> para el alta
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Estudios previos:</strong> tomografía o endoscopia
+                    diagnóstica
+                  </span>
+                </li>
+              </ul>
             </div>
 
-            {/* Post-Procedimiento */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                <Heart className="h-8 w-8 text-primary" />
+            {/* Recuperación */}
+            <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+              <div className="flex items-center gap-2">
+                <Heart className="h-6 w-6 text-primary" />
+                <h3 className="text-lg font-serif font-semibold text-foreground">
+                  Después del procedimiento
+                </h3>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Recuperación Post-Procedimiento
-              </h3>
-              <div className="space-y-3 text-foreground/80">
-                <div className="flex items-start gap-3">
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p><strong>Observación 2-4 horas</strong> en hospital</p>
-                </div>
-                <div className="flex items-start gap-3">
+                  <span>
+                    <strong>Observación 2–4 horas</strong> en hospital
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p><strong>Dieta líquida 24-48 horas</strong> según tolerancia</p>
-                </div>
-                <div className="flex items-start gap-3">
+                  <span>
+                    <strong>Dieta líquida 24–48 horas</strong> según tolerancia
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p><strong>Control endoscópico</strong> en 1-2 semanas</p>
-                </div>
-                <div className="flex items-start gap-3">
+                  <span>
+                    <strong>Control endoscópico</strong> en 1–2 semanas
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p><strong>Vigilancia de signos de alarma</strong> 24/7</p>
-                </div>
-              </div>
+                  <span>
+                    <strong>Vigilancia de signos de alarma</strong> las primeras
+                    24 h
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRICING & LOGISTICS */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Precio y Costo del Cierre de Fístulas en Mérida - Hospital Amerimed
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Transparencia total en precios desde la consulta inicial
-            </p>
-          </div>
+      {/* SECTION 5: DOCTOR CREDENTIALS — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            <Image
+              src={DOCTOR.photos.headshot}
+              alt={DOCTOR.name}
+              width={280}
+              height={350}
+              className="rounded-2xl w-full max-w-[280px] h-auto mx-auto md:mx-0"
+            />
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            {/* Pricing Details */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mb-6">
-                <FileText className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Estructura de Precios
-              </h3>
-              <div className="space-y-4 text-foreground/80">
-                <div className="p-4 rounded-lg bg-muted/30">
-                  <p className="font-semibold text-foreground">Precio base: Desde {mxn(PRICING.cierre_fistulas_clips.from)}</p>
-                  <p className="text-sm">Costo inicial para casos simples</p>
-                </div>
-                <div className="space-y-2">
-                  <p><strong>El costo final depende de:</strong></p>
-                  <ul className="space-y-1 text-sm pl-4">
-                    <li>• Número de clips necesarios</li>
-                    <li>• Complejidad del caso</li>
-                    <li>• Tiempo quirúrgico requerido</li>
-                    <li>• Ubicación y tamaño de fístula</li>
-                  </ul>
-                </div>
-                <div className="p-4 rounded-lg bg-primary/10">
-                  <p className="font-semibold text-primary">Cotización sin compromiso</p>
-                  <p className="text-sm text-foreground/70">Precio exacto después de evaluación inicial</p>
-                </div>
-              </div>
-            </div>
+            <div className="flex-1 space-y-6">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                Tu Especialista: {DOCTOR.name}
+              </h2>
 
-            {/* What's Included */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                <CheckCircle2 className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Qué Incluye el Precio
-              </h3>
-              <div className="space-y-3 text-foreground/80">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p>Procedimiento endoscópico completo</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p>Sedación y monitoreo anestésico</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p>Clips metálicos especializados</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p>Observación post-procedimiento</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <p>Seguimiento inicial</p>
-                </div>
+              <p className="text-muted-foreground leading-relaxed">
+                {DOCTOR.bioShort}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {DOCTOR.credentials.map((cred) => (
+                  <span
+                    key={cred}
+                    className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 text-xs font-medium text-foreground"
+                  >
+                    <ShieldCheck className="h-4 w-4 text-text-accent" />
+                    {cred}
+                  </span>
+                ))}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-border">
-                <h4 className="font-semibold text-foreground mb-2">Costos Adicionales</h4>
-                <div className="text-sm text-foreground/70 space-y-1">
-                  <p>• Estudios previos (tomografía)</p>
-                  <p>• Medicamentos externos</p>
-                  <p>• Consultas de seguimiento</p>
-                </div>
-              </div>
-            </div>
-          </div>
+              <p className="text-muted-foreground leading-relaxed">
+                Como cirujano con formación en endoscopia, el {DOCTOR.name} puede
+                manejar complicaciones que requieren intervención quirúrgica
+                inmediata si el cierre endoscópico no es suficiente.
+              </p>
 
-          {/* Insurance & Payment */}
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <div className="p-6 rounded-xl bg-background border border-border text-center">
-              <ShieldCheck className="h-8 w-8 text-accent-strong mx-auto mb-3" />
-              <h4 className="font-semibold text-foreground mb-2">Seguros Médicos</h4>
-              <p className="text-sm text-foreground/70">Muchos seguros cubren el procedimiento como tratamiento terapéutico</p>
-            </div>
-            <div className="p-6 rounded-xl bg-background border border-border text-center">
-              <FileText className="h-8 w-8 text-primary mx-auto mb-3" />
-              <h4 className="font-semibold text-foreground mb-2">Precio Transparente</h4>
-              <p className="text-sm text-foreground/70">Sin sorpresas en el costo final, cotización previa clara</p>
-            </div>
-            <div className="p-6 rounded-xl bg-background border border-border text-center">
-              <Hospital className="h-8 w-8 text-accent-strong mx-auto mb-3" />
-              <h4 className="font-semibold text-foreground mb-2">Hospital Amerimed</h4>
-              <p className="text-sm text-foreground/70">Instalaciones especializadas en Mérida, Yucatán</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DR. OMAR CREDENTIALS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Dr. Omar Quiroz - Especialista en Procedimientos Endoscópicos Avanzados</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  Triple Certificación con Entrenamiento Internacional
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  Con <strong>más de 200 procedimientos terapéuticos</strong> realizados con clips y suturas endoscópicas. El Dr. Quiroz tiene triple certificación en Cirugía General, Laparoscópica y Endoscopia Terapéutica, con fellowship internacional en procedimientos avanzados.
-                </p>
-                
-                <div className="p-6 rounded-xl bg-muted/20 border border-border">
-                  <p className="text-foreground/80 italic">
-                    "Como cirujano especializado en endoscopia, puedo ofrecer opciones que otros no pueden cuando el cierre endoscópico no es suficiente"
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Certifications Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border hover:shadow-md transition-all">
-                <ShieldCheck className="h-6 w-6 text-primary flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">Cirugía General</p>
-                  <p className="text-xs text-foreground/70">UNAM • Cédula CIR180523</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border hover:shadow-md transition-all">
-                <ShieldCheck className="h-6 w-6 text-accent-strong flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">Alta Especialidad Endoscopia</p>
-                  <p className="text-xs text-foreground/70">4 años especializados • Cédula EGI230072</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border hover:shadow-md transition-all">
-                <ShieldCheck className="h-6 w-6 text-primary flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">Fellowship Internacional</p>
-                  <p className="text-xs text-foreground/70">Gastric Sleeve Center, Florida</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border hover:shadow-md transition-all">
-                <ShieldCheck className="h-6 w-6 text-accent-strong flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">Laparoscopia Avanzada</p>
-                  <p className="text-xs text-foreground/70">Centro Médico ABC</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* COMPETITIVE ADVANTAGES */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Por Qué Elegir al Dr. Omar Quiroz?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Experiencia integrada, tecnología avanzada y transparencia total
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {/* Experiencia Integrada */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mb-6">
-                <Award className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Experiencia Integrada
-              </h3>
-              <div className="space-y-2 text-foreground/80">
-                <p>• Combinación única: Cirujano + Endoscopista</p>
-                <p>• Maneja complicaciones que otros derivan</p>
-                <p>• Respaldo quirúrgico inmediato disponible</p>
-              </div>
-            </div>
-
-            {/* Tecnología Avanzada */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                <Microscope className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Tecnología Avanzada
-              </h3>
-              <div className="space-y-2 text-foreground/80">
-                <p>• Clips metálicos especializados</p>
-                <p>• Equipo Olympus de última generación</p>
-                <p>• Instalaciones Hospital Amerimed</p>
-              </div>
-            </div>
-
-            {/* Transparencia Total */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mb-6">
-                <CheckCircle2 className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-4">
-                Transparencia Total
-              </h3>
-              <div className="space-y-2 text-foreground/80">
-                <p>• Precios claros desde consulta</p>
-                <p>• Sin sorpresas en costos</p>
-                <p>• Cotización previa siempre disponible</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Necesitas Cierre de Fístulas? Evaluación Especializada Disponible
-            </h2>
-            <p className="text-lg text-foreground/70">
-              Emergencias digestivas 24/7 - No esperes si tienes complicaciones post-quirúrgicas
-            </p>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center">
-                    <AlertTriangle className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-serif font-semibold text-foreground">
-                      Síntomas que requieren evaluación inmediata
-                    </h3>
-                    <p className="text-foreground/70">Fugas o perforaciones digestivas</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2 text-sm text-foreground/80">
-                  <p>• Fuga post-operatoria con dolor severo</p>
-                  <p>• Perforación durante endoscopia</p>
-                  <p>• Fístula que no cicatriza adecuadamente</p>
-                  <p>• Dolor abdominal intenso con fiebre</p>
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <MessageCircle className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">WhatsApp directo</span>
-                  </div>
-                  <p className="text-foreground/80">Descripción de síntomas</p>
-                </div>
-                
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Phone className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">999-236-0153</span>
-                  </div>
-                  <p className="text-foreground/80">Emergencias 24 horas</p>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="cierre fistulas" position="cta section" />
-                      <WhatsAppButton service="cierre fistulas" position="cta section" />
-                </div>
-            </div>
-
-            {/* Image */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-light/20 to-accent-strong/20 rounded-2xl blur-xl" />
-                <Image
-                  src="/endoscopia-del-mayab-logo.png"
-                  alt="Cierre de Fístulas en Mérida - Contacto"
-                  width={480}
-                  height={320}
-                  className="relative w-full max-w-md h-auto rounded-2xl shadow-xl"
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <WhatsAppButton
+                  service="cierre fistulas"
+                  position="doctor"
+                  procedureName="Cierre de Fístulas"
+                  variant="primary"
+                  size="compact"
                 />
+                <Link
+                  href="/dr-omar-quiroz"
+                  className="text-sm text-primary hover:underline font-medium"
+                >
+                  Ver perfil completo →
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-            {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
+      {/* SECTION 6: GOOGLE REVIEWS — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <GoogleReviews />
         </div>
       </section>
 
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
+      {/* SECTION 7: FAQ — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <Faq routeKey="cierre_fistulas" service="cierre fistulas" />
         </div>
       </section>
 
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="cierre_fistulas_clips" />
+      {/* SECTION 8: RELATED + BOTTOM CTA — bg-primary */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
+            ¿Listo para tu evaluación?
+          </h2>
+
+          {/* Related procedures */}
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+            {[
+              {
+                name: "Sutura Endoscópica",
+                href: "/sutura-endoscopica-merida",
+              },
+              {
+                name: "Endoprótesis Esofágicas",
+                href: "/endoprotesis-esofagicas-merida",
+              },
+              { name: "CPRE", href: "/cpre-merida" },
+            ].map((proc) => (
+              <Link
+                key={proc.href}
+                href={proc.href}
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
+              >
+                {proc.name} →
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
+            <MapPin className="h-4 w-4" />
+            <span>{CLINIC.address.display}</span>
+          </div>
+          <p className="text-white/70 text-sm">{CLINIC.hours.display}</p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <WhatsAppButton
+              service="cierre fistulas"
+              position="bottom-cta"
+              procedureName="Cierre de Fístulas"
+              variant="primary"
+              className="sm:px-10"
+            />
+            <CallButton
+              service="cierre fistulas"
+              position="bottom-cta"
+              variant="inverse"
+            />
+          </div>
         </div>
       </section>
     </>

@@ -1,752 +1,598 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
-import Image from "next/image"
+import { PRICING, displayFrom, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
-import { Stethoscope, MapPin, Phone, MessageCircle, Globe, CheckCircle2, ShieldCheck, Microscope, Hospital, Clock, Star, Award, Users, Heart, AlertTriangle, Activity, Camera, Search, Brain, Target } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import Image from "next/image"
+import {
+  CheckCircle2,
+  Microscope,
+  Clock,
+  MapPin,
+  ArrowRight,
+} from "lucide-react"
 import Faq from "@/components/Faq"
-import CallButton from "@/components/CallButton";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
+import CallButton from "@/components/CallButton"
+import WhatsAppButton from "@/components/WhatsAppButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = metaFor("endoscopia")
+export const metadata: import("next").Metadata = {
+  ...metaFor("endoscopia"),
+  other: {
+    "geo.region": "MX-YUC",
+    "geo.placename": "Mérida",
+    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
+    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
+  },
+}
+
+/* ── Related procedures for cross-sell (matches homepage card pattern) ──── */
+const relatedProcedures = [
+  {
+    name: "Colonoscopia",
+    desc: "Prevención y detección de cáncer colorrectal.",
+    slug: "/colonoscopia-merida",
+    pricingKey: "colonoscopia" as const,
+  },
+  {
+    name: "Panendoscopia",
+    desc: "Endoscopia + colonoscopia en una sola sedación.",
+    slug: "/panendoscopia-merida",
+    pricingKey: "panendoscopia" as const,
+  },
+  {
+    name: "CPRE",
+    desc: "Tratamiento de conductos biliares y páncreas.",
+    slug: "/cpre-merida",
+    pricingKey: "cpre" as const,
+  },
+]
+
+/* ── Data for DRY rendering ────────────────────────────────────────────── */
+const trustChips = [
+  "Sedación consciente",
+  "Olympus 190 HD",
+  "Resultados inmediatos",
+  "Reporte con fotos",
+]
+
+const includedItems = [
+  "Consulta pre-endoscopia",
+  "Sedación con anestesiólogo",
+  "Endoscopia Olympus 190 HD",
+  "Fotos HD de hallazgos",
+  "Reporte escrito mismo día",
+]
 
 export default function EndoscopiaPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent-light/20">
-                  <Activity className="h-4 w-4 text-accent-strong" />
-                  <span className="text-sm font-medium text-foreground">500+ Endoscopias Anuales</span>
+      {/* ── JSON-LD Schema ─────────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Endoscopia (Esofagogastroduodenoscopia)",
+              path: "/endoscopia-merida",
+              pricingKey: "endoscopia",
+              description:
+                "Estudio endoscópico del esófago, estómago y duodeno con cámara HD Olympus. Diagnóstico directo de gastritis, úlceras, reflujo y H. pylori en 15–25 minutos bajo sedación consciente.",
+              procedureType: "Diagnostic",
+              bodyLocation: "Esófago, estómago, duodeno",
+              howPerformed:
+                "Endoscopio flexible Olympus 190 HD introducido por vía oral bajo sedación consciente. Duración: 15–25 minutos.",
+              preparation:
+                "Ayuno de 8 horas. Acudir acompañado. Ropa cómoda. No suspender medicamentos sin indicación médica.",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Endoscopia en Mérida", path: "/endoscopia-merida" },
+            ])
+          ),
+        }}
+      />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 1: HERO — bg-background
+          Serves: ALL personas. Price + CTA above fold.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+
+            {/* ── Left: Content ── */}
+            <div className="flex-1 space-y-6">
+              <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
+                Endoscopia en Mérida
+              </h1>
+
+              <p className="text-xl font-semibold text-text-accent">
+                {displayFrom("endoscopia")} · Sedación incluida · Resultados el mismo día
+              </p>
+
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                Diagnóstico directo de gastritis, úlceras, reflujo y
+                H.&nbsp;pylori en 15–25 minutos. Cámara HD Olympus ve tu
+                estómago en tiempo real — sin adivinar.
+              </p>
+
+              {/* Trust chips */}
+              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+                {trustChips.map((chip) => (
+                  <div key={chip} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span>{chip}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTAs — WhatsApp FIRST per spec */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <WhatsAppButton
+                  service="endoscopia"
+                  position="hero"
+                  procedureName="Endoscopia"
+                  label="Agendar por WhatsApp"
+                  className="sm:px-8"
+                />
+                <CallButton service="endoscopia" position="hero" />
+              </div>
+
+              {/* Location signal — Persona 1 (local seeker) + NAP for SEO */}
+              <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.address.display}</span>
                 </div>
-                
-                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
-                  Endoscopia en Mérida - {mxn(PRICING.endoscopia.from)} | Dr. Omar Quiroz
-                </h1>
-                
-                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
-                  Endoscopia digestiva con sedación - Diagnóstico real de gastritis, úlceras y reflujo
-                </p>
-                
-                <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
-                  <p>
-                    ¿Meses tomando antiácidos sin mejoría? ¿Dolor estómago que no se quita? Dr. Omar Quiroz encuentra la causa real en 20 minutos con endoscopia segura.
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-primary shrink-0" />
+                  <span>{CLINIC.hours.display}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Right: Price card — Persona 2 (price shopper) ── */}
+            <div className="w-full lg:max-w-sm">
+              <div className="border-2 border-accent bg-accent/5 rounded-2xl p-8">
+                <div className="text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Microscope className="h-8 w-8 text-accent" />
+                  </div>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {DOCTOR.name}
+                  </p>
+                  <p className="font-serif font-bold text-text-accent text-3xl">
+                    {displayFrom("endoscopia")}
                   </p>
                 </div>
-                
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Sedación consciente</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Olympus 180 HD</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Resultados inmediatos</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Reporte con fotos</span>
+
+                <div className="mt-8 space-y-4">
+                  <h3 className="text-lg font-serif font-bold text-foreground text-center">
+                    Todo incluido
+                  </h3>
+                  {includedItems.map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                      <span className="text-sm text-foreground/80">{item}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span className="text-sm text-foreground/80">
+                      Biopsia {mxn(ADDITIONAL_FEES.biopsy.amount)} si necesaria
+                    </span>
                   </div>
                 </div>
-                
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="endoscopia" position="hero" />
-                      <WhatsAppButton service="endoscopia" position="hero" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Image - Right Side */}
-            <div className="flex-1 lg:max-w-md">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-strong/20 to-primary/20 rounded-3xl transform rotate-3" />
-                <div className="relative bg-background rounded-3xl p-8 border border-border shadow-2xl">
-                  <div className="text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-accent-strong/10 flex items-center justify-center mx-auto">
-                      <Microscope className="h-8 w-8 text-accent-strong" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium text-foreground/60">Dr. Omar Quiroz</div>
-                      <div className="text-2xl font-bold text-accent-strong">{mxn(PRICING.endoscopia.from)} pesos fijos</div>
-                    </div>
-                  </div>
 
-                  {/* What's Included */}
-                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-                    <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
-                      Todo incluido en {mxn(PRICING.endoscopia.from)} pesos
-                    </h3>
-                    
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Sedación consciente</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Endoscopia Olympus 180</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Fotos HD hallazgos</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Reporte mismo día</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Biopsia $1,000 si necesaria</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 p-3 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                      <h4 className="font-semibold text-foreground mb-1 text-sm">¿Por qué más accesible?</h4>
-                      <p className="text-xs text-foreground/80">
-                        Sin overhead hospitalario. Mismo equipo, precio justo.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT IS ENDOSCOPY SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué es la Endoscopia? - Ve Directamente Tu Estómago
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              No es radiografía que "adivina" - es VER directamente qué tienes
-            </p>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-2 items-center mb-16">
-            {/* Explanation */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-serif font-bold text-foreground">
-                  Endoscopia: Cámara HD Dentro del Estómago
-                </h3>
-                
-                <div className="space-y-4">
-                  <div className="p-4 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                    <h4 className="font-semibold text-foreground mb-2">¿Cómo funciona?</h4>
-                    <div className="space-y-2 text-foreground/80">
-                      <p>• Endoscopio flexible por boca</p>
-                      <p>• Cámara HD ve estómago tiempo real</p>
-                      <p>• Detecta gastritis, úlceras, cáncer</p>
-                      <p>• Resultados inmediatos con fotos</p>
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
-                    <h4 className="font-semibold text-foreground mb-2">Diagnóstico real vs. adivinar</h4>
-                    <p className="text-foreground/80">No más "toma esto a ver si funciona". Vemos exactamente tu problema.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Patient Story */}
-            <div className="bg-gradient-to-br from-background to-muted/30 p-8 rounded-2xl border border-border">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-accent-strong/10 flex items-center justify-center">
-                    <Star className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">Testimonio Real</h4>
-                    <p className="text-sm text-foreground/60">Carmen, 48 años</p>
-                  </div>
-                </div>
-                <blockquote className="text-foreground/80 italic">
-                  "Después 6 meses pantoprazol sin mejoría, endoscopia mostró H. pylori. 2 semanas antibióticos me curé completamente."
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PRICING SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Precio de Endoscopia en Mérida - {mxn(PRICING.endoscopia.from)} Todo Incluido
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Sin overhead hospitalario - Mismo equipo, precio justo
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            {/* Hospitals */}
-            <div className="p-6 rounded-2xl border border-border bg-background text-center">
-              <div className="text-lg font-bold text-foreground/60 mb-2">Hospitales Mérida</div>
-              <div className="text-2xl font-bold text-foreground/60 line-through">$8,000+ pesos</div>
-              <p className="text-sm text-foreground/50 mt-2">+ extras + estudios</p>
-            </div>
-            
-            <div className="p-6 rounded-2xl border-2 border-accent-strong bg-accent-strong/5 text-center">
-              <div className="text-lg font-bold text-accent-strong mb-2">Dr. Omar Quiroz</div>
-              <div className="text-3xl font-bold text-accent-strong">{mxn(PRICING.endoscopia.from)} pesos</div>
-              <p className="text-sm text-accent-strong/80 mt-2">Todo incluido</p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-border bg-background text-center">
-              <div className="text-lg font-bold text-foreground/60 mb-2">IMSS</div>
-              <div className="text-2xl font-bold text-foreground/60">"Gratis"</div>
-              <p className="text-sm text-foreground/50 mt-2">3-6 meses espera</p>
-            </div>
-          </div>
-
-          {/* What's Included */}
-          <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-            <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
-              ¿Qué incluye tu endoscopia?
-            </h3>
-            
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Consulta pre-endoscopia</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Sedación con anestesiólogo</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Endoscopia Olympus 180</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Fotos HD hallazgos</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Reporte escrito mismo día</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Biopsia $1,000 si necesaria</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PANENDOSCOPIA SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Panendoscopia en Mérida - Estudio Completo Mismo Día
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              ¿Síntomas arriba Y abajo? Una cita resuelve todo
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">¿Qué incluye panendoscopia?</p>
-                    <div className="space-y-1 text-sm text-foreground/70">
-                      <p>• Endoscopia alta (estómago, esófago)</p>
-                      <p>• Colonoscopia (colon completo)</p>
-                      <p>• Una sola sedación ambos procedimientos</p>
-                      <p>• Diagnóstico completo digestivo</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Cuándo se recomienda:</p>
-                    <div className="space-y-1 text-sm text-foreground/70">
-                      <p>• Anemia sin causa clara</p>
-                      <p>• Dolor abdominal generalizado</p>
-                      <p>• Antecedentes familiares cáncer digestivo</p>
-                      <p>• Sangrado digestivo alto y bajo</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                <Target className="h-5 w-5 text-accent-strong" />
-                <span className="font-semibold text-foreground">Ventaja:</span>
-                <span className="text-foreground/70">Un día preparación, una sedación, diagnóstico completo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* REFLUX SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Search className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Endoscopia por Reflujo</span>
-              </div>
-              
-              <div className="space-y-4 text-center">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  Endoscopia por Reflujo - Evalúa Daño Real del Esófago
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  ¿Años con reflujo tomando omeprazol? Endoscopia muestra si esófago tiene daño real o solo síntomas.
+                <p className="mt-6 text-center text-sm text-accent font-medium">
+                  ✓ Mismo equipo que hospitales privados
                 </p>
               </div>
             </div>
-
-            {/* What We Look For */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h4 className="font-semibold text-foreground mb-3">¿Qué buscamos en reflujo?</h4>
-                <div className="space-y-2 text-foreground/80">
-                  <p>• Esofagitis (inflamación esófago)</p>
-                  <p>• Barrett's esófago (precáncer)</p>
-                  <p>• Úlceras esofágicas</p>
-                  <p>• Hernia hiatal</p>
-                  <p>• Gastritis por reflujo biliar</p>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-gradient-to-br from-accent-light/5 to-background">
-                <h4 className="font-semibold text-foreground mb-3">Testimonio</h4>
-                <blockquote className="text-foreground/80 italic">
-                  "3 años reflujo horrible. Endoscopia mostró esófago perfecto - era solo estrés. Cambié pastillas por terapia"
-                </blockquote>
-                <p className="text-sm text-foreground/60 mt-2">- José, 35 años</p>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/20">
-                <Brain className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Grados esofagitis:</span>
-                <span className="text-foreground/70">A (leve) hasta D (severo) - Tratamiento específico</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* DR. OMAR EXPERTISE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2: WHAT IS ENDOSCOPY — bg-muted
+          Serves: Persona 3 (procedure seeker) + Persona 5 (investigator)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Dr. Omar Quiroz - Endoscopista Certificado</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  Endoscopia en Mérida Yucatán - 500+ Endoscopias Anuales
-                </h2>
-              </div>
-            </div>
-
-            {/* Stats and Credentials */}
-            <div className="grid gap-6 md:grid-cols-3">
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-accent-strong mb-2">500+</div>
-                <div className="text-sm font-medium text-foreground/70">Endoscopias Anuales</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-primary mb-2">15+</div>
-                <div className="text-sm font-medium text-foreground/70">Años Experiencia</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-accent-strong mb-2">&lt;0.1%</div>
-                <div className="text-sm font-medium text-foreground/70">Complicaciones</div>
-              </div>
-            </div>
-
-            {/* Certifications */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Certificaciones:</p>
-                    <div className="text-sm text-foreground/70 space-y-1 mt-1">
-                      <p>• Consejo Mexicano Cirugía General</p>
-                      <p>• Colegio Mexicano Gastroenterología</p>
-                      <p>• Entrenamiento UNAM + University of Florida</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground">Precisión diagnóstica:</p>
-                    <p className="text-sm text-foreground/70 mt-1">
-                      Experiencia quirúrgica encuentra lesiones que otros endoscopistas pierden
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Patient Testimonial */}
-            <div className="p-6 rounded-xl bg-gradient-to-br from-accent-light/5 to-background border border-accent-light/20">
-              <blockquote className="text-foreground/80 italic text-center text-lg">
-                "Dr. Quiroz único que encontró mi úlcera. 2 endoscopias otros lugares decían normal"
-              </blockquote>
-              <p className="text-center text-foreground/60 mt-2">- Ana, 43 años</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE US */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-            ¿Por Qué Elegir Endoscopia con Dr. Omar Quiroz?
-          </h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-            Más de 15 años de experiencia, triple certificación y equipo Olympus 180 HD en Hospital Amerimed Mérida. Seguridad, precisión diagnóstica y precios claros en un solo lugar.
-          </p>
-          <div className="flex flex-wrap gap-6 justify-center">
-            <Link href="/colonoscopia-merida" className="text-accent-strong underline">
-              Ver costo de Colonoscopia
-            </Link>
-            <Link href="/cpre-merida" className="text-accent-strong underline">
-              Ver costo de CPRE
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCEDURE SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Costo de Endoscopia vs. Valor Diagnóstico
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Qué es una endoscopia?
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Procedimiento paso a paso - Qué esperar
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              Cámara flexible HD que entra por la boca y muestra en tiempo real
+              tu esófago, estómago y duodeno. Detecta gastritis, úlceras,
+              reflujo, H.&nbsp;pylori y cáncer gástrico — y toma biopsias en
+              el mismo procedimiento. 15–25 minutos bajo sedación consciente.
+              Sin dolor.
+            </p>
+
+            <p className="text-sm text-muted-foreground max-w-3xl">
+              A diferencia de radiografías, ultrasonido o tomografía, la
+              endoscopia ve directamente la mucosa digestiva — no adivina.
             </p>
           </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {/* Before */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                1
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Antes endoscopia</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Ayuno 8 horas</p>
-                <p>• Llegar acompañado</p>
-                <p>• Ropa cómoda</p>
-              </div>
-            </div>
-
-            {/* During */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-accent-strong-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                2
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Durante procedimiento</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Sedación consciente</p>
-                <p>• Endoscopio por boca</p>
-                <p>• 15-25 minutos</p>
-                <p>• Fotos hallazgos</p>
-              </div>
-            </div>
-
-            {/* After */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                3
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Después endoscopia</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Recuperación 30-45 min</p>
-                <p>• Resultados con fotos</p>
-                <p>• Reporte completo</p>
-                <p>• WhatsApp para dudas</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <Clock className="h-5 w-5 text-accent-strong" />
-              <span className="font-semibold text-foreground">Duración total:</span>
-              <span className="text-foreground/70">15-25 minutos procedimiento</span>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* RESULTS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-            Resultados y Tiempos de Entrega
-          </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Entregamos un reporte con fotos el mismo día del estudio, y resultados en USB inmediatos. Si se toman biopsias, el resultado de patología se entrega en 5–10 días, con consulta de revisión incluida.
-          </p>
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-            <Clock className="h-5 w-5 text-accent-strong" />
-            <span className="font-semibold text-foreground">Tiempo total:</span>
-            <span className="text-foreground/70">30-45 minutos</span>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT DETECTS SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué Detecta la Endoscopia? - Diagnósticos Comunes
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Endoscopia encuentra la causa real de tus síntomas
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {/* Gastritis */}
-            <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Microscope className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Gastritis</h3>
-              <div className="space-y-1 text-sm text-foreground/80">
-                <p>• H. pylori (bacteria)</p>
-                <p>• Por medicinas</p>
-                <p>• Por estrés</p>
-              </div>
-            </div>
-
-            {/* Ulcers */}
-            <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Úlceras</h3>
-              <div className="space-y-1 text-sm text-foreground/80">
-                <p>• Gástricas o duodenales</p>
-                <p>• Tamaño y profundidad</p>
-                <p>• Riesgo sangrado</p>
-              </div>
-            </div>
-
-            {/* Reflux */}
-            <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Activity className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Reflujo</h3>
-              <div className="space-y-1 text-sm text-foreground/80">
-                <p>• Esofagitis grados A-D</p>
-                <p>• Barrett's esófago</p>
-                <p>• Hernia hiatal</p>
-              </div>
-            </div>
-
-            {/* Cancer */}
-            <div className="p-6 rounded-xl border border-border bg-background hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <ShieldCheck className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Cáncer Gástrico</h3>
-              <div className="space-y-1 text-sm text-foreground/80">
-                <p>• Detección temprana</p>
-                <p>• Cuando se puede curar</p>
-                <p>• Muchas veces parece gastritis</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Success Story */}
-          <div className="mt-12 max-w-3xl mx-auto p-6 rounded-xl bg-gradient-to-br from-accent-light/5 to-background border border-accent-light/20">
-            <blockquote className="text-foreground/80 italic text-center text-lg">
-              "Pensé gastritis normal. Endoscopia mostró cáncer gástrico temprano. Operaron a tiempo, me salvé"
-            </blockquote>
-            <p className="text-center text-foreground/60 mt-2">- Roberto, 58 años</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ENDOSCOPY VS OTHER STUDIES */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Endoscopia Precio Merida vs. Otros Estudios
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              ¿Por qué endoscopia y no radiografía o ultrasonido?
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <div className="p-6 rounded-xl border border-border bg-background text-center">
-              <h3 className="font-semibold text-foreground mb-3">Radiografía</h3>
-              <p className="text-sm text-foreground/60">Solo perforaciones grandes</p>
-              <div className="mt-3 text-red-500 font-semibold">❌ No ve gastritis</div>
-            </div>
-
-            <div className="p-6 rounded-xl border border-border bg-background text-center">
-              <h3 className="font-semibold text-foreground mb-3">Ultrasonido</h3>
-              <p className="text-sm text-foreground/60">Ve vesícula, NO estómago</p>
-              <div className="mt-3 text-red-500 font-semibold">❌ No ve úlceras</div>
-            </div>
-
-            <div className="p-6 rounded-xl border border-border bg-background text-center">
-              <h3 className="font-semibold text-foreground mb-3">Tomografía</h3>
-              <p className="text-sm text-foreground/60">Órganos sólidos, no mucosa</p>
-              <div className="mt-3 text-red-500 font-semibold">❌ No toma biopsias</div>
-            </div>
-
-            <div className="p-6 rounded-xl border-2 border-accent-strong bg-accent-strong/5 text-center">
-              <h3 className="font-semibold text-accent-strong mb-3">Endoscopia</h3>
-              <p className="text-sm text-foreground/80">VE directamente + biopsias</p>
-              <div className="mt-3 text-green-600 font-semibold">✅ Diagnóstico preciso</div>
-            </div>
-          </div>
-
-          {/* Patient Story */}
-          <div className="mt-12 max-w-3xl mx-auto p-6 rounded-xl bg-gradient-to-br from-primary/5 to-background border border-primary/20">
-            <blockquote className="text-foreground/80 italic text-center">
-              "Ultrasonido, tomografía, radiografías 'normales' pero dolor seguía. Endoscopia encontró úlcera duodenal"
-            </blockquote>
-            <p className="text-center text-foreground/60 mt-2">- Mario, 44 años</p>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 3: PRICING COMPARISON — bg-background
+          Serves: Persona 2 (price shopper) — highest-value persona
+          H2 targets "endoscopia precio merida" (1,052 impressions @ pos 24)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-12">
             <div className="space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                Agendar Endoscopia - Citas Disponibles
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                Precio de endoscopia en Mérida — todo incluido
               </h2>
-              <p className="text-lg text-foreground/70">
-                Consulta valoración - Dr. Quiroz evalúa si endoscopia necesaria
+              <p className="text-muted-foreground">
+                Mismo equipo que hospitales privados — precio justo
               </p>
             </div>
 
-            {/* Contact Methods */}
+            {/* Three-column comparison */}
             <div className="grid gap-6 md:grid-cols-3">
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <Phone className="h-8 w-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">📞 Teléfono</h3>
-                <p className="text-sm text-foreground/70">[Número] - Llamadas directas</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <MessageCircle className="h-8 w-8 text-accent-strong mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">💬 WhatsApp</h3>
-                <p className="text-sm text-foreground/70">[Número] - Respuesta rápida</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">📍 Centro Mérida</h3>
-                <p className="text-sm text-foreground/70">Fácil acceso toda ciudad</p>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="w-full flex flex-col sm:flex-row gap-4 justify-center">
-                  <CallButton service="endoscopia" position="cta section" />
-                  <WhatsAppButton service="endoscopia" position="cta section" />
-            </div>
-
-            {/* Additional Info */}
-            <div className="grid gap-4 md:grid-cols-2 mt-8">
-              <div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
-                <h4 className="font-semibold text-foreground mb-2">¿Primera endoscopia?</h4>
-                <p className="text-sm text-foreground/80">
-                  Consulta $800 explica procedimiento, resuelve miedos
+              <div className="p-6 rounded-2xl border border-border text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  Hospitales Mérida
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground line-through">
+                  $8,000+ MXN
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  + extras + estudios
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                <h4 className="font-semibold text-foreground mb-2">Para expatriados</h4>
-                <p className="text-sm text-foreground/80">
-                  Atención bilingüe comunidad extranjera Cholul/Norte
+              <div className="p-6 rounded-2xl border-2 border-accent bg-accent/5 text-center">
+                <p className="text-lg font-bold text-text-accent mb-2">
+                  {DOCTOR.name}
                 </p>
+                <p className="font-serif font-bold text-text-accent text-3xl">
+                  {displayFrom("endoscopia")}
+                </p>
+                <p className="text-sm text-accent/80 mt-2">Todo incluido</p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  IMSS
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground">
+                  &ldquo;Gratis&rdquo;
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  3–6 meses espera
+                </p>
+              </div>
+            </div>
+
+            {/* What's included */}
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
+                ¿Qué incluye tu endoscopia?
+              </h3>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {[...includedItems, `Biopsia ${mxn(ADDITIONAL_FEES.biopsy.amount)} si necesaria`].map(
+                  (item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0" />
+                      <span className="text-foreground/80">{item}</span>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="text-center mt-8">
+              <Link
+                href="/precios"
+                className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+              >
+                Ver todos los precios y procedimientos <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 4: PREPARATION — bg-muted
+          Serves: Persona 5 (investigator — "preparación para endoscopia")
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-12">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Cómo prepararte para tu endoscopia?
+            </h2>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Step 1 */}
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  1
+                </div>
+                <h3 className="font-serif font-semibold text-foreground mb-4">
+                  Antes
+                </h3>
+                <ul className="space-y-2 text-sm text-foreground/80 text-left list-disc list-inside">
+                  <li>Ayuno de 8 horas</li>
+                  <li>Llegar acompañado(a)</li>
+                  <li>Ropa cómoda</li>
+                  <li>No suspender medicamentos sin indicación</li>
+                </ul>
+              </div>
+
+              {/* Step 2 */}
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  2
+                </div>
+                <h3 className="font-serif font-semibold text-foreground mb-4">
+                  Durante el procedimiento
+                </h3>
+                <ul className="space-y-2 text-sm text-foreground/80 text-left list-disc list-inside">
+                  <li>Sedación consciente — no hay dolor</li>
+                  <li>Endoscopio por boca — 15–25 minutos</li>
+                  <li>Fotos HD de hallazgos en tiempo real</li>
+                  <li>Biopsias si son necesarias</li>
+                </ul>
+              </div>
+
+              {/* Step 3 */}
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  3
+                </div>
+                <h3 className="font-serif font-semibold text-foreground mb-4">
+                  Después
+                </h3>
+                <ul className="space-y-2 text-sm text-foreground/80 text-left list-disc list-inside">
+                  <li>Recuperación 30–45 minutos en clínica</li>
+                  <li>Resultados con fotos el mismo día</li>
+                  <li>Reporte completo entregado</li>
+                  <li>Seguimiento por WhatsApp para dudas</li>
+                  <li>Si biopsia: patología en 5–10 días</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent/10 border border-accent/20">
+                <Clock className="h-5 w-5 text-accent" />
+                <span className="font-semibold text-foreground">
+                  Duración total:
+                </span>
+                <span className="text-muted-foreground">
+                  15–25 min procedimiento + 30–45 min recuperación
+                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 5: DR. QUIROZ CREDENTIALS — bg-background
+          Serves: Persona 4 (referred patient) + trust for all
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <div className="flex flex-col sm:flex-row gap-6 sm:items-center mb-8">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0">
+                <Image
+                  src="/dr-omar-quiroz.webp"
+                  alt={DOCTOR.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                  Tu endoscopista: {DOCTOR.name}
+                </h2>
+                <p className="text-primary font-medium text-sm mt-1">
+                  Gastroenterólogo y Endoscopista Certificado
+                </p>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                { value: "500+", label: "Endoscopias anuales", color: "text-accent" },
+                { value: "15+", label: "Años experiencia", color: "text-primary" },
+                { value: "<0.1%", label: "Complicaciones", color: "text-accent" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="text-center p-6 rounded-2xl border border-border bg-muted"
+                >
+                  <p className={`text-3xl font-bold ${stat.color} mb-2`}>
+                    {stat.value}
+                  </p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Credentials + Bio */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-3">
+                <h3 className="font-serif font-semibold text-foreground">
+                  Certificaciones
+                </h3>
+                <ul className="space-y-2 text-sm text-foreground/80">
+                  {DOCTOR.credentials.map((credential, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                      <span>{credential}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-serif font-semibold text-foreground">
+                  Experiencia
+                </h3>
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  {DOCTOR.bioShort}
+                </p>
+                <p className="text-sm text-accent font-medium">
+                  ✓ Te contesta directamente el doctor — no una recepcionista
+                </p>
+                <Link
+                  href={DOCTOR.profileUrl}
+                  className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+                >
+                  Ver perfil completo <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-            {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 6: GOOGLE REVIEWS — bg-muted
+          Serves: All personas — social proof with real, verifiable reviews
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <GoogleReviews />
         </div>
       </section>
 
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7: FAQ — bg-background
+          Serves: Persona 5 (investigator — fear/question queries)
+          Generates FAQPage schema for rich results
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
           <Faq routeKey="endoscopia" />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 8: RELATED PROCEDURES — bg-muted
+          Cross-sell to colonoscopia, panendoscopia, CPRE.
+          Matches homepage card pattern — focused, not full catalog.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
+            Otros procedimientos
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            Precios transparentes — sin sorpresas
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {relatedProcedures.map((proc) => (
+              <Link
+                key={proc.slug}
+                href={proc.slug}
+                className="group flex flex-col p-6 rounded-2xl border border-border bg-background hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <h3 className="font-serif font-bold text-foreground text-lg mb-2">
+                  {proc.name}
+                </h3>
+                <p className="font-serif font-bold text-text-accent text-xl mb-2">
+                  {displayFrom(proc.pricingKey)}
+                </p>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">
+                  {proc.desc}
+                </p>
+                <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
+                  Ver detalles <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+            >
+              Ver todos los servicios <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 9: BOTTOM CTA — bg-background
+          Final conversion opportunity
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                ¿Listo para agendar tu endoscopia?
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Consulta de valoración con {DOCTOR.name} — evalúa si la
+                endoscopia es necesaria para tu caso.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <WhatsAppButton
+                service="endoscopia"
+                position="bottom-cta"
+                procedureName="Endoscopia"
+                label="Agendar por WhatsApp"
+                className="sm:px-10"
+              />
+              <CallButton service="endoscopia" position="bottom-cta" />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="p-4 rounded-xl bg-muted border border-border">
+                <p className="font-semibold text-foreground mb-1">
+                  ¿Primera endoscopia?
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Consulta de valoración {mxn(ADDITIONAL_FEES.consultation.amount)} — el único consultorio
+                  de endoscopia en Mérida, Yucatán donde te atiende directamente el especialista.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl bg-muted border border-border">
+                <p className="font-semibold text-foreground mb-1">
+                  Expatriados y zonas norte
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Atención bilingüe. A minutos de Cholul, Temozón Norte y Country Club.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>

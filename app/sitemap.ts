@@ -23,6 +23,7 @@ const routes: RouteCfg[] = [
   // Terapéuticas / avanzadas
   { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 },
   { path: "/ligadura-varices-esofagicas-merida", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/esclerosis-varices-gastricas-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/ligadura-hemorroides-internas-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/gastrostomia-endoscopica-peg-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/extraccion-cuerpos-extranos-endoscopia-merida", changeFrequency: "monthly", priority: 0.75 },
@@ -43,15 +44,14 @@ const routes: RouteCfg[] = [
   { path: "/retiro-balon-gastrico-merida", changeFrequency: "monthly", priority: 0.7 },
   { path: "/emergencias-digestivas-merida", changeFrequency: "weekly", priority: 0.85 },
   { path: "/consultas-digestivas-merida", changeFrequency: "weekly", priority: 0.8 },
-  { path: "/servicios", changeFrequency: "weekly", priority: 0.8 },
-
   // Institucional
   { path: "/dr-omar-quiroz", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contacto", changeFrequency: "monthly", priority: 0.6 },
 
+  { path: "/precios", changeFrequency: "weekly", priority: 0.9 },
+
   // TODO (recommended to add soon)
   // { path: "/ubicacion-hospitales-merida", changeFrequency: "monthly", priority: 0.7 },
-  // { path: "/precios", changeFrequency: "weekly", priority: 0.8 },
   // { path: "/aviso-de-privacidad", changeFrequency: "yearly", priority: 0.3 },
   // { path: "/terminos-y-condiciones", changeFrequency: "yearly", priority: 0.3 },
   // { path: "/blog", changeFrequency: "weekly", priority: 0.6 },

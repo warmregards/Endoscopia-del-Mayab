@@ -1,25 +1,72 @@
 // SiteHeader.tsx
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
-import CallButton from "@/components/CallButton"
-import WhatsAppButton from "@/components/WhatsAppButton"
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { CLINIC } from "@/lib/clinic";
+import CallButton from "@/components/CallButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const services = [
   { href: "/endoscopia-merida", label: "Endoscopia" },
   { href: "/colonoscopia-merida", label: "Colonoscopia" },
   { href: "/cpre-merida", label: "CPRE" },
-]
+];
 
 export default function SiteHeader() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !drawerRef.current) return;
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("keydown", handleKeyDown);
+      // Focus first focusable element in drawer
+      const timer = setTimeout(() => {
+        const first = drawerRef.current?.querySelector<HTMLElement>(
+          'a[href], button, [tabindex]:not([tabindex="-1"])'
+        );
+        first?.focus();
+      }, 50);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        clearTimeout(timer);
+      };
+    }
+  }, [open, handleKeyDown]);
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center" aria-label="Inicio - Endoscopia del Mayab">
+        <Link
+          href="/"
+          className="flex items-center"
+          aria-label="Inicio - Endoscopia del Mayab"
+        >
           <Image
             src="/endoscopia-logo.png"
             alt="Endoscopia del Mayab"
@@ -31,7 +78,10 @@ export default function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
+        <nav
+          className="hidden md:flex items-center gap-8"
+          aria-label="Navegación principal"
+        >
           <Link
             href="/"
             className="text-foreground/80 hover:text-link font-medium"
@@ -41,14 +91,13 @@ export default function SiteHeader() {
             Endoscopia Mérida
           </Link>
 
-          {/* Servicios link */}
           <Link
-            href="/servicios"
-            className="text-foreground/80 hover:text-link font-medium flex items-center"
+            href="/precios"
+            className="text-foreground/80 hover:text-link font-medium"
             data-cta="nav"
-            data-cta-link="service:all"
+            data-cta-link="precios"
           >
-            Servicios
+            Precios
           </Link>
           <Link
             href="/emergencias-digestivas-merida"
@@ -77,8 +126,19 @@ export default function SiteHeader() {
           aria-controls="mobile-menu"
           aria-expanded={open}
         >
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </div>
@@ -93,6 +153,7 @@ export default function SiteHeader() {
           onClick={() => setOpen(false)}
         >
           <div
+            ref={drawerRef}
             className="ml-auto h-full w-80 bg-background shadow-xl border-l border-border p-6 flex flex-col gap-4"
             onClick={(e) => e.stopPropagation()}
           >
@@ -104,15 +165,45 @@ export default function SiteHeader() {
                 onClick={() => setOpen(false)}
                 aria-label="Cerrar menú"
               >
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
 
-            <Link href="/" className="py-2 text-foreground" onClick={() => setOpen(false)} data-cta="nav" data-cta-link="home">Inicio</Link>
+            <Link
+              href="/"
+              className="py-2 text-foreground"
+              onClick={() => setOpen(false)}
+              data-cta="nav"
+              data-cta-link="home"
+            >
+              Inicio
+            </Link>
+            <Link
+              href="/precios"
+              className="py-2 text-foreground"
+              onClick={() => setOpen(false)}
+              data-cta="nav"
+              data-cta-link="precios"
+            >
+              Precios
+            </Link>
             <div className="pt-2">
-              <div className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">Servicios</div>
+              <div className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
+                Servicios
+              </div>
               <div className="flex flex-col">
                 {services.map((s) => (
                   <Link
@@ -128,23 +219,35 @@ export default function SiteHeader() {
                 ))}
               </div>
             </div>
-            <Link href="/emergencias-digestivas-merida" className="py-2 text-foreground" onClick={() => setOpen(false)} data-cta="nav" data-cta-link="emergencias">
+            <Link
+              href="/emergencias-digestivas-merida"
+              className="py-2 text-foreground"
+              onClick={() => setOpen(false)}
+              data-cta="nav"
+              data-cta-link="emergencias"
+            >
               Emergencias
             </Link>
-            <Link href="/contacto" className="py-2 text-foreground" onClick={() => setOpen(false)} data-cta="nav" data-cta-link="contacto">
+            <Link
+              href="/contacto"
+              className="py-2 text-foreground"
+              onClick={() => setOpen(false)}
+              data-cta="nav"
+              data-cta-link="contacto"
+            >
               Contacto
             </Link>
 
-            {/* CTA block — use tracked components */}
+            {/* CTA block */}
             <div className="mt-auto flex flex-col gap-3">
               <CallButton
-                className="!px-4 !py-2"
-                position="Header Mobile"
-                label="Llamar: +52 999 236 0153"
+                size="compact"
+                position="header-mobile"
+                label={`Llamar: ${CLINIC.phone.display}`}
               />
               <WhatsAppButton
-                className="!px-4 !py-2"
-                position="Header Mobile"
+                size="compact"
+                position="header-mobile"
                 label="WhatsApp"
               />
             </div>
@@ -152,5 +255,5 @@ export default function SiteHeader() {
         </div>
       )}
     </header>
-  )
+  );
 }

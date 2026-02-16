@@ -1,13 +1,22 @@
 // components/ProceduresGrid.tsx
-import Link from "next/link"
-import { SERVICES, type ServiceItem } from "@/lib/services"
-import { PRICING, mxn, type ServiceKey } from "@/lib/pricing"
+import Link from "next/link";
+import { SERVICES, type ServiceItem, type ServiceCategory } from "@/lib/services";
+import { PRICING, mxn } from "@/lib/pricing";
 import {
-  Stethoscope, Microscope, ShieldCheck, Activity, Zap, Settings, ArrowRight,
-} from "lucide-react"
+  Stethoscope,
+  Microscope,
+  ShieldCheck,
+  Activity,
+  Zap,
+  Settings,
+  ArrowRight,
+} from "lucide-react";
 
-// Map *slug or semantic key* to pricing key + icon
-const ICON_MAP: Record<string, any> = {
+// ---------------------------------------------------------------------------
+// Icon map — keyed by slug, falls back to Stethoscope
+// ---------------------------------------------------------------------------
+
+const ICON_MAP: Record<string, typeof Stethoscope> = {
   "endoscopia-merida": Microscope,
   "colonoscopia-merida": Stethoscope,
   "panendoscopia-merida": Activity,
@@ -33,61 +42,37 @@ const ICON_MAP: Record<string, any> = {
   "reseccion-endoscopica-mucosa-emr-merida": Microscope,
   "retiro-balon-gastrico-merida": Settings,
   "apc-coagulacion-plasma-argon-merida": Zap,
-}
+};
 
-// Map slug -> PRICING key when available
-const SLUG_TO_PRICING: Record<string, ServiceKey> = {
-  "endoscopia-merida": "endoscopia",
-  "colonoscopia-merida": "colonoscopia",
-  "panendoscopia-merida": "panendoscopia",
-  "cpre-merida": "cpre",
+// ---------------------------------------------------------------------------
+// Category display config
+// ---------------------------------------------------------------------------
 
-  "ligadura-varices-esofagicas-merida": "ligadura_varices",
-  "ligadura-hemorroides-internas-merida": "ligadura_hemorroides",
-  "gastrostomia-endoscopica-peg-merida": "gastrostomia_peg",
-  "extraccion-cuerpos-extranos-endoscopia-merida": "extraccion_cuerpos_extranos",
-  "dilatacion-esofagica-merida": "dilatacion_esofagica",
-  "esclerosis-varices-gastricas-merida": "esclerosis_varices_gastricas",
-  "dilatacion-biliar-merida": "dilatacion_biliar",
-  "dilatacion-colonica-merida": "dilatacion_colonica",
+const CATEGORY_CONFIG: Record<
+  string,
+  { label: string; icon: typeof Stethoscope }
+> = {
+  diagnostic: { label: "Procedimientos Principales", icon: Microscope },
+  therapeutic: { label: "Procedimientos Terapéuticos", icon: Zap },
+  advanced: { label: "Procedimientos Avanzados", icon: ShieldCheck },
+  // Stents are a UI sub-group of "advanced" — handled separately below
+};
 
-  "endoprotesis-esofagicas-merida": "endoprotesis_esofagicas",
-  "endoprotesis-biliares-merida": "endoprotesis_biliares",
-  "endoprotesis-duodenales-merida": "endoprotesis_duodenales",
-  "endoprotesis-colonicas-merida": "endoprotesis_colonicas",
+// Stent slugs for the dedicated UI group
+const STENT_SLUGS = new Set([
+  "endoprotesis-esofagicas-merida",
+  "endoprotesis-biliares-merida",
+  "endoprotesis-duodenales-merida",
+  "endoprotesis-colonicas-merida",
+]);
 
-  "cierre-fistulas-clips-endoscopicos-merida": "cierre_fistulas_clips",
-  "sutura-endoscopica-merida": "sutura_endoscopica",
-  "diseccion-endoscopica-submucosa-esd-merida": "esd",
-  "reseccion-endoscopica-mucosa-emr-merida": "emr",
-  "retiro-balon-gastrico-merida": "retiro_balon_gastrico",
-  "apc-coagulacion-plasma-argon-merida": "apc",
-}
-
-// Category buckets by slug
-const MAIN = new Set([
-  "endoscopia-merida", "colonoscopia-merida", "panendoscopia-merida", "cpre-merida",
-])
-const STENTS = new Set([
-  "endoprotesis-esofagicas-merida", "endoprotesis-biliares-merida",
-  "endoprotesis-duodenales-merida", "endoprotesis-colonicas-merida",
-])
-const ADVANCED = new Set([
-  "cierre-fistulas-clips-endoscopicos-merida", "sutura-endoscopica-merida",
-  "diseccion-endoscopica-submucosa-esd-merida", // note: our slug is reseccion-endoscopica-mucosa-emr-merida
-  "reseccion-endoscopica-mucosa-emr-merida", "retiro-balon-gastrico-merida", "apc-coagulacion-plasma-argon-merida",
-])
-const THERAPEUTIC = new Set([
-  "ligadura-varices-esofagicas-merida", "ligadura-hemorroides-internas-merida", "gastrostomia-endoscopica-peg-merida",
-  "extraccion-cuerpos-extranos-endoscopia-merida", "dilatacion-esofagica-merida",
-  "esclerosis-varices-gastricas-merida", "dilatacion-biliar-merida", "dilatacion-colonica-merida",
-])
+// ---------------------------------------------------------------------------
+// Card
+// ---------------------------------------------------------------------------
 
 function ProcedureCard({ s }: { s: ServiceItem }) {
-  const Icon = ICON_MAP[s.slug] || Stethoscope
-  const pricingKey = SLUG_TO_PRICING[s.slug]
-  const pricing = pricingKey ? PRICING[pricingKey] : undefined
-  const title = `${s.name} en Mérida`
+  const Icon = ICON_MAP[s.slug] || Stethoscope;
+  const pricing = s.pricingKey ? PRICING[s.pricingKey] : undefined;
 
   return (
     <Link
@@ -100,81 +85,96 @@ function ProcedureCard({ s }: { s: ServiceItem }) {
 
       <div className="min-w-0 flex-1">
         <h3 className="text-sm font-semibold text-foreground group-hover:text-accent-strong transition-colors line-clamp-1">
-          {title}
+          {s.displayName}
         </h3>
-        {pricing?.from !== undefined && (
-          <p className="text-xs text-foreground/60">{mxn(pricing.from)}</p>
+        {!s.quoteOnly && pricing?.from !== undefined && (
+          <p className="text-xs text-foreground/60">Desde {mxn(pricing.from)}</p>
         )}
       </div>
 
       <ArrowRight className="h-4 w-4 text-foreground/40 group-hover:text-accent-strong group-hover:translate-x-0.5 transition-all flex-shrink-0" />
     </Link>
-  )
+  );
 }
 
+// ---------------------------------------------------------------------------
+// Section
+// ---------------------------------------------------------------------------
+
+function CategorySection({
+  label,
+  icon: Icon,
+  services,
+}: {
+  label: string;
+  icon: typeof Stethoscope;
+  services: ServiceItem[];
+}) {
+  if (!services.length) return null;
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-serif font-semibold text-foreground flex items-center gap-2">
+        <Icon className="h-5 w-5 text-accent-strong" />
+        {label}
+      </h3>
+      <div className="space-y-2">
+        {services.map((s) => (
+          <ProcedureCard key={s.slug} s={s} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Grid
+// ---------------------------------------------------------------------------
+
 export default function ProceduresGrid() {
-  // Partition from SERVICES
-  const main = SERVICES.filter(s => MAIN.has(s.slug))
-  const stents = SERVICES.filter(s => STENTS.has(s.slug))
-  const advanced = SERVICES.filter(s => ADVANCED.has(s.slug))
-  const therapeutic = SERVICES.filter(s => THERAPEUTIC.has(s.slug))
+  const diagnostic = SERVICES.filter((s) => s.category === "diagnostic");
+  const therapeutic = SERVICES.filter(
+    (s) => s.category === "therapeutic" && !STENT_SLUGS.has(s.slug)
+  );
+  const stents = SERVICES.filter((s) => STENT_SLUGS.has(s.slug));
+  const advanced = SERVICES.filter(
+    (s) => s.category === "advanced" && !STENT_SLUGS.has(s.slug)
+  );
 
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">Todos los Procedimientos</h2>
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+            Todos los Procedimientos
+          </h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Catálogo completo de procedimientos endoscópicos especializados
           </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
-          {/* Main Procedures */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-serif font-semibold text-foreground flex items-center gap-2">
-              <Microscope className="h-5 w-5 text-accent-strong" />
-              Procedimientos Principales
-            </h3>
-            <div className="space-y-2">
-              {main.map(s => <ProcedureCard key={s.slug} s={s} />)}
-            </div>
-          </div>
-
-          {/* Stent Procedures */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-serif font-semibold text-foreground flex items-center gap-2">
-              <Settings className="h-5 w-5 text-accent-strong" />
-              Endoprótesis (Stents)
-            </h3>
-            <div className="space-y-2">
-              {stents.map(s => <ProcedureCard key={s.slug} s={s} />)}
-            </div>
-          </div>
-
-          {/* Advanced Procedures */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-serif font-semibold text-foreground flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-accent-strong" />
-              Procedimientos Avanzados
-            </h3>
-            <div className="space-y-2">
-              {advanced.map(s => <ProcedureCard key={s.slug} s={s} />)}
-            </div>
-          </div>
-
-          {/* Therapeutic Procedures */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-serif font-semibold text-foreground flex items-center gap-2">
-              <Zap className="h-5 w-5 text-accent-strong" />
-              Procedimientos Terapéuticos
-            </h3>
-            <div className="space-y-2">
-              {therapeutic.map(s => <ProcedureCard key={s.slug} s={s} />)}
-            </div>
-          </div>
+          <CategorySection
+            label="Procedimientos Principales"
+            icon={Microscope}
+            services={diagnostic}
+          />
+          <CategorySection
+            label="Endoprótesis (Stents)"
+            icon={Settings}
+            services={stents}
+          />
+          <CategorySection
+            label="Procedimientos Avanzados"
+            icon={ShieldCheck}
+            services={advanced}
+          />
+          <CategorySection
+            label="Procedimientos Terapéuticos"
+            icon={Zap}
+            services={therapeutic}
+          />
         </div>
       </div>
     </section>
-  )
+  );
 }

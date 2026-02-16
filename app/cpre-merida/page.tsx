@@ -1,906 +1,472 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { displayFrom } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { Stethoscope, MapPin, Phone, MessageCircle, Globe, CheckCircle2, ShieldCheck, Microscope, Hospital, Clock, Star, Award, Users, Heart, AlertTriangle, Activity, Camera, Search, Brain, Target, TrendingUp, UserCheck, Zap, Users2, FileText } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import { CheckCircle2, MapPin } from "lucide-react"
 import Faq from "@/components/Faq"
-import CallButton from "@/components/CallButton";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
+import CallButton from "@/components/CallButton"
+import WhatsAppButton from "@/components/WhatsAppButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
 export const metadata = metaFor("cpre")
 
-export default function CprePage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
+/* ── Data ──────────────────────────────────────────────────────────────── */
 
+const trustChips = [
+  "Sedación incluida",
+  "Hospital Amerimed",
+  "Resultados mismo día",
+  "WhatsApp directo con el doctor",
+]
+
+const includedItems = [
+  "Sedación profunda con anestesiólogo",
+  "Fluoroscopía en tiempo real",
+  "Extracción de cálculos biliares",
+  "Duodenoscopio especializado",
+  "Materiales estándar",
+  "Seguimiento 24 horas",
+]
+
+const relatedProcedures = [
+  {
+    name: "Endoscopia",
+    slug: "endoscopia-merida",
+    pricingKey: "endoscopia" as const,
+    desc: "Estudio del tracto digestivo superior para diagnóstico de gastritis, úlceras y reflujo.",
+  },
+  {
+    name: "Colonoscopia",
+    slug: "colonoscopia-merida",
+    pricingKey: "colonoscopia" as const,
+    desc: "Estudio del colon para prevención de cáncer colorrectal y detección de pólipos.",
+  },
+  {
+    name: "Dilatación Biliar",
+    slug: "dilatacion-biliar-merida",
+    pricingKey: "dilatacion_biliar" as const,
+    desc: "Tratamiento de estenosis biliares para restablecer el flujo de la bilis.",
+  },
+]
+
+/* ══════════════════════════════════════════════════════════════════════════ */
+
+export default function CprePage() {
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent-light/20">
-                  <Zap className="h-4 w-4 text-accent-strong" />
-                  <span className="text-sm font-medium text-foreground">50+ CPREs Anuales</span>
-                </div>
-                
-                <h1 className="`${montserrat.className} text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-foreground leading-tight`">
-                  CPRE en Mérida - {mxn(PRICING.cpre.from)} Pesos Fijos | Dr. Omar Quiroz
-                </h1>
-                
-                <p className="`${inter.className} text-xl text-accent-strong font-semibold`">
-                  Especialista en CPRE - Problemas biliares sin cirugía abierta
-                </p>
-                
-                <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
-                  <p>
-                    ¿Te dijeron que necesitas cirugía de vesícula? La CPRE puede evitar la operación. Dr. Omar Quiroz - uno de los pocos especialistas en Yucatán entrenado en esta técnica avanzada.
-                  </p>
-                </div>
-                
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Sedación profunda incluida</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Tecnología SpyGlass Olympus</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Extracción cálculos incluida</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Stents si necesario</span>
-                  </div>
-                </div>
-                
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="CPRE" position="hero" />
-                      <WhatsAppButton service="CPRE" position="hero" />
-                </div>
-              </div>
+      {/* ── JSON-LD ─────────────────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "CPRE en Mérida",
+              path: "/cpre-merida",
+              pricingKey: "cpre",
+              description:
+                "Colangiopancreatografía retrógrada endoscópica para diagnóstico y tratamiento de cálculos biliares, estenosis y obstrucciones del conducto biliar. Incluye sedación con anestesiólogo.",
+              procedureType: "Therapeutic",
+              bodyLocation: "Conductos biliares y páncreas",
+              howPerformed:
+                "Duodenoscopio especializado bajo sedación profunda con fluoroscopía en tiempo real. Duración: 30–90 minutos.",
+              preparation:
+                "Ayuno 8 horas, análisis de sangre, acudir con acompañante.",
+              followUp:
+                "Observación 2–3 horas. Reposo 24–48 horas. Seguimiento por WhatsApp.",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "CPRE en Mérida", path: "/cpre-merida" },
+            ])
+          ),
+        }}
+      />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 1: HERO — bg-background
+          Serves: ALL personas
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
+              CPRE en Mérida
+            </h1>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Colangiopancreatografía retrógrada endoscópica — desbloqueamos los
+              conductos biliares sin cirugía abierta
+            </p>
+
+            {/* Price badge */}
+            <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
+              <span className="text-2xl sm:text-3xl font-bold text-text-accent">
+                {displayFrom("cpre")}
+              </span>
             </div>
-            
-            {/* Image - Right Side */}
-            <div className="flex-1 lg:max-w-md">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-strong/20 to-primary/20 rounded-3xl transform rotate-3" />
-                <div className="relative bg-background rounded-3xl p-8 border border-border shadow-2xl">
-                  <div className="text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-accent-strong/10 flex items-center justify-center mx-auto">
-                      <ShieldCheck className="h-8 w-8 text-accent-strong" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium text-foreground/60">Dr. Omar Quiroz</div>
-                      <div className="text-2xl font-bold text-accent-strong">{mxn(PRICING.cpre.from)} pesos fijos</div>
-                    </div>
-                  </div>
 
-                  {/* What's Included */}
-                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-                    <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
-                      Todo incluido en {mxn(PRICING.cpre.from)} pesos
-                    </h3>
-                    
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Sedación profunda</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Duodenoscopio especializado</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Fluoroscopía tiempo real</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Extracción cálculos</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Stents si necesario</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
-                        <span className="text-sm text-foreground/80">Seguimiento 24h</span>
-                      </div>
-                    </div>
+            <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
+              ¿Te dijeron que tienes cálculos en el conducto biliar? La CPRE los
+              resuelve sin abrir. Procedimiento ambulatorio en{" "}
+              {DOCTOR.worksFor.hospital}, Mérida — con el{" "}
+              {DOCTOR.name} directamente.
+            </p>
 
-                    <div className="mt-4 p-3 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                      <h4 className="font-semibold text-foreground mb-1 text-sm">¿Por qué más accesible?</h4>
-                      <p className="text-xs text-foreground/80">
-                        Sin overhead hospitalario. Acceso directo equipos sin intermediarios.
-                      </p>
-                    </div>
-                  </div>
+            {/* Trust chips */}
+            <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              {trustChips.map((chip) => (
+                <div key={chip} className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                  <span>{chip}</span>
                 </div>
-              </div>
+              ))}
+            </div>
+
+            {/* CTAs — WhatsApp FIRST */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <WhatsAppButton
+                service="CPRE"
+                position="hero"
+                procedureName="CPRE"
+                label="Agendar por WhatsApp"
+                className="sm:px-8"
+              />
+              <CallButton
+                service="CPRE"
+                position="hero"
+                variant="ghost"
+              />
+            </div>
+
+            {/* Location signal */}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4 text-primary shrink-0" />
+              <span>{CLINIC.address.display}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHAT IS CPRE SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Qué es la CPRE? - Estudio Biliar Especializado
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2: ¿Qué es la CPRE? — bg-muted
+          Serves: P4 (Directo), P5 (Investigador)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Qué es la CPRE y para qué sirve?
             </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Colangiopancreatografía Retrógrada Endoscópica - Técnica que pocos dominan
-            </p>
-          </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center mb-16">
-            {/* Explanation */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-serif font-bold text-foreground">
-                  Estudio CPRE - Endoscopia + Rayos X para Conductos Biliares
-                </h3>
-                
-                <div className="p-6 rounded-xl bg-accent-light/10 border border-accent-light/20">
-                  <h4 className="font-semibold text-foreground mb-3">CPRE = Colangiopancreatografía Retrógrada Endoscópica</h4>
-                  <div className="space-y-3 text-foreground/80">
-                    <p>• Duodenoscopio especializado hasta intestino</p>
-                    <p>• Contraste en conductos biliares</p>
-                    <p>• Rayos X tiempo real (fluoroscopía)</p>
-                    <p>• Ve y trata obstrucciones mismo día</p>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-xl bg-primary/10 border border-primary/20">
-                  <h4 className="font-semibold text-foreground mb-3">Diferencia clave:</h4>
-                  <p className="text-foreground/80">
-                    Endoscopia normal solo "ve" - <strong>CPRE "trata"</strong> problemas biliares sin cirugía abierta
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Patient Story */}
-            <div className="bg-gradient-to-br from-background to-muted/30 p-8 rounded-2xl border border-border">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-accent-strong/10 flex items-center justify-center">
-                    <Heart className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">Testimonio Real</h4>
-                    <p className="text-sm text-foreground/60">Carmen, 54 años</p>
-                  </div>
-                </div>
-                <blockquote className="text-foreground/80 italic text-lg">
-                  "Evité cirugía de vesícula gracias a CPRE. Dr. Quiroz sacó 3 cálculos del conducto sin abrir abdomen"
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PRICING SECTION */}
-      {/* PRICING SECTION */}
-      <section id="precio-cpre-merida" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              CPRE en Mérida: costo y qué incluye — {mxn(PRICING.cpre.from)} todo incluido
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Costo fijo para casos estándar (cálculos y esfinterotomía) — sin sorpresas.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            {/* Dr. Omar Price */}
-            <div className="p-6 rounded-2xl border-2 border-accent-strong bg-accent-strong/5 text-center order-2 md:order-1">
-              <div className="text-lg font-bold text-accent-strong mb-2">Dr. Omar Quiroz</div>
-              <div className="text-3xl font-bold text-accent-strong">{mxn(PRICING.cpre.from)} pesos</div>
-              <p className="text-sm text-accent-strong/80 mt-2">Todo incluido</p>
-            </div>
-
-            {/* Other Specialists */}
-            <div className="p-6 rounded-2xl border border-border bg-background text-center order-1 md:order-2">
-              <div className="text-lg font-bold text-foreground/60 mb-2">Otros especialistas</div>
-              <div className="text-2xl font-bold text-foreground/60 line-through">$35,000+ pesos</div>
-              <p className="text-sm text-foreground/50 mt-2">+ extras + estudios</p>
-            </div>
-
-            {/* Hospital Option */}
-            <div className="p-6 rounded-2xl border border-border bg-background text-center order-3">
-              <div className="text-lg font-bold text-foreground/60 mb-2">Hospitales</div>
-              <div className="text-2xl font-bold text-foreground/60 line-through">$30,000+ pesos</div>
-              <p className="text-sm text-foreground/50 mt-2">+ sobrecargos</p>
-            </div>
-          </div>
-
-          {/* What's Included */}
-          <div id="incluye-cpre" className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border">
-            <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
-              ¿Qué incluye exactamente?
-            </h3>
-            
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Sedación profunda con anestesiólogo</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Duodenoscopio + fluoroscopía</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Extracción de cálculos biliares</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Colocación de stents si necesario*</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Materiales y equipo estéril</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0" />
-                <span className="text-foreground/80">Seguimiento hospitalario 24h</span>
-              </div>
-            </div>
-
-            <div className="mt-6 p-4 rounded-xl bg-accent-light/10 border border-accent-light/20 text-center">
-              <p className="text-sm text-foreground/80">
-                <strong>Incluye:</strong> sedación, fluoroscopía, extracción de litos y materiales estándar.<br className="hidden sm:block" />
-                <strong>Puede tener costo extra:</strong> stent plástico/metálico o dispositivos especiales en casos complejos; te avisamos antes.
+            <div className="space-y-4 text-foreground/80 leading-relaxed">
+              <p>
+                La CPRE (colangiopancreatografía retrógrada endoscópica) combina
+                un endoscopio especializado con rayos X en tiempo real para ver y
+                tratar problemas de los conductos biliares y el páncreas — todo
+                en una sola sesión, sin cirugía abierta.
+              </p>
+              <p>
+                Se usa para resolver cálculos atrapados en el conducto biliar,
+                estenosis (estrechamientos), ictericia obstructiva y pancreatitis
+                biliar. A diferencia de una endoscopia convencional que solo
+                observa, la CPRE puede diagnosticar y tratar el problema al mismo
+                tiempo.
               </p>
             </div>
 
-            {/* Mini FAQ de costo/ubicación (queries exactas) */}
-            <div className="mt-8 border-t border-border pt-6">
-              <h4 className="text-center font-semibold text-foreground mb-4">Preguntas frecuentes sobre costo de CPRE</h4>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="p-4 rounded-lg bg-background border border-border">
-                  <p className="font-medium">• cpre precio / cpre cuánto cuesta</p>
-                  <p className="text-sm text-foreground/70 mt-1">
-                    {mxn(PRICING.cpre.from)} pesos para casos estándar. Si se requieren stents o insumos especiales, se cotiza y autoriza antes.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-background border border-border">
-                  <p className="font-medium">• costo cpre hospital</p>
-                  <p className="text-sm text-foreground/70 mt-1">
-                    En hospitales suele ser $30,000–$35,000+ por sobrecargos. Nuestra consulta independiente evita esos extras.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-background border border-border">
-                  <p className="font-medium">• cpre playa del carmen</p>
-                  <p className="text-sm text-foreground/70 mt-1">
-                    Atendemos en Mérida. Pacientes de Playa del Carmen y la península viajan por disponibilidad y experiencia en casos complejos.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-background border border-border">
-                  <p className="font-medium">• ¿Qué incluye el costo de CPRE?</p>
-                  <p className="text-sm text-foreground/70 mt-1">
-                    Sedación, fluoroscopía, extracción de litos y materiales estándar. Stents o accesorios especiales pueden cotizarse aparte.
-                  </p>
-                </div>
-              </div>
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              ¿Cuándo necesitas una CPRE?
+            </h3>
+            <div className="space-y-4 text-foreground/80 leading-relaxed">
+              <p>
+                Tu médico puede indicar una CPRE si tienes cálculos en el
+                conducto biliar (coledocolitiasis), ictericia con sospecha de
+                obstrucción, pancreatitis biliar aguda, estenosis de las vías
+                biliares o necesitas drenaje biliar antes de una cirugía de
+                vesícula.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SPYGLASS TECHNOLOGY */}
-<section id="spyglass-cpre" className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center space-y-4 mb-16">
-      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-        CPRE con SpyGlass: costo y ventajas
-      </h2>
-      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-        Visualización directa de los conductos biliares = mayor precisión y menos complicaciones.
-      </p>
-    </div>
-
-    <div className="grid gap-8 lg:grid-cols-2 items-center">
-      {/* Technology Details */}
-      <div className="space-y-6">
-        <div className="p-6 rounded-xl border border-border bg-background">
-          <h3 className="font-semibold text-foreground mb-4">SpyGlass Olympus — ver para tratar</h3>
-          <div className="space-y-3 text-foreground/80">
-            <p>• La CPRE tradicional depende solo de rayos X</p>
-            <p>• SpyGlass permite ver <em>dentro</em> del colédoco</p>
-            <p>• Facilita extracción de litos difíciles y estenosis</p>
-            <p>• Menos tiempo de procedimiento, menor riesgo</p>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-          <h3 className="font-semibold text-foreground mb-2">¿Impacta en el costo?</h3>
-          <p className="text-foreground/80">
-            Nuestro costo estándar cubre la mayoría de casos. Si SpyGlass requiere accesorios específicos (p. ej., ciertos stents),
-            lo <strong>cotizamos y autorizamos contigo</strong> antes de usarlo.{" "}
-            <Link href="#precio-cpre-merida" className="underline decoration-accent-strong/40 hover:decoration-accent-strong">
-              Ver costo y qué incluye
-            </Link>.
-          </p>
-        </div>
-      </div>
-
-      {/* Benefits Grid */}
-      <div className="space-y-4">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="p-4 rounded-xl border border-border bg-background text-center">
-            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground mb-1">Mayor precisión</h4>
-            <p className="text-sm text-foreground/70">Litos difíciles y estenosis</p>
-          </div>
-
-          <div className="p-4 rounded-xl border border-border bg-background text-center">
-            <Clock className="h-8 w-8 text-accent-strong mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground mb-1">Menos tiempo</h4>
-            <p className="text-sm text-foreground/70">Procedimiento más eficiente</p>
-          </div>
-
-          <div className="p-4 rounded-xl border border-border bg-background text-center">
-            <ShieldCheck className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground mb-1">Menor riesgo</h4>
-            <p className="text-sm text-foreground/70">Baja tasa de complicaciones</p>
-          </div>
-
-          <div className="p-4 rounded-xl border border-border bg-background text-center">
-            <Target className="h-8 w-8 text-accent-strong mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground mb-1">Mejores resultados</h4>
-            <p className="text-sm text-foreground/70">Casos de referencia resueltos</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* PRIVATE PRACTICE BENEFITS */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <UserCheck className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">CPRE Particular Mérida</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  CPRE Particular - Ventajas Consulta Independiente
-                </h2>
-              </div>
-            </div>
-
-            {/* Benefits Grid */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Comunicación directa</p>
-                    <p className="text-sm text-foreground/70">
-                      Hablas con Dr. Quiroz, no residentes. Explica procedimiento y resultados personalmente
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Horarios flexibles</p>
-                    <p className="text-sm text-foreground/70">
-                      Emergencias biliares fines de semana. No esperas lunes si urgencia
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Seguimiento personal</p>
-                    <p className="text-sm text-foreground/70">
-                      Dr. Quiroz revisa evolución. WhatsApp directo para dudas post-CPRE
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Atención bilingüe</p>
-                    <p className="text-sm text-foreground/70">
-                      Perfecto expatriados Cholul/Norte. Explicaciones claras inglés sobre procedimientos complejos
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SEDATION COMFORT */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              CPRE con Sedación en Mérida - Procedimiento Cómodo
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 3: Precio — bg-background
+          Serves: P2 (Comparador)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section id="precio-cpre-merida" className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Cuánto cuesta una CPRE en Mérida?
             </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Sedación profunda para tu comodidad durante procedimiento complejo
-            </p>
-          </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
-            {/* Sedation Details */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-xl border border-border bg-background">
-                <h3 className="font-semibold text-foreground mb-4">Sedación Profunda Segura</h3>
-                <div className="space-y-3 text-foreground/80">
-                  <p>• Anestesiólogo certificado maneja sedación</p>
-                  <p>• Te duermes cómodamente durante procedimiento</p>
-                  <p>• Monitoreo continuo signos vitales</p>
-                  <p>• Equipo emergencia disponible</p>
+            <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
+              <span className="text-2xl font-bold text-text-accent">
+                {displayFrom("cpre")}
+              </span>
+            </div>
+
+            {/* What's included */}
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              ¿Qué incluye el precio?
+            </h3>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {includedItems.map((item) => (
+                <div key={item} className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                  <span className="text-foreground/80">{item}</span>
                 </div>
+              ))}
+            </div>
+
+            {/* Extra costs */}
+            <div className="p-6 rounded-xl bg-muted border border-border">
+              <p className="text-foreground/80 leading-relaxed">
+                <strong className="text-foreground">Puede tener costo extra:</strong>{" "}
+                stents plásticos o metálicos y accesorios SpyGlass en casos
+                complejos — te cotizamos y autorizas antes del procedimiento.
+                Contamos con tecnología SpyGlass para casos que requieren
+                visualización directa del conducto biliar.
+              </p>
+            </div>
+
+            {/* Competitor context */}
+            <p className="text-foreground/80 leading-relaxed">
+              En hospitales de Mérida, la CPRE cuesta ~$34,000 MXN. En Cancún,
+              $40,000+. Nuestro precio es más accesible porque el {DOCTOR.name}{" "}
+              trabaja con equipo propio en {DOCTOR.worksFor.hospital} — sin
+              sobrecargos de intermediarios.
+            </p>
+
+            <Link
+              href="/precios"
+              className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+            >
+              Ver todos nuestros precios →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 4: Preparación — bg-muted
+          Serves: P4 (Directo), P5 (Investigador)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Preparación para CPRE: antes, durante y después
+            </h2>
+
+            <div className="grid gap-8 md:grid-cols-3">
+              {/* Antes */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center">
+                    1
+                  </span>
+                  <h3 className="text-lg font-serif font-semibold text-foreground">
+                    Antes
+                  </h3>
+                </div>
+                <p className="text-foreground/80 leading-relaxed">
+                  Ayuno de 8 horas antes del procedimiento. Te pediremos análisis
+                  de sangre (bilirrubinas, enzimas hepáticas, coagulación) y
+                  necesitas venir con un acompañante que pueda llevarte a casa.
+                </p>
               </div>
 
-              <div className="p-6 rounded-xl bg-primary/10 border border-primary/20">
-                <h3 className="font-semibold text-foreground mb-4">Recuperación:</h3>
-                <p className="text-foreground/80">
-                  2-3 horas observación. Mayoría pacientes se va caminando mismo día.
+              {/* Durante */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white font-bold text-sm flex items-center justify-center">
+                    2
+                  </span>
+                  <h3 className="text-lg font-serif font-semibold text-foreground">
+                    Durante
+                  </h3>
+                </div>
+                <p className="text-foreground/80 leading-relaxed">
+                  Te duermes cómodamente con sedación profunda — no sientes nada.
+                  El procedimiento dura entre 30 y 90 minutos según la
+                  complejidad. Un anestesiólogo monitorea tus signos vitales en
+                  todo momento.
+                </p>
+              </div>
+
+              {/* Después */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center">
+                    3
+                  </span>
+                  <h3 className="text-lg font-serif font-semibold text-foreground">
+                    Después
+                  </h3>
+                </div>
+                <p className="text-foreground/80 leading-relaxed">
+                  Observación de 2 a 3 horas en recuperación. Te damos
+                  instrucciones detalladas de cuidados en casa, dieta blanda
+                  progresiva y seguimiento por WhatsApp con el {DOCTOR.name}{" "}
+                  directamente.
                 </p>
               </div>
             </div>
-
-            {/* Patient Testimonial */}
-            <div className="bg-gradient-to-br from-background to-muted/30 p-8 rounded-2xl border border-border">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-accent-strong/10 flex items-center justify-center">
-                    <Star className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">Experiencia Paciente</h4>
-                    <p className="text-sm text-foreground/60">Roberto, 48 años</p>
-                  </div>
-                </div>
-                <blockquote className="text-foreground/80 italic text-lg">
-                  "No sentí nada. Me dormí con dolor terrible vesícula y desperté sin molestias por primera vez en meses"
-                </blockquote>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* DR. OMAR'S SURGICAL ADVANTAGE */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Dr. Omar Quiroz - Cirujano Especialista CPRE</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  CPRE Merida - Experiencia Quirúrgica Única
-                </h2>
-                
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  ¿Por qué cirujano hace CPRE? Otros endoscopistas envían casos difíciles a cirugía. Dr. Quiroz resuelve complicaciones que otros no pueden manejar.
-                </p>
-              </div>
-            </div>
-
-            {/* Experience Stats */}
-            <div className="grid gap-6 md:grid-cols-3">
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-accent-strong mb-2">100+</div>
-                <div className="text-sm font-medium text-foreground/70">CPREs Anuales</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-primary mb-2">15+</div>
-                <div className="text-sm font-medium text-foreground/70">Años Experiencia</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl border border-border bg-background">
-                <div className="text-3xl font-bold text-accent-strong mb-2">&lt;0.1%</div>
-                <div className="text-sm font-medium text-foreground/70">Complicaciones</div>
-              </div>
-            </div>
-
-            {/* Certifications */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Certificaciones:</p>
-                    <div className="text-sm text-foreground/70 space-y-1">
-                      <p>• Consejo Mexicano Cirugía General</p>
-                      <p>• Colegio Mexicano Gastroenterología</p>
-                      <p>• Entrenamiento UNAM + University of Florida</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Casos referencia:</p>
-                    <p className="text-sm text-foreground/70">
-                      Médicos península refieren casos complejos CPRE que fallaron otros centros
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHEN YOU NEED CPRE */}
-<section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center space-y-4 mb-16">
-      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-        ¿Cuándo necesitas CPRE? - CPRE en Mérida Yucatán
-      </h2>
-      <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-        Indicaciones médicas para el procedimiento
-      </p>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {/* Gallstones */}
-      <div className="p-6 rounded-xl border border-border bg-background">
-        <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-          <AlertTriangle className="h-6 w-6 text-accent-strong" />
-        </div>
-        <h3 className="font-semibold text-foreground mb-3">Cálculos en conducto biliar</h3>
-        <div className="space-y-2 text-sm text-foreground/80">
-          <p>• Piedras atoradas a la salida de la vesícula</p>
-          <p>• Dolor intenso, ictericia</p>
-          <p>• Náusea severa</p>
-        </div>
-      </div>
-
-      {/* Emergencies */}
-      <div className="p-6 rounded-xl border border-border bg-background">
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-          <Activity className="h-6 w-6 text-primary" />
-        </div>
-        <h3 className="font-semibold text-foreground mb-3">Emergencias biliares</h3>
-        <div className="space-y-2 text-sm text-foreground/80">
-          <p>• Colangitis (infección)</p>
-          <p>• Pancreatitis por cálculos</p>
-          <p>• Ictericia severa</p>
-        </div>
-      </div>
-
-      {/* Pre-Surgery */}
-      <div className="p-6 rounded-xl border border-border bg-background">
-        <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-          <ShieldCheck className="h-6 w-6 text-accent-strong" />
-        </div>
-        <h3 className="font-semibold text-foreground mb-3">Antes de cirugía de vesícula</h3>
-        <div className="space-y-2 text-sm text-foreground/80">
-          <p>• Limpiar conductos</p>
-          <p>• Evitar complicaciones</p>
-          <p>• Cirugía más segura</p>
-        </div>
-      </div>
-    </div>
-
-    {/* Triage links */}
-    <div className="mt-10 text-center">
-      <p className="text-sm text-foreground/70">
-        ¿Síntomas altos (reflujo, gastritis)? Conoce la{" "}
-        <Link href="/endoscopia" className="underline decoration-primary/40 hover:decoration-primary">
-          endoscopia en Mérida (precio y qué incluye)
-        </Link>.
-      </p>
-      <p className="text-sm text-foreground/70 mt-2">
-        ¿Sangrado bajo o cambios en evacuaciones? Revisa la{" "}
-        <Link href="/colonoscopia" className="underline decoration-primary/40 hover:decoration-primary">
-          colonoscopia en Mérida (costo y preparación)
-        </Link>.
-      </p>
-      <p className="text-sm text-foreground/70 mt-2">
-        ¿Dudas comunes? Visita las{" "}
-        <Link href="#faqs-cpre" className="underline decoration-primary/40 hover:decoration-primary">
-          preguntas frecuentes
-        </Link>.
-      </p>
-    </div>
-  </div>
-</section>
-
-      {/* PROCEDURE STEPS */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Procedimiento CPRE Paso a Paso - Qué Esperar
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 5: Doctor — bg-background
+          Serves: P3 (Referido)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Tu especialista en CPRE
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Proceso completo desde preparación hasta recuperación
-            </p>
+
+            <div className="flex flex-col sm:flex-row gap-8 items-start">
+              <div className="flex-shrink-0">
+                <Image
+                  src={DOCTOR.photos.headshot}
+                  alt={DOCTOR.name}
+                  width={200}
+                  height={200}
+                  className="rounded-2xl"
+                />
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-serif font-semibold text-foreground">
+                  {DOCTOR.name}
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  {DOCTOR.bioShort} {DOCTOR.name} es cirujano y endoscopista —
+                  resuelve complicaciones que otros centros refieren a cirugía.
+                  Entrenado en la UNAM con experiencia internacional.
+                </p>
+                <p className="text-foreground/80 leading-relaxed">
+                  Pacientes de Valladolid, Campeche, Playa del Carmen, Cancún y
+                  la Riviera Maya nos buscan por experiencia en casos complejos de
+                  CPRE en la península de Yucatán.
+                </p>
+
+                {/* Credentials */}
+                <div className="flex flex-wrap gap-2">
+                  {DOCTOR.credentials.map((cred) => (
+                    <span
+                      key={cred}
+                      className="inline-flex items-center px-4 py-2 rounded-full bg-accent-light text-sm font-medium text-foreground"
+                    >
+                      {cred}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  href="/dr-omar-quiroz"
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+                >
+                  Ver perfil completo →
+                </Link>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 6: Google Reviews — bg-muted
+          Serves: ALL personas
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7: FAQ — bg-background
+          Serves: P5, P2
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <Faq routeKey="cpre" service="CPRE" />
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 8: Related Procedures — bg-muted
+          Serves: P1, P4
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Otros procedimientos que pueden ayudarte
+          </h2>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {/* Before */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-accent-strong-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                1
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Antes CPRE</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Análisis sangre + evaluación</p>
-                <p>• Ayuno 8 horas</p>
-                <p>• Llegar acompañado</p>
-              </div>
-            </div>
-
-            {/* During */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                2
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Durante CPRE</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Sedación profunda</p>
-                <p>• Duodenoscopio a duodeno</p>
-                <p>• Contraste + rayos X</p>
-                <p>• 30-90 min según caso</p>
-              </div>
-            </div>
-
-            {/* After */}
-            <div className="text-center p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-full bg-accent-strong text-accent-strong-foreground font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                3
-              </div>
-              <h3 className="font-semibold text-foreground mb-3">Después CPRE</h3>
-              <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Observación 2-3 horas</p>
-                <p>• Resultados inmediatos</p>
-                <p>• Instrucciones detalladas</p>
-                <p>• Seguimiento telefónico</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <Zap className="h-5 w-5 text-accent-strong" />
-              <span className="font-semibold text-foreground">Duración variable:</span>
-              <span className="text-foreground/70">30-90 minutos según complejidad caso</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* EMERGENCY CPRE */}
-      <section id="emergencias-cpre" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent-strong/10 border border-accent-strong/20">
-                <AlertTriangle className="h-5 w-5 text-accent-strong" />
-                <span className="font-semibold text-foreground">Emergencias CPRE Mérida</span>
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground leading-tight">
-                  CPRE Emergencia - Disponible Fines de Semana
-                </h2>
-              </div>
-            </div>
-
-            {/* Emergency Conditions */}
-            <div className="grid gap-6 md:grid-cols-3">
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-3">Colangitis Aguda</h3>
-                <p className="text-sm text-foreground/80">
-                  Infección biliar requiere CPRE urgente 24/7
+            {relatedProcedures.map((proc) => (
+              <Link
+                key={proc.slug}
+                href={`/${proc.slug}`}
+                className="group block p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {proc.name}
+                </h3>
+                <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
+                  {proc.desc}
                 </p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-4">
-                  <Activity className="h-6 w-6 text-orange-600" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-3">Pancreatitis Biliar</h3>
-                <p className="text-sm text-foreground/80">
-                  Cálculos causan pancreatitis grave. CPRE urgente salva vidas
-                </p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <div className="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center mx-auto mb-4">
-                  <Search className="h-6 w-6 text-yellow-600" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-3">Ictericia Severa</h3>
-                <p className="text-sm text-foreground/80">
-                  Bloqueo biliar completo. CPRE resuelve obstrucción rápido
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-50 border border-red-200">
-                <Phone className="h-5 w-5 text-red-600" />
-                <span className="font-semibold text-foreground">Contacto emergencia:</span>
-                <span className="text-foreground/70">[Teléfono] - Respuesta inmediata urgencias biliares</span>
-              </div>
-            </div>
+                <span className="text-sm font-semibold text-text-accent">
+                  {displayFrom(proc.pricingKey)}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* LOCAL EXPERTISE */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              CPRE en Mérida Yucatán - Especialista Único
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Entrenamiento especializado - Casos referencia toda península
-            </p>
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 9: Bottom CTA — bg-primary
+          Serves: ALL personas
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-6">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
+            ¿Listo para agendar tu CPRE?
+          </h2>
+          <p className="text-white/80 max-w-xl mx-auto leading-relaxed">
+            Escríbenos por WhatsApp — te contesta el {DOCTOR.name} directamente.
+            Evaluamos tu caso y te damos costo exacto antes del procedimiento.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <WhatsAppButton
+              service="CPRE"
+              position="bottom-cta"
+              procedureName="CPRE"
+              label="Agendar por WhatsApp"
+              className="sm:px-10"
+            />
+            <CallButton
+              service="CPRE"
+              position="bottom-cta"
+              variant="inverse"
+            />
           </div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {/* Training & Coverage */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Entrenamiento especializado:</p>
-                    <p className="text-sm text-foreground/70">
-                      CPRE estudiada centros referencia UNAM y Florida. Técnica que pocos dominan sureste mexicano
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-6 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-strong mt-3 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Pacientes península:</p>
-                    <p className="text-sm text-foreground/70">
-                      Vienen Progreso, Izamal, Valladolid, Campeche. Médicos interior refieren casos complejos
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Availability */}
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                <Clock className="h-5 w-5 text-accent-strong" />
-                <span className="font-semibold text-foreground">Disponibilidad emergencia:</span>
-                <span className="text-foreground/70">CPRE urgente fines de semana casos ictericia severa</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-                Agendar CPRE - Consulta Valoración Disponible
-              </h2>
-              <p className="text-lg text-foreground/70">
-                Evaluación previa - Dr. Quiroz explica si CPRE mejor opción que cirugía
-              </p>
-            </div>
-
-            {/* Contact Methods */}
-            <div className="grid gap-6 md:grid-cols-3">
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <Phone className="h-8 w-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">📞 Teléfono</h3>
-                <p className="text-sm text-foreground/70">[Número] - Llamadas directas consultorio</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <MessageCircle className="h-8 w-8 text-accent-strong mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">💬 WhatsApp</h3>
-                <p className="text-sm text-foreground/70">[Número] - Respuesta rápida programar</p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-background text-center">
-                <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">📍 Centro Mérida</h3>
-                <p className="text-sm text-foreground/70">Fácil acceso García Ginerés, Montebello</p>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="CPRE" position="cta section" />
-                      <WhatsAppButton service="CPRE" position="cta section" />
-                </div>
-
-            {/* Additional Info */}
-            <div className="grid gap-4 md:grid-cols-2 mt-8">
-              <div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
-                <h4 className="font-semibold text-foreground mb-2">¿Primera vez CPRE?</h4>
-                <p className="text-sm text-foreground/80">
-                  Consulta explica procedimiento completo, riesgos mínimos, beneficios específicos tu caso
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                <h4 className="font-semibold text-foreground mb-2">Emergencias</h4>
-                <p className="text-sm text-foreground/80">
-                  Dolor biliar severo, ictericia, fiebre. Atención inmediata disponible
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
-        </div>
-      </section>
-
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
-        </div>
-      </section>
-
-      {/* FAQ LIST COMPONENT */}
-      <section id="faqs-cpre" className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="cpre" />
         </div>
       </section>
     </>

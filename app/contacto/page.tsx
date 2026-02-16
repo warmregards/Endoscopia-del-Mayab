@@ -1,451 +1,296 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { displayFrom } from "@/lib/pricing"
+import { CLINIC, telHref, waHref } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { 
-  Stethoscope, 
-  MapPin, 
-  Phone, 
-  MessageCircle, 
-  Globe, 
-  CheckCircle2, 
-  ShieldCheck, 
-  Microscope, 
-  Hospital, 
-  Clock, 
-  Star, 
-  Award, 
-  Users, 
-  Heart, 
-  AlertTriangle, 
-  Activity, 
-  Download, 
-  Calendar, 
-  Target, 
-  FileText, 
-  Search,
-  Navigation,
-  Zap,
-  Users2
-} from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import { MapPin, Phone, MessageCircle, Clock, Star, ChevronRight } from "lucide-react"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import GoogleReviews from "@/components/GoogleReviews"
+import MapEmbed from "@/components/MapEmbed"
+import Faq from "@/components/Faq"
 
 export const revalidate = 86400
 export const metadata = metaFor("contacto")
 
 export default function ContactoPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent-light/20">
-                  <Calendar className="h-4 w-4 text-accent-strong" />
-                  <span className="text-sm font-medium text-foreground">Atención Inmediata Disponible</span>
+      {/* Breadcrumb JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Contacto", path: "/contacto" },
+            ])
+          ),
+        }}
+      />
+
+      {/* SECTION 1: Hero — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
+            Contacto — Endoscopia del Mayab en Mérida
+          </h1>
+
+          <p className="text-lg text-foreground/80 mt-4 max-w-2xl">
+            Agenda directo con el Dr. Omar Quiroz por WhatsApp — respuesta en
+            minutos, no con una recepcionista.
+          </p>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap gap-4 mt-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium">
+              <Star className="h-4 w-4 text-text-accent" />
+              {CLINIC.aggregateRating.ratingValue} — {CLINIC.aggregateRating.reviewCount} reseñas en Google
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-sm font-medium">
+              <MapPin className="h-4 w-4 text-primary" />
+              Hospital Amerimed, Mérida, Yucatán
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-sm font-medium">
+              <Clock className="h-4 w-4 text-primary" />
+              {CLINIC.hours.display}
+            </span>
+          </div>
+
+          {/* CTAs — WhatsApp first */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <WhatsAppButton
+              variant="primary"
+              label="Escribir por WhatsApp"
+              service="contacto"
+              position="hero"
+              className="sm:px-8"
+            />
+            <CallButton
+              variant="ghost"
+              label={`Llamar: ${CLINIC.phone.display}`}
+              service="contacto"
+              position="hero"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2: Contact Info + Map — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Cómo Llegar y Horarios
+          </h2>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* NAP+W card */}
+            <div className="rounded-2xl border border-border bg-background p-6 space-y-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold text-foreground">Dirección</p>
+                  <p className="text-foreground/80">{CLINIC.address.display}</p>
                 </div>
+              </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight">
-                  Contacto - Agendar Cita Endoscopia y Colonoscopia en Mérida
-                </h1>
+              <div className="flex items-start gap-4">
+                <Phone className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold text-foreground">Teléfono</p>
+                  <a
+                    href={telHref()}
+                    className="text-primary hover:underline"
+                  >
+                    {CLINIC.phone.display}
+                  </a>
+                </div>
+              </div>
 
-                <p className="text-xl text-accent-strong font-semibold">
-                  Contacto directo con Dr. Omar Quiroz - Respuesta inmediata para emergencias digestivas
+              <div className="flex items-start gap-4">
+                <MessageCircle className="h-5 w-5 text-text-accent flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold text-foreground">WhatsApp</p>
+                  <a
+                    href={waHref()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-accent hover:underline"
+                  >
+                    {CLINIC.phone.display}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Clock className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold text-foreground">Horario</p>
+                  <p className="text-foreground/80">{CLINIC.hours.display}</p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border text-sm text-foreground/70 space-y-2">
+                <p>Estacionamiento gratuito disponible</p>
+                <p>
+                  Fácil acceso desde Periférico Norte, colonia{" "}
+                  {CLINIC.address.neighborhood}, {CLINIC.address.addressRegion}
                 </p>
-
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Único endoscopista disponible fines de semana</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Atención de emergencias 24/7</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Precios fijos sin sorpresas</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Emergency Alert */}
-              <div className="p-4 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Urgencias Digestivas 24/7</h3>
-                    <p className="text-sm text-foreground/80">
-                      ¿Dolor severo de estómago? ¿Sangrado digestivo? ¿Sospecha de úlcera? No esperes hasta el lunes. 
-                      Llamar ahora: 999-236-0153
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/50 shadow-md">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent-strong/10 flex items-center justify-center">
-                    <Phone className="h-5 w-5 text-accent-strong" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-medium text-foreground">999-236-0153</div>
-                    <div className="text-sm text-foreground/70">Emergencias 24/7</div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/50 shadow-md">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent-light/10 flex items-center justify-center">
-                    <MessageCircle className="h-5 w-5 text-accent-strong" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-medium text-foreground">WhatsApp</div>
-                    <div className="text-sm text-foreground/70">Respuesta en minutos</div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/50 shadow-md">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Clock className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-medium text-foreground">Citas rápidas</div>
-                    <div className="text-sm text-foreground/70">Esta misma semana</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <CallButton />
-                <WhatsAppButton />
+                <p>
+                  Cerca de Altabrisa, Temozón Norte, Cholul y Francisco de
+                  Montejo
+                </p>
               </div>
             </div>
 
-            {/* Image - Right Side */}
-            <div className="flex-1 flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute" />
-                <Image
-                  src="/schedule-now.webp"
-                  alt="Dr. Omar Quiroz - Contacto Endoscopia Mérida"
-                  width={600}
-                  height={400}
-                  className="relative w-full max-w-md lg:max-w-lg h-auto"
-                  priority
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden border border-border">
+              <MapEmbed />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: Doctor Credentials — bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Tu Especialista: {DOCTOR.name}
+          </h2>
+
+          <div className="grid gap-8 lg:grid-cols-[280px_1fr] items-start">
+            <Image
+              src={DOCTOR.photos.headshot}
+              alt={`${DOCTOR.name} — ${DOCTOR.title}`}
+              width={280}
+              height={350}
+              className="rounded-2xl w-full lg:w-[280px] object-cover"
+            />
+
+            <div className="space-y-4">
+              <p className="text-lg font-semibold text-foreground">
+                {DOCTOR.name}
+              </p>
+              <p className="text-foreground/80">{DOCTOR.bioShort}</p>
+
+              <ul className="flex flex-wrap gap-2">
+                {DOCTOR.credentials.slice(0, 4).map((c) => (
+                  <li
+                    key={c}
+                    className="px-4 py-2 rounded-full bg-accent-light text-sm font-medium text-foreground"
+                  >
+                    {c}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-foreground/80 italic">
+                Cuando nos escribes, te contesta el Dr. Quiroz directamente — no
+                una recepcionista.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <WhatsAppButton
+                  variant="primary"
+                  size="compact"
+                  label="Agendar con el Dr. Quiroz"
+                  service="contacto"
+                  position="doctor"
                 />
+                <Link
+                  href={DOCTOR.profileUrl}
+                  className="text-sm text-primary font-semibold hover:underline"
+                >
+                  Ver perfil completo
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* MAIN CONTACT SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Dr. Omar Quiroz - Especialista en Endoscopia Digestiva
-            </h2>
-            <p className="text-lg text-foreground/70">
-              Cirujano certificado con más de 10 años de experiencia en Mérida
-            </p>
+      {/* SECTION 4: Quick Price Reference — bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
+            Precios de Procedimientos
+          </h2>
+
+          <div className="grid gap-4 sm:grid-cols-3">
+            {(
+              [
+                { key: "endoscopia", name: "Endoscopia" },
+                { key: "colonoscopia", name: "Colonoscopia" },
+                { key: "cpre", name: "CPRE" },
+              ] as const
+            ).map(({ key, name }) => (
+              <div
+                key={key}
+                className="rounded-xl border border-border bg-background p-6 space-y-2"
+              >
+                <p className="font-serif font-semibold text-foreground">
+                  {name}
+                </p>
+                <p className="text-lg font-bold text-text-accent">
+                  {displayFrom(key)}
+                </p>
+                <p className="text-sm text-foreground/70">
+                  Incluye anestesia, biopsias y recuperación
+                </p>
+              </div>
+            ))}
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Hospital className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-serif font-semibold text-foreground">
-                      Información de Contacto
-                    </h3>
-                    <p className="text-foreground/70">Atención personalizada</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-accent-strong" />
-                    <div>
-                      <div className="font-medium text-foreground">999-236-0153</div>
-                      <div className="text-sm text-foreground/70">Línea directa del doctor</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <MessageCircle className="h-5 w-5 text-accent-strong" />
-                    <div>
-                      <div className="font-medium text-foreground">WhatsApp: 999-236-0153</div>
-                      <div className="text-sm text-foreground/70">Respuesta en minutos</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-accent-strong" />
-                    <div>
-                      <div className="font-medium text-foreground">Consultorio Mérida</div>
-                      <div className="text-sm text-foreground/70">Centro médico especializado</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5 text-accent-strong" />
-                    <div>
-                      <div className="font-medium text-foreground">Horarios Flexibles</div>
-                      <div className="text-sm text-foreground/70">Lunes a domingo, emergencias 24/7</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Services Quick Access */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Target className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">Endoscopia</span>
-                  </div>
-                  <p className="text-foreground/80">{mxn(PRICING.endoscopia.from)} pesos fijo</p>
-                </div>
-                
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Search className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">Colonoscopia</span>
-                  </div>
-                  <p className="text-foreground/80">{mxn(PRICING.colonoscopia.from)} pesos fijo</p>
-                </div>
-                
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Zap className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">CPRE</span>
-                  </div>
-                  <p className="text-foreground/80">{mxn(PRICING.cpre.from)} pesos</p>
-                </div>
-                
-                <div className="p-4 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <AlertTriangle className="h-5 w-5 text-accent-strong" />
-                    <span className="font-semibold text-foreground">Emergencias</span>
-                  </div>
-                  <p className="text-foreground/80">Disponible 24/7</p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <CallButton />
-                <WhatsAppButton />
-              </div>
-            </div>
-
-            {/* Location & Map */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center">
-                    <MapPin className="h-6 w-6 text-accent-strong" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-serif font-semibold text-foreground">
-                      Ubicación en Mérida
-                    </h3>
-                    <p className="text-foreground/70">Fácil acceso y estacionamiento</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <Navigation className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-medium text-foreground">Centro Médico Especializado</div>
-                      <div className="text-sm text-foreground/70">Zona norte de Mérida</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <Users2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-medium text-foreground">Estacionamiento gratuito</div>
-                      <div className="text-sm text-foreground/70">Espacios amplios disponibles</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <Globe className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-medium text-foreground">Fácil acceso desde periférico</div>
-                      <div className="text-sm text-foreground/70">Cerca de principales avenidas</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Google Maps embed */}
-              <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-                <div className="aspect-video rounded-xl overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.2246452050617!2d-89.55689432227041!3d20.98363028932237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f567136033f05e9%3A0xe0f304c9458a28b2!2sEndoscopia%20del%20Mayab!5e0!3m2!1sen!2smx!4v1756155121463!5m2!1sen!2smx"
-
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-              </div>
-            </div>
+          <div className="mt-6 text-center">
+            <Link
+              href="/precios"
+              className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+            >
+              Ver todos los precios
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* TRUST SIGNALS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Por Qué Elegir Endoscopia del Mayab
-            </h2>
-            <p className="text-lg text-foreground/70">
-              Experiencia, tecnología y atención personalizada en Mérida
-            </p>
+      {/* SECTION 5: Google Reviews — bg-background */}
+      <GoogleReviews title="Lo Que Dicen Nuestros Pacientes" />
+
+      {/* SECTION 6: FAQ — bg-muted */}
+      <div className="bg-muted">
+        <Faq
+          routeKey="contacto"
+          service="contacto"
+          heading="Preguntas Frecuentes sobre Citas"
+        />
+      </div>
+
+      {/* SECTION 7: Bottom CTA — bg-primary */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-6">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-primary-foreground tracking-tight">
+            ¿Listo para Agendar tu Cita?
+          </h2>
+          <p className="text-primary-foreground/80 text-lg">
+            Escríbenos por WhatsApp y te contestamos en minutos.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <WhatsAppButton
+              variant="primary"
+              label="Agendar por WhatsApp"
+              service="contacto"
+              position="bottom-cta"
+              className="sm:px-10"
+            />
+            <CallButton
+              variant="inverse"
+              label="Llamar Ahora"
+              service="contacto"
+              position="bottom-cta"
+            />
           </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div className="text-center p-6 rounded-2xl border border-border bg-background/50">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Especialista Certificado</h3>
-              <p className="text-foreground/70">Triple certificación en cirugía y endoscopia</p>
-            </div>
-
-            <div className="text-center p-6 rounded-2xl border border-border bg-background/50">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Disponibilidad Única</h3>
-              <p className="text-foreground/70">Único endoscopista disponible fines de semana</p>
-            </div>
-
-            <div className="text-center p-6 rounded-2xl border border-border bg-background/50">
-              <div className="w-16 h-16 rounded-2xl bg-accent-light/10 flex items-center justify-center mx-auto mb-4">
-                <ShieldCheck className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Precios Transparentes</h3>
-              <p className="text-foreground/70">Sin cargos ocultos ni sorpresas</p>
-            </div>
-
-            <div className="text-center p-6 rounded-2xl border border-border bg-background/50">
-              <div className="w-16 h-16 rounded-2xl bg-accent-strong/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-accent-strong" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Más de 10 Años</h3>
-              <p className="text-foreground/70">Experiencia comprobada en Mérida</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DOWNLOADABLE RESOURCES SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Recursos y Guías para Pacientes
-            </h2>
-            <p className="text-lg text-foreground/70">
-              Descarga información útil para tu procedimiento
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center flex-shrink-0">
-                  <Download className="h-6 w-6 text-accent-strong" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Guía de Preparación Colonoscopia</h3>
-                  <p className="text-foreground/70 mb-4">Instrucciones paso a paso para una preparación exitosa</p>
-                  <a
-                    href="/colonoscopia-preparacion.pdf"
-                    download
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-strong text-accent-strong-foreground font-medium hover:bg-accent-strong/90 transition-colors"
-                  >
-                    <Download className="h-4 w-4" />
-                    Descargar PDF
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <FileText className="h-6 w-6 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Qué Esperar - Endoscopia</h3>
-                  <p className="text-foreground/70 mb-4">Todo sobre el procedimiento de endoscopia superior</p>
-                  <a
-                    href="/endoscopia-informacion.pdf"
-                    download
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
-                  >
-                    <Download className="h-4 w-4" />
-                    Descargar PDF
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent-light/10 flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6 text-accent-strong" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Cuidados Post-Procedimiento</h3>
-                  <p className="text-foreground/70 mb-4">Recomendaciones para después de tu endoscopia</p>
-                  <a
-                    href="/cuidados-post-endoscopia.pdf"
-                    download
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-light text-accent-light-foreground font-medium hover:bg-accent-light/90 transition-colors"
-                  >
-                    <Download className="h-4 w-4" />
-                    Descargar PDF
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
         </div>
       </section>
     </>

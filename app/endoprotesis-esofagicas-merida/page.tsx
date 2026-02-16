@@ -1,520 +1,359 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import { PRICING, displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
-import {
-  Stethoscope,
-  MapPin,
-  CheckCircle2,
-  ShieldCheck,
-  Microscope,
-  Clock,
-  Heart,
-  AlertTriangle,
-  Activity,
-  Target,
-  FileText,
-  ExternalLink,
-} from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
+import Image from "next/image"
+import { CheckCircle2, MapPin, Clock, ArrowRight } from "lucide-react"
 import Faq from "@/components/Faq"
-import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import CallButton from "@/components/CallButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
 export const metadata = metaFor("endoprotesis_esofagicas")
 
-export default function EndoprotesisEsofagicasPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
+const RELATED_PROCEDURES = [
+  {
+    name: "Dilatación Esofágica",
+    slug: "dilatacion-esofagica-merida",
+    description: "Primera opción para estenosis esofágicas — cuando el stent no es necesario",
+    price: displayFrom("dilatacion_esofagica"),
+  },
+  {
+    name: "Sutura Endoscópica",
+    slug: "sutura-endoscopica-merida",
+    description: "Reparación de perforaciones y defectos mucosos mayores",
+    price: displayFrom("sutura_endoscopica"),
+  },
+  {
+    name: "Cierre de Fístulas por Clips",
+    slug: "cierre-fistulas-clips-endoscopicos-merida",
+    description: "Alternativa mínimamente invasiva para fístulas de bajo débito",
+    price: displayFrom("cierre_fistulas_clips"),
+  },
+]
 
+export default function EndoprotesisEsofagicasPage() {
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200">
-                  <Target className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm font-medium text-blue-700">Stents Esofágicos Especializados</span>
-                </div>
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Endoprótesis Esofágicas",
+              path: "/endoprotesis-esofagicas-merida",
+              pricingKey: "endoprotesis_esofagicas",
+              description:
+                "Stents esofágicos autoexpandibles para restaurar la deglución en casos de estenosis maligna, benigna o fístulas esofágicas.",
+              bodyLocation: "Esófago",
+              procedureType: "Therapeutic",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Endoprótesis Esofágicas", path: "/endoprotesis-esofagicas-merida" },
+            ])
+          ),
+        }}
+      />
 
-                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
-                  Endoprótesis Esofágicas en Mérida | Dr. Omar Quiroz - Stent Esofágico para Estenosis y Fístulas
-                </h1>
-
-                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
-                  Las endoprótesis esofágicas en Mérida son stents metálicos autoexpandibles que el Dr. Omar Quiroz coloca por endoscopia para mantener abierto el esófago en casos de estenosis maligna, benigna o fístulas esofágicas. Este procedimiento especializado en Hospital Amerimed, Mérida, Yucatán, permite restaurar la deglución cuando las dilataciones no son suficientes, con precio personalizado según el tipo de prótesis requerida.
-                </p>
-
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Restaura capacidad de tragar</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Mínimamente invasivo</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>{mxn(PRICING.endoprotesis_esofagicas.from)}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
-                    <span>Hospital Amerimed con sedación profunda</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="endoprotesis esofagica" position="hero" />
-                      <WhatsAppButton service="endoprotesis esofagica" position="hero" />
-                </div>
-
-              {/* Quick Info */}
-              <div className="flex flex-wrap gap-6 text-sm text-foreground/70">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-accent-strong" />
-                  <span>Hospital Amerimed, Consultorio 517</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-accent-strong" />
-                  <span>Evaluaciones programadas</span>
-                </div>
-              </div>
+      {/* §1 Hero → bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-8">
+            <div className="space-y-4">
+              <h1 className="font-serif font-extrabold text-3xl md:text-4xl lg:text-5xl tracking-tight text-foreground">
+                Endoprótesis Esofágicas en Mérida
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Stents esofágicos autoexpandibles para restaurar la deglución en casos de
+                estenosis maligna, benigna o fístulas esofágicas. Valoración personalizada
+                en {CLINIC.address.streetAddress}.
+              </p>
             </div>
 
-            {/* Info Card - Right Side */}
-            <div className="w-full lg:max-w-md space-y-6">
-              <div className="p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-sm">
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Heart className="h-5 w-5 text-accent-strong" />
-                  Beneficios de las Endoprótesis Esofágicas
+            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+              <span className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20">
+                <CheckCircle2 className="h-4 w-4 text-text-accent" />
+                {displayFrom("endoprotesis_esofagicas")}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 border border-border">
+                <MapPin className="h-4 w-4 text-text-accent" />
+                {CLINIC.address.streetAddress}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 border border-border">
+                <CheckCircle2 className="h-4 w-4 text-text-accent" />
+                Restaura capacidad de tragar
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 border border-border">
+                <CheckCircle2 className="h-4 w-4 text-text-accent" />
+                Cirujano + Endoscopista
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <WhatsAppButton
+                service="endoprótesis esofágica"
+                position="hero"
+                procedureName="Endoprótesis Esofágica"
+                variant="primary"
+                className="sm:px-8"
+              />
+              <CallButton service="endoprótesis esofágica" position="hero" variant="ghost" />
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+              <span className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-text-accent" />
+                {CLINIC.address.display}
+              </span>
+              <span className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-text-accent" />
+                {CLINIC.hours.display}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* §2 Definition → bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-8">
+            <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
+              ¿Qué es una endoprótesis esofágica?
+            </h2>
+
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Es un stent metálico autoexpandible que se coloca por endoscopia para mantener
+                abierto el esófago. Se indica cuando las dilataciones no son suficientes para
+                resolver una estenosis (estrechamiento) o cuando existe una fístula que necesita
+                sellarse. No requiere cirugía abierta.
+              </p>
+              <p>
+                El procedimiento se realiza bajo sedación profunda con anestesiólogo en{" "}
+                {CLINIC.address.streetAddress}, en la zona norte de Mérida, Yucatán. Dura
+                aproximadamente 30–45 minutos y requiere observación de 4–6 horas. Después
+                inicias dieta modificada con seguimiento personalizado del {DOCTOR.name}.
+              </p>
+            </div>
+
+            <div className="rounded-xl bg-background border border-border p-6">
+              <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-4">
+                Se indica cuando:
+              </h3>
+              <ul className="space-y-2 text-muted-foreground">
+                {[
+                  "Estenosis maligna (cáncer esofágico)",
+                  "Estenosis benigna recurrente que no responde a dilatación",
+                  "Fístulas esófago-traqueales o mediastínicas",
+                  "Perforaciones controladas",
+                  "Paliación en enfermedad avanzada",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-1" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* §3 Pricing / Quote → bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-8">
+            <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
+              ¿Cuánto cuesta una endoprótesis esofágica?
+            </h2>
+
+            <p className="text-muted-foreground leading-relaxed">
+              El costo depende del tipo de stent (cubierto, parcialmente cubierto, sin cubrir),
+              el diámetro y longitud necesarios, y la complejidad de tu caso. Envíanos tus
+              estudios por WhatsApp para una cotización personalizada.
+            </p>
+
+            <div className="rounded-xl border border-border bg-muted p-6">
+              <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-4">
+                Qué incluye tu procedimiento
+              </h3>
+              <ul className="space-y-2 text-muted-foreground">
+                {INCLUDED_IN_PRICE.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Único costo adicional posible: {ADDITIONAL_FEES.biopsy.label} ({mxn(ADDITIONAL_FEES.biopsy.amount)})
+                — {ADDITIONAL_FEES.biopsy.description.toLowerCase()}.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <WhatsAppButton
+                service="cotización endoprótesis esofágica"
+                position="pricing"
+                procedureName="Endoprótesis Esofágica"
+                variant="primary"
+              />
+              <Link
+                href="/precios"
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                Ver todos nuestros precios →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* §4 Doctor Credentials → bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="flex-shrink-0">
+              <Image
+                src={DOCTOR.photos.headshot}
+                alt={DOCTOR.name}
+                width={280}
+                height={350}
+                className="rounded-2xl"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <h2 className="font-serif font-bold text-xl md:text-2xl tracking-tight text-foreground">
+                Tu especialista: {DOCTOR.name}
+              </h2>
+
+              <p className="text-muted-foreground leading-relaxed">
+                {DOCTOR.bioShort}
+              </p>
+
+              <p className="text-muted-foreground leading-relaxed">
+                Como cirujano general certificado con subespecialidad en endoscopia,
+                el {DOCTOR.name} maneja tanto la colocación del stent como cualquier
+                complicación quirúrgica — sin referirte a otro especialista.
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {DOCTOR.credentials.map((cred) => (
+                  <span
+                    key={cred}
+                    className="inline-flex items-center rounded-full bg-accent-light px-4 py-1 text-xs font-medium text-text-accent border border-accent/20"
+                  >
+                    {cred}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <WhatsAppButton
+                  service="endoprótesis esofágica"
+                  position="doctor"
+                  procedureName="Endoprótesis Esofágica"
+                  variant="primary"
+                  size="compact"
+                />
+                <Link
+                  href={DOCTOR.profileUrl}
+                  className="text-sm font-medium text-primary hover:underline"
+                >
+                  Ver perfil completo →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* §5 Google Reviews → bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* §6 FAQ → bg-muted */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <Faq routeKey="endoprotesis_esofagicas" service="endoprótesis esofágica" />
+        </div>
+      </section>
+
+      {/* §7 Related Procedures → bg-background */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <h2 className="font-serif font-bold text-xl md:text-2xl tracking-tight text-foreground mb-8">
+            Procedimientos relacionados
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {RELATED_PROCEDURES.map((proc) => (
+              <Link
+                key={proc.slug}
+                href={`/${proc.slug}`}
+                className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+              >
+                <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-2">
+                  {proc.name}
                 </h3>
-
-                <div className="space-y-4 text-foreground/80">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <p>
-                      <strong>Rápida mejoría:</strong> Alivio inmediato de disfagia severa
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <p>
-                      <strong>Calidad de vida:</strong> Permite alimentación oral
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <p>
-                      <strong>Mínimamente invasivo:</strong> Sin cirugía abierta
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-8 p-4 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                  <h4 className="font-semibold text-foreground mb-3">Disponibilidad en Mérida:</h4>
-                  <div className="space-y-2 text-sm text-foreground/80">
-                    <p>• Evaluaciones urgentes Hospital Amerimed</p>
-                    <p>• Stents especializados disponibles</p>
-                    <p>• Seguimiento post-colocación</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESS SECTION */}
-      <section className="py-16 sm:py-24 bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              5 Pasos para Colocación de Endoprótesis Esofágica en Mérida
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Proceso especializado que permite restaurar la deglución de forma mínimamente invasiva
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Step 1 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                1. Evaluación Especializada Pre-procedimiento
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                El Dr. Omar Quiroz evalúa estudios de imagen (TAC, endoscopia diagnóstica) para determinar el tipo y tamaño de endoprótesis más adecuada. Se analiza la localización de la estenosis, su causa (maligna/benigna) y la anatomía esofágica individual.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-accent-strong/10 flex items-center justify-center mb-4">
-                <ShieldCheck className="h-6 w-6 text-accent-strong" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                2. Ingreso Hospitalario y Anestesia
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                Ingreso programado en Hospital Amerimed con ayuno de 8 horas. Se administra sedación profunda con anestesiólogo certificado, monitoreo cardiopulmonnar continuo y antibiótico profiláctico según protocolo.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
-                <Stethoscope className="h-6 w-6 text-green-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                3. Colocación Endoscópica del Stent
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                Utilizando endoscopio terapéutico, se avanza la endoprótesis autoexpandible hasta la zona de estenosis bajo visualización directa. El stent se libera con precisión y se verifica su correcta expansión y posición.
-              </p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="p-6 rounded-2xl border border-border bg-background">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
-                <Activity className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                4. Monitoreo y Recuperación
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                Observación post-procedimiento por 4-6 horas con monitoreo de signos vitales. Se verifica la tolerancia inicial a líquidos y se descarta complicaciones inmediatas como dolor torácico o dificultad respiratoria.
-              </p>
-            </div>
-
-            {/* Step 5 */}
-            <div className="p-6 rounded-2xl border border-border bg-background lg:col-span-2">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
-                <Clock className="h-6 w-6 text-purple-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                5. Seguimiento y Cuidados Post-colocación
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                Control ambulatorio a 24-48 horas para evaluar tolerancia alimentaria. Se proporcionan indicaciones dietéticas específicas (alimentos blandos, masticación adecuada) y se programa seguimiento a 1-2 semanas para verificar funcionamiento del stent y detectar complicaciones tardías.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DR. OMAR'S ADVANTAGE SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Dr. Omar: Endoscopista + Cirujano = Manejo Integral de Patología Esofágica Compleja
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              La ventaja única de tener ambas especialidades para casos esofágicos complicados
-            </p>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-2">
-            {/* Problem */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                ¿Qué pasa cuando una endoprótesis esofágica no es la solución completa?
-              </h3>
-
-              <div className="space-y-4 text-foreground/80">
-                <p>
-                  En casos complejos de patología esofágica (15-25%), las endoprótesis pueden presentar limitaciones: migración del stent, obstrucción por alimentos, erosión de la mucosa, o necesidad de resección quirúrgica combinada.
+                <p className="text-sm text-muted-foreground mb-4">
+                  {proc.description}
                 </p>
-                
-                <div className="p-4 rounded-xl bg-red-50 border border-red-200">
-                  <h4 className="font-semibold text-red-800 mb-2">Situaciones que requieren evaluación quirúrgica adicional:</h4>
-                  <ul className="space-y-1 text-sm text-red-700">
-                    <li>• Perforación esofágica durante colocación</li>
-                    <li>• Fístulas complejas que no sellan con stent</li>
-                    <li>• Tumores que requieren resección + reconstrucción</li>
-                    <li>• Migración recurrente de endoprótesis</li>
-                    <li>• Stenosis benignas que no responden a tratamiento endoscópico</li>
-                  </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-text-accent">
+                    {proc.price}
+                  </span>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
                 </div>
-
-                <p>
-                  <strong>El problema tradicional:</strong> Cuando surgen estas complicaciones, el paciente debe ser referido a otro especialista, perdiendo continuidad en el cuidado y retrasando el tratamiento definitivo.
-                </p>
-              </div>
-            </div>
-
-            {/* Solution */}
-            <div className="p-8 rounded-2xl border border-accent-strong/20 bg-gradient-to-br from-accent-light/5 to-accent-strong/5">
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                La Ventaja del Dr. Omar Quiroz: Doble Certificación
-              </h3>
-
-              <div className="space-y-4 text-foreground/80">
-                <p>
-                  El Dr. Omar Quiroz es <strong>cirujano general certificado</strong> con subespecialidad en <strong>endoscopia digestiva</strong>, lo que le permite ofrecer manejo integral desde el diagnóstico hasta la resolución quirúrgica cuando es necesaria.
-                </p>
-
-                <div className="p-4 rounded-xl bg-green-50 border border-green-200">
-                  <h4 className="font-semibold text-green-800 mb-2">Beneficios de la doble especialidad:</h4>
-                  <ul className="space-y-1 text-sm text-green-700">
-                    <li>• <strong>Continuidad del cuidado:</strong> Un solo médico maneja todo el proceso</li>
-                    <li>• <strong>Decisión quirúrgica inmediata:</strong> Durante el mismo procedimiento</li>
-                    <li>• <strong>Técnica híbrida:</strong> Combina endoscopia + cirugía cuando es necesario</li>
-                    <li>• <strong>Experiencia en complicaciones:</strong> Manejo inmediato de perforaciones</li>
-                    <li>• <strong>Planificación integral:</strong> Estrategia completa desde la primera consulta</li>
-                  </ul>
-                </div>
-
-                <p>
-                  <strong>Resultado:</strong> Los pacientes reciben atención especializada sin referencia a múltiples especialistas, con resolución más rápida y coordinada de su patología esofágica compleja.
-                </p>
-
-                <div className="mt-6 p-4 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-                  <h4 className="font-semibold text-foreground mb-2">Casos donde esta combinación es crucial:</h4>
-                  <ul className="space-y-1 text-sm text-foreground/80">
-                    <li>• Cáncer de esófago con necesidad de resección + stent paliativo</li>
-                    <li>• Fístulas esófago-traqueales complejas</li>
-                    <li>• Perforaciones iatrogénicas durante endoscopia</li>
-                    <li>• Estenosis cáusticas con componente fibrótico severo</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-lg text-foreground/80 mb-6">
-              ¿Necesita evaluación para otro procedimiento esofágico? El Dr. Omar Quiroz ofrece manejo integral de patología esofágica.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/dilatacion-esofagica-merida" 
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:shadow-md transition-all">
-                <ExternalLink className="h-4 w-4" />
-                Ver Dilatación Esofágica
               </Link>
-              <Link href="/sutura-endoscopica-merida"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:shadow-md transition-all">
-                <ExternalLink className="h-4 w-4" />
-                Ver Sutura Endoscópica
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    
-
-      {/* FINAL CTA SECTION */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-primary/10 via-accent-light/10 to-accent-strong/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Necesita Evaluación para Endoprótesis Esofágica?
-            </h2>
-            <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-              El Dr. Omar Quiroz ofrece consulta especializada para determinar si las endoprótesis esofágicas son la mejor opción para su caso específico.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 max-w-2xl mx-auto">
-            <div className="p-6 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-              <h3 className="font-semibold text-foreground mb-2">Consulta Especializada</h3>
-              <p className="text-sm text-foreground/70 mb-4">
-                Evaluación integral con estudios de imagen para planificar el mejor tratamiento
-              </p>
-              <div className="flex justify-center">
-                <CallButton service="endoprotesis esofagica" position="cta section" />
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl border border-border bg-background/80 backdrop-blur-sm">
-              <h3 className="font-semibold text-foreground mb-2">WhatsApp Directo</h3>
-              <p className="text-sm text-foreground/70 mb-4">
-                Consulte su caso específico y obtenga información personalizada
-              </p>
-              <div className="flex justify-center">
-                <WhatsAppButton service="endoprotesis esofagica" position="cta section" />
-              </div>
-            </div>
-          </div>
-
-
-          <div className="pt-8 border-t border-border/30">
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-foreground/60">
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-accent-strong" />
-                <span>Hospital Amerimed, Consultorio 517, Mérida, Yucatán</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-accent-strong" />
-                <span>Lunes a Viernes: 8:00 AM - 6:00 PM</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* BENEFITS SECTION */}
-      <section className="py-16 sm:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Endoprótesis Esofágicas: Cuando las Dilataciones No Son Suficientes
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Solución especializada para estenosis esofágicas complejas en Mérida
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Benefit 1 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
-                <Heart className="h-6 w-6 text-green-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Restauración Inmediata de la Deglución
-              </h3>
-              <p className="text-foreground/80">
-                Permite alimentación oral inmediata en pacientes con disfagia severa por estenosis malignas o benignas complejas que no responden a dilatación.
-              </p>
-            </div>
-
-            {/* Benefit 2 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
-                <ShieldCheck className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Alternativa a Cirugía Mayor
-              </h3>
-              <p className="text-foreground/80">
-                Evita procedimientos quirúrgicos extensos (esofagectomía, reconstrucción) en pacientes con alto riesgo operatorio o enfermedad avanzada.
-              </p>
-            </div>
-
-            {/* Benefit 3 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
-                <Target className="h-6 w-6 text-purple-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Manejo de Fístulas Esofágicas
-              </h3>
-              <p className="text-foreground/80">
-                Los stents cubiertos permiten sellar fístulas esófago-traqueales o esófago-mediastínicas, mejorando significativamente la calidad de vida.
-              </p>
-            </div>
-
-            {/* Benefit 4 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mb-4">
-                <Clock className="h-6 w-6 text-orange-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Procedimiento Ambulatorio
-              </h3>
-              <p className="text-foreground/80">
-                Se realiza bajo sedación consciente con alta el mismo día en casos seleccionados, reduciendo la estancia hospitalaria.
-              </p>
-            </div>
-
-            {/* Benefit 5 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-4">
-                <Activity className="h-6 w-6 text-teal-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Mejora Nutricional Rápida
-              </h3>
-              <p className="text-foreground/80">
-                Permite ingesta calórica adecuada desde las primeras 24 horas, fundamental en pacientes oncológicos o con desnutrición severa.
-              </p>
-            </div>
-
-            {/* Benefit 6 */}
-            <div className="p-6 rounded-2xl border border-border bg-background hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-red-600" />
-              </div>
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-3">
-                Cuidado Paliativo Especializado
-              </h3>
-              <p className="text-foreground/80">
-                En casos de cáncer esofágico avanzado, ofrece paliación efectiva de síntomas mejorando significativamente la calidad de vida restante.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEIGHBORHOODS SECTION */}
-      <section className="py-16 bg-gradient-to-b from-accent-light/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-foreground">
-              Endoprótesis Esofágicas en Colonias de Mérida
-            </h2>
-            <p className="text-foreground/70">
-              Atendemos pacientes de toda la zona metropolitana de Mérida con fácil acceso al Hospital Amerimed
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-sm">
-            {[
-              "Centro Histórico", "Montebello", "Altabrisa", "Temozón Norte", 
-              "Cholul", "García Ginerés", "Itzimná", "Alemán", "México", 
-              "San José Tecoh", "Chichí Suárez", "Fraccionamiento del Norte"
-            ].map((colonia) => (
-              <div key={colonia} className="p-3 text-center rounded-lg border border-border bg-background/50">
-                <span className="text-foreground/80 font-medium">{colonia}</span>
-              </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 text-center">
-            <p className="text-foreground/70">
-              <MapPin className="inline h-4 w-4 text-accent-strong mr-1" />
-              Hospital Amerimed se encuentra estratégicamente ubicado para fácil acceso desde cualquier punto de Mérida
-            </p>
+      {/* §8 Bottom CTA → bg-primary */}
+      <section className="bg-primary">
+        <div className="container-page py-16 text-center space-y-6">
+          <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-primary-foreground">
+            ¿Necesitas valoración para endoprótesis esofágica?
+          </h2>
+          <p className="text-primary-foreground/80 max-w-xl mx-auto">
+            Envía tus estudios por WhatsApp y el {DOCTOR.name} te orienta sobre la
+            mejor opción para tu caso.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <WhatsAppButton
+              service="endoprótesis esofágica"
+              position="bottom-cta"
+              procedureName="Endoprótesis Esofágica"
+              variant="primary"
+              className="sm:px-10"
+            />
+            <CallButton
+              service="endoprótesis esofágica"
+              position="bottom-cta"
+              variant="inverse"
+            />
           </div>
         </div>
       </section>
-
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
-        </div>
-      </section>
-
-            {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
-        </div>
-      </section>
-
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="endoprotesis_esofagicas" />
-        </div>
-      </section>
-      </>
+    </>
   )
 }

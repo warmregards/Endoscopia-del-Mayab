@@ -1,566 +1,420 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn } from "@/lib/pricing"
+import {
+  PRICING,
+  mxn,
+  displayFrom,
+  ADDITIONAL_FEES,
+  INCLUDED_IN_PRICE,
+} from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
+import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
+import Image from "next/image"
 import {
   Stethoscope,
   MapPin,
   CheckCircle2,
-  ShieldCheck,
-  Microscope,
   Clock,
-  Heart,
-  AlertTriangle,
-  Activity,
-  Target,
-  FileText,
-  ExternalLink,
-  Users,
-  Utensils,
-  Shield,
-  Phone,
+  ArrowRight,
 } from "lucide-react"
-import ProceduresGrid from "@/components/ProceduresGrid"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import GoogleReviews from "@/components/GoogleReviews";
-import { inter, montserrat } from "@/app/fonts";
-
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = metaFor("peg")
+export const metadata: import("next").Metadata = {
+  ...metaFor("gastrostomia"),
+  other: {
+    "geo.region": "MX-YUC",
+    "geo.placename": "Mérida",
+    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
+    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
+  },
+}
+
+const RELATED = [
+  {
+    name: "Dilatación Esofágica",
+    href: "/dilatacion-esofagica-merida",
+    price: displayFrom("dilatacion_esofagica"),
+  },
+  {
+    name: "Endoscopia",
+    href: "/endoscopia-merida",
+    price: displayFrom("endoscopia"),
+  },
+  {
+    name: "Consultas Digestivas",
+    href: "/consultas-digestivas-merida",
+    price: `${mxn(ADDITIONAL_FEES.consultation.amount)}`,
+  },
+]
+
+const INDICATIONS = [
+  "Disfagia por evento vascular cerebral",
+  "Cáncer de cabeza y cuello",
+  "Enfermedades neurológicas degenerativas",
+  "Desnutrición severa con contraindicación oral",
+  "Soporte nutricional pre/post-quirúrgico prolongado",
+]
+
+const STEPS = [
+  {
+    title: "Evaluación",
+    desc: "Consulta con el Dr. Quiroz para determinar indicación, evaluar anatomía gástrica y discutir expectativas con tu familia.",
+  },
+  {
+    title: "Preparación",
+    desc: "Ayuno de 8 horas, evaluación anestésica y profilaxis antibiótica.",
+  },
+  {
+    title: "Procedimiento",
+    desc: "Colocación endoscópica de 30–45 minutos con sedación — no sientes dolor.",
+  },
+  {
+    title: "Recuperación",
+    desc: "Observación 4–6 horas, inicio de alimentación a las 24 horas, educación completa a familiares.",
+  },
+]
 
 export default function GastrostomiaEndoscopicaPEGPage() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
-
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent-light/5 to-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            {/* Content - Left Side */}
-            <div className="flex-1 lg:max-w-3xl space-y-8">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200">
-                  <Utensils className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm font-medium text-blue-700">Alimentación Segura</span>
-                </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Gastrostomía Endoscópica (PEG) en Mérida",
+              path: "/gastrostomia-endoscopica-peg-merida",
+              pricingKey: "gastrostomia_peg",
+              description:
+                "Colocación de sonda de alimentación (PEG) por endoscopia bajo sedación en Hospital Amerimed, Mérida. Procedimiento ambulatorio de 30-45 minutos para pacientes con dificultades de deglución.",
+              procedureType: "Therapeutic",
+              bodyLocation: "Estómago (pared abdominal anterior)",
+              howPerformed:
+                "Técnica endoscópica percutánea bajo sedación consciente",
+              preparation:
+                "Ayuno de 8 horas, evaluación anestésica, profilaxis antibiótica",
+              followUp:
+                "Observación 4-6 horas, inicio gradual de alimentación a las 24 horas, seguimiento telefónico por 7 días",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              {
+                name: "Gastrostomía Endoscópica (PEG) en Mérida",
+                path: "/gastrostomia-endoscopica-peg-merida",
+              },
+            ])
+          ),
+        }}
+      />
 
-                <h1 className="`${montserrat.className} text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-foreground leading-tight`">
-                  Gastrostomía Endoscópica PEG en Mérida | Dr. Omar Quiroz - Alimentación Enteral Segura
-                </h1>
-
-                <p className="`${inter.className} text-lg text-foreground/80 leading-relaxed`">
-                  La gastrostomía endoscópica (PEG) en Mérida es el procedimiento gold standard para establecer acceso de alimentación enteral a largo plazo. El Dr. Omar Quiroz realiza colocación de PEG en Hospital Amerimed, Mérida, Yucatán, con técnica percutánea endoscópica desde {mxn(PRICING.gastrostomia_peg.from)}.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex items-center gap-3 text-sm text-foreground/70">
-                    <MapPin className="h-4 w-4 text-primary" />
-                    <span>Hospital Amerimed, Mérida, Yucatán</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-foreground/70">
-                    <Clock className="h-4 w-4 text-primary" />
-                    <span>Procedimiento ambulatorio 45-60 min</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="gastrostomia" position="hero" />
-                      <WhatsAppButton service="gastrostomia" position="hero" />
-                </div>
+      {/* S1: HERO */}
+      <section className="bg-background">
+        <div className="container-page section-padding-lg">
+          <div className="max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/20 border border-accent/20">
+              <Stethoscope className="h-4 w-4 text-text-accent" />
+              <span className="text-sm font-medium text-text-accent">
+                Procedimiento Ambulatorio
+              </span>
             </div>
 
-            {/* Visual - Right Side */}
-            <div className="flex-1 lg:max-w-md">
-              <div className="relative">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-accent-light/20 to-primary/10 border border-accent-light/30 p-8">
-                  <div className="h-full flex flex-col justify-center items-center text-center space-y-6">
-                    <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
-                      <Utensils className="h-10 w-10 text-green-600" />
-                    </div>
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-serif font-semibold text-foreground">
-                        PEG: Nutrición Segura
-                      </h3>
-                      <p className="text-foreground/70 text-sm leading-relaxed">
-                        Acceso nutricional a largo plazo para pacientes con dificultades de deglución o necesidades nutricionales especiales.
-                      </p>
-                    </div>
-                    <div className="w-full pt-4 border-t border-accent-light/20 text-center">
-                      <p className="text-sm text-foreground/60">
-                        Desde <span className="font-semibold text-primary">{mxn(PRICING.gastrostomia_peg.from)}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+              Gastrostomía Endoscópica (PEG) en Mérida
+            </h1>
+
+            <p className="text-lg text-foreground/80 leading-relaxed">
+              La gastrostomía PEG es una sonda de alimentación que se coloca
+              directamente en el estómago por endoscopia, sin cirugía abierta.
+              Indicada cuando tu familiar no puede alimentarse por boca durante
+              más de 4 semanas — {DOCTOR.name} la realiza en{" "}
+              {CLINIC.address.streetAddress},{" "}
+              {CLINIC.address.addressLocality},{" "}
+              {CLINIC.address.addressRegion}.
+            </p>
+
+            <div className="inline-flex px-4 py-2 rounded-full bg-accent-light text-text-accent font-semibold text-lg">
+              {displayFrom("gastrostomia_peg")}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 text-sm text-foreground/70">
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                {CLINIC.address.streetAddress},{" "}
+                {CLINIC.address.addressLocality},{" "}
+                {CLINIC.address.addressRegion}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Clock className="h-4 w-4 text-primary" />
+                Ambulatorio · 30–45 min
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <WhatsAppButton
+                service="gastrostomia"
+                position="hero"
+                procedureName="Gastrostomía PEG"
+              />
+              <CallButton
+                service="gastrostomia"
+                position="hero"
+                variant="ghost"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* BENEFITS SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              ¿Por qué elegir gastrostomía PEG en lugar de nutrición parenteral?
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              La PEG ofrece ventajas significativas para nutrición enteral a largo plazo
-            </p>
-          </div>
+      {/* S2: DEFINITION + INDICATIONS */}
+      <section className="bg-muted">
+        <div className="container-page section-padding-lg">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            ¿Qué es la gastrostomía PEG y quién la necesita?
+          </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {/* Benefit 1 */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-shadow">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-green-600" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  Menor riesgo de infección
-                </h3>
-                <p className="text-foreground/80">
-                  La PEG evita accesos vasculares centrales, reduciendo significativamente el riesgo de bacteremia y sepsis comparado con nutrición parenteral.
-                </p>
-                <div className="pt-4 space-y-2 text-sm text-foreground/70">
-                  <p>• Sin acceso venoso central</p>
-                  <p>• Menor manipulación diaria</p>
-                  <p>• Cuidados domiciliarios simples</p>
-                </div>
+          <p className="mt-6 text-foreground/80 leading-relaxed max-w-3xl">
+            La gastrostomía endoscópica percutánea (PEG) es un tubo que se
+            coloca a través de la pared abdominal directamente al estómago,
+            permitiendo alimentar a tu familiar de forma segura cuando no puede
+            tragar. Está indicada cuando la vía oral no es posible por más de
+            4–6 semanas. El {DOCTOR.name} realiza este procedimiento con
+            sedación en {CLINIC.address.streetAddress},{" "}
+            {CLINIC.address.addressLocality} — es ambulatorio, seguro y tu
+            familiar regresa a casa el mismo día.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            {INDICATIONS.map((item) => (
+              <div key={item} className="flex items-start gap-4">
+                <CheckCircle2 className="h-5 w-5 text-text-accent flex-shrink-0 mt-0.5" />
+                <span className="text-foreground/80">{item}</span>
               </div>
-            </div>
-
-            {/* Benefit 2 */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-shadow">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Activity className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  Mantiene función intestinal
-                </h3>
-                <p className="text-foreground/80">
-                  La alimentación enteral por PEG preserva la función gastrointestinal, la inmunidad intestinal y el trofismo de las vellosidades.
-                </p>
-                <div className="pt-4 space-y-2 text-sm text-foreground/70">
-                  <p>• Estimula motilidad intestinal</p>
-                  <p>• Preserva microbiota</p>
-                  <p>• Absorción más fisiológica</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Benefit 3 */}
-            <div className="p-8 rounded-2xl border border-border bg-background hover:shadow-lg transition-shadow">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                  <Heart className="h-6 w-6 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">
-                  Mayor calidad de vida
-                </h3>
-                <p className="text-foreground/80">
-                  Los pacientes con PEG pueden mantener mayor independencia, movilidad y participación en actividades familiares y sociales.
-                </p>
-                <div className="pt-4 space-y-2 text-sm text-foreground/70">
-                  <p>• Alimentación en casa</p>
-                  <p>• Movilidad sin restricciones</p>
-                  <p>• Integración social normal</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
-              <strong>¿Tu familiar necesita alimentación enteral a largo plazo?</strong> La gastrostomía PEG en Mérida puede ser la solución más segura y cómoda. Dr. Omar Quiroz evalúa cada caso individualmente en Hospital Amerimed.
-            </p>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* PROCESS SECTION */}
-      <section className="py-16 sm:py-24 bg-accent-strong/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Proceso de colocación de PEG: 4 pasos seguros
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Procedimiento endoscópico percutáneo con recuperación ambulatoria
-            </p>
-          </div>
+      {/* S3: PRICING */}
+      <section className="bg-background">
+        <div className="container-page section-padding-lg">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            Costo de Gastrostomía PEG en Mérida
+          </h2>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Step 1 */}
-            <div className="relative p-6 rounded-xl bg-background border border-border">
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
-                1
-              </div>
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <FileText className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-lg font-serif font-semibold text-foreground">
-                  Evaluación nutricional
-                </h3>
-                <p className="text-sm text-foreground/80">
-                  Consulta especializada para determinar indicación de PEG, evaluar anatomía gástrica y discutir expectativas con familia.
-                </p>
-                <div className="text-xs text-foreground/60 space-y-1">
-                  <p>• Historia clínica completa</p>
-                  <p>• Evaluación deglución</p>
-                  <p>• Análisis nutricional</p>
-                </div>
-              </div>
+          <div className="mt-8 rounded-2xl border border-border bg-card p-8 max-w-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+              <h3 className="text-xl font-serif font-semibold text-foreground">
+                Gastrostomía PEG
+              </h3>
+              <p className="text-2xl font-bold text-text-accent">
+                {displayFrom("gastrostomia_peg")}
+              </p>
             </div>
 
-            {/* Step 2 */}
-            <div className="relative p-6 rounded-xl bg-background border border-border">
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
-                2
-              </div>
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <ShieldCheck className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-lg font-serif font-semibold text-foreground">
-                  Preparación pre-procedimiento
-                </h3>
-                <p className="text-sm text-foreground/80">
-                  Ayuno de 8 horas, evaluación anestésica, consentimiento informado y preparación del sitio de inserción.
-                </p>
-                <div className="text-xs text-foreground/60 space-y-1">
-                  <p>• Ayuno 8 horas</p>
-                  <p>• Valoración anestésica</p>
-                  <p>• Profilaxis antibiótica</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative p-6 rounded-xl bg-background border border-border">
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
-                3
-              </div>
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Stethoscope className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-lg font-serif font-semibold text-foreground">
-                  Colocación endoscópica
-                </h3>
-                <p className="text-sm text-foreground/80">
-                  Procedimiento de 45-60 minutos con sedación consciente. Técnica "pull" o "push" según anatomía del paciente.
-                </p>
-                <div className="text-xs text-foreground/60 space-y-1">
-                  <p>• Sedación monitorizada</p>
-                  <p>• Técnica percutánea</p>
-                  <p>• Verificación endoscópica</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="relative p-6 rounded-xl bg-background border border-border">
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold">
-                4
-              </div>
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <Heart className="h-5 w-5 text-green-600" />
-                </div>
-                <h3 className="text-lg font-serif font-semibold text-foreground">
-                  Recuperación y educación
-                </h3>
-                <p className="text-sm text-foreground/80">
-                  Observación 4-6 horas, inicio gradual de alimentación y entrenamiento completo a familiares sobre cuidados de PEG.
-                </p>
-                <div className="text-xs text-foreground/60 space-y-1">
-                  <p>• Inicio alimentación 24h</p>
-                  <p>• Educación familiar</p>
-                  <p>• Seguimiento 7 días</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 p-8 rounded-2xl bg-background border border-border">
-            <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-              ¿Qué pueden esperar los pacientes durante el procedimiento?
-            </h3>
-
-            <div className="space-y-4 text-foreground/80">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p>
-                  <strong>Comodidad total:</strong> Sedación consciente asegura que no sienta dolor ni recuerde el procedimiento
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p>
-                  <strong>Tiempo optimizado:</strong> Procedimiento de 45-60 minutos con técnica endoscópica avanzada
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p>
-                  <strong>Alta el mismo día:</strong> Recuperación ambulatoria con seguimiento estrecho primeras 72 horas
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 rounded-xl bg-accent-strong/10 border border-accent-strong/20">
-              <h4 className="font-semibold text-foreground mb-3">Disponibilidad en Mérida:</h4>
+            <div className="mt-6 space-y-4">
+              <h4 className="font-medium text-foreground">
+                El precio incluye:
+              </h4>
               <div className="space-y-2 text-sm text-foreground/80">
-                <p>• Procedimientos programados Hospital Amerimed martes y jueves</p>
-                <p>• Consultas evaluación nutricional disponibles lunes a viernes</p>
-                <p>• Capacitación familiar incluida en costo</p>
+                {INCLUDED_IN_PRICE.map((item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0" />
+                  <span>
+                    Capacitación completa a familiares sobre cuidados de la
+                    sonda
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0" />
+                  <span>Seguimiento telefónico primeros 7 días</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 rounded-xl bg-muted border border-border">
+              <p className="text-sm text-foreground/70">
+                Lectura de patología (si se toman biopsias):{" "}
+                <strong>{mxn(ADDITIONAL_FEES.biopsy.amount)}</strong> adicional
+              </p>
+            </div>
+
+            <p className="mt-4 text-sm text-foreground/60">
+              Precio base para pacientes con anatomía gástrica normal. Casos
+              complejos se evalúan individualmente.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <Link
+              href="/precios"
+              className="text-primary hover:underline inline-flex items-center gap-1"
+            >
+              Ver todos nuestros precios{" "}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* S4: PREPARATION & PROCESS */}
+      <section className="bg-muted">
+        <div className="container-page section-padding-lg">
+          <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
+            Preparación y Proceso
+          </h2>
+
+          <div className="mt-8 space-y-6">
+            {STEPS.map((step, i) => (
+              <div key={step.title} className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
+                  {i + 1}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-foreground/80">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-sm text-foreground/70">
+            Agenda tu evaluación. Horario: {CLINIC.hours.display}.
+            A minutos de Cholul, Temozón Norte, Altabrisa y el Centro de Mérida.
+          </p>
+        </div>
+      </section>
+
+      {/* S5: DOCTOR CREDENTIALS */}
+      <section className="bg-background">
+        <div className="container-page section-padding-lg">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            Tu Especialista: {DOCTOR.name}
+          </h2>
+
+          <div className="mt-8 flex flex-col md:flex-row gap-8">
+            <div className="flex-shrink-0">
+              <Image
+                src={DOCTOR.photos.headshot}
+                alt={DOCTOR.name}
+                width={280}
+                height={280}
+                className="rounded-2xl"
+              />
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-foreground/80 leading-relaxed">
+                {DOCTOR.bioShort}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {DOCTOR.credentials.map((cred) => (
+                  <span
+                    key={cred}
+                    className="px-4 py-2 rounded-full bg-accent-light text-text-accent text-xs font-medium"
+                  >
+                    {cred}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-foreground/80">
+                Al ser endoscopista y cirujano general certificado,{" "}
+                {DOCTOR.name} maneja tanto la colocación rutinaria de PEG
+                como cualquier complicación — sin trasladar al paciente.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <WhatsAppButton
+                  service="gastrostomia"
+                  position="doctor"
+                  procedureName="Gastrostomía PEG"
+                  size="compact"
+                />
+                <Link
+                  href={DOCTOR.profileUrl}
+                  className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+                >
+                  Ver perfil completo <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* DR. OMAR'S ADVANTAGE SECTION */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
-              Dr. Omar: Endoscopista + Cirujano = Manejo Integral de Nutrición Enteral
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              La ventaja de tener doble certificación para casos complejos de PEG
-            </p>
+      {/* S6: GOOGLE REVIEWS */}
+      <section className="bg-muted">
+        <div className="container-page section-padding-lg">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* S7: FAQ */}
+      <section className="bg-background">
+        <div className="container-page section-padding-lg">
+          <Faq routeKey="gastrostomia" service="gastrostomia" />
+        </div>
+      </section>
+
+      {/* S8: BOTTOM CTA */}
+      <section className="bg-primary">
+        <div className="container-page section-padding-lg text-center">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
+            ¿Tu familiar necesita alimentación por sonda PEG?
+          </h2>
+          <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
+            {DOCTOR.name} evalúa cada caso individualmente. Escríbenos por
+            WhatsApp para agendar tu valoración.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <WhatsAppButton
+              service="gastrostomia"
+              position="bottom-cta"
+              procedureName="Gastrostomía PEG"
+            />
+            <CallButton
+              service="gastrostomia"
+              position="bottom-cta"
+              variant="inverse"
+            />
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            {/* Problem */}
-            <div className="p-8 rounded-2xl border border-border bg-background">
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                ¿Qué pasa cuando la PEG no es suficiente o hay complicaciones?
-              </h3>
-
-              <div className="space-y-4 text-foreground/80">
-                <p>
-                  En algunos casos (5-10%), los pacientes pueden desarrollar complicaciones como peritonitis, sangrado significativo, 
-                  o requerir conversión a yeyunostomía quirúrgica por intolerance gástrica o gastroparesia severa.
-                </p>
-
-                <div className="p-4 rounded-lg bg-red-50 border border-red-200">
-                  <h4 className="font-medium text-red-800 mb-2">Escenarios que requieren expertise quirúrgica:</h4>
-                  <ul className="space-y-1 text-sm text-red-700">
-                    <li>• Perforación inadvertida durante colocación</li>
-                    <li>• Sangrado arterial de pared gástrica</li>
-                    <li>• Necesidad de yeyunostomía por gastroparesia</li>
-                    <li>• Obstrucción intestinal por síndrome buried bumper</li>
-                  </ul>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {RELATED.map((r) => (
+              <Link
+                key={r.href}
+                href={r.href}
+                className="rounded-xl border border-white/20 bg-white/10 p-4 hover:bg-white/20 transition-colors text-left"
+              >
+                <p className="font-semibold text-white">{r.name}</p>
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-sm text-white/70">{r.price}</span>
+                  <ArrowRight className="h-4 w-4 text-white/70" />
                 </div>
-
-                <p className="text-sm text-foreground/60">
-                  <strong>¿Qué sucede si su endoscopista no es cirujano?</strong> Transferencia a otro hospital, 
-                  pérdida de continuidad en el cuidado, y retrasos en resolución de complicaciones.
-                </p>
-              </div>
-            </div>
-
-            {/* Solution */}
-            <div className="p-8 rounded-2xl border border-green-200 bg-green-50">
-              <h3 className="text-xl font-serif font-semibold text-foreground mb-6">
-                Dr. Omar resuelve todo en el mismo lugar y momento
-              </h3>
-
-              <div className="space-y-4 text-foreground/80">
-                <p>
-                  Al ser endoscopista <strong>y</strong> cirujano general certificado, Dr. Omar puede manejar 
-                  tanto la colocación rutinaria de PEG como cualquier complicación sin trasladar al paciente.
-                </p>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <Users className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-medium text-green-800">Continuidad de atención</h4>
-                      <p className="text-sm text-green-700">El mismo médico evalúa, coloca PEG y resuelve complicaciones</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Activity className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-medium text-green-800">Conversión inmediata a cirugía</h4>
-                      <p className="text-sm text-green-700">Si se requiere yeyunostomía o reparación, se hace en el mismo tiempo</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Shield className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-medium text-green-800">Manejo de casos complejos</h4>
-                      <p className="text-sm text-green-700">Experiencia en pacientes con cirugías abdominales previas o anatomía difícil</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-lg bg-green-100 border border-green-300">
-                  <p className="text-sm text-green-800">
-                    <strong>Resultado:</strong> Mayor seguridad, menor ansiedad familiar, y resolución definitiva 
-                    de problemas nutricionales sin referir a otros especialistas.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              <strong>¿Su familiar necesita PEG pero tiene condiciones médicas complejas?</strong> 
-              Dr. Omar Quiroz combina técnica endoscópica avanzada con experiencia quirúrgica para 
-              ofrecer el manejo más seguro en Mérida. 
-              <Link href="/contacto" className="text-primary hover:text-primary/80 font-medium">
-                Evalúa todas tus opciones antes de decidir dónde colocar la PEG.
               </Link>
-            </p>
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* PRICING & LOCATION SECTION */}
-      <section className="py-16 sm:py-24 bg-accent-strong/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
-            {/* Pricing Card */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-serif font-bold text-foreground mb-4">
-                  Costo de gastrostomía PEG en Mérida
-                </h2>
-                <p className="text-lg text-foreground/80">
-                  Precio transparente con todo incluido
-                </p>
-              </div>
-
-              <div className="p-8 rounded-2xl border border-border bg-background">
-                <div className="space-y-6">
-                  <div className="flex items-baseline justify-between">
-                    <h3 className="text-xl font-serif font-semibold text-foreground">
-                      Gastrostomía PEG completa
-                    </h3>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-primary">{mxn(PRICING.gastrostomia_peg.from)}</p>
-                      <p className="text-sm text-foreground/60">Todo incluido</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="font-medium text-foreground">El precio incluye:</h4>
-                    <div className="space-y-2 text-sm text-foreground/80">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600" />
-                        <span>Capacitación completa a familiares sobre cuidados PEG</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600" />
-                        <span>Seguimiento telefónico primeros 7 días</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-sm text-foreground/60">
-                      *Precio válido para pacientes con anatomía gástrica normal. 
-                      Casos complejos se evalúan individualmente.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Location & Contact */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-serif font-bold text-foreground mb-4">
-                  Ubicación y contacto en Mérida
-                </h2>
-                <p className="text-lg text-foreground/80">
-                  Hospital Amerimed, accesible desde toda la zona metropolitana
-                </p>
-              </div>
-
-              <div className="p-8 rounded-2xl border border-border bg-background">
-                <div className="space-y-6">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h3 className="font-semibold text-foreground">Hospital Amerimed</h3>
-                      <p className="text-sm text-foreground/80">Consultorio 517 - Torre de Especialidades</p>
-                      <p className="text-sm text-foreground/80">Chichí Suárez, Mérida, Yucatán</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="font-medium text-foreground">Fácil acceso desde:</h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm text-foreground/70">
-                      <p>• Centro de Mérida</p>
-                      <p>• Montebello</p>
-                      <p>• Altabrisa</p>
-                      <p>• Temozón Norte</p>
-                      <p>• Cholul</p>
-                      <p>• García Ginerés</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 pt-4 border-t border-border">
-                    <div>
-                      <h4 className="font-medium text-foreground mb-2">Agenda tu consulta:</h4>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                      <CallButton service="gastrostomia" position="cta section" />
-                      <WhatsAppButton service="gastrostomia" position="cta section" />
-                </div>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                    <h4 className="font-medium text-blue-800 mb-2">Horarios de consulta PEG:</h4>
-                    <div className="text-sm text-blue-700 space-y-1">
-                      <p>• Evaluación nutricional: Lunes a viernes 8:00-17:00</p>
-                      <p>• Procedimientos PEG: Martes y jueves 8:00-14:00</p>
-                      <p>• Urgencias nutricionales: Disponibilidad fin de semana</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-                  {/* GOOGLE REVIEWS COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GoogleReviews className="mt-8" />
-        </div>
-      </section>
-
-      {/* PROCEDURES GRID COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProceduresGrid />
-        </div>
-      </section>
-
-      {/* FAQ LIST COMPONENT */}
-      <section className="py-16 sm:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Faq routeKey="peg" />
         </div>
       </section>
     </>

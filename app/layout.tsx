@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import ClinicJsonLd from "@/components/ClinicJsonLd";
-import ServiceJsonLdAuto from "@/components/ServiceJsonLdAuto";
+import { globalGraph } from "@/lib/schema";
+import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -16,14 +16,14 @@ import "./globals.css";
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "600", "700", "900"],
+  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-montserrat",
 });
 
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-open-sans",
 });
 
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${openSans.variable}`}>
+    <html lang="es" className={`${montserrat.variable} ${openSans.variable}`} suppressHydrationWarning>
       <head>
         {/* ❌ Remove Google Fonts preconnects — next/font inlines and preloads automatically. */}
 
@@ -111,26 +111,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ) : null}
 
         {/* Structured data */}
-        <ClinicJsonLd />
-        <Suspense fallback={null}>
-          <ServiceJsonLdAuto />
-        </Suspense>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+        />
 
-        <Suspense fallback={null}>
-          <ScrollToTop />
-        </Suspense>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <Suspense fallback={null}>
+            <ScrollToTop />
+          </Suspense>
 
-        {/* A11y skip link */}
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2 rounded"
-        >
-          Saltar al contenido
-        </a>
+          {/* A11y skip link */}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2 rounded"
+          >
+            Saltar al contenido
+          </a>
 
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <Footer />
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,53 +1,55 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import { Phone } from "lucide-react";
-import { telHref } from "@/lib/contact";
-import { pushCta } from "@/lib/gtm";
+import { CLINIC, telHref } from "@/lib/clinic";
+import { pushPhoneClick } from "@/lib/gtm";
+import { cn } from "@/lib/utils";
 
 type CallButtonProps = {
   label?: string;
-  number?: string;          // E.164, e.g. +529992360153
   className?: string;
-  position?: string;        // "hero", "footer", etc.
-  service?: string;         // "endoscopia", "colonoscopia", etc.
-  id?: string;              // optional explicit id
+  position?: string;
+  service?: string;
+  variant?: "secondary" | "inverse" | "ghost";
+  size?: "default" | "compact";
+  id?: string;
 };
 
 export default function CallButton({
   label = "Llamar",
-  number,
   className,
   position = "unspecified",
   service = "generic",
+  variant = "secondary",
+  size = "default",
   id,
 }: CallButtonProps) {
-  const [path, setPath] = useState("/");
-  useEffect(() => {
-    if (typeof window !== "undefined") setPath(window.location.pathname || "/");
-  }, []);
-
-  const resolvedTel =
-    number ?? process.env.NEXT_PUBLIC_PHONE_E164 ?? "+529992360153";
   const ctaId = id ?? `cta-${service}-${position}-call`;
 
   return (
     <a
       id={ctaId}
-      href={telHref(resolvedTel)}
-      className={`inline-flex items-center justify-center px-8 py-4 rounded-xl 
-        bg-white border border-border text-foreground font-semibold 
-        hover:border-accent-strong hover:text-accent-strong transition-colors ${className ?? ""}`}
+      href={telHref()}
+      className={cn(
+        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors",
+        size === "default" ? "px-6 py-3" : "px-4 py-2",
+        variant === "secondary" &&
+          "bg-action-secondary hover:bg-action-secondary-hover text-white shadow-md",
+        variant === "inverse" &&
+          "bg-transparent border-2 border-white text-white hover:bg-white/10",
+        variant === "ghost" &&
+          "bg-transparent border border-border text-foreground hover:bg-muted",
+        className
+      )}
       onClick={() =>
-        pushCta({
-          cta_type: "call",
-          cta_id: ctaId,
-          cta_number: resolvedTel,
-          cta_service: service,
-          page_path: path,
+        pushPhoneClick({
+          ctaId,
+          number: CLINIC.phone.e164,
+          service,
         })
       }
     >
-      <Phone className="h-4 w-4 mr-2" />
+      <Phone className="h-4 w-4" />
       {label}
     </a>
   );

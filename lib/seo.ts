@@ -1,10 +1,23 @@
 // /lib/seo.ts
+// Centralized metadata generation for all pages.
+// Consumed by: layout.tsx, page.tsx files across all 28 routes.
+//
+// Title/description formulas follow Project_Context_and_Decisions_v2.md:
+//   Procedure:  [Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
+//   Homepage:   Endoscopia y Colonoscopia en Mérida | Desde $4,500 MXN | Endoscopia del Mayab
+//   Pricing:    Precios de Endoscopia y Colonoscopia en Mérida | Endoscopia del Mayab
+//   Doctor:     Dr. Omar Quiroz – Endoscopista en Mérida | Endoscopia del Mayab
+//
+// Description strategy: price + inclusions + soft CTA (targeting Persona 2 CTR)
+
 import type { Metadata } from "next"
 import { PRICING, hasPrice, mxn, type ServiceKey } from "@/lib/pricing"
+import { CLINIC } from "@/lib/clinic"
 
-// ─────────────────────────────────────────────
+// ---------------------------------------------------------------------------
 // Types
-// ─────────────────────────────────────────────
+// ---------------------------------------------------------------------------
+
 type Robots =
   | boolean
   | {
@@ -21,15 +34,15 @@ type Robots =
     }
 
 interface BuildMetaParams {
-  /** Final <title> text (before brand is appended). */
+  /** Final <title> text (brand appended automatically if space allows). */
   title: string
   /** Meta description content. */
   description: string
-  /** Site-relative path like "/cpre-merida". */
+  /** Site-relative path like "/cpre-merida". Leading slash required. */
   path: string
   /** Relative ("/images/x.jpg") or absolute ("https://.../x.jpg"). */
   ogImage?: string
-  /** Optional overrides. */
+  /** Override defaults. */
   siteName?: string
   locale?: string
   ogType?: "website" | "article" | "profile"
@@ -37,24 +50,75 @@ interface BuildMetaParams {
   twitterCard?: "summary_large_image" | "summary"
 }
 
-// ─────────────────────────────────────────────
-// Constants & helpers
-// ─────────────────────────────────────────────
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+
 const BRAND = "Endoscopia del Mayab"
+const BRAND_SUFFIX = ` | ${BRAND}` // " | Endoscopia del Mayab" = 23 chars
 const DEFAULT_SITE = "https://www.endoscopiadelmayab.com"
-/** Make sure this file exists under /public (or change the path). */
 const DEFAULT_OG_REL = "/omar-open-graph.jpg"
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE).replace(/\/$/, "")
+// Google measures title width in pixels (~580px), not characters.
+// 70 chars is a safe ceiling that lets Google truncate the brand
+// (expendable) rather than the price (critical for Persona 2 CTR).
+const TITLE_MAX = 70
+const DESC_MAX = 160
 
-const trim = (s: string, max: number) => (s.length <= max ? s : s.slice(0, Math.max(0, max - 1)) + "…")
-const withBrand = (t: string) => (t.includes(BRAND) ? t : `${t} | ${BRAND}`)
-const joinUrl = (base: string, relPath: string) =>
+// Standard trust signals for descriptions (Persona 2 + Persona 1)
+const TRUST_LINE = "Incluye anestesia, biopsias y recuperación."
+const CTA_LINE = "Agenda directo con el Dr. Quiroz por WhatsApp."
+
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE).replace(
+  /\/$/,
+  ""
+)
+
+// ---------------------------------------------------------------------------
+// Internal helpers
+// ---------------------------------------------------------------------------
+
+/** Trim to max length with ellipsis. */
+const trim = (s: string, max: number): string =>
+  s.length <= max ? s : `${s.slice(0, max - 1)}…`
+
+/**
+ * Append brand suffix only if the result stays under TITLE_MAX.
+ * If the title already contains the brand name, skip.
+ * Priority: price in title > brand in title.
+ */
+const withBrand = (t: string): string => {
+  if (t.includes(BRAND)) return t
+  const candidate = `${t}${BRAND_SUFFIX}`
+  return candidate.length <= TITLE_MAX ? candidate : t
+}
+
+/** Join base URL with a relative path. */
+const joinUrl = (base: string, relPath: string): string =>
   `${(base || DEFAULT_SITE).replace(/\/$/, "")}${relPath.startsWith("/") ? relPath : `/${relPath}`}`
 
-// ─────────────────────────────────────────────
+/**
+ * Build a rich description from parts, respecting DESC_MAX.
+ * Assembles: base + trust + CTA, trimming from the end if needed.
+ */
+const buildDescription = (parts: (string | undefined)[]): string => {
+  const filtered = parts.filter(Boolean) as string[]
+  let result = filtered.join(" ")
+  if (result.length > DESC_MAX) {
+    // Drop parts from the end until it fits, always keeping at least the first part
+    for (let i = filtered.length - 1; i > 0; i--) {
+      filtered.pop()
+      result = filtered.join(" ")
+      if (result.length <= DESC_MAX) break
+    }
+  }
+  return trim(result, DESC_MAX)
+}
+
+// ---------------------------------------------------------------------------
 // Core builder
-// ─────────────────────────────────────────────
+// ---------------------------------------------------------------------------
+
 export function buildMeta({
   title,
   description,
@@ -67,7 +131,9 @@ export function buildMeta({
   twitterCard = "summary_large_image",
 }: BuildMetaParams): Metadata {
   const canonicalUrl = joinUrl(siteUrl, path)
-  const fullOgImageUrl = ogImage.startsWith("http") ? ogImage : joinUrl(siteUrl, ogImage)
+  const fullOgImageUrl = ogImage.startsWith("http")
+    ? ogImage
+    : joinUrl(siteUrl, ogImage)
 
   // Default: index prod, noindex non-prod (safe for staging)
   const isProd = process.env.NODE_ENV === "production"
@@ -85,8 +151,8 @@ export function buildMeta({
       }
     : { index: false, follow: false }
 
-  const safeTitle = trim(withBrand(title), 60)
-  const safeDesc = trim(description, 160)
+  const safeTitle = trim(withBrand(title), TITLE_MAX)
+  const safeDesc = trim(description, DESC_MAX)
 
   return {
     title: safeTitle,
@@ -97,7 +163,9 @@ export function buildMeta({
       description: safeDesc,
       url: canonicalUrl,
       siteName,
-      images: [{ url: fullOgImageUrl, width: 1200, height: 630, alt: safeTitle }],
+      images: [
+        { url: fullOgImageUrl, width: 1200, height: 630, alt: safeTitle },
+      ],
       locale,
       type: ogType,
     },
@@ -108,32 +176,165 @@ export function buildMeta({
       images: [fullOgImageUrl],
     },
     robots: robots ?? defaultRobots,
+    other: {
+      "geo.region": `${CLINIC.address.addressCountry}-YUC`,
+      "geo.placename": CLINIC.address.addressLocality,
+      ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
+    },
   }
 }
 
-// Service pages: price front-loaded after the em dash.
-// NOTE: key is optional now, so non-priced pages (e.g. /contacto) won’t break.
+// ---------------------------------------------------------------------------
+// Procedure page builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Generate metadata for procedure/service pages.
+ *
+ * Title formula (per Project_Context_v2):
+ *   [Procedure Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
+ *
+ * Description formula:
+ *   [Procedure] en Mérida desde $X MXN. [Trust signals]. [CTA].
+ *
+ * @example
+ *   buildServiceMeta({
+ *     service: "Colonoscopia",
+ *     key: "colonoscopia",
+ *     path: "/colonoscopia-merida",
+ *   })
+ */
 export function buildServiceMeta(
   params: Omit<BuildMetaParams, "title" | "description"> & {
+    /** Procedure display name, e.g. "Colonoscopia" or "CPRE" */
     service: string
-    key?: ServiceKey            // ← made optional
-    titleSuffix?: string
+    /** Pricing key — optional for non-priced pages like /contacto */
+    key?: ServiceKey
+    /** Override the auto-generated description entirely */
+    descriptionOverride?: string
+    /** Extra sentence appended to description before CTA */
     descriptionExtra?: string
-  },
+    /** Full title override — bypasses the formula entirely */
+    titleOverride?: string
+  }
 ): Metadata {
-  const { service, key, titleSuffix, descriptionExtra, ...rest } = params
+  const { service, key, descriptionOverride, descriptionExtra, titleOverride, ...rest } =
+    params
 
+  // ── Title ──
+  // Formula: [Service] en Mérida | Desde $X MXN | Endoscopia del Mayab
+  // Brand is appended by withBrand() in buildMeta, so we build up to that point.
   const priceStr =
-    key && hasPrice(key) ? mxn(PRICING[key].from) : undefined
-  const priceChunk = priceStr ? `Desde ${priceStr}` : undefined
+    key && hasPrice(key) ? `Desde ${mxn(PRICING[key].from)}` : undefined
 
-  const suffix = titleSuffix?.trim() ?? ""
-  const mid = priceChunk ? `${priceChunk}${suffix ? " · " : ""}` : ""
-  const title = `${service} en Mérida – ${mid}${suffix}`.trim()
+  const titleParts = [`${service} en Mérida`, priceStr].filter(Boolean)
+  const title = titleOverride ?? titleParts.join(" | ")
 
-  const base =
-    `${service} en Mérida.` + (descriptionExtra ? ` ${descriptionExtra}` : "")
-  const description = priceChunk ? `${base} Costo ${priceChunk.toLowerCase()}.` : base
+  // ── Description ──
+  const description =
+    descriptionOverride ??
+    buildDescription([
+      priceStr
+        ? `${service} en Mérida ${priceStr.toLowerCase().replace("mxn", "MXN")}.`
+        : `${service} en Mérida.`,
+      TRUST_LINE,
+      descriptionExtra,
+      CTA_LINE,
+    ])
 
   return buildMeta({ title, description, ...rest })
+}
+
+// ---------------------------------------------------------------------------
+// Homepage builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Title: Endoscopia y Colonoscopia en Mérida | Desde $4,500 MXN | Endoscopia del Mayab
+ * Description: Rich with pricing, inclusions, trust signals.
+ */
+export function buildHomeMeta(
+  overrides?: Partial<BuildMetaParams>
+): Metadata {
+  const lowestPrice = mxn(PRICING.endoscopia.from)
+
+  return buildMeta({
+    title: `Endoscopia y Colonoscopia en Mérida | Desde ${lowestPrice}`,
+    description: buildDescription([
+      `Endoscopia y colonoscopia en Mérida desde ${lowestPrice}.`,
+      TRUST_LINE,
+      "Precios transparentes, tecnología Olympus HD y atención directa con el Dr. Quiroz.",
+      CTA_LINE,
+    ]),
+    path: "/",
+    ...overrides,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Pricing page builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Title: Precios de Endoscopia y Colonoscopia en Mérida | Endoscopia del Mayab
+ * Description: Price range + value props for Persona 2.
+ */
+export function buildPricingMeta(
+  overrides?: Partial<BuildMetaParams>
+): Metadata {
+  const lowestPrice = mxn(PRICING.endoscopia.from)
+
+  return buildMeta({
+    title: "Precios de Endoscopia y Colonoscopia en Mérida",
+    description: buildDescription([
+      `Precios de procedimientos endoscópicos en Mérida desde ${lowestPrice}.`,
+      "Todos los precios incluyen anestesia, biopsias y sala de recuperación.",
+      "Sin cargos ocultos — precio transparente desde la primera consulta.",
+    ]),
+    path: "/precios",
+    ...overrides,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Doctor profile builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Title: Dr. Omar Quiroz – Endoscopista en Mérida | Endoscopia del Mayab
+ * Description: Credentials + accessibility for Persona 4.
+ */
+export function buildDoctorMeta(
+  overrides?: Partial<BuildMetaParams>
+): Metadata {
+  return buildMeta({
+    title: "Dr. Omar Quiroz – Endoscopista en Mérida",
+    description: buildDescription([
+      "Dr. Omar Quiroz, endoscopista certificado en Mérida, Yucatán.",
+      "Especialista en endoscopia, colonoscopia y CPRE en Hospital Amerimed.",
+      "Atención directa por WhatsApp — sin intermediarios.",
+    ]),
+    path: "/dr-omar-quiroz",
+    ogType: "profile",
+    ...overrides,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Contact page builder
+// ---------------------------------------------------------------------------
+
+export function buildContactMeta(
+  overrides?: Partial<BuildMetaParams>
+): Metadata {
+  return buildMeta({
+    title: "Contacto | Endoscopia del Mayab – Mérida",
+    description: buildDescription([
+      "Agenda tu cita de endoscopia en Mérida.",
+      "Hospital Amerimed, Consultorio 517, Chichi Suárez.",
+      "WhatsApp directo con el Dr. Quiroz: 999 236 0153.",
+    ]),
+    path: "/contacto",
+    ...overrides,
+  })
 }

@@ -1,233 +1,305 @@
-//routes-seo.ts
+// /lib/routes-seo.ts
+// Per-route SEO configuration and metadata generation.
+// Consumes: seo.ts builders, services.ts for data, pricing.ts for keys.
+//
+// Architecture:
+//   - Procedure routes use `buildServiceMeta()` with the v2 title formula:
+//     [Service] en Mérida | Desde $X MXN | Endoscopia del Mayab
+//   - Homepage, pricing, doctor, contact use their dedicated builders
+//   - `descriptionOverride` is used ONLY when the auto-generated description
+//     genuinely doesn't work for a specific page. Most routes rely on the
+//     standard description template (price + trust signals + CTA).
+//
+// Title philosophy:
+//   The v2 spec defines a consistent title formula. Per-route "suffix" patterns
+//   were removed because:
+//   1. They produced inconsistent SERP appearances across 27 pages
+//   2. They competed with the price signal that drives Persona 2 CTR
+//   3. Google often rewrites overstuffed titles anyway
+//   If a page genuinely needs a custom title, use `titleOverride`.
+
 import type { Metadata } from "next"
-import { buildServiceMeta } from "@/lib/seo"
+import {
+  buildServiceMeta,
+  buildHomeMeta,
+  buildPricingMeta,
+  buildDoctorMeta,
+  buildContactMeta,
+} from "@/lib/seo"
 import type { ServiceKey } from "@/lib/pricing"
 
-/** Route config */
-type RouteCfg = {
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+interface ServiceRouteCfg {
+  type: "service"
+  /** Procedure display name, e.g. "Colonoscopia" */
   service: string
+  /** Site-relative path, e.g. "/colonoscopia-merida" */
   path: string
-  titleSuffix: string
-  descriptionExtra: string
-  /** Pricing key to enable price in SEO (optional). If omitted, no price is appended. */
+  /** Pricing key — optional for non-priced pages */
   key?: ServiceKey
+  /** Override the auto-generated description if it doesn't fit */
+  descriptionOverride?: string
+  /** Extra sentence inserted into the auto-generated description before CTA */
+  descriptionExtra?: string
+  /** Full title override — bypasses the v2 formula entirely. Use sparingly. */
+  titleOverride?: string
 }
 
-/** Routes constrained to GBP rule: Title & Description must include "<Servicio> en Mérida" */
-/** Routes constrained to GBP rule: Title & Description must include "<Servicio> en Mérida" */
+interface SpecialRouteCfg {
+  type: "home" | "pricing" | "doctor" | "contact"
+}
+
+type RouteCfg = ServiceRouteCfg | SpecialRouteCfg
+
+// ---------------------------------------------------------------------------
+// Route Registry
+// ---------------------------------------------------------------------------
+
 export const ROUTES_SEO: Record<string, RouteCfg> = {
-  // Core
-  home: {
-    service: "Endoscopia",
-    path: "/",
-    titleSuffix: "Diagnóstico Seguro en Hospital • Resultados el Mismo Día | Dr. Omar Quiroz",
-    descriptionExtra: "Endoscopia y colonoscopia con sedación segura en hospital acreditado en Mérida. Atención por especialista con triple certificación. Precio transparente.",
-    key: "endoscopia",
-  },
+  // ── Special pages (use dedicated builders) ──────────────────────────────
+  home: { type: "home" },
+  precios: { type: "pricing" },
+  doctor: { type: "doctor" },
+  contacto: { type: "contact" },
+
+  // ── Core Procedure Pages ────────────────────────────────────────────────
   endoscopia: {
+    type: "service",
     service: "Endoscopia",
     path: "/endoscopia-merida",
-    titleSuffix: "Sedación Segura • Hospital Amerimed • Resultados Hoy",
-    descriptionExtra: "Endoscopia digestiva en Mérida con sedación segura y resultados el mismo día. Realizada por especialista certificado en hospital. Precio transparente y agenda rápida.",
     key: "endoscopia",
+    descriptionExtra:
+      "Diagnóstico con sedación segura y resultados el mismo día en Hospital Amerimed.",
   },
   colonoscopia: {
+    type: "service",
     service: "Colonoscopia",
     path: "/colonoscopia-merida",
-    titleSuffix: "Con Sedación • Prevención de Cáncer | Dr. Omar Quiroz",
-    descriptionExtra: "Colonoscopia en Mérida con sedación segura. Detección y resección de pólipos, prevención de cáncer colorrectal. Guía de preparación y precio transparente.",
     key: "colonoscopia",
+    descriptionExtra:
+      "Prevención de cáncer colorrectal con detección y resección de pólipos.",
   },
   panendoscopia: {
+    type: "service",
     service: "Panendoscopia",
     path: "/panendoscopia-merida",
-    titleSuffix: "Evaluación Completa • Un Solo Día",
-    descriptionExtra: "Estudio integral del tracto digestivo con sedación en hospital. Ideal para evaluación completa en una sola visita. Precio transparente y agenda rápida.",
     key: "panendoscopia",
+    descriptionExtra:
+      "Evaluación completa del tracto digestivo superior en una sola visita.",
   },
   cpre: {
+    type: "service",
     service: "CPRE",
     path: "/cpre-merida",
-    titleSuffix: "Especialista en Vías Biliares • Equipo Avanzado (SpyGlass)",
-    descriptionExtra: "CPRE en Mérida para cálculos/obstrucciones biliares y pancreáticas. Uno de pocos especialistas. Sedación segura en hospital, equipo avanzado. Precio transparente.",
     key: "cpre",
+    titleOverride: "CPRE en Mérida | Cálculos Biliares Sin Cirugía | Desde $15,000 MXN",
+    descriptionOverride:
+      "CPRE (colangiopancreatografía retrógrada endoscópica) en Mérida desde $15,000 MXN. Resuelve cálculos biliares, estenosis y obstrucciones en una sola sesión con sedación. Hospital Amerimed. Agenda por WhatsApp con el Dr. Quiroz.",
   },
 
-  // Terapéuticos / avanzados
-  ligadura: {
+  // ── Therapeutic Procedures ──────────────────────────────────────────────
+  ligadura_varices: {
+    type: "service",
     service: "Ligadura de Várices Esofágicas",
     path: "/ligadura-varices-esofagicas-merida",
-    titleSuffix: "Control de Hemorragias • Endoscopia Terapéutica",
-    descriptionExtra: "Prevención y control de sangrado por várices esofágicas con ligadura endoscópica. Procedimiento seguro en hospital por especialista.",
     key: "ligadura_varices",
-  },
-  ligadura_hemorroides: {
-    service: "Ligadura de Hemorroides Internas",
-    path: "/ligadura-hemorroides-internas-merida",
-    titleSuffix: "Tratamiento Ambulatorio • Recuperación Rápida",
-    descriptionExtra: "Ligadura de hemorroides internas con banda elástica. Procedimiento ambulatorio, mínimo dolor, rápida recuperación. Realizado por especialista.",
-    key: "ligadura_hemorroides",
-  },
-  peg: {
-    service: "Gastrostomía",
-    path: "/gastrostomia-endoscopica-peg-merida",
-    titleSuffix: "Alimentación Segura por PEG • En Hospital",
-    descriptionExtra: "Colocación de gastrostomía endoscópica (PEG) para soporte nutricional. Procedimiento en hospital con sedación segura y seguimiento.",
-    key: "gastrostomia_peg",
-  },
-  extraccion: {
-    service: "Extracción de Cuerpos Extraños",
-    path: "/extraccion-cuerpos-extranos-endoscopia-merida",
-    titleSuffix: "Atención Inmediata • 24/7 Según Disponibilidad",
-    descriptionExtra: "Extracción endoscópica de cuerpos extraños con respuesta rápida en hospital. Prioridad a urgencias. Consulta disponibilidad y precio.",
-    key: "extraccion_cuerpos_extranos",
-  },
-  dilatacion: {
-    service: "Dilatación Esofágica",
-    path: "/dilatacion-esofagica-merida",
-    titleSuffix: "Alivio de Disfagia • En Hospital",
-    descriptionExtra: "Tratamiento endoscópico de estenosis esofágica para mejorar el paso de alimentos. Procedimiento seguro con sedación en hospital acreditado.",
-    key: "dilatacion_esofagica",
+    descriptionExtra:
+      "Prevención y control de sangrado por várices esofágicas.",
   },
   esclerosis_varices_gastricas: {
+    type: "service",
     service: "Esclerosis de Várices Gástricas",
     path: "/esclerosis-varices-gastricas-merida",
-    titleSuffix: "Control de Sangrado • Técnica Endoscópica",
-    descriptionExtra: "Esclerosis de várices gástricas para control de hemorragias. Manejo por especialista en entorno hospitalario con sedación.",
     key: "esclerosis_varices_gastricas",
+    descriptionExtra:
+      "Control de sangrado por várices gástricas con inyección de cianoacrilato. Procedimiento de urgencia disponible.",
+  },
+  ligadura_hemorroides: {
+    type: "service",
+    service: "Ligadura de Hemorroides Internas",
+    path: "/ligadura-hemorroides-internas-merida",
+    key: "ligadura_hemorroides",
+    descriptionExtra:
+      "Tratamiento ambulatorio con banda elástica. Mínimo dolor, rápida recuperación.",
+  },
+  gastrostomia: {
+    type: "service",
+    service: "Gastrostomía Endoscópica (PEG)",
+    path: "/gastrostomia-endoscopica-peg-merida",
+    key: "gastrostomia_peg",
+    descriptionExtra:
+      "Colocación de sonda PEG para soporte nutricional en hospital con sedación.",
+  },
+  extraccion: {
+    type: "service",
+    service: "Extracción de Cuerpos Extraños",
+    path: "/extraccion-cuerpos-extranos-endoscopia-merida",
+    key: "extraccion_cuerpos_extranos",
+    descriptionExtra:
+      "Atención de emergencia para objetos atorados en esófago o garganta. Disponible fines de semana en Hospital Amerimed.",
+  },
+  dilatacion_esofagica: {
+    type: "service",
+    service: "Dilatación Esofágica",
+    path: "/dilatacion-esofagica-merida",
+    key: "dilatacion_esofagica",
+    descriptionExtra:
+      "Tratamiento de estenosis esofágica para mejorar el paso de alimentos.",
   },
   dilatacion_biliar: {
+    type: "service",
     service: "Dilatación Biliar",
     path: "/dilatacion-biliar-merida",
-    titleSuffix: "Tratamiento de Estenosis • Bajo Sedación",
-    descriptionExtra: "Dilatación endoscópica de estenosis de la vía biliar. Manejo de obstrucciones con equipo especializado en hospital.",
     key: "dilatacion_biliar",
+    descriptionExtra:
+      "Tratamiento endoscópico de estenosis de la vía biliar con equipo especializado.",
   },
   dilatacion_colonica: {
+    type: "service",
     service: "Dilatación Colónica",
     path: "/dilatacion-colonica-merida",
-    titleSuffix: "Alivio de Obstrucciones • Endoscopia Terapéutica",
-    descriptionExtra: "Dilatación colónica para manejo de obstrucciones. Procedimiento mínimamente invasivo con sedación en hospital.",
     key: "dilatacion_colonica",
+    descriptionExtra:
+      "Tratamiento de estenosis del colon sin cirugía. Alternativa mínimamente invasiva.",
   },
-
-  // Stents / quote-only (no price in schema, pero sí valor en snippet)
-  endoprotesis_esofagicas: {
-    service: "Endoprótesis Esofágicas",
-    path: "/endoprotesis-esofagicas-merida",
-    titleSuffix: "Stents para Estenosis/Fístulas • En Hospital",
-    descriptionExtra: "Colocación de stents esofágicos para estenosis y fístulas. Valoración individual y manejo por especialista en hospital.",
-    key: "endoprotesis_esofagicas",
-  },
-  endoprotesis_biliares: {
-    service: "Endoprótesis Biliares",
-    path: "/endoprotesis-biliares-merida",
-    titleSuffix: "Drenaje de Vía Biliar • Manejo Especializado",
-    descriptionExtra: "Colocación de stents biliares para restablecer el flujo. Evaluación personalizada, procedimiento en hospital.",
-    key: "endoprotesis_biliares",
-  },
-  endoprotesis_duodenales: {
-    service: "Endoprótesis Duodenales",
-    path: "/endoprotesis-duodenales-merida",
-    titleSuffix: "Tratamiento de Obstrucciones • Oncológico/Paliativo",
-    descriptionExtra: "Stents duodenales para obstrucciones intestinales. Indicaciones oncológicas y paliativas, manejo por especialista.",
-    key: "endoprotesis_duodenales",
-  },
-  endoprotesis_colonicas: {
-    service: "Endoprótesis Colónicas",
-    path: "/endoprotesis-colonicas-merida",
-    titleSuffix: "Descompresión de Colon • Puente a Cirugía",
-    descriptionExtra: "Colocación de stents colónicos para descompresión y como puente a cirugía. Procedimiento en hospital.",
-    key: "endoprotesis_colonicas",
-  },
-
-  // Avanzados
-  cierre_fistulas_clips: {
-    service: "Cierre de Fístulas por Clips Endoscópicos",
-    path: "/cierre-fistulas-clips-endoscopicos-merida",
-    titleSuffix: "Tratamiento Avanzado • Minimiza Cirugía",
-    descriptionExtra: "Cierre endoscópico de fístulas con clips especializados. Alternativa mínimamente invasiva a cirugía en muchos casos.",
-    key: "cierre_fistulas_clips",
-  },
-  sutura_endoscopica: {
-    service: "Sutura Endoscópica",
-    path: "/sutura-endoscopica-merida",
-    titleSuffix: "Reparación Mucosa • Perforaciones/Defectos",
-    descriptionExtra: "Sutura endoscópica para reparación de perforaciones y defectos mucosos. Procedimiento avanzado en hospital.",
-    key: "sutura_endoscopica",
-  },
-  esd: {
-    service: "Disección Endoscópica Submucosa (ESD)",
-    path: "/diseccion-endoscopica-submucosa-esd-merida",
-    titleSuffix: "Resección en Bloque • Lesiones Complejas",
-    descriptionExtra: "ESD para resección en bloque de lesiones gastrointestinales complejas, preservando órgano. Alto nivel de especialización.",
-    key: "esd",
-  },
-  emr: {
-    service: "Resección Endoscópica Mucosa (EMR)",
-    path: "/reseccion-endoscopica-mucosa-emr-merida",
-    titleSuffix: "Tratamiento de Pólipos • Menos Invasivo",
-    descriptionExtra: "EMR para resección de pólipos y lesiones superficiales del tracto digestivo. Opción menos invasiva frente a cirugía.",
-    key: "emr",
-  },
-
-  // Otros
-  retiro_balon_gastrico: {
+  retiro_balon: {
+    type: "service",
     service: "Retiro de Balón Gástrico",
     path: "/retiro-balon-gastrico-merida",
-    titleSuffix: "Procedimiento Seguro • Sedación Consciente",
-    descriptionExtra: "Extracción endoscópica de balón gástrico con sedación segura en hospital. Valoración pre y seguimiento.",
     key: "retiro_balon_gastrico",
+    descriptionExtra:
+      "Extracción endoscópica de balón gástrico con sedación consciente.",
   },
   apc: {
+    type: "service",
     service: "Coagulación con Plasma de Argón (APC)",
     path: "/apc-coagulacion-plasma-argon-merida",
-    titleSuffix: "Control de Sangrado • Lesiones con Displasia",
-    descriptionExtra: "APC para hemostasia y tratamiento de lesiones. Procedimiento seguro, rápido y efectivo en hospital con especialista.",
     key: "apc",
+    descriptionExtra:
+      "Control de sangrado y tratamiento de lesiones con displasia.",
   },
 
-  // Informativas
+  // ── Advanced / Quote-Only ───────────────────────────────────────────────
+  endoprotesis_esofagicas: {
+    type: "service",
+    service: "Endoprótesis Esofágicas",
+    path: "/endoprotesis-esofagicas-merida",
+    key: "endoprotesis_esofagicas",
+    descriptionExtra:
+      "Stents esofágicos para disfagia por tumores o estenosis. Mejora la capacidad de tragar.",
+  },
+  endoprotesis_biliares: {
+    type: "service",
+    service: "Endoprótesis Biliares",
+    path: "/endoprotesis-biliares-merida",
+    key: "endoprotesis_biliares",
+    descriptionExtra:
+      "Stents biliares para restablecer el flujo. Evaluación personalizada.",
+  },
+  endoprotesis_duodenales: {
+    type: "service",
+    service: "Endoprótesis Duodenales",
+    path: "/endoprotesis-duodenales-merida",
+    key: "endoprotesis_duodenales",
+    descriptionExtra:
+      "Stents duodenales para obstrucción gástrica. Alternativa a cirugía de derivación.",
+  },
+  endoprotesis_colonicas: {
+    type: "service",
+    service: "Endoprótesis Colónicas",
+    path: "/endoprotesis-colonicas-merida",
+    key: "endoprotesis_colonicas",
+    descriptionExtra:
+      "Stents colónicos para descompresión y como puente a cirugía.",
+  },
+  cierre_fistulas: {
+    type: "service",
+    service: "Cierre de Fístulas por Clips Endoscópicos",
+    path: "/cierre-fistulas-clips-endoscopicos-merida",
+    key: "cierre_fistulas_clips",
+    descriptionExtra:
+      "Alternativa mínimamente invasiva a cirugía para cierre de fístulas.",
+  },
+  sutura_endoscopica: {
+    type: "service",
+    service: "Sutura Endoscópica",
+    path: "/sutura-endoscopica-merida",
+    key: "sutura_endoscopica",
+    descriptionExtra:
+      "Reparación de perforaciones y defectos mucosos. Procedimiento avanzado.",
+  },
+  esd: {
+    type: "service",
+    service: "Disección Endoscópica Submucosa (ESD)",
+    path: "/diseccion-endoscopica-submucosa-esd-merida",
+    key: "esd",
+    descriptionExtra:
+      "Resección en bloque de lesiones complejas preservando el órgano.",
+  },
+  emr: {
+    type: "service",
+    service: "Resección Endoscópica Mucosa (EMR)",
+    path: "/reseccion-endoscopica-mucosa-emr-merida",
+    key: "emr",
+    descriptionExtra:
+      "Resección de pólipos y lesiones superficiales. Menos invasivo que cirugía.",
+  },
+
+  // ── Info Pages ──────────────────────────────────────────────────────────
   emergencias: {
-    service: "Endoscopia",
+    type: "service",
+    service: "Urgencias Digestivas",
     path: "/emergencias-digestivas-merida",
-    titleSuffix: "Atención Rápida • Sangrado/Obstrucciones",
-    descriptionExtra: "Manejo endoscópico de urgencias digestivas: sangrado, cuerpos extraños, obstrucciones. Contáctanos para disponibilidad inmediata.",
-    key: "endoscopia",
+    titleOverride: "Emergencias Digestivas en Mérida | Atención 24/7 | Endoscopia del Mayab",
+    descriptionOverride:
+      "Atención endoscópica de emergencia en Mérida: sangrado digestivo, cálculos biliares, cuerpos extraños. Dr. Omar Quiroz disponible fines de semana. Hospital Amerimed. WhatsApp 999 236 0153.",
   },
   consultas: {
-    service: "Endoscopia",
+    type: "service",
+    service: "Consultas Digestivas",
     path: "/consultas-digestivas-merida",
-    titleSuffix: "Valoración por Especialista • Pre & Post Procedimiento",
-    descriptionExtra: "Consulta digestiva con especialista certificado. Explicación de estudios, preparación y seguimiento.",
-    key: "endoscopia",
+    titleOverride: "Consultas Digestivas en Mérida | Desde $900 MXN | Endoscopia del Mayab",
+    descriptionOverride:
+      "Consulta digestiva especializada con el Dr. Omar Quiroz en Mérida. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
   },
-  doctor: {
-    service: "Endoscopia",
-    path: "/dr-omar-quiroz",
-    titleSuffix: "Especialista en Endoscopia Avanzada • Triple Certificación",
-    descriptionExtra: "Atención por el Dr. Omar Quiroz: endoscopia avanzada, colonoscopia y procedimientos terapéuticos. Experiencia, seguridad y trato humano.",
-    // no key → sin precio en SEO
-  },
-  contacto: {
-    service: "Endoscopia",
-    path: "/contacto",
-    titleSuffix: "Agenda tu Cita • Respuesta Rápida",
-    descriptionExtra: "Programa endoscopia o colonoscopia. Te orientamos sobre costos, preparación y disponibilidad.",
-    // no key → sin precio
-  },
+
 } as const
+
+// ---------------------------------------------------------------------------
+// Metadata generator
+// ---------------------------------------------------------------------------
 
 export type RouteKey = keyof typeof ROUTES_SEO
 
+/**
+ * Generate Next.js Metadata for any registered route.
+ *
+ * @example
+ *   // In a page.tsx:
+ *   export const metadata = metaFor("colonoscopia")
+ *
+ *   // Or for the homepage:
+ *   export const metadata = metaFor("home")
+ */
 export function metaFor(route: RouteKey): Metadata {
   const cfg = ROUTES_SEO[route]
+
+  // Special pages use dedicated builders
+  if (cfg.type === "home") return buildHomeMeta()
+  if (cfg.type === "pricing") return buildPricingMeta()
+  if (cfg.type === "doctor") return buildDoctorMeta()
+  if (cfg.type === "contact") return buildContactMeta()
+
+  // Service/procedure pages use the standard builder
   return buildServiceMeta({
     service: cfg.service,
     path: cfg.path,
-    titleSuffix: cfg.titleSuffix,
+    key: cfg.key,
+    descriptionOverride: cfg.descriptionOverride,
     descriptionExtra: cfg.descriptionExtra,
-    ...(cfg.key ? { key: cfg.key } as const : {}),
-    // ogImage: "/images/omar-open-graph.jpg", // optional per-route override
+    titleOverride: cfg.titleOverride,
   })
 }

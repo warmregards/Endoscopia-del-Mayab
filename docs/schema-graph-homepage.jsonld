@@ -1,0 +1,556 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+
+    // ═══════════════════════════════════════════════════
+    // 1. WEBSITE — Site-level entity
+    // Present on: EVERY page
+    // ═══════════════════════════════════════════════════
+    {
+      "@type": "WebSite",
+      "@id": "https://www.endoscopiadelmayab.com/#website",
+      "url": "https://www.endoscopiadelmayab.com/",
+      "name": "Endoscopia del Mayab",
+      "description": "Clínica especializada en endoscopia, colonoscopia y CPRE en Mérida, Yucatán. Precios transparentes desde $4,500 MXN.",
+      "publisher": { "@id": "https://www.endoscopiadelmayab.com/#organization" },
+      "inLanguage": "es-MX"
+    },
+
+    // ═══════════════════════════════════════════════════
+    // 2. ORGANIZATION — Legal/brand entity
+    // Present on: EVERY page
+    // ═══════════════════════════════════════════════════
+    {
+      "@type": "Organization",
+      "@id": "https://www.endoscopiadelmayab.com/#organization",
+      "name": "Endoscopia del Mayab",
+      "url": "https://www.endoscopiadelmayab.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.endoscopiadelmayab.com/logo.png",
+        "_comment": "CLAUDE CODE: Replace with actual logo URL once known"
+      },
+      "sameAs": [
+        "https://www.instagram.com/endoscopiadelmayab/",
+        "_DOCTORALIA_URL_"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+52-999-236-0153",
+        "contactType": "customer service",
+        "availableLanguage": ["Spanish", "English"],
+        "areaServed": {
+          "@type": "State",
+          "name": "Yucatán",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Mexico"
+          }
+        }
+      }
+    },
+
+    // ═══════════════════════════════════════════════════
+    // 3. MEDICAL CLINIC — The core business entity
+    // Present on: EVERY page
+    // This is the GBP ↔ Website bridge
+    // ═══════════════════════════════════════════════════
+    {
+      "@type": "MedicalClinic",
+      "@id": "https://www.endoscopiadelmayab.com/#clinic",
+      "name": "Endoscopia del Mayab",
+      "url": "https://www.endoscopiadelmayab.com/",
+      "image": "https://www.endoscopiadelmayab.com/clinic-photo.jpg",
+      "description": "Endoscopia del Mayab es una clínica especializada en endoscopia, colonoscopia y CPRE, ubicada dentro del Hospital Amerimed en Mérida, Yucatán. Ofrecemos diagnóstico y tratamiento de enfermedades digestivas con tecnología avanzada y médico certificado. Precios transparentes desde $4,500 MXN. Atención directa con el Dr. Quiroz.",
+      "medicalSpecialty": "Gastroenterology",
+      "telephone": "+52-999-236-0153",
+      "priceRange": "$$",
+
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Hospital Amerimed Mérida, Consultorio 517",
+        "addressLocality": "Mérida",
+        "addressRegion": "Yucatán",
+        "postalCode": "97306",
+        "addressCountry": "MX"
+      },
+
+      "geo": {
+        "@type": "GeoCoordinates",
+        "_comment": "CLAUDE CODE: Replace with exact Hospital Amerimed GPS coordinates from GBP pin",
+        "latitude": 21.0187,
+        "longitude": -89.6370
+      },
+
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"
+          ],
+          "opens": "07:00",
+          "closes": "21:00"
+        }
+      ],
+
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Mérida",
+          "containedInPlace": {
+            "@type": "State",
+            "name": "Yucatán"
+          }
+        },
+        {
+          "@type": "State",
+          "name": "Yucatán",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Mexico"
+          }
+        }
+      ],
+
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "52",
+        "bestRating": "5"
+      },
+
+      "knowsAbout": [
+        "https://en.wikipedia.org/wiki/Endoscopy",
+        "https://en.wikipedia.org/wiki/Colonoscopy",
+        "https://en.wikipedia.org/wiki/Endoscopic_retrograde_cholangiopancreatography",
+        "https://en.wikipedia.org/wiki/Gastroenterology"
+      ],
+
+      "memberOf": { "@id": "https://www.endoscopiadelmayab.com/#organization" },
+      "founder": { "@id": "https://www.endoscopiadelmayab.com/#physician" },
+
+      // ── FULL 27-SERVICE CATALOG ──
+      // Maps 1:1 to GBP services list
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Procedimientos Endoscópicos",
+        "itemListElement": [
+
+          // ── DIAGNOSTIC (3) ──
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Endoscopia",
+              "url": "https://www.endoscopiadelmayab.com/endoscopia-merida",
+              "procedureType": "https://health-lifesci.schema.org/DiagnosticProcedure"
+            },
+            "price": "4500",
+            "priceCurrency": "MXN",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "4500",
+              "priceCurrency": "MXN",
+              "description": "Desde $4,500 MXN. Incluye anestesia, toma de biopsias, sala de recuperación y valoración."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Colonoscopia",
+              "url": "https://www.endoscopiadelmayab.com/colonoscopia-merida",
+              "procedureType": "https://health-lifesci.schema.org/DiagnosticProcedure"
+            },
+            "price": "5000",
+            "priceCurrency": "MXN",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "5000",
+              "priceCurrency": "MXN",
+              "description": "Desde $5,000 MXN. Incluye anestesia, toma de biopsias, sala de recuperación y valoración."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Panendoscopia",
+              "url": "https://www.endoscopiadelmayab.com/panendoscopia-merida",
+              "procedureType": "https://health-lifesci.schema.org/DiagnosticProcedure"
+            },
+            "price": "4500",
+            "priceCurrency": "MXN"
+          },
+
+          // ── SPECIALIZED DIAGNOSTIC (1) ──
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "CPRE",
+              "alternateName": "Colangiopancreatografía Retrógrada Endoscópica",
+              "url": "https://www.endoscopiadelmayab.com/cpre-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "24700",
+            "priceCurrency": "MXN",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "24700",
+              "priceCurrency": "MXN",
+              "description": "Desde $24,700 MXN. Incluye anestesia, sala de recuperación y valoración."
+            }
+          },
+
+          // ── THERAPEUTIC (10) ──
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Ligadura de Várices Esofágicas",
+              "alternateName": "Esclerosis de Várices Gástricas",
+              "url": "https://www.endoscopiadelmayab.com/ligadura-varices-esofagicas-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "19000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Ligadura de Hemorroides Internas",
+              "url": "https://www.endoscopiadelmayab.com/ligadura-hemorroides-internas-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "17000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Gastrostomía Endoscópica (PEG)",
+              "url": "https://www.endoscopiadelmayab.com/gastrostomia-endoscopica-peg-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "19000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Extracción de Cuerpos Extraños",
+              "url": "https://www.endoscopiadelmayab.com/extraccion-cuerpos-extranos-endoscopia-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "9500",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Dilatación Esofágica",
+              "url": "https://www.endoscopiadelmayab.com/dilatacion-esofagica-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "15000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Dilatación Biliar",
+              "url": "https://www.endoscopiadelmayab.com/dilatacion-biliar-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "25000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Dilatación Colónica",
+              "url": "https://www.endoscopiadelmayab.com/dilatacion-colonica-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "15000",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Retiro de Balón Gástrico",
+              "url": "https://www.endoscopiadelmayab.com/retiro-balon-gastrico-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "11900",
+            "priceCurrency": "MXN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Coagulación con Plasma de Argón (APC)",
+              "url": "https://www.endoscopiadelmayab.com/apc-coagulacion-plasma-argon-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            },
+            "price": "19000",
+            "priceCurrency": "MXN"
+          },
+
+          // ── ADVANCED / QUOTE-ONLY (8) ──
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Endoprótesis Esofágicas",
+              "url": "https://www.endoscopiadelmayab.com/endoprotesis-esofagicas-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Endoprótesis Biliares",
+              "url": "https://www.endoscopiadelmayab.com/endoprotesis-biliares-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Endoprótesis Duodenales",
+              "url": "https://www.endoscopiadelmayab.com/endoprotesis-duodenales-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Endoprótesis Colónicas",
+              "url": "https://www.endoscopiadelmayab.com/endoprotesis-colonicas-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Cierre de Fístulas por Clips Endoscópicos",
+              "url": "https://www.endoscopiadelmayab.com/cierre-fistulas-clips-endoscopicos-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Sutura Endoscópica",
+              "url": "https://www.endoscopiadelmayab.com/sutura-endoscopica-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Disección Endoscópica Submucosa (ESD)",
+              "url": "https://www.endoscopiadelmayab.com/diseccion-endoscopica-submucosa-esd-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Resección Endoscópica Mucosa (EMR)",
+              "url": "https://www.endoscopiadelmayab.com/reseccion-endoscopica-mucosa-emr-merida",
+              "procedureType": "https://health-lifesci.schema.org/TherapeuticProcedure"
+            }
+          },
+
+          // ── CONSULTATION SERVICES (5) ──
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Consulta de Urgencias Digestivas",
+              "url": "https://www.endoscopiadelmayab.com/emergencias-digestivas-merida"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Atención a Emergencias Gastrointestinales",
+              "url": "https://www.endoscopiadelmayab.com/emergencias-digestivas-merida"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Control Post-Endoscopia",
+              "url": "https://www.endoscopiadelmayab.com/consultas-digestivas-merida"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Valoración Pre-Endoscópica",
+              "url": "https://www.endoscopiadelmayab.com/consultas-digestivas-merida"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Chequeo Digestivo Preventivo",
+              "url": "https://www.endoscopiadelmayab.com/consultas-digestivas-merida"
+            }
+          }
+        ]
+      }
+    },
+
+    // ═══════════════════════════════════════════════════
+    // 4. PHYSICIAN — Dr. Omar Quiroz
+    // Present on: EVERY page (global graph)
+    // Enhanced version on: /dr-omar-quiroz
+    // ═══════════════════════════════════════════════════
+    {
+      "@type": "Physician",
+      "@id": "https://www.endoscopiadelmayab.com/#physician",
+      "name": "Dr. Omar Quiroz",
+      "url": "https://www.endoscopiadelmayab.com/dr-omar-quiroz",
+      "image": "https://www.endoscopiadelmayab.com/dr-omar-quiroz-photo.jpg",
+      "description": "Endoscopista certificado en Mérida con más de 15 años de experiencia. Egresado de la UNAM, certificado por el Consejo Mexicano de Cirugía General (CMCG). Alta especialidad en Endoscopia (Cédula EGI230072).",
+
+      "medicalSpecialty": "Gastroenterology",
+
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Medical Degree",
+          "name": "Médico Cirujano",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "UNAM"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Medical Specialty",
+          "name": "Cirugía General",
+          "identifier": "Cédula 11629429"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Subspecialty",
+          "name": "Alta Especialidad en Endoscopia",
+          "identifier": "Cédula EGI230072"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Board Certification",
+          "name": "Consejo Mexicano de Cirugía General",
+          "identifier": "C18044318"
+        }
+      ],
+
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "name": "Consejo Mexicano de Cirugía General (CMCG)"
+        },
+        {
+          "@type": "Organization",
+          "name": "Asociación Mexicana de Cirugía Endoscópica (AMCE)"
+        }
+      ],
+
+      "worksFor": { "@id": "https://www.endoscopiadelmayab.com/#clinic" },
+
+      "knowsAbout": [
+        "https://en.wikipedia.org/wiki/Endoscopy",
+        "https://en.wikipedia.org/wiki/Colonoscopy",
+        "https://en.wikipedia.org/wiki/Endoscopic_retrograde_cholangiopancreatography",
+        "https://en.wikipedia.org/wiki/Gastroenterology"
+      ],
+
+      "availableService": { "@id": "https://www.endoscopiadelmayab.com/#clinic" }
+    },
+
+    // ═══════════════════════════════════════════════════
+    // 5. FAQ PAGE — Homepage FAQs
+    // Present on: Homepage ONLY (procedure pages get their own)
+    // Targets: Persona 5 (El Investigador) fear-based queries
+    // ═══════════════════════════════════════════════════
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.endoscopiadelmayab.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Duele la endoscopia o colonoscopia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Todos los procedimientos se realizan con sedación consciente — no sentirás dolor durante el estudio. La mayoría de los pacientes no recuerdan nada del procedimiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el precio de la endoscopia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El precio incluye: anestesia, toma de biopsias (sin límite — un solo costo sin importar cuántas se tomen), sala de recuperación y valoración pre-endoscópica. La lectura de biopsias (patología) tiene un costo adicional de $1,200 MXN."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo me preparo para una endoscopia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La preparación varía según el procedimiento. Al agendar tu cita por WhatsApp, el Dr. Quiroz te enviará instrucciones detalladas y personalizadas. En general, se requiere ayuno de 8 horas para endoscopia y una preparación intestinal especial para colonoscopia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es peligrosa la colonoscopia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La colonoscopia es uno de los procedimientos más seguros en gastroenterología. Las complicaciones graves son extremadamente raras (menos del 0.1%). El Dr. Quiroz ha realizado más de 300 colonoscopias anuales con equipo Olympus de última generación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo dura el procedimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una endoscopia tarda 10-15 minutos y una colonoscopia 20-30 minutos. Después necesitarás 30-60 minutos en recuperación. En total, planifica unas 2 horas desde tu llegada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Atienden emergencias digestivas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El Dr. Quiroz atiende emergencias gastrointestinales los 7 días de la semana, incluyendo sangrado digestivo, cuerpos extraños y obstrucciones. Contacte por WhatsApp al 999 236 0153 para atención inmediata."
+          }
+        }
+      ]
+    }
+  ]
+}
