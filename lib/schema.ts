@@ -221,6 +221,8 @@ export interface ProcedureSchemaParams {
   procedureType?: "Diagnostic" | "Therapeutic" | "Surgical"
   /** Optional image URL (absolute or site-relative) */
   image?: string
+  /** Override default areaServed (for geo-targeted pages covering multiple cities) */
+  areaServed?: Array<{ type: "City" | "State"; name: string }>
 }
 
 /**
@@ -277,14 +279,19 @@ export function procedureSchema(params: ProcedureSchemaParams) {
     // Schema.org: "Gastroenterology" is pragmatic closest. Dr. Quiroz actual specialty: Endoscopia Gastrointestinal (Cédula EGI230072)
     medicalSpecialty: "Gastroenterology",
     provider: { "@id": CLINIC_ID },
-    areaServed: {
-      "@type": "City",
-      name: CLINIC.areaServed.primary,
-      containedInPlace: {
-        "@type": "State",
-        name: CLINIC.areaServed.region,
-      },
-    },
+    areaServed: params.areaServed
+      ? params.areaServed.map((area) => ({
+          "@type": area.type,
+          name: area.name,
+        }))
+      : {
+          "@type": "City",
+          name: CLINIC.areaServed.primary,
+          containedInPlace: {
+            "@type": "State",
+            name: CLINIC.areaServed.region,
+          },
+        },
     offers: hasFixedPrice
       ? {
           "@type": "Offer",

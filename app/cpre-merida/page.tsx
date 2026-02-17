@@ -363,7 +363,13 @@ export default function CprePage() {
                 <p className="text-foreground/80 leading-relaxed">
                   Pacientes de Valladolid, Campeche, Playa del Carmen, Cancún y
                   la Riviera Maya nos buscan por experiencia en casos complejos de
-                  CPRE en la península de Yucatán.
+                  CPRE en la península de Yucatán.{" "}
+                  <Link
+                    href="/cpre-playa-del-carmen"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    Información para pacientes de Quintana Roo →
+                  </Link>
                 </p>
 
                 {/* Credentials */}

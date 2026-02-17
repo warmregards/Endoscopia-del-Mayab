@@ -22,6 +22,8 @@ const routes: RouteCfg[] = [
 
   // Terapéuticas / avanzadas
   { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 },
+  // Geo-targeted landing pages
+  { path: "/cpre-playa-del-carmen", changeFrequency: "monthly", priority: 0.75 },
   { path: "/ligadura-varices-esofagicas-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/esclerosis-varices-gastricas-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/ligadura-hemorroides-internas-merida", changeFrequency: "monthly", priority: 0.75 },

@@ -298,6 +298,44 @@ export const cpreFaqs: FAQ[] = [
 ]
 
 // ---------------------------------------------------------------------------
+// CPRE PLAYA DEL CARMEN (Geo-Targeted)
+// 1,206 organic impressions from Quintana Roo CPRE queries with 0 clicks.
+// Mix of medical + travel/logistics questions for QR patients.
+// ---------------------------------------------------------------------------
+
+export const cprePlayaDelCarmenFaqs: FAQ[] = [
+  {
+    question: "¿Cuánto cuesta una CPRE en Mérida?",
+    answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano, equipo y fluoroscopía. Puede aumentar si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En hospitales privados de Cancún, el mismo procedimiento puede costar $40,000+ MXN.`,
+  },
+  {
+    question: "¿Necesito quedarme en Mérida después del procedimiento?",
+    answer:
+      "Depende de la complejidad. Una CPRE diagnóstica simple permite alta el mismo día — podrías regresar a Playa del Carmen esa misma tarde con un acompañante. Si se realiza intervención terapéutica (extracción de cálculos, colocación de prótesis), la hospitalización es de 12–24 horas. Te indicamos todo antes del procedimiento.",
+  },
+  {
+    question: "¿Por qué no hay especialistas en CPRE en Playa del Carmen?",
+    answer:
+      "La CPRE requiere equipo altamente especializado (duodenoscopio, fluoroscopía, sala de quirófano equipada) y un endoscopista con entrenamiento avanzado específico. Los hospitales de la Riviera Maya no cuentan con esta infraestructura, por lo que refieren estos casos a especialistas en Mérida.",
+  },
+  {
+    question: "¿La CPRE es peligrosa?",
+    answer:
+      "Es un procedimiento más complejo que una endoscopia convencional, pero sigue siendo seguro en manos experimentadas. Los riesgos más descritos son pancreatitis post-procedimiento (2–5%), sangrado o perforación (raros). Utilizamos duodenoscopio Olympus, fluoroscopía digital y antibióticos profilácticos para minimizarlos.",
+  },
+  {
+    question: "¿Qué estudios necesito llevar a mi cita?",
+    answer:
+      "Ultrasonido abdominal, química sanguínea (bilirrubinas, enzimas hepáticas), biometría hemática y estudios de coagulación. Se ajusta según urgencia y condición del paciente. El Dr. Quiroz te indica exactamente qué necesitas al valorar tu caso.",
+  },
+  {
+    question: "¿Puedo enviar mis estudios por WhatsApp antes de viajar?",
+    answer:
+      "Sí. Envía tu ultrasonido, laboratorios y la indicación de tu médico por WhatsApp. El Dr. Quiroz los revisa, confirma si la CPRE es necesaria, te da cotización exacta y agendamos fecha — todo antes de que salgas de Playa del Carmen.",
+  },
+]
+
+// ---------------------------------------------------------------------------
 // LIGADURA DE VÁRICES ESOFÁGICAS
 // Query: "síntomas después de una ligadura de várices esofágicas" (21 Ads impr)
 // Band ligation for esophageal varices. Gastric varices → see esclerosisVaricesFaqs.
@@ -1011,6 +1049,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   colonoscopia: colonoscopiaFaqs,
   panendoscopia: panendoscopiaFaqs,
   cpre: cpreFaqs,
+  cpre_playa_del_carmen: cprePlayaDelCarmenFaqs,
   ligadura_varices: ligaduraVaricesFaqs,
   esclerosis_varices_gastricas: esclerosisVaricesFaqs,
   ligadura_hemorroides: ligaduraHemorroidesFaqs,

@@ -100,6 +100,18 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
       "CPRE (colangiopancreatografía retrógrada endoscópica) en Mérida desde $15,000 MXN. Resuelve cálculos biliares, estenosis y obstrucciones en una sola sesión con sedación. Hospital Amerimed. Agenda por WhatsApp con el Dr. Quiroz.",
   },
 
+  // ── Geo-Targeted Landing Pages ─────────────────────────────────────────
+  cpre_playa_del_carmen: {
+    type: "service",
+    service: "CPRE Playa del Carmen",
+    path: "/cpre-playa-del-carmen",
+    key: "cpre",
+    titleOverride:
+      "CPRE en Playa del Carmen — Desde $25,000 MXN | Endoscopia del Mayab",
+    descriptionOverride:
+      "CPRE para pacientes de Quintana Roo. Desde $25,000 MXN en Hospital Amerimed, Mérida. Incluye sedación y quirófano. Dr. Omar Quiroz — agenda por WhatsApp.",
+  },
+
   // ── Therapeutic Procedures ──────────────────────────────────────────────
   ligadura_varices: {
     type: "service",
