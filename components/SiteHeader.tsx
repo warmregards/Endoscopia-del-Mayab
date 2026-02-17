@@ -42,6 +42,16 @@ export default function SiteHeader() {
     []
   );
 
+  // Body scroll lock
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [open]);
+
   useEffect(() => {
     if (open) {
       document.addEventListener("keydown", handleKeyDown);
@@ -143,48 +153,59 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile menu panel */}
+      {/* Mobile menu — full-screen overlay */}
       {open && (
         <div
           id="mobile-menu"
-          className="md:hidden fixed inset-0 z-50 bg-black/40"
+          ref={drawerRef}
+          className="md:hidden fixed inset-0 z-50 bg-background flex flex-col"
           role="dialog"
           aria-modal="true"
-          onClick={() => setOpen(false)}
         >
-          <div
-            ref={drawerRef}
-            className="ml-auto h-full w-80 bg-background shadow-xl border-l border-border p-6 flex flex-col gap-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-semibold text-foreground">Menú</span>
-              <button
-                type="button"
-                className="p-2 rounded-md text-foreground/80 hover:text-link"
-                onClick={() => setOpen(false)}
-                aria-label="Cerrar menú"
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
+          {/* Header row — matches main header */}
+          <div className="h-16 px-4 sm:px-6 flex items-center justify-between border-b border-border">
             <Link
               href="/"
-              className="py-2 text-foreground"
+              className="flex items-center"
+              aria-label="Inicio - Endoscopia del Mayab"
+              onClick={() => setOpen(false)}
+            >
+              <Image
+                src="/endoscopia-logo.png"
+                alt="Endoscopia del Mayab"
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+              />
+            </Link>
+            <button
+              type="button"
+              className="p-2 rounded-md text-foreground/80 hover:text-link"
+              onClick={() => setOpen(false)}
+              aria-label="Cerrar menú"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav className="flex-1 overflow-y-auto" aria-label="Menú móvil">
+            <Link
+              href="/"
+              className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
               onClick={() => setOpen(false)}
               data-cta="nav"
               data-cta-link="home"
@@ -193,35 +214,28 @@ export default function SiteHeader() {
             </Link>
             <Link
               href="/precios"
-              className="py-2 text-foreground"
+              className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
               onClick={() => setOpen(false)}
               data-cta="nav"
               data-cta-link="precios"
             >
               Precios
             </Link>
-            <div className="pt-2">
-              <div className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
-                Servicios
-              </div>
-              <div className="flex flex-col">
-                {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className="py-2 text-foreground"
-                    onClick={() => setOpen(false)}
-                    data-cta="nav"
-                    data-cta-link={`service:${s.label}`}
-                  >
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {services.map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
+                onClick={() => setOpen(false)}
+                data-cta="nav"
+                data-cta-link={`service:${s.label}`}
+              >
+                {s.label}
+              </Link>
+            ))}
             <Link
               href="/emergencias-digestivas-merida"
-              className="py-2 text-foreground"
+              className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
               onClick={() => setOpen(false)}
               data-cta="nav"
               data-cta-link="emergencias"
@@ -230,27 +244,27 @@ export default function SiteHeader() {
             </Link>
             <Link
               href="/contacto"
-              className="py-2 text-foreground"
+              className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
               onClick={() => setOpen(false)}
               data-cta="nav"
               data-cta-link="contacto"
             >
               Contacto
             </Link>
+          </nav>
 
-            {/* CTA block */}
-            <div className="mt-auto flex flex-col gap-3">
-              <CallButton
-                size="compact"
-                position="header-mobile"
-                label={`Llamar: ${CLINIC.phone.display}`}
-              />
-              <WhatsAppButton
-                size="compact"
-                position="header-mobile"
-                label="WhatsApp"
-              />
-            </div>
+          {/* CTA buttons — pinned to bottom */}
+          <div className="px-4 sm:px-6 pb-8 pt-4 flex flex-col gap-4">
+            <WhatsAppButton
+              position="header-mobile"
+              label="WhatsApp"
+              className="w-full"
+            />
+            <CallButton
+              position="header-mobile"
+              label={`Llamar: ${CLINIC.phone.display}`}
+              className="w-full"
+            />
           </div>
         </div>
       )}
