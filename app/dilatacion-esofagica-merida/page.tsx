@@ -1,11 +1,10 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES, displayFrom } from "@/lib/pricing"
+import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
-import { CLINIC } from "@/lib/clinic"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, CheckCircle2, Clock, ShieldCheck } from "lucide-react"
+import { CheckCircle2, Clock, ShieldCheck } from "lucide-react"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
@@ -256,7 +255,7 @@ export default function DilatacionEsofagicaPage() {
 
             <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start">
               <Image
-                src="/dr-omar-quiroz.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={300}
                 height={400}
@@ -307,95 +306,49 @@ export default function DilatacionEsofagicaPage() {
         </div>
       </section>
 
-      {/* Section 8: Related Procedures */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
+      {/* Section 8: Related Procedures + Bottom CTA */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          {/* Related procedures */}
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
             Procedimientos Relacionados
           </h2>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
             {[
-              {
-                name: "Endoscopia",
-                href: "/endoscopia-merida",
-                price: displayFrom("endoscopia"),
-                context: "Evaluación diagnóstica previa",
-              },
-              {
-                name: "Endoprótesis Esofágicas",
-                href: "/endoprotesis-esofagicas-merida",
-                price: displayFrom("endoprotesis_esofagicas"),
-                context: "Para estenosis severas",
-              },
-              {
-                name: "CPRE",
-                href: "/cpre-merida",
-                price: displayFrom("cpre"),
-                context: "Si la estenosis involucra vía biliar",
-              },
+              { name: "Endoscopia", href: "/endoscopia-merida" },
+              { name: "Endoprótesis Esofágicas", href: "/endoprotesis-esofagicas-merida" },
+              { name: "CPRE", href: "/cpre-merida" },
             ].map((proc) => (
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:border-accent/30 hover:shadow-md"
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
               >
-                <h3 className="font-serif text-lg font-semibold text-foreground">
-                  {proc.name}
-                </h3>
-                <p className="mt-2 text-sm font-medium text-text-accent">
-                  {proc.price}
-                </p>
-                <p className="mt-2 text-sm text-foreground/70">
-                  {proc.context}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                  Ver más
-                  <span className="transition-all group-hover:ml-1">→</span>
-                </span>
+                {proc.name} →
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Section 9: Bottom CTA */}
-      <section className="bg-primary">
-        <div className="container-page section-padding text-center">
-          <div className="mx-auto max-w-2xl space-y-6">
-            <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
-              ¿Necesitas Dilatación Esofágica en Mérida?
-            </h2>
-
-            <p className="text-lg text-white/80">
-              Agenda tu valoración con el {DOCTOR.name}. Precio transparente
-              desde {mxn(PRICING.dilatacion_esofagica.from)} con todo incluido.
-            </p>
-
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <WhatsAppButton
-                service="dilatacion-esofagica"
-                position="bottom-cta"
-                procedureName="Dilatación Esofágica"
-                className="sm:px-10"
-              />
-              <CallButton
-                service="dilatacion-esofagica"
-                position="bottom-cta"
-                variant="inverse"
-              />
-            </div>
-
-            <div className="space-y-2 text-sm text-white/70">
-              <div className="flex items-center justify-center gap-2">
-                <MapPin className="h-4 w-4" />
-                <span>{CLINIC.address.display}</span>
-              </div>
-              <p>{CLINIC.hours.display}</p>
-              <p className="text-xs">
-                Cerca de Altabrisa, Cholul, Temozón Norte
-              </p>
-            </div>
+          {/* CTA */}
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
+            ¿Necesitas Dilatación Esofágica en Mérida?
+          </h2>
+          <p className="text-lg text-white/80">
+            Agenda tu valoración con el {DOCTOR.name}. Precio transparente
+            desde {mxn(PRICING.dilatacion_esofagica.from)} con todo incluido.
+          </p>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <WhatsAppButton
+              service="dilatacion-esofagica"
+              position="bottom-cta"
+              procedureName="Dilatación Esofágica"
+              className="sm:px-10"
+            />
+            <CallButton
+              service="dilatacion-esofagica"
+              position="bottom-cta"
+              variant="inverse"
+            />
           </div>
         </div>
       </section>

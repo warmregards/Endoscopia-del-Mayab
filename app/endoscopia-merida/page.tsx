@@ -226,6 +226,29 @@ export default function EndoscopiaPage() {
               A diferencia de radiografías, ultrasonido o tomografía, la
               endoscopia ve directamente la mucosa digestiva — no adivina.
             </p>
+
+            <div className="mt-8">
+              <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                ¿Qué detecta la endoscopia?
+              </h3>
+              <div className="grid gap-3 md:grid-cols-2 max-w-3xl">
+                {[
+                  "Gastritis y Helicobacter pylori",
+                  "Úlceras gástricas y duodenales",
+                  "Reflujo gastroesofágico (ERGE)",
+                  "Hernia hiatal",
+                  "Pólipos gástricos",
+                  "Cáncer gástrico en etapa temprana",
+                  "Várices esofágicas",
+                  "Estenosis (estrechamiento) del esófago",
+                ].map((condition) => (
+                  <div key={condition} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span className="text-foreground/80 text-sm">{condition}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -282,6 +305,19 @@ export default function EndoscopiaPage() {
                   3–6 meses espera
                 </p>
               </div>
+            </div>
+
+            <div className="rounded-xl bg-muted border border-border p-6 mt-8 max-w-4xl mx-auto">
+              <h3 className="font-serif font-semibold text-foreground mb-2">
+                ¿Hacen endoscopia en Salud Digna o Chopo?
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                No. Salud Digna y Chopo son laboratorios de análisis clínicos —
+                no cuentan con endoscopios, quirófano ni anestesiólogo para
+                realizar endoscopias. Para un procedimiento endoscópico necesitas
+                un endoscopista certificado en un hospital equipado como{" "}
+                {CLINIC.address.streetAddress.split(",")[0].trim()}.
+              </p>
             </div>
 
             {/* What's included */}
@@ -384,6 +420,61 @@ export default function EndoscopiaPage() {
                 <span className="text-muted-foreground">
                   15–25 min procedimiento + 30–45 min recuperación
                 </span>
+              </div>
+            </div>
+
+            {/* Fear-based reassurance — targets "duele la endoscopia" + "es peligrosa la endoscopia" (P5 Investigator) */}
+            <div className="grid gap-6 md:grid-cols-2 mt-12">
+              <div className="rounded-xl border border-border bg-background p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  ¿Duele la endoscopia?
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  No. Se realiza con sedación consciente administrada por un
+                  anestesiólogo certificado. No sentirás dolor ni molestia. La
+                  mayoría de pacientes despiertan sin recordar nada del
+                  procedimiento. Después puedes tener leve molestia en la
+                  garganta que desaparece en pocas horas.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-background p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  ¿Es peligrosa la endoscopia?
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  Es uno de los procedimientos más seguros en gastroenterología.
+                  La tasa de complicaciones serias es menor al 0.1%. El{" "}
+                  {DOCTOR.name} realiza más de 500 endoscopias al año en Hospital
+                  Amerimed con monitoreo continuo por anestesiólogo certificado.
+                  Las complicaciones raras incluyen reacción leve a sedación o
+                  sangrado menor tras biopsia.
+                </p>
+              </div>
+            </div>
+
+            {/* Results timeline */}
+            <div className="rounded-xl bg-background border border-border p-6 mt-6">
+              <h3 className="font-serif font-semibold text-foreground mb-4">
+                ¿Cuándo recibo los resultados?
+              </h3>
+              <div className="grid gap-4 md:grid-cols-2 text-sm text-foreground/80">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong className="text-foreground">Mismo día:</strong> Reporte con fotos HD de hallazgos</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong className="text-foreground">5–10 días:</strong> Resultado de patología (si hubo biopsias)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong className="text-foreground">Seguimiento:</strong> Por WhatsApp para dudas post-procedimiento</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong className="text-foreground">Consulta de control:</strong> Según hallazgos — el doctor te indica</span>
+                </div>
               </div>
             </div>
           </div>

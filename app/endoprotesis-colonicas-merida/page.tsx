@@ -93,15 +93,15 @@ export default function EndoprotesisColonicasPage() {
 
             <div className="flex flex-wrap gap-6 text-sm text-foreground/70">
               <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-accent-strong" />
+                <MapPin className="h-4 w-4 text-accent" />
                 {CLINIC.address.streetAddress.split(",")[0]}, Mérida
               </span>
               <span className="inline-flex items-center gap-2">
-                <Clock className="h-4 w-4 text-accent-strong" />
+                <Clock className="h-4 w-4 text-accent" />
                 {CLINIC.hours.display}
               </span>
               <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-accent-strong" />
+                <ShieldCheck className="h-4 w-4 text-accent" />
                 Endoscopista + Cirujano certificado
               </span>
             </div>
@@ -126,7 +126,7 @@ export default function EndoprotesisColonicasPage() {
 
             <div className="space-y-4 mb-6">
               <div className="flex items-start gap-4">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <p className="text-foreground/80">
                   <strong className="text-foreground">
                     Obstrucción intestinal completa:
@@ -135,7 +135,7 @@ export default function EndoprotesisColonicasPage() {
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <p className="text-foreground/80">
                   <strong className="text-foreground">
                     Puente a cirugía programada:
@@ -145,7 +145,7 @@ export default function EndoprotesisColonicasPage() {
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <CheckCircle2 className="h-5 w-5 text-accent-strong flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <p className="text-foreground/80">
                   <strong className="text-foreground">
                     Paliación de síntomas:
@@ -195,7 +195,7 @@ export default function EndoprotesisColonicasPage() {
                       key={item}
                       className="flex items-center gap-4 text-foreground/80"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -261,7 +261,7 @@ export default function EndoprotesisColonicasPage() {
                 },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent-strong flex items-center justify-center text-white font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-bold text-sm">
                     {step}
                   </div>
                   <div>
@@ -275,7 +275,7 @@ export default function EndoprotesisColonicasPage() {
             </div>
 
             <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
-              <Clock className="h-4 w-4 text-accent-strong" />
+              <Clock className="h-4 w-4 text-accent" />
               Procedimiento: 30–45 minutos | Alivio de obstrucción: inmediato
             </div>
           </div>
@@ -318,7 +318,7 @@ export default function EndoprotesisColonicasPage() {
                       key={cred}
                       className="flex items-center gap-2 text-sm text-foreground/80"
                     >
-                      <ShieldCheck className="h-4 w-4 text-accent-strong flex-shrink-0" />
+                      <ShieldCheck className="h-4 w-4 text-accent flex-shrink-0" />
                       {cred}
                     </li>
                   ))}

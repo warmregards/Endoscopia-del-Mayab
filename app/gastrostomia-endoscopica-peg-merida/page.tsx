@@ -135,7 +135,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
             </h1>
 
             <p className="text-lg text-foreground/80 leading-relaxed">
-              La gastrostomía PEG es una sonda de alimentación que se coloca
+              La gastrostomía PEG (también llamada sonda PEG) es una sonda de alimentación que se coloca
               directamente en el estómago por endoscopia, sin cirugía abierta.
               Indicada cuando tu familiar no puede alimentarse por boca durante
               más de 4 semanas — {DOCTOR.name} la realiza en{" "}
@@ -206,8 +206,42 @@ export default function GastrostomiaEndoscopicaPEGPage() {
         </div>
       </section>
 
-      {/* S3: PRICING */}
+      {/* ── Family-focused reassurance ── bg-background */}
       <section className="bg-background">
+        <div className="container-page section-padding">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
+            Información para Familiares: Lo Que Necesitas Saber
+          </h2>
+
+          <div className="max-w-3xl space-y-8">
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+                ¿Es Doloroso para Mi Familiar?
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                La colocación se realiza con sedación — tu familiar no sentirá
+                dolor durante el procedimiento. Después, puede haber molestia
+                leve en el sitio durante 2 a 3 días, que se maneja con
+                analgésicos simples.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+                ¿Cómo Se Alimenta Después de la PEG?
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Se inicia con alimentación líquida especial a las 24 horas. Te
+                capacitamos completamente en el manejo de la sonda: cómo
+                alimentar, cómo limpiar, y cuándo llamar al doctor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* S3: PRICING */}
+      <section className="bg-muted">
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Costo de Gastrostomía PEG en Mérida
@@ -274,7 +308,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S4: PREPARATION & PROCESS */}
-      <section className="bg-muted">
+      <section className="bg-background">
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
             Preparación y Proceso
@@ -304,7 +338,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S5: DOCTOR CREDENTIALS */}
-      <section className="bg-background">
+      <section className="bg-muted">
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Tu Especialista: {DOCTOR.name}
@@ -363,14 +397,14 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S6: GOOGLE REVIEWS */}
-      <section className="bg-muted">
+      <section className="bg-background">
         <div className="container-page section-padding-lg">
           <GoogleReviews />
         </div>
       </section>
 
       {/* S7: FAQ */}
-      <section className="bg-background">
+      <section className="bg-muted">
         <div className="container-page section-padding-lg">
           <Faq routeKey="gastrostomia" service="gastrostomia" />
         </div>

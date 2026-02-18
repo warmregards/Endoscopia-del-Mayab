@@ -136,6 +136,18 @@ export default function EmrPage() {
               el mismo día. En muchos casos, pacientes que otro médico envió a cirugía pueden
               resolverse con EMR ambulatoria.
             </p>
+
+            <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+              ¿EMR Es lo Mismo que Cirugía?
+            </h3>
+            <p className="text-foreground/80 leading-relaxed mb-6">
+              No. La EMR se realiza por vía endoscópica — sin incisiones, sin
+              cicatrices, sin hospitalización. Muchos pacientes que otro médico
+              envió a cirugía abierta pueden resolverse con EMR ambulatoria. El{" "}
+              {DOCTOR.name} evalúa cada caso y te indica si EMR es la opción
+              adecuada o si necesitas un abordaje diferente.
+            </p>
+
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border">
               <Clock className="h-5 w-5 text-accent-strong" />
               <span className="font-semibold text-foreground">30–45 minutos</span>

@@ -13,17 +13,7 @@ import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
 
-const baseMeta = metaFor("apc")
-
-export const metadata = {
-  ...baseMeta,
-  other: {
-    ...(typeof baseMeta.other === "object" ? baseMeta.other : {}),
-    "geo.region": "MX-YUC",
-    "geo.placename": CLINIC.address.addressLocality,
-    "ICBM": `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
-  },
-}
+export const metadata = metaFor("apc")
 
 export default function APCPage() {
   return (
@@ -58,6 +48,11 @@ export default function APCPage() {
                 className="sm:px-8"
               />
               <CallButton service="coagulacion plasma argon" position="hero" variant="ghost" />
+            </div>
+
+            <div className="flex items-center gap-2 text-sm text-foreground/70">
+              <MapPin className="h-4 w-4 text-primary shrink-0" />
+              <span>{CLINIC.address.display}</span>
             </div>
           </div>
         </div>
@@ -152,7 +147,7 @@ export default function APCPage() {
             {/* Before */}
             <div>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-6">
-                Antes del procedimiento
+                Pasos del procedimiento
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
@@ -287,81 +282,44 @@ export default function APCPage() {
         </div>
       </section>
 
-      {/* 8. RELATED PROCEDURES */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
-            Procedimientos relacionados
+      {/* 8. RELATED PROCEDURES + BOTTOM CTA */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          {/* Related procedures */}
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+            Procedimientos Relacionados
           </h2>
-
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
             {[
-              {
-                name: "Endoscopia",
-                href: "/endoscopia-merida",
-                price: mxn(PRICING.endoscopia.from),
-                desc: "El APC se realiza durante una endoscopia diagnóstica",
-              },
-              {
-                name: "Colonoscopia",
-                href: "/colonoscopia-merida",
-                price: mxn(PRICING.colonoscopia.from),
-                desc: "Tratamiento de angiodisplasias colónicas con APC",
-              },
-              {
-                name: "Resección Endoscópica (EMR)",
-                href: "/reseccion-endoscopica-mucosa-emr-merida",
-                price: "Cotización",
-                desc: "Hemostasia preventiva post-resección",
-              },
-            ].map((card) => (
+              { name: "Endoscopia", href: "/endoscopia-merida" },
+              { name: "Colonoscopia", href: "/colonoscopia-merida" },
+              { name: "Resección Endoscópica (EMR)", href: "/reseccion-endoscopica-mucosa-emr-merida" },
+            ].map((proc) => (
               <Link
-                key={card.href}
-                href={card.href}
-                className="group p-6 rounded-xl bg-card border border-border hover:shadow-md hover:border-accent/30 transition-all"
+                key={proc.href}
+                href={proc.href}
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
               >
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-serif text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {card.name}
-                  </h3>
-                  <ArrowRight className="h-4 w-4 text-foreground/40 group-hover:text-primary transition-colors" />
-                </div>
-                <p className="text-sm font-medium text-text-accent mb-2">
-                  {card.price === "Cotización" ? "Precio bajo cotización" : `Desde ${card.price}`}
-                </p>
-                <p className="text-sm text-foreground/70">{card.desc}</p>
+                {proc.name} →
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* 9. BOTTOM CTA */}
-      <section className="bg-primary">
-        <div className="container-page section-padding">
-          <div className="max-w-2xl mx-auto text-center space-y-6">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
-              ¿Necesitas coagulación con plasma de argón?
-            </h2>
-            <p className="text-white/80">
-              Agenda tu cita directamente con el Dr. Quiroz
-            </p>
-            <p className="text-sm text-white/60">
-              {CLINIC.address.display}<br />
-              {CLINIC.hours.display}
-            </p>
-            <p className="text-sm text-white/70">
-              Cerca de Cholul, Temozón Norte y Altabrisa
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <WhatsAppButton
-                service="coagulacion plasma argon"
-                position="bottom cta"
-                procedureName="Coagulación con Plasma de Argón"
-                className="sm:px-10"
-              />
-              <CallButton service="coagulacion plasma argon" position="bottom cta" variant="inverse" />
-            </div>
+          {/* CTA */}
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
+            ¿Necesitas coagulación con plasma de argón?
+          </h2>
+          <p className="text-white/80">
+            Agenda tu cita directamente con el Dr. Quiroz
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <WhatsAppButton
+              service="coagulacion plasma argon"
+              position="bottom cta"
+              procedureName="Coagulación con Plasma de Argón"
+              className="sm:px-10"
+            />
+            <CallButton service="coagulacion plasma argon" position="bottom cta" variant="inverse" />
           </div>
         </div>
       </section>

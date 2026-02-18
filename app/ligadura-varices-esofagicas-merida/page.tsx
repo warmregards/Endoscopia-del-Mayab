@@ -544,7 +544,7 @@ export default function LigaduraVaricesPage() {
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
-                ¿Necesitas valoración urgente?
+                ¿Sangrado por Várices Esofágicas? Valoración Urgente en Mérida
               </h2>
               <p className="text-white/80 mt-2">
                 Si tienes sangrado digestivo o te indicaron ligadura de várices,

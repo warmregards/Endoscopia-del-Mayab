@@ -150,6 +150,15 @@ export default function RetiroBalonGastricoPage() {
             ))}
           </div>
 
+          <div className="bg-accent-light border border-accent/20 rounded-xl p-6 mb-6">
+            <p className="text-foreground/80 leading-relaxed">
+              <strong className="text-foreground">¿Otro médico colocó tu balón?</strong>{" "}
+              No importa. El {DOCTOR.name} tiene experiencia con Orbera,
+              Reshape y Spatz — retiramos balones colocados por cualquier
+              médico, dentro o fuera de Mérida.
+            </p>
+          </div>
+
           <p className="text-muted-foreground">
             Si tu médico te indicó retirar el balón, el {DOCTOR.name} puede
             evaluarte.{" "}
@@ -166,8 +175,24 @@ export default function RetiroBalonGastricoPage() {
         </div>
       </section>
 
-      {/* ── SECTION 3: PRICING ── bg-background */}
+      {/* ── Fear-based content ── bg-background */}
       <section className="bg-background">
+        <div className="container-page section-padding">
+          <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+            ¿Duele el Retiro de Balón Gástrico?
+          </h3>
+          <p className="text-foreground/80 leading-relaxed max-w-3xl mb-4">
+            El retiro se realiza con sedación intravenosa — no sientes nada
+            durante el procedimiento. Después puedes sentir una molestia leve
+            en la garganta por 24 a 48 horas, similar a la que sentiste cuando
+            te colocaron el balón. La mayoría de pacientes describen el retiro
+            como más sencillo que la colocación.
+          </p>
+        </div>
+      </section>
+
+      {/* ── SECTION 3: PRICING ── bg-muted */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Precio de Retiro de Balón Gástrico en Mérida
@@ -232,8 +257,8 @@ export default function RetiroBalonGastricoPage() {
         </div>
       </section>
 
-      {/* ── SECTION 4: PREPARATION ── bg-muted */}
-      <section className="bg-muted">
+      {/* ── SECTION 4: PREPARATION ── bg-background */}
+      <section className="bg-background">
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             ¿Cómo Se Realiza el Retiro de Balón Gástrico?
@@ -318,8 +343,8 @@ export default function RetiroBalonGastricoPage() {
         </div>
       </section>
 
-      {/* ── SECTION 5: DOCTOR CREDENTIALS ── bg-background */}
-      <section className="bg-background">
+      {/* ── SECTION 5: DOCTOR CREDENTIALS ── bg-muted */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-shrink-0">
@@ -380,22 +405,22 @@ export default function RetiroBalonGastricoPage() {
         </div>
       </section>
 
-      {/* ── SECTION 6: GOOGLE REVIEWS ── bg-muted */}
-      <section className="bg-muted">
+      {/* ── SECTION 6: GOOGLE REVIEWS ── bg-background */}
+      <section className="bg-background">
         <div className="container-page section-padding">
           <GoogleReviews />
         </div>
       </section>
 
-      {/* ── SECTION 7: FAQ ── bg-background */}
-      <section className="bg-background">
+      {/* ── SECTION 7: FAQ ── bg-muted */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <Faq routeKey="retiro_balon" service="retiro balon" />
         </div>
       </section>
 
-      {/* ── SECTION 8: RELATED + CTA ── bg-muted */}
-      <section className="bg-muted">
+      {/* ── SECTION 8: RELATED + CTA ── bg-background */}
+      <section className="bg-background">
         <div className="container-page section-padding space-y-16">
           {/* Related procedures */}
           <div>

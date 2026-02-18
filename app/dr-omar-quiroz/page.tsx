@@ -282,7 +282,13 @@ export default function DoctorOmarQuirozPage() {
               </div>
 
               {/* Stats */}
-              <div className="flex gap-4">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex-1 text-center p-4 rounded-xl bg-muted border border-border">
+                  <div className="text-2xl font-bold text-text-accent">500+</div>
+                  <div className="text-sm text-muted-foreground">
+                    Procedimientos anuales
+                  </div>
+                </div>
                 <div className="flex-1 text-center p-4 rounded-xl bg-muted border border-border">
                   <div className="text-2xl font-bold text-text-accent">15+</div>
                   <div className="text-sm text-muted-foreground">

@@ -5,22 +5,14 @@ import { DOCTOR } from "@/lib/doctor"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { CheckCircle2, MapPin, Clock, ArrowRight } from "lucide-react"
+import { CheckCircle2, MapPin, ArrowRight } from "lucide-react"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata = {
-  ...metaFor("dilatacion_biliar"),
-  other: {
-    "geo.region": "MX-YUC",
-    "geo.placename": CLINIC.address.addressLocality,
-    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
-    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
-  },
-}
+export const metadata = metaFor("dilatacion_biliar")
 
 const RELATED_PROCEDURES = [
   {
@@ -135,7 +127,7 @@ export default function DilatacionBiliarPage() {
             Es un procedimiento endoscópico que permite abrir conductos biliares
             que se han estrechado, restaurando el flujo normal de bilis sin
             necesidad de cirugía abierta. Se realiza con sedación en Hospital
-            Amerimed en la zona de Chichí Suárez, Mérida, Yucatán — con
+            Amerimed en la zona de Chichi Suárez, Mérida, Yucatán — con
             acceso rápido desde Temozón, Cholul, Altabrisa y la zona norte de
             la ciudad.
           </p>
@@ -314,52 +306,34 @@ export default function DilatacionBiliarPage() {
         </div>
       </section>
 
-      {/* Section 8: Related Procedures */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
+      {/* Section 8: Related Procedures + Bottom CTA */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          {/* Related procedures */}
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
             Procedimientos Relacionados
           </h2>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
             {RELATED_PROCEDURES.map((proc) => (
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
               >
-                <h3 className="font-serif text-lg font-semibold text-foreground">
-                  {proc.name}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {proc.description}
-                </p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-sm font-medium text-text-accent">
-                    {proc.price}
-                  </span>
-                  <span className="flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
-                    Ver más <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
+                {proc.name} →
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Section 9: Bottom CTA */}
-      <section className="bg-primary">
-        <div className="container-page section-padding text-center">
+          {/* CTA */}
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
             ¿Necesitas Evaluación para Dilatación Biliar?
           </h2>
-          <p className="mt-4 text-white/80 max-w-xl mx-auto">
+          <p className="text-white/80 max-w-xl mx-auto">
             Escríbenos por WhatsApp para una valoración personalizada con el{" "}
             {DOCTOR.name}.
           </p>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <WhatsAppButton
               service="dilatacion biliar"
               position="cta section"
@@ -371,17 +345,6 @@ export default function DilatacionBiliarPage() {
               position="cta section"
               variant="inverse"
             />
-          </div>
-
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-white/70">
-            <span className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              {CLINIC.address.display}
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              {CLINIC.hours.display}
-            </span>
           </div>
         </div>
       </section>

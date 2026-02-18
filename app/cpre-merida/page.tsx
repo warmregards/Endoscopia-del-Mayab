@@ -5,7 +5,7 @@ import { DOCTOR } from "@/lib/doctor"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
-import { CheckCircle2, MapPin } from "lucide-react"
+import { CheckCircle2, MapPin, Clock } from "lucide-react"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
@@ -188,15 +188,45 @@ export default function CprePage() {
             <h3 className="text-lg font-serif font-semibold text-foreground">
               ¿Cuándo necesitas una CPRE?
             </h3>
-            <div className="space-y-4 text-foreground/80 leading-relaxed">
-              <p>
-                Tu médico puede indicar una CPRE si tienes cálculos en el
-                conducto biliar (coledocolitiasis), ictericia con sospecha de
-                obstrucción, pancreatitis biliar aguda, estenosis de las vías
-                biliares o necesitas drenaje biliar antes de una cirugía de
-                vesícula.
+            <ul className="space-y-2 text-foreground/80">
+              {[
+                "Cálculos en el conducto biliar (coledocolitiasis)",
+                "Ictericia por obstrucción biliar",
+                "Pancreatitis biliar aguda",
+                "Estenosis de las vías biliares",
+                "Drenaje biliar antes de cirugía de vesícula",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Risk reassurance — targets "cpre riesgos y complicaciones" P5 queries */}
+            <div className="rounded-xl bg-accent-light border border-accent/20 p-6">
+              <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+                ¿Es segura la CPRE?
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                La CPRE es un procedimiento seguro cuando lo realiza un especialista
+                certificado con experiencia. Las complicaciones más frecuentes —
+                pancreatitis leve y sangrado menor — ocurren en menos del 5% de los
+                casos y generalmente se resuelven con manejo conservador en 24–48
+                horas. El {DOCTOR.name} tiene doble formación como cirujano y
+                endoscopista: si surge alguna complicación durante el procedimiento,
+                puede resolverla sin necesidad de referirte a otro especialista.
               </p>
             </div>
+
+            {/* SpyGlass explainer */}
+            <p className="text-foreground/80 leading-relaxed">
+              En casos complejos, utilizamos tecnología SpyGlass — un endoscopio
+              miniatura que permite ver directamente el interior de los conductos
+              biliares. Es especialmente útil para cálculos difíciles de extraer
+              o para evaluar estenosis cuya causa no está clara en estudios de
+              imagen convencionales.
+            </p>
           </div>
         </div>
       </section>
@@ -325,6 +355,41 @@ export default function CprePage() {
                 </p>
               </div>
             </div>
+
+            {/* Recovery timeline — addresses P5 "después de cpre" queries */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-serif font-semibold text-foreground">
+                Recuperación después de la CPRE
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  { time: "2–3 horas", desc: "Observación en recuperación. El doctor te explica lo que encontró con imágenes." },
+                  { time: "24–48 horas", desc: "Reposo relativo, dieta blanda progresiva. Molestia leve en garganta es normal y pasa sola." },
+                  { time: "3–5 días", desc: "Actividades normales. Seguimiento por WhatsApp directo con el doctor." },
+                  { time: "7–10 días", desc: "Control si se colocó prótesis o se realizó intervención compleja." },
+                ].map((t) => (
+                  <div key={t.time} className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent-light flex items-center justify-center">
+                      <Clock className="h-4 w-4 text-accent" />
+                    </span>
+                    <div>
+                      <span className="font-semibold text-foreground">{t.time}</span>
+                      <p className="text-sm text-foreground/70">{t.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Warning signs */}
+            <div className="rounded-xl bg-muted border border-border p-6">
+              <p className="text-foreground/80 leading-relaxed">
+                <strong className="text-foreground">Señales de alarma:</strong>{" "}
+                fiebre mayor a 38°C, dolor abdominal intenso o sangrado — contacta
+                al {DOCTOR.name} inmediatamente por WhatsApp o llama al{" "}
+                {CLINIC.phone.display}.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -415,43 +480,28 @@ export default function CprePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 8: Related Procedures — bg-muted
-          Serves: P1, P4
+          SECTION 8: Related Procedures + Bottom CTA — bg-primary
+          Serves: ALL personas
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
-            Otros procedimientos que pueden ayudarte
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          {/* Related procedures */}
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+            Procedimientos Relacionados
           </h2>
-
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
             {relatedProcedures.map((proc) => (
               <Link
                 key={proc.slug}
                 href={`/${proc.slug}`}
-                className="group block p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
               >
-                <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {proc.name}
-                </h3>
-                <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
-                  {proc.desc}
-                </p>
-                <span className="text-sm font-semibold text-text-accent">
-                  {displayFrom(proc.pricingKey)}
-                </span>
+                {proc.name} →
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          SECTION 9: Bottom CTA — bg-primary
-          Serves: ALL personas
-          ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
-        <div className="container-page section-padding text-center space-y-6">
+          {/* CTA */}
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
             ¿Listo para agendar tu CPRE?
           </h2>

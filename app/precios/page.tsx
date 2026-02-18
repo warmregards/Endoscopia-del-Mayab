@@ -210,6 +210,28 @@ export default function PreciosPage() {
               Todos los precios
             </h2>
 
+            {/* Long-tail pricing headings */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
+                  ¿Cuánto Cuesta una Colonoscopia en Mérida?
+                </h3>
+                <p className="text-foreground/80 text-sm leading-relaxed">
+                  {displayFrom("colonoscopia")} — con sedación, biopsias y sala
+                  de recuperación incluidas. Sin costos ocultos.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
+                  ¿Cuánto Cuesta una Endoscopia en Mérida?
+                </h3>
+                <p className="text-foreground/80 text-sm leading-relaxed">
+                  {displayFrom("endoscopia")} — mismo día, resultados
+                  inmediatos.
+                </p>
+              </div>
+            </div>
+
             {/* Group A: Diagnostic */}
             <div className="space-y-4">
               <h3 className="font-serif font-semibold text-foreground text-lg">
@@ -422,6 +444,22 @@ export default function PreciosPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Cost-concern reassurance ── */}
+      <div className="bg-background">
+        <div className="container-page py-6">
+          <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-5 max-w-3xl">
+            <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
+              ¿El Precio Puede Subir?
+            </h3>
+            <p className="text-foreground/80 text-sm leading-relaxed">
+              El precio publicado incluye todo lo listado arriba. Si durante el
+              procedimiento se detecta algo que requiera atención adicional, el{" "}
+              {DOCTOR.name} te lo comunica antes de cualquier cargo extra.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════
           SECTION 6: FAQ — bg-muted

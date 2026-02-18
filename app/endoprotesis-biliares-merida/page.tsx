@@ -17,7 +17,6 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
-import { montserrat } from "@/app/fonts"
 
 export const revalidate = 86400
 export const metadata = {
@@ -80,7 +79,7 @@ export default function EndoprotesisBiliaresPage() {
             </div>
 
             <h1
-              className={`${montserrat.className} text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground`}
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground"
             >
               Endoprótesis Biliares en Mérida
             </h1>
@@ -133,7 +132,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6`}
+            className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6"
           >
             ¿Qué son las Endoprótesis Biliares?
           </h2>
@@ -154,7 +153,7 @@ export default function EndoprotesisBiliaresPage() {
           </p>
 
           <h3
-            className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+            className="font-serif text-lg font-semibold text-foreground mb-4"
           >
             ¿Cuándo se necesitan?
           </h3>
@@ -176,7 +175,7 @@ export default function EndoprotesisBiliaresPage() {
             {/* Stent Plástico */}
             <div className="rounded-xl border border-border bg-card p-6">
               <h3
-                className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                className="font-serif text-lg font-semibold text-foreground mb-4"
               >
                 Stent Plástico
               </h3>
@@ -198,7 +197,7 @@ export default function EndoprotesisBiliaresPage() {
             {/* Stent Metálico */}
             <div className="rounded-xl border border-border bg-card p-6">
               <h3
-                className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                className="font-serif text-lg font-semibold text-foreground mb-4"
               >
                 Stent Metálico
               </h3>
@@ -224,7 +223,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2`}
+            className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2"
           >
             Costo de Endoprótesis Biliares en Mérida
           </h2>
@@ -246,7 +245,7 @@ export default function EndoprotesisBiliaresPage() {
             </p>
 
             <h3
-              className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+              className="font-serif text-lg font-semibold text-foreground mb-4"
             >
               Incluye:
             </h3>
@@ -284,7 +283,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8"
           >
             Preparación y Recuperación
           </h2>
@@ -293,7 +292,7 @@ export default function EndoprotesisBiliaresPage() {
             {/* Before */}
             <div className="rounded-xl border border-border bg-card p-6">
               <h3
-                className={`${montserrat.className} text-lg font-semibold text-foreground mb-6`}
+                className="font-serif text-lg font-semibold text-foreground mb-6"
               >
                 Antes del Procedimiento
               </h3>
@@ -332,7 +331,7 @@ export default function EndoprotesisBiliaresPage() {
             {/* After */}
             <div className="rounded-xl border border-border bg-card p-6">
               <h3
-                className={`${montserrat.className} text-lg font-semibold text-foreground mb-6`}
+                className="font-serif text-lg font-semibold text-foreground mb-6"
               >
                 Durante la Recuperación
               </h3>
@@ -389,7 +388,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8"
           >
             Tu Especialista en Endoprótesis Biliares
           </h2>
@@ -408,7 +407,7 @@ export default function EndoprotesisBiliaresPage() {
             <div className="space-y-4">
               <div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground`}
+                  className="font-serif text-lg font-semibold text-foreground"
                 >
                   {DOCTOR.name}
                 </h3>
@@ -460,7 +459,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-xl md:text-2xl font-bold tracking-tight text-foreground mb-8`}
+            className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-8"
           >
             Procedimientos Relacionados
           </h2>
@@ -492,7 +491,7 @@ export default function EndoprotesisBiliaresPage() {
                 className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
               >
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-2`}
+                  className="font-serif text-lg font-semibold text-foreground mb-2"
                 >
                   {proc.name}
                 </h3>
@@ -516,7 +515,7 @@ export default function EndoprotesisBiliaresPage() {
       <section className="bg-primary">
         <div className="container-page section-padding text-center">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold tracking-tight text-white mb-4`}
+            className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4"
           >
             ¿Necesitas una Endoprótesis Biliar en Mérida?
           </h2>

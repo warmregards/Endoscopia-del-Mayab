@@ -222,6 +222,32 @@ export default function ExtraccionCuerposExtranosPage() {
               incluyendo Altabrisa, Cholul, Temozón Norte, García Ginerés y
               Montebello.
             </p>
+
+            <div className="rounded-xl bg-background border border-border p-6 mt-6">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+                Extracción en niños
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                La ingestión accidental de objetos es una de las emergencias
+                pediátricas más comunes. Monedas, pilas botón, imanes y juguetes
+                pequeños requieren evaluación inmediata. El {DOCTOR.name} tiene
+                experiencia en extracción endoscópica pediátrica con sedación
+                segura adaptada a niños.
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {[
+                  "Monedas — el objeto más frecuente en niños",
+                  "Pilas botón — urgencia máxima (quemadura en 2 horas)",
+                  "Imanes múltiples — riesgo de perforación intestinal",
+                  "Juguetes pequeños y piezas de plástico",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

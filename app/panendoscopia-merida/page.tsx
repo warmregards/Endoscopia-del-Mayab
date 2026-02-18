@@ -312,6 +312,19 @@ export default function PanendoscopiaPage() {
               </ul>
             </div>
           </div>
+
+          <div className="bg-accent-light border border-accent/20 rounded-xl p-6 mt-8">
+            <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+              ¿Es Seguro Hacer Endoscopia y Colonoscopia el Mismo Día?
+            </h3>
+            <p className="text-foreground/80 text-sm leading-relaxed">
+              Sí. Es la práctica estándar cuando se necesitan ambos estudios.
+              Una sola sedación significa menos riesgo que dos sedaciones
+              separadas, y el tiempo total es 45 a 60 minutos. El
+              anestesiólogo monitorea constantemente y el {DOCTOR.name} tiene
+              equipo de reanimación disponible.
+            </p>
+          </div>
         </div>
       </section>
 

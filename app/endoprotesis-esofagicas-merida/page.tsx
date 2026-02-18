@@ -222,8 +222,93 @@ export default function EndoprotesisEsofagicasPage() {
         </div>
       </section>
 
-      {/* §4 Doctor Credentials → bg-muted */}
+      {/* §3.5 Preparation & Recovery → bg-muted */}
       <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-8">
+            <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
+              Preparación y qué esperar
+            </h2>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Antes
+                </h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Ayuno de 8–12 horas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Estudios previos (tomografía, endoscopia diagnóstica)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Suspender anticoagulantes según indicación</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Acompañante adulto obligatorio</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Durante (30–45 min)
+                </h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Sedación profunda con anestesiólogo</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Endoscopio avanza hasta la estenosis</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Despliegue del stent autoexpandible</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Verificación de posición y permeabilidad</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-foreground text-center mb-4">
+                  Después
+                </h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Observación 4–6 horas en hospital</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Dieta modificada (líquidos → blandos)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Control endoscópico según indicación</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-text-accent flex-shrink-0 mt-0.5" />
+                    <span>Seguimiento por WhatsApp incluido</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* §4 Doctor Credentials → bg-background */}
+      <section className="bg-background">
         <div className="container-page section-padding">
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="flex-shrink-0">
@@ -282,22 +367,22 @@ export default function EndoprotesisEsofagicasPage() {
         </div>
       </section>
 
-      {/* §5 Google Reviews → bg-background */}
-      <section className="bg-background">
+      {/* §5 Google Reviews → bg-muted */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <GoogleReviews />
         </div>
       </section>
 
-      {/* §6 FAQ → bg-muted */}
-      <section className="bg-muted">
+      {/* §6 FAQ → bg-background */}
+      <section className="bg-background">
         <div className="container-page section-padding">
           <Faq routeKey="endoprotesis_esofagicas" service="endoprótesis esofágica" />
         </div>
       </section>
 
-      {/* §7 Related Procedures → bg-background */}
-      <section className="bg-background">
+      {/* §7 Related Procedures → bg-muted */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold text-xl md:text-2xl tracking-tight text-foreground mb-8">
             Procedimientos relacionados

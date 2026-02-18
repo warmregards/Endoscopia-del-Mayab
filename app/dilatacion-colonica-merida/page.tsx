@@ -12,15 +12,7 @@ import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
-export const metadata: import("next").Metadata = {
-  ...metaFor("dilatacion_colonica"),
-  other: {
-    "geo.region": "MX-YUC",
-    "geo.placename": "Mérida",
-    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
-    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
-  },
-}
+export const metadata = metaFor("dilatacion_colonica")
 
 export default function DilatacionColonicaPage() {
   const jsonLd = procedureSchema({
@@ -344,67 +336,38 @@ export default function DilatacionColonicaPage() {
         </div>
       </section>
 
-      {/* SECTION 8a: Related Procedures */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
+      {/* SECTION 8: Related Procedures + Bottom CTA */}
+      <section className="bg-primary">
+        <div className="container-page section-padding text-center space-y-8">
+          {/* Related procedures */}
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
             Procedimientos Relacionados
           </h2>
-
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
             {[
-              {
-                name: "Colonoscopia",
-                slug: "/colonoscopia-merida",
-                desc: "Estudio diagnóstico que detecta estenosis del colon",
-                price: mxn(PRICING.colonoscopia.from),
-              },
-              {
-                name: "Dilatación Esofágica",
-                slug: "/dilatacion-esofagica-merida",
-                desc: "Misma técnica para estrechamientos del esófago",
-                price: mxn(PRICING.dilatacion_esofagica.from),
-              },
-              {
-                name: "Endoprótesis Colónicas",
-                slug: "/endoprotesis-colonicas-merida",
-                desc: "Alternativa con stent para obstrucciones complejas",
-                price: null,
-              },
+              { name: "Colonoscopia", href: "/colonoscopia-merida" },
+              { name: "Dilatación Esofágica", href: "/dilatacion-esofagica-merida" },
+              { name: "Endoprótesis Colónicas", href: "/endoprotesis-colonicas-merida" },
             ].map((proc) => (
               <Link
-                key={proc.slug}
-                href={proc.slug}
-                className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                key={proc.href}
+                href={proc.href}
+                className="rounded-xl border border-white/20 bg-white/10 p-4 text-white hover:bg-white/20 transition-colors text-sm font-medium"
               >
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-                  {proc.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">{proc.desc}</p>
-                <p className="text-sm font-medium text-text-accent mb-4">
-                  {proc.price ? `Desde ${proc.price}` : "Precio bajo cotización"}
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-4 transition-all">
-                  Ver más <ArrowRight className="h-4 w-4" />
-                </span>
+                {proc.name} →
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* SECTION 8b: Final CTA */}
-      <section className="bg-primary">
-        <div className="container-page section-padding text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
+          {/* CTA */}
+          <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
             Agenda tu Evaluación
           </h2>
-          <p className="text-white/80 max-w-xl mx-auto mb-8">
+          <p className="text-white/80 max-w-xl mx-auto">
             Mejora tu calidad de vida con tratamiento endoscópico especializado en{" "}
             {CLINIC.address.addressLocality}, {CLINIC.address.addressRegion}.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <WhatsAppButton
               service="dilatación colónica"
               position="cta section"
@@ -416,17 +379,6 @@ export default function DilatacionColonicaPage() {
               position="cta section"
               variant="inverse"
             />
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/80">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              <span>{CLINIC.address.streetAddress}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>{CLINIC.hours.display}</span>
-            </div>
           </div>
         </div>
       </section>

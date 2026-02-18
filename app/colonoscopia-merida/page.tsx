@@ -517,8 +517,23 @@ export default function ColonoscopiaPage() {
               </div>
             </div>
 
+            {/* Pain reassurance — targets "duele la colonoscopia" P5 snippet */}
+            <div className="rounded-xl bg-accent-light border border-accent/20 p-6 max-w-3xl mx-auto">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                ¿Duele la colonoscopia?
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                No. La colonoscopia se realiza bajo sedación profunda con
+                anestesiólogo — estás completamente dormido durante todo el
+                procedimiento. No sientes dolor, no sientes incomodidad, y la
+                mayoría de los pacientes no recuerdan nada al despertar. La parte
+                más incómoda es la preparación intestinal del día anterior, no el
+                procedimiento en sí.
+              </p>
+            </div>
+
             <p className="text-sm text-muted-foreground text-center">
-              ¿Dudas sobre la preparación?{" "}
+              ¿Más dudas sobre la preparación?{" "}
               <a
                 href="#faqs-colonoscopia"
                 className="text-primary hover:underline"

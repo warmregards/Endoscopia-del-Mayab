@@ -259,13 +259,13 @@ export default function ContactoPage() {
       <GoogleReviews title="Lo Que Dicen Nuestros Pacientes" />
 
       {/* SECTION 6: FAQ — bg-muted */}
-      <div className="bg-muted">
+      <section className="bg-muted">
         <Faq
           routeKey="contacto"
           service="contacto"
           heading="Preguntas Frecuentes sobre Citas"
         />
-      </div>
+      </section>
 
       {/* SECTION 7: Bottom CTA — bg-primary */}
       <section className="bg-primary">

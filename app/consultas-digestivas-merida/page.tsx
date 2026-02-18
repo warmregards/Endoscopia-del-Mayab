@@ -12,15 +12,7 @@ import GoogleReviews from "@/components/GoogleReviews"
 import Faq from "@/components/Faq"
 
 export const revalidate = 86400
-export const metadata: import("next").Metadata = {
-  ...metaFor("consultas"),
-  other: {
-    "geo.region": "MX-YUC",
-    "geo.placename": CLINIC.address.addressLocality,
-    "geo.position": `${CLINIC.geo.lat};${CLINIC.geo.lng}`,
-    ICBM: `${CLINIC.geo.lat}, ${CLINIC.geo.lng}`,
-  },
-}
+export const metadata = metaFor("consultas")
 
 export default function ConsultasDigestivasPage() {
   const consultationPrice = mxn(ADDITIONAL_FEES.consultation.amount)
@@ -63,7 +55,7 @@ export default function ConsultasDigestivasPage() {
             </div>
 
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
-              Consultas Digestivas en Mérida
+              Gastroenterólogo en Mérida — Consultas Digestivas
             </h1>
 
             <p className="text-lg text-muted-foreground">
@@ -76,6 +68,14 @@ export default function ConsultasDigestivasPage() {
               En Endoscopia del Mayab, el Dr. Quiroz evalúa tus síntomas con
               enfoque especializado para darte un diagnóstico real y un plan de
               tratamiento claro.
+            </p>
+
+            <p className="text-base text-foreground/80 leading-relaxed">
+              El {DOCTOR.name} es endoscopista gastrointestinal certificado — a
+              diferencia de un gastroenterólogo de consulta, puede diagnosticar y
+              tratar en el mismo acto mediante endoscopia. Si tu evaluación
+              indica que necesitas un procedimiento, lo realiza él mismo sin
+              referirte a otro especialista.
             </p>
 
             <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
@@ -171,6 +171,28 @@ export default function ConsultasDigestivasPage() {
                 Ver todos los precios →
               </Link>
             </p>
+          </div>
+
+          {/* Symptom trigger list — targets "cuándo ir al gastroenterólogo" P5 queries */}
+          <div className="mt-8">
+            <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+              ¿Cuándo debes consultar a un especialista digestivo?
+            </h3>
+            <ul className="space-y-2 text-muted-foreground">
+              {[
+                "Reflujo o acidez que no mejora con antiácidos de farmacia",
+                "Dolor abdominal recurrente sin diagnóstico claro",
+                "Cambio en hábitos intestinales que persiste más de 4 semanas",
+                "Sangrado digestivo — heces oscuras, negras o con sangre",
+                "Pérdida de peso involuntaria sin causa aparente",
+                "Antecedentes familiares de cáncer gástrico o colorrectal (tamizaje preventivo a partir de los 45 años)",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

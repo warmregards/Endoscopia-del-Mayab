@@ -9,6 +9,7 @@ import { CheckCircle2, MapPin, ArrowRight, Clock, Car } from "lucide-react"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
 export const metadata = metaFor("cpre_playa_del_carmen")
@@ -395,10 +396,20 @@ export default function CprePlayaDelCarmenPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 6: FAQ — bg-muted
-          Serves: P5 (researcher), P1 (QR location seeker)
+          SECTION 6: Google Reviews — bg-muted
+          Serves: P3 (referred patients traveling from QR)
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
+        <div className="container-page section-padding">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7: FAQ — bg-background
+          Serves: P5 (researcher), P1 (QR location seeker)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
         <Faq
           routeKey="cpre_playa_del_carmen"
           service="CPRE"

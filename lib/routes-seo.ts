@@ -273,9 +273,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     type: "service",
     service: "Consultas Digestivas",
     path: "/consultas-digestivas-merida",
-    titleOverride: "Consultas Digestivas en Mérida | Desde $900 MXN | Endoscopia del Mayab",
+    titleOverride: "Gastroenterólogo en Mérida | Consultas Digestivas | Endoscopia del Mayab",
     descriptionOverride:
-      "Consulta digestiva especializada con el Dr. Omar Quiroz en Mérida. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
+      "Gastroenterólogo en Mérida — consulta digestiva especializada con el Dr. Omar Quiroz. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
   },
 
 } as const

@@ -96,6 +96,13 @@ export default function Page() {
             </span>
           </div>
 
+          <p className="text-sm text-muted-foreground mb-8">
+            Anestesia, biopsias y sala de recuperación incluidas en todos los procedimientos.{" "}
+            <Link href="/precios" className="text-primary font-medium hover:underline">
+              Ver todos los precios →
+            </Link>
+          </p>
+
           <div id="hero-ctas" className="flex flex-col sm:flex-row gap-4 mb-6">
             <WhatsAppButton
               service="homepage"
@@ -115,6 +122,9 @@ export default function Page() {
             <MapPin className="h-4 w-4 text-primary shrink-0" />
             <span>{CLINIC.address.streetAddress} — {CLINIC.address.neighborhood}</span>
           </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            A minutos de Cholul, Temozón Norte, Altabrisa, Francisco de Montejo y el Centro Histórico de Mérida.
+          </p>
         </div>
       </section>
 
@@ -203,8 +213,13 @@ export default function Page() {
                   <p className="text-primary font-medium text-sm mb-4">
                     Endoscopista Gastrointestinal Certificado
                   </p>
-                  <p className="text-muted-foreground italic text-sm mb-6 max-w-md">
+                  <p className="text-muted-foreground italic text-sm mb-4 max-w-md">
                     &ldquo;Cuando nos escribes, te contesta el doctor directamente.&rdquo;
+                  </p>
+                  <p className="text-foreground/80 text-sm mb-6 max-w-md leading-relaxed">
+                    El único endoscopista certificado en Mérida con consultorio propio
+                    en Hospital Amerimed — tu procedimiento lo realiza el mismo doctor
+                    que te atiende por WhatsApp.
                   </p>
 
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -263,6 +278,62 @@ export default function Page() {
 
       {/* ── Google Reviews — Social Proof ── */}
       <GoogleReviews />
+
+      {/* ── How It Works + Sedation Reassurance ── */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-8">
+            ¿Cómo Funciona? Tu Primera Cita en 3 Pasos
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-3 mb-8">
+            {[
+              {
+                n: 1,
+                title: "Agenda",
+                desc: `Escríbenos por WhatsApp. El ${DOCTOR.name} te responde personalmente y agenda tu cita.`,
+              },
+              {
+                n: 2,
+                title: "Procedimiento",
+                desc: "Llegada, sedación segura, procedimiento ambulatorio. Resultados el mismo día.",
+              },
+              {
+                n: 3,
+                title: "Seguimiento",
+                desc: "Reporte con fotos HD, seguimiento por WhatsApp, y orientación completa.",
+              },
+            ].map((step) => (
+              <div
+                key={step.n}
+                className="p-6 rounded-xl border border-border bg-card text-center"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                  {step.n}
+                </div>
+                <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-5">
+            <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
+              Sedación Segura — No Sientes Nada
+            </h3>
+            <p className="text-foreground/80 text-sm leading-relaxed max-w-2xl">
+              Todos nuestros procedimientos se realizan con sedación consciente y
+              anestesiólogo certificado. Te duermes, se realiza el estudio, y
+              despiertas sin recordar nada. Es ambulatorio — regresas a casa el
+              mismo día.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* ── Section 5: All Services Catalog ── */}
       <section className="bg-background">

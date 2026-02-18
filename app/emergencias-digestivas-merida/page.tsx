@@ -14,11 +14,9 @@ import {
   ChevronRight,
 } from "lucide-react"
 import Faq from "@/components/Faq"
-import GoogleReviews from "@/components/GoogleReviews"
 import MapEmbed from "@/components/MapEmbed"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
-import { montserrat } from "@/app/fonts"
 
 export const revalidate = 86400
 export const metadata = {
@@ -48,7 +46,7 @@ export default function EmergenciasDigestivasPage() {
                 </div>
 
                 <h1
-                  className={`${montserrat.className} text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight`}
+                  className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight"
                 >
                   Emergencias Digestivas en Mérida
                 </h1>
@@ -62,15 +60,15 @@ export default function EmergenciasDigestivasPage() {
 
                 <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
+                    <CheckCircle2 className="h-4 w-4 text-accent" />
                     <span>Disponible fines de semana y festivos</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
+                    <CheckCircle2 className="h-4 w-4 text-accent" />
                     <span>Hospital Amerimed, Mérida</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent-strong" />
+                    <CheckCircle2 className="h-4 w-4 text-accent" />
                     <span>Cirujano + endoscopista para casos complejos</span>
                   </div>
                 </div>
@@ -122,7 +120,7 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
           >
             ¿Es una Emergencia Digestiva?
           </h2>
@@ -135,7 +133,7 @@ export default function EmergenciasDigestivasPage() {
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground`}
+                  className="font-serif text-lg font-semibold text-foreground"
                 >
                   Busca Atención Inmediata
                 </h3>
@@ -168,7 +166,7 @@ export default function EmergenciasDigestivasPage() {
                   <Clock className="h-6 w-6 text-primary" />
                 </div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground`}
+                  className="font-serif text-lg font-semibold text-foreground"
                 >
                   Agenda lo Antes Posible
                 </h3>
@@ -201,7 +199,7 @@ export default function EmergenciasDigestivasPage() {
         <div className="container-page section-padding">
           <div className="mb-8">
             <h2
-              className={`${montserrat.className} text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2`}
+              className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"
             >
               Procedimientos de Emergencia Disponibles
             </h2>
@@ -239,7 +237,7 @@ export default function EmergenciasDigestivasPage() {
                 className="rounded-2xl border border-border bg-card p-8 hover:shadow-md transition-shadow"
               >
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                  className="font-serif text-lg font-semibold text-foreground mb-4"
                 >
                   {proc.title}
                 </h3>
@@ -263,7 +261,7 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold text-foreground tracking-tight text-center mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight text-center mb-8"
           >
             Cómo Funciona la Atención de Emergencia
           </h2>
@@ -274,7 +272,7 @@ export default function EmergenciasDigestivasPage() {
                 step: 1,
                 title: "Contacto Inmediato",
                 text: `Llama o escribe por WhatsApp. Describe tus síntomas. El ${DOCTOR.name} evalúa y coordina tu llegada a Hospital Amerimed.`,
-                bg: "bg-accent-strong",
+                bg: "bg-accent",
               },
               {
                 step: 2,
@@ -286,7 +284,7 @@ export default function EmergenciasDigestivasPage() {
                 step: 3,
                 title: "Procedimiento + Seguimiento",
                 text: "Endoscopia terapéutica con sedación segura. Control post-procedimiento y seguimiento por WhatsApp incluidos.",
-                bg: "bg-accent-strong",
+                bg: "bg-accent",
               },
             ].map((item) => (
               <div
@@ -299,7 +297,7 @@ export default function EmergenciasDigestivasPage() {
                   {item.step}
                 </div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                  className="font-serif text-lg font-semibold text-foreground mb-4"
                 >
                   {item.title}
                 </h3>
@@ -314,7 +312,7 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
           >
             Tu Emergencia en Manos Expertas
           </h2>
@@ -332,7 +330,7 @@ export default function EmergenciasDigestivasPage() {
 
             <div className="flex-1 space-y-6">
               <h3
-                className={`${montserrat.className} text-lg font-semibold text-foreground`}
+                className="font-serif text-lg font-semibold text-foreground"
               >
                 {DOCTOR.name}
               </h3>
@@ -383,7 +381,7 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8`}
+            className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
           >
             Dónde Encontrarnos
           </h2>
@@ -393,8 +391,8 @@ export default function EmergenciasDigestivasPage() {
             <div className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent-strong/10 flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="h-5 w-5 text-accent-strong" />
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="h-5 w-5 text-accent" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">WhatsApp</p>
@@ -455,7 +453,7 @@ export default function EmergenciasDigestivasPage() {
             <div className="space-y-8">
               <div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                  className="font-serif text-lg font-semibold text-foreground mb-4"
                 >
                   Qué Traer a la Emergencia
                 </h3>
@@ -476,7 +474,7 @@ export default function EmergenciasDigestivasPage() {
 
               <div>
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-4`}
+                  className="font-serif text-lg font-semibold text-foreground mb-4"
                 >
                   Formas de Pago
                 </h3>
@@ -486,7 +484,7 @@ export default function EmergenciasDigestivasPage() {
                     "Pago directo con cotización previa",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-accent-strong flex-shrink-0 mt-1" />
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-1" />
                       <span className="text-sm text-foreground/80">{item}</span>
                     </li>
                   ))}
@@ -516,11 +514,11 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-primary">
         <div className="container-page section-padding text-center">
           <h2
-            className={`${montserrat.className} text-2xl md:text-3xl font-bold text-primary-foreground tracking-tight mb-4`}
+            className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight mb-4"
           >
             ¿Emergencia Digestiva Ahora?
           </h2>
-          <p className="text-primary-foreground/80 mb-8">
+          <p className="text-white/80 mb-8">
             No esperes — las emergencias digestivas requieren atención inmediata
           </p>
 
@@ -533,7 +531,7 @@ export default function EmergenciasDigestivasPage() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/70">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4" />
               <span>Hospital Amerimed</span>
@@ -554,7 +552,7 @@ export default function EmergenciasDigestivasPage() {
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2
-            className={`${montserrat.className} text-xl md:text-2xl font-bold text-foreground tracking-tight mb-8`}
+            className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-8"
           >
             Procedimientos Relacionados
           </h2>
@@ -586,7 +584,7 @@ export default function EmergenciasDigestivasPage() {
                 className="group rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/30 transition-all"
               >
                 <h3
-                  className={`${montserrat.className} text-lg font-semibold text-foreground mb-2`}
+                  className="font-serif text-lg font-semibold text-foreground mb-2"
                 >
                   {proc.title}
                 </h3>
@@ -600,13 +598,6 @@ export default function EmergenciasDigestivasPage() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── Google Reviews ── bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews limit={3} />
         </div>
       </section>
 
