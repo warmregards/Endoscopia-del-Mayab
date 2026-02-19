@@ -34,10 +34,7 @@ const defaultOg = `${siteUrl}/omar-open-graph.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: "Endoscopia en Mérida – Endoscopia del Mayab",
-    template: "%s | Endoscopia del Mayab",
-  },
+  title: "Endoscopia en Mérida – Endoscopia del Mayab",
   description:
     "Endoscopia en Mérida con sedación segura. Colonoscopia, endoscopia alta, CPRE y procedimientos digestivos con el Dr. Omar Quiroz.",
   openGraph: {
