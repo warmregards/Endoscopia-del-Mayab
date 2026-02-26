@@ -50,12 +50,12 @@ export default function ConsultasDigestivasPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20">
               <Stethoscope className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-foreground">
-                Gastroenterología Especializada
+                Endoscopia Gastrointestinal
               </span>
             </div>
 
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
-              Gastroenterólogo en Mérida — Consultas Digestivas
+              Endoscopista en Mérida — Consultas Digestivas
             </h1>
 
             <p className="text-lg text-muted-foreground">

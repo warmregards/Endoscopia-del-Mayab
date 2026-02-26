@@ -2,8 +2,8 @@
 // Centralized metadata generation for all pages.
 // Consumed by: layout.tsx, page.tsx files across all 28 routes.
 //
-// Title/description formulas follow Project_Context_and_Decisions_v2.md:
-//   Procedure:  [Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
+// Title/description formulas (v3 — "Precio" keyword for CTR):
+//   Procedure:  [Name] en Mérida | Precio desde $X MXN | Endoscopia del Mayab
 //   Homepage:   Endoscopia y Colonoscopia en Mérida | Desde $4,500 MXN | Endoscopia del Mayab
 //   Pricing:    Precios de Endoscopia y Colonoscopia en Mérida | Endoscopia del Mayab
 //   Doctor:     Dr. Omar Quiroz – Endoscopista en Mérida | Endoscopia del Mayab
@@ -48,6 +48,8 @@ interface BuildMetaParams {
   ogType?: "website" | "article" | "profile"
   robots?: Robots
   twitterCard?: "summary_large_image" | "summary"
+  /** Replace "Endoscopia del Mayab" brand suffix with a custom string (e.g., "Dr. Omar Quiroz"). */
+  brandOverride?: string
 }
 
 // ---------------------------------------------------------------------------
@@ -66,8 +68,8 @@ const TITLE_MAX = 70
 const DESC_MAX = 160
 
 // Standard trust signals for descriptions (Persona 2 + Persona 1)
-const TRUST_LINE = "Incluye anestesia, biopsias y recuperación."
-const CTA_LINE = "Agenda directo con el Dr. Quiroz por WhatsApp."
+const TRUST_LINE = "Precio incluye anestesia, biopsias y recuperación."
+const CTA_LINE = "Agenda con el Dr. Quiroz por WhatsApp."
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE).replace(
   /\/$/,
@@ -129,6 +131,7 @@ export function buildMeta({
   ogType = "website",
   robots,
   twitterCard = "summary_large_image",
+  brandOverride,
 }: BuildMetaParams): Metadata {
   const canonicalUrl = joinUrl(siteUrl, path)
   const fullOgImageUrl = ogImage.startsWith("http")
@@ -151,7 +154,16 @@ export function buildMeta({
       }
     : { index: false, follow: false }
 
-  const safeTitle = trim(withBrand(title), TITLE_MAX)
+  const safeTitle = trim(
+    brandOverride
+      ? (() => {
+          const suffix = ` | ${brandOverride}`
+          const candidate = `${title}${suffix}`
+          return candidate.length <= TITLE_MAX ? candidate : title
+        })()
+      : withBrand(title),
+    TITLE_MAX
+  )
   const safeDesc = trim(description, DESC_MAX)
 
   return {
@@ -191,11 +203,11 @@ export function buildMeta({
 /**
  * Generate metadata for procedure/service pages.
  *
- * Title formula (per Project_Context_v2):
- *   [Procedure Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
+ * Title formula (v3 — "Precio" keyword for CTR):
+ *   [Name] en Mérida | Precio desde $X MXN | Endoscopia del Mayab
  *
  * Description formula:
- *   [Procedure] en Mérida desde $X MXN. [Trust signals]. [CTA].
+ *   [Name] en Mérida — precio desde $X MXN. [Trust signals]. [CTA].
  *
  * @example
  *   buildServiceMeta({
@@ -216,29 +228,35 @@ export function buildServiceMeta(
     descriptionExtra?: string
     /** Full title override — bypasses the formula entirely */
     titleOverride?: string
+    /** Override service name in <title> only. H1/schema still use `service`. */
+    serviceDisplayOverride?: string
   }
 ): Metadata {
-  const { service, key, descriptionOverride, descriptionExtra, titleOverride, ...rest } =
+  const { service, key, descriptionOverride, descriptionExtra, titleOverride, serviceDisplayOverride, ...rest } =
     params
 
   // ── Title ──
-  // Formula: [Service] en Mérida | Desde $X MXN | Endoscopia del Mayab
-  // Brand is appended by withBrand() in buildMeta, so we build up to that point.
+  // Formula: [DisplayName] en Mérida | Precio desde $X MXN | Brand/Override
+  // Brand (or brandOverride) is appended by buildMeta, so we build up to that point.
+  const displayName = serviceDisplayOverride ?? service
   const priceStr =
-    key && hasPrice(key) ? `Desde ${mxn(PRICING[key].from)}` : undefined
+    key && hasPrice(key) ? `Precio desde ${mxn(PRICING[key].from)}` : undefined
 
-  const titleParts = [`${service} en Mérida`, priceStr].filter(Boolean)
+  const titleParts = [`${displayName} en Mérida`, priceStr].filter(Boolean)
   const title = titleOverride ?? titleParts.join(" | ")
 
   // ── Description ──
+  // Order: base price → differentiator → trust → CTA.
+  // buildDescription drops from the end when over 160 chars,
+  // so CTA drops first, then trust, preserving the differentiator.
   const description =
     descriptionOverride ??
     buildDescription([
       priceStr
-        ? `${service} en Mérida ${priceStr.toLowerCase().replace("mxn", "MXN")}.`
+        ? `${service} en Mérida — precio desde ${mxn(PRICING[key!].from)}.`
         : `${service} en Mérida.`,
-      TRUST_LINE,
       descriptionExtra,
+      TRUST_LINE,
       CTA_LINE,
     ])
 

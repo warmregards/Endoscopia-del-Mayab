@@ -503,7 +503,7 @@ export default function EndoscopiaPage() {
                   Tu endoscopista: {DOCTOR.name}
                 </h2>
                 <p className="text-primary font-medium text-sm mt-1">
-                  Gastroenterólogo y Endoscopista Certificado
+                  Endoscopista Gastrointestinal Certificado
                 </p>
               </div>
             </div>

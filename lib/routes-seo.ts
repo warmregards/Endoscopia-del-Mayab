@@ -3,20 +3,14 @@
 // Consumes: seo.ts builders, services.ts for data, pricing.ts for keys.
 //
 // Architecture:
-//   - Procedure routes use `buildServiceMeta()` with the v2 title formula:
-//     [Service] en Mérida | Desde $X MXN | Endoscopia del Mayab
+//   - Procedure routes use `buildServiceMeta()` with the v3 title formula:
+//     [Name] en Mérida | Precio desde $X MXN | Endoscopia del Mayab
 //   - Homepage, pricing, doctor, contact use their dedicated builders
-//   - `descriptionOverride` is used ONLY when the auto-generated description
-//     genuinely doesn't work for a specific page. Most routes rely on the
-//     standard description template (price + trust signals + CTA).
-//
-// Title philosophy:
-//   The v2 spec defines a consistent title formula. Per-route "suffix" patterns
-//   were removed because:
-//   1. They produced inconsistent SERP appearances across 27 pages
-//   2. They competed with the price signal that drives Persona 2 CTR
-//   3. Google often rewrites overstuffed titles anyway
-//   If a page genuinely needs a custom title, use `titleOverride`.
+//   - `serviceDisplayOverride` — override service name in <title> only (H1/schema use `service`)
+//   - `brandOverride` — replace brand suffix (e.g., "Dr. Omar Quiroz" instead of "Endoscopia del Mayab")
+//   - `titleOverride` — ONLY for geo-targeted or structurally unique pages
+//   - `descriptionExtra` — page-specific differentiators assembled by the formula
+//   - `descriptionOverride` — ONLY when the entire description structure must differ
 
 import type { Metadata } from "next"
 import {
@@ -44,8 +38,12 @@ interface ServiceRouteCfg {
   descriptionOverride?: string
   /** Extra sentence inserted into the auto-generated description before CTA */
   descriptionExtra?: string
-  /** Full title override — bypasses the v2 formula entirely. Use sparingly. */
+  /** Full title override — bypasses the formula entirely. Use sparingly. */
   titleOverride?: string
+  /** Override service name in <title> only. H1 and schema still use `service`. */
+  serviceDisplayOverride?: string
+  /** Replace brand suffix in <title>. E.g., "Dr. Omar Quiroz" instead of "Endoscopia del Mayab". */
+  brandOverride?: string
 }
 
 interface SpecialRouteCfg {
@@ -80,7 +78,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/colonoscopia-merida",
     key: "colonoscopia",
     descriptionExtra:
-      "Prevención de cáncer colorrectal con detección y resección de pólipos.",
+      "Detección y prevención de cáncer colorrectal con tecnología Olympus HD.",
   },
   panendoscopia: {
     type: "service",
@@ -88,16 +86,16 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/panendoscopia-merida",
     key: "panendoscopia",
     descriptionExtra:
-      "Evaluación completa del tracto digestivo superior en una sola visita.",
+      "Endoscopia digestiva alta: evaluación de esófago, estómago y duodeno en una sola visita.",
   },
   cpre: {
     type: "service",
     service: "CPRE",
     path: "/cpre-merida",
     key: "cpre",
-    titleOverride: "CPRE en Mérida | Cálculos Biliares Sin Cirugía | Desde $15,000 MXN",
-    descriptionOverride:
-      "CPRE (colangiopancreatografía retrógrada endoscópica) en Mérida desde $15,000 MXN. Resuelve cálculos biliares, estenosis y obstrucciones en una sola sesión con sedación. Hospital Amerimed. Agenda por WhatsApp con el Dr. Quiroz.",
+    brandOverride: "Dr. Omar Quiroz",
+    descriptionExtra:
+      "Colangiopancreatografía para cálculos biliares y obstrucciones. Equipo SpyGlass en Hospital Amerimed.",
   },
 
   // ── Geo-Targeted Landing Pages ─────────────────────────────────────────
@@ -107,9 +105,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/cpre-playa-del-carmen",
     key: "cpre",
     titleOverride:
-      "CPRE en Playa del Carmen — Desde $25,000 MXN | Endoscopia del Mayab",
+      "CPRE en Playa del Carmen | Precio desde $25,000 MXN",
     descriptionOverride:
-      "CPRE para pacientes de Quintana Roo. Desde $25,000 MXN en Hospital Amerimed, Mérida. Incluye sedación y quirófano. Dr. Omar Quiroz — agenda por WhatsApp.",
+      "CPRE para pacientes de Quintana Roo. Precio desde $25,000 MXN en Hospital Amerimed, Mérida. Incluye sedación y quirófano. Dr. Omar Quiroz — agenda por WhatsApp.",
   },
 
   // ── Therapeutic Procedures ──────────────────────────────────────────────
@@ -134,6 +132,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     service: "Ligadura de Hemorroides Internas",
     path: "/ligadura-hemorroides-internas-merida",
     key: "ligadura_hemorroides",
+    serviceDisplayOverride: "Ligadura de Hemorroides",
     descriptionExtra:
       "Tratamiento ambulatorio con banda elástica. Mínimo dolor, rápida recuperación.",
   },
@@ -190,8 +189,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     service: "Coagulación con Plasma de Argón (APC)",
     path: "/apc-coagulacion-plasma-argon-merida",
     key: "apc",
+    serviceDisplayOverride: "Argón Plasma (APC)",
     descriptionExtra:
-      "Control de sangrado y tratamiento de lesiones con displasia.",
+      "Control de sangrado digestivo y tratamiento de lesiones con displasia.",
   },
 
   // ── Advanced / Quote-Only ───────────────────────────────────────────────
@@ -265,7 +265,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     type: "service",
     service: "Urgencias Digestivas",
     path: "/emergencias-digestivas-merida",
-    titleOverride: "Emergencias Digestivas en Mérida | Atención 24/7 | Endoscopia del Mayab",
+    titleOverride: "Emergencias Digestivas en Mérida | 24/7 | Endoscopia del Mayab",
     descriptionOverride:
       "Atención endoscópica de emergencia en Mérida: sangrado digestivo, cálculos biliares, cuerpos extraños. Dr. Omar Quiroz disponible fines de semana. Hospital Amerimed. WhatsApp 999 236 0153.",
   },
@@ -273,9 +273,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     type: "service",
     service: "Consultas Digestivas",
     path: "/consultas-digestivas-merida",
-    titleOverride: "Gastroenterólogo en Mérida | Consultas Digestivas | Endoscopia del Mayab",
+    titleOverride: "Endoscopista en Mérida | Consultas Digestivas | Endoscopia del Mayab",
     descriptionOverride:
-      "Gastroenterólogo en Mérida — consulta digestiva especializada con el Dr. Omar Quiroz. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
+      "Endoscopista gastrointestinal en Mérida — consulta digestiva especializada con el Dr. Omar Quiroz. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
   },
 
 } as const
@@ -313,5 +313,7 @@ export function metaFor(route: RouteKey): Metadata {
     descriptionOverride: cfg.descriptionOverride,
     descriptionExtra: cfg.descriptionExtra,
     titleOverride: cfg.titleOverride,
+    serviceDisplayOverride: cfg.serviceDisplayOverride,
+    brandOverride: cfg.brandOverride,
   })
 }
