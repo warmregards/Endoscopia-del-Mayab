@@ -150,6 +150,11 @@ export const endoscopiaFaqs: FAQ[] = [
     answer:
       "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado.",
   },
+  {
+    question: "¿Aceptan seguros de gastos médicos para endoscopia?",
+    answer:
+      "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu endoscopia.",
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -203,6 +208,11 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿La biopsia de colon tiene costo adicional?",
     answer: `La toma de biopsias durante la colonoscopia está incluida en el precio sin límite — no importa cuántas muestras se tomen. El único costo adicional es la lectura de patología (${biopsyFee()}), que se informa antes del procedimiento.`,
+  },
+  {
+    question: "¿Aceptan seguros de gastos médicos para colonoscopia?",
+    answer:
+      "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu colonoscopia.",
   },
 ]
 
