@@ -203,7 +203,7 @@ export default function PreciosPage() {
           SECTION 3: FULL PRICING TABLE — bg-background
           All 22 services grouped by category.
           ══════════════════════════════════════════════════════════════ */}
-      <section id="tabla-precios" className="bg-background">
+      <section id="pricing-anchor" className="bg-background">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
