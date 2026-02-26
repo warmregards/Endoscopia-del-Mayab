@@ -272,7 +272,11 @@ export default function LigaduraHemorroidesPage() {
               ))}
             </ul>
 
-            <div className="p-4 rounded-xl bg-muted border border-border mb-6">
+            <p className="text-sm text-foreground/80 mt-4">
+              Además incluye: evaluación proctológica, bandas elásticas y observación post-procedimiento de 1–2 horas. Una sola sesión resuelve la mayoría de los casos.
+            </p>
+
+            <div className="p-4 rounded-xl bg-muted border border-border mb-6 mt-6">
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">Costo adicional:</strong>{" "}
                 {ADDITIONAL_FEES.biopsy.label} —{" "}
