@@ -200,6 +200,10 @@ export const colonoscopiaFaqs: FAQ[] = [
     answer:
       "La colonoscopia tradicional (óptica) permite diagnóstico y tratamiento en la misma sesión — si encuentra un pólipo, lo retira ahí mismo. La virtual por tomografía no permite biopsia ni extracción, y si encuentra algo, requiere colonoscopia óptica de todos modos.",
   },
+  {
+    question: "¿La biopsia de colon tiene costo adicional?",
+    answer: `La toma de biopsias durante la colonoscopia está incluida en el precio sin límite — no importa cuántas muestras se tomen. El único costo adicional es la lectura de patología (${biopsyFee()}), que se informa antes del procedimiento.`,
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -294,6 +298,11 @@ export const cpreFaqs: FAQ[] = [
     question: "¿Realizan CPRE para pacientes de Playa del Carmen y Cancún?",
     answer:
       "Sí. Recibimos pacientes de toda la Península de Yucatán, incluyendo Playa del Carmen, Cancún y Quintana Roo. El procedimiento se realiza en Hospital Amerimed Mérida — a menos de 3 horas por carretera. Agenda por WhatsApp al 999 236 0153 y coordinamos tu cita.",
+  },
+  {
+    question: "¿Dónde se realiza la CPRE en Mérida?",
+    answer:
+      "En el quirófano de Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. Es el único centro en la península de Yucatán con esta combinación de equipo.",
   },
 ]
 
@@ -419,6 +428,15 @@ export const ligaduraHemorroidesFaqs: FAQ[] = [
     question: "¿Cómo es la recuperación?",
     answer:
       "Regreso a actividades en 24–48 horas. Recomendamos fibra, buena hidratación, baños de asiento y evitar cargar más de 10 kg por 2–3 semanas. Señales de alarma: sangrado abundante persistente, fiebre o dolor severo.",
+  },
+  {
+    question: "¿Qué incluye el precio de la ligadura de hemorroides?",
+    answer: `Desde ${price("ligadura_hemorroides")}. El precio incluye: valoración pre-procedimiento, sedación con anestesiólogo certificado, equipo endoscópico, bandas elásticas, sala de recuperación y seguimiento post-procedimiento por WhatsApp con el Dr. Quiroz. Sin cargos ocultos.`,
+  },
+  {
+    question: "¿Cuántas sesiones de ligadura de hemorroides necesito?",
+    answer:
+      "La mayoría de los pacientes resuelven con 1–2 sesiones espaciadas por 3–4 semanas. Hemorroides grado I generalmente requieren una sesión; grado II puede necesitar dos. El Dr. Quiroz evalúa en la primera consulta cuántas sesiones necesitas.",
   },
 ]
 
