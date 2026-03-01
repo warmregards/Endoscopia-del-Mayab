@@ -6,7 +6,6 @@ import { PRICING, mxn, displayFrom, ADDITIONAL_FEES } from "@/lib/pricing"
 import { SERVICES, servicesByCategory } from "@/lib/services"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import HomepageSchema from "@/components/home/HomepageSchema"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
@@ -51,8 +50,6 @@ const advancedServices = servicesByCategory("advanced")
 export default function Page() {
   return (
     <>
-      <HomepageSchema />
-
       {/* ── Section 1: Hero ── */}
       <section className="bg-background">
         <div className="container-page section-padding">
@@ -435,7 +432,7 @@ export default function Page() {
 
       {/* ── Section 6: FAQ ── */}
       <div className="bg-muted">
-        <Faq routeKey="home" maxVisible={6} noSchema />
+        <Faq routeKey="home" maxVisible={6} />
       </div>
 
       {/* ── Emergency Banner ── */}
