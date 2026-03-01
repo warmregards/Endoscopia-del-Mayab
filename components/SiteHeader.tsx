@@ -70,90 +70,92 @@ export default function SiteHeader() {
   }, [open, handleKeyDown]);
 
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/90">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center"
-          aria-label="Inicio - Endoscopia del Mayab"
-        >
-          <Image
-            src="/endoscopia-logo.png"
-            alt="Endoscopia del Mayab"
-            width={180}
-            height={40}
-            className="h-10 w-auto"
-            priority
-          />
-        </Link>
-
-        {/* Desktop nav */}
-        <nav
-          className="hidden md:flex items-center gap-8"
-          aria-label="Navegación principal"
-        >
+    <>
+      <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/90">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="text-foreground/80 hover:text-link font-medium"
-            data-cta="nav"
-            data-cta-link="home"
+            className="flex items-center"
+            aria-label="Inicio - Endoscopia del Mayab"
           >
-            Endoscopia Mérida
-          </Link>
-
-          <Link
-            href="/precios"
-            className="text-foreground/80 hover:text-link font-medium"
-            data-cta="nav"
-            data-cta-link="precios"
-          >
-            Precios
-          </Link>
-          <Link
-            href="/emergencias-digestivas-merida"
-            className="text-foreground/80 hover:text-link font-medium"
-            data-cta="nav"
-            data-cta-link="emergencias"
-          >
-            Emergencias
-          </Link>
-          <Link
-            href="/contacto"
-            className="text-foreground/80 hover:text-link font-medium"
-            data-cta="nav"
-            data-cta-link="contacto"
-          >
-            Contacto
-          </Link>
-        </nav>
-
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="md:hidden p-2 rounded-md text-foreground/80 hover:text-link"
-          aria-label="Abrir menú"
-          aria-controls="mobile-menu"
-          aria-expanded={open}
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
+            <Image
+              src="/endoscopia-logo.png"
+              alt="Endoscopia del Mayab"
+              width={180}
+              height={40}
+              className="h-10 w-auto"
+              priority
             />
-          </svg>
-        </button>
-      </div>
+          </Link>
 
-      {/* Mobile menu — full-screen overlay */}
+          {/* Desktop nav */}
+          <nav
+            className="hidden md:flex items-center gap-8"
+            aria-label="Navegación principal"
+          >
+            <Link
+              href="/"
+              className="text-foreground/80 hover:text-link font-medium"
+              data-cta="nav"
+              data-cta-link="home"
+            >
+              Endoscopia Mérida
+            </Link>
+
+            <Link
+              href="/precios"
+              className="text-foreground/80 hover:text-link font-medium"
+              data-cta="nav"
+              data-cta-link="precios"
+            >
+              Precios
+            </Link>
+            <Link
+              href="/emergencias-digestivas-merida"
+              className="text-foreground/80 hover:text-link font-medium"
+              data-cta="nav"
+              data-cta-link="emergencias"
+            >
+              Emergencias
+            </Link>
+            <Link
+              href="/contacto"
+              className="text-foreground/80 hover:text-link font-medium"
+              data-cta="nav"
+              data-cta-link="contacto"
+            >
+              Contacto
+            </Link>
+          </nav>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="md:hidden p-2 rounded-md text-foreground/80 hover:text-link"
+            aria-label="Abrir menú"
+            aria-controls="mobile-menu"
+            aria-expanded={open}
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile menu — OUTSIDE header to avoid backdrop-filter containment */}
       {open && (
         <div
           id="mobile-menu"
@@ -268,6 +270,6 @@ export default function SiteHeader() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
