@@ -9,7 +9,6 @@ import { DOCTOR } from "@/lib/doctor"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
-import StickyMobileCTA from "@/components/home/StickyMobileCTA"
 import GoogleReviews from "@/components/GoogleReviews"
 
 export const revalidate = 86400
@@ -498,9 +497,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Clearance for sticky mobile CTA bar */}
-      <div className="h-16 sm:h-0" aria-hidden="true" />
-      <StickyMobileCTA />
     </>
   )
 }

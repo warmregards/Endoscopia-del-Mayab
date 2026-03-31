@@ -50,7 +50,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-footer text-white pt-12 pb-8">
+    <footer className="bg-footer text-white pt-12 pb-20 md:pb-8">
       {/* Google Maps embed — GBP geo signal */}
       <div className="max-w-6xl mx-auto px-4 mb-8">
         <div className="h-48 sm:h-56 rounded-lg overflow-hidden [&>iframe]:!h-full [&>div]:!h-full">

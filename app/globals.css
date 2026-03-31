@@ -331,6 +331,11 @@
     @apply py-16;
   }
 
+  /* Safe area padding for sticky bottom bars (notch devices) */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   /* Glass morphism effect for cards */
   .glass-card {
     @apply bg-white/80 backdrop-blur-sm border border-border shadow-md;
