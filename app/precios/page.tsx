@@ -195,6 +195,12 @@ export default function PreciosPage() {
                 cubre todas las biopsias necesarias.
               </p>
             </div>
+
+            <p className="text-foreground/80 leading-relaxed">
+              Si necesitas endoscopia y colonoscopia, ambos estudios pueden
+              realizarse en la misma sesión de sedación — contáctanos por
+              WhatsApp para cotización combinada.
+            </p>
           </div>
         </div>
       </section>
@@ -226,8 +232,9 @@ export default function PreciosPage() {
                   ¿Cuánto Cuesta una Endoscopia en Mérida?
                 </h3>
                 <p className="text-foreground/80 text-sm leading-relaxed">
-                  {displayFrom("endoscopia")} — mismo día, resultados
-                  inmediatos.
+                  {displayFrom("endoscopia")} — con sedación, biopsias y
+                  reporte con fotos incluidos. Resultados el mismo día.
+                  Sin costos ocultos.
                 </p>
               </div>
             </div>

@@ -301,6 +301,14 @@ export default function ColonoscopiaPage() {
               >
                 CPRE en Mérida
               </Link>
+              . Si durante la colonoscopia se detectan hemorroides internas,
+              el Dr. Quiroz también realiza{" "}
+              <Link
+                href="/ligadura-hemorroides-internas-merida"
+                className="text-primary hover:underline"
+              >
+                ligadura de hemorroides con banda elástica
+              </Link>
               .
             </p>
           </div>
@@ -705,7 +713,9 @@ export default function ColonoscopiaPage() {
             {/* Cross-links */}
             <div className="space-y-2 text-sm text-muted-foreground">
               <p>
-                ¿Necesitas también revisar esófago y estómago?{" "}
+                ¿Necesitas endoscopia y colonoscopia? Ambos estudios se
+                realizan en la misma sesión de sedación — una sola
+                preparación.{" "}
                 <Link
                   href="/endoscopia-merida"
                   className="text-primary hover:underline"

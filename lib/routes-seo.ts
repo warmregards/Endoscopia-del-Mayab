@@ -88,7 +88,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "cpre",
     brandOverride: "Dr. Omar Quiroz",
     descriptionExtra:
-      "Colangiopancreatografía para cálculos biliares y obstrucciones. Equipo SpyGlass en Hospital Amerimed.",
+      "Tratamiento de cálculos biliares, ictericia obstructiva y pancreatitis biliar con equipo SpyGlass. Hospital Amerimed, Mérida.",
   },
 
   // ── Geo-Targeted Landing Pages ─────────────────────────────────────────

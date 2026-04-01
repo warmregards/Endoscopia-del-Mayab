@@ -326,11 +326,11 @@ export function buildDoctorMeta(
   overrides?: Partial<BuildMetaParams>
 ): Metadata {
   return buildMeta({
-    title: "Dr. Omar Quiroz – Endoscopista en Mérida",
+    title: "Dr. Omar Quiroz | Endoscopista en Mérida",
     description: buildDescription([
-      "Dr. Omar Quiroz, endoscopista certificado en Mérida, Yucatán.",
-      "Especialista en endoscopia, colonoscopia y CPRE en Hospital Amerimed.",
-      "Atención directa por WhatsApp — sin intermediarios.",
+      "Dr. Omar Quiroz, endoscopista certificado en Mérida.",
+      "Endoscopia, colonoscopia y CPRE — Hospital Amerimed.",
+      "WhatsApp directo con el doctor, sin intermediarios.",
     ]),
     path: "/dr-omar-quiroz",
     ogType: "profile",

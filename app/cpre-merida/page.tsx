@@ -171,10 +171,11 @@ export default function CprePage() {
 
             <div className="space-y-4 text-foreground/80 leading-relaxed">
               <p>
-                La CPRE (colangiopancreatografía retrógrada endoscópica) combina
-                un endoscopio especializado con rayos X en tiempo real para ver y
-                tratar problemas de los conductos biliares y el páncreas — todo
-                en una sola sesión, sin cirugía abierta.
+                La CPRE (colangiopancreatografía retrógrada endoscópica) —
+                también conocida como CEPRE — combina un endoscopio
+                especializado con rayos X en tiempo real para ver y tratar
+                problemas de los conductos biliares y el páncreas — todo en
+                una sola sesión, sin cirugía abierta.
               </p>
               <p>
                 Se usa para resolver cálculos atrapados en el conducto biliar,
@@ -223,21 +224,53 @@ export default function CprePage() {
               ))}
             </ul>
 
-            {/* Risk reassurance — targets "cpre riesgos y complicaciones" P5 queries */}
-            <div className="rounded-xl bg-accent-light border border-accent/20 p-6">
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
-                ¿Es segura la CPRE?
-              </h3>
-              <p className="text-foreground/80 leading-relaxed">
-                La CPRE es un procedimiento seguro cuando lo realiza un especialista
-                certificado con experiencia. Las complicaciones más frecuentes —
-                pancreatitis leve y sangrado menor — ocurren en menos del 5% de los
-                casos y generalmente se resuelven con manejo conservador en 24–48
-                horas. El {DOCTOR.name} tiene doble formación como cirujano y
-                endoscopista: si surge alguna complicación durante el procedimiento,
-                puede resolverla sin necesidad de referirte a otro especialista.
-              </p>
-            </div>
+            {/* Risk & pain reassurance — targets "cpre es peligrosa", "cpre riesgos" */}
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              ¿Es peligrosa la CPRE? Riesgos y seguridad
+            </h3>
+            <p className="text-foreground/80 leading-relaxed">
+              La CPRE es más compleja que una endoscopia convencional, pero es
+              un procedimiento seguro cuando lo realiza un especialista con
+              experiencia. Es importante que conozcas los riesgos para tomar
+              una decisión informada.
+            </p>
+            <p className="text-foreground/80 leading-relaxed">
+              El riesgo más descrito es pancreatitis post-CPRE (inflamación
+              temporal del páncreas), que ocurre en el 2–5% de los casos y
+              generalmente se resuelve con manejo médico en 24–72 horas. El
+              sangrado y la perforación son raros (menos del 1%). El{" "}
+              {DOCTOR.name} tiene doble formación como cirujano y
+              endoscopista: si surge alguna complicación, puede resolverla
+              sin necesidad de referirte a otro especialista.
+            </p>
+            <p className="text-foreground/80 leading-relaxed">
+              Para minimizar estos riesgos, utilizamos:
+            </p>
+            <ul className="space-y-2 text-foreground/80">
+              {[
+                "Duodenoscopio Olympus de alta resolución",
+                "Fluoroscopía digital en tiempo real",
+                "Antibióticos profilácticos cuando están indicados",
+                "Monitoreo continuo por anestesiólogo certificado",
+                "Quirófano completo en Hospital Amerimed con capacidad de respuesta inmediata",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              ¿Duele la CPRE?
+            </h3>
+            <p className="text-foreground/80 leading-relaxed">
+              No. Se realiza bajo sedación profunda administrada por
+              anestesiólogo — no sentirás dolor durante el procedimiento.
+              Después puedes tener molestia abdominal leve que se maneja con
+              medicamento. La estancia hospitalaria es de 6–24 horas según
+              la complejidad del caso.
+            </p>
 
             {/* SpyGlass explainer */}
             <p className="text-foreground/80 leading-relaxed">
@@ -281,23 +314,49 @@ export default function CprePage() {
               ))}
             </div>
 
-            {/* Extra costs */}
-            <div className="p-6 rounded-xl bg-muted border border-border">
-              <p className="text-foreground/80 leading-relaxed">
-                <strong className="text-foreground">Puede tener costo extra:</strong>{" "}
-                stents plásticos o metálicos y accesorios SpyGlass en casos
-                complejos — te cotizamos y autorizas antes del procedimiento.
-                Contamos con tecnología SpyGlass para casos que requieren
-                visualización directa del conducto biliar.
-              </p>
-            </div>
+            {/* What can modify the price */}
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              ¿Qué puede modificar el precio?
+            </h3>
+            <p className="text-foreground/80 leading-relaxed">
+              El precio puede aumentar si durante el procedimiento se requieren
+              intervenciones terapéuticas adicionales:
+            </p>
+            <ul className="space-y-2 text-foreground/80">
+              {[
+                "Esfinterotomía (corte del esfínter de Oddi para facilitar el drenaje)",
+                "Extracción de cálculos biliares múltiples o impactados",
+                "Colocación de endoprótesis (stent) biliar o pancreático",
+                "Uso de tecnología SpyGlass para visualización directa del conducto",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-foreground/80 leading-relaxed">
+              En todos los casos, el {DOCTOR.name} te informa el costo
+              estimado antes de proceder. No hay sorpresas — el precio se
+              confirma antes del procedimiento.
+            </p>
 
             {/* Competitor context */}
+            <h3 className="text-lg font-serif font-semibold text-foreground">
+              CPRE en Mérida vs. Cancún
+            </h3>
             <p className="text-foreground/80 leading-relaxed">
-              En hospitales de Mérida, la CPRE cuesta ~$34,000 MXN. En Cancún,
-              $40,000+. Nuestro precio es más accesible porque el {DOCTOR.name}{" "}
-              trabaja con equipo propio en {DOCTOR.worksFor.hospital} — sin
-              sobrecargos de intermediarios.
+              El mismo procedimiento en hospitales privados de Cancún puede
+              costar $40,000 MXN o más. {DOCTOR.worksFor.hospital} Mérida
+              está a menos de 3 horas de la Riviera Maya. Pacientes de
+              Quintana Roo pueden consultar nuestra página de{" "}
+              <Link
+                href="/cpre-playa-del-carmen"
+                className="text-primary font-semibold hover:underline"
+              >
+                CPRE para pacientes de Playa del Carmen
+              </Link>
+              .
             </p>
 
             <Link
@@ -415,10 +474,54 @@ export default function CprePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 5: Doctor — bg-background
-          Serves: P3 (Referido)
+          SECTION 5: ¿Dónde Hacen CPRE? — bg-background
+          Targets: "hospitales donde hacen cpre" (pos 6.1 → 35.8)
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Dónde hacen CPRE en Mérida?
+            </h2>
+
+            <p className="text-foreground/80 leading-relaxed">
+              El {DOCTOR.name} realiza la CPRE en el quirófano de{" "}
+              {DOCTOR.worksFor.hospital} Mérida (Consultorio 517, Chichí
+              Suárez), equipado con fluoroscopía digital, duodenoscopio
+              Olympus especializado y tecnología SpyGlass para casos
+              complejos. Es el único centro en la península de Yucatán con
+              esta combinación de equipo.
+            </p>
+
+            <p className="text-foreground/80 leading-relaxed">
+              La CPRE requiere infraestructura altamente especializada que
+              pocos hospitales tienen: fluoroscopio (rayos X en tiempo real),
+              duodenoscopio dedicado y quirófano con equipo de recuperación.
+              Por esto, muchos hospitales de la región — incluyendo los de
+              Cancún y Playa del Carmen — refieren estos casos a
+              especialistas en Mérida.
+            </p>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4 text-primary shrink-0" />
+              <span>{CLINIC.address.display}</span>
+            </div>
+
+            <WhatsAppButton
+              service="CPRE"
+              position="location"
+              procedureName="CPRE"
+              label="Agendar por WhatsApp"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 6: Doctor — bg-muted
+          Serves: P3 (Referido)
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -482,25 +585,25 @@ export default function CprePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 6: Google Reviews — bg-muted
+          SECTION 7: Google Reviews — bg-background
           Serves: ALL personas
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className="bg-background">
         <div className="container-page section-padding">
           <GoogleReviews />
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 7: FAQ — bg-background
+          SECTION 8: FAQ — bg-muted
           Serves: P5, P2
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className="bg-muted">
         <Faq routeKey="cpre" service="CPRE" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 8: Related Procedures + Bottom CTA — bg-primary
+          SECTION 9: Related Procedures + Bottom CTA — bg-primary
           Serves: ALL personas
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-primary">

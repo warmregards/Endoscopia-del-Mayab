@@ -118,7 +118,7 @@ export default function DoctorOmarQuirozPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
-            Endoscopista Gastrointestinal Certificado en Mérida
+            Dr. Omar Quiroz — Endoscopista Certificado en Mérida
           </h2>
 
           <p className="text-foreground/80 leading-relaxed max-w-3xl mb-8">
@@ -313,7 +313,7 @@ export default function DoctorOmarQuirozPage() {
       <section className="bg-muted">
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
-            Consultorio en Mérida, Yucatán
+            Consultorio del Dr. Omar Quiroz en Mérida
           </h2>
 
           {/* Primary hospital */}

@@ -249,11 +249,21 @@ export default function EndoscopiaPage() {
                 ¿Panendoscopia o endoscopia? Es el mismo procedimiento
               </h3>
               <p className="text-foreground/80 leading-relaxed">
-                &ldquo;Panendoscopia&rdquo; es simplemente el nombre médico formal
-                de la endoscopia digestiva alta. Si tu médico te indicó una
-                panendoscopia, es exactamente este estudio: una revisión de
-                esófago, estómago y duodeno con cámara flexible bajo sedación.
-                Mismo equipo, mismo precio, mismo doctor.
+                &ldquo;Panendoscopia&rdquo; — también llamada gastroscopia —
+                es simplemente el nombre médico formal de la endoscopia
+                digestiva alta. Si tu médico te indicó una panendoscopia, es
+                exactamente este estudio: una revisión de esófago, estómago y
+                duodeno con cámara flexible bajo sedación. Mismo equipo, mismo
+                precio, mismo doctor. Para estudios
+                especializados de vías biliares y páncreas, el Dr. Quiroz
+                también realiza{" "}
+                <Link
+                  href="/cpre-merida"
+                  className="text-primary hover:underline"
+                >
+                  CPRE en Hospital Amerimed
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -273,7 +283,8 @@ export default function EndoscopiaPage() {
                 Precio de endoscopia en Mérida — todo incluido
               </h2>
               <p className="text-muted-foreground">
-                Mismo equipo que hospitales privados — precio justo
+                ¿Cuánto cuesta una endoscopia? Mismo equipo que hospitales
+                privados — precio justo, todo incluido
               </p>
             </div>
 
@@ -330,7 +341,7 @@ export default function EndoscopiaPage() {
             {/* What's included */}
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
-                ¿Qué incluye tu endoscopia?
+                ¿Qué incluye el costo de tu endoscopia?
               </h3>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {[...includedItems, `Biopsia ${mxn(ADDITIONAL_FEES.biopsy.amount)} si necesaria`].map(
@@ -710,7 +721,9 @@ export default function EndoscopiaPage() {
             Otros procedimientos
           </h2>
           <p className="text-muted-foreground mb-8">
-            Precios transparentes — sin sorpresas
+            ¿Necesitas endoscopia y colonoscopia? Ambos estudios pueden
+            realizarse en la misma sesión de sedación. Precios transparentes
+            — sin sorpresas.
           </p>
 
           <div className="grid gap-6 md:grid-cols-3">

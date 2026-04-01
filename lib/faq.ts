@@ -153,7 +153,7 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Endoscopia y panendoscopia son lo mismo?",
     answer:
-      "Sí. Panendoscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites.",
+      "Sí. Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites.",
   },
   {
     question: "¿Hacen endoscopia en Salud Digna o Chopo?",
@@ -164,6 +164,25 @@ export const endoscopiaFaqs: FAQ[] = [
     question: "¿Aceptan seguros de gastos médicos para endoscopia?",
     answer:
       "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu endoscopia.",
+  },
+  {
+    question: "¿La endoscopia incluye toma de biopsia?",
+    answer: `Sí. Durante la endoscopia se pueden tomar biopsias de cualquier hallazgo sospechoso — sin límite y sin cargo adicional por la toma. Solo la lectura de patología (interpretación en laboratorio) tiene un costo aparte de ${biopsyFee()}. El Dr. Quiroz te muestra las fotos al despertar y te explica si se tomaron biopsias y por qué.`,
+  },
+  {
+    question: "¿Se pueden hacer endoscopia y colonoscopia el mismo día?",
+    answer:
+      "Sí. Cuando tu médico indica ambos estudios, se realizan en la misma sesión de sedación — una sola preparación, un solo anestesiólogo y menos tiempo en el hospital. Es lo más común en chequeos digestivos completos o cuando hay síntomas que requieren evaluación alta y baja. Contáctanos por WhatsApp para cotización combinada.",
+  },
+  {
+    question: "¿Dónde hacen endoscopia en Mérida?",
+    answer:
+      "En Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez), con equipo Olympus 190 HD, sala de recuperación y anestesiólogo certificado. A diferencia de laboratorios como Salud Digna o Chopo, Hospital Amerimed es un centro hospitalario completo equipado para endoscopia con sedación. Agenda por WhatsApp al 999 236 0153.",
+  },
+  {
+    question: "¿Cuándo es necesaria una endoscopia?",
+    answer:
+      "Tu médico puede indicar una endoscopia si tienes: acidez o reflujo que no mejora con medicamento, dolor abdominal recurrente, dificultad para tragar, náusea o vómito persistente, pérdida de peso inexplicada, anemia sin causa clara, o sospecha de H. pylori. También se usa como control después de tratar úlceras o como tamizaje si hay antecedentes de cáncer gástrico.",
   },
 ]
 
@@ -224,6 +243,21 @@ export const colonoscopiaFaqs: FAQ[] = [
     answer:
       "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu colonoscopia.",
   },
+  {
+    question: "¿Se pueden hacer colonoscopia y endoscopia el mismo día?",
+    answer:
+      "Sí. Cuando necesitas evaluación del tracto digestivo completo — arriba y abajo — realizamos ambos estudios en la misma sesión bajo una sola sedación. Es más cómodo, más seguro y más económico que hacerlos por separado. Escríbenos por WhatsApp para una cotización combinada.",
+  },
+  {
+    question: "¿A qué edad debo hacerme mi primera colonoscopia?",
+    answer:
+      "A partir de los 45 años si no tienes factores de riesgo — tanto hombres como mujeres. El cáncer colorrectal es el tercer cáncer más frecuente en mujeres en México. Si tienes antecedentes familiares de cáncer colorrectal, la primera colonoscopia se recomienda 10 años antes de la edad en que se diagnosticó el familiar. A cualquier edad si presentas sangrado rectal, cambio en hábitos intestinales o anemia sin causa clara.",
+  },
+  {
+    question: "¿Dónde hacen colonoscopia en Mérida?",
+    answer:
+      "En Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez). Contamos con colonoscopio Olympus HD, sala de recuperación privada y anestesiólogo dedicado. La colonoscopia requiere equipo hospitalario con sedación — no se realiza en laboratorios como Chopo o Salud Digna. Agenda por WhatsApp al 999 236 0153.",
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -283,6 +317,11 @@ export const cpreFaqs: FAQ[] = [
     question: "¿Dónde se realiza la CPRE en Mérida?",
     answer:
       "En el quirófano de Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. Es el único centro en la península de Yucatán con esta combinación de equipo.",
+  },
+  {
+    question: "¿CPRE y CEPRE son lo mismo?",
+    answer:
+      "Sí. CEPRE es la abreviación coloquial del mismo procedimiento: colangiopancreatografía retrógrada endoscópica (CPRE). Si tu médico te indicó una CEPRE, es exactamente el estudio que realizamos aquí.",
   },
 ]
 
