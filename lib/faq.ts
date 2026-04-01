@@ -875,17 +875,60 @@ export const retiroBalonFaqs: FAQ[] = [
 
 // ---------------------------------------------------------------------------
 // APC — coagulación con plasma de argón
+// Targets: procedure-intent ("argón plasma precio", "APC endoscopia")
+//          + disease-intent ("esófago de barrett tratamiento",
+//            "sangrado digestivo", "angiodisplasia", "GAVE", "proctitis radiación")
 // ---------------------------------------------------------------------------
 
 export const apcFaqs: FAQ[] = [
   {
     question: "¿Para qué sirve la coagulación con plasma de argón (APC)?",
     answer:
-      "Para tratar lesiones vasculares sangrantes, control hemostático post-resección y ablación de lesiones superficiales. Produce coagulación controlada sin contacto directo y con penetración limitada.",
+      "Para tratar lesiones vasculares sangrantes (angiodisplasias, ectasia vascular antral gástrica), ablación de esófago de Barrett con displasia, control de sangrado post-polipectomía, tratamiento de proctitis por radiación y desvitalización tumoral paliativa. Produce coagulación controlada sin contacto directo y con penetración limitada a 2–3 mm.",
   },
   {
-    question: "¿Cuántas sesiones necesito y cuánto cuesta?",
-    answer: `Desde ${price("apc")}. El número de sesiones depende de la extensión de la lesión y la respuesta clínica. Indicamos inhibidor de bomba de protones y dieta blanda 24–48 horas entre sesiones.`,
+    question: "¿Cuánto cuesta el tratamiento con APC en Mérida?",
+    answer: `Desde ${price("apc")} por sesión. El precio incluye sedación con anestesiólogo, equipo ERBE, sala de recuperación y reporte con fotografías. El número de sesiones depende de la condición: Barrett puede requerir 2–4 sesiones, GAVE entre 2–4, y lesiones hemorrágicas aisladas suelen resolverse en 1–2.`,
+  },
+  {
+    question: "¿Cómo se trata el esófago de Barrett con APC?",
+    answer:
+      "Se ablaciona el tejido metaplásico capa por capa bajo visión endoscópica directa. El tratamiento suele requerir múltiples sesiones espaciadas para permitir la regeneración de mucosa normal. Entre sesiones se indica inhibidor de bomba de protones. Se realizan biopsias de control para confirmar eliminación de la displasia.",
+  },
+  {
+    question: "¿Qué es la ectasia vascular antral gástrica (estómago sandía)?",
+    answer:
+      "La GAVE es una condición donde vasos sanguíneos anormales en el antro gástrico causan sangrado crónico y anemia. Se llama 'estómago sandía' por su apariencia endoscópica con franjas rojas. El APC es el tratamiento endoscópico de primera línea — coagula estos vasos en sesiones programadas hasta controlar el sangrado.",
+  },
+  {
+    question: "¿El APC sirve para proctitis por radiación?",
+    answer:
+      "Sí. La proctopatía por radiación causa sangrado rectal por vasos frágiles (telangiectasias) en pacientes que recibieron radioterapia pélvica. El APC es el tratamiento endoscópico más utilizado para esta condición. Generalmente se necesitan 2–4 sesiones dependiendo de la extensión.",
+  },
+  {
+    question: "¿Duele el tratamiento con APC?",
+    answer:
+      "No. Se realiza bajo sedación con anestesiólogo certificado — no sentirás dolor ni molestia durante el procedimiento. Después puedes tener sensación de distensión leve que desaparece en horas. Alta el mismo día en la mayoría de casos.",
+  },
+  {
+    question: "¿Cuántas sesiones de APC necesito?",
+    answer:
+      "Depende de la condición y extensión de la lesión. Barrett con displasia: 2–4 sesiones. GAVE: 2–4 sesiones. Angiodisplasias aisladas: 1–2 sesiones. Proctitis por radiación: 2–4 sesiones. El Dr. Quiroz evalúa tu caso y te presenta el plan completo antes de iniciar tratamiento.",
+  },
+  {
+    question: "¿Qué diferencia hay entre APC y cauterización?",
+    answer:
+      "La cauterización tradicional toca directamente el tejido. El APC trabaja sin contacto — el gas argón ionizado transfiere la energía a distancia con penetración controlada (2–3 mm), lo que reduce significativamente el riesgo de perforación y permite tratar áreas más amplias de forma segura.",
+  },
+  {
+    question: "¿Por qué el APC es más barato aquí que con otros doctores?",
+    answer:
+      `El Dr. Quiroz adquirió su propio equipo ERBE — no depende de rentar equipo hospitalario ni de intermediarios. Esto reduce el costo operativo y permite ofrecer el tratamiento desde ${price("apc")} por sesión, cuando otros proveedores en Mérida cobran entre $25,000 y $30,000 MXN.`,
+  },
+  {
+    question: "Vivo en Cancún / Playa del Carmen / Campeche — ¿puedo tratarme en Mérida?",
+    answer:
+      "Sí. Mérida es la única ciudad en la Península de Yucatán donde se realiza tratamiento con argón plasma. Recibimos pacientes de Cancún, Playa del Carmen, Tulum, Campeche, Chetumal y Belice. Agenda por WhatsApp y coordinamos tu cita — muchos pacientes combinan valoración y primera sesión en la misma visita para minimizar traslados.",
   },
 ]
 

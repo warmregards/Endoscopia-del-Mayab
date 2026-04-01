@@ -184,7 +184,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "apc",
     serviceDisplayOverride: "Argón Plasma (APC)",
     descriptionExtra:
-      "Control de sangrado digestivo y tratamiento de lesiones con displasia.",
+      "Equipo ERBE propio con el precio más accesible en la península. Sangrado digestivo, esófago de Barrett, GAVE, angiodisplasias y proctitis por radiación. Desde $15,000 MXN. Pacientes de Cancún, Campeche, Playa del Carmen y Belice.",
   },
 
   // ── Advanced / Quote-Only ───────────────────────────────────────────────

@@ -489,6 +489,10 @@ export default function ColonoscopiaPage() {
                     </span>
                   </li>
                 </ul>
+                <p className="text-sm text-foreground/80 mt-4">
+                  Para hemostasia post-polipectomía o tratamiento de angiodisplasias encontradas durante el estudio, contamos con{" "}
+                  <Link href="/apc-coagulacion-plasma-argon-merida" className="text-primary hover:underline">equipo ERBE propio con argón plasma</Link>.
+                </p>
               </div>
 
               {/* Step 3 */}

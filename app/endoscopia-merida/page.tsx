@@ -494,6 +494,11 @@ export default function EndoscopiaPage() {
                   <span><strong className="text-foreground">Consulta de control:</strong> Según hallazgos — el doctor te indica</span>
                 </div>
               </div>
+              <p className="text-sm text-foreground/80 mt-4">
+                Si se detectan lesiones que requieren tratamiento (como esófago de Barrett con displasia o angiodisplasias), contamos con equipo ERBE propio para realizar{" "}
+                <Link href="/apc-coagulacion-plasma-argon-merida" className="text-primary hover:underline">coagulación con plasma de argón (APC)</Link>
+                {" "}sin necesidad de referirte a otro especialista.
+              </p>
             </div>
           </div>
         </div>

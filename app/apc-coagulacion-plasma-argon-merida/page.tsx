@@ -32,7 +32,7 @@ export default function APCPage() {
             </h1>
 
             <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-              Tratamiento endoscópico sin contacto para control de sangrado digestivo y ablación de lesiones superficiales.
+              Tratamiento endoscópico sin contacto para sangrado digestivo, esófago de Barrett y ablación de lesiones — con equipo ERBE propio y el precio más accesible de la Península de Yucatán.
             </p>
 
             <div className="inline-flex items-baseline gap-2 px-6 py-4 rounded-2xl bg-accent-light border border-accent/20">
@@ -69,22 +69,70 @@ export default function APCPage() {
             La coagulación con plasma de argón (APC) es un tratamiento endoscópico que utiliza gas argón ionizado para coagular tejido sin contacto directo. El gas se ioniza y transfiere energía al tejido, sellando vasos sanguíneos de forma segura con una penetración limitada a 2–3 mm, lo que reduce significativamente el riesgo de perforación.
           </p>
 
-          <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-            Principales indicaciones
-          </h3>
-          <ul className="grid gap-4 sm:grid-cols-2 max-w-2xl">
-            {[
-              "Sangrado digestivo activo",
-              "Angiodisplasias vasculares",
-              "Esófago de Barrett (ablación)",
-              "Hemostasia post-resección endoscópica",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-8 max-w-3xl">
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Esófago de Barrett con displasia
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                El esófago de Barrett ocurre cuando el ácido gástrico daña el revestimiento del esófago y las células cambian (metaplasia intestinal). Cuando se detecta displasia, el APC ablaciona el tejido anormal capa por capa en sesiones controladas. Se diagnostica durante una{" "}
+                <Link href="/endoscopia-merida" className="text-primary hover:underline">endoscopia</Link>
+                {" "}y puede requerir múltiples sesiones con vigilancia endoscópica entre ellas.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Ectasia vascular antral gástrica (GAVE)
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                También conocida como &ldquo;estómago sandía&rdquo; por su apariencia endoscópica con franjas rojas, la GAVE causa sangrado crónico y anemia por deficiencia de hierro. El APC coagula los vasos sanguíneos anormales sin dañar el tejido circundante. Usualmente requiere 2–4 sesiones y es la aplicación de APC con mayor evidencia en el estómago.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Angiodisplasias del tubo digestivo
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Las angiodisplasias son malformaciones vasculares que causan sangrado oculto o visible. Pueden aparecer en cualquier parte del tubo digestivo — esófago, estómago, intestino delgado o colon. El APC sella estas lesiones con coagulación precisa y controlada. Frecuentemente se descubren durante una{" "}
+                <Link href="/endoscopia-merida" className="text-primary hover:underline">endoscopia</Link> o{" "}
+                <Link href="/colonoscopia-merida" className="text-primary hover:underline">colonoscopia</Link>.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Proctitis y proctopatía por radiación
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Efecto secundario frecuente en pacientes que recibieron radioterapia pélvica (próstata, cérvix, recto). Causa sangrado rectal por vasos sanguíneos frágiles (telangiectasias) en la mucosa del recto. El APC es el tratamiento endoscópico de primera línea para esta condición. Generalmente se necesitan múltiples sesiones dependiendo de la extensión.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Sangrado post-polipectomía y post-resección
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Después de remover pólipos durante una{" "}
+                <Link href="/colonoscopia-merida" className="text-primary hover:underline">colonoscopia</Link>
+                {" "}o lesiones más grandes mediante{" "}
+                <Link href="/reseccion-endoscopica-mucosa-emr-merida" className="text-primary hover:underline">resección endoscópica (EMR)</Link>
+                , el sitio de resección puede sangrar. El APC proporciona hemostasia inmediata sin dañar nuevamente el tejido.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                Desvitalización tumoral paliativa
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Para pacientes con tumores obstructivos de esófago o estómago que no son candidatos a cirugía, el APC reduce el tejido tumoral para restaurar el paso de alimentos. Es un tratamiento paliativo que mejora la calidad de vida y puede combinarse con{" "}
+                <Link href="/endoprotesis-esofagicas-merida" className="text-primary hover:underline">endoprótesis esofágicas</Link>.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -116,6 +164,45 @@ export default function APCPage() {
               <p className="text-sm text-foreground/80 font-medium">
                 Un solo costo sin importar cuántas biopsias se tomen — la lectura de patología ({mxn(ADDITIONAL_FEES.biopsy.amount)}) es el único costo adicional posible.
               </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-serif text-lg font-semibold text-foreground">
+                Equipo ERBE propio — el precio más accesible en la península
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                Mérida es la única ciudad en la Península de Yucatán donde se realiza tratamiento con argón plasma. El Dr. Quiroz cuenta con su propio generador electroquirúrgico ERBE, lo que permite ofrecer el tratamiento desde {mxn(PRICING.apc.from)} por sesión — el precio más accesible de los proveedores en la región, donde el promedio es de $25,000–$30,000 MXN.
+              </p>
+              <p className="text-foreground/80 leading-relaxed">
+                Recibimos pacientes de Cancún, Playa del Carmen, Tulum, Campeche, Valladolid, Chetumal y Belice que necesitan este tratamiento.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-muted border border-border">
+              <h3 className="font-serif text-base font-semibold text-foreground mb-4">
+                ¿Cómo se compara el costo del APC?
+              </h3>
+              <div className="space-y-4 text-sm text-foreground/80">
+                <p>
+                  El APC trata la <strong>causa</strong> del problema, no solo los síntomas. Comparado con las alternativas:
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    "Infusiones de hierro por anemia crónica: $2,000–$4,000 MXN/mes indefinidamente — sin resolver el sangrado",
+                    "Cirugía esofágica por Barrett avanzado: $150,000+ MXN con semanas de recuperación",
+                    "Transfusiones por sangrado recurrente: costos acumulados sin tratar el origen",
+                    "APC con otros proveedores en la región: $25,000–$30,000 MXN por sesión",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <ArrowRight className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  La mayoría de condiciones se resuelven en 1–4 sesiones de APC. Es la opción menos invasiva, más accesible y con recuperación más rápida.
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-start gap-4">
@@ -193,6 +280,12 @@ export default function APCPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-accent-light border border-accent/20">
+                <p className="text-sm text-foreground/80">
+                  El número de sesiones depende de la condición tratada y la extensión de la lesión. El Dr. Quiroz te explica el plan completo de tratamiento antes de iniciar.
+                </p>
               </div>
 
               {/* Warning signs */}
@@ -289,11 +382,12 @@ export default function APCPage() {
           <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
             Procedimientos Relacionados
           </h2>
-          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
             {[
               { name: "Endoscopia", href: "/endoscopia-merida" },
               { name: "Colonoscopia", href: "/colonoscopia-merida" },
               { name: "Resección Endoscópica (EMR)", href: "/reseccion-endoscopica-mucosa-emr-merida" },
+              { name: "Ligadura de Várices", href: "/ligadura-varices-esofagicas-merida" },
             ].map((proc) => (
               <Link
                 key={proc.href}
@@ -333,11 +427,14 @@ export default function APCPage() {
               name: "Coagulación con Plasma de Argón (APC) en Mérida",
               path: "/apc-coagulacion-plasma-argon-merida",
               pricingKey: "apc",
-              description: "Tratamiento endoscópico sin contacto para control de sangrado digestivo y ablación de lesiones superficiales con gas argón ionizado.",
-              bodyLocation: "Tracto gastrointestinal",
-              howPerformed: "Se introduce un catéter por el canal de trabajo del endoscopio y se aplica gas argón ionizado para coagular el tejido sin contacto directo.",
+              description:
+                "Tratamiento endoscópico sin contacto con equipo ERBE para sangrado digestivo, esófago de Barrett con displasia, ectasia vascular antral gástrica (GAVE), angiodisplasias, proctitis por radiación y control hemostático post-resección.",
+              bodyLocation: "Tracto gastrointestinal (esófago, estómago, colon, recto)",
+              howPerformed:
+                "Se introduce un catéter por el canal de trabajo del endoscopio y se aplica gas argón ionizado para coagular el tejido sin contacto directo, con penetración controlada de 2–3 mm.",
               preparation: "Ayuno de 8-12 horas. Posible ajuste de anticoagulantes según indicación médica.",
-              followUp: "Dieta blanda 24-48 horas. Control endoscópico según extensión del tratamiento.",
+              followUp:
+                "Dieta blanda 24-48 horas. Inhibidor de bomba de protones entre sesiones. Control endoscópico según extensión del tratamiento.",
               procedureType: "Therapeutic",
             })
           ),
