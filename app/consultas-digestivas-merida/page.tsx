@@ -362,11 +362,11 @@ export default function ConsultasDigestivasPage() {
                 href: "/colonoscopia-merida",
               },
               {
-                name: "Panendoscopia",
-                price: mxn(PRICING.panendoscopia.from),
+                name: "Endoscopia",
+                price: mxn(PRICING.endoscopia.from),
                 description:
                   "Estudio del tubo digestivo alto con toma de biopsias.",
-                href: "/panendoscopia-merida",
+                href: "/endoscopia-merida",
               },
             ].map((proc) => (
               <Link

@@ -69,8 +69,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     service: "Endoscopia",
     path: "/endoscopia-merida",
     key: "endoscopia",
+    serviceDisplayOverride: "Endoscopia Gastrointestinal",
     descriptionExtra:
-      "Diagnóstico con sedación segura y resultados el mismo día en Hospital Amerimed.",
+      "Diagnóstico de esófago, estómago y duodeno con sedación segura y resultados el mismo día en Hospital Amerimed.",
   },
   colonoscopia: {
     type: "service",
@@ -79,14 +80,6 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "colonoscopia",
     descriptionExtra:
       "Detección y prevención de cáncer colorrectal con tecnología Olympus HD.",
-  },
-  panendoscopia: {
-    type: "service",
-    service: "Panendoscopia",
-    path: "/panendoscopia-merida",
-    key: "panendoscopia",
-    descriptionExtra:
-      "Endoscopia digestiva alta: evaluación de esófago, estómago y duodeno en una sola visita.",
   },
   cpre: {
     type: "service",

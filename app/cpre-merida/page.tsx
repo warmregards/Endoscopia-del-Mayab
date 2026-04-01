@@ -183,6 +183,26 @@ export default function CprePage() {
                 observa, la CPRE puede diagnosticar y tratar el problema al mismo
                 tiempo.
               </p>
+
+              <p>
+                La CPRE es un procedimiento endoscópico avanzado especializado en
+                vías biliares y páncreas. Para estudios diagnósticos generales del
+                tracto digestivo, consulta{" "}
+                <Link
+                  href="/endoscopia-merida"
+                  className="text-primary hover:underline"
+                >
+                  endoscopia
+                </Link>{" "}
+                o{" "}
+                <Link
+                  href="/colonoscopia-merida"
+                  className="text-primary hover:underline"
+                >
+                  colonoscopia
+                </Link>
+                .
+              </p>
             </div>
 
             <h3 className="text-lg font-serif font-semibold text-foreground">

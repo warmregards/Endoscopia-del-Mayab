@@ -37,12 +37,6 @@ const relatedProcedures = [
     pricingKey: "colonoscopia" as const,
   },
   {
-    name: "Panendoscopia",
-    desc: "Endoscopia + colonoscopia en una sola sedación.",
-    slug: "/panendoscopia-merida",
-    pricingKey: "panendoscopia" as const,
-  },
-  {
     name: "CPRE",
     desc: "Tratamiento de conductos biliares y páncreas.",
     slug: "/cpre-merida",
@@ -248,6 +242,19 @@ export default function EndoscopiaPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="mt-8 max-w-3xl">
+              <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                ¿Panendoscopia o endoscopia? Es el mismo procedimiento
+              </h3>
+              <p className="text-foreground/80 leading-relaxed">
+                &ldquo;Panendoscopia&rdquo; es simplemente el nombre médico formal
+                de la endoscopia digestiva alta. Si tu médico te indicó una
+                panendoscopia, es exactamente este estudio: una revisión de
+                esófago, estómago y duodeno con cámara flexible bajo sedación.
+                Mismo equipo, mismo precio, mismo doctor.
+              </p>
             </div>
           </div>
         </div>
@@ -578,7 +585,111 @@ export default function EndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 7: FAQ — bg-background
+          SECTION 7: SEDATION & SAFETY — bg-background
+          Crawlable H2 for "duele la endoscopia" + "es peligrosa la endoscopia"
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Duele la Endoscopia? Lo Que Debes Saber Sobre la Sedación
+            </h2>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              No duele. Utilizamos sedación intravenosa administrada por
+              anestesiólogo certificado — no sentirás dolor ni reflejo de náusea. La
+              mayoría de pacientes no recuerdan nada del procedimiento y despiertan
+              cómodamente.
+            </p>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              El anestesiólogo monitorea tus signos vitales continuamente
+              durante todo el estudio. Al despertar, puedes tener leve incomodidad en
+              la garganta que desaparece en horas. La recuperación toma 30–60 minutos
+              en la sala del hospital antes del alta.
+            </p>
+
+            <h3 className="font-serif font-semibold text-lg text-foreground">
+              ¿Es Peligrosa la Endoscopia?
+            </h3>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              Es uno de los procedimientos más seguros en gastroenterología.
+              Las complicaciones graves ocurren en menos del 0.1% de los casos. El{" "}
+              {DOCTOR.name} realiza endoscopias diariamente con equipo Olympus HD y protocolo
+              completo de seguridad en Hospital Amerimed, que cuenta con capacidad de
+              respuesta inmediata ante cualquier eventualidad.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 8: DISAMBIGUATION — bg-muted
+          Captures "panendoscopia" (301 redirect) + "endoscopia salud digna"
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Endoscopia en Mérida: Preguntas Comunes
+            </h2>
+
+            <div className="space-y-6">
+              <h3 className="font-serif font-semibold text-lg text-foreground">
+                ¿Panendoscopia o Endoscopia? Es el Mismo Procedimiento
+              </h3>
+
+              <p className="text-foreground/80 leading-relaxed max-w-3xl">
+                &ldquo;Panendoscopia&rdquo; es simplemente el nombre médico formal de la
+                endoscopia digestiva alta (también llamada EGD). Los tres términos describen
+                el mismo estudio: una revisión de esófago, estómago y duodeno con cámara
+                flexible bajo sedación. En Endoscopia del Mayab, el precio es{" "}
+                {displayFrom("endoscopia")} sin importar cómo lo solicites.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <h3 className="font-serif font-semibold text-lg text-foreground">
+                ¿Por Qué Elegir Endoscopia del Mayab vs. Salud Digna o Chopo?
+              </h3>
+
+              <p className="text-foreground/80 leading-relaxed max-w-3xl">
+                Salud Digna y Chopo son laboratorios de análisis clínicos — no
+                realizan endoscopias. Si tu médico te indicó una endoscopia, necesitas un
+                endoscopista certificado con quirófano equipado. Esto es lo que incluye tu
+                endoscopia con nosotros:
+              </p>
+
+              <ul className="space-y-2 max-w-3xl">
+                {[
+                  `Atención directa con el ${DOCTOR.name}, endoscopista certificado por el Consejo Mexicano de Cirugía General`,
+                  "Sedación administrada por anestesiólogo certificado (no solo sedación local)",
+                  "Biopsias sin límite incluidas en el precio",
+                  "Equipo Olympus HD de última generación",
+                  "Hospital Amerimed con sala de recuperación (no clínica ambulatoria)",
+                  "Reporte digital con fotos el mismo día",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground/80">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <WhatsAppButton
+                service="endoscopia"
+                position="disambiguation"
+                procedureName="Endoscopia"
+                label="Agendar por WhatsApp"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 9: FAQ — bg-background
           Serves: Persona 5 (investigator — fear/question queries)
           Generates FAQPage schema for rich results
           ══════════════════════════════════════════════════════════════════ */}
@@ -590,7 +701,7 @@ export default function EndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: RELATED PROCEDURES — bg-muted
-          Cross-sell to colonoscopia, panendoscopia, CPRE.
+          Cross-sell to colonoscopia, CPRE.
           Matches homepage card pattern — focused, not full catalog.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">

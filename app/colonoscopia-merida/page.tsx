@@ -234,6 +234,18 @@ export default function ColonoscopiaPage() {
                 avanzada, la supervivencia baja al 14%. La colonoscopia es la
                 única prueba que detecta y trata en el mismo procedimiento.
               </p>
+
+              <p className="text-foreground/80 leading-relaxed">
+                Si tu médico indicó solo revisión del tracto digestivo superior
+                (esófago, estómago y duodeno), consulta nuestra página de{" "}
+                <Link
+                  href="/endoscopia-merida"
+                  className="text-primary hover:underline"
+                >
+                  endoscopia en Mérida
+                </Link>
+                .
+              </p>
             </div>
 
             {/* Indication cards */}

@@ -16,6 +16,11 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/panendoscopia-merida',
+        destination: '/endoscopia-merida',
+        permanent: true,
+      },
     ]
   },
 }

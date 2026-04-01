@@ -74,18 +74,6 @@ export const SERVICES: ServiceItem[] = [
     priceFrom: PRICING.colonoscopia?.from,
     trafficTier: "high", // 1,436 GA4 sessions
   },
-  {
-    name: "Panendoscopia",
-    displayName: "Panendoscopia en Mérida",
-    gbpServiceName: "Panendoscopia",
-    slug: "panendoscopia-merida",
-    pricingKey: "panendoscopia",
-    category: "diagnostic",
-    quoteOnly: false,
-    priceFrom: PRICING.panendoscopia?.from,
-    trafficTier: "low", // 17 GA4 sessions
-  },
-
   // ── Therapeutic / Interventional ────────────────────────────────────────
   {
     name: "CPRE",

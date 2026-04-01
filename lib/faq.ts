@@ -95,6 +95,11 @@ export const homeFaqs: FAQ[] = [
       "Sí. El Dr. Quiroz atiende emergencias gastrointestinales los 7 días de la semana, incluyendo sangrado digestivo, cuerpos extraños y obstrucciones. Contacta por WhatsApp al 999 236 0153 para valoración inmediata.",
   },
   {
+    question: "¿El precio puede cambiar después de agendar?",
+    answer:
+      "El precio base del procedimiento no cambia. Lo que puede variar es si durante el estudio se encuentran hallazgos que requieran tratamiento adicional (por ejemplo, extracción de pólipos durante una colonoscopia o colocación de prótesis durante una CPRE). En esos casos, el Dr. Quiroz te informa antes de proceder y te da la cotización del costo adicional.",
+  },
+  {
     question: "¿Atienden pacientes de Cancún y Playa del Carmen?",
     answer:
       "Sí. Recibimos pacientes de toda la Península de Yucatán para endoscopias, colonoscopias, CPRE y todos nuestros procedimientos. Hospital Amerimed Mérida está a menos de 3 horas de Playa del Carmen. Contacta por WhatsApp al 999 236 0153.",
@@ -146,6 +151,11 @@ export const endoscopiaFaqs: FAQ[] = [
       "Detecta gastritis por Helicobacter pylori, reflujo gastroesofágico, úlceras, várices esofágicas, pólipos gástricos, tumores, estenosis y causas de dolor abdominal o pérdida de peso inexplicada.",
   },
   {
+    question: "¿Endoscopia y panendoscopia son lo mismo?",
+    answer:
+      "Sí. Panendoscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites.",
+  },
+  {
     question: "¿Hacen endoscopia en Salud Digna o Chopo?",
     answer:
       "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado.",
@@ -193,7 +203,7 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Es peligrosa la colonoscopia?",
     answer:
-      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato.",
+      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato. El anestesiólogo monitorea tus signos vitales durante todo el procedimiento y ajusta la sedación en tiempo real para tu seguridad.",
   },
   {
     question: "¿Qué detecta la colonoscopia?",
@@ -213,46 +223,6 @@ export const colonoscopiaFaqs: FAQ[] = [
     question: "¿Aceptan seguros de gastos médicos para colonoscopia?",
     answer:
       "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu colonoscopia.",
-  },
-]
-
-// ---------------------------------------------------------------------------
-// PANENDOSCOPIA
-// ---------------------------------------------------------------------------
-
-export const panendoscopiaFaqs: FAQ[] = [
-  {
-    question: "¿Qué es la panendoscopia y en qué casos se indica?",
-    answer:
-      "Es la combinación de endoscopia alta (esófago, estómago, duodeno) y colonoscopia (colon completo) en una sola sesión bajo sedación. Se indica cuando hay síntomas digestivos altos y bajos simultáneos, anemia sin causa clara, pérdida de peso inexplicable o necesidad de tamizaje digestivo completo.",
-  },
-  {
-    question: "¿Cuánto cuesta una panendoscopia y qué incluye?",
-    answer: `Desde ${price("panendoscopia")}. Incluye ambos estudios (endoscopia + colonoscopia), sedación con anestesiólogo, equipo Olympus HD, fotos de hallazgos y reportes el mismo día. Toma de biopsias incluida sin límite; la lectura de patología tiene costo adicional (${biopsyFee()}).`,
-  },
-  {
-    question: "¿Duele la panendoscopia? ¿Es con sedación?",
-    answer:
-      "No duele. Se realiza bajo sedación profunda con anestesiólogo — no sentirás dolor ni molestia durante ninguno de los dos estudios. Al despertar puedes tener ligera distensión abdominal que desaparece en pocas horas.",
-  },
-  {
-    question: "¿Cómo es la preparación para panendoscopia?",
-    answer:
-      "Requiere ayuno de 8-12 horas y preparación intestinal completa (solución de polietilenglicol en 2 tomas más dieta líquida el día previo). Si tomas anticoagulantes, el Dr. Quiroz te indica cómo ajustarlos. Las instrucciones detalladas se envían por WhatsApp al agendar.",
-  },
-  {
-    question: "¿Cuánto dura y cuál es la recuperación?",
-    answer:
-      "El procedimiento dura 45-60 minutos. La estancia total es de 3-4 horas incluyendo recuperación. Puedes comer ligero el mismo día y retomar actividades normales al día siguiente. Se entregan dos reportes completos con fotos HD.",
-  },
-  {
-    question: "¿Es peligrosa la panendoscopia? ¿Cuáles son los riesgos?",
-    answer:
-      "Es un procedimiento seguro. Los riesgos poco comunes incluyen sangrado menor (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato de cualquier eventualidad.",
-  },
-  {
-    question: "¿Incluye biopsias o tratamientos?",
-    answer: `Sí. Se toman biopsias cuando está indicado y se realizan terapias simples (como remoción de pólipos pequeños) en la misma sesión sin costo adicional. El análisis de patología tiene un costo independiente (${biopsyFee()}) informado previamente.`,
   },
 ]
 
@@ -904,7 +874,7 @@ export const preciosFaqs: FAQ[] = [
   {
     question: "¿Por qué son más baratos que otros especialistas?",
     answer:
-      "El Dr. Quiroz es propietario de su equipo endoscópico (Olympus HD) y tiene costos hospitalarios fijos en Amerimed. Esto permite ofrecer precios más accesibles sin sacrificar calidad. No somos un laboratorio de bajo costo — somos un especialista certificado con precios transparentes.",
+      "El Dr. Quiroz atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de Hospital Amerimed y utilizamos el mismo equipo de los hospitales más grandes. Esto permite ofrecer procedimientos de la misma calidad a precio más accesible.",
   },
 ]
 
@@ -1075,7 +1045,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   precios: preciosFaqs,
   endoscopia: endoscopiaFaqs,
   colonoscopia: colonoscopiaFaqs,
-  panendoscopia: panendoscopiaFaqs,
+
   cpre: cpreFaqs,
   cpre_playa_del_carmen: cprePlayaDelCarmenFaqs,
   ligadura_varices: ligaduraVaricesFaqs,

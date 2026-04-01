@@ -19,7 +19,6 @@ import {
 const ICON_MAP: Record<string, typeof Stethoscope> = {
   "endoscopia-merida": Microscope,
   "colonoscopia-merida": Stethoscope,
-  "panendoscopia-merida": Activity,
   "cpre-merida": ShieldCheck,
 
   "ligadura-varices-esofagicas-merida": Zap,
