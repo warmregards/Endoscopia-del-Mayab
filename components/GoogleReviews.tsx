@@ -1,4 +1,5 @@
 // /components/GoogleReviews.tsx
+import { Suspense } from "react";
 import { getGoogleReviews } from "@/lib/reviews";
 import { CLINIC } from "@/lib/clinic";
 
@@ -11,7 +12,47 @@ type Props = {
   className?: string;
 };
 
-export default async function GoogleReviews({
+function ReviewsSkeleton() {
+  return (
+    <section className="py-16 bg-gradient-to-b from-muted/20 to-background">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <div className="h-8 w-64 bg-muted rounded animate-pulse" />
+          <div className="h-4 w-48 bg-muted rounded animate-pulse mt-2" />
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="rounded-2xl border border-border bg-background p-5">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
+                <div>
+                  <div className="h-4 w-24 bg-muted rounded animate-pulse" />
+                  <div className="h-3 w-16 bg-muted rounded animate-pulse mt-1" />
+                </div>
+              </div>
+              <div className="h-3 w-20 bg-muted rounded animate-pulse mb-2" />
+              <div className="space-y-2">
+                <div className="h-3 w-full bg-muted rounded animate-pulse" />
+                <div className="h-3 w-3/4 bg-muted rounded animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Public wrapper — renders a Suspense boundary so the API call never blocks LCP. */
+export default function GoogleReviews(props: Props) {
+  return (
+    <Suspense fallback={<ReviewsSkeleton />}>
+      <GoogleReviewsAsync {...props} />
+    </Suspense>
+  );
+}
+
+async function GoogleReviewsAsync({
   title = "Opiniones de pacientes (Google)",
   limit = 4,
   className = "",

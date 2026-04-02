@@ -197,6 +197,7 @@ export default function Page() {
                     alt={DOCTOR.name}
                     width={128}
                     height={128}
+                    priority
                     className="w-full h-full object-cover"
                   />
                 </div>
