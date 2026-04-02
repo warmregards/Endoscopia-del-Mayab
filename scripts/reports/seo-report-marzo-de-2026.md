@@ -108,11 +108,11 @@
 
 | Page | Perf | SEO | LCP | CLS | TBT |
 |------|------|-----|-----|-----|-----|
-| /endoscopia-merida | ⚠️ unavailable | — | — | — | — |
-| /colonoscopia-merida | ⚠️ unavailable | — | — | — | — |
-| /cpre-merida | ⚠️ unavailable | — | — | — | — |
-| / | ⚠️ unavailable | — | — | — | — |
-| /dr-omar-quiroz | ⚠️ unavailable | — | — | — | — |
+| /endoscopia-merida | 🟢 96 | 100 | 2.3s | 0.000 | 182ms |
+| /colonoscopia-merida | 🟡 89 | 100 | 2.1s | 0.000 | 411ms |
+| /cpre-merida | 🟢 94 | 100 | 2.3s | 0.000 | 237ms |
+| / | 🟡 68 | 100 | 8.0s | 0.000 | 221ms |
+| /dr-omar-quiroz | 🟡 71 | 100 | 7.7s | 0.000 | 232ms |
 
 ## Keyword Cannibalization (endoscopiadelmayab.com vs omar.doctor)
 
