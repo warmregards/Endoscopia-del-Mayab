@@ -32,15 +32,14 @@ jobs:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: node scripts/seo-report.mjs
 
-      - name: Read report for email
-        id: body
+      - name: Find report file
+        id: report
+        run: echo "path=$(ls -t scripts/reports/seo-report-*.md | head -1)" >> "$GITHUB_OUTPUT"
+
+      - name: Convert report to HTML for email
         run: |
-          REPORT_FILE=$(ls -t scripts/reports/seo-report-*.md | head -1)
-          {
-            echo "content<<ENDOFREPORT"
-            cat "$REPORT_FILE"
-            echo "ENDOFREPORT"
-          } >> "$GITHUB_OUTPUT"
+          npm install -g marked
+          marked "${{ steps.report.outputs.path }}" -o /tmp/report.html
 
       - name: Send report email
         uses: dawidd6/action-send-mail@v3
@@ -53,9 +52,7 @@ jobs:
           subject: Monthly Search Report - Endoscopia del Mayab
           to: sanels@gmail.com
           from: Endoscopia SEO Agent <${{ secrets.GMAIL_USERNAME }}>
-          content_type: text/html
-          convert_markdown: true
-          body: ${{ steps.body.outputs.content }}
+          html_body: file:///tmp/report.html
 
       - name: Commit report
         run: |
