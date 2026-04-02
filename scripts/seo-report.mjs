@@ -284,11 +284,11 @@ function analyzeOpportunities(gscData) {
 }
 
 // ── Report Generation ───────────────────────────────────────────────────
-function generateReport(gscData, ga4Data, pageSpeedData, opportunities, startDate, endDate, prevStartDate, prevEndDate) {
+function generateReport(gscData, ga4Data, pageSpeedData, opportunities, startDate, endDate, prevStartDate, prevEndDate, reportMonth = "") {
   const lines = [];
   const ln = (s = "") => lines.push(s);
 
-  ln(`# SEO Monthly Report — Endoscopia del Mayab`);
+  ln(`# SEO Report: ${reportMonth} — Endoscopia del Mayab`);
   ln(`**Period:** ${startDate} to ${endDate}`);
   ln(`**Compared to:** ${prevStartDate} to ${prevEndDate}`);
   ln(`**Generated:** ${new Date().toISOString().split("T")[0]}`);
@@ -479,25 +479,39 @@ function generateReport(gscData, ga4Data, pageSpeedData, opportunities, startDat
 async function main() {
   console.log("🔄 Starting SEO report generation...\n");
 
-  // Date ranges
-  let endDate, startDate;
+  // Date ranges — full calendar months
+  // Running on the 1st → report on the previous month
+  // e.g. April 1 run → reports March 1–31, compared to Feb 1–28
+  let startDate, endDate, prevStartDate, prevEndDate, reportMonth;
+
   if (process.argv[2] && process.argv[3]) {
+    // Manual override: node seo-report.mjs 2026-03-01 2026-03-31
     startDate = process.argv[2];
     endDate = process.argv[3];
+    const d = new Date(startDate);
+    reportMonth = d.toLocaleDateString("es-MX", { month: "long", year: "numeric" });
   } else {
     const now = new Date();
-    endDate = dateFmt(new Date(now.setDate(now.getDate() - 1))); // yesterday
-    startDate = dateFmt(new Date(now.setDate(now.getDate() - 29))); // 30 days back
+    // Previous calendar month
+    const prevMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0); // last day of prev month
+    const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    startDate = dateFmt(prevMonthStart);
+    endDate = dateFmt(prevMonthEnd);
+    reportMonth = prevMonthStart.toLocaleDateString("es-MX", { month: "long", year: "numeric" });
   }
 
-  // Previous period (same length, immediately before)
-  const days = (new Date(endDate) - new Date(startDate)) / 86400000 + 1;
-  const prevEnd = new Date(new Date(startDate).getTime() - 86400000);
-  const prevStart = new Date(prevEnd.getTime() - (days - 1) * 86400000);
-  const prevStartDate = dateFmt(prevStart);
-  const prevEndDate = dateFmt(prevEnd);
+  // Previous period = the calendar month before that
+  const currentStart = new Date(startDate);
+  const prevMonthEndDate = new Date(currentStart.getTime() - 86400000); // day before current start
+  const prevMonthStartDate = new Date(prevMonthEndDate.getFullYear(), prevMonthEndDate.getMonth(), 1);
+  prevStartDate = dateFmt(prevMonthStartDate);
+  prevEndDate = dateFmt(prevMonthEndDate);
 
-  console.log(`📅 Current period: ${startDate} → ${endDate} (${days} days)`);
+  // Capitalize first letter for display
+  reportMonth = reportMonth.charAt(0).toUpperCase() + reportMonth.slice(1);
+
+  console.log(`📅 Report: ${reportMonth}`);
+  console.log(`📅 Current period: ${startDate} → ${endDate}`);
   console.log(`📅 Previous period: ${prevStartDate} → ${prevEndDate}`);
   console.log();
 
@@ -526,12 +540,13 @@ async function main() {
   // Generate report
   const report = generateReport(
     gscData, ga4Data, pageSpeedData, opportunities,
-    startDate, endDate, prevStartDate, prevEndDate
+    startDate, endDate, prevStartDate, prevEndDate, reportMonth
   );
 
   // Save
   mkdirSync(REPORTS_DIR, { recursive: true });
-  const filename = `seo-report-${endDate}.md`;
+  const monthSlug = reportMonth.toLowerCase().replace(/\s+/g, "-");
+  const filename = `seo-report-${monthSlug}.md`;
   const filepath = path.join(REPORTS_DIR, filename);
   writeFileSync(filepath, report, "utf-8");
 
@@ -547,6 +562,7 @@ async function main() {
   console.log(`📉 ${drops} queries lost position`);
   console.log(`💡 ${totalOpps} total opportunities`);
   console.log(`📄 Full report: ${filepath}`);
+
 }
 
 main().catch((e) => {

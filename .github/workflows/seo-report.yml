@@ -30,6 +30,14 @@ jobs:
       - name: Write Google credentials
         run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > google-credentials.json
 
+      - name: Compute report month
+        id: month
+        run: |
+          # Previous calendar month name (e.g. "March 2026")
+          REPORT_MONTH=$(date -d "$(date +%Y-%m-01) -1 month" +"%B %Y" 2>/dev/null \
+            || date -v-1m +"%B %Y")
+          echo "name=$REPORT_MONTH" >> "$GITHUB_OUTPUT"
+
       - name: Run SEO report
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
@@ -52,7 +60,7 @@ jobs:
           secure: true
           username: ${{ secrets.GMAIL_USERNAME }}
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: Monthly Search Report - Endoscopia del Mayab
+          subject: "Monthly Search Report - Endoscopia del Mayab - ${{ steps.month.outputs.name }}"
           to: sanels@gmail.com
           from: Endoscopia SEO Agent <${{ secrets.GMAIL_USERNAME }}>
           html_body: file:///tmp/report.html
@@ -62,5 +70,5 @@ jobs:
           git config user.name "SEO Report Bot"
           git config user.email "noreply@endoscopiadelmayab.com"
           git add scripts/reports/
-          git diff --cached --quiet || git commit -m "seo: monthly report $(date +%Y-%m-%d)"
+          git diff --cached --quiet || git commit -m "seo: monthly report ${{ steps.month.outputs.name }}"
           git push
