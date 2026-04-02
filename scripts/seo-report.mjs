@@ -186,7 +186,7 @@ async function getPageSpeedData(pages) {
     // Limit to top 8 to avoid rate limits
     const url = `${SITE_URL}${pagePath}`;
     try {
-      const apiKey = process.env.GOOGLE_PLACES_API_KEY || "";
+      const apiKey = process.env.PAGESPEED_API_KEY || process.env.GOOGLE_PLACES_API_KEY || "";
       const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=PERFORMANCE&category=SEO${apiKey ? `&key=${apiKey}` : ""}`;
       const res = await fetch(apiUrl);
       const data = await res.json();
