@@ -6,6 +6,9 @@ on:
     - cron: '0 15 1 * *'
   workflow_dispatch: # Manual trigger for testing
 
+permissions:
+  contents: write
+
 jobs:
   seo-report:
     runs-on: ubuntu-latest
