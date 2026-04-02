@@ -33,7 +33,6 @@ jobs:
       - name: Compute report month
         id: month
         run: |
-          # Previous calendar month name (e.g. "March 2026")
           REPORT_MONTH=$(date -d "$(date +%Y-%m-01) -1 month" +"%B %Y" 2>/dev/null \
             || date -v-1m +"%B %Y")
           echo "name=$REPORT_MONTH" >> "$GITHUB_OUTPUT"
@@ -43,14 +42,11 @@ jobs:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: node scripts/seo-report.mjs
 
-      - name: Find report file
+      - name: Find report files
         id: report
-        run: echo "path=$(ls -t scripts/reports/seo-report-*.md | head -1)" >> "$GITHUB_OUTPUT"
-
-      - name: Convert report to HTML for email
         run: |
-          npm install -g marked
-          marked "${{ steps.report.outputs.path }}" -o /tmp/report.html
+          echo "md=$(ls -t scripts/reports/seo-report-*.md | head -1)" >> "$GITHUB_OUTPUT"
+          echo "html=$(ls -t scripts/reports/seo-report-*.html | head -1)" >> "$GITHUB_OUTPUT"
 
       - name: Send report email
         uses: dawidd6/action-send-mail@v3
@@ -63,8 +59,8 @@ jobs:
           subject: "Monthly Search Report - Endoscopia del Mayab - ${{ steps.month.outputs.name }}"
           to: sanels@gmail.com
           from: Endoscopia SEO Agent <${{ secrets.GMAIL_USERNAME }}>
-          html_body: file:///tmp/report.html
-          attachments: ${{ steps.report.outputs.path }}
+          html_body: file://${{ steps.report.outputs.html }}
+          attachments: ${{ steps.report.outputs.md }}
 
       - name: Commit report
         run: |

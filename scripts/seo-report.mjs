@@ -516,6 +516,196 @@ function generateReport(gscData, ga4Data, pageSpeedData, opportunities, cannibal
   return lines.join("\n");
 }
 
+// ── HTML Report ─────────────────────────────────────────────────────────
+function generateHtmlReport(gscData, ga4Data, pageSpeedData, opportunities, cannibalization, startDate, endDate, prevStartDate, prevEndDate, reportMonth = "") {
+  // Inline styles for email compatibility
+  const s = {
+    body: 'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:720px;margin:0 auto;padding:24px;color:#1a1a2e;background:#fff;line-height:1.5',
+    h1: 'font-size:24px;font-weight:700;color:#1a1a2e;margin:0 0 8px;border-bottom:3px solid #0b6e5f;padding-bottom:12px',
+    h2: 'font-size:18px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;padding:8px 12px;background:#f0f4f8;border-left:4px solid #0b6e5f;border-radius:0 6px 6px 0',
+    h3: 'font-size:15px;font-weight:600;color:#2d5aa0;margin:20px 0 8px',
+    meta: 'font-size:13px;color:#64748b;margin:0 0 24px',
+    table: 'width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:13px',
+    th: 'text-align:left;padding:8px 10px;background:#f0f4f8;border:1px solid #e2e8f0;font-weight:600;color:#334155;white-space:nowrap',
+    thR: 'text-align:right;padding:8px 10px;background:#f0f4f8;border:1px solid #e2e8f0;font-weight:600;color:#334155;white-space:nowrap',
+    td: 'padding:8px 10px;border:1px solid #e2e8f0;color:#334155',
+    tdR: 'text-align:right;padding:8px 10px;border:1px solid #e2e8f0;color:#334155;font-variant-numeric:tabular-nums',
+    trAlt: 'background:#f8fafc',
+    up: 'color:#059669;font-weight:600',
+    down: 'color:#dc2626;font-weight:600',
+    neutral: 'color:#64748b',
+    badge: 'display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600',
+    pill: (color) => `display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:${color === 'green' ? '#dcfce7;color:#166534' : color === 'red' ? '#fef2f2;color:#991b1b' : '#f0f4f8;color:#334155'}`,
+    li: 'padding:4px 0;font-size:14px;color:#334155',
+    footer: 'margin-top:32px;padding-top:16px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center',
+  };
+
+  const changeHtml = (current, previous, fmt = (v) => v) => {
+    if (!previous) return current > 0 ? `<span style="${s.up}">NEW</span>` : '—';
+    const change = ((current - previous) / previous) * 100;
+    const style = change > 0 ? s.up : change < 0 ? s.down : s.neutral;
+    const sign = change >= 0 ? '+' : '';
+    return `<span style="${style}">${sign}${change.toFixed(1)}%</span>`;
+  };
+
+  const trendIcon = (posChange) => {
+    if (posChange < -1) return '<span style="color:#059669">&#9650;</span>'; // up arrow
+    if (posChange > 1) return '<span style="color:#dc2626">&#9660;</span>'; // down arrow
+    return '<span style="color:#94a3b8">&#9654;</span>'; // right arrow
+  };
+
+  const rowBg = (i) => i % 2 === 1 ? ` style="${s.trAlt}"` : '';
+
+  const lines = [];
+  const ln = (html) => lines.push(html);
+
+  ln(`<!DOCTYPE html><html><head><meta charset="utf-8"></head>`);
+  ln(`<body style="${s.body}">`);
+
+  // Header
+  ln(`<h1 style="${s.h1}">SEO Report: ${reportMonth}</h1>`);
+  ln(`<p style="${s.meta}"><strong>Period:</strong> ${startDate} to ${endDate} &nbsp;|&nbsp; <strong>Compared to:</strong> ${prevStartDate} to ${prevEndDate} &nbsp;|&nbsp; <strong>Generated:</strong> ${new Date().toISOString().split("T")[0]}</p>`);
+
+  // ── Overall Summary
+  ln(`<h2 style="${s.h2}">Overall Summary</h2>`);
+  const t = ga4Data.totals[0]?.metricValues;
+  const pt = ga4Data.prevTotals[0]?.metricValues;
+  if (t && pt) {
+    const sessions = parseInt(t[0].value), prevSessions = parseInt(pt[0].value);
+    const conversions = parseInt(t[1].value), prevConversions = parseInt(pt[1].value);
+    const engagement = (parseFloat(t[2].value) * 100).toFixed(1);
+    const prevEngagement = (parseFloat(pt[2].value) * 100).toFixed(1);
+    const convRate = ((conversions / sessions) * 100).toFixed(1);
+    const prevConvRate = ((prevConversions / prevSessions) * 100).toFixed(1);
+
+    ln(`<table style="${s.table}"><tr><th style="${s.th}">Metric</th><th style="${s.thR}">Current</th><th style="${s.thR}">Previous</th><th style="${s.thR}">Change</th></tr>`);
+    ln(`<tr><td style="${s.td}">Sessions</td><td style="${s.tdR}">${sessions.toLocaleString()}</td><td style="${s.tdR}">${prevSessions.toLocaleString()}</td><td style="${s.tdR}">${changeHtml(sessions, prevSessions)}</td></tr>`);
+    ln(`<tr${rowBg(1)}><td style="${s.td}">Conversions</td><td style="${s.tdR}">${conversions}</td><td style="${s.tdR}">${prevConversions}</td><td style="${s.tdR}">${changeHtml(conversions, prevConversions)}</td></tr>`);
+    ln(`<tr><td style="${s.td}">Conv. Rate</td><td style="${s.tdR}">${convRate}%</td><td style="${s.tdR}">${prevConvRate}%</td><td style="${s.tdR}">${parseFloat(convRate) > parseFloat(prevConvRate) ? `<span style="${s.up}">&#9650;</span>` : `<span style="${s.down}">&#9660;</span>`}</td></tr>`);
+    ln(`<tr${rowBg(1)}><td style="${s.td}">Engagement</td><td style="${s.tdR}">${engagement}%</td><td style="${s.tdR}">${prevEngagement}%</td><td style="${s.tdR}">${parseFloat(engagement) > parseFloat(prevEngagement) ? `<span style="${s.up}">&#9650;</span>` : `<span style="${s.down}">&#9660;</span>`}</td></tr>`);
+    ln(`</table>`);
+  }
+
+  // GSC totals
+  const gscTotals = gscData.currentQueries.reduce((a, r) => ({ clicks: a.clicks + r.clicks, impressions: a.impressions + r.impressions }), { clicks: 0, impressions: 0 });
+  const gscPrev = gscData.prevQueries.reduce((a, r) => ({ clicks: a.clicks + r.clicks, impressions: a.impressions + r.impressions }), { clicks: 0, impressions: 0 });
+
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">GSC Metric</th><th style="${s.thR}">Current</th><th style="${s.thR}">Previous</th><th style="${s.thR}">Change</th></tr>`);
+  ln(`<tr><td style="${s.td}">Organic Clicks</td><td style="${s.tdR}">${gscTotals.clicks}</td><td style="${s.tdR}">${gscPrev.clicks}</td><td style="${s.tdR}">${changeHtml(gscTotals.clicks, gscPrev.clicks)}</td></tr>`);
+  ln(`<tr${rowBg(1)}><td style="${s.td}">Organic Impressions</td><td style="${s.tdR}">${gscTotals.impressions.toLocaleString()}</td><td style="${s.tdR}">${gscPrev.impressions.toLocaleString()}</td><td style="${s.tdR}">${changeHtml(gscTotals.impressions, gscPrev.impressions)}</td></tr>`);
+  const ctr = ((gscTotals.clicks / gscTotals.impressions) * 100).toFixed(1);
+  const prevCtr = ((gscPrev.clicks / gscPrev.impressions) * 100).toFixed(1);
+  ln(`<tr><td style="${s.td}">Avg CTR</td><td style="${s.tdR}">${ctr}%</td><td style="${s.tdR}">${prevCtr}%</td><td style="${s.tdR}">${parseFloat(ctr) >= parseFloat(prevCtr) ? `<span style="${s.up}">&#9650;</span>` : `<span style="${s.down}">&#9660;</span>`}</td></tr>`);
+  ln(`</table>`);
+
+  // ── Top Queries
+  ln(`<h2 style="${s.h2}">Top 20 Search Queries</h2>`);
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">Query</th><th style="${s.thR}">Clicks</th><th style="${s.thR}">Impr</th><th style="${s.thR}">CTR</th><th style="${s.thR}">Pos</th><th style="${s.thR}">Trend</th></tr>`);
+  const prevQMap = new Map(gscData.prevQueries.map((r) => [r.keys[0], r]));
+  gscData.currentQueries.slice(0, 20).forEach((row, i) => {
+    const q = row.keys[0];
+    const prev = prevQMap.get(q);
+    const posChange = prev ? row.position - prev.position : 0;
+    ln(`<tr${rowBg(i)}><td style="${s.td}">${q}</td><td style="${s.tdR}">${row.clicks}</td><td style="${s.tdR}">${row.impressions}</td><td style="${s.tdR}">${(row.ctr * 100).toFixed(1)}%</td><td style="${s.tdR}">${row.position.toFixed(1)}</td><td style="${s.tdR}">${trendIcon(posChange)} ${prev ? changeHtml(row.clicks, prev.clicks) : `<span style="${s.up}">NEW</span>`}</td></tr>`);
+  });
+  ln(`</table>`);
+
+  // ── Page Performance
+  ln(`<h2 style="${s.h2}">Page Performance (GSC)</h2>`);
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">Page</th><th style="${s.thR}">Clicks</th><th style="${s.thR}">Impr</th><th style="${s.thR}">CTR</th><th style="${s.thR}">Pos</th><th style="${s.thR}">vs Prev</th></tr>`);
+  const prevPMap = new Map(gscData.prevPages.map((r) => [r.keys[0], r]));
+  gscData.currentPages.slice(0, 15).forEach((row, i) => {
+    const page = row.keys[0].replace(SITE_URL, '') || '/';
+    const prev = prevPMap.get(row.keys[0]);
+    ln(`<tr${rowBg(i)}><td style="${s.td}">${page}</td><td style="${s.tdR}">${row.clicks}</td><td style="${s.tdR}">${row.impressions}</td><td style="${s.tdR}">${(row.ctr * 100).toFixed(1)}%</td><td style="${s.tdR}">${row.position.toFixed(1)}</td><td style="${s.tdR}">${prev ? changeHtml(row.clicks, prev.clicks) : `<span style="${s.up}">NEW</span>`}</td></tr>`);
+  });
+  ln(`</table>`);
+
+  // ── GA4 Conversions
+  ln(`<h2 style="${s.h2}">Landing Page Conversions (GA4)</h2>`);
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">Page</th><th style="${s.thR}">Sessions</th><th style="${s.thR}">Engagement</th><th style="${s.thR}">Conv</th><th style="${s.thR}">Rate</th><th style="${s.thR}">vs Prev</th></tr>`);
+  const prevGA4 = new Map(ga4Data.prevPages.map((r) => [r.dimensionValues[0].value, r]));
+  ga4Data.currentPages.slice(0, 15).forEach((row, i) => {
+    const page = row.dimensionValues[0].value;
+    const sess = parseInt(row.metricValues[0].value);
+    const eng = (parseFloat(row.metricValues[1].value) * 100).toFixed(1);
+    const conv = parseInt(row.metricValues[2].value);
+    const rate = sess > 0 ? ((conv / sess) * 100).toFixed(1) : '0';
+    const prev = prevGA4.get(page);
+    const prevConv = prev ? parseInt(prev.metricValues[2].value) : 0;
+    ln(`<tr${rowBg(i)}><td style="${s.td}">${page}</td><td style="${s.tdR}">${sess}</td><td style="${s.tdR}">${eng}%</td><td style="${s.tdR}">${conv}</td><td style="${s.tdR}">${rate}%</td><td style="${s.tdR}">${prev ? changeHtml(conv, prevConv) : `<span style="${s.up}">NEW</span>`}</td></tr>`);
+  });
+  ln(`</table>`);
+
+  // ── Devices + Cities side by side
+  ln(`<h2 style="${s.h2}">Device &amp; City Breakdown</h2>`);
+  ln(`<table style="width:100%"><tr><td style="vertical-align:top;padding-right:16px">`);
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">Device</th><th style="${s.thR}">Sessions</th><th style="${s.thR}">Conv</th><th style="${s.thR}">Rate</th></tr>`);
+  ga4Data.devices.forEach((row, i) => {
+    const sess = parseInt(row.metricValues[0].value), conv = parseInt(row.metricValues[1].value);
+    ln(`<tr${rowBg(i)}><td style="${s.td}">${row.dimensionValues[0].value}</td><td style="${s.tdR}">${sess}</td><td style="${s.tdR}">${conv}</td><td style="${s.tdR}">${sess > 0 ? ((conv / sess) * 100).toFixed(1) : 0}%</td></tr>`);
+  });
+  ln(`</table></td><td style="vertical-align:top">`);
+  ln(`<table style="${s.table}"><tr><th style="${s.th}">City</th><th style="${s.thR}">Sessions</th><th style="${s.thR}">Conv</th></tr>`);
+  ga4Data.cities.slice(0, 8).forEach((row, i) => {
+    ln(`<tr${rowBg(i)}><td style="${s.td}">${row.dimensionValues[0].value}</td><td style="${s.tdR}">${row.metricValues[0].value}</td><td style="${s.tdR}">${row.metricValues[1].value}</td></tr>`);
+  });
+  ln(`</table></td></tr></table>`);
+
+  // ── PageSpeed
+  if (pageSpeedData.some(p => p.performance != null)) {
+    ln(`<h2 style="${s.h2}">PageSpeed Insights (Mobile)</h2>`);
+    ln(`<table style="${s.table}"><tr><th style="${s.th}">Page</th><th style="${s.thR}">Perf</th><th style="${s.thR}">SEO</th><th style="${s.thR}">LCP</th><th style="${s.thR}">CLS</th><th style="${s.thR}">TBT</th></tr>`);
+    pageSpeedData.forEach((ps, i) => {
+      if (ps.performance == null) {
+        ln(`<tr${rowBg(i)}><td style="${s.td}">${ps.page}</td><td style="${s.tdR}" colspan="5">unavailable</td></tr>`);
+      } else {
+        const perfColor = ps.performance >= 90 ? 'green' : ps.performance >= 50 ? '' : 'red';
+        ln(`<tr${rowBg(i)}><td style="${s.td}">${ps.page}</td><td style="${s.tdR}"><span style="${s.pill(perfColor)}">${ps.performance}</span></td><td style="${s.tdR}">${ps.seo ?? '—'}</td><td style="${s.tdR}">${ps.lcp ?? '—'}s</td><td style="${s.tdR}">${ps.cls ?? '—'}</td><td style="${s.tdR}">${ps.tbt ?? '—'}ms</td></tr>`);
+      }
+    });
+    ln(`</table>`);
+  }
+
+  // ── Cannibalization
+  if (cannibalization.length) {
+    ln(`<h2 style="${s.h2}">Keyword Cannibalization (endoscopia vs omar.doctor)</h2>`);
+    ln(`<p style="font-size:13px;color:#64748b;margin:0 0 8px">Queries where both domains compete — consider consolidating.</p>`);
+    ln(`<table style="${s.table}"><tr><th style="${s.th}">Query</th><th style="${s.thR}">Endoscopia Pos</th><th style="${s.thR}">Impr</th><th style="${s.thR}">Omar Pos</th><th style="${s.thR}">Impr</th><th style="${s.th}">Winner</th></tr>`);
+    cannibalization.slice(0, 15).forEach((c, i) => {
+      const winner = c.primary.position < c.secondary.position ? 'endoscopia' : 'omar.doctor';
+      ln(`<tr${rowBg(i)}><td style="${s.td}">${c.query}</td><td style="${s.tdR}">${c.primary.position.toFixed(1)}</td><td style="${s.tdR}">${c.primary.impressions}</td><td style="${s.tdR}">${c.secondary.position.toFixed(1)}</td><td style="${s.tdR}">${c.secondary.impressions}</td><td style="${s.td}">${winner}</td></tr>`);
+    });
+    ln(`</table>`);
+  }
+
+  // ── Opportunities
+  ln(`<h2 style="${s.h2}">Opportunities &amp; Recommendations</h2>`);
+
+  const sections = [
+    { type: 'low_ctr', title: 'Low CTR — Rewrite Meta Title/Description', max: 5, fmt: (o) => `<strong>"${o.query}"</strong> — ${o.impressions} impr, CTR ${o.ctr}%, pos ${o.position}` },
+    { type: 'striking_distance', title: 'Striking Distance (Position 5-15)', max: 8, fmt: (o) => `<strong>"${o.query}"</strong> — ${o.impressions} impr, pos ${o.position}` },
+    { type: 'position_drop', title: 'Position Drops — Investigate', max: 5, fmt: (o) => `<strong>"${o.query}"</strong> — dropped from ${o.prevPosition} → ${o.currentPosition} (${o.drop} positions)` },
+    { type: 'new_query', title: 'New Emerging Queries', max: 5, fmt: (o) => `<strong>"${o.query}"</strong> — ${o.impressions} impr, ${o.clicks} clicks, pos ${o.position}` },
+  ];
+
+  for (const sec of sections) {
+    const items = opportunities.filter((o) => o.type === sec.type);
+    if (items.length) {
+      ln(`<h3 style="${s.h3}">${sec.title}</h3><ul style="padding-left:20px;margin:4px 0">`);
+      items.slice(0, sec.max).forEach((o) => ln(`<li style="${s.li}">${sec.fmt(o)}</li>`));
+      ln(`</ul>`);
+    }
+  }
+
+  if (!opportunities.length) ln(`<p style="color:#64748b">No significant opportunities detected this period.</p>`);
+
+  ln(`<div style="${s.footer}">Generated automatically by seo-report.mjs — Endoscopia del Mayab</div>`);
+  ln(`</body></html>`);
+
+  return lines.join('\n');
+}
+
 // ── Main ────────────────────────────────────────────────────────────────
 async function main() {
   console.log("🔄 Starting SEO report generation...\n");
@@ -596,14 +786,24 @@ async function main() {
     startDate, endDate, prevStartDate, prevEndDate, reportMonth
   );
 
-  // Save
+  // Generate HTML version for email
+  const htmlReport = generateHtmlReport(
+    gscData, ga4Data, pageSpeedData, opportunities, cannibalization,
+    startDate, endDate, prevStartDate, prevEndDate, reportMonth
+  );
+
+  // Save both formats
   mkdirSync(REPORTS_DIR, { recursive: true });
   const monthSlug = reportMonth.toLowerCase().replace(/\s+/g, "-");
   const filename = `seo-report-${monthSlug}.md`;
+  const htmlFilename = `seo-report-${monthSlug}.html`;
   const filepath = path.join(REPORTS_DIR, filename);
+  const htmlFilepath = path.join(REPORTS_DIR, htmlFilename);
   writeFileSync(filepath, report, "utf-8");
+  writeFileSync(htmlFilepath, htmlReport, "utf-8");
 
   console.log(`✅ Report saved: scripts/reports/${filename}`);
+  console.log(`✅ HTML saved: scripts/reports/${htmlFilename}`);
   console.log();
 
   // Print summary to stdout
