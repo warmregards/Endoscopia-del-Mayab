@@ -24,6 +24,7 @@ const ROOT = path.resolve(__dirname, "..");
 // ── Config ──────────────────────────────────────────────────────────────
 const CREDENTIALS_PATH = path.join(ROOT, "google-credentials.json");
 const GSC_SITE_URL = "sc-domain:endoscopiadelmayab.com";
+const GSC_SECONDARY_URL = "sc-domain:omar.doctor"; // Bariatric/surgery site — same doctor
 const GA4_PROPERTY = "properties/494008470";
 const SITE_URL = "https://www.endoscopiadelmayab.com";
 const REPORTS_DIR = path.join(__dirname, "reports");
@@ -81,10 +82,10 @@ async function getAuth() {
 }
 
 // ── GSC Data ────────────────────────────────────────────────────────────
-async function fetchGSC(auth, startDate, endDate, dimensions, rowLimit = 100) {
+async function fetchGSC(auth, startDate, endDate, dimensions, rowLimit = 100, siteUrl = GSC_SITE_URL) {
   const searchconsole = google.searchconsole({ version: "v1", auth });
   const res = await searchconsole.searchanalytics.query({
-    siteUrl: GSC_SITE_URL,
+    siteUrl,
     requestBody: {
       startDate,
       endDate,
@@ -283,8 +284,33 @@ function analyzeOpportunities(gscData) {
   return opportunities;
 }
 
+// ── Cannibalization Detection ───────────────────────────────────────────
+function detectCannibalization(primaryQueries, secondaryQueries) {
+  const secondaryMap = new Map(secondaryQueries.map((r) => [r.keys[0], r]));
+  const overlaps = [];
+
+  for (const row of primaryQueries) {
+    const query = row.keys[0];
+    const secondary = secondaryMap.get(query);
+    if (secondary && row.impressions + secondary.impressions > 5) {
+      overlaps.push({
+        query,
+        primary: { impressions: row.impressions, clicks: row.clicks, position: row.position },
+        secondary: { impressions: secondary.impressions, clicks: secondary.clicks, position: secondary.position },
+      });
+    }
+  }
+
+  // Sort by total impressions (most impactful first)
+  overlaps.sort((a, b) =>
+    (b.primary.impressions + b.secondary.impressions) - (a.primary.impressions + a.secondary.impressions)
+  );
+
+  return overlaps;
+}
+
 // ── Report Generation ───────────────────────────────────────────────────
-function generateReport(gscData, ga4Data, pageSpeedData, opportunities, startDate, endDate, prevStartDate, prevEndDate, reportMonth = "") {
+function generateReport(gscData, ga4Data, pageSpeedData, opportunities, cannibalization, startDate, endDate, prevStartDate, prevEndDate, reportMonth = "") {
   const lines = [];
   const ln = (s = "") => lines.push(s);
 
@@ -420,6 +446,21 @@ function generateReport(gscData, ga4Data, pageSpeedData, opportunities, startDat
   }
   ln();
 
+  // ── Cannibalization
+  if (cannibalization.length) {
+    ln(`## Keyword Cannibalization (endoscopiadelmayab.com vs omar.doctor)`);
+    ln();
+    ln(`Queries where both domains compete. Consider consolidating to one site.`);
+    ln();
+    ln(`| Query | Endoscopia Pos | Endoscopia Impr | Omar Pos | Omar Impr | Winner |`);
+    ln(`|-------|---------------|-----------------|----------|-----------|--------|`);
+    for (const c of cannibalization.slice(0, 15)) {
+      const winner = c.primary.position < c.secondary.position ? "endoscopia" : "omar.doctor";
+      ln(`| ${c.query} | ${c.primary.position.toFixed(1)} | ${c.primary.impressions} | ${c.secondary.position.toFixed(1)} | ${c.secondary.impressions} | ${winner} |`);
+    }
+    ln();
+  }
+
   // ── Opportunities
   ln(`## Opportunities & Recommendations`);
   ln();
@@ -528,6 +569,15 @@ async function main() {
   const ga4Data = await getGA4Data(auth, startDate, endDate, prevStartDate, prevEndDate);
   console.log(`   ${ga4Data.currentPages.length} landing pages\n`);
 
+  console.log("📊 Fetching omar.doctor GSC data (cannibalization check)...");
+  let secondaryQueries = [];
+  try {
+    secondaryQueries = await fetchGSC(auth, startDate, endDate, ["query"], 200, GSC_SECONDARY_URL);
+    console.log(`   ${secondaryQueries.length} queries from omar.doctor\n`);
+  } catch (e) {
+    console.log(`   ⚠️ Could not fetch omar.doctor: ${e.message?.substring(0, 80)}\n`);
+  }
+
   console.log("📊 Running PageSpeed audits (this takes ~30s)...");
   const pageSpeedData = await getPageSpeedData(KEY_PAGES.slice(0, 5));
   console.log(`   ${pageSpeedData.length} pages audited\n`);
@@ -535,11 +585,14 @@ async function main() {
   // Analyze
   console.log("🔍 Analyzing opportunities...");
   const opportunities = analyzeOpportunities(gscData);
-  console.log(`   ${opportunities.length} opportunities found\n`);
+  console.log(`   ${opportunities.length} opportunities found`);
+
+  const cannibalization = detectCannibalization(gscData.currentQueries, secondaryQueries);
+  console.log(`   ${cannibalization.length} cannibalized queries found\n`);
 
   // Generate report
   const report = generateReport(
-    gscData, ga4Data, pageSpeedData, opportunities,
+    gscData, ga4Data, pageSpeedData, opportunities, cannibalization,
     startDate, endDate, prevStartDate, prevEndDate, reportMonth
   );
 

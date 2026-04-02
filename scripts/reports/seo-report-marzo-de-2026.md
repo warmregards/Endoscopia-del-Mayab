@@ -114,6 +114,17 @@
 | / | ⚠️ unavailable | — | — | — | — |
 | /dr-omar-quiroz | ⚠️ unavailable | — | — | — | — |
 
+## Keyword Cannibalization (endoscopiadelmayab.com vs omar.doctor)
+
+Queries where both domains compete. Consider consolidating to one site.
+
+| Query | Endoscopia Pos | Endoscopia Impr | Omar Pos | Omar Impr | Winner |
+|-------|---------------|-----------------|----------|-----------|--------|
+| omar quiroz | 6.3 | 15 | 2.2 | 97 | omar.doctor |
+| dr omar quiroz | 15.2 | 23 | 11.0 | 29 | omar.doctor |
+| colonoscopia en merida yucatan | 11.8 | 35 | 3.3 | 3 | omar.doctor |
+| balon gastrico merida | 32.0 | 1 | 11.3 | 31 | omar.doctor |
+
 ## Opportunities & Recommendations
 
 ### Low CTR (Rewrite Meta Title/Description)

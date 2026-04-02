@@ -64,6 +64,7 @@ jobs:
           to: sanels@gmail.com
           from: Endoscopia SEO Agent <${{ secrets.GMAIL_USERNAME }}>
           html_body: file:///tmp/report.html
+          attachments: ${{ steps.report.outputs.path }}
 
       - name: Commit report
         run: |
