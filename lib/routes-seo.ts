@@ -88,7 +88,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "cpre",
     brandOverride: "Dr. Omar Quiroz",
     descriptionExtra:
-      "Tratamiento de cálculos biliares, ictericia obstructiva y pancreatitis biliar con equipo SpyGlass. Hospital Amerimed, Mérida.",
+      "Tratamiento de cálculos biliares con tecnología SpyGlass.",
   },
 
   // ── Geo-Targeted Landing Pages ─────────────────────────────────────────
@@ -118,7 +118,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/esclerosis-varices-gastricas-merida",
     key: "esclerosis_varices_gastricas",
     descriptionExtra:
-      "Control de sangrado por várices gástricas con inyección de cianoacrilato. Procedimiento de urgencia disponible.",
+      "Control de sangrado con inyección de cianoacrilato. Urgencias disponibles.",
   },
   ligadura_hemorroides: {
     type: "service",
@@ -143,7 +143,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/extraccion-cuerpos-extranos-endoscopia-merida",
     key: "extraccion_cuerpos_extranos",
     descriptionExtra:
-      "Atención de emergencia para objetos atorados en esófago o garganta. Disponible fines de semana en Hospital Amerimed.",
+      "Atención de emergencia para objetos en esófago o garganta. Hospital Amerimed.",
   },
   dilatacion_esofagica: {
     type: "service",
@@ -184,7 +184,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "apc",
     serviceDisplayOverride: "Argón Plasma (APC)",
     descriptionExtra:
-      "Equipo ERBE propio con el precio más accesible en la península. Sangrado digestivo, esófago de Barrett, GAVE, angiodisplasias y proctitis por radiación. Desde $15,000 MXN. Pacientes de Cancún, Campeche, Playa del Carmen y Belice.",
+      "Equipo ERBE propio. Barrett, GAVE, sangrado digestivo y angiodisplasias.",
   },
 
   // ── Advanced / Quote-Only ───────────────────────────────────────────────

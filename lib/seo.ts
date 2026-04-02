@@ -240,7 +240,7 @@ export function buildServiceMeta(
   // Brand (or brandOverride) is appended by buildMeta, so we build up to that point.
   const displayName = serviceDisplayOverride ?? service
   const priceStr =
-    key && hasPrice(key) ? `Precio desde ${mxn(PRICING[key].from)}` : undefined
+    key && hasPrice(key) ? `Desde ${mxn(PRICING[key].from)}` : undefined
 
   const titleParts = [`${displayName} en Mérida`, priceStr].filter(Boolean)
   const title = titleOverride ?? titleParts.join(" | ")
@@ -280,9 +280,8 @@ export function buildHomeMeta(
     title: `Endoscopia y Colonoscopia en Mérida | Desde ${lowestPrice}`,
     description: buildDescription([
       `Endoscopia y colonoscopia en Mérida desde ${lowestPrice}.`,
-      TRUST_LINE,
-      "Precios transparentes, tecnología Olympus HD y atención directa con el Dr. Quiroz.",
-      CTA_LINE,
+      "Incluye anestesia, biopsias y recuperación.",
+      "Hospital Amerimed — Dr. Omar Quiroz. Agenda por WhatsApp.",
     ]),
     path: "/",
     ...overrides,
@@ -300,14 +299,16 @@ export function buildHomeMeta(
 export function buildPricingMeta(
   overrides?: Partial<BuildMetaParams>
 ): Metadata {
-  const lowestPrice = mxn(PRICING.endoscopia.from)
+  const endoPrice = mxn(PRICING.endoscopia.from)
+  const colonPrice = mxn(PRICING.colonoscopia.from)
+  const cprePrice = mxn(PRICING.cpre.from)
 
   return buildMeta({
-    title: "Precios de Endoscopia y Colonoscopia en Mérida",
+    title: `Precios Endoscopia ${endoPrice} | Colonoscopia ${colonPrice} | Mérida`,
     description: buildDescription([
-      `Precios de procedimientos endoscópicos en Mérida desde ${lowestPrice}.`,
-      "Todos los precios incluyen anestesia, biopsias y sala de recuperación.",
-      "Sin cargos ocultos — precio transparente desde la primera consulta.",
+      `Endoscopia ${endoPrice} | Colonoscopia ${colonPrice} | CPRE ${cprePrice}. 22 procedimientos en Mérida.`,
+      "Todos los precios incluyen anestesia, biopsias y recuperación.",
+      CTA_LINE,
     ]),
     path: "/precios",
     ...overrides,
