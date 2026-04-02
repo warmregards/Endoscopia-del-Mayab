@@ -29,5 +29,9 @@ next-env.d.ts
 # OS files
 .DS_Store
 
+# Google service account credentials
+google-credentials.json
+
+
 # Claude Code
 .claude/

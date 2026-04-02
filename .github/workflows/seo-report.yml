@@ -1,0 +1,66 @@
+name: Monthly SEO Report
+
+on:
+  schedule:
+    # 1st of every month at 9am Merida time (CST = UTC-6)
+    - cron: '0 15 1 * *'
+  workflow_dispatch: # Manual trigger for testing
+
+jobs:
+  seo-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Write Google credentials
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > google-credentials.json
+
+      - name: Run SEO report
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: node scripts/seo-report.mjs
+
+      - name: Read report for email
+        id: body
+        run: |
+          REPORT_FILE=$(ls -t scripts/reports/seo-report-*.md | head -1)
+          {
+            echo "content<<ENDOFREPORT"
+            cat "$REPORT_FILE"
+            echo "ENDOFREPORT"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send report email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: true
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: Monthly Search Report - Endoscopia del Mayab
+          to: sanels@gmail.com
+          from: Endoscopia SEO Agent <${{ secrets.GMAIL_USERNAME }}>
+          content_type: text/html
+          convert_markdown: true
+          body: ${{ steps.body.outputs.content }}
+
+      - name: Commit report
+        run: |
+          git config user.name "SEO Report Bot"
+          git config user.email "noreply@endoscopiadelmayab.com"
+          git add scripts/reports/
+          git diff --cached --quiet || git commit -m "seo: monthly report $(date +%Y-%m-%d)"
+          git push
