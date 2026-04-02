@@ -271,6 +271,143 @@ export default function EndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2B: COMMON DIAGNOSES — bg-background
+          Restores condition-specific keywords: gastritis, H. pylori,
+          úlcera, reflujo, esofagitis, Barrett, hernia hiatal, cáncer.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Qué Encuentra la Endoscopia? Diagnósticos Comunes
+            </h2>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              La endoscopia permite ver directamente la mucosa de esófago,
+              estómago y duodeno — no adivina como una radiografía o
+              ultrasonido. Estos son los diagnósticos más frecuentes:
+            </p>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Gastritis y H.&nbsp;pylori
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  La endoscopia detecta gastritis por Helicobacter pylori
+                  (la causa más común de úlceras), gastritis por medicamentos
+                  (como antiinflamatorios) y gastritis por estrés. Si llevas
+                  meses tomando antiácidos sin mejoría, la endoscopia encuentra
+                  la causa real en 15&nbsp;minutos.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Úlceras Gástricas y Duodenales
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  Vemos directamente la úlcera — su tamaño, profundidad y
+                  riesgo de sangrado. A diferencia de estudios indirectos, la
+                  endoscopia permite tomar biopsias en el momento para descartar
+                  malignidad y detectar H.&nbsp;pylori.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Reflujo y Esofagitis
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  ¿Años tomando omeprazol sin mejoría? La endoscopia evalúa
+                  el daño real del esófago: esofagitis (grados A a D), esófago
+                  de Barrett (condición precancerosa que requiere vigilancia),
+                  hernia hiatal y gastritis por reflujo biliar. El grado de daño
+                  determina el tratamiento específico.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Cáncer Gástrico — Detección Temprana
+                </h3>
+                <p className="text-foreground/80 leading-relaxed">
+                  Muchas veces parece gastritis común. La endoscopia con
+                  equipo Olympus HD detecta lesiones sospechosas en etapa
+                  temprana — cuando el cáncer aún es curable. Se toman biopsias
+                  inmediatas para diagnóstico definitivo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2C: ENDOSCOPIA VS OTHER STUDIES — bg-muted
+          Answers "¿por qué endoscopia y no otro estudio?" with
+          comparison cards. Restores: radiografía, ultrasonido, tomografía.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿Por Qué Endoscopia y No Radiografía o Ultrasonido?
+            </h2>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              Si tu médico te indicó una endoscopia, es porque otros estudios
+              no pueden ver directamente la mucosa del estómago. Esta es la
+              diferencia:
+            </p>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-xl border border-border bg-background p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Radiografía
+                </h3>
+                <p className="text-foreground/80 leading-relaxed text-sm">
+                  Solo detecta perforaciones grandes. No ve gastritis, úlceras
+                  superficiales ni lesiones tempranas.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-background p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Ultrasonido
+                </h3>
+                <p className="text-foreground/80 leading-relaxed text-sm">
+                  Ve vesícula y órganos sólidos, pero no ve el interior del
+                  estómago ni del esófago. No detecta úlceras ni gastritis.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-background p-6">
+                <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
+                  Tomografía
+                </h3>
+                <p className="text-foreground/80 leading-relaxed text-sm">
+                  Evalúa órganos sólidos y estructuras externas. No ve la
+                  mucosa digestiva ni permite tomar biopsias.
+                </p>
+              </div>
+
+              <div className="rounded-xl border-2 border-accent bg-accent/5 p-6">
+                <h3 className="font-serif font-semibold text-lg text-text-accent mb-4">
+                  Endoscopia
+                </h3>
+                <p className="text-foreground/80 leading-relaxed text-sm">
+                  Ve directamente la mucosa en tiempo real. Detecta, biopsia
+                  y trata en la misma sesión. Diagnóstico preciso en
+                  15–25&nbsp;minutos.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: PRICING COMPARISON — bg-background
           Serves: Persona 2 (price shopper) — highest-value persona
           H2 targets "endoscopia precio merida" (1,052 impressions @ pos 24)
