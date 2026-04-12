@@ -41,6 +41,7 @@ const ICON_MAP: Record<string, typeof Stethoscope> = {
   "reseccion-endoscopica-mucosa-emr-merida": Microscope,
   "retiro-balon-gastrico-merida": Settings,
   "apc-coagulacion-plasma-argon-merida": Zap,
+  "ultrasonido-endoscopico-merida": Microscope,
 };
 
 // ---------------------------------------------------------------------------

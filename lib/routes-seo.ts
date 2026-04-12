@@ -252,6 +252,13 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     descriptionExtra:
       "Resección de pólipos y lesiones superficiales. Menos invasivo que cirugía.",
   },
+  eus: {
+    type: "service",
+    service: "Ultrasonido Endoscópico",
+    path: "/ultrasonido-endoscopico-merida",
+    descriptionOverride:
+      "Ultrasonido endoscópico en Mérida con el Dr. Omar Quiroz, Endoscopista Gastrointestinal. Evaluación de páncreas, vías biliares y tumores digestivos. Hospital Amerimed. Consulta tu caso por WhatsApp.",
+  },
 
   // ── Info Pages ──────────────────────────────────────────────────────────
   emergencias: {

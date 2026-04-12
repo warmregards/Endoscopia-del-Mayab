@@ -278,6 +278,16 @@ export const SERVICES: ServiceItem[] = [
     quoteOnly: true,
     trafficTier: "low",
   },
+  {
+    name: "Ultrasonido Endoscópico",
+    displayName: "Ultrasonido Endoscópico en Mérida",
+    gbpServiceName: "Ultrasonido Endoscópico",
+    slug: "ultrasonido-endoscopico-merida",
+    pricingKey: "eus",
+    category: "advanced",
+    quoteOnly: true,
+    trafficTier: "low",
+  },
 ]
 
 // ---------------------------------------------------------------------------

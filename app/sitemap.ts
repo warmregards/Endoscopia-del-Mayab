@@ -40,6 +40,7 @@ const routes: RouteCfg[] = [
   { path: "/diseccion-endoscopica-submucosa-esd-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/reseccion-endoscopica-mucosa-emr-merida", changeFrequency: "monthly", priority: 0.75 },
   { path: "/apc-coagulacion-plasma-argon-merida", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/ultrasonido-endoscopico-merida", changeFrequency: "monthly", priority: 0.7 },
 
   // Otros
   { path: "/retiro-balon-gastrico-merida", changeFrequency: "monthly", priority: 0.7 },

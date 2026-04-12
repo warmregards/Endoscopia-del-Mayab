@@ -22,7 +22,7 @@ export default function ServiceCatalog() {
       <div className="container-page section-padding-sm">
         <h2 className="text-text-primary mb-1.5">Todos los Servicios</h2>
         <p className="text-[length:var(--text-body)] text-text-secondary mb-6">
-          22 procedimientos endoscópicos · Atención 7 días a la semana
+          23 procedimientos endoscópicos · Atención 7 días a la semana
         </p>
 
         {/* Therapeutic */}

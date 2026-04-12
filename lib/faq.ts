@@ -1119,6 +1119,55 @@ const contactoFaqs: FAQ[] = [
 ]
 
 // ---------------------------------------------------------------------------
+// ULTRASONIDO ENDOSCÓPICO — Placeholder demand-validation page
+// Targets: "qué es el ultrasonido endoscópico", "USE Mérida",
+//          "duele", "diferencia con ultrasonido normal", "disponibilidad"
+// ---------------------------------------------------------------------------
+
+export const eusFaqs: FAQ[] = [
+  {
+    question: "¿Qué es el ultrasonido endoscópico y cuándo se necesita?",
+    answer:
+      "El ultrasonido endoscópico (USE) combina una cámara endoscópica con un transductor de ultrasonido para obtener imágenes detalladas de las paredes del esófago, estómago, duodeno, páncreas y vías biliares — estructuras que el ultrasonido abdominal convencional no puede ver con claridad. Se indica principalmente para evaluar tumores del tubo digestivo, lesiones del páncreas, cálculos en el conducto biliar, y para guiar biopsias de tejidos profundos (USE-PAAF).",
+  },
+  {
+    question: "¿Cuánto cuesta el ultrasonido endoscópico en Mérida?",
+    answer:
+      "El costo depende del tipo de estudio (diagnóstico o con punción guiada) y se confirma en la consulta previa. Escríbenos por WhatsApp para que el Dr. Quiroz evalúe tu caso y te indique el precio exacto según lo que necesitas.",
+  },
+  {
+    question: "¿Duele el ultrasonido endoscópico?",
+    answer:
+      "No. El procedimiento se realiza con sedación, igual que una endoscopia convencional. Estarás dormido durante todo el estudio y no sentirás nada. Al despertar, la mayoría de los pacientes solo refieren una leve sensación de distensión que desaparece en minutos.",
+  },
+  {
+    question: "¿Cómo me preparo para un ultrasonido endoscópico?",
+    answer:
+      "La preparación es similar a la de una endoscopia alta: ayuno de 6 a 8 horas antes del procedimiento y suspender ciertos medicamentos según indicación médica. El Dr. Quiroz te dará las instrucciones específicas al momento de agendar tu estudio.",
+  },
+  {
+    question: "¿Cuánto dura el procedimiento y cuándo puedo volver a mi rutina?",
+    answer:
+      "El estudio dura entre 30 y 60 minutos dependiendo de la complejidad. Por la sedación, necesitarás descansar unas horas y venir acompañado. La mayoría de los pacientes retoman sus actividades normales al día siguiente.",
+  },
+  {
+    question: "¿Cuáles son los riesgos del ultrasonido endoscópico?",
+    answer:
+      "Es un procedimiento seguro con una tasa de complicaciones menor al 1%. Los riesgos son los mismos que en cualquier endoscopia: reacción a la sedación, sangrado o perforación, todos muy poco frecuentes. Si se realiza punción (USE-PAAF), existe un riesgo mínimo adicional de infección o pancreatitis, que el médico evalúa caso por caso antes de indicarlo.",
+  },
+  {
+    question: "¿Está disponible el ultrasonido endoscópico en la Península de Yucatán?",
+    answer:
+      "El Dr. Omar Quiroz está incorporando el ultrasonido endoscópico a su práctica en Mérida. Si tu médico te lo indicó y no quieres viajar a otra ciudad, escríbenos: el Dr. Quiroz puede orientarte sobre tu caso y confirmarte disponibilidad.",
+  },
+  {
+    question: "¿En qué se diferencia el ultrasonido endoscópico del ultrasonido abdominal normal?",
+    answer:
+      "El ultrasonido abdominal se realiza desde afuera del cuerpo y su imagen se ve limitada por los huesos, el gas intestinal y la distancia. El ultrasonido endoscópico coloca el transductor directamente dentro del tubo digestivo, a milímetros del tejido que se quiere ver — lo que permite detectar lesiones de 2 a 3 mm que el ultrasonido convencional no puede identificar.",
+  },
+]
+
+// ---------------------------------------------------------------------------
 // Route map — keys MUST match routes-seo.ts RouteKey exactly
 // ---------------------------------------------------------------------------
 
@@ -1148,6 +1197,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   emr: emrFaqs,
   retiro_balon: retiroBalonFaqs,
   apc: apcFaqs,
+  eus: eusFaqs,
   emergencias: emergenciasFaqs,
   consultas: consultasFaqs,
   contacto: contactoFaqs,
