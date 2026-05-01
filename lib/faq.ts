@@ -161,6 +161,11 @@ export const endoscopiaFaqs: FAQ[] = [
       "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado.",
   },
   {
+    question: "¿Hacen endoscopia o colonoscopia con cápsula?",
+    answer:
+      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos te enviamos cotización por WhatsApp después de una breve valoración con el Dr. Quiroz.",
+  },
+  {
     question: "¿Aceptan seguros de gastos médicos para endoscopia?",
     answer:
       "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu endoscopia.",
@@ -233,6 +238,11 @@ export const colonoscopiaFaqs: FAQ[] = [
     question: "¿Colonoscopia tradicional o virtual?",
     answer:
       "La colonoscopia tradicional (óptica) permite diagnóstico y tratamiento en la misma sesión — si encuentra un pólipo, lo retira ahí mismo. La virtual por tomografía no permite biopsia ni extracción, y si encuentra algo, requiere colonoscopia óptica de todos modos.",
+  },
+  {
+    question: "¿Hacen endoscopia o colonoscopia con cápsula?",
+    answer:
+      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos te enviamos cotización por WhatsApp después de una breve valoración con el Dr. Quiroz.",
   },
   {
     question: "¿La biopsia de colon tiene costo adicional?",
