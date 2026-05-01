@@ -69,7 +69,7 @@ export default function Page() {
           </div>
 
           <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl mb-4">
-            Endoscopia y Colonoscopia en Mérida, Yucatán
+            Centro de Endoscopia y Colonoscopia en Mérida
           </h1>
 
           <p className="text-lg leading-relaxed text-muted-foreground mb-8 max-w-xl">

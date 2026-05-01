@@ -87,8 +87,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/cpre-merida",
     key: "cpre",
     brandOverride: "Dr. Omar Quiroz",
+    titleOverride: "CPRE en Mérida — Cálculos Biliares sin Cirugía",
     descriptionExtra:
-      "Tratamiento de cálculos biliares con tecnología SpyGlass.",
+      "Tratamiento mínimamente invasivo de cálculos en vías biliares con tecnología SpyGlass.",
   },
 
   // ── Geo-Targeted Landing Pages ─────────────────────────────────────────
@@ -98,9 +99,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/cpre-playa-del-carmen",
     key: "cpre",
     titleOverride:
-      "CPRE en Playa del Carmen | Precio desde $25,000 MXN",
+      "CPRE en Mérida para Pacientes de Quintana Roo | Desde $25,000",
     descriptionOverride:
-      "CPRE para pacientes de Quintana Roo. Precio desde $25,000 MXN en Hospital Amerimed, Mérida. Incluye sedación y quirófano. Dr. Omar Quiroz — agenda por WhatsApp.",
+      "Atendemos pacientes de Playa del Carmen, Cancún y Tulum en Hospital Amerimed Mérida. CPRE con Dr. Quiroz desde $25,000 MXN. Facilitamos traslado.",
   },
 
   // ── Therapeutic Procedures ──────────────────────────────────────────────
@@ -110,7 +111,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/ligadura-varices-esofagicas-merida",
     key: "ligadura_varices",
     descriptionExtra:
-      "Prevención y control de sangrado por várices esofágicas.",
+      "Prevención de hemorragia digestiva en pacientes con cirrosis e hipertensión portal.",
   },
   esclerosis_varices_gastricas: {
     type: "service",
@@ -151,7 +152,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/dilatacion-esofagica-merida",
     key: "dilatacion_esofagica",
     descriptionExtra:
-      "Tratamiento de estenosis esofágica para mejorar el paso de alimentos.",
+      "Tratamiento endoscópico de estrechez esofágica, disfagia y acalasia.",
   },
   dilatacion_biliar: {
     type: "service",
@@ -184,7 +185,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "apc",
     serviceDisplayOverride: "Argón Plasma (APC)",
     descriptionExtra:
-      "Equipo ERBE propio. Barrett, GAVE, sangrado digestivo y angiodisplasias.",
+      "Hemorragia digestiva, Barrett, GAVE y ectasias vasculares. Equipo ERBE propio.",
   },
 
   // ── Advanced / Quote-Only ───────────────────────────────────────────────
@@ -225,8 +226,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     service: "Cierre de Fístulas por Clips Endoscópicos",
     path: "/cierre-fistulas-clips-endoscopicos-merida",
     key: "cierre_fistulas_clips",
+    serviceDisplayOverride: "Cierre Endoscópico de Fístulas",
     descriptionExtra:
-      "Alternativa mínimamente invasiva a cirugía para cierre de fístulas.",
+      "Fístulas y perforaciones digestivas con clips OTSC y hemoclips. Alternativa a cirugía.",
   },
   sutura_endoscopica: {
     type: "service",
@@ -267,15 +269,15 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/emergencias-digestivas-merida",
     titleOverride: "Emergencias Digestivas en Mérida | 24/7 | Endoscopia del Mayab",
     descriptionOverride:
-      "Atención endoscópica de emergencia en Mérida: sangrado digestivo, cálculos biliares, cuerpos extraños. Dr. Omar Quiroz disponible fines de semana. Hospital Amerimed. WhatsApp 999 236 0153.",
+      "Atención endoscópica urgente en Mérida para hemorragia digestiva, impactación alimentaria y cuerpos extraños. Dr. Omar Quiroz por WhatsApp 999 236 0153.",
   },
   consultas: {
     type: "service",
     service: "Consultas Digestivas",
     path: "/consultas-digestivas-merida",
-    titleOverride: "Endoscopista en Mérida | Consultas Digestivas | Endoscopia del Mayab",
+    titleOverride: "Consulta con Endoscopista Gastrointestinal en Mérida | Dr. Quiroz",
     descriptionOverride:
-      "Endoscopista gastrointestinal en Mérida — consulta digestiva especializada con el Dr. Omar Quiroz. Desde $900 MXN. Hospital Amerimed. Valoración pre-endoscópica, control post-procedimiento y chequeo preventivo. Agenda por WhatsApp.",
+      "Consulta con el Dr. Omar Quiroz, endoscopista gastrointestinal en Mérida. Reflujo, dolor abdominal, sangrado y disfagia. Desde $900 MXN. Hospital Amerimed.",
   },
 
 } as const

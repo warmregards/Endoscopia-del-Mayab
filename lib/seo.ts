@@ -3,7 +3,7 @@
 // Consumed by: layout.tsx, page.tsx files across all 28 routes.
 //
 // Title/description formulas (v3 — "Precio" keyword for CTR):
-//   Procedure:  [Name] en Mérida | Precio desde $X MXN | Endoscopia del Mayab
+//   Procedure:  [Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
 //   Homepage:   Endoscopia y Colonoscopia en Mérida | Desde $4,500 MXN | Endoscopia del Mayab
 //   Pricing:    Precios de Endoscopia y Colonoscopia en Mérida | Endoscopia del Mayab
 //   Doctor:     Dr. Omar Quiroz – Endoscopista en Mérida | Endoscopia del Mayab
@@ -204,7 +204,7 @@ export function buildMeta({
  * Generate metadata for procedure/service pages.
  *
  * Title formula (v3 — "Precio" keyword for CTR):
- *   [Name] en Mérida | Precio desde $X MXN | Endoscopia del Mayab
+ *   [Name] en Mérida | Desde $X MXN | Endoscopia del Mayab
  *
  * Description formula:
  *   [Name] en Mérida — precio desde $X MXN. [Trust signals]. [CTA].
@@ -236,7 +236,7 @@ export function buildServiceMeta(
     params
 
   // ── Title ──
-  // Formula: [DisplayName] en Mérida | Precio desde $X MXN | Brand/Override
+  // Formula: [DisplayName] en Mérida | Desde $X MXN | Brand/Override
   // Brand (or brandOverride) is appended by buildMeta, so we build up to that point.
   const displayName = serviceDisplayOverride ?? service
   const priceStr =
@@ -274,14 +274,11 @@ export function buildServiceMeta(
 export function buildHomeMeta(
   overrides?: Partial<BuildMetaParams>
 ): Metadata {
-  const lowestPrice = mxn(PRICING.endoscopia.from)
-
   return buildMeta({
-    title: `Endoscopia y Colonoscopia en Mérida | Desde ${lowestPrice}`,
+    title: "Endoscopia del Mayab — Centro Endoscópico en Mérida, Yucatán",
     description: buildDescription([
-      `Endoscopia y colonoscopia en Mérida desde ${lowestPrice}.`,
-      "Incluye anestesia, biopsias y recuperación.",
-      "Hospital Amerimed — Dr. Omar Quiroz. Agenda por WhatsApp.",
+      "Centro endoscópico privado en Mérida con el Dr. Omar Quiroz.",
+      "Endoscopia, colonoscopia, CPRE y procedimientos especializados con precios transparentes.",
     ]),
     path: "/",
     ...overrides,
@@ -327,11 +324,10 @@ export function buildDoctorMeta(
   overrides?: Partial<BuildMetaParams>
 ): Metadata {
   return buildMeta({
-    title: "Dr. Omar Quiroz | Endoscopista en Mérida",
+    title: "Dr. Omar Quiroz — Endoscopista Gastrointestinal en Mérida",
     description: buildDescription([
-      "Dr. Omar Quiroz, endoscopista certificado en Mérida.",
-      "Endoscopia, colonoscopia y CPRE — Hospital Amerimed.",
-      "WhatsApp directo con el doctor, sin intermediarios.",
+      "Dr. Omar Quiroz, endoscopista gastrointestinal y cirujano general en Hospital Amerimed Mérida.",
+      "Endoscopia, colonoscopia, CPRE y procedimientos avanzados.",
     ]),
     path: "/dr-omar-quiroz",
     ogType: "profile",
