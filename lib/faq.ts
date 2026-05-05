@@ -290,6 +290,11 @@ export const cpreFaqs: FAQ[] = [
       "La CPRE (colangiopancreatografía retrógrada endoscópica) combina endoscopia y rayos X para diagnosticar y tratar problemas de vías biliares y páncreas: cálculos biliares, estenosis, obstrucciones con ictericia y pancreatitis biliar. Es tanto diagnóstica como terapéutica — puede resolver el problema en la misma sesión.",
   },
   {
+    question: "¿La CPRE es lo mismo que una endoscopia?",
+    answer:
+      "No. La endoscopia convencional explora estómago, esófago y duodeno con una cámara — solo observa. La CPRE usa un endoscopio especializado (duodenoscopio) más fluoroscopía con rayos X para entrar al conducto biliar y al páncreas, y además puede tratar el problema en la misma sesión: extraer cálculos, liberar estenosis o colocar prótesis. Si tu médico pidió una endoscopia, no necesitas una CPRE — son procedimientos distintos.",
+  },
+  {
     question: "¿Cuánto cuesta una CPRE y qué modifica el precio?",
     answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano y equipo. Aumenta si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En Cancún, el mismo procedimiento puede costar $40,000+ MXN según reportes de pacientes.`,
   },
@@ -326,7 +331,7 @@ export const cpreFaqs: FAQ[] = [
   {
     question: "¿Dónde se realiza la CPRE en Mérida?",
     answer:
-      "En el quirófano de Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. Es el único centro en la península de Yucatán con esta combinación de equipo.",
+      "En el quirófano de Hospital Amerimed Mérida, Yucatán (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. La CPRE requiere infraestructura altamente especializada — fluoroscopio en tiempo real, duodenoscopio dedicado, sala de quirófano con anestesiólogo — por eso muchos hospitales de la península de Yucatán refieren estos casos a Mérida.",
   },
   {
     question: "¿CPRE y CEPRE son lo mismo?",
