@@ -21,6 +21,7 @@ import {
   CheckCircle2,
   X,
   ArrowRight,
+  ArrowDown,
   MessageCircle,
   ShieldCheck,
   Stethoscope,
@@ -37,10 +38,10 @@ export const metadata = metaFor("precios")
 
 /* ── Data ─────────────────────────────────────────────────────────────── */
 
-const heroAnchors: { key: "endoscopia" | "colonoscopia" | "cpre"; label: string; slug: string }[] = [
-  { key: "endoscopia", label: "Endoscopia", slug: "endoscopia-merida" },
-  { key: "colonoscopia", label: "Colonoscopia", slug: "colonoscopia-merida" },
-  { key: "cpre", label: "CPRE", slug: "cpre-merida" },
+const heroAnchors: { key: "endoscopia" | "colonoscopia" | "cpre"; label: string }[] = [
+  { key: "endoscopia", label: "Endoscopia" },
+  { key: "colonoscopia", label: "Colonoscopia" },
+  { key: "cpre", label: "CPRE" },
 ]
 
 const diagnosticServices = servicesByCategory("diagnostic")
@@ -48,9 +49,94 @@ const therapeuticServices = servicesByCategory("therapeutic")
 const advancedServices = servicesByCategory("advanced")
 
 const trustBadges = [
-  "Anestesia incluida",
-  "Biopsias incluidas",
-  "Sala de recuperación",
+  "Sedación incluida",
+  "Reporte el mismo día",
+  "Hospital Amerimed Mérida",
+]
+
+/* Per-procedure anchored pricing cards — deep-link landing targets for the
+   price-keyword ad groups (/precios#endoscopia, #colonoscopia, #cpre). */
+type ProcedureDetail = {
+  key: "endoscopia" | "colonoscopia" | "cpre"
+  heading: string
+  subhead: string
+  included: string[]
+  notIncluded: string
+  differentiator: string
+  waLabel: string
+  waMessage: string
+}
+
+const procedureDetails: ProcedureDetail[] = [
+  {
+    key: "endoscopia",
+    heading: "¿Cuánto Cuesta una Endoscopia en Mérida?",
+    subhead: `Precio de endoscopia en Mérida ${displayFrom(
+      "endoscopia",
+      "desde"
+    )}. Estudio del esófago, estómago y duodeno bajo sedación.`,
+    included: [
+      "Sedación con anestesiólogo",
+      "Toma de biopsias incluida — sin límite de muestras",
+      "Sala de recuperación",
+      "Valoración pre-procedimiento",
+      "Reporte con fotografías HD el mismo día",
+    ],
+    notIncluded: `Si se toman biopsias, la interpretación del patólogo externo cuesta ${mxn(
+      ADDITIONAL_FEES.biopsy.amount
+    )} adicional — tarifa única, sin importar el número de muestras. Solo aplica cuando se requieren biopsias y se te informa antes del procedimiento.`,
+    differentiator:
+      "Costo de endoscopia transparente: reporte HD con fotografías el mismo día. Sin sorpresas ni cargos ocultos.",
+    waLabel: "Cotizar Endoscopia",
+    waMessage:
+      "Hola Dr. Quiroz, me interesa una endoscopia. ¿Cuál es el costo y la disponibilidad?",
+  },
+  {
+    key: "colonoscopia",
+    heading: "¿Cuánto Cuesta una Colonoscopia en Mérida?",
+    subhead: `Precio de colonoscopia en Mérida ${displayFrom(
+      "colonoscopia",
+      "desde"
+    )}. Estudio completo del colon para detección y prevención.`,
+    included: [
+      "Sedación con anestesiólogo",
+      "Toma de biopsias incluida — sin límite de muestras",
+      "Polipectomía en la misma sesión si se detectan pólipos pequeños",
+      "Sala de recuperación",
+      "Valoración pre-procedimiento",
+      "Reporte con fotografías HD el mismo día",
+    ],
+    notIncluded: `La solución de preparación intestinal (laxante) se compra por separado en farmacia — el Dr. Quiroz te indica cuál adquirir y cómo tomarla al agendar. Si se toman biopsias, la interpretación del patólogo externo cuesta ${mxn(
+      ADDITIONAL_FEES.biopsy.amount
+    )} adicional — tarifa única, sin importar el número de muestras.`,
+    differentiator:
+      "Costo de colonoscopia transparente. Si se detectan pólipos pequeños, pueden extirparse en el mismo estudio — prevención de cáncer de colon sin una segunda cita.",
+    waLabel: "Cotizar Colonoscopia",
+    waMessage:
+      "Hola Dr. Quiroz, me interesa una colonoscopia. ¿Cuál es el costo y la disponibilidad?",
+  },
+  {
+    key: "cpre",
+    heading: "¿Cuánto Cuesta una CPRE en Mérida?",
+    subhead: `Precio de CPRE en Mérida ${displayFrom(
+      "cpre",
+      "desde"
+    )}. Tratamiento de cálculos y obstrucciones de la vía biliar.`,
+    included: [
+      "Sedación profunda con anestesiólogo",
+      "Equipo endoscópico y fluoroscópico especializado",
+      "Sala de recuperación",
+      "Valoración pre-procedimiento",
+      "Reporte del procedimiento el mismo día",
+    ],
+    notIncluded:
+      "Las endoprótesis (stents biliares), cuando el caso las requiere, se cotizan por separado según el tipo y tamaño. El Dr. Quiroz te lo confirma en la valoración.",
+    differentiator:
+      "CPRE de alta complejidad sin salir de Mérida. El Dr. Quiroz te da una cotización exacta según tu caso, normalmente el mismo día.",
+    waLabel: "Cotizar CPRE",
+    waMessage:
+      "Hola Dr. Quiroz, me interesa una CPRE. ¿Cuál es el costo y la disponibilidad?",
+  },
 ]
 
 /* ══════════════════════════════════════════════════════════════════════ */
@@ -92,7 +178,7 @@ export default function PreciosPage() {
               {heroAnchors.map((item) => (
                 <Link
                   key={item.key}
-                  href={`/${item.slug}`}
+                  href={`#${item.key}`}
                   className="group border border-border bg-card rounded-xl p-6 text-center hover:shadow-md hover:border-accent/30 transition-all"
                 >
                   <p className="text-sm font-medium text-muted-foreground mb-2">
@@ -102,8 +188,8 @@ export default function PreciosPage() {
                     {displayFrom(item.key)}
                   </p>
                   <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1 group-hover:gap-2 transition-all">
-                    Ver procedimiento
-                    <ArrowRight className="h-4 w-4" />
+                    Ver detalle
+                    <ArrowDown className="h-4 w-4" />
                   </p>
                 </Link>
               ))}
@@ -135,7 +221,7 @@ export default function PreciosPage() {
           SECTION 2: QUÉ INCLUYE — bg-muted
           Value differentiator for Persona 2.
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="que-incluye" className="bg-muted scroll-mt-24">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -169,8 +255,17 @@ export default function PreciosPage() {
                   <li className="flex items-start gap-2 text-foreground/80">
                     <span className="flex-shrink-0 w-4 h-4 mt-0.5 text-muted-foreground">·</span>
                     <span>
-                      <span className="font-semibold">Lectura de patología (biopsia):</span>{" "}
-                      {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional
+                      <span className="font-semibold">Interpretación de biopsias:</span>{" "}
+                      {mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única del patólogo
+                      externo — sin importar el número de muestras. Solo aplica si
+                      se toman biopsias.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2 text-foreground/80">
+                    <span className="flex-shrink-0 w-4 h-4 mt-0.5 text-muted-foreground">·</span>
+                    <span>
+                      <span className="font-semibold">Preparación intestinal (colonoscopia):</span>{" "}
+                      la solución laxante se adquiere por separado en farmacia
                     </span>
                   </li>
                   <li className="flex items-start gap-2 text-foreground/80">
@@ -184,16 +279,34 @@ export default function PreciosPage() {
               </div>
             </div>
 
-            {/* Biopsy differentiator callout */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
-              <p className="text-foreground/80 leading-relaxed">
-                <span className="font-semibold text-foreground">
-                  Biopsias sin límite con tarifa única.
-                </span>{" "}
-                La mayoría de clínicas cobra por cada biopsia tomada — 3
-                biopsias = 3 cargos. Con el {DOCTOR.name}, una sola tarifa
-                cubre todas las biopsias necesarias.
+            {/* Biopsy differentiator callout — two-layer flat-fee story */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
+              <p className="font-semibold text-foreground">
+                Biopsias: tarifa única en ambos lados, no por muestra.
               </p>
+              <p className="text-foreground/80 leading-relaxed">
+                Cuando se requieren biopsias, la mayoría de clínicas cobra por
+                cada muestra — tanto por tomarla como por interpretarla. 3
+                biopsias = 3 cargos en ambos lados.
+              </p>
+              <ul className="space-y-2 text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <span className="font-semibold">Toma de muestras:</span>{" "}
+                    incluida en el precio del procedimiento del {DOCTOR.name},
+                    sin importar cuántas se necesiten.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>
+                    <span className="font-semibold">Interpretación patológica:</span>{" "}
+                    {mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única del
+                    patólogo externo, sin importar cuántas muestras se procesen.
+                  </span>
+                </li>
+              </ul>
             </div>
 
             <p className="text-foreground/80 leading-relaxed">
@@ -206,38 +319,27 @@ export default function PreciosPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          SECTION 3: FULL PRICING TABLE — bg-background
-          All 22 services grouped by category.
+          SECTION 3: PRICING — bg-background
+          Anchored per-procedure cards (#endoscopia / #colonoscopia /
+          #cpre — ad-routing landing targets), then the full category
+          tables for all 22 services.
           ══════════════════════════════════════════════════════════════ */}
       <section id="pricing-anchor" className="bg-background">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
+            {/* Per-procedure anchored cards */}
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Precios por procedimiento
+            </h2>
+
+            {procedureDetails.map((detail) => (
+              <ProcedureAnchorCard key={detail.key} detail={detail} />
+            ))}
+
+            {/* Full category tables */}
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               Todos los precios
             </h2>
-
-            {/* Long-tail pricing headings */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
-                  ¿Cuánto Cuesta una Colonoscopia en Mérida?
-                </h3>
-                <p className="text-foreground/80 text-sm leading-relaxed">
-                  {displayFrom("colonoscopia")} — con sedación, biopsias y sala
-                  de recuperación incluidas. Sin costos ocultos.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
-                  ¿Cuánto Cuesta una Endoscopia en Mérida?
-                </h3>
-                <p className="text-foreground/80 text-sm leading-relaxed">
-                  {displayFrom("endoscopia")} — con sedación, biopsias y
-                  reporte con fotos incluidos. Resultados el mismo día.
-                  Sin costos ocultos.
-                </p>
-              </div>
-            </div>
 
             {/* Group A: Diagnostic */}
             <div className="space-y-4">
@@ -326,7 +428,7 @@ export default function PreciosPage() {
           SECTION 4: COMPETITIVE COMPARISON — bg-muted
           Implicit comparison (no competitor names).
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="comparacion" className="bg-muted scroll-mt-24">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -400,7 +502,7 @@ export default function PreciosPage() {
       {/* ══════════════════════════════════════════════════════════════
           SECTION 5: INSURANCE & PAYMENT — bg-background
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section id="seguros" className="bg-background scroll-mt-24">
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
@@ -520,6 +622,69 @@ export default function PreciosPage() {
   )
 }
 
+/* ── Procedure Anchor Card ────────────────────────────────────────────── */
+/* Deep-link target for /precios#{key}. scroll-mt-24 (96px) clears the
+   sticky 64px SiteHeader so the heading isn't hidden on landing. */
+
+function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
+  return (
+    <section
+      id={detail.key}
+      className="scroll-mt-24 bg-card border border-border rounded-xl p-6 md:p-8 space-y-6"
+    >
+      <div className="space-y-2">
+        <h3 className="font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight">
+          {detail.heading}
+        </h3>
+        <p className="text-muted-foreground leading-relaxed">
+          {detail.subhead}
+        </p>
+      </div>
+
+      {/* Price + procedure-specific WhatsApp CTA */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-accent-light border border-accent/20 rounded-xl p-6">
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">Precio</p>
+          <p className="font-serif font-extrabold text-text-accent text-3xl md:text-4xl">
+            {displayFrom(detail.key)}
+          </p>
+        </div>
+        <WhatsAppButton
+          service={detail.key}
+          position="precios-anchor"
+          label={detail.waLabel}
+          message={detail.waMessage}
+          className="w-full sm:w-auto"
+        />
+      </div>
+
+      {/* What's included — procedure-specific */}
+      <div className="space-y-4">
+        <p className="font-semibold text-foreground">¿Qué incluye?</p>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+          {detail.included.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2 text-foreground/80 text-sm"
+            >
+              <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          {detail.notIncluded}
+        </p>
+      </div>
+
+      {/* One-line value differentiator */}
+      <p className="text-sm font-semibold text-foreground border-l-2 border-accent pl-4 leading-relaxed">
+        {detail.differentiator}
+      </p>
+    </section>
+  )
+}
+
 /* ── Service Row Component ────────────────────────────────────────────── */
 
 function ServiceRow({ service, isLast }: { service: ServiceItem; isLast: boolean }) {
@@ -582,10 +747,16 @@ const comparisonRows = [
     us: "Incluida",
   },
   {
-    label: "Biopsias",
+    label: "Toma de biopsias",
     lab: "Por cada muestra",
     hospital: "Variable",
-    us: "Tarifa única",
+    us: "Incluida, sin límite",
+  },
+  {
+    label: "Interpretación patológica",
+    lab: "Por cada muestra",
+    hospital: "Por cada muestra",
+    us: `${mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única`,
   },
   {
     label: "Endoscopista certificado",
@@ -606,7 +777,7 @@ const comparisonRows = [
     us: "El doctor contesta",
   },
   {
-    label: "Resultados",
+    label: "Reporte del estudio",
     lab: "3–5 días",
     hospital: "2–3 días",
     us: "Mismo día",

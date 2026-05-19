@@ -88,8 +88,12 @@ export const ADDITIONAL_FEES: Record<AdditionalFeeKey, AdditionalFee> = {
   biopsy: {
     amount: 1200,
     currency: "MXN",
-    label: "Lectura de patología (biopsia)",
-    description: "Solo si se toman biopsias — se informa antes del procedimiento",
+    // The procedure fee covers TAKING the samples; this fee is only the
+    // external pathologist's interpretation — flat regardless of count.
+    // NOTE: `description` has no trailing period on purpose — several
+    // procedure pages append their own "." when rendering it.
+    label: "Interpretación de biopsias (patólogo externo)",
+    description: "Tarifa única — sin importar el número de muestras. Solo aplica si se toman biopsias",
   },
   consultation: {
     amount: 900,

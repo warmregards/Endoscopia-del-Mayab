@@ -18,7 +18,17 @@ export default function ScrollToTop() {
   const firedPricingView = useRef(false)
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    // Honor in-page deep links (e.g. /precios#endoscopia from an ad) instead
+    // of forcing the page back to the top. Defer one frame so the target
+    // element and layout have settled before scrolling to it.
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      requestAnimationFrame(() => {
+        document.getElementById(hash)?.scrollIntoView()
+      })
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
     firedDepths.current.clear()
     firedCtaView.current = false
     firedPricingView.current = false
