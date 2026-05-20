@@ -72,7 +72,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "¿Es peligrosa la colonoscopia?",
     answer:
-      "La colonoscopia es uno de los procedimientos más seguros en gastroenterología. Las complicaciones graves son extremadamente raras (menos del 0.1%). El Dr. Quiroz ha realizado más de 300 colonoscopias anuales con equipo Olympus HD y monitoreo continuo por anestesiólogo en Hospital Amerimed.",
+      "La colonoscopia es uno de los procedimientos más seguros en gastroenterología. Las complicaciones graves son extremadamente raras (menos del 0.1%). El Dr. Quiroz ha realizado más de 300 colonoscopias anuales con equipo Olympus HD y monitoreo continuo por anestesiólogo en Hospital Amerimed. Si te preocupa algún riesgo en tu caso particular, puedes platicarlo directamente con el Dr. Quiroz por WhatsApp antes de decidir.",
   },
   {
     question: "¿Cómo me preparo para el procedimiento?",
@@ -128,12 +128,12 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Duele la endoscopia?",
     answer:
-      "No. Utilizamos sedación intravenosa administrada por anestesiólogo certificado. No sentirás dolor ni reflejo de náusea. La mayoría de pacientes no recuerdan el procedimiento y despiertan con mínima incomodidad.",
+      "No. Utilizamos sedación intravenosa administrada por anestesiólogo certificado. No sentirás dolor ni reflejo de náusea. La mayoría de pacientes no recuerdan el procedimiento y despiertan con mínima incomodidad. Si el procedimiento te genera ansiedad, escríbele al Dr. Quiroz por WhatsApp y te explica exactamente cómo será tu sedación.",
   },
   {
     question: "¿Qué preparación necesito antes del estudio?",
     answer:
-      "Ayuno estricto de 8–12 horas. Algunos medicamentos pueden ajustarse — el Dr. Quiroz te indica cuáles al agendar. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación.",
+      "Ayuno estricto de 8–12 horas. Algunos medicamentos pueden ajustarse — el Dr. Quiroz te indica cuáles al agendar. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación. Al agendar por WhatsApp, el Dr. Quiroz te envía la guía de preparación exacta para tu estudio.",
   },
   {
     question: "¿Cuánto dura una endoscopia?",
@@ -143,7 +143,7 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Es peligrosa la endoscopia?",
     answer:
-      "Es uno de los procedimientos más seguros en gastroenterología. Las complicaciones son raras: reacciones a sedación (leves), sangrado menor tras biopsia o perforación (menos del 0.1%). Hospital Amerimed cuenta con protocolos de seguridad y manejo inmediato.",
+      "Es uno de los procedimientos más seguros en gastroenterología. Las complicaciones son raras: reacciones a sedación (leves), sangrado menor tras biopsia o perforación (menos del 0.1%). Hospital Amerimed cuenta con protocolos de seguridad y manejo inmediato. Si te preocupa algún riesgo, platícalo con el Dr. Quiroz por WhatsApp antes de agendar.",
   },
   {
     question: "¿Qué enfermedades se diagnostican con endoscopia?",
@@ -227,7 +227,7 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Es peligrosa la colonoscopia?",
     answer:
-      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato. El anestesiólogo monitorea tus signos vitales durante todo el procedimiento y ajusta la sedación en tiempo real para tu seguridad.",
+      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato. El anestesiólogo monitorea tus signos vitales durante todo el procedimiento y ajusta la sedación en tiempo real para tu seguridad. Si tienes dudas sobre los riesgos en tu situación específica, escríbele al Dr. Quiroz por WhatsApp — las resuelve personalmente antes de que agendes.",
   },
   {
     question: "¿Qué detecta la colonoscopia?",
