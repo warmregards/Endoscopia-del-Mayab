@@ -32,6 +32,7 @@ import {
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
+import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 
 export const revalidate = 86400
 export const metadata = metaFor("precios")
@@ -296,35 +297,11 @@ export default function PreciosPage() {
               </div>
             </div>
 
-            {/* Biopsy differentiator callout — two-layer flat-fee story */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
-              <p className="font-semibold text-foreground">
-                Biopsias: tarifa única en ambos lados, no por muestra.
-              </p>
-              <p className="text-foreground/80 leading-relaxed">
-                Cuando se requieren biopsias, la mayoría de clínicas cobra por
-                cada muestra — tanto por tomarla como por interpretarla. 3
-                biopsias = 3 cargos en ambos lados.
-              </p>
-              <ul className="space-y-2 text-foreground/80">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span>
-                    <span className="font-semibold">Toma de muestras:</span>{" "}
-                    incluida en el precio del procedimiento del {DOCTOR.name},
-                    sin importar cuántas se necesiten.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span>
-                    <span className="font-semibold">Interpretación patológica:</span>{" "}
-                    {mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única del
-                    patólogo externo, sin importar cuántas muestras se procesen.
-                  </span>
-                </li>
-              </ul>
-            </div>
+            {/* Biopsy differentiator — two-layer "tarifa única" story */}
+            <BiopsyDifferentiator
+              headline="Biopsias: tarifa única en ambos lados, no por muestra."
+              intro="Cuando se requieren biopsias, la mayoría de clínicas cobra por cada muestra — tanto por tomarla como por interpretarla. 3 biopsias = 3 cargos en ambos lados."
+            />
 
             <p className="text-foreground/80 leading-relaxed">
               Si necesitas endoscopia y colonoscopia, ambos estudios pueden

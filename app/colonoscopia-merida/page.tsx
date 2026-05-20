@@ -15,6 +15,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 
 export const revalidate = 86400
 export const metadata = metaFor("colonoscopia")
@@ -328,7 +329,7 @@ export default function ColonoscopiaPage() {
                 {mxn(PRICING.colonoscopia.from)} todo incluido
               </h2>
               <p className="text-muted-foreground mt-2">
-                Precio fijo con todo incluido. Sin cargos ocultos.
+                Precio fijo y transparente. Sin cargos ocultos.
               </p>
             </div>
 
@@ -353,7 +354,7 @@ export default function ColonoscopiaPage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {mxn(PRICING.colonoscopia.from)}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">Todo incluido</p>
+                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
               </div>
 
               <div className="p-6 rounded-2xl border border-border text-center">
@@ -369,17 +370,11 @@ export default function ColonoscopiaPage() {
               </div>
             </div>
 
-            {/* Biopsy differentiator */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
-              <p className="text-foreground/80 leading-relaxed">
-                <span className="font-semibold text-foreground">
-                  Biopsias sin límite con tarifa única.
-                </span>{" "}
-                Otros proveedores cobran por cada biopsia tomada — si necesitas
-                3, pagas 3 veces. Con nosotros pagas una sola vez, sin importar
-                cuántas biopsias se requieran.
-              </p>
-            </div>
+            {/* Biopsy differentiator — two-layer "tarifa única" story */}
+            <BiopsyDifferentiator
+              headline="Biopsias: tarifa única en ambos lados, no por muestra."
+              intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
+            />
 
             {/* GEO definitive paragraph */}
             <p className="text-muted-foreground leading-relaxed">
@@ -388,8 +383,8 @@ export default function ColonoscopiaPage() {
               precio incluye valoración pre-procedimiento, sedación con
               anestesiólogo, equipo Olympus 190 HD, extracción de pólipos
               pequeños y reporte con fotografías. El único costo adicional
-              posible es la lectura de patología ({mxn(ADDITIONAL_FEES.biopsy.amount)}) si
-              se toman biopsias.{" "}
+              posible es la interpretación del patólogo externo ({mxn(ADDITIONAL_FEES.biopsy.amount)})
+              si se toman biopsias.{" "}
               <Link href="/precios" className="text-primary hover:underline font-medium">
                 Ver todos los precios
               </Link>
@@ -398,8 +393,8 @@ export default function ColonoscopiaPage() {
             {/* Additional cost note */}
             <div className="bg-muted rounded-xl p-4">
               <p className="text-sm text-muted-foreground">
-                Único costo adicional posible: lectura de patología (biopsias)
-                por {mxn(ADDITIONAL_FEES.biopsy.amount)}, solo si el {DOCTOR.name} toma
+                Único costo adicional posible: interpretación del patólogo
+                externo por {mxn(ADDITIONAL_FEES.biopsy.amount)}, solo si el {DOCTOR.name} toma
                 muestras durante el estudio.
               </p>
             </div>

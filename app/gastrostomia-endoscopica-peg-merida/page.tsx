@@ -284,8 +284,9 @@ export default function GastrostomiaEndoscopicaPEGPage() {
 
             <div className="mt-6 p-4 rounded-xl bg-muted border border-border">
               <p className="text-sm text-foreground/70">
-                Lectura de patología (si se toman biopsias):{" "}
-                <strong>{mxn(ADDITIONAL_FEES.biopsy.amount)}</strong> adicional
+                Interpretación de biopsias por el patólogo externo (si se{" "}
+                toman): <strong>{mxn(ADDITIONAL_FEES.biopsy.amount)}</strong>{" "}
+                tarifa única
               </p>
             </div>
 

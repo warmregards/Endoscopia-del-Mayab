@@ -189,7 +189,7 @@ export default function EmrPage() {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground mb-4">
-                Lectura de patología: {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional
+                Interpretación de biopsias por el patólogo externo: {mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única
               </p>
               <Link
                 href="/precios"

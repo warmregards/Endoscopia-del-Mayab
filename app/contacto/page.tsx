@@ -237,7 +237,7 @@ export default function ContactoPage() {
                   {displayFrom(key)}
                 </p>
                 <p className="text-sm text-foreground/70">
-                  Incluye anestesia, biopsias y recuperación
+                  Incluye sedación, biopsias y recuperación
                 </p>
               </div>
             ))}

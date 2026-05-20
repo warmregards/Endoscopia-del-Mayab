@@ -172,7 +172,7 @@ export default function EndoscopiaPage() {
 
                 <div className="mt-8 space-y-4">
                   <h3 className="text-lg font-serif font-bold text-foreground text-center">
-                    Todo incluido
+                    ¿Qué incluye el precio?
                   </h3>
                   {includedItems.map((item) => (
                     <div key={item} className="flex items-center gap-3">
@@ -446,7 +446,7 @@ export default function EndoscopiaPage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {displayFrom("endoscopia")}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">Todo incluido</p>
+                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
               </div>
 
               <div className="p-6 rounded-2xl border border-border text-center">

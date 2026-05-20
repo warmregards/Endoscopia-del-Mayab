@@ -17,6 +17,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -185,9 +186,9 @@ export default function EsclerosisVaricesGastricasPage() {
 
                 <div className="bg-muted rounded-xl p-4">
                   <p className="text-xs text-muted-foreground">
-                    Generalmente 1–2 sesiones. Lectura de patología{" "}
-                    {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional si se toman
-                    biopsias.
+                    Generalmente 1–2 sesiones. Interpretación del patólogo{" "}
+                    externo {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional si
+                    se toman biopsias.
                   </p>
                 </div>
               </div>
@@ -275,17 +276,8 @@ export default function EsclerosisVaricesGastricasPage() {
               ligadura esofágica que puede requerir 2–4.
             </p>
 
-            {/* Biopsy differentiator */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
-              <p className="text-foreground/80">
-                <span className="font-semibold text-foreground">
-                  Biopsias sin límite con tarifa única.
-                </span>{" "}
-                Si se toman biopsias, la lectura de patología tiene un costo
-                adicional de {mxn(ADDITIONAL_FEES.biopsy.amount)} — un solo
-                cobro sin importar cuántas biopsias se requieran.
-              </p>
-            </div>
+            {/* Biopsy differentiator — two-layer "tarifa única" story */}
+            <BiopsyDifferentiator />
 
             <p className="text-sm text-muted-foreground">
               <Link

@@ -196,7 +196,8 @@ export default function DilatacionColonicaPage() {
             </div>
 
             <p className="text-sm text-muted-foreground mb-6">
-              Lectura de patología: {mxn(ADDITIONAL_FEES.biopsy.amount)} adicional si se toman
+              Interpretación de biopsias por el patólogo externo:{" "}
+              {mxn(ADDITIONAL_FEES.biopsy.amount)} tarifa única si se toman
               biopsias
             </p>
 

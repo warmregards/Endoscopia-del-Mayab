@@ -235,13 +235,13 @@ export default function APCPage() {
                     {displayFrom("apc")}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Precio por sesión — todo incluido
+                    Precio por sesión — sin cargos ocultos
                   </p>
                 </div>
 
                 <div className="mt-8 space-y-4">
                   <h3 className="text-lg font-serif font-bold text-foreground text-center">
-                    Todo incluido
+                    ¿Qué incluye el precio?
                   </h3>
                   {includedItems.map((item) => (
                     <div key={item} className="flex items-center gap-3">
