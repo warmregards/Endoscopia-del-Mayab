@@ -103,8 +103,8 @@ export default function LigaduraHemorroidesPage() {
           </h2>
 
           <p className="text-foreground/80 leading-relaxed max-w-3xl mb-8">
-            La ligadura con bandas elásticas es un procedimiento ambulatorio para
-            tratar hemorroides internas grado 1 y 2. El {DOCTOR.name} coloca
+            La ligadura con bandas elásticas (banda de goma) es un procedimiento
+            ambulatorio para tratar hemorroides internas grado 1 y 2. El {DOCTOR.name} coloca
             bandas especiales que cortan el flujo sanguíneo a la hemorroide. En
             3 a 7 días, el tejido se seca y cae. Se realiza con sedación
             consciente en {CLINIC.address.streetAddress} y dura entre 5 y 10
@@ -135,7 +135,7 @@ export default function LigaduraHemorroidesPage() {
           </ul>
           <p className="text-foreground/80 leading-relaxed max-w-3xl mb-8">
             El {DOCTOR.name} determina el grado durante la evaluación. Si
-            necesitas cirugía, puede realizarla en el mismo hospital.
+            necesitas cirugía u operación, puede realizarla en el mismo hospital.
           </p>
 
           {/* 5-step vertical timeline */}
@@ -247,6 +247,12 @@ export default function LigaduraHemorroidesPage() {
                 </div>
               </div>
             </div>
+            <p className="text-foreground/80 leading-relaxed max-w-3xl mt-6">
+              Al ser ambulatoria, sin quirófano y sin anestesia general, la
+              ligadura cuesta una fracción de lo que cuesta una
+              hemorroidectomía — desde{" "}
+              {displayFrom("ligadura_hemorroides", "")}, todo incluido.
+            </p>
           </div>
 
           {/* Pricing */}
