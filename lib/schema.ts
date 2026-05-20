@@ -352,6 +352,65 @@ export function faqSchema(items: FaqItem[]) {
 }
 
 // ---------------------------------------------------------------------------
+// Pricing page: ItemList of Service+Offer entries
+// ---------------------------------------------------------------------------
+
+/**
+ * Generate ItemList JSON-LD for the /precios page anchored procedure cards.
+ * Each item is a Service with an Offer, deep-linked to the matching anchor.
+ *
+ * Gives Google explicit machine-readable price data tied to each procedure
+ * on this page — improves LP relevance for "[precio de X]" ad queries
+ * compared to relying solely on the clinic-level hasOfferCatalog.
+ *
+ * @example
+ *   pricingItemList([
+ *     { name: "Endoscopia en Mérida", pricingKey: "endoscopia", anchor: "endoscopia" },
+ *     { name: "Colonoscopia en Mérida", pricingKey: "colonoscopia", anchor: "colonoscopia" },
+ *     { name: "CPRE en Mérida", pricingKey: "cpre", anchor: "cpre" },
+ *   ])
+ */
+export function pricingItemList(
+  items: Array<{ name: string; pricingKey: ServiceKey; anchor: string }>
+) {
+  return prune({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Precios por procedimiento — Mérida",
+    numberOfItems: items.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: items.map((it, i) => {
+      const url = `${SITE_URL}/precios#${it.anchor}`
+      const price = PRICING[it.pricingKey].from
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Service",
+          name: it.name,
+          url,
+          provider: { "@id": CLINIC_ID },
+          areaServed: {
+            "@type": "City",
+            name: CLINIC.areaServed.primary,
+          },
+          offers:
+            typeof price === "number"
+              ? {
+                  "@type": "Offer",
+                  price: String(price),
+                  priceCurrency: "MXN",
+                  url,
+                  availability: "https://schema.org/InStock",
+                }
+              : undefined,
+        },
+      }
+    }),
+  })
+}
+
+// ---------------------------------------------------------------------------
 // Breadcrumb (optional, for procedure pages)
 // ---------------------------------------------------------------------------
 

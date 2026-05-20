@@ -15,7 +15,7 @@ import {
   SERVICES,
   type ServiceItem,
 } from "@/lib/services"
-import { breadcrumbSchema } from "@/lib/schema"
+import { breadcrumbSchema, pricingItemList } from "@/lib/schema"
 import Link from "next/link"
 import {
   CheckCircle2,
@@ -157,6 +157,20 @@ export default function PreciosPage() {
         }}
       />
 
+      {/* ── JSON-LD: ItemList of per-procedure offers (deep-linked) ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            pricingItemList([
+              { name: "Endoscopia en Mérida", pricingKey: "endoscopia", anchor: "endoscopia" },
+              { name: "Colonoscopia en Mérida", pricingKey: "colonoscopia", anchor: "colonoscopia" },
+              { name: "CPRE en Mérida", pricingKey: "cpre", anchor: "cpre" },
+            ])
+          ),
+        }}
+      />
+
       {/* ══════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           Price anchors for top-3 searched procedures.
@@ -166,10 +180,13 @@ export default function PreciosPage() {
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="space-y-4">
               <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
-                Precios de Procedimientos Endoscópicos en Mérida, Yucatán
+                Precio de Endoscopia, Colonoscopia y CPRE en Mérida, Yucatán
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                Precios transparentes. Sin sorpresas. Todo incluido.
+                Conoce el precio de endoscopia y el precio de colonoscopia en
+                Mérida con cotizaciones transparentes — sedación, sala de
+                recuperación y reporte el mismo día incluidos. Sin sorpresas
+                ni costos ocultos.
               </p>
             </div>
 

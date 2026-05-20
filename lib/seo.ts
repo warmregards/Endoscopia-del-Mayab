@@ -68,7 +68,7 @@ const TITLE_MAX = 70
 const DESC_MAX = 160
 
 // Standard trust signals for descriptions (Persona 2 + Persona 1)
-const TRUST_LINE = "Precio incluye anestesia, biopsias y recuperación."
+const TRUST_LINE = "Precio incluye sedación, biopsias y recuperación."
 const CTA_LINE = "Agenda con el Dr. Quiroz por WhatsApp."
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE).replace(
@@ -298,13 +298,12 @@ export function buildPricingMeta(
 ): Metadata {
   const endoPrice = mxn(PRICING.endoscopia.from)
   const colonPrice = mxn(PRICING.colonoscopia.from)
-  const cprePrice = mxn(PRICING.cpre.from)
 
   return buildMeta({
-    title: `Precios Endoscopia ${endoPrice} | Colonoscopia ${colonPrice} | Mérida`,
+    title: `Precio de Endoscopia, Colonoscopia y CPRE en Mérida | Desde ${endoPrice}`,
     description: buildDescription([
-      `Endoscopia ${endoPrice} | Colonoscopia ${colonPrice} | CPRE ${cprePrice}. 22 procedimientos en Mérida.`,
-      "Todos los precios incluyen anestesia, biopsias y recuperación.",
+      `Precio de Endoscopia desde ${endoPrice} y precio de Colonoscopia desde ${colonPrice} en Mérida.`,
+      "Sedación, sala de recuperación y reporte el mismo día incluidos.",
       CTA_LINE,
     ]),
     path: "/precios",
