@@ -21,7 +21,7 @@ export default function DoctorSection() {
           <div className="flex-1">
             <h2 className="text-text-primary mb-1.5">{DOCTOR.name}</h2>
             <p className="text-[length:var(--text-body)] font-bold text-text-accent mb-3">
-              {DOCTOR.title} · {DOCTOR.hospital}
+              {DOCTOR.title} · {DOCTOR.hospitals[0].name}
             </p>
             <p className="text-sm text-text-secondary leading-relaxed mb-4 max-w-2xl">
               {DOCTOR.bio}

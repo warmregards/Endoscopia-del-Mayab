@@ -45,7 +45,7 @@ export default function EndoprotesisBiliaresPage() {
               name: "Endoprótesis Biliares",
               path: "/endoprotesis-biliares-merida",
               pricingKey: "endoprotesis_biliares",
-              procedureType: "Endoscopic",
+              procedureType: "Therapeutic",
               bodyLocation: "Biliary system",
               description:
                 "Colocación de stents biliares mediante CPRE para restaurar el flujo biliar obstruido por cálculos, estenosis o tumores.",
