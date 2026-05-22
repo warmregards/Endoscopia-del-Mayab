@@ -69,7 +69,7 @@ export interface ReviewsResult {
 // ---------------------------------------------------------------------------
 // Static fallback reviews
 // ---------------------------------------------------------------------------
-// Hand-picked from the 52 five-star reviews. Displayed when API is unavailable
+// Hand-picked from the 80 five-star reviews. Displayed when API is unavailable
 // (missing key, quota exhausted, network error). Better to show real social
 // proof than an empty section.
 //

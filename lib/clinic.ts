@@ -133,9 +133,9 @@ export const CLINIC = {
   // ── Reviews ─────────────────────────────────────────────────────────────
   aggregateRating: {
     ratingValue: 5.0,
-    reviewCount: 52,
+    reviewCount: 80,
     /** When this was last verified against GBP — update when count changes */
-    lastVerified: "2026-02-09",
+    lastVerified: "2026-05-22",
   },
 
   // ── Entity Verification: sameAs ─────────────────────────────────────────
