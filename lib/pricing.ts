@@ -67,7 +67,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
 
   retiro_balon_gastrico: { from: 15000, currency: "MXN", label: "Retiro de balón gástrico" },
   apc: { from: 15000, currency: "MXN", label: "Coagulación con plasma de argón (APC)" },
-  eus: { currency: "MXN", label: "Ultrasonido Endoscópico (USE)" },
+  eus: { from: 25000, currency: "MXN", label: "Ultrasonido Endoscópico (USE)" },
 } as const
 
 // ---------------------------------------------------------------------------

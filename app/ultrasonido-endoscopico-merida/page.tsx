@@ -1,6 +1,7 @@
 import { metaFor } from "@/lib/routes-seo"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
+import { displayFrom } from "@/lib/pricing"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
 import Link from "next/link"
@@ -93,12 +94,16 @@ export default function UltrasonidoEndoscopicoPage() {
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
-              Precio bajo cotización · Consulta tu caso
+              {displayFrom("eus")} · Sedación con anestesiólogo
             </div>
 
             <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
               Ultrasonido Endoscópico en Mérida
             </h1>
+
+            <p className="text-xl font-semibold text-text-accent">
+              {displayFrom("eus")} · Estudio diagnóstico · Hospital Amerimed
+            </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
               Diagnóstico de alta resolución para páncreas, vías biliares y
@@ -217,16 +222,19 @@ export default function UltrasonidoEndoscopicoPage() {
 
               <p className="text-foreground/80 leading-relaxed">
                 Si tu médico te indicó este estudio, escríbenos. El Dr. Quiroz
-                evalúa tu caso directamente y te confirma disponibilidad y costo.
+                evalúa tu caso directamente y te confirma fecha y detalles del
+                procedimiento.
               </p>
             </div>
 
             <div className="rounded-xl bg-accent-light border border-accent/20 p-6">
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Recibimos pacientes de Cancún, Playa del Carmen, Campeche,
-                Valladolid, Chetumal y toda la Península de Yucatán. El costo
-                depende del tipo de estudio (diagnóstico o con punción guiada) y
-                se confirma en la consulta previa.
+                Valladolid, Chetumal y toda la Península de Yucatán. El precio
+                base es {displayFrom("eus", "desde")} para el estudio
+                diagnóstico con sedación; si tu indicación incluye punción
+                guiada (USE-PAAF), el costo final se confirma al evaluar tu
+                caso.
               </p>
             </div>
 

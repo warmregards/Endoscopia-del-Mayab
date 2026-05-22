@@ -368,11 +368,11 @@ export default function PreciosPage() {
               {/* Explainer callout */}
               <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
                 <p className="font-semibold text-foreground">
-                  ¿Por qué estos procedimientos requieren cotización?
+                  ¿Por qué la mayoría de estos procedimientos requieren cotización?
                 </p>
                 <p className="text-foreground/80 leading-relaxed">
-                  Estos son procedimientos altamente especializados donde el
-                  costo depende de su caso particular:
+                  Son procedimientos altamente especializados donde, en la mayoría
+                  de los casos, el costo depende de su situación particular:
                 </p>
                 <ul className="space-y-2 text-foreground/80">
                   <li className="flex items-start gap-2">

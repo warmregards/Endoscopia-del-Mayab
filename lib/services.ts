@@ -285,7 +285,8 @@ export const SERVICES: ServiceItem[] = [
     slug: "ultrasonido-endoscopico-merida",
     pricingKey: "eus",
     category: "advanced",
-    quoteOnly: true,
+    quoteOnly: false,
+    priceFrom: PRICING.eus?.from,
     trafficTier: "low",
   },
 ]

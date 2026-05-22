@@ -1148,7 +1148,7 @@ export const eusFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuesta el ultrasonido endoscópico en Mérida?",
     answer:
-      "El costo depende del tipo de estudio (diagnóstico o con punción guiada) y se confirma en la consulta previa. Escríbenos por WhatsApp para que el Dr. Quiroz evalúe tu caso y te indique el precio exacto según lo que necesitas.",
+      "El ultrasonido endoscópico en Mérida tiene un precio desde $25,000 MXN para el estudio diagnóstico con sedación, realizado por el Dr. Omar Quiroz en Hospital Amerimed. Si tu indicación incluye punción guiada (USE-PAAF), el costo final se confirma al evaluar tu caso — escríbenos por WhatsApp con tu indicación médica para una cotización exacta.",
   },
   {
     question: "¿Duele el ultrasonido endoscópico?",

@@ -259,7 +259,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     service: "Ultrasonido Endoscópico",
     path: "/ultrasonido-endoscopico-merida",
     descriptionOverride:
-      "Ultrasonido endoscópico en Mérida con el Dr. Omar Quiroz, Endoscopista Gastrointestinal. Evaluación de páncreas, vías biliares y tumores digestivos. Hospital Amerimed. Consulta tu caso por WhatsApp.",
+      "Ultrasonido endoscópico en Mérida desde $25,000 MXN. Evaluación de páncreas, vías biliares y tumores digestivos con el Dr. Omar Quiroz en Hospital Amerimed.",
   },
 
   // ── Info Pages ──────────────────────────────────────────────────────────
