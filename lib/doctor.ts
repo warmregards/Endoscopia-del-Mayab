@@ -62,7 +62,7 @@ export const DOCTOR = {
   ],
 
   // ── UI Content ──────────────────────────────────────────────────────────
-  bio: "Médico egresado de la UNAM con más de 15 años de experiencia y alta especialidad en endoscopia (Cédula EGI230072). Certificado por el Consejo Mexicano de Cirugía General. Cuando escribes, te contesta directamente el doctor — no una recepcionista.",
+  bio: "Médico egresado de la UNAM con más de 15 años de experiencia y alta especialidad en endoscopia gastrointestinal por la UNAM (Cédula EGI230072). Certificado por el Consejo Mexicano de Cirugía General (CMCG) y por el Consejo Mexicano de Cirugía Bariátrica. Cuando escribes, te contesta directamente el doctor — no una recepcionista.",
 
   /** Short trust snippet for procedure pages (1-2 lines max) */
   bioShort:
@@ -77,17 +77,29 @@ export const DOCTOR = {
     "15+ años experiencia",
   ],
 
+  /**
+   * Source of truth — all licensing/certification IDs (provided directly by Dr. Quiroz).
+   * - medicoGeneral:        Cédula de medicina (médico cirujano, SEP)
+   * - especialidad:         Cédula de especialidad — Cirugía General (SEP)
+   * - endoscopia:           Cédula Alta Especialidad — Endoscopia Gastrointestinal (SEP/UNAM)
+   * - consejoCirugiaGeneral: Certificación CMCG (Consejo Mexicano de Cirugía General)
+   * - consejoBariatrica:    Certificación Consejo Mexicano de Cirugía Bariátrica
+   * - cofepris:             Licencia sanitaria COFEPRIS
+   */
   cedulas: {
-    medico: "11629429",
-    especialidad: "EGI230072",
-    consejo: "C18044318",
+    medicoGeneral: "8126111",
+    especialidad: "11629429",
+    endoscopia: "EGI230072",
+    consejoCirugiaGeneral: "C18044318",
+    consejoBariatrica: "CB200056",
+    cofepris: "2431012002A00355",
   },
 
   memberships: ["CMCG", "AMCE"],
 
   // ── Schema: Description ─────────────────────────────────────────────────
   schemaDescription:
-    "Endoscopista certificado en Mérida con más de 15 años de experiencia. Egresado de la UNAM, certificado por el Consejo Mexicano de Cirugía General (CMCG). Alta especialidad en Endoscopia (Cédula EGI230072).",
+    "Endoscopista certificado en Mérida con más de 15 años de experiencia. Egresado de la UNAM, certificado por el Consejo Mexicano de Cirugía General (CMCG) y por el Consejo Mexicano de Cirugía Bariátrica. Alta especialidad en Endoscopia Gastrointestinal por la UNAM (Cédula EGI230072).",
 
   // ── Schema: Credentials ─────────────────────────────────────────────────
   schemaCredentials: [
@@ -95,6 +107,7 @@ export const DOCTOR = {
       "@type": "EducationalOccupationalCredential" as const,
       credentialCategory: "Medical Degree",
       name: "Médico Cirujano",
+      identifier: "Cédula Profesional 8126111",
       recognizedBy: { "@type": "Organization" as const, name: "UNAM" },
     },
     {
@@ -102,18 +115,36 @@ export const DOCTOR = {
       credentialCategory: "Medical Specialty",
       name: "Cirugía General",
       identifier: "Cédula 11629429",
+      recognizedBy: { "@type": "Organization" as const, name: "UNAM" },
     },
     {
       "@type": "EducationalOccupationalCredential" as const,
       credentialCategory: "Subspecialty",
-      name: "Alta Especialidad en Endoscopia",
+      name: "Alta Especialidad en Endoscopia Gastrointestinal",
       identifier: "Cédula EGI230072",
+      recognizedBy: { "@type": "Organization" as const, name: "UNAM" },
     },
     {
       "@type": "EducationalOccupationalCredential" as const,
       credentialCategory: "Board Certification",
-      name: "Consejo Mexicano de Cirugía General",
+      name: "Consejo Mexicano de Cirugía General (CMCG)",
       identifier: "C18044318",
+    },
+    {
+      "@type": "EducationalOccupationalCredential" as const,
+      credentialCategory: "Board Certification",
+      name: "Consejo Mexicano de Cirugía Bariátrica",
+      identifier: "CB200056",
+    },
+    {
+      "@type": "EducationalOccupationalCredential" as const,
+      credentialCategory: "Regulatory License",
+      name: "COFEPRIS — Licencia sanitaria vigente",
+      identifier: "2431012002A00355",
+      recognizedBy: {
+        "@type": "Organization" as const,
+        name: "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      },
     },
   ],
 

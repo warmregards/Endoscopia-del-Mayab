@@ -202,9 +202,9 @@ export default function DoctorOmarQuirozPage() {
                 Trayectoria Académica
               </h3>
               {[
-                { title: "Médico Cirujano", sub: "UNAM, Ciudad de México", highlight: true },
-                { title: "Cirugía General — UNAM", sub: `Cédula ${DOCTOR.cedulas.medico}` },
-                { title: "Alta Especialidad en Endoscopia", sub: `Cédula ${DOCTOR.cedulas.especialidad}` },
+                { title: "Médico Cirujano", sub: `UNAM · Cédula ${DOCTOR.cedulas.medicoGeneral}`, highlight: true },
+                { title: "Cirugía General — UNAM", sub: `Cédula de Especialidad ${DOCTOR.cedulas.especialidad}` },
+                { title: "Alta Especialidad en Endoscopia Gastrointestinal — UNAM", sub: `Cédula ${DOCTOR.cedulas.endoscopia}` },
                 { title: "Rotación Laparoscópica Avanzada", sub: "Centro Médico ABC, CDMX" },
                 { title: "Fellowship Bariátrico", sub: "Gastric Sleeve Center, Florida" },
               ].map((item) => (
@@ -234,28 +234,44 @@ export default function DoctorOmarQuirozPage() {
               </h3>
 
               <div className="border border-border rounded-xl p-6 space-y-4">
-                <div className="flex justify-between items-center p-4 rounded-lg bg-accent-light/10 border border-accent/20">
+                <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-accent-light/10 border border-accent/20">
+                  <span className="font-medium text-foreground">
+                    Alta Especialidad — Endoscopia GI
+                  </span>
+                  <span className="text-text-accent font-mono text-sm font-bold">
+                    {DOCTOR.cedulas.endoscopia}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-accent-light/10 border border-accent/20">
                   <span className="font-medium text-foreground">
                     Consejo CMCG — Cirugía General
                   </span>
                   <span className="text-text-accent font-mono text-sm font-bold">
-                    {DOCTOR.cedulas.consejo}
+                    {DOCTOR.cedulas.consejoCirugiaGeneral}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-4 rounded-lg bg-accent-light/10 border border-accent/20">
+                <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-accent-light/10 border border-accent/20">
                   <span className="font-medium text-foreground">
-                    Alta Especialidad — Endoscopia
+                    Consejo — Cirugía Bariátrica
                   </span>
                   <span className="text-text-accent font-mono text-sm font-bold">
+                    {DOCTOR.cedulas.consejoBariatrica}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-muted border border-border">
+                  <span className="font-medium text-foreground">
+                    Cédula de Especialidad — Cirugía General
+                  </span>
+                  <span className="text-muted-foreground font-mono text-sm">
                     {DOCTOR.cedulas.especialidad}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-4 rounded-lg bg-muted border border-border">
+                <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-muted border border-border">
                   <span className="font-medium text-foreground">
-                    Cédula Profesional
+                    Cédula Profesional — Médico Cirujano
                   </span>
                   <span className="text-muted-foreground font-mono text-sm">
-                    {DOCTOR.cedulas.medico}
+                    {DOCTOR.cedulas.medicoGeneral}
                   </span>
                 </div>
               </div>
@@ -274,9 +290,12 @@ export default function DoctorOmarQuirozPage() {
                       {m}
                     </div>
                   ))}
-                  <div className="flex items-center gap-2 text-sm text-foreground/80">
-                    <ShieldCheck className="h-4 w-4 text-primary" />
-                    COFEPRIS — Licencia sanitaria vigente
+                  <div className="flex items-center gap-2 text-sm text-foreground/80 flex-wrap">
+                    <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+                    <span>COFEPRIS — Licencia sanitaria vigente</span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      Reg. {DOCTOR.cedulas.cofepris}
+                    </span>
                   </div>
                 </div>
               </div>
