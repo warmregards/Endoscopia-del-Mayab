@@ -100,6 +100,7 @@ export default function EmergenciasDigestivasPage() {
                     "Sangrado digestivo (vómito con sangre, evacuaciones negras)",
                     "Cálculos biliares / ictericia súbita",
                     "Cuerpo extraño atorado (hueso, moneda, alimento)",
+                    "Perforaciones del tubo digestivo",
                     "Complicaciones post-procedimiento",
                   ].map((scenario) => (
                     <div key={scenario} className="flex items-start gap-4">
@@ -340,7 +341,9 @@ export default function EmergenciasDigestivasPage() {
                 <p className="text-sm text-foreground/80">
                   Cirujano Y endoscopista — puede resolver tu emergencia con
                   endoscopia y, si es necesario, pasar directamente a cirugía sin
-                  esperar otro especialista.
+                  esperar otro especialista. Especialmente relevante en
+                  perforaciones del tubo digestivo, donde la decisión entre vía
+                  endoscópica y quirúrgica debe tomarse —y ejecutarse— rápido.
                 </p>
               </div>
 

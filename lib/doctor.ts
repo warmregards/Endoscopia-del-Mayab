@@ -168,6 +168,7 @@ export const DOCTOR = {
     "https://en.wikipedia.org/wiki/Colonoscopy",
     "https://en.wikipedia.org/wiki/Endoscopic_retrograde_cholangiopancreatography",
     "https://en.wikipedia.org/wiki/Gastroenterology",
+    "https://en.wikipedia.org/wiki/Gastrointestinal_perforation",
   ],
 
   // ── Schema: sameAs (entity verification) ────────────────────────────────

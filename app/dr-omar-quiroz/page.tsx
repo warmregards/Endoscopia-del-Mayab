@@ -185,6 +185,38 @@ export default function DoctorOmarQuirozPage() {
               </span>
             </Link>
           </div>
+
+          {/* Áreas de experiencia — perforation management differentiator */}
+          <div className="mt-8 bg-background border border-border rounded-xl p-8">
+            <ShieldCheck className="h-6 w-6 text-text-accent mb-4" />
+            <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+              Manejo de perforaciones gastrointestinales
+            </h3>
+            <p className="text-foreground/80 leading-relaxed mb-6 max-w-3xl">
+              Como cirujano general certificado y endoscopista de alta
+              especialidad, el {DOCTOR.name} maneja perforaciones del tubo
+              digestivo —iatrogénicas, ulcerosas o traumáticas— por la vía menos
+              invasiva posible, y resuelve quirúrgicamente cuando hace falta. El
+              mismo médico decide la estrategia y la ejecuta, sin transferencias
+              entre especialistas en el momento crítico.
+            </p>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {[
+                "Cierre endoscópico con clips OTSC/TTSC",
+                "Sutura endoscópica (OverStitch)",
+                "Colocación de stents recubiertos",
+                "Conversión a cirugía si es necesario",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-foreground/80"
+                >
+                  <ShieldCheck className="h-4 w-4 text-text-accent flex-shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
