@@ -32,6 +32,7 @@
 //     Q7: Procedure-specific extra (varies per page)
 
 import { PRICING as PRICES, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { DOCTOR } from "@/lib/doctor"
 import type { RouteKey } from "@/lib/routes-seo"
 import type { ServiceKey } from "@/lib/pricing"
 
@@ -1072,8 +1073,7 @@ export const consultasFaqs: FAQ[] = [
 export const doctorFaqs: FAQ[] = [
   {
     question: "¿Qué certificaciones tiene el Dr. Omar Quiroz?",
-    answer:
-      "El Dr. Quiroz cuenta con triple certificación del Consejo Mexicano de Cirugía General (CMCG): Cirugía General (C18044318) y Alta Especialidad en Endoscopia (EGI230072). Su cédula profesional es 11629429.",
+    answer: `El Dr. Quiroz está certificado por el Consejo Mexicano de Cirugía General (CMCG, registro ${DOCTOR.cedulas.consejoCirugiaGeneral}) y por el Consejo Mexicano de Cirugía Bariátrica (${DOCTOR.cedulas.consejoBariatrica}). Cuenta además con Alta Especialidad en Endoscopia Gastrointestinal por la UNAM (Cédula ${DOCTOR.cedulas.endoscopia}). Su cédula profesional como Médico Cirujano es ${DOCTOR.cedulas.medicoGeneral} y su cédula de especialidad en Cirugía General es ${DOCTOR.cedulas.especialidad}.`,
   },
   {
     question: "¿Dónde atiende el Dr. Omar Quiroz?",
