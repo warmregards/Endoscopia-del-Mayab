@@ -59,39 +59,6 @@ export default function EndoscopiaPage() {
 
   return (
     <>
-      {/* ── JSON-LD Schema ─────────────────────────────────────────────── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            procedureSchema({
-              name: "Endoscopia (Esofagogastroduodenoscopia)",
-              path: "/endoscopia-merida",
-              pricingKey: "endoscopia",
-              description:
-                "Estudio endoscópico del esófago, estómago y duodeno con cámara HD Olympus. Diagnóstico directo de gastritis, úlceras, reflujo y H. pylori en 15–25 minutos bajo sedación consciente.",
-              procedureType: "Diagnostic",
-              bodyLocation: "Esófago, estómago, duodeno",
-              howPerformed:
-                "Endoscopio flexible Olympus 190 HD introducido por vía oral bajo sedación consciente. Duración: 15–25 minutos.",
-              preparation:
-                "Ayuno de 8 horas. Acudir acompañado. Ropa cómoda. No suspender medicamentos sin indicación médica.",
-            })
-          ),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbSchema([
-              { name: "Inicio", path: "/" },
-              { name: "Endoscopia en Mérida", path: "/endoscopia-merida" },
-            ])
-          ),
-        }}
-      />
-
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           Serves: ALL personas. Price chip + WhatsApp CTA above fold (mobile).
@@ -744,6 +711,43 @@ export default function EndoscopiaPage() {
           </div>
         </div>
       </section>
+
+      {/* ── JSON-LD Schema ─────────────────────────────────────────────────
+          Placed at end of fragment so it doesn't push the H1 further down
+          the byte stream. Google docs explicitly allow JSON-LD anywhere in
+          the document; crawlers parse the full response.
+          ──────────────────────────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            procedureSchema({
+              name: "Endoscopia (Esofagogastroduodenoscopia)",
+              path: "/endoscopia-merida",
+              pricingKey: "endoscopia",
+              description:
+                "Estudio endoscópico del esófago, estómago y duodeno con cámara HD Olympus. Diagnóstico directo de gastritis, úlceras, reflujo y H. pylori en 15–25 minutos bajo sedación consciente.",
+              procedureType: "Diagnostic",
+              bodyLocation: "Esófago, estómago, duodeno",
+              howPerformed:
+                "Endoscopio flexible Olympus 190 HD introducido por vía oral bajo sedación consciente. Duración: 15–25 minutos.",
+              preparation:
+                "Ayuno de 8 horas. Acudir acompañado. Ropa cómoda. No suspender medicamentos sin indicación médica.",
+            })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", path: "/" },
+              { name: "Endoscopia en Mérida", path: "/endoscopia-merida" },
+            ])
+          ),
+        }}
+      />
     </>
   )
 }
