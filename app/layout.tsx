@@ -113,12 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         ) : null}
 
-        {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
-        />
-
         <ThemeProvider attribute="class" defaultTheme="light">
           <Suspense fallback={null}>
             <ScrollToTop />
@@ -137,6 +131,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <StickyMobileCTA />
         </ThemeProvider>
+
+        {/* Structured data — placed at end of body so it doesn't push the H1
+            further down the byte stream. Google docs explicitly allow JSON-LD
+            anywhere in the document (head or body); crawlers parse the full
+            response. Saves ~12.6 KB of pre-H1 markup on the homepage. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+        />
       </body>
     </html>
   );
