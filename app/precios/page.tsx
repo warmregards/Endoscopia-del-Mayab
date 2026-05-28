@@ -756,7 +756,7 @@ const comparisonRows = [
     label: "Endoscopista certificado",
     lab: "No siempre",
     hospital: "Variable",
-    us: `${DOCTOR.name.split(" ").slice(0, 3).join(" ")} — 10+ años`,
+    us: `${DOCTOR.name.split(" ").slice(0, 3).join(" ")} — ${DOCTOR.yearsExperience}+ años`,
   },
   {
     label: "Equipo",

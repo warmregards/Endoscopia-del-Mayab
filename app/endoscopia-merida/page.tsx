@@ -412,12 +412,12 @@ export default function EndoscopiaPage() {
           Serves: Persona 2 (price shopper) — highest-value persona
           H2 targets "endoscopia precio merida" (1,052 impressions @ pos 24)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section id="precio" className="scroll-mt-24 bg-background">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="space-y-4">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
-                Precio de endoscopia en Mérida — todo incluido
+                Precio de endoscopia en Mérida: {displayFrom("endoscopia")} todo incluido
               </h2>
               <p className="text-muted-foreground">
                 ¿Cuánto cuesta una endoscopia? Mismo equipo que hospitales
@@ -936,8 +936,9 @@ export default function EndoscopiaPage() {
                   ¿Primera endoscopia?
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Consulta de valoración {mxn(ADDITIONAL_FEES.consultation.amount)} — el único consultorio
-                  de endoscopia en Mérida, Yucatán donde te atiende directamente el especialista.
+                  Consulta de valoración {mxn(ADDITIONAL_FEES.consultation.amount)} — uno de los pocos
+                  consultorios en Mérida donde te contesta directamente el {DOCTOR.name} por WhatsApp,
+                  no una recepcionista.
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-muted border border-border">

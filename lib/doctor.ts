@@ -12,6 +12,7 @@ export const DOCTOR = {
   // ── Identity ────────────────────────────────────────────────────────────
   name: "Dr. Omar Quiroz",
   title: "Endoscopista Certificado",
+  yearsExperience: 15,
   /** Schema.org closest value — no "Endoscopy" enum exists. See audit 2026-02-16. */
   medicalSpecialty: "Gastroenterology",
   /** UI-facing label (Spanish) */

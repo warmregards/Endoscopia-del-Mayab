@@ -320,7 +320,7 @@ export default function ColonoscopiaPage() {
           SECTION 3: PRICING — bg-background
           Serves: Persona 2 (price shopper) — highest-value persona
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio-colonoscopia-merida" className="bg-background">
+      <section id="precio" className="scroll-mt-24 bg-background">
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <div>
