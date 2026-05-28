@@ -1,5 +1,5 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, INCLUDED_IN_PRICE } from "@/lib/pricing"
+import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, INCLUDED_IN_PRICE, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
@@ -228,17 +228,29 @@ export default function ColonoscopiaPage() {
               </p>
             </div>
 
-            {/* 3-column comparison */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
-                  Hospital privado típico
+                  {MARKET_BENCHMARKS.colonoscopia.hospitalMayor.label}
                 </p>
                 <p className="text-2xl font-bold text-muted-foreground">
-                  Cargo base + extras
+                  Desde {mxn(MARKET_BENCHMARKS.colonoscopia.hospitalMayor.from)}
                 </p>
                 <p className="text-sm text-muted-foreground/70 mt-2">
-                  Anestesia, patología y sala de recuperación facturados por separado
+                  Hospitales privados de mayor tamaño en Mérida
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border bg-background text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  {MARKET_BENCHMARKS.colonoscopia.hospitalPrivado.label}
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground">
+                  Desde {mxn(MARKET_BENCHMARKS.colonoscopia.hospitalPrivado.from)}
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  + anestesia, + patología, + recuperación por separado
                 </p>
               </div>
 

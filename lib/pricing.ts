@@ -184,3 +184,29 @@ export const priceData = (
     formatted: mxn(entry.from),
   }
 }
+
+// ---------------------------------------------------------------------------
+// Market Benchmarks (for competitive comparison blocks on procedure pages)
+// ---------------------------------------------------------------------------
+// Survey baseline: May 2026, Mérida market.
+//   - Independent doctors (cirujano general + endoscopia): $5,000+ (EDM tier)
+//   - Hospital-tier independent practices (e.g. Torre Médica Cénit): ~$8,000–8,200
+//   - Major private hospitals (Faro del Mayab, Star Médica): ~$12,000
+//   - IMSS / sector público: sin costo directo, 3–12 meses lista de espera
+//
+// Rendered on procedure pages in the 3-column comparison block.
+// Do NOT name specific competitors in patient-facing rendered text — keep to
+// category labels (Hospital privado típico, Hospital mayor). Specific
+// competitor data lives here in the comment for internal reference only.
+// Re-survey when any major competitor publishes a price change.
+
+export const MARKET_BENCHMARKS = {
+  colonoscopia: {
+    hospitalPrivado: { from: 8000, label: "Hospital privado típico" },
+    hospitalMayor: { from: 12000, label: "Hospital mayor" },
+  },
+  endoscopia: {
+    hospitalPrivado: { from: 8000, label: "Hospital privado típico" },
+    hospitalMayor: { from: 12000, label: "Hospital mayor" },
+  },
+} as const

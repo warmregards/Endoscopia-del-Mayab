@@ -1,5 +1,5 @@
 import { metaFor } from "@/lib/routes-seo"
-import { PRICING, displayFrom, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
 import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
@@ -211,17 +211,29 @@ export default function EndoscopiaPage() {
               </p>
             </div>
 
-            {/* Three-column comparison */}
-            <div className="grid gap-6 md:grid-cols-3">
+            {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
-                  Hospitales privados Mérida
+                  {MARKET_BENCHMARKS.endoscopia.hospitalMayor.label}
                 </p>
                 <p className="text-2xl font-bold text-muted-foreground">
-                  Cargo base + extras
+                  Desde {mxn(MARKET_BENCHMARKS.endoscopia.hospitalMayor.from)}
                 </p>
                 <p className="text-sm text-muted-foreground/70 mt-2">
-                  Anestesia, patología y estudios facturados por separado
+                  Hospitales privados de mayor tamaño en Mérida
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border bg-background text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  {MARKET_BENCHMARKS.endoscopia.hospitalPrivado.label}
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground">
+                  Desde {mxn(MARKET_BENCHMARKS.endoscopia.hospitalPrivado.from)}
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  + anestesia, + patología, + estudios facturados por separado
                 </p>
               </div>
 
