@@ -103,7 +103,7 @@ export default function EndoscopiaPage() {
             {/* ── Left: Content ── */}
             <div className="flex-1 space-y-6">
               <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
-                Endoscopia en Mérida
+                Endoscopia en Mérida — {displayFrom("endoscopia")}
               </h1>
 
               <p className="text-xl font-semibold text-text-accent">
