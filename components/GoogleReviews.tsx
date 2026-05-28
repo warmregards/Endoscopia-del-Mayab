@@ -5,6 +5,17 @@ import { CLINIC } from "@/lib/clinic";
 
 const BLOCKED_REVIEW_TERMS = ["yazmin", "yasmin"];
 
+/**
+ * Google's profile-photo CDN supports a size param in the URL path:
+ *   .../ALV-Uj...=s128-c0x00000000-cc-rp-mo
+ * The default `=s128` ships a 128×128 PNG even when displayed at 40px.
+ * We render the avatars at h-10 w-10 (40px) — `=s80` is the correct 2× DPR
+ * variant and trims ~24 KB per avatar (Lighthouse "Improve image delivery").
+ */
+function resizeGoogleProfilePhoto(url: string, size = 80): string {
+  return url.replace(/=s\d+/, `=s${size}`);
+}
+
 type Props = {
   title?: string;
   /** Google sends max 5 reviews; cap to [1..5]. Default 4. */
@@ -116,10 +127,13 @@ async function GoogleReviewsAsync({
               <div className="flex items-center gap-3 mb-2">
                 {r.profile_photo_url ? (
                   <img
-                    src={r.profile_photo_url}
+                    src={resizeGoogleProfilePhoto(r.profile_photo_url)}
                     alt={r.author_name}
+                    width={40}
+                    height={40}
                     className="h-10 w-10 rounded-full object-cover"
                     loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
                   />
                 ) : (
