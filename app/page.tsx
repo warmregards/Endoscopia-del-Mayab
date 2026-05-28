@@ -197,7 +197,7 @@ export default function Page() {
                     alt={DOCTOR.name}
                     width={128}
                     height={128}
-                    priority
+                    sizes="(min-width: 640px) 128px, 96px"
                     className="w-full h-full object-cover"
                   />
                 </div>

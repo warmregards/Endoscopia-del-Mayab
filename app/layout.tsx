@@ -17,7 +17,12 @@ import "./globals.css";
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "optional",
-  weight: ["400", "600", "700", "900"],
+  // Weights audited site-wide 2026-05-28:
+  //   600 = font-semibold (H3, subsection headings)
+  //   700 = font-bold (H2)
+  //   800 = font-extrabold (H1) — was missing; H1s were being synthesized/substituted
+  // 400 + 900 dropped — never paired with font-serif anywhere in app/ or components/.
+  weight: ["600", "700", "800"],
   variable: "--font-montserrat",
 });
 
