@@ -111,7 +111,9 @@ export default function EndoscopiaPage() {
               </p>
 
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                Cámara HD Olympus que detecta gastritis, úlceras y H.&nbsp;pylori en 15–25 minutos.
+                Diagnóstico directo de gastritis, úlceras, reflujo y
+                H.&nbsp;pylori en 15–25 minutos. Cámara HD Olympus ve tu
+                estómago en tiempo real — sin adivinar.
               </p>
 
               {/* Trust chips — hidden on mobile to keep CTA above fold */}
