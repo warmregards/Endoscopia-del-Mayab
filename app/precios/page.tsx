@@ -102,7 +102,7 @@ const procedureDetails: ProcedureDetail[] = [
     included: [
       "Sedación con anestesiólogo",
       "Toma de biopsias incluida — sin límite de muestras",
-      "Polipectomía en la misma sesión si se detectan pólipos pequeños",
+      "Extracción de pólipos pequeños en la misma sesión, sin costo adicional (pólipos grandes o lesiones que requieran intervención adicional se cotizan antes de cualquier cargo)",
       "Sala de recuperación",
       "Valoración pre-procedimiento",
       "Reporte con fotografías HD el mismo día",

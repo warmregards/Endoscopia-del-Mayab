@@ -48,12 +48,6 @@ const symptomItems = [
   "Anemia ferropénica sin causa identificada",
 ]
 
-const stats = [
-  { value: "300+", label: "Colonoscopias anuales", color: "text-text-accent" },
-  { value: "15+", label: "Años experiencia", color: "text-primary" },
-  { value: "<0.1%", label: "Complicaciones", color: "text-text-accent" },
-]
-
 const differentiators = [
   {
     title: "Comunicación directa",
@@ -76,6 +70,10 @@ const differentiators = [
 /* ══════════════════════════════════════════════════════════════════════════ */
 
 export default function ColonoscopiaPage() {
+  const colonBase = PRICING.colonoscopia.from ?? 0
+  const consultaFee = ADDITIONAL_FEES.consultation.amount
+  const biopsyFee = ADDITIONAL_FEES.biopsy.amount
+
   return (
     <>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
@@ -117,7 +115,7 @@ export default function ColonoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
-          Serves: ALL personas. Price + CTA above fold.
+          Serves: ALL personas. Price chip + WhatsApp CTA above fold (mobile).
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-page section-padding">
@@ -132,13 +130,17 @@ export default function ColonoscopiaPage() {
                 Colonoscopia en Mérida — {displayFrom("colonoscopia")}
               </h1>
 
+              <p className="text-xl font-semibold text-text-accent">
+                {displayFrom("colonoscopia")} · Sedación incluida · Resultados el mismo día
+              </p>
+
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
                 Estudio del colon con sedación — sin dolor, precio fijo,
                 resultados el mismo día.
               </p>
 
               {/* Trust chips */}
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className="hidden md:flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
                 {trustChips.map((chip) => (
                   <div key={chip} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -210,10 +212,148 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 2: WHAT IS + WHEN — bg-muted
+          SECTION 2: PRICING (promoted) — bg-muted
+          Serves: Persona 2 (price shopper) — highest-value persona
+          ══════════════════════════════════════════════════════════════════ */}
+      <section id="precio" className="scroll-mt-24 bg-muted">
+        <div className="container-page section-padding">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                Precio de colonoscopia en Mérida:{" "}
+                {mxn(PRICING.colonoscopia.from)} todo incluido
+              </h2>
+              <p className="text-muted-foreground mt-2">
+                Precio fijo y transparente. Sin cargos ocultos.
+              </p>
+            </div>
+
+            {/* 3-column comparison */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border border-border bg-background text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  Hospital privado típico
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground">
+                  Cargo base + extras
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  Anestesia, patología y sala de recuperación facturados por separado
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border-2 border-accent bg-accent-light text-center">
+                <p className="text-lg font-bold text-text-accent mb-2">
+                  {DOCTOR.name}
+                </p>
+                <p className="font-serif font-bold text-text-accent text-3xl">
+                  {mxn(PRICING.colonoscopia.from)}
+                </p>
+                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border bg-background text-center">
+                <p className="text-lg font-bold text-muted-foreground mb-2">
+                  IMSS / Sector público
+                </p>
+                <p className="text-2xl font-bold text-muted-foreground">
+                  Sin costo directo
+                </p>
+                <p className="text-sm text-muted-foreground/70 mt-2">
+                  Lista de espera: 3–12 meses
+                </p>
+              </div>
+            </div>
+
+            {/* Totales típicos por escenario — worked examples for price-intent */}
+            <div className="bg-card border border-border rounded-xl p-6">
+              <p className="font-semibold text-foreground mb-4">
+                Totales típicos por escenario
+              </p>
+              <div className="space-y-4">
+                <div className="flex justify-between items-baseline border-b border-border pb-4">
+                  <span className="text-sm text-foreground/80">Colonoscopia base</span>
+                  <span className="font-semibold text-text-accent">
+                    {mxn(colonBase)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-baseline border-b border-border pb-4">
+                  <span className="text-sm text-foreground/80">
+                    Base + consulta de valoración
+                  </span>
+                  <span className="font-semibold text-text-accent">
+                    {mxn(colonBase + consultaFee)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-baseline">
+                  <span className="text-sm text-foreground/80">
+                    Base + consulta + patología (si hay biopsias)
+                  </span>
+                  <span className="font-semibold text-text-accent">
+                    {mxn(colonBase + consultaFee + biopsyFee)}
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-4">
+                El {DOCTOR.name} te confirma el total exacto antes del
+                procedimiento. Sin sorpresas.
+              </p>
+            </div>
+
+            {/* Biopsy differentiator — two-layer "tarifa única" story */}
+            <BiopsyDifferentiator
+              headline="Biopsias: tarifa única en ambos lados, no por muestra."
+              intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
+            />
+
+            {/* GEO definitive paragraph */}
+            <p className="text-muted-foreground leading-relaxed">
+              Una colonoscopia en Mérida con el {DOCTOR.name} en{" "}
+              {CLINIC.name} cuesta desde {mxn(PRICING.colonoscopia.from)}. El
+              precio incluye valoración pre-procedimiento, sedación con
+              anestesiólogo, equipo Olympus 190 HD, extracción de pólipos
+              pequeños y reporte con fotografías. El único costo adicional
+              posible es la interpretación del patólogo externo ({mxn(ADDITIONAL_FEES.biopsy.amount)})
+              si se toman biopsias.{" "}
+              <Link href="/precios" className="text-primary hover:underline font-medium">
+                Ver todos los precios
+              </Link>
+            </p>
+
+            {/* Additional cost note */}
+            <div className="bg-background border border-border rounded-xl p-4">
+              <p className="text-sm text-muted-foreground">
+                Único costo adicional posible: interpretación del patólogo
+                externo por {mxn(ADDITIONAL_FEES.biopsy.amount)}, solo si el {DOCTOR.name} toma
+                muestras durante el estudio.
+              </p>
+            </div>
+
+            {/* Differentiators — compact 4-up strip (folded from removed "Why Choose Us" section) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {differentiators.map((d) => (
+                <div
+                  key={d.title}
+                  className="bg-background border border-border rounded-xl p-4"
+                >
+                  <p className="font-semibold text-sm text-foreground mb-2">
+                    {d.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {d.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 3: WHAT IS + WHEN — bg-background
           Serves: Persona 5 (investigator) + Persona 3 (procedure seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className="bg-background">
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -317,95 +457,8 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 3: PRICING — bg-background
-          Serves: Persona 2 (price shopper) — highest-value persona
-          ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="scroll-mt-24 bg-background">
-        <div className="container-page section-padding">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
-                Precio de colonoscopia en Mérida:{" "}
-                {mxn(PRICING.colonoscopia.from)} todo incluido
-              </h2>
-              <p className="text-muted-foreground mt-2">
-                Precio fijo y transparente. Sin cargos ocultos.
-              </p>
-            </div>
-
-            {/* 3-column comparison */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl border border-border text-center">
-                <p className="text-lg font-bold text-muted-foreground mb-2">
-                  Hospital privado típico
-                </p>
-                <p className="text-2xl font-bold text-muted-foreground">
-                  Desde $8,000 MXN
-                </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
-                  + anestesia, + patología, + recuperación por separado
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl border-2 border-accent bg-accent-light text-center">
-                <p className="text-lg font-bold text-text-accent mb-2">
-                  {DOCTOR.name}
-                </p>
-                <p className="font-serif font-bold text-text-accent text-3xl">
-                  {mxn(PRICING.colonoscopia.from)}
-                </p>
-                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border text-center">
-                <p className="text-lg font-bold text-muted-foreground mb-2">
-                  IMSS / Sector público
-                </p>
-                <p className="text-2xl font-bold text-muted-foreground">
-                  Sin costo directo
-                </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
-                  Lista de espera: 3–12 meses
-                </p>
-              </div>
-            </div>
-
-            {/* Biopsy differentiator — two-layer "tarifa única" story */}
-            <BiopsyDifferentiator
-              headline="Biopsias: tarifa única en ambos lados, no por muestra."
-              intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
-            />
-
-            {/* GEO definitive paragraph */}
-            <p className="text-muted-foreground leading-relaxed">
-              Una colonoscopia en Mérida con el {DOCTOR.name} en{" "}
-              {CLINIC.name} cuesta desde {mxn(PRICING.colonoscopia.from)}. El
-              precio incluye valoración pre-procedimiento, sedación con
-              anestesiólogo, equipo Olympus 190 HD, extracción de pólipos
-              pequeños y reporte con fotografías. El único costo adicional
-              posible es la interpretación del patólogo externo ({mxn(ADDITIONAL_FEES.biopsy.amount)})
-              si se toman biopsias.{" "}
-              <Link href="/precios" className="text-primary hover:underline font-medium">
-                Ver todos los precios
-              </Link>
-            </p>
-
-            {/* Additional cost note */}
-            <div className="bg-muted rounded-xl p-4">
-              <p className="text-sm text-muted-foreground">
-                Único costo adicional posible: interpretación del patólogo
-                externo por {mxn(ADDITIONAL_FEES.biopsy.amount)}, solo si el {DOCTOR.name} toma
-                muestras durante el estudio.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════════
           SECTION 4: STEP-BY-STEP PROCESS — bg-muted
           Serves: Persona 5 (investigator) + Persona 3 (procedure seeker)
-          Sedation comfort content folded into step 2.
           ══════════════════════════════════════════════════════════════════ */}
       <section id="preparacion-colonoscopia" className="bg-muted">
         <div className="container-page section-padding">
@@ -565,70 +618,10 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 5: WHY DR. QUIROZ — bg-background
-          Serves: Persona 4 (referred) + local SEO entity signals
-          ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
-              ¿Por qué elegir al Dr. Quiroz para tu colonoscopia?
-            </h2>
-
-            <p className="text-foreground/80 leading-relaxed max-w-3xl">
-              El <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link> es endoscopista certificado con alta especialidad en endoscopia gastrointestinal y más de 15
-              años de experiencia en Mérida. Realiza más de 300 colonoscopias al
-              año con equipo Olympus 190 HD en Hospital Amerimed Mérida, Yucatán, con
-              tasa de complicaciones menor al 0.1%.
-            </p>
-
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-6">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="text-center p-6 rounded-2xl border border-border bg-muted"
-                >
-                  <p className={`text-3xl font-bold ${stat.color} mb-2`}>
-                    {stat.value}
-                  </p>
-                  <p className="text-sm font-medium text-muted-foreground">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Differentiators grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {differentiators.map((d) => (
-                <div
-                  key={d.title}
-                  className="bg-card border border-border rounded-xl p-6"
-                >
-                  <h3 className="font-serif font-semibold text-foreground mb-2">
-                    {d.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{d.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Neighborhoods from CLINIC.areaServed */}
-            <p className="text-sm text-muted-foreground">
-              Atiende pacientes de García Ginerés, Montebello, Altabrisa y toda
-              la zona metropolitana de Mérida en su consultorio de Chichi
-              Suárez.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════════
-          SECTION 6: RESULTS & FOLLOW-UP — bg-muted
+          SECTION 5: RESULTS & FOLLOW-UP — bg-background
           Serves: Persona 3 (procedure seeker) + Persona 5 (investigator)
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="resultados-y-tiempos" className="bg-muted">
+      <section id="resultados-y-tiempos" className="bg-background">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
@@ -737,14 +730,13 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 7: GOOGLE REVIEWS
-          Serves: All personas — real social proof
-          Component wraps itself in <section> with own bg/padding.
+          SECTION 6: GOOGLE REVIEWS
+          Component wraps itself in <section> (gradient muted → background).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews />
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 8: FAQ — bg-muted
+          SECTION 7: FAQ — bg-muted
           Serves: Persona 5 (investigator) + Persona 2 (price)
           Component injects faqSchema() JSON-LD automatically.
           ══════════════════════════════════════════════════════════════════ */}
@@ -753,7 +745,7 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 9: BOTTOM CTA — bg-primary
+          SECTION 8: BOTTOM CTA — bg-primary
           Serves: ALL personas. Final conversion capture.
           ══════════════════════════════════════════════════════════════════ */}
       <section id="contacto-colonoscopia" className="bg-primary">

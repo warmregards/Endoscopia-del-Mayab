@@ -33,6 +33,7 @@
 
 import { PRICING as PRICES, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
+import { CLINIC } from "@/lib/clinic"
 import type { RouteKey } from "@/lib/routes-seo"
 import type { ServiceKey } from "@/lib/pricing"
 
@@ -127,6 +128,25 @@ export const endoscopiaFaqs: FAQ[] = [
     answer: `Endoscopia en Mérida desde ${price("endoscopia")}. Incluye valoración pre-endoscópica, sedación con anestesiólogo, equipo Olympus HD, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y reporte digital con imágenes. Único costo adicional posible: lectura de patología ${biopsyFee()}.`,
   },
   {
+    question: "¿Aumenta el costo si encuentran algo durante el estudio?",
+    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. Si encontramos una lesión que requiera intervención adicional (por ejemplo, control de un sangrado o colocación de hemoclips), el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento.`,
+  },
+  {
+    question: "¿Por qué cuesta menos que en un hospital privado típico?",
+    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer endoscopias de la misma calidad clínica a un precio más accesible y transparente.`,
+  },
+  {
+    question: "¿La consulta de valoración tiene costo separado?",
+    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la endoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — el ${DOCTOR.name} lo determina al agendar por WhatsApp.`,
+  },
+  // TODO: Confirm with Dr. Quiroz the exact payment terms before shipping
+  // (cash only? transfer? credit/debit cards? meses sin intereses? which banks?).
+  // Current answer is a placeholder — replace with confirmed methods.
+  {
+    question: "¿Qué formas de pago aceptan?",
+    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
+  },
+  {
     question: "¿Duele la endoscopia?",
     answer:
       "No. Utilizamos sedación intravenosa administrada por anestesiólogo certificado. No sentirás dolor ni reflejo de náusea. La mayoría de pacientes no recuerdan el procedimiento y despiertan con mínima incomodidad. Si el procedimiento te genera ansiedad, escríbele al Dr. Quiroz por WhatsApp y te explica exactamente cómo será tu sedación.",
@@ -172,10 +192,6 @@ export const endoscopiaFaqs: FAQ[] = [
       "Sí. El Dr. Quiroz trabaja con todas las principales aseguradoras de la región. Contáctanos por WhatsApp con los datos de tu póliza y te orientamos sobre la cobertura de tu endoscopia.",
   },
   {
-    question: "¿La endoscopia incluye toma de biopsia?",
-    answer: `Sí. Durante la endoscopia se pueden tomar biopsias de cualquier hallazgo sospechoso — sin límite y sin cargo adicional por la toma. Solo la lectura de patología (interpretación en laboratorio) tiene un costo aparte de ${biopsyFee()}. El Dr. Quiroz te muestra las fotos al despertar y te explica si se tomaron biopsias y por qué.`,
-  },
-  {
     question: "¿Se pueden hacer endoscopia y colonoscopia el mismo día?",
     answer:
       "Sí. Cuando tu médico indica ambos estudios, se realizan en la misma sesión de sedación — una sola preparación, un solo anestesiólogo y menos tiempo en el hospital. Es lo más común en chequeos digestivos completos o cuando hay síntomas que requieren evaluación alta y baja. Contáctanos por WhatsApp para cotización combinada.",
@@ -208,7 +224,26 @@ export const colonoscopiaFaqs: FAQ[] = [
   },
   {
     question: "¿Cuánto cuesta una colonoscopia y qué incluye?",
-    answer: `Colonoscopia en Mérida desde ${price("colonoscopia")}. Incluye sedación con anestesiólogo, equipo Olympus HD, biopsias sin límite, sala de recuperación y reporte con imágenes. La polipectomía (extracción de pólipos) y lectura de patología se cotizan según hallazgos.`,
+    answer: `Colonoscopia en Mérida desde ${price("colonoscopia")}. Incluye sedación con anestesiólogo, equipo Olympus HD, biopsias sin límite, sala de recuperación, valoración pre-procedimiento y reporte con imágenes. Los pólipos pequeños descubiertos durante el estudio se extirpan en la misma sesión sin costo adicional. Pólipos grandes o lesiones que requieran intervención adicional se cotizan antes de cualquier cargo. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias.`,
+  },
+  {
+    question: "¿Aumenta el costo si encuentran algo durante el estudio?",
+    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. También incluye la extracción de pólipos pequeños descubiertos durante la colonoscopia. Si encontramos pólipos grandes o lesiones que requieran intervención adicional, el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento.`,
+  },
+  {
+    question: "¿Por qué cuesta menos que en un hospital privado típico?",
+    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer colonoscopias de la misma calidad clínica a un precio más accesible y transparente.`,
+  },
+  {
+    question: "¿La consulta de valoración tiene costo separado?",
+    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la colonoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — el ${DOCTOR.name} lo determina al agendar por WhatsApp.`,
+  },
+  // TODO: Confirm with Dr. Quiroz the exact payment terms before shipping
+  // (cash only? transfer? credit/debit cards? meses sin intereses? which banks?).
+  // Current answer is a placeholder — replace with confirmed methods.
+  {
+    question: "¿Qué formas de pago aceptan?",
+    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
   },
   {
     question: "¿Duele la colonoscopia?",
@@ -244,10 +279,6 @@ export const colonoscopiaFaqs: FAQ[] = [
     question: "¿Hacen endoscopia o colonoscopia con cápsula?",
     answer:
       "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos te enviamos cotización por WhatsApp después de una breve valoración con el Dr. Quiroz.",
-  },
-  {
-    question: "¿La biopsia de colon tiene costo adicional?",
-    answer: `La toma de biopsias durante la colonoscopia está incluida en el precio sin límite — no importa cuántas muestras se tomen. El único costo adicional es la lectura de patología (${biopsyFee()}), que se informa antes del procedimiento.`,
   },
   {
     question: "¿Aceptan seguros de gastos médicos para colonoscopia?",
