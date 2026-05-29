@@ -1,0 +1,30 @@
+{
+  "placeName": "Endoscopia del Mayab",
+  "placeUrl": "https://maps.app.goo.gl/hYxCrLJ1SrapBYV27",
+  "rating": 5,
+  "total": 80,
+  "fetchedAt": "2026-05-29T00:00:00.000Z",
+  "reviews": [
+    {
+      "author_name": "Paciente verificado",
+      "rating": 5,
+      "relative_time_description": "hace 2 meses",
+      "text": "Excelente atención del Dr. Quiroz. Me explicó todo el procedimiento con mucha paciencia y el precio fue exactamente lo que me dijeron desde el inicio. Muy recomendado.",
+      "time": 1740787200
+    },
+    {
+      "author_name": "Paciente verificado",
+      "rating": 5,
+      "relative_time_description": "hace 3 meses",
+      "text": "Me hice una colonoscopia y todo salió perfecto. El doctor te contesta directamente por WhatsApp, lo cual da mucha confianza. Las instalaciones en Amerimed son de primera.",
+      "time": 1738108800
+    },
+    {
+      "author_name": "Paciente verificado",
+      "rating": 5,
+      "relative_time_description": "hace 4 meses",
+      "text": "Llevé a mi mamá para una endoscopia. El Dr. Quiroz fue muy amable y profesional. El precio incluía todo, sin sorpresas. Muy agradecida.",
+      "time": 1735516800
+    }
+  ]
+}

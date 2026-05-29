@@ -1,0 +1,41 @@
+name: Fetch Google reviews
+
+# Refreshes data/reviews.json from the Places API once a day. The website reads
+# the committed JSON — it never calls the Places API at runtime — so this is the
+# ONLY place Places billing is incurred (~30 calls/month, inside the free cap).
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-reviews
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch reviews
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: npx -y tsx scripts/fetch-reviews.ts
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/reviews.json
+          git diff --cached --quiet -- data/reviews.json \
+            || git commit -m "chore: refresh reviews"
+          git push

@@ -1,17 +1,25 @@
 // /lib/reviews.ts
-// Google Places API review fetching + static fallback.
+// Google reviews, served from committed static JSON (data/reviews.json).
+//
+// We do NOT call the Google Places API at runtime or build time — that bills
+// against the per-SKU caps Google introduced on 2025-03-01. Instead,
+// scripts/fetch-reviews.ts calls the Places API (New / v1) ONCE per day in CI
+// (.github/workflows/fetch-reviews.yml) and commits the normalized result to
+// data/reviews.json. This module just reads that committed file, so visitor
+// traffic generates ZERO Places billing.
+//
 // Consumed by: review sections on procedure pages, homepage trust section,
 // schema JSON-LD aggregateRating, and doctor profile page.
 //
 // "use server" — this runs server-side only (Server Components / Server Actions).
-// Client components needing reviews should use a server action wrapper.
 //
-// Google Places API returns max 5 reviews. For layout flexibility,
-// callers decide how many to display — this file returns all available.
+// The data/reviews.json shape (and the GoogleReview field names below) match what
+// the legacy Places API returned, so consuming components need no changes.
 
 "use server"
 
 import { CLINIC } from "@/lib/clinic"
+import reviewsData from "@/data/reviews.json"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -28,31 +36,25 @@ export interface GoogleReview {
   language?: string
 }
 
-interface PlaceDetailsResponse {
-  status: string
-  error_message?: string
-  result?: {
-    name?: string
-    rating?: number
-    user_ratings_total?: number
-    reviews?: GoogleReview[]
-    url?: string
-  }
-}
-
 interface GetGoogleReviewsOptions {
-  /** Default "es". Use "es-MX" if you prefer. */
-  language?: string
-  /** If true, disables Google auto-translation of reviews. */
-  noTranslations?: boolean
   /** Return up to this many reviews (Google API max is 5). */
   maxReviews?: number
-  /** "most_relevant" | "newest" (default "newest"). */
-  sort?: "most_relevant" | "newest"
-  /** Next.js revalidate seconds for fetch caching. Default 3600 (1h). */
-  revalidateSeconds?: number
-  /** If true, return static fallback reviews on API failure instead of empty array. */
+  /**
+   * If true (default), return static fallback reviews when data/reviews.json is
+   * empty instead of an empty array.
+   */
   useFallback?: boolean
+  /**
+   * @deprecated No longer used — reviews are pre-fetched into data/reviews.json.
+   * Kept so existing call sites compile unchanged.
+   */
+  language?: string
+  /** @deprecated No longer used. */
+  noTranslations?: boolean
+  /** @deprecated No longer used — JSON is pre-sorted newest-first by CI. */
+  sort?: "most_relevant" | "newest"
+  /** @deprecated No longer used — there is no runtime fetch to revalidate. */
+  revalidateSeconds?: number
 }
 
 export interface ReviewsResult {
@@ -62,18 +64,15 @@ export interface ReviewsResult {
   total?: number
   reviews: GoogleReview[]
   attribution: "Google"
-  /** Whether the returned reviews are from the live API or static fallback */
+  /** "api" = from committed (CI-fetched) data; "fallback" = static reviews below */
   source: "api" | "fallback"
 }
 
 // ---------------------------------------------------------------------------
 // Static fallback reviews
 // ---------------------------------------------------------------------------
-// Hand-picked from the 80 five-star reviews. Displayed when API is unavailable
-// (missing key, quota exhausted, network error). Better to show real social
+// Used only if data/reviews.json is ever empty. Better to show real social
 // proof than an empty section.
-//
-// Update these periodically when notable new reviews come in.
 
 const FALLBACK_REVIEWS: GoogleReview[] = [
   {
@@ -100,40 +99,23 @@ const FALLBACK_RATING = CLINIC.aggregateRating.ratingValue
 const FALLBACK_TOTAL = CLINIC.aggregateRating.reviewCount
 
 // ---------------------------------------------------------------------------
-// Core fetcher
+// Core reader
 // ---------------------------------------------------------------------------
 
 /**
- * Fetch Google reviews for the clinic via Places API.
+ * Read Google reviews from the committed data/reviews.json.
  *
- * Uses CLINIC.placeId by default. Falls back to static reviews on failure
- * unless `useFallback: false` is passed.
+ * No network call — the data is refreshed once daily by CI. Falls back to static
+ * reviews if the file is somehow empty (unless `useFallback: false`).
  *
  * @example
- *   // In a Server Component:
  *   const { reviews, rating, total } = await getGoogleReviews()
- *
- *   // With options:
- *   const data = await getGoogleReviews({
- *     maxReviews: 3,
- *     sort: "most_relevant",
- *     useFallback: true,
- *   })
+ *   const data = await getGoogleReviews({ maxReviews: 3 })
  */
 export async function getGoogleReviews(
   opts: GetGoogleReviewsOptions = {},
 ): Promise<ReviewsResult> {
-  const {
-    language = "es",
-    noTranslations = true,
-    maxReviews = 5,
-    sort = "newest",
-    revalidateSeconds = 3600,
-    useFallback = true,
-  } = opts
-
-  const placeId = CLINIC.placeId
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY || ""
+  const { maxReviews = 5, useFallback = true } = opts
 
   const fallbackResult: ReviewsResult = {
     placeName: CLINIC.name,
@@ -144,82 +126,24 @@ export async function getGoogleReviews(
     source: "fallback",
   }
 
-  if (!placeId) {
-    console.error("getGoogleReviews: missing CLINIC.placeId")
-    return useFallback ? fallbackResult : { reviews: [], attribution: "Google", source: "fallback" }
+  const reviews = (reviewsData.reviews ?? [])
+    .filter((r) => (r.text?.trim()?.length ?? 0) > 0 && (r.rating ?? 0) > 0)
+    .slice(0, maxReviews)
+
+  if (reviews.length === 0) {
+    return useFallback
+      ? fallbackResult
+      : { reviews: [], attribution: "Google", source: "fallback" }
   }
 
-  if (!apiKey) {
-    console.error("getGoogleReviews: missing GOOGLE_PLACES_API_KEY env var")
-    return useFallback ? fallbackResult : { reviews: [], attribution: "Google", source: "fallback" }
-  }
-
-  try {
-    const url = new URL(
-      "https://maps.googleapis.com/maps/api/place/details/json"
-    )
-    url.searchParams.set("place_id", placeId)
-    url.searchParams.set(
-      "fields",
-      ["name", "url", "rating", "user_ratings_total", "reviews"].join(",")
-    )
-    url.searchParams.set("key", apiKey)
-    url.searchParams.set("language", language)
-    url.searchParams.set("reviews_sort", sort)
-    if (noTranslations) url.searchParams.set("reviews_no_translations", "true")
-    url.searchParams.set("region", "mx")
-
-    const response = await fetch(url.toString(), {
-      next: { revalidate: revalidateSeconds },
-    })
-
-    if (!response.ok) {
-      console.error(
-        "Google Places API HTTP error:",
-        response.status,
-        response.statusText
-      )
-      return useFallback ? fallbackResult : { reviews: [], attribution: "Google", source: "fallback" }
-    }
-
-    const data = (await response.json()) as PlaceDetailsResponse
-
-    if (data.status !== "OK") {
-      console.error(
-        "Google Places API status error:",
-        data.status,
-        data.error_message
-      )
-      return useFallback
-        ? fallbackResult
-        : {
-            placeName: data.result?.name,
-            rating: data.result?.rating,
-            total: data.result?.user_ratings_total,
-            reviews: [],
-            attribution: "Google",
-            source: "fallback",
-          }
-    }
-
-    const result = data.result ?? {}
-    const reviews = (result.reviews ?? [])
-      .filter((r) => (r.text?.trim()?.length ?? 0) > 0 && (r.rating ?? 0) > 0)
-      .sort((a, b) => (b.time ?? 0) - (a.time ?? 0))
-      .slice(0, maxReviews)
-
-    return {
-      placeName: result.name,
-      placeUrl: result.url,
-      rating: result.rating,
-      total: result.user_ratings_total,
-      reviews,
-      attribution: "Google",
-      source: "api",
-    }
-  } catch (error) {
-    console.error("Error fetching Google reviews:", error)
-    return useFallback ? fallbackResult : { reviews: [], attribution: "Google", source: "fallback" }
+  return {
+    placeName: reviewsData.placeName,
+    placeUrl: reviewsData.placeUrl,
+    rating: reviewsData.rating,
+    total: reviewsData.total,
+    reviews,
+    attribution: "Google",
+    source: "api",
   }
 }
 
@@ -228,12 +152,12 @@ export async function getGoogleReviews(
 // ---------------------------------------------------------------------------
 
 /**
- * Fetch fresh aggregate rating data for schema JSON-LD.
- * Returns schema-ready object, or falls back to CLINIC.aggregateRating.
+ * Aggregate rating for schema JSON-LD, read from data/reviews.json.
+ * Falls back to CLINIC.aggregateRating.
  *
  * @example
  *   const rating = await toSchemaRating()
- *   // → { "@type": "AggregateRating", ratingValue: 5, reviewCount: 52, bestRating: 5 }
+ *   // → { "@type": "AggregateRating", ratingValue: 5, reviewCount: 80, bestRating: 5 }
  */
 export async function toSchemaRating(): Promise<{
   "@type": "AggregateRating"
@@ -242,7 +166,7 @@ export async function toSchemaRating(): Promise<{
   bestRating: 5
 }> {
   const { rating, total } = await getGoogleReviews({
-    maxReviews: 1, // We only need aggregate data, minimize payload
+    maxReviews: 1,
     useFallback: true,
   })
 
