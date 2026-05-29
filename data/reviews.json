@@ -1,30 +1,49 @@
 {
   "placeName": "Endoscopia del Mayab",
-  "placeUrl": "https://maps.app.goo.gl/hYxCrLJ1SrapBYV27",
+  "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
-  "total": 80,
-  "fetchedAt": "2026-05-29T00:00:00.000Z",
+  "total": 84,
+  "fetchedAt": "2026-05-29T20:58:06.062Z",
   "reviews": [
     {
-      "author_name": "Paciente verificado",
+      "author_name": "Daniel Gutiérrez",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKaA04tuh2EF6XOX1uWQiyH3IJGr0SLhj-8jF1coFGdXWUD-A=s128-c0x00000000-cc-rp-mo",
       "rating": 5,
-      "relative_time_description": "hace 2 meses",
-      "text": "Excelente atención del Dr. Quiroz. Me explicó todo el procedimiento con mucha paciencia y el precio fue exactamente lo que me dijeron desde el inicio. Muy recomendado.",
-      "time": 1740787200
+      "relative_time_description": "Hace 2 meses",
+      "text": "Fui a Mérida y necesitaba realizarme una endoscopia. Todo excelente. El Dr. Omar Quiroz es súper atento y profesional.",
+      "time": 1772739195
     },
     {
-      "author_name": "Paciente verificado",
+      "author_name": "Paola Castillo",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXc8hCTXVE8r0Qsr9tSigGep0RuDZHrWdpMC1QIZw94W6YzvdneKw=s128-c0x00000000-cc-rp-mo",
       "rating": 5,
-      "relative_time_description": "hace 3 meses",
-      "text": "Me hice una colonoscopia y todo salió perfecto. El doctor te contesta directamente por WhatsApp, lo cual da mucha confianza. Las instalaciones en Amerimed son de primera.",
-      "time": 1738108800
+      "relative_time_description": "Hace 2 meses",
+      "text": "Muy agradecida con el Dr Omar Quiroz y su equipo. Profesionalismo, claridad en la información y una atención excepcional. Excelente doctor, humano y comprometido. 100% recomendable.",
+      "time": 1772728702
     },
     {
-      "author_name": "Paciente verificado",
+      "author_name": "Carlos Erbach",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWvUVGw1Nh6sKOC7R9pznhurYyc7rCawPp3XzgT_zxoBvVyctGZ=s128-c0x00000000-cc-rp-mo-ba4",
       "rating": 5,
-      "relative_time_description": "hace 4 meses",
-      "text": "Llevé a mi mamá para una endoscopia. El Dr. Quiroz fue muy amable y profesional. El precio incluía todo, sin sorpresas. Muy agradecida.",
-      "time": 1735516800
+      "relative_time_description": "Hace 3 meses",
+      "text": "Excelente trato por parte del Dr. Omar Quiroz y su equipo, en el hospital Amerimed Mérida. La colonoscopia con sedación hace que uno pierda totalmente el miedo a este proceso, tan importante como medida preventiva, para aquellos que somos mayores de 45 años.\n\nDefinitivamente da gusto saber que existe esta opción en Mérida.",
+      "time": 1771906918
+    },
+    {
+      "author_name": "Alejandra Garcia",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJV44bcoqd3eThkzu5RiNPh60gjupbxUz3y1H7GY74jDTuD5w=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "Hace 3 meses",
+      "text": "El Dr.Omar Quiroz  de endoscopia  merida. Excelente atención muy amable y  legible en sus resultados.\nRecomiendo este lugar a pesar de ser nuevo cuenta con todo para poder hacer todo tipo de estudios.",
+      "time": 1771897972
+    },
+    {
+      "author_name": "Pablo Canek",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIaW0TNBbJnNoSKP_OxkmapYqPTlOZKu5taVqqc7DWd9d7XDw=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "Hace 9 meses",
+      "text": "El Dr. Omar Quiroz, cirujano y endoscopista gastrointestinal en Mérida, Yucatán, me realizó una endoscopia en el Hospital Amerimed. Desde la primera cita me explicó con claridad el procedimiento y resolvió todas mis dudas. El estudio fue rápido, seguro y sin molestias. Recomiendo al Dr. Omar Quiroz y a su equipo de Endoscopia del Mayab si necesitan realizarse una endoscopia o colonoscopia en Mérida.",
+      "time": 1756144936
     }
   ]
 }
