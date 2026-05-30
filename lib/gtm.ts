@@ -9,6 +9,7 @@
 //   cta_view        — WhatsApp button enters viewport
 //   pricing_view    — user scrolls to pricing section
 //   faq_expand      — user clicks FAQ accordion item
+//   appointment_request — on-page appointment form delivered (stronger conversion signal)
 //   page_view       — standard (handled by Next.js, helper here for SPA edge cases)
 
 // ---------------------------------------------------------------------------
@@ -57,6 +58,14 @@ interface FaqExpandEvent {
   page_path: string
 }
 
+interface AppointmentRequestEvent {
+  event: "appointment_request"
+  service?: string
+  cross_sell?: boolean
+  folio?: string
+  page_path: string
+}
+
 interface PageViewEvent {
   event: "page_view"
   page_path: string
@@ -70,6 +79,7 @@ type DataLayerEvent =
   | CtaViewEvent
   | PricingViewEvent
   | FaqExpandEvent
+  | AppointmentRequestEvent
   | PageViewEvent
 
 declare global {
@@ -216,6 +226,31 @@ export function pushFaqExpand(
     faq_question: question,
     service,
     page_path: pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a delivered appointment request (on-page form).
+ * Fire ONLY after the server confirms delivery (200 from /api/intake) —
+ * never on submit-click. This is the conversion signal we want to count,
+ * and it carries the folio + service so it can later be imported to
+ * Google Ads alongside the captured click IDs.
+ *
+ * @example
+ *   pushAppointmentRequest({ service: "endoscopia", crossSell: true, folio: "EDM-7K4Q" })
+ */
+export function pushAppointmentRequest(params: {
+  service?: string
+  crossSell?: boolean
+  folio?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "appointment_request",
+    service: params.service,
+    cross_sell: params.crossSell,
+    folio: params.folio,
+    page_path: params.pagePath || currentPath(),
   })
 }
 
