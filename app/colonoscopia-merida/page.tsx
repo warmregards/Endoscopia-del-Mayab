@@ -363,6 +363,30 @@ export default function ColonoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2B: APPOINTMENT FORM (on-page booking) — bg-accent-light
+          Placed right after pricing — price-shopper intent peak. The teal
+          tint reads as a distinct conversion moment between the muted pricing
+          section and the white section that follows. Additional path; the
+          existing hero WhatsApp/phone CTAs are unchanged.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-accent-light">
+        <div className="container-page section-padding">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              Agenda tu colonoscopia en línea
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              ¿Prefieres no escribir por WhatsApp? Déjanos tus datos y te
+              contactamos para confirmar tu cita.
+            </p>
+          </div>
+          <div className="mt-8">
+            <AppointmentForm procedure="colonoscopia" />
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: WHAT IS + WHEN — bg-background
           Serves: Persona 5 (investigator) + Persona 3 (procedure seeker)
           ══════════════════════════════════════════════════════════════════ */}
@@ -755,27 +779,6 @@ export default function ColonoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section id="faqs-colonoscopia" className="bg-muted">
         <Faq routeKey="colonoscopia" service="colonoscopia" />
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════════
-          SECTION 7B: APPOINTMENT FORM (on-page booking) — bg-background
-          Additional conversion path alongside the WhatsApp/phone CTAs.
-          ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
-              Agenda en línea
-            </h2>
-            <p className="mt-2 text-muted-foreground">
-              ¿Prefieres no escribir por WhatsApp? Déjanos tus datos y te
-              contactamos para confirmar tu cita.
-            </p>
-          </div>
-          <div className="mt-8">
-            <AppointmentForm procedure="colonoscopia" />
-          </div>
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════

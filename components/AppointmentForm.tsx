@@ -10,11 +10,12 @@
 // lib/clinic.ts. This is an ADDITIONAL conversion path — it does not replace
 // the page's existing WhatsApp/phone CTAs.
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/style.css"
 import { es } from "date-fns/locale"
 import { format, startOfToday } from "date-fns"
+import { isValidPhoneNumber } from "libphonenumber-js"
 import * as Popover from "@radix-ui/react-popover"
 import {
   CalendarDays,
@@ -66,9 +67,28 @@ const PROCEDURE_CONFIG: Record<Procedure, ProcedureConfig> = {
 const INPUT_BASE =
   "w-full min-h-[48px] rounded-xl border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
 
-/** Lightweight client-side phone check (server is authoritative via libphonenumber). */
-function phoneLooksValid(value: string): boolean {
-  return value.replace(/\D/g, "").length >= 10
+/** Returns a Spanish error message for an invalid name, or null if valid. */
+function validateName(value: string): string | null {
+  const v = value.trim()
+  if (v.length < 2) return "Ingresa tu nombre completo (mínimo 2 letras)."
+  if (v.length > 80) return "El nombre es demasiado largo (máximo 80 caracteres)."
+  // Letters (incl. accents/ñ), spaces, and . ' - only — no digits or symbols.
+  if (!/^[\p{L}\p{M}][\p{L}\p{M}\s.'-]*$/u.test(v))
+    return "Usa solo letras (sin números ni símbolos)."
+  return null
+}
+
+/**
+ * Client mirror of the server's libphonenumber MX validation, so the inline
+ * error matches exactly what the server would reject. Returns a Spanish error
+ * message, or null if valid.
+ */
+function validatePhone(value: string): string | null {
+  const v = value.trim()
+  if (!v) return "Ingresa tu número de teléfono."
+  if (!isValidPhoneNumber(v, "MX"))
+    return "Ingresa un número de WhatsApp válido a 10 dígitos."
+  return null
 }
 
 export default function AppointmentForm({ procedure }: { procedure: Procedure }) {
@@ -78,14 +98,19 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
 
   // ── Field state ───────────────────────────────────────────────────────────
   const [name, setName] = useState("")
+  const [nameTouched, setNameTouched] = useState(false)
   const [phone, setPhone] = useState("")
   const [phoneTouched, setPhoneTouched] = useState(false)
+  const [submitAttempted, setSubmitAttempted] = useState(false)
   const [date, setDate] = useState<Date | undefined>(undefined)
   const [dateOpen, setDateOpen] = useState(false)
   const [window_, setWindow] = useState<"manana" | "tarde" | null>(null)
   const [crossSell, setCrossSell] = useState(false)
   const [message, setMessage] = useState("")
   const [website, setWebsite] = useState("") // honeypot
+
+  const nameRef = useRef<HTMLInputElement>(null)
+  const phoneRef = useRef<HTMLInputElement>(null)
 
   // ── Submission state ──────────────────────────────────────────────────────
   const [submitting, setSubmitting] = useState(false)
@@ -108,15 +133,31 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
   }, [config.key, config.crossSellKey, crossSell])
 
   const includedItems = INCLUDED_IN_PRICE.slice(0, 4)
-  const phoneError = phoneTouched && !phoneLooksValid(phone)
+
+  // Validate live; only surface an error once the field is touched (blurred)
+  // or the user has pressed Submit — so messages don't flash on first load.
+  const nameError = validateName(name)
+  const phoneError = validatePhone(phone)
+  const showNameError = (nameTouched || submitAttempted) && nameError
+  const showPhoneError = (phoneTouched || submitAttempted) && phoneError
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(false)
+    setSubmitAttempted(true)
+    setNameTouched(true)
     setPhoneTouched(true)
 
-    // Client-side mirror validation (UX only).
-    if (name.trim().length < 2 || !phoneLooksValid(phone)) return
+    // Field-level validation — focus the first invalid field so the user sees
+    // exactly what to fix instead of a silent no-op.
+    if (nameError) {
+      nameRef.current?.focus()
+      return
+    }
+    if (phoneError) {
+      phoneRef.current?.focus()
+      return
+    }
 
     setSubmitting(true)
     const attribution = getStoredAttribution()
@@ -168,8 +209,10 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
     setFolio(null)
     setError(false)
     setName("")
+    setNameTouched(false)
     setPhone("")
     setPhoneTouched(false)
+    setSubmitAttempted(false)
     setDate(undefined)
     setWindow(null)
     setCrossSell(false)
@@ -241,15 +284,27 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
             Nombre completo
           </label>
           <input
+            ref={nameRef}
             id="apt-name"
             type="text"
             autoComplete="name"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onBlur={() => setNameTouched(true)}
             placeholder="Tu nombre"
-            className={INPUT_BASE}
+            aria-invalid={!!showNameError}
+            aria-describedby={showNameError ? "apt-name-error" : undefined}
+            className={cn(
+              INPUT_BASE,
+              showNameError && "border-error focus:border-error focus:ring-error/30"
+            )}
           />
+          {showNameError && (
+            <p id="apt-name-error" className="mt-2 text-sm text-error">
+              {nameError}
+            </p>
+          )}
         </div>
 
         {/* Teléfono */}
@@ -261,6 +316,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
             Teléfono (WhatsApp)
           </label>
           <input
+            ref={phoneRef}
             id="apt-phone"
             type="tel"
             inputMode="tel"
@@ -270,12 +326,16 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
             onChange={(e) => setPhone(e.target.value)}
             onBlur={() => setPhoneTouched(true)}
             placeholder="999 123 4567"
-            aria-invalid={phoneError}
-            className={cn(INPUT_BASE, phoneError && "border-error focus:border-error focus:ring-error/30")}
+            aria-invalid={!!showPhoneError}
+            aria-describedby={showPhoneError ? "apt-phone-error" : undefined}
+            className={cn(
+              INPUT_BASE,
+              showPhoneError && "border-error focus:border-error focus:ring-error/30"
+            )}
           />
-          {phoneError && (
-            <p className="mt-2 text-sm text-error">
-              Ingresa un número válido de 10 dígitos.
+          {showPhoneError && (
+            <p id="apt-phone-error" className="mt-2 text-sm text-error">
+              {phoneError}
             </p>
           )}
         </div>
