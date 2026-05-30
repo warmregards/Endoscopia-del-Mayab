@@ -15,6 +15,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import AppointmentForm from "@/components/AppointmentForm"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -655,6 +656,27 @@ export default function EndoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <Faq routeKey="endoscopia" service="endoscopia" />
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 7B: APPOINTMENT FORM (on-page booking) — bg-background
+          Additional conversion path alongside the WhatsApp/phone CTAs.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
+              Agenda en línea
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              ¿Prefieres no escribir por WhatsApp? Déjanos tus datos y te
+              contactamos para confirmar tu cita.
+            </p>
+          </div>
+          <div className="mt-8">
+            <AppointmentForm procedure="endoscopia" />
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
