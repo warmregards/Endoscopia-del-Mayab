@@ -66,6 +66,8 @@ type ProcedureDetail = {
   differentiator: string
   waLabel: string
   waMessage: string
+  /** Link text → the full procedure page (slug resolved from lib/services.ts). */
+  pageLabel: string
 }
 
 const procedureDetails: ProcedureDetail[] = [
@@ -91,6 +93,7 @@ const procedureDetails: ProcedureDetail[] = [
     waLabel: "Cotizar Endoscopia",
     waMessage:
       "Hola Dr. Quiroz, me interesa una endoscopia. ¿Cuál es el costo y la disponibilidad?",
+    pageLabel: "Ver toda la información de la endoscopia",
   },
   {
     key: "colonoscopia",
@@ -115,6 +118,7 @@ const procedureDetails: ProcedureDetail[] = [
     waLabel: "Cotizar Colonoscopia",
     waMessage:
       "Hola Dr. Quiroz, me interesa una colonoscopia. ¿Cuál es el costo y la disponibilidad?",
+    pageLabel: "Ver toda la información de la colonoscopia",
   },
   {
     key: "cpre",
@@ -137,6 +141,7 @@ const procedureDetails: ProcedureDetail[] = [
     waLabel: "Cotizar CPRE",
     waMessage:
       "Hola Dr. Quiroz, me interesa una CPRE. ¿Cuál es el costo y la disponibilidad?",
+    pageLabel: "Ver toda la información de la CPRE",
   },
 ]
 
@@ -621,6 +626,10 @@ export default function PreciosPage() {
    sticky 64px SiteHeader so the heading isn't hidden on landing. */
 
 function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
+  // Resolve the procedure-page slug from the canonical services data — never
+  // hardcode the path here.
+  const service = SERVICES.find((s) => s.pricingKey === detail.key)
+
   return (
     <section
       id={detail.key}
@@ -675,6 +684,16 @@ function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
       <p className="text-sm font-semibold text-foreground border-l-2 border-accent pl-4 leading-relaxed">
         {detail.differentiator}
       </p>
+
+      {/* Link through to the full procedure page */}
+      {service && (
+        <Link
+          href={`/${service.slug}`}
+          className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all hover:underline"
+        >
+          {detail.pageLabel} <ArrowRight className="h-4 w-4" />
+        </Link>
+      )}
     </section>
   )
 }
@@ -722,7 +741,7 @@ function ServiceRow({ service, isLast }: { service: ServiceItem; isLast: boolean
         )}
         <Link
           href={`/${service.slug}`}
-          className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1"
+          className="text-sm text-primary hover:underline inline-flex items-center gap-1 whitespace-nowrap"
         >
           Ver más <ArrowRight className="h-4 w-4" />
         </Link>
