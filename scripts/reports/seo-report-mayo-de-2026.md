@@ -7,10 +7,10 @@
 
 | Metric | Current | Previous | Change |
 |--------|---------|----------|--------|
-| Sessions | 1369 | 1273 | +7.5% ↑ |
+| Sessions | 1370 | 1273 | +7.6% ↑ |
 | Conversions | 161 | 192 | -16.1% ↓ |
 | Conv. Rate | 11.8% | 15.1% | ↓ |
-| Engagement | 51.4% | 56.6% | ↓ |
+| Engagement | 51.3% | 56.6% | ↓ |
 
 | GSC Metric | Current | Previous | Change |
 |------------|---------|----------|--------|
@@ -72,7 +72,7 @@
 | /precios | 212 | 51.9% | 23 | 10.8% | +∞ |
 | / | 157 | 47.1% | 15 | 9.6% | +0.0% |
 | /cpre-merida | 63 | 42.9% | 2 | 3.2% | -33.3% |
-| (not set) | 23 | 4.3% | 0 | 0.0% | 0% |
+| (not set) | 24 | 4.2% | 0 | 0.0% | 0% |
 | /ligadura-varices-esofagicas-merida | 22 | 45.5% | 0 | 0.0% | 0% |
 | /dr-omar-quiroz | 18 | 83.3% | 1 | 5.6% | -50.0% |
 | /ligadura-hemorroides-internas-merida | 10 | 50.0% | 0 | 0.0% | 0% |
@@ -81,13 +81,13 @@
 | /dilatacion-esofagica-merida | 3 | 100.0% | 1 | 33.3% | +∞ |
 | /consultas-digestivas-merida | 2 | 50.0% | 0 | 0.0% | NEW |
 | /cpre-playa-del-carmen | 2 | 50.0% | 0 | 0.0% | 0% |
-|  | 1 | 0.0% | 0 | 0.0% | NEW |
+| /?fbclid=IwZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAEeRsx0PMgqG-81LevtFBAF3-6d9GeQ1xMeDwMKXxC1oX4NS3dhjuPAEBXJIxo_aem_qFGPhJKRjvudBSrtLseGnw | 1 | 100.0% | 0 | 0.0% | NEW |
 
 ## Device Breakdown
 
 | Device | Sessions | Conversions | Conv Rate |
 |--------|----------|-------------|-----------|
-| mobile | 1113 | 145 | 13.0% |
+| mobile | 1114 | 145 | 13.0% |
 | desktop | 255 | 16 | 6.3% |
 | tablet | 1 | 0 | 0.0% |
 
@@ -96,7 +96,7 @@
 | City | Sessions | Conversions |
 |------|----------|-------------|
 | Merida | 732 | 95 |
-| (not set) | 151 | 13 |
+| (not set) | 155 | 14 |
 | Mexico City | 73 | 7 |
 | Cancun | 48 | 12 |
 | Kanasin | 27 | 10 |
@@ -108,11 +108,24 @@
 
 | Page | Perf | SEO | LCP | CLS | TBT |
 |------|------|-----|-----|-----|-----|
-| /endoscopia-merida | 🟢 95 | 100 | 2.7s | 0.000 | 47ms |
-| /colonoscopia-merida | 🟢 96 | 100 | 2.6s | 0.000 | 137ms |
-| /cpre-merida | 🟢 90 | 100 | 2.1s | 0.000 | 373ms |
-| / | 🟡 74 | 100 | 3.8s | 0.000 | 472ms |
-| /dr-omar-quiroz | 🟢 90 | 100 | 1.9s | 0.000 | 387ms |
+| /endoscopia-merida | 🟡 79 | 100 | 2.9s | 0.000 | 622ms |
+| /colonoscopia-merida | 🟡 67 | 100 | 7.8s | 0.000 | 314ms |
+| /cpre-merida | 🟢 93 | 100 | 2.4s | 0.000 | 226ms |
+| / | 🟢 94 | 100 | 2.6s | 0.000 | 58ms |
+| /dr-omar-quiroz | 🟢 95 | 100 | 2.4s | 0.000 | 193ms |
+
+## Keyword Cannibalization (endoscopiadelmayab.com vs omar.doctor)
+
+Queries where both domains compete. Consider consolidating to one site.
+
+| Query | Endoscopia Pos | Endoscopia Impr | Omar Pos | Omar Impr | Winner |
+|-------|---------------|-----------------|----------|-----------|--------|
+| colonoscopia merida | 7.6 | 49 | 7.0 | 1 | omar.doctor |
+| dr omar quiroz | 13.4 | 16 | 16.7 | 22 | endoscopia |
+| colonoscopia en merida yucatan | 6.0 | 27 | 8.0 | 2 | endoscopia |
+| balon gastrico merida | 13.0 | 1 | 2.1 | 16 | omar.doctor |
+| costo | 1.5 | 4 | 2.0 | 6 | endoscopia |
+| cirugia de vesicula biliar en merida | 44.0 | 1 | 28.7 | 6 | omar.doctor |
 
 ## Opportunities & Recommendations
 
