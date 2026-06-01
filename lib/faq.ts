@@ -59,37 +59,37 @@ const biopsyFee = () => mxn(ADDITIONAL_FEES.biopsy.amount)
 export const homeFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuestan los procedimientos endoscópicos?",
-    answer: `Endoscopia desde ${price("endoscopia")}, colonoscopia desde ${price("colonoscopia")}, CPRE desde ${price("cpre")}. Todos los precios incluyen anestesia, biopsias sin límite, sala de recuperación y valoración pre-endoscópica. Sin cargos ocultos — la lectura de patología (${biopsyFee()}) es el único costo adicional posible.`,
+    answer: `Endoscopia desde ${price("endoscopia")}, colonoscopia desde ${price("colonoscopia")}, CPRE desde ${price("cpre")}. Todos los precios incluyen anestesia, biopsias sin límite, sala de recuperación y valoración pre-endoscópica. Sin cargos ocultos — la lectura de patología (${biopsyFee()}) es el único costo adicional posible. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el total exacto para tu procedimiento.`,
   },
   {
     question: "¿Duele la endoscopia o colonoscopia?",
     answer:
-      "No. Todos los procedimientos se realizan con sedación consciente administrada por anestesiólogo — no sentirás dolor ni molestia durante el estudio. La mayoría de los pacientes no recuerdan nada del procedimiento y despiertan cómodamente en la sala de recuperación.",
+      "No. Todos los procedimientos se realizan con sedación consciente administrada por anestesiólogo — no sentirás dolor ni molestia durante el estudio. La mayoría de los pacientes no recuerdan nada del procedimiento y despiertan cómodamente en la sala de recuperación. Escríbele al Dr. Quiroz por WhatsApp y te explica exactamente cómo será tu sedación.",
   },
   {
     question: "¿Qué diferencia hay entre ustedes y Salud Digna o Chopo?",
     answer:
-      "Salud Digna y Chopo son laboratorios de análisis clínicos — no realizan endoscopias ni colonoscopias. Nosotros somos una clínica de endoscopia con especialista certificado, anestesiólogo, quirófano y equipo Olympus HD en Hospital Amerimed. Si te indicaron un procedimiento endoscópico, necesitas un endoscopista, no un laboratorio.",
+      "Salud Digna y Chopo son laboratorios de análisis clínicos — no realizan endoscopias ni colonoscopias. Nosotros somos una clínica de endoscopia con especialista certificado, anestesiólogo, quirófano y equipo Olympus HD en Hospital Amerimed. Si te indicaron un procedimiento endoscópico, necesitas un endoscopista, no un laboratorio. Escríbele al Dr. Quiroz por WhatsApp y agenda tu estudio con el especialista correcto.",
   },
   {
     question: "¿Es peligrosa la colonoscopia?",
     answer:
-      "La colonoscopia es uno de los procedimientos más seguros en gastroenterología. Las complicaciones graves son extremadamente raras (menos del 0.1%). El Dr. Quiroz ha realizado más de 300 colonoscopias anuales con equipo Olympus HD y monitoreo continuo por anestesiólogo en Hospital Amerimed. Si te preocupa algún riesgo en tu caso particular, puedes platicarlo directamente con el Dr. Quiroz por WhatsApp antes de decidir.",
+      "La colonoscopia es uno de los procedimientos más seguros en gastroenterología. Las complicaciones graves son extremadamente raras (menos del 0.1%). El Dr. Quiroz ha realizado más de 300 colonoscopias anuales con equipo Olympus HD y monitoreo continuo por anestesiólogo en Hospital Amerimed. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso particular.",
   },
   {
     question: "¿Cómo me preparo para el procedimiento?",
     answer:
-      "La preparación varía según el procedimiento. Al agendar tu cita por WhatsApp, el Dr. Quiroz te enviará instrucciones detalladas y personalizadas. En general: ayuno de 8 horas para endoscopia, preparación intestinal especial para colonoscopia. Debes acudir con acompañante.",
+      "La preparación varía según el procedimiento. En general: ayuno de 8 horas para endoscopia, preparación intestinal especial para colonoscopia. Debes acudir con acompañante. Agenda por WhatsApp y el Dr. Quiroz te envía las instrucciones de preparación detalladas para tu estudio.",
   },
   {
     question: "¿Cuánto tiempo dura el procedimiento?",
     answer:
-      "Una endoscopia tarda 10–15 minutos y una colonoscopia 20–30 minutos. Después necesitarás 30–60 minutos en recuperación. En total, planifica unas 2 horas desde tu llegada al hospital.",
+      "Una endoscopia tarda 10–15 minutos y una colonoscopia 20–30 minutos. Después necesitarás 30–60 minutos en recuperación. En total, planifica unas 2 horas desde tu llegada al hospital. Agenda por WhatsApp y el Dr. Quiroz te explica qué esperar en tu caso.",
   },
   {
     question: "¿Quién me atiende cuando escribo por WhatsApp?",
     answer:
-      "El Dr. Quiroz personalmente. No hay recepcionista ni call center — cuando escribes al 999 236 0153, te contesta el doctor directamente. Esto permite resolver dudas médicas, confirmar disponibilidad y agendar tu cita sin intermediarios.",
+      "El Dr. Quiroz personalmente. No hay recepcionista ni call center — cuando escribes al 999 236 0153, te contesta el doctor directamente. Esto permite resolver dudas médicas, confirmar disponibilidad y agendar tu cita sin intermediarios. Escríbele al Dr. Quiroz por WhatsApp y compruébalo tú mismo.",
   },
   {
     question: "¿Atienden emergencias digestivas?",
@@ -99,7 +99,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "¿El precio puede cambiar después de agendar?",
     answer:
-      "El precio base del procedimiento no cambia. Lo que puede variar es si durante el estudio se encuentran hallazgos que requieran tratamiento adicional (por ejemplo, extracción de pólipos durante una colonoscopia o colocación de prótesis durante una CPRE). En esos casos, el Dr. Quiroz te informa antes de proceder y te da la cotización del costo adicional.",
+      "El precio base del procedimiento no cambia. Lo que puede variar es si durante el estudio se encuentran hallazgos que requieran tratamiento adicional (por ejemplo, extracción de pólipos durante una colonoscopia o colocación de prótesis durante una CPRE). En esos casos, el Dr. Quiroz te informa antes de proceder y te da la cotización del costo adicional. Escríbele al Dr. Quiroz por WhatsApp y te aclara cualquier duda sobre el precio de tu caso.",
   },
   {
     question: "¿Atienden pacientes de Cancún y Playa del Carmen?",
@@ -121,23 +121,23 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Qué es una endoscopia digestiva y para qué sirve?",
     answer:
-      "Es un estudio con una cámara flexible que revisa esófago, estómago y duodeno. Detecta gastritis, reflujo, úlceras, pólipos y cáncer temprano. También permite biopsias y terapias en la misma sesión.",
+      "Es un estudio con una cámara flexible que revisa esófago, estómago y duodeno. Detecta gastritis, reflujo, úlceras, pólipos y cáncer temprano. También permite biopsias y terapias en la misma sesión. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre si la necesitas en tu caso.",
   },
   {
     question: "¿Cuánto cuesta una endoscopia y qué incluye el precio?",
-    answer: `Endoscopia en Mérida desde ${price("endoscopia")}. Incluye valoración pre-endoscópica, sedación con anestesiólogo, equipo Olympus HD, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y reporte digital con imágenes. Único costo adicional posible: lectura de patología ${biopsyFee()}.`,
+    answer: `Endoscopia en Mérida desde ${price("endoscopia")}. Incluye valoración pre-endoscópica, sedación con anestesiólogo, equipo Olympus HD, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y reporte digital con imágenes. Único costo adicional posible: lectura de patología ${biopsyFee()}. Pídele tu cotización al ${DOCTOR.name} por WhatsApp y confirma tu total exacto.`,
   },
   {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",
-    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. Si encontramos una lesión que requiera intervención adicional (por ejemplo, control de un sangrado o colocación de hemoclips), el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento.`,
+    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. Si encontramos una lesión que requiera intervención adicional (por ejemplo, control de un sangrado o colocación de hemoclips), el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve cualquier duda sobre el precio antes de agendar.`,
   },
   {
     question: "¿Por qué cuesta menos que en un hospital privado típico?",
-    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer endoscopias de la misma calidad clínica a un precio más accesible y transparente.`,
+    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer endoscopias de la misma calidad clínica a un precio más accesible y transparente. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu endoscopia.`,
   },
   {
     question: "¿La consulta de valoración tiene costo separado?",
-    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la endoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — el ${DOCTOR.name} lo determina al agendar por WhatsApp.`,
+    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la endoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — escríbele al ${DOCTOR.name} por WhatsApp y te confirma si la necesitas en tu caso.`,
   },
   // TODO: Confirm with Dr. Quiroz the exact payment terms before shipping
   // (cash only? transfer? credit/debit cards? meses sin intereses? which banks?).
@@ -149,42 +149,42 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Duele la endoscopia?",
     answer:
-      "No. Utilizamos sedación intravenosa administrada por anestesiólogo certificado. No sentirás dolor ni reflejo de náusea. La mayoría de pacientes no recuerdan el procedimiento y despiertan con mínima incomodidad. Si el procedimiento te genera ansiedad, escríbele al Dr. Quiroz por WhatsApp y te explica exactamente cómo será tu sedación.",
+      "No. Utilizamos sedación intravenosa administrada por anestesiólogo certificado. No sentirás dolor ni reflejo de náusea. La mayoría de pacientes no recuerdan el procedimiento y despiertan con mínima incomodidad. Mándale un WhatsApp al Dr. Quiroz y te explica con detalle cómo será tu sedación.",
   },
   {
     question: "¿Qué preparación necesito antes del estudio?",
     answer:
-      "Ayuno estricto de 8–12 horas. Algunos medicamentos pueden ajustarse — el Dr. Quiroz te indica cuáles al agendar. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación. Al agendar por WhatsApp, el Dr. Quiroz te envía la guía de preparación exacta para tu estudio.",
+      "Ayuno estricto de 8–12 horas. Algunos medicamentos pueden ajustarse — el Dr. Quiroz te indica cuáles al agendar. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación. Agenda por WhatsApp y el Dr. Quiroz te envía tu guía de preparación exacta.",
   },
   {
     question: "¿Cuánto dura una endoscopia?",
     answer:
-      "El procedimiento dura 15–20 minutos. La estancia total en el hospital es de 2–3 horas (incluye preparación y recuperación). Entregamos resumen con fotos el mismo día. Si hay biopsias, patología en 5–7 días.",
+      "El procedimiento dura 15–20 minutos. La estancia total en el hospital es de 2–3 horas (incluye preparación y recuperación). Entregamos resumen con fotos el mismo día. Si hay biopsias, patología en 5–7 días. Agenda por WhatsApp y el Dr. Quiroz te explica los tiempos para tu caso.",
   },
   {
     question: "¿Es peligrosa la endoscopia?",
     answer:
-      "Es uno de los procedimientos más seguros en gastroenterología. Las complicaciones son raras: reacciones a sedación (leves), sangrado menor tras biopsia o perforación (menos del 0.1%). Hospital Amerimed cuenta con protocolos de seguridad y manejo inmediato. Si te preocupa algún riesgo, platícalo con el Dr. Quiroz por WhatsApp antes de agendar.",
+      "Es uno de los procedimientos más seguros en gastroenterología. Las complicaciones son raras: reacciones a sedación (leves), sangrado menor tras biopsia o perforación (menos del 0.1%). Hospital Amerimed cuenta con protocolos de seguridad y manejo inmediato. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso antes de agendar.",
   },
   {
     question: "¿Qué enfermedades se diagnostican con endoscopia?",
     answer:
-      "Detecta gastritis por Helicobacter pylori, reflujo gastroesofágico, úlceras, várices esofágicas, pólipos gástricos, tumores, estenosis y causas de dolor abdominal o pérdida de peso inexplicada.",
+      "Detecta gastritis por Helicobacter pylori, reflujo gastroesofágico, úlceras, várices esofágicas, pólipos gástricos, tumores, estenosis y causas de dolor abdominal o pérdida de peso inexplicada. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre qué estudio necesitas.",
   },
   {
     question: "¿Endoscopia y panendoscopia son lo mismo?",
     answer:
-      "Sí. Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites.",
+      "Sí. Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites. Agenda por WhatsApp con el Dr. Quiroz sin importar el nombre con que te lo indicaron.",
   },
   {
     question: "¿Hacen endoscopia en Salud Digna o Chopo?",
     answer:
-      "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado.",
+      "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado. Escríbele al Dr. Quiroz por WhatsApp y agenda tu endoscopia donde sí se realiza.",
   },
   {
     question: "¿Hacen endoscopia o colonoscopia con cápsula?",
     answer:
-      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos te enviamos cotización por WhatsApp después de una breve valoración con el Dr. Quiroz.",
+      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos, escríbenos por WhatsApp y te enviamos la cotización tras una breve valoración con el Dr. Quiroz.",
   },
   {
     question: "¿Aceptan seguros de gastos médicos para endoscopia?",
@@ -204,7 +204,7 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Cuándo es necesaria una endoscopia?",
     answer:
-      "Tu médico puede indicar una endoscopia si tienes: acidez o reflujo que no mejora con medicamento, dolor abdominal recurrente, dificultad para tragar, náusea o vómito persistente, pérdida de peso inexplicada, anemia sin causa clara, o sospecha de H. pylori. También se usa como control después de tratar úlceras o como tamizaje si hay antecedentes de cáncer gástrico.",
+      "Tu médico puede indicar una endoscopia si tienes: acidez o reflujo que no mejora con medicamento, dolor abdominal recurrente, dificultad para tragar, náusea o vómito persistente, pérdida de peso inexplicada, anemia sin causa clara, o sospecha de H. pylori. También se usa como control después de tratar úlceras o como tamizaje si hay antecedentes de cáncer gástrico. Escríbele al Dr. Quiroz por WhatsApp y te dice si una endoscopia es lo indicado para tus síntomas.",
   },
 ]
 
@@ -220,23 +220,23 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Qué es la colonoscopia y cuándo se recomienda?",
     answer:
-      "Estudia colon y recto con una cámara flexible para prevenir y diagnosticar cáncer colorrectal, pólipos, divertículos e inflamación. Se recomienda tamizaje desde los 45 años, o antes si hay antecedentes familiares de cáncer colorrectal.",
+      "Estudia colon y recto con una cámara flexible para prevenir y diagnosticar cáncer colorrectal, pólipos, divertículos e inflamación. Se recomienda tamizaje desde los 45 años, o antes si hay antecedentes familiares de cáncer colorrectal. Escríbele al Dr. Quiroz por WhatsApp y te dice si ya es momento de tu colonoscopia.",
   },
   {
     question: "¿Cuánto cuesta una colonoscopia y qué incluye?",
-    answer: `Colonoscopia en Mérida desde ${price("colonoscopia")}. Incluye sedación con anestesiólogo, equipo Olympus HD, biopsias sin límite, sala de recuperación, valoración pre-procedimiento y reporte con imágenes. Los pólipos pequeños descubiertos durante el estudio se extirpan en la misma sesión sin costo adicional. Pólipos grandes o lesiones que requieran intervención adicional se cotizan antes de cualquier cargo. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias.`,
+    answer: `Colonoscopia en Mérida desde ${price("colonoscopia")}. Incluye sedación con anestesiólogo, equipo Olympus HD, biopsias sin límite, sala de recuperación, valoración pre-procedimiento y reporte con imágenes. Los pólipos pequeños descubiertos durante el estudio se extirpan en la misma sesión sin costo adicional. Pólipos grandes o lesiones que requieran intervención adicional se cotizan antes de cualquier cargo. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el total de tu colonoscopia.`,
   },
   {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",
-    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. También incluye la extracción de pólipos pequeños descubiertos durante la colonoscopia. Si encontramos pólipos grandes o lesiones que requieran intervención adicional, el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento.`,
+    answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. También incluye la extracción de pólipos pequeños descubiertos durante la colonoscopia. Si encontramos pólipos grandes o lesiones que requieran intervención adicional, el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve cualquier duda sobre el precio antes de agendar.`,
   },
   {
     question: "¿Por qué cuesta menos que en un hospital privado típico?",
-    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer colonoscopias de la misma calidad clínica a un precio más accesible y transparente.`,
+    answer: `El ${DOCTOR.name} atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de ${DOCTOR.worksFor.hospital} y utilizamos el mismo equipo Olympus HD que los hospitales privados más grandes de Mérida. Esto permite ofrecer colonoscopias de la misma calidad clínica a un precio más accesible y transparente. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu colonoscopia.`,
   },
   {
     question: "¿La consulta de valoración tiene costo separado?",
-    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la colonoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — el ${DOCTOR.name} lo determina al agendar por WhatsApp.`,
+    answer: `La consulta de valoración cuesta ${mxn(ADDITIONAL_FEES.consultation.amount)}. Permite definir si la colonoscopia es el estudio adecuado para tu caso o si necesitas otro abordaje. Algunos pacientes con indicación médica clara no la requieren — escríbele al ${DOCTOR.name} por WhatsApp y te confirma si la necesitas en tu caso.`,
   },
   // TODO: Confirm with Dr. Quiroz the exact payment terms before shipping
   // (cash only? transfer? credit/debit cards? meses sin intereses? which banks?).
@@ -248,37 +248,37 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Duele la colonoscopia?",
     answer:
-      "No. Se realiza bajo sedación profunda con anestesiólogo — no sentirás dolor ni molestia. Tras el procedimiento puedes tener ligera distensión abdominal que desaparece en pocas horas.",
+      "No. Se realiza bajo sedación profunda con anestesiólogo — no sentirás dolor ni molestia. Tras el procedimiento puedes tener ligera distensión abdominal que desaparece en pocas horas. Mándale un WhatsApp al Dr. Quiroz y te explica cómo será tu sedación para que llegues tranquilo.",
   },
   {
     question: "¿Cómo es la preparación intestinal?",
     answer:
-      "Usamos soluciones de polietilenglicol en 2 tomas, más dieta líquida el día previo. La buena preparación es clave para un estudio completo — si no es adecuada, puede reprogramarse. El Dr. Quiroz envía instrucciones detalladas por WhatsApp al agendar.",
+      "Usamos soluciones de polietilenglicol en 2 tomas, más dieta líquida el día previo. La buena preparación es clave para un estudio completo — si no es adecuada, puede reprogramarse. Agenda por WhatsApp y el Dr. Quiroz te envía las instrucciones de preparación detalladas.",
   },
   {
     question: "¿Cuánto dura una colonoscopia?",
     answer:
-      "El procedimiento dura 25–45 minutos. La estancia total es de 3–4 horas. Puedes comer ligero el mismo día y retomar actividades al siguiente. Si se extirpan pólipos grandes, se dan indicaciones adicionales de cuidado.",
+      "El procedimiento dura 25–45 minutos. La estancia total es de 3–4 horas. Puedes comer ligero el mismo día y retomar actividades al siguiente. Si se extirpan pólipos grandes, se dan indicaciones adicionales de cuidado. Agenda por WhatsApp y el Dr. Quiroz te explica qué esperar el día de tu estudio.",
   },
   {
     question: "¿Es peligrosa la colonoscopia?",
     answer:
-      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato. El anestesiólogo monitorea tus signos vitales durante todo el procedimiento y ajusta la sedación en tiempo real para tu seguridad. Si tienes dudas sobre los riesgos en tu situación específica, escríbele al Dr. Quiroz por WhatsApp — las resuelve personalmente antes de que agendes.",
+      "Es un procedimiento muy seguro. Riesgos poco comunes: sangrado (especialmente si se retiran pólipos) o perforación (menos del 0.1%). Contamos con anestesiólogo y protocolos hospitalarios en Amerimed para manejo inmediato. El anestesiólogo monitorea tus signos vitales durante todo el procedimiento y ajusta la sedación en tiempo real para tu seguridad. Escríbele al Dr. Quiroz por WhatsApp y te resuelve personalmente las dudas sobre los riesgos en tu situación antes de agendar.",
   },
   {
     question: "¿Qué detecta la colonoscopia?",
     answer:
-      "Detecta y permite retirar pólipos en la misma sesión, además de diagnosticar cáncer colorrectal, colitis, divertículos y causas de diarrea crónica, dolor abdominal o sangrado rectal.",
+      "Detecta y permite retirar pólipos en la misma sesión, además de diagnosticar cáncer colorrectal, colitis, divertículos y causas de diarrea crónica, dolor abdominal o sangrado rectal. Escríbele al Dr. Quiroz por WhatsApp y agenda tu colonoscopia.",
   },
   {
     question: "¿Colonoscopia tradicional o virtual?",
     answer:
-      "La colonoscopia tradicional (óptica) permite diagnóstico y tratamiento en la misma sesión — si encuentra un pólipo, lo retira ahí mismo. La virtual por tomografía no permite biopsia ni extracción, y si encuentra algo, requiere colonoscopia óptica de todos modos.",
+      "La colonoscopia tradicional (óptica) permite diagnóstico y tratamiento en la misma sesión — si encuentra un pólipo, lo retira ahí mismo. La virtual por tomografía no permite biopsia ni extracción, y si encuentra algo, requiere colonoscopia óptica de todos modos. Escríbele al Dr. Quiroz por WhatsApp y te recomienda la opción adecuada para tu caso.",
   },
   {
     question: "¿Hacen endoscopia o colonoscopia con cápsula?",
     answer:
-      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos te enviamos cotización por WhatsApp después de una breve valoración con el Dr. Quiroz.",
+      "Sí, pero bajo cotización personalizada — no entra dentro de los precios estándar de endoscopia o colonoscopia. La cápsula endoscópica requiere equipo especializado y la cápsula misma debe adquirirse aparte. Podemos atenderte en cualquiera de estos esquemas: que tú adquieras la cápsula y nosotros realicemos la valoración previa y la lectura e interpretación del estudio, o que nosotros te proporcionemos también la cápsula. En ambos casos, escríbenos por WhatsApp y te enviamos la cotización tras una breve valoración con el Dr. Quiroz.",
   },
   {
     question: "¿Aceptan seguros de gastos médicos para colonoscopia?",
@@ -293,7 +293,7 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿A qué edad debo hacerme mi primera colonoscopia?",
     answer:
-      "A partir de los 45 años si no tienes factores de riesgo — tanto hombres como mujeres. El cáncer colorrectal es el tercer cáncer más frecuente en mujeres en México. Si tienes antecedentes familiares de cáncer colorrectal, la primera colonoscopia se recomienda 10 años antes de la edad en que se diagnosticó el familiar. A cualquier edad si presentas sangrado rectal, cambio en hábitos intestinales o anemia sin causa clara.",
+      "A partir de los 45 años si no tienes factores de riesgo — tanto hombres como mujeres. El cáncer colorrectal es el tercer cáncer más frecuente en mujeres en México. Si tienes antecedentes familiares de cáncer colorrectal, la primera colonoscopia se recomienda 10 años antes de la edad en que se diagnosticó el familiar. A cualquier edad si presentas sangrado rectal, cambio en hábitos intestinales o anemia sin causa clara. Escríbele al Dr. Quiroz por WhatsApp y agenda tu primera colonoscopia.",
   },
   {
     question: "¿Dónde hacen colonoscopia en Mérida?",
@@ -319,31 +319,31 @@ export const cpreFaqs: FAQ[] = [
   {
     question: "¿Qué es la CPRE y para qué sirve?",
     answer:
-      "La CPRE (colangiopancreatografía retrógrada endoscópica) combina endoscopia y rayos X para diagnosticar y tratar problemas de vías biliares y páncreas: cálculos biliares, estenosis, obstrucciones con ictericia y pancreatitis biliar. Es tanto diagnóstica como terapéutica — puede resolver el problema en la misma sesión.",
+      "La CPRE (colangiopancreatografía retrógrada endoscópica) combina endoscopia y rayos X para diagnosticar y tratar problemas de vías biliares y páncreas: cálculos biliares, estenosis, obstrucciones con ictericia y pancreatitis biliar. Es tanto diagnóstica como terapéutica — puede resolver el problema en la misma sesión. Escríbele al Dr. Quiroz por WhatsApp y te orienta si la CPRE es lo que necesitas.",
   },
   {
     question: "¿La CPRE es lo mismo que una endoscopia?",
     answer:
-      "No. La endoscopia convencional explora estómago, esófago y duodeno con una cámara — solo observa. La CPRE usa un endoscopio especializado (duodenoscopio) más fluoroscopía con rayos X para entrar al conducto biliar y al páncreas, y además puede tratar el problema en la misma sesión: extraer cálculos, liberar estenosis o colocar prótesis. Si tu médico pidió una endoscopia, no necesitas una CPRE — son procedimientos distintos.",
+      "No. La endoscopia convencional explora estómago, esófago y duodeno con una cámara — solo observa. La CPRE usa un endoscopio especializado (duodenoscopio) más fluoroscopía con rayos X para entrar al conducto biliar y al páncreas, y además puede tratar el problema en la misma sesión: extraer cálculos, liberar estenosis o colocar prótesis. Si tu médico pidió una endoscopia, no necesitas una CPRE — son procedimientos distintos. Mándale tus estudios por WhatsApp al Dr. Quiroz y te confirma qué procedimiento necesitas.",
   },
   {
     question: "¿Cuánto cuesta una CPRE y qué modifica el precio?",
-    answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano y equipo. Aumenta si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En Cancún, el mismo procedimiento puede costar $40,000+ MXN según reportes de pacientes.`,
+    answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano y equipo. Aumenta si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En Cancún, el mismo procedimiento puede costar $40,000+ MXN según reportes de pacientes. Escríbele al ${DOCTOR.name} por WhatsApp con tus estudios y te damos tu cotización detallada.`,
   },
   {
     question: "¿La CPRE es peligrosa?",
     answer:
-      "Es un procedimiento más complejo que una endoscopia convencional, pero sigue siendo seguro en manos experimentadas. Los riesgos más descritos son pancreatitis post-procedimiento (2–5%), sangrado o perforación (raros). Utilizamos duodenoscopio Olympus, fluoroscopía digital y antibióticos profilácticos para minimizarlos.",
+      "Es un procedimiento más complejo que una endoscopia convencional, pero sigue siendo seguro en manos experimentadas. Los riesgos más descritos son pancreatitis post-procedimiento (2–5%), sangrado o perforación (raros). Utilizamos duodenoscopio Olympus, fluoroscopía digital y antibióticos profilácticos para minimizarlos. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso.",
   },
   {
     question: "¿Cómo se realiza y cuánto dura?",
     answer:
-      "Se efectúa bajo sedación profunda con fluoroscopía (rayos X en tiempo real). Se canulan los conductos biliares, se obtienen imágenes y, si es necesario, se realiza tratamiento en la misma sesión. Duración: 30–90 minutos según complejidad. La estancia total es de 6–24 horas.",
+      "Se efectúa bajo sedación profunda con fluoroscopía (rayos X en tiempo real). Se canulan los conductos biliares, se obtienen imágenes y, si es necesario, se realiza tratamiento en la misma sesión. Duración: 30–90 minutos según complejidad. La estancia total es de 6–24 horas. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu procedimiento.",
   },
   {
     question: "¿Qué cuidados necesito en casa después de una CPRE?",
     answer:
-      "Reposo relativo 24–48 horas, dieta blanda progresiva, evitar esfuerzos. Tras una CPRE diagnóstica simple, el alta puede ser el mismo día. Si hubo intervención terapéutica, la hospitalización es de 12–24 horas. Señales de alarma: dolor abdominal intenso, fiebre o ictericia — contactar inmediatamente.",
+      "Reposo relativo 24–48 horas, dieta blanda progresiva, evitar esfuerzos. Tras una CPRE diagnóstica simple, el alta puede ser el mismo día. Si hubo intervención terapéutica, la hospitalización es de 12–24 horas. Señales de alarma: dolor abdominal intenso, fiebre o ictericia. Ante cualquiera de ellas, escríbele al Dr. Quiroz por WhatsApp de inmediato.",
   },
   {
     question: "¿Cuándo es urgente realizar una CPRE?",
@@ -353,7 +353,7 @@ export const cpreFaqs: FAQ[] = [
   {
     question: "¿Qué estudios necesito antes de una CPRE?",
     answer:
-      "Ultrasonido abdominal, química sanguínea (bilirrubinas, enzimas hepáticas), biometría hemática y estudios de coagulación. Se ajusta según urgencia y condición del paciente. El Dr. Quiroz te indica exactamente qué necesitas al valorar tu caso.",
+      "Ultrasonido abdominal, química sanguínea (bilirrubinas, enzimas hepáticas), biometría hemática y estudios de coagulación. Se ajusta según urgencia y condición del paciente. Envíale tus estudios al Dr. Quiroz por WhatsApp y te indica exactamente qué necesitas para tu caso.",
   },
   {
     question: "¿Realizan CPRE para pacientes de Playa del Carmen y Cancún?",
@@ -363,12 +363,12 @@ export const cpreFaqs: FAQ[] = [
   {
     question: "¿Dónde se realiza la CPRE en Mérida?",
     answer:
-      "En el quirófano de Hospital Amerimed Mérida, Yucatán (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. La CPRE requiere infraestructura altamente especializada — fluoroscopio en tiempo real, duodenoscopio dedicado, sala de quirófano con anestesiólogo — por eso muchos hospitales de la península de Yucatán refieren estos casos a Mérida.",
+      "En el quirófano de Hospital Amerimed Mérida, Yucatán (Consultorio 517, Chichí Suárez), equipado con fluoroscopía digital, duodenoscopio Olympus especializado y tecnología SpyGlass para casos complejos. La CPRE requiere infraestructura altamente especializada — fluoroscopio en tiempo real, duodenoscopio dedicado, sala de quirófano con anestesiólogo — por eso muchos hospitales de la península de Yucatán refieren estos casos a Mérida. Escríbele al Dr. Quiroz por WhatsApp y coordina tu CPRE en Mérida.",
   },
   {
     question: "¿CPRE y CEPRE son lo mismo?",
     answer:
-      "Sí. CEPRE es la abreviación coloquial del mismo procedimiento: colangiopancreatografía retrógrada endoscópica (CPRE). Si tu médico te indicó una CEPRE, es exactamente el estudio que realizamos aquí.",
+      "Sí. CEPRE es la abreviación coloquial del mismo procedimiento: colangiopancreatografía retrógrada endoscópica (CPRE). Si tu médico te indicó una CEPRE, es exactamente el estudio que realizamos aquí. Escríbele al Dr. Quiroz por WhatsApp y agenda tu CEPRE.",
   },
 ]
 
@@ -381,27 +381,27 @@ export const cpreFaqs: FAQ[] = [
 export const cprePlayaDelCarmenFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuesta una CPRE en Mérida?",
-    answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano, equipo y fluoroscopía. Puede aumentar si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En hospitales privados de Cancún, el mismo procedimiento puede costar $40,000+ MXN.`,
+    answer: `CPRE en Mérida desde ${price("cpre")}. El costo base incluye sedación, quirófano, equipo y fluoroscopía. Puede aumentar si se realizan esfinterotomía, extracción de cálculos o colocación de prótesis — te damos cotización detallada antes del procedimiento. En hospitales privados de Cancún, el mismo procedimiento puede costar $40,000+ MXN. Escríbele al ${DOCTOR.name} por WhatsApp desde Playa del Carmen y te damos tu cotización exacta.`,
   },
   {
     question: "¿Necesito quedarme en Mérida después del procedimiento?",
     answer:
-      "Depende de la complejidad. Una CPRE diagnóstica simple permite alta el mismo día — podrías regresar a Playa del Carmen esa misma tarde con un acompañante. Si se realiza intervención terapéutica (extracción de cálculos, colocación de prótesis), la hospitalización es de 12–24 horas. Te indicamos todo antes del procedimiento.",
+      "Depende de la complejidad. Una CPRE diagnóstica simple permite alta el mismo día — podrías regresar a Playa del Carmen esa misma tarde con un acompañante. Si se realiza intervención terapéutica (extracción de cálculos, colocación de prótesis), la hospitalización es de 12–24 horas. Escríbele al Dr. Quiroz por WhatsApp y planeamos juntos tu viaje y tu alta.",
   },
   {
     question: "¿Por qué no hay especialistas en CPRE en Playa del Carmen?",
     answer:
-      "La CPRE requiere equipo altamente especializado (duodenoscopio, fluoroscopía, sala de quirófano equipada) y un endoscopista con entrenamiento avanzado específico. Los hospitales de la Riviera Maya no cuentan con esta infraestructura, por lo que refieren estos casos a especialistas en Mérida.",
+      "La CPRE requiere equipo altamente especializado (duodenoscopio, fluoroscopía, sala de quirófano equipada) y un endoscopista con entrenamiento avanzado específico. Los hospitales de la Riviera Maya no cuentan con esta infraestructura, por lo que refieren estos casos a especialistas en Mérida. Escríbele al Dr. Quiroz por WhatsApp y coordina tu CPRE en Mérida.",
   },
   {
     question: "¿La CPRE es peligrosa?",
     answer:
-      "Es un procedimiento más complejo que una endoscopia convencional, pero sigue siendo seguro en manos experimentadas. Los riesgos más descritos son pancreatitis post-procedimiento (2–5%), sangrado o perforación (raros). Utilizamos duodenoscopio Olympus, fluoroscopía digital y antibióticos profilácticos para minimizarlos.",
+      "Es un procedimiento más complejo que una endoscopia convencional, pero sigue siendo seguro en manos experimentadas. Los riesgos más descritos son pancreatitis post-procedimiento (2–5%), sangrado o perforación (raros). Utilizamos duodenoscopio Olympus, fluoroscopía digital y antibióticos profilácticos para minimizarlos. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso.",
   },
   {
     question: "¿Qué estudios necesito llevar a mi cita?",
     answer:
-      "Ultrasonido abdominal, química sanguínea (bilirrubinas, enzimas hepáticas), biometría hemática y estudios de coagulación. Se ajusta según urgencia y condición del paciente. El Dr. Quiroz te indica exactamente qué necesitas al valorar tu caso.",
+      "Ultrasonido abdominal, química sanguínea (bilirrubinas, enzimas hepáticas), biometría hemática y estudios de coagulación. Se ajusta según urgencia y condición del paciente. Envíale tus estudios al Dr. Quiroz por WhatsApp y te indica exactamente qué necesitas para tu caso.",
   },
   {
     question: "¿Puedo enviar mis estudios por WhatsApp antes de viajar?",
@@ -420,26 +420,26 @@ export const ligaduraVaricesFaqs: FAQ[] = [
   {
     question: "¿Qué es la ligadura de várices esofágicas y cuándo se indica?",
     answer:
-      "Consiste en colocar bandas elásticas sobre várices del esófago para detener sangrado o prevenirlo en pacientes con hipertensión portal. Se indica en sangrado activo, várices grandes o después de un primer episodio hemorrágico.",
+      "Consiste en colocar bandas elásticas sobre várices del esófago para detener sangrado o prevenirlo en pacientes con hipertensión portal. Se indica en sangrado activo, várices grandes o después de un primer episodio hemorrágico. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta y cuántas sesiones se necesitan?",
-    answer: `Desde ${price("ligadura_varices")}. Pueden requerirse 2–4 sesiones separadas 2–4 semanas hasta erradicar las várices residuales. Se efectúa con endoscopio terapéutico bajo sedación. Posteriormente vigilancia periódica según evolución.`,
+    answer: `Desde ${price("ligadura_varices")}. Pueden requerirse 2–4 sesiones separadas 2–4 semanas hasta erradicar las várices residuales. Se efectúa con endoscopio terapéutico bajo sedación. Posteriormente vigilancia periódica según evolución. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el plan y el costo para tu caso.`,
   },
   {
     question: "¿Qué síntomas son normales después de la ligadura?",
     answer:
-      "Es normal sentir molestia leve al tragar y dolor torácico bajo las primeras 24–48 horas. Dieta fría y blanda el primer día. Señales de alarma que requieren atención inmediata: vómito con sangre, evacuaciones negras, dolor intenso o fiebre.",
+      "Es normal sentir molestia leve al tragar y dolor torácico bajo las primeras 24–48 horas. Dieta fría y blanda el primer día. Señales de alarma que requieren atención inmediata: vómito con sangre, evacuaciones negras, dolor intenso o fiebre. Ante cualquiera de ellas, escríbele al Dr. Quiroz por WhatsApp de inmediato.",
   },
   {
     question: "¿Cuál es la diferencia entre ligadura de várices esofágicas y esclerosis de várices gástricas?",
     answer:
-      "La ligadura coloca bandas elásticas sobre las várices del esófago. La esclerosis inyecta cianoacrilato en las várices del estómago. Son procedimientos distintos para localizaciones diferentes. Si tus várices están en el estómago, el tratamiento indicado es la esclerosis — consulta nuestra página de esclerosis de várices gástricas para más información.",
+      "La ligadura coloca bandas elásticas sobre las várices del esófago. La esclerosis inyecta cianoacrilato en las várices del estómago. Son procedimientos distintos para localizaciones diferentes. Si tus várices están en el estómago, el tratamiento indicado es la esclerosis — consulta nuestra página de esclerosis de várices gástricas para más información. Escríbele al Dr. Quiroz por WhatsApp y te indica el tratamiento correcto según dónde estén tus várices.",
   },
   {
     question: "¿Qué preparación necesito para la ligadura de várices?",
     answer:
-      "Ayuno de 8 horas, laboratorios (biometría hemática y estudios de coagulación). Suspender anticoagulantes según indicación médica. El Dr. Quiroz te indica los ajustes necesarios al valorar tu caso por WhatsApp.",
+      "Ayuno de 8 horas, laboratorios (biometría hemática y estudios de coagulación). Suspender anticoagulantes según indicación médica. Escríbele al Dr. Quiroz por WhatsApp y te indica los ajustes necesarios para tu caso.",
   },
 ]
 
@@ -453,11 +453,11 @@ export const esclerosisVaricesFaqs: FAQ[] = [
   {
     question: "¿Qué es la esclerosis de várices gástricas y cuándo se indica?",
     answer:
-      "Es la inyección endoscópica de cianoacrilato (un adhesivo tisular) directamente en las várices del estómago para sellarlas y prevenir o detener el sangrado. Se indica cuando las várices están en el fondo gástrico, donde las bandas elásticas de la ligadura no pueden aplicarse. Es el tratamiento de primera línea recomendado por guías internacionales para várices gástricas fúndicas.",
+      "Es la inyección endoscópica de cianoacrilato (un adhesivo tisular) directamente en las várices del estómago para sellarlas y prevenir o detener el sangrado. Se indica cuando las várices están en el fondo gástrico, donde las bandas elásticas de la ligadura no pueden aplicarse. Es el tratamiento de primera línea recomendado por guías internacionales para várices gástricas fúndicas. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta la esclerosis de várices gástricas?",
-    answer: `Desde ${price("esclerosis_varices_gastricas")}. Generalmente se resuelve en 1–2 sesiones. Incluye sedación profunda, equipo endoscópico especializado, sala de recuperación y consulta pre-procedimiento. El número de sesiones depende de la cantidad y tamaño de las várices.`,
+    answer: `Desde ${price("esclerosis_varices_gastricas")}. Generalmente se resuelve en 1–2 sesiones. Incluye sedación profunda, equipo endoscópico especializado, sala de recuperación y consulta pre-procedimiento. El número de sesiones depende de la cantidad y tamaño de las várices. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el costo y las sesiones para tu caso.`,
   },
   {
     question: "¿Cómo es la recuperación después de la inyección de cianoacrilato?",
@@ -467,12 +467,12 @@ export const esclerosisVaricesFaqs: FAQ[] = [
   {
     question: "¿En qué se diferencia de la ligadura de várices esofágicas?",
     answer:
-      "La ligadura usa bandas elásticas para estrangular las várices del esófago. La esclerosis inyecta un adhesivo (cianoacrilato) dentro de las várices del estómago. Son procedimientos complementarios: si tienes várices en ambos sitios, se tratan con la técnica adecuada para cada localización. Ambos se realizan bajo sedación con el mismo equipo endoscópico.",
+      "La ligadura usa bandas elásticas para estrangular las várices del esófago. La esclerosis inyecta un adhesivo (cianoacrilato) dentro de las várices del estómago. Son procedimientos complementarios: si tienes várices en ambos sitios, se tratan con la técnica adecuada para cada localización. Ambos se realizan bajo sedación con el mismo equipo endoscópico. Escríbele al Dr. Quiroz por WhatsApp y te indica la técnica adecuada para tus várices.",
   },
   {
     question: "¿Cuáles son los riesgos de la esclerosis con cianoacrilato?",
     answer:
-      "Los riesgos principales son resangrado (menos del 15%) y, en casos raros, embolización del adhesivo. Utilizamos técnica controlada con dosis precisas y monitoreo continuo para minimizar complicaciones. La tasa de éxito en control de sangrado supera el 90%. El Dr. Quiroz te explica los riesgos específicos de tu caso antes del procedimiento.",
+      "Los riesgos principales son resangrado (menos del 15%) y, en casos raros, embolización del adhesivo. Utilizamos técnica controlada con dosis precisas y monitoreo continuo para minimizar complicaciones. La tasa de éxito en control de sangrado supera el 90%. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos específicos de tu caso antes del procedimiento.",
   },
 ]
 
@@ -484,25 +484,25 @@ export const ligaduraHemorroidesFaqs: FAQ[] = [
   {
     question: "¿Qué es la ligadura de hemorroides internas y para quién está indicada?",
     answer:
-      "Colocamos bandas elásticas en la base de las hemorroides internas grado I–II para cortar su irrigación y que se retraigan. Alivia sangrado, molestia y sensación de evacuación incompleta. Los grados III–IV generalmente requieren manejo quirúrgico.",
+      "Colocamos bandas elásticas en la base de las hemorroides internas grado I–II para cortar su irrigación y que se retraigan. Alivia sangrado, molestia y sensación de evacuación incompleta. Los grados III–IV generalmente requieren manejo quirúrgico. Escríbele al Dr. Quiroz por WhatsApp y te dice si eres candidato a la ligadura.",
   },
   {
     question: "¿Cuánto cuesta y cómo es el procedimiento?",
-    answer: `Desde ${price("ligadura_hemorroides")}. Es ambulatorio, con sedación consciente en quirófano. Dura 5–10 minutos con 1–2 horas de observación. El plan incluye seguimiento sin costo adicional en el primer mes.`,
+    answer: `Desde ${price("ligadura_hemorroides")}. Es ambulatorio, con sedación consciente en quirófano. Dura 5–10 minutos con 1–2 horas de observación. El plan incluye seguimiento sin costo adicional en el primer mes. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu sesión.`,
   },
   {
     question: "¿Cómo es la recuperación?",
     answer:
-      "Regreso a actividades en 24–48 horas. Recomendamos fibra, buena hidratación, baños de asiento y evitar cargar más de 10 kg por 2–3 semanas. Señales de alarma: sangrado abundante persistente, fiebre o dolor severo.",
+      "Regreso a actividades en 24–48 horas. Recomendamos fibra, buena hidratación, baños de asiento y evitar cargar más de 10 kg por 2–3 semanas. Señales de alarma: sangrado abundante persistente, fiebre o dolor severo. Ante cualquiera de ellas, escríbele al Dr. Quiroz por WhatsApp de inmediato.",
   },
   {
     question: "¿Qué incluye el precio de la ligadura de hemorroides?",
-    answer: `Desde ${price("ligadura_hemorroides")}. El precio incluye: valoración pre-procedimiento, sedación con anestesiólogo certificado, equipo endoscópico, bandas elásticas, sala de recuperación y seguimiento post-procedimiento por WhatsApp con el Dr. Quiroz. Sin cargos ocultos.`,
+    answer: `Desde ${price("ligadura_hemorroides")}. El precio incluye: valoración pre-procedimiento, sedación con anestesiólogo certificado, equipo endoscópico, bandas elásticas, sala de recuperación y seguimiento post-procedimiento por WhatsApp con el Dr. Quiroz. Sin cargos ocultos. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu ligadura.`,
   },
   {
     question: "¿Cuántas sesiones de ligadura de hemorroides necesito?",
     answer:
-      "La mayoría de los pacientes resuelven con 1–2 sesiones espaciadas por 3–4 semanas. Hemorroides grado I generalmente requieren una sesión; grado II puede necesitar dos. El Dr. Quiroz evalúa en la primera consulta cuántas sesiones necesitas.",
+      "La mayoría de los pacientes resuelven con 1–2 sesiones espaciadas por 3–4 semanas. Hemorroides grado I generalmente requieren una sesión; grado II puede necesitar dos. Escríbele al Dr. Quiroz por WhatsApp y agenda tu valoración.",
   },
 ]
 
@@ -514,26 +514,26 @@ export const gastrostomiaFaqs: FAQ[] = [
   {
     question: "¿Quiénes se benefician de una gastrostomía (PEG)?",
     answer:
-      "Pacientes con disfagia prolongada por evento vascular cerebral, cáncer de cabeza y cuello u otras condiciones que impiden la alimentación oral por más de 4–6 semanas. Se valora de forma multidisciplinaria antes del procedimiento.",
+      "Pacientes con disfagia prolongada por evento vascular cerebral, cáncer de cabeza y cuello u otras condiciones que impiden la alimentación oral por más de 4–6 semanas. Se valora de forma multidisciplinaria antes del procedimiento. Escríbele al Dr. Quiroz por WhatsApp y valoramos el caso de tu familiar.",
   },
   {
     question: "¿Cómo se coloca y cuánto cuesta?",
-    answer: `Se coloca por endoscopia bajo sedación en 30–45 minutos. Precio desde ${price("gastrostomia_peg")} con control inicial incluido. Generalmente alta el mismo día. La sonda dura 12–24 meses antes de requerir recambio.`,
+    answer: `Se coloca por endoscopia bajo sedación en 30–45 minutos. Precio desde ${price("gastrostomia_peg")} con control inicial incluido. Generalmente alta el mismo día. La sonda dura 12–24 meses antes de requerir recambio. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el costo y agendamos.`,
   },
   {
     question: "¿Qué riesgos tiene y cómo es el seguimiento?",
     answer:
-      "Complicaciones menores: irritación o infección del sitio de la sonda. Complicaciones mayores: raras. Ofrecemos profilaxis antibiótica y educación familiar sobre cuidados domiciliarios de la sonda.",
+      "Complicaciones menores: irritación o infección del sitio de la sonda. Complicaciones mayores: raras. Ofrecemos profilaxis antibiótica y educación familiar sobre cuidados domiciliarios de la sonda. Escríbele al Dr. Quiroz por WhatsApp y resuelve tus dudas sobre los cuidados.",
   },
   {
     question: "¿Cuánto tiempo dura la sonda PEG y cuándo se cambia?",
     answer:
-      "La sonda PEG dura entre 12 y 24 meses antes de requerir recambio. El cambio es ambulatorio, rápido y se realiza en consultorio sin necesidad de nueva endoscopia en la mayoría de los casos.",
+      "La sonda PEG dura entre 12 y 24 meses antes de requerir recambio. El cambio es ambulatorio, rápido y se realiza en consultorio sin necesidad de nueva endoscopia en la mayoría de los casos. Escríbele al Dr. Quiroz por WhatsApp para programar el recambio de la sonda.",
   },
   {
     question: "¿Mi familiar puede hacer vida normal con una gastrostomía?",
     answer:
-      "Sí. Pacientes con PEG pueden bañarse, vestirse, moverse libremente y participar en actividades familiares. La alimentación se administra en casa siguiendo las indicaciones que damos en la capacitación post-procedimiento.",
+      "Sí. Pacientes con PEG pueden bañarse, vestirse, moverse libremente y participar en actividades familiares. La alimentación se administra en casa siguiendo las indicaciones que damos en la capacitación post-procedimiento. Escríbele al Dr. Quiroz por WhatsApp y te explicamos cómo es el día a día con la sonda.",
   },
   {
     question: "¿Qué hago si la sonda se sale o hay signos de infección?",
@@ -550,16 +550,16 @@ export const extraccionFaqs: FAQ[] = [
   {
     question: "¿Qué objetos pueden retirarse por endoscopia?",
     answer:
-      "Alimentos impactados (huesos, espinas), monedas, pilas botón, prótesis dentales, objetos metálicos o punzocortantes. Localización frecuente: esófago, estómago y duodeno. Disponibilidad hospitalaria para casos urgentes.",
+      "Alimentos impactados (huesos, espinas), monedas, pilas botón, prótesis dentales, objetos metálicos o punzocortantes. Localización frecuente: esófago, estómago y duodeno. Disponibilidad hospitalaria para casos urgentes. Escríbele al Dr. Quiroz por WhatsApp para atención inmediata.",
   },
   {
     question: "¿Cuándo es urgente acudir?",
     answer:
-      "Pilas botón, objetos punzocortantes, dolor torácico intenso, fiebre, dificultad para tragar o respirar y salivación excesiva. En estos casos se requiere atención inmediata para evitar complicaciones.",
+      "Pilas botón, objetos punzocortantes, dolor torácico intenso, fiebre, dificultad para tragar o respirar y salivación excesiva. En estos casos se requiere atención inmediata para evitar complicaciones. Escríbele al Dr. Quiroz por WhatsApp ahora mismo para valoración urgente.",
   },
   {
     question: "¿Cómo se realiza y cuánto cuesta?",
-    answer: `Se usan pinzas, cestas y dispositivos protectores con endoscopio terapéutico bajo sedación. Desde ${price("extraccion_cuerpos_extranos")}. La mayoría de casos se resuelven sin cirugía. El éxito depende del tipo de objeto y su ubicación.`,
+    answer: `Se usan pinzas, cestas y dispositivos protectores con endoscopio terapéutico bajo sedación. Desde ${price("extraccion_cuerpos_extranos")}. La mayoría de casos se resuelven sin cirugía. El éxito depende del tipo de objeto y su ubicación. Escríbele al ${DOCTOR.name} por WhatsApp y te orienta sobre tu caso.`,
   },
   {
     question: "¿Mi hijo se tragó una moneda o pila — qué debo hacer?",
@@ -568,12 +568,12 @@ export const extraccionFaqs: FAQ[] = [
   },
   {
     question: "¿Duele la extracción endoscópica de cuerpos extraños?",
-    answer: `No. Se realiza bajo sedación profunda con anestesiólogo presente — no sientes nada durante el procedimiento. Después puedes tener molestia leve en garganta por 24 horas. Precio desde ${price("extraccion_cuerpos_extranos")} con sedación incluida.`,
+    answer: `No. Se realiza bajo sedación profunda con anestesiólogo presente — no sientes nada durante el procedimiento. Después puedes tener molestia leve en garganta por 24 horas. Precio desde ${price("extraccion_cuerpos_extranos")} con sedación incluida. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve tu caso.`,
   },
   {
     question: "¿Qué pasa si el objeto no puede sacarse por endoscopia?",
     answer:
-      "En casos complicados (5-10%), el Dr. Quiroz tiene la ventaja de ser endoscopista Y cirujano general. Si la extracción endoscópica no funciona, puede resolver quirúrgicamente en el mismo momento sin necesidad de referir a otro médico.",
+      "En casos complicados (5-10%), el Dr. Quiroz tiene la ventaja de ser endoscopista Y cirujano general. Si la extracción endoscópica no funciona, puede resolver quirúrgicamente en el mismo momento sin necesidad de referir a otro médico. Escríbele al Dr. Quiroz por WhatsApp y te explica las opciones para tu caso.",
   },
   {
     question: "¿Atienden emergencias de cuerpos extraños fines de semana?",
@@ -590,31 +590,31 @@ export const dilatacionEsofagicaFaqs: FAQ[] = [
   {
     question: "¿Qué es la dilatación esofágica y para qué sirve?",
     answer:
-      "Tratamiento endoscópico para estenosis (estrechamiento) del esófago que dificulta tragar. Se utilizan balones graduados o bujías bajo sedación para ampliar el paso y mejorar la deglución.",
+      "Tratamiento endoscópico para estenosis (estrechamiento) del esófago que dificulta tragar. Se utilizan balones graduados o bujías bajo sedación para ampliar el paso y mejorar la deglución. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta y cuántas sesiones se necesitan?",
-    answer: `Desde ${price("dilatacion_esofagica")}. Muchas estenosis mejoran en 1–3 sesiones; los casos complejos pueden requerir mantenimientos periódicos. Se realiza con sedación — no sentirás dolor durante el procedimiento.`,
+    answer: `Desde ${price("dilatacion_esofagica")}. Muchas estenosis mejoran en 1–3 sesiones; los casos complejos pueden requerir mantenimientos periódicos. Se realiza con sedación — no sentirás dolor durante el procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el costo y el plan para tu caso.`,
   },
   {
     question: "¿La dilatación esofágica duele?",
     answer:
-      "No. Se realiza bajo sedación profunda — no sentirás dolor durante el procedimiento. Después puedes tener molestia leve al tragar que mejora en 24-48 horas.",
+      "No. Se realiza bajo sedación profunda — no sentirás dolor durante el procedimiento. Después puedes tener molestia leve al tragar que mejora en 24-48 horas. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuántas sesiones de dilatación esofágica necesito?",
     answer:
-      "Depende del tipo y severidad de la estenosis. Muchos pacientes mejoran en 1-3 sesiones. Los casos complejos pueden requerir dilataciones periódicas. El Dr. Quiroz te explica el plan desde la primera valoración.",
+      "Depende del tipo y severidad de la estenosis. Muchos pacientes mejoran en 1-3 sesiones. Los casos complejos pueden requerir dilataciones periódicas. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan para tu caso.",
   },
   {
     question: "¿Qué riesgos tiene la dilatación esofágica?",
     answer:
-      "Es un procedimiento seguro cuando lo realiza un especialista. Los riesgos (sangrado menor, perforación) son poco frecuentes y se minimizan con balones graduados, guía endoscópica y monitoreo en Hospital Amerimed.",
+      "Es un procedimiento seguro cuando lo realiza un especialista. Los riesgos (sangrado menor, perforación) son poco frecuentes y se minimizan con balones graduados, guía endoscópica y monitoreo en Hospital Amerimed. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso.",
   },
   {
     question: "¿Cómo es la recuperación y alimentación?",
     answer:
-      "Líquidos las primeras 24 horas y dieta blanda 2–7 días. Reanudación progresiva según tolerancia. Molestia faríngea transitoria es normal. Riesgo de sangrado o perforación es bajo con material graduado.",
+      "Líquidos las primeras 24 horas y dieta blanda 2–7 días. Reanudación progresiva según tolerancia. Molestia faríngea transitoria es normal. Riesgo de sangrado o perforación es bajo con material graduado. Escríbele al Dr. Quiroz por WhatsApp y te explica los cuidados después de tu dilatación.",
   },
 ]
 
@@ -626,16 +626,16 @@ export const dilatacionBiliarFaqs: FAQ[] = [
   {
     question: "¿Qué es la dilatación biliar y en qué casos se indica?",
     answer:
-      "Procedimiento endoscópico (generalmente durante CPRE) que ensancha estenosis en los conductos biliares para restablecer el flujo de bilis. Indicado en estenosis benignas posquirúrgicas o malignas.",
+      "Procedimiento endoscópico (generalmente durante CPRE) que ensancha estenosis en los conductos biliares para restablecer el flujo de bilis. Indicado en estenosis benignas posquirúrgicas o malignas. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta y cómo es la recuperación?",
-    answer: `Desde ${price("dilatacion_biliar")}. Se realiza con sedación profunda y guía fluoroscópica. Observación 2–6 horas con regreso gradual a actividades en 24–48 horas.`,
+    answer: `Desde ${price("dilatacion_biliar")}. Se realiza con sedación profunda y guía fluoroscópica. Observación 2–6 horas con regreso gradual a actividades en 24–48 horas. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el costo para tu caso.`,
   },
   {
     question: "¿Qué riesgos tiene?",
     answer:
-      "Los eventos adversos son poco frecuentes y se reducen con guía por fluoroscopía y protocolos hospitalarios de seguridad en Amerimed.",
+      "Los eventos adversos son poco frecuentes y se reducen con guía por fluoroscopía y protocolos hospitalarios de seguridad en Amerimed. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso.",
   },
 ]
 
@@ -647,36 +647,36 @@ export const dilatacionColonicaFaqs: FAQ[] = [
   {
     question: "¿Qué es la dilatación colónica endoscópica?",
     answer:
-      "Tratamiento con balones para estenosis del colon que enlentecen el tránsito intestinal. Se realiza durante colonoscopia terapéutica con sedación y monitoreo continuo.",
+      "Tratamiento con balones para estenosis del colon que enlentecen el tránsito intestinal. Se realiza durante colonoscopia terapéutica con sedación y monitoreo continuo. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta y qué incluye el precio?",
-    answer: `Desde ${price("dilatacion_colonica")}. Incluye sedación con anestesiólogo, sala de recuperación, valoración pre-procedimiento y reporte con fotografías HD. La lectura de patología (${biopsyFee()}) es el único costo adicional posible si se toman biopsias.`,
+    answer: `Desde ${price("dilatacion_colonica")}. Incluye sedación con anestesiólogo, sala de recuperación, valoración pre-procedimiento y reporte con fotografías HD. La lectura de patología (${biopsyFee()}) es el único costo adicional posible si se toman biopsias. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma tu total.`,
   },
   {
     question: "¿Duele la dilatación colónica?",
     answer:
-      "No. Se realiza con sedación profunda — no sientes nada durante el procedimiento. El anestesiólogo monitorea tus signos vitales todo el tiempo. Después puedes tener molestia abdominal leve que se resuelve en horas.",
+      "No. Se realiza con sedación profunda — no sientes nada durante el procedimiento. El anestesiólogo monitorea tus signos vitales todo el tiempo. Después puedes tener molestia abdominal leve que se resuelve en horas. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cómo me preparo para una dilatación colónica?",
     answer:
-      "Requiere preparación intestinal completa (igual que para colonoscopia): dieta líquida 24 horas antes y solución de limpieza intestinal. Te damos instrucciones detalladas al agendar.",
+      "Requiere preparación intestinal completa (igual que para colonoscopia): dieta líquida 24 horas antes y solución de limpieza intestinal. Agenda por WhatsApp y te enviamos las instrucciones de preparación detalladas.",
   },
   {
     question: "¿Cuánto dura y cuándo puedo regresar a mis actividades?",
     answer:
-      "El procedimiento toma 30–45 minutos. Observación 2–4 horas en Hospital Amerimed y alta el mismo día. Alimentación gradual empezando con líquidos. La mayoría de pacientes retoma actividades normales en 24–48 horas.",
+      "El procedimiento toma 30–45 minutos. Observación 2–4 horas en Hospital Amerimed y alta el mismo día. Alimentación gradual empezando con líquidos. La mayoría de pacientes retoma actividades normales en 24–48 horas. Escríbele al Dr. Quiroz por WhatsApp y te explica qué esperar el día de tu estudio.",
   },
   {
     question: "¿Puede necesitarse más de una sesión?",
     answer:
-      "Sí. En re-estenosis puede repetirse la dilatación en sesiones posteriores según evolución clínica y endoscópica. El sangrado o la perforación son poco frecuentes.",
+      "Sí. En re-estenosis puede repetirse la dilatación en sesiones posteriores según evolución clínica y endoscópica. El sangrado o la perforación son poco frecuentes. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan para tu caso.",
   },
   {
     question: "¿La dilatación colónica puede evitar una cirugía de colon?",
     answer:
-      "En muchos casos sí. El Dr. Quiroz evalúa cada caso individualmente. Como endoscopista y cirujano, puede ofrecerte ambas opciones y recomendarte la más segura. Si la dilatación no es suficiente, no necesitas buscar otro especialista.",
+      "En muchos casos sí. El Dr. Quiroz evalúa cada caso individualmente. Como endoscopista y cirujano, puede ofrecerte ambas opciones y recomendarte la más segura. Si la dilatación no es suficiente, no necesitas buscar otro especialista. Escríbele al Dr. Quiroz por WhatsApp y te explica tus opciones.",
   },
 ]
 
@@ -688,32 +688,32 @@ export const endoprotesisEsofagicasFaqs: FAQ[] = [
   {
     question: "¿Cuándo se indica una endoprótesis esofágica?",
     answer:
-      "En obstrucción maligna, fístulas, perforaciones controladas o estenosis benignas recurrentes. Mejora la deglución rápidamente y puede ser parte de un plan paliativo o puente a cirugía.",
+      "En obstrucción maligna, fístulas, perforaciones controladas o estenosis benignas recurrentes. Mejora la deglución rápidamente y puede ser parte de un plan paliativo o puente a cirugía. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo se coloca y qué cuidados requiere?",
     answer:
-      "Se coloca bajo sedación y guía endoscópica/fluoroscópica. Masticar bien, evitar alimentos fibrosos y mantener buena hidratación. Control endoscópico según evolución.",
+      "Se coloca bajo sedación y guía endoscópica/fluoroscópica. Masticar bien, evitar alimentos fibrosos y mantener buena hidratación. Control endoscópico según evolución. Escríbele al Dr. Quiroz por WhatsApp y te explica los cuidados para tu caso.",
   },
   {
     question: "¿Cuánto cuesta una endoprótesis esofágica en Mérida?",
     answer:
-      "El precio depende del tipo de stent, diámetro, longitud y complejidad del caso. Envíanos tus estudios por WhatsApp para cotización personalizada. El procedimiento incluye sedación con anestesiólogo, sala de recuperación y reporte con fotografías.",
+      "El precio depende del tipo de stent, diámetro, longitud y complejidad del caso. El procedimiento incluye sedación con anestesiólogo, sala de recuperación y reporte con fotografías. Envíanos tus estudios por WhatsApp y te damos tu cotización personalizada.",
   },
   {
     question: "¿Duele la colocación de un stent esofágico?",
     answer:
-      "No. Se realiza bajo sedación profunda con anestesiólogo certificado — no sientes nada durante el procedimiento. Después puedes sentir molestia leve al tragar que mejora en 24–48 horas conforme te adaptas al stent.",
+      "No. Se realiza bajo sedación profunda con anestesiólogo certificado — no sientes nada durante el procedimiento. Después puedes sentir molestia leve al tragar que mejora en 24–48 horas conforme te adaptas al stent. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuánto tiempo dura un stent esofágico?",
     answer:
-      "Depende del tipo: los stents metálicos cubiertos para fístulas pueden retirarse en semanas, mientras que los stents para estenosis maligna son permanentes. El Dr. Quiroz te explica el plan específico para tu caso.",
+      "Depende del tipo: los stents metálicos cubiertos para fístulas pueden retirarse en semanas, mientras que los stents para estenosis maligna son permanentes. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan específico para tu caso.",
   },
   {
     question: "¿Puedo comer normal después de la endoprótesis esofágica?",
     answer:
-      "Inicias con líquidos claros y progresas a dieta blanda en 24–48 horas. Debes masticar muy bien, evitar alimentos fibrosos (carne con nervios, pan pegajoso) y comer porciones pequeñas. La mayoría de pacientes logra alimentación oral satisfactoria.",
+      "Inicias con líquidos claros y progresas a dieta blanda en 24–48 horas. Debes masticar muy bien, evitar alimentos fibrosos (carne con nervios, pan pegajoso) y comer porciones pequeñas. La mayoría de pacientes logra alimentación oral satisfactoria. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu alimentación.",
   },
 ]
 
@@ -721,12 +721,12 @@ export const endoprotesisBiliaresFaqs: FAQ[] = [
   {
     question: "¿Para qué sirve un stent biliar?",
     answer:
-      "Para drenar la bilis cuando hay obstrucción por cálculos, estenosis o tumores. Reduce ictericia y síntomas. Puede ser temporal (plástico, recambio cada 3–6 meses) o de mayor duración (metálico).",
+      "Para drenar la bilis cuando hay obstrucción por cálculos, estenosis o tumores. Reduce ictericia y síntomas. Puede ser temporal (plástico, recambio cada 3–6 meses) o de mayor duración (metálico). Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo es el seguimiento?",
     answer:
-      "Control clínico y de laboratorios periódico. Los stents plásticos se recambian cada 3–6 meses; los metálicos requieren vigilancia por posible re-estenosis. Nueva CPRE si hay fiebre o ictericia recurrente.",
+      "Control clínico y de laboratorios periódico. Los stents plásticos se recambian cada 3–6 meses; los metálicos requieren vigilancia por posible re-estenosis. Nueva CPRE si hay fiebre o ictericia recurrente. Ante fiebre o ictericia, escríbele al Dr. Quiroz por WhatsApp de inmediato.",
   },
 ]
 
@@ -734,7 +734,7 @@ export const endoprotesisDuodenalesFaqs: FAQ[] = [
   {
     question: "¿Qué es una prótesis duodenal y quién la necesita?",
     answer:
-      "Es un stent metálico autoexpandible que se coloca por endoscopia para abrir obstrucciones del duodeno. Está indicada en pacientes con obstrucción por cáncer pancreático, tumores duodenales, estenosis post-quirúrgica o pancreatitis crónica que impide la alimentación oral.",
+      "Es un stent metálico autoexpandible que se coloca por endoscopia para abrir obstrucciones del duodeno. Está indicada en pacientes con obstrucción por cáncer pancreático, tumores duodenales, estenosis post-quirúrgica o pancreatitis crónica que impide la alimentación oral. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta una endoprótesis duodenal en Mérida?",
@@ -744,22 +744,22 @@ export const endoprotesisDuodenalesFaqs: FAQ[] = [
   {
     question: "¿Duele la colocación del stent duodenal?",
     answer:
-      "No. El procedimiento se realiza con sedación profunda administrada por anestesiólogo certificado. No sentirás dolor durante la colocación. Después del procedimiento puede haber molestia abdominal leve que se controla con medicamento.",
+      "No. El procedimiento se realiza con sedación profunda administrada por anestesiólogo certificado. No sentirás dolor durante la colocación. Después del procedimiento puede haber molestia abdominal leve que se controla con medicamento. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Qué esperar tras la colocación?",
     answer:
-      "Mejoría del vómito y la distensión en 24–48 horas. Se inicia dieta con líquidos claros y se avanza gradualmente a alimentos blandos y sólidos. El Dr. Quiroz programa un control a los 7 días para verificar la posición y permeabilidad del stent.",
+      "Mejoría del vómito y la distensión en 24–48 horas. Se inicia dieta con líquidos claros y se avanza gradualmente a alimentos blandos y sólidos. El Dr. Quiroz programa un control a los 7 días para verificar la posición y permeabilidad del stent. Escríbele al Dr. Quiroz por WhatsApp y te explica qué esperar tras tu procedimiento.",
   },
   {
     question: "¿Cuánto dura un stent duodenal?",
     answer:
-      "Los stents metálicos duodenales pueden funcionar de meses a años dependiendo de la causa subyacente. En obstrucciones malignas, la duración depende de la progresión de la enfermedad. Algunos pacientes pueden requerir recambio o limpieza endoscópica.",
+      "Los stents metálicos duodenales pueden funcionar de meses a años dependiendo de la causa subyacente. En obstrucciones malignas, la duración depende de la progresión de la enfermedad. Algunos pacientes pueden requerir recambio o limpieza endoscópica. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan para tu caso.",
   },
   {
     question: "¿Qué ventaja tiene que el Dr. Quiroz sea cirujano y endoscopista certificado?",
     answer:
-      "Si durante el procedimiento surgen complicaciones como perforación o sangrado, el Dr. Quiroz puede resolverlas quirúrgicamente en la misma sesión sin trasladar al paciente. Además, si la endoprótesis no es factible, puede ofrecer alternativas quirúrgicas como gastroenterostomía laparoscópica.",
+      "Si durante el procedimiento surgen complicaciones como perforación o sangrado, el Dr. Quiroz puede resolverlas quirúrgicamente en la misma sesión sin trasladar al paciente. Además, si la endoprótesis no es factible, puede ofrecer alternativas quirúrgicas como gastroenterostomía laparoscópica. Escríbele al Dr. Quiroz por WhatsApp y te explica tus opciones.",
   },
 ]
 
@@ -767,27 +767,27 @@ export const endoprotesisColonicasFaqs: FAQ[] = [
   {
     question: "¿Cuándo se necesita un stent colónico?",
     answer:
-      "En obstrucción aguda por tumor o estenosis posquirúrgica. Permite descompresión y preparación para cirugía electiva o paliación según el caso oncológico.",
+      "En obstrucción aguda por tumor o estenosis posquirúrgica. Permite descompresión y preparación para cirugía electiva o paliación según el caso oncológico. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo se coloca y qué resultados ofrece?",
     answer:
-      "Se coloca durante colonoscopia con guía fluoroscópica bajo sedación profunda. Suele aliviar la obstrucción en pocas horas y reducir la necesidad de colostomía de urgencia.",
+      "Se coloca durante colonoscopia con guía fluoroscópica bajo sedación profunda. Suele aliviar la obstrucción en pocas horas y reducir la necesidad de colostomía de urgencia. Escríbele al Dr. Quiroz por WhatsApp y te explica el procedimiento para tu caso.",
   },
   {
     question: "¿Es doloroso el procedimiento de endoprótesis colónica?",
     answer:
-      "No. El procedimiento se realiza bajo sedación profunda con anestesiólogo — no sentirás nada durante la colocación del stent. La sedación está incluida en el costo.",
+      "No. El procedimiento se realiza bajo sedación profunda con anestesiólogo — no sentirás nada durante la colocación del stent. La sedación está incluida en el costo. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuánto tiempo dura la recuperación después del stent colónico?",
     answer:
-      "La mayoría de pacientes notan alivio de la obstrucción en pocas horas. La hospitalización típica es de 24 a 48 horas para monitoreo. El Dr. Quiroz te da seguimiento personalizado.",
+      "La mayoría de pacientes notan alivio de la obstrucción en pocas horas. La hospitalización típica es de 24 a 48 horas para monitoreo. Escríbele al Dr. Quiroz por WhatsApp y te da seguimiento personalizado.",
   },
   {
     question: "¿Qué pasa si el stent colónico no resuelve la obstrucción?",
     answer:
-      "El Dr. Quiroz es endoscopista y cirujano certificado, lo que significa que puede evaluar opciones quirúrgicas de inmediato sin esperar otro especialista ni traslados.",
+      "El Dr. Quiroz es endoscopista y cirujano certificado, lo que significa que puede evaluar opciones quirúrgicas de inmediato sin esperar otro especialista ni traslados. Escríbele al Dr. Quiroz por WhatsApp y te explica tus opciones.",
   },
   {
     question: "¿Cuánto cuesta una endoprótesis colónica en Mérida?",
@@ -804,12 +804,12 @@ export const cierreFistulasFaqs: FAQ[] = [
   {
     question: "¿Qué fístulas o perforaciones pueden cerrarse con clips?",
     answer:
-      "Defectos pequeños o de bajo débito en esófago, estómago o colon, fístulas gastro-cutáneas y dehiscencias tempranas. La selección depende del tamaño, localización y condiciones generales del paciente.",
+      "Defectos pequeños o de bajo débito en esófago, estómago o colon, fístulas gastro-cutáneas y dehiscencias tempranas. La selección depende del tamaño, localización y condiciones generales del paciente. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo es el proceso y el seguimiento?",
     answer:
-      "Se realiza por endoscopia con clips TTSC u OTSC según el tamaño del defecto. Indicamos ayuno temporal, antibiótico cuando corresponde y estudio contrastado de control para verificar el cierre.",
+      "Se realiza por endoscopia con clips TTSC u OTSC según el tamaño del defecto. Indicamos ayuno temporal, antibiótico cuando corresponde y estudio contrastado de control para verificar el cierre. Escríbele al Dr. Quiroz por WhatsApp y te explica el procedimiento para tu caso.",
   },
 ]
 
@@ -821,12 +821,12 @@ export const suturaEndoscopicaFaqs: FAQ[] = [
   {
     question: "¿Cuándo se indica la sutura endoscópica?",
     answer:
-      "En defectos mayores a 2 cm, cierres bajo tensión o anatomías complejas donde los clips no son suficientes. Evita cirugía abierta en casos seleccionados y requiere equipo especializado.",
+      "En defectos mayores a 2 cm, cierres bajo tensión o anatomías complejas donde los clips no son suficientes. Evita cirugía abierta en casos seleccionados y requiere equipo especializado. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo es la recuperación?",
     answer:
-      "Generalmente ayuno inicial con progresión de dieta y vigilancia estrecha. Valoramos en consulta la necesidad de controles endoscópicos para confirmar cicatrización completa.",
+      "Generalmente ayuno inicial con progresión de dieta y vigilancia estrecha. Valoramos en consulta la necesidad de controles endoscópicos para confirmar cicatrización completa. Escríbele al Dr. Quiroz por WhatsApp y te explica los cuidados para tu caso.",
   },
   {
     question: "¿Cuánto cuesta la sutura endoscópica en Mérida?",
@@ -836,17 +836,17 @@ export const suturaEndoscopicaFaqs: FAQ[] = [
   {
     question: "¿La sutura endoscópica duele?",
     answer:
-      "No. Se realiza con sedación profunda monitorizada por anestesiólogo. No sentirás dolor durante el procedimiento. Las molestias post-procedimiento suelen ser mínimas y se controlan con medicamento oral.",
+      "No. Se realiza con sedación profunda monitorizada por anestesiólogo. No sentirás dolor durante el procedimiento. Las molestias post-procedimiento suelen ser mínimas y se controlan con medicamento oral. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuánto dura la recuperación?",
     answer:
-      "La mayoría de pacientes reciben alta el mismo día. La recuperación completa toma de 3 a 7 días con dieta progresiva. Incluimos seguimiento por 30 días para confirmar cicatrización.",
+      "La mayoría de pacientes reciben alta el mismo día. La recuperación completa toma de 3 a 7 días con dieta progresiva. Incluimos seguimiento por 30 días para confirmar cicatrización. Escríbele al Dr. Quiroz por WhatsApp y te explica qué esperar en tu recuperación.",
   },
   {
     question: "¿Qué diferencia tiene con cirugía abierta?",
     answer:
-      "La sutura endoscópica repara defectos desde el interior del tracto digestivo, sin incisiones externas. Esto significa menor dolor, recuperación más rápida, menor riesgo de infección y alta el mismo día en la mayoría de casos.",
+      "La sutura endoscópica repara defectos desde el interior del tracto digestivo, sin incisiones externas. Esto significa menor dolor, recuperación más rápida, menor riesgo de infección y alta el mismo día en la mayoría de casos. Escríbele al Dr. Quiroz por WhatsApp y te explica si eres candidato.",
   },
 ]
 
@@ -858,17 +858,17 @@ export const esdFaqs: FAQ[] = [
   {
     question: "¿Qué es la disección endoscópica submucosa (ESD)?",
     answer:
-      "Técnica avanzada que permite resecar en una sola pieza lesiones tempranas del tubo digestivo, preservando el órgano. Indicada en casos seleccionados tras valoración endoscópica y patológica.",
+      "Técnica avanzada que permite resecar en una sola pieza lesiones tempranas del tubo digestivo, preservando el órgano. Indicada en casos seleccionados tras valoración endoscópica y patológica. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta y cómo es la recuperación?",
     answer:
-      "El costo depende del tamaño y localización de la lesión. La recuperación suele ser de 24–48 horas con dieta progresiva. Requiere control histopatológico y endoscópico para confirmar curación completa.",
+      "El costo depende del tamaño y localización de la lesión. La recuperación suele ser de 24–48 horas con dieta progresiva. Requiere control histopatológico y endoscópico para confirmar curación completa. Escríbele al Dr. Quiroz por WhatsApp y te confirma el costo y el plan para tu caso.",
   },
   {
     question: "¿ESD o EMR — cuál es la diferencia?",
     answer:
-      "La EMR es adecuada para lesiones pequeñas y elevables; la ESD permite resección en-bloc de lesiones más grandes o con características complejas. Elegimos la técnica según tamaño, localización y riesgo.",
+      "La EMR es adecuada para lesiones pequeñas y elevables; la ESD permite resección en-bloc de lesiones más grandes o con características complejas. Elegimos la técnica según tamaño, localización y riesgo. Escríbele al Dr. Quiroz por WhatsApp y te recomienda la técnica adecuada para tu caso.",
   },
 ]
 
@@ -880,17 +880,17 @@ export const emrFaqs: FAQ[] = [
   {
     question: "¿Qué lesiones se tratan con EMR?",
     answer:
-      "Pólipos grandes del colon, lesiones superficiales del estómago, esófago o duodeno y esófago de Barrett con displasia. Permite resección terapéutica y análisis histológico completo.",
+      "Pólipos grandes del colon, lesiones superficiales del estómago, esófago o duodeno y esófago de Barrett con displasia. Permite resección terapéutica y análisis histológico completo. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo se realiza y qué cuidados requiere?",
     answer:
-      "Se inyecta solución submucosa para elevar la lesión y se reseca con asa. Indicamos dieta progresiva y control endoscópico posterior para vigilar el sitio de resección.",
+      "Se inyecta solución submucosa para elevar la lesión y se reseca con asa. Indicamos dieta progresiva y control endoscópico posterior para vigilar el sitio de resección. Escríbele al Dr. Quiroz por WhatsApp y te explica los cuidados para tu caso.",
   },
   {
     question: "¿Duele la EMR? ¿Es segura?",
     answer:
-      "No sentirás dolor — se realiza bajo sedación con anestesiólogo certificado. Es un procedimiento seguro con complicaciones raras (sangrado menor o perforación en menos del 1% de los casos). El Dr. Quiroz tiene experiencia quirúrgica para manejar cualquier complicación inmediatamente.",
+      "No sentirás dolor — se realiza bajo sedación con anestesiólogo certificado. Es un procedimiento seguro con complicaciones raras (sangrado menor o perforación en menos del 1% de los casos). El Dr. Quiroz tiene experiencia quirúrgica para manejar cualquier complicación inmediatamente. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuánto cuesta la EMR en Mérida?",
@@ -900,7 +900,7 @@ export const emrFaqs: FAQ[] = [
   {
     question: "¿EMR o cirugía — cuál es mejor para pólipos?",
     answer:
-      "La EMR es menos invasiva, ambulatoria y con recuperación más rápida que la cirugía. Sin embargo, no todos los pólipos son candidatos. El Dr. Quiroz evalúa cada caso para determinar si EMR, ESD o cirugía es la mejor opción — como cirujano, puede ofrecer todas las alternativas.",
+      "La EMR es menos invasiva, ambulatoria y con recuperación más rápida que la cirugía. Sin embargo, no todos los pólipos son candidatos. El Dr. Quiroz evalúa cada caso para determinar si EMR, ESD o cirugía es la mejor opción — como cirujano, puede ofrecer todas las alternativas. Escríbele al Dr. Quiroz por WhatsApp y te explica la mejor opción para tu caso.",
   },
 ]
 
@@ -912,11 +912,11 @@ export const retiroBalonFaqs: FAQ[] = [
   {
     question: "¿Cuándo debe retirarse el balón gástrico?",
     answer:
-      "Al cumplir el tiempo recomendado por el fabricante (6–12 meses) o si hay intolerancia, migración o complicaciones. Valoramos alternativas para mantener los resultados de pérdida de peso.",
+      "Al cumplir el tiempo recomendado por el fabricante (6–12 meses) o si hay intolerancia, migración o complicaciones. Valoramos alternativas para mantener los resultados de pérdida de peso. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cómo se retira y cuánto cuesta?",
-    answer: `Se punciona y aspira su contenido por endoscopia bajo sedación, luego se extrae colapsado. Desde ${price("retiro_balon_gastrico")}. Toma 15–30 minutos con alta el mismo día. Dieta líquida 24 horas y seguimiento nutricional.`,
+    answer: `Se punciona y aspira su contenido por endoscopia bajo sedación, luego se extrae colapsado. Desde ${price("retiro_balon_gastrico")}. Toma 15–30 minutos con alta el mismo día. Dieta líquida 24 horas y seguimiento nutricional. Escríbele al ${DOCTOR.name} por WhatsApp y agenda el retiro de tu balón.`,
   },
 ]
 
@@ -931,46 +931,46 @@ export const apcFaqs: FAQ[] = [
   {
     question: "¿Para qué sirve la coagulación con plasma de argón (APC)?",
     answer:
-      "Para tratar lesiones vasculares sangrantes (angiodisplasias, ectasia vascular antral gástrica), ablación de esófago de Barrett con displasia, control de sangrado post-polipectomía, tratamiento de proctitis por radiación y desvitalización tumoral paliativa. Produce coagulación controlada sin contacto directo y con penetración limitada a 2–3 mm.",
+      "Para tratar lesiones vasculares sangrantes (angiodisplasias, ectasia vascular antral gástrica), ablación de esófago de Barrett con displasia, control de sangrado post-polipectomía, tratamiento de proctitis por radiación y desvitalización tumoral paliativa. Produce coagulación controlada sin contacto directo y con penetración limitada a 2–3 mm. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta el tratamiento con APC en Mérida?",
-    answer: `Desde ${price("apc")} por sesión. El precio incluye sedación con anestesiólogo, equipo ERBE, sala de recuperación y reporte con fotografías. El número de sesiones depende de la condición: Barrett puede requerir 2–4 sesiones, GAVE entre 2–4, y lesiones hemorrágicas aisladas suelen resolverse en 1–2.`,
+    answer: `Desde ${price("apc")} por sesión. El precio incluye sedación con anestesiólogo, equipo ERBE, sala de recuperación y reporte con fotografías. El número de sesiones depende de la condición: Barrett puede requerir 2–4 sesiones, GAVE entre 2–4, y lesiones hemorrágicas aisladas suelen resolverse en 1–2. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el costo y las sesiones para tu caso.`,
   },
   {
     question: "¿Cómo se trata el esófago de Barrett con APC?",
     answer:
-      "Se ablaciona el tejido metaplásico capa por capa bajo visión endoscópica directa. El tratamiento suele requerir múltiples sesiones espaciadas para permitir la regeneración de mucosa normal. Entre sesiones se indica inhibidor de bomba de protones. Se realizan biopsias de control para confirmar eliminación de la displasia.",
+      "Se ablaciona el tejido metaplásico capa por capa bajo visión endoscópica directa. El tratamiento suele requerir múltiples sesiones espaciadas para permitir la regeneración de mucosa normal. Entre sesiones se indica inhibidor de bomba de protones. Se realizan biopsias de control para confirmar eliminación de la displasia. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan para tu caso.",
   },
   {
     question: "¿Qué es la ectasia vascular antral gástrica (estómago sandía)?",
     answer:
-      "La GAVE es una condición donde vasos sanguíneos anormales en el antro gástrico causan sangrado crónico y anemia. Se llama 'estómago sandía' por su apariencia endoscópica con franjas rojas. El APC es el tratamiento endoscópico de primera línea — coagula estos vasos en sesiones programadas hasta controlar el sangrado.",
+      "La GAVE es una condición donde vasos sanguíneos anormales en el antro gástrico causan sangrado crónico y anemia. Se llama 'estómago sandía' por su apariencia endoscópica con franjas rojas. El APC es el tratamiento endoscópico de primera línea — coagula estos vasos en sesiones programadas hasta controlar el sangrado. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu tratamiento.",
   },
   {
     question: "¿El APC sirve para proctitis por radiación?",
     answer:
-      "Sí. La proctopatía por radiación causa sangrado rectal por vasos frágiles (telangiectasias) en pacientes que recibieron radioterapia pélvica. El APC es el tratamiento endoscópico más utilizado para esta condición. Generalmente se necesitan 2–4 sesiones dependiendo de la extensión.",
+      "Sí. La proctopatía por radiación causa sangrado rectal por vasos frágiles (telangiectasias) en pacientes que recibieron radioterapia pélvica. El APC es el tratamiento endoscópico más utilizado para esta condición. Generalmente se necesitan 2–4 sesiones dependiendo de la extensión. Escríbele al Dr. Quiroz por WhatsApp y te explica el plan para tu caso.",
   },
   {
     question: "¿Duele el tratamiento con APC?",
     answer:
-      "No. Se realiza bajo sedación con anestesiólogo certificado — no sentirás dolor ni molestia durante el procedimiento. Después puedes tener sensación de distensión leve que desaparece en horas. Alta el mismo día en la mayoría de casos.",
+      "No. Se realiza bajo sedación con anestesiólogo certificado — no sentirás dolor ni molestia durante el procedimiento. Después puedes tener sensación de distensión leve que desaparece en horas. Alta el mismo día en la mayoría de casos. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cuántas sesiones de APC necesito?",
     answer:
-      "Depende de la condición y extensión de la lesión. Barrett con displasia: 2–4 sesiones. GAVE: 2–4 sesiones. Angiodisplasias aisladas: 1–2 sesiones. Proctitis por radiación: 2–4 sesiones. El Dr. Quiroz evalúa tu caso y te presenta el plan completo antes de iniciar tratamiento.",
+      "Depende de la condición y extensión de la lesión. Barrett con displasia: 2–4 sesiones. GAVE: 2–4 sesiones. Angiodisplasias aisladas: 1–2 sesiones. Proctitis por radiación: 2–4 sesiones. Escríbele al Dr. Quiroz por WhatsApp y te presenta el plan completo para tu caso.",
   },
   {
     question: "¿Qué diferencia hay entre APC y cauterización?",
     answer:
-      "La cauterización tradicional toca directamente el tejido. El APC trabaja sin contacto — el gas argón ionizado transfiere la energía a distancia con penetración controlada (2–3 mm), lo que reduce significativamente el riesgo de perforación y permite tratar áreas más amplias de forma segura.",
+      "La cauterización tradicional toca directamente el tejido. El APC trabaja sin contacto — el gas argón ionizado transfiere la energía a distancia con penetración controlada (2–3 mm), lo que reduce significativamente el riesgo de perforación y permite tratar áreas más amplias de forma segura. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Por qué el APC es más barato aquí que con otros doctores?",
     answer:
-      `El Dr. Quiroz adquirió su propio equipo ERBE — no depende de rentar equipo hospitalario ni de intermediarios. Esto reduce el costo operativo y permite ofrecer el tratamiento desde ${price("apc")} por sesión, cuando otros proveedores en Mérida cobran entre $25,000 y $30,000 MXN.`,
+      `El Dr. Quiroz adquirió su propio equipo ERBE — no depende de rentar equipo hospitalario ni de intermediarios. Esto reduce el costo operativo y permite ofrecer el tratamiento desde ${price("apc")} por sesión, cuando otros proveedores en Mérida cobran entre $25,000 y $30,000 MXN. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu sesión de APC.`,
   },
   {
     question: "Vivo en Cancún / Playa del Carmen / Campeche — ¿puedo tratarme en Mérida?",
@@ -988,7 +988,7 @@ export const preciosFaqs: FAQ[] = [
   {
     question: "¿Qué incluye el precio de cada procedimiento?",
     answer:
-      `Todos los precios incluyen: anestesia con anestesiólogo certificado, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y valoración pre-endoscópica. Único costo adicional posible: lectura de patología (${biopsyFee()}).`,
+      `Todos los precios incluyen: anestesia con anestesiólogo certificado, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y valoración pre-endoscópica. Único costo adicional posible: lectura de patología (${biopsyFee()}). Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el total exacto de tu procedimiento.`,
   },
   {
     question: "¿Aceptan seguros de gastos médicos?",
@@ -998,12 +998,12 @@ export const preciosFaqs: FAQ[] = [
   {
     question: "¿El precio puede cambiar después de agendar?",
     answer:
-      "El precio base es fijo para procedimientos programados de lunes a viernes. Puede variar si durante el procedimiento se requiere intervención terapéutica adicional (por ejemplo, extracción de cálculos en CPRE). Siempre te informamos antes de proceder. Fines de semana y festivos pueden tener un costo adicional.",
+      "El precio base es fijo para procedimientos programados de lunes a viernes. Puede variar si durante el procedimiento se requiere intervención terapéutica adicional (por ejemplo, extracción de cálculos en CPRE). Siempre te informamos antes de proceder. Fines de semana y festivos pueden tener un costo adicional. Escríbele al Dr. Quiroz por WhatsApp y te confirma el precio para tu caso.",
   },
   {
     question: "¿Por qué son más baratos que otros especialistas?",
     answer:
-      "El Dr. Quiroz atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de Hospital Amerimed y utilizamos el mismo equipo de los hospitales más grandes. Esto permite ofrecer procedimientos de la misma calidad a precio más accesible.",
+      "El Dr. Quiroz atiende directamente — no hay intermediarios, recepcionistas ni costos administrativos innecesarios. Operamos en un solo consultorio dentro de Hospital Amerimed y utilizamos el mismo equipo de los hospitales más grandes. Esto permite ofrecer procedimientos de la misma calidad a precio más accesible. Escríbele al Dr. Quiroz por WhatsApp y agenda tu procedimiento.",
   },
 ]
 
@@ -1015,7 +1015,7 @@ export const emergenciasFaqs: FAQ[] = [
   {
     question: "¿Qué emergencias digestivas atienden?",
     answer:
-      "Sangrado digestivo alto y bajo, cuerpos extraños impactados (huesos, monedas, pilas), obstrucciones biliares agudas (colangitis), perforaciones y complicaciones post-endoscópicas. Atención los 7 días de la semana incluyendo fines de semana y festivos.",
+      "Sangrado digestivo alto y bajo, cuerpos extraños impactados (huesos, monedas, pilas), obstrucciones biliares agudas (colangitis), perforaciones y complicaciones post-endoscópicas. Atención los 7 días de la semana incluyendo fines de semana y festivos. Escríbele al Dr. Quiroz por WhatsApp para atención inmediata.",
   },
   {
     question: "¿Cómo solicito atención de emergencia?",
@@ -1030,7 +1030,7 @@ export const emergenciasFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuesta una endoscopia de emergencia?",
     answer:
-      "El costo varía según el procedimiento necesario. El Dr. Quiroz te da una cotización clara antes de proceder. Trabajamos con seguros de gastos médicos mayores y ofrecemos pago directo. Consulta precios de procedimientos programados en nuestra página de precios.",
+      "El costo varía según el procedimiento necesario. El Dr. Quiroz te da una cotización clara antes de proceder. Trabajamos con seguros de gastos médicos mayores y ofrecemos pago directo. Escríbele al Dr. Quiroz por WhatsApp y te da una cotización clara para tu emergencia.",
   },
   {
     question: "Mi hijo se tragó una moneda, ¿qué hago?",
@@ -1040,12 +1040,12 @@ export const emergenciasFaqs: FAQ[] = [
   {
     question: "¿Necesito estar en ayunas para una endoscopia de emergencia?",
     answer:
-      "No. En emergencias reales no se requiere ayuno previo. La prioridad es resolver la urgencia digestiva. El equipo médico toma las precauciones necesarias durante la sedación.",
+      "No. En emergencias reales no se requiere ayuno previo. La prioridad es resolver la urgencia digestiva. El equipo médico toma las precauciones necesarias durante la sedación. Escríbele al Dr. Quiroz por WhatsApp para atención inmediata.",
   },
   {
     question: "¿En qué hospital se realizan las emergencias?",
     answer:
-      "En Hospital Amerimed Mérida, Consultorio 517, en la zona de Chichi Suárez. Fácil acceso desde Altabrisa, Temozón Norte, Cholul y el Centro Histórico de Mérida. Estacionamiento disponible.",
+      "En Hospital Amerimed Mérida, Consultorio 517, en la zona de Chichi Suárez. Fácil acceso desde Altabrisa, Temozón Norte, Cholul y el Centro Histórico de Mérida. Estacionamiento disponible. Escríbele al Dr. Quiroz por WhatsApp y coordinamos tu llegada.",
   },
 ]
 
@@ -1056,37 +1056,37 @@ export const emergenciasFaqs: FAQ[] = [
 export const consultasFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuesta la consulta con un gastroenterólogo?",
-    answer: `El Dr. Quiroz es endoscopista certificado (no gastroenterólogo), pero atiende las mismas condiciones digestivas. La consulta digestiva tiene un costo de ${mxn(ADDITIONAL_FEES.consultation.amount)}. Incluye historia clínica completa, examen físico especializado, plan de estudios personalizado y seguimiento por WhatsApp. La valoración pre-endoscópica está incluida en el precio de los procedimientos.`,
+    answer: `El Dr. Quiroz es endoscopista certificado (no gastroenterólogo), pero atiende las mismas condiciones digestivas. La consulta digestiva tiene un costo de ${mxn(ADDITIONAL_FEES.consultation.amount)}. Incluye historia clínica completa, examen físico especializado, plan de estudios personalizado y seguimiento por WhatsApp. La valoración pre-endoscópica está incluida en el precio de los procedimientos. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu consulta.`,
   },
   {
     question: "¿Qué tipos de consulta ofrecen?",
     answer:
-      "Valoración pre-endoscópica (antes de un procedimiento), control post-endoscopia (seguimiento de hallazgos) y chequeo digestivo preventivo (evaluación general de salud digestiva). Todas incluyen revisión de estudios previos.",
+      "Valoración pre-endoscópica (antes de un procedimiento), control post-endoscopia (seguimiento de hallazgos) y chequeo digestivo preventivo (evaluación general de salud digestiva). Todas incluyen revisión de estudios previos. Escríbele al Dr. Quiroz por WhatsApp y agenda la consulta que necesitas.",
   },
   {
     question: "¿Necesito referencia médica para agendar consulta?",
     answer:
-      "No. Puedes agendar directamente por WhatsApp al 999 236 0153 sin necesidad de referencia de otro médico.",
+      "No. Agenda directamente por WhatsApp al 999 236 0153 — te contesta el Dr. Quiroz y no necesitas referencia de otro médico.",
   },
   {
     question: "¿Cuánto dura una consulta digestiva?",
     answer:
-      "Entre 30 y 45 minutos. El Dr. Quiroz dedica el tiempo necesario para revisar tus síntomas, antecedentes y explicarte el plan de estudios sin prisas.",
+      "Entre 30 y 45 minutos. El Dr. Quiroz dedica el tiempo necesario para revisar tus síntomas, antecedentes y explicarte el plan de estudios sin prisas. Escríbele al Dr. Quiroz por WhatsApp y agenda tu consulta.",
   },
   {
     question: "¿Dónde se realiza la consulta?",
     answer:
-      "En el Hospital Amerimed Mérida, Consultorio 517, en la zona de Chichi Suárez. Fácil acceso desde Altabrisa, Temozón Norte, Cholul y Centro Histórico.",
+      "En el Hospital Amerimed Mérida, Consultorio 517, en la zona de Chichi Suárez. Fácil acceso desde Altabrisa, Temozón Norte, Cholul y Centro Histórico. Escríbele al Dr. Quiroz por WhatsApp y agenda tu cita.",
   },
   {
     question: "¿El doctor habla inglés?",
     answer:
-      "Sí. El Dr. Quiroz ofrece atención bilingüe (español e inglés) para expatriados y visitantes internacionales.",
+      "Sí. El Dr. Quiroz ofrece atención bilingüe (español e inglés) para expatriados y visitantes internacionales. Escríbele al Dr. Quiroz por WhatsApp y agenda tu consulta en español o inglés.",
   },
   {
     question: "¿La valoración pre-endoscópica tiene costo adicional?",
     answer:
-      "No. La valoración pre-endoscópica está incluida en el precio de todos los procedimientos endoscópicos.",
+      "No. La valoración pre-endoscópica está incluida en el precio de todos los procedimientos endoscópicos. Escríbele al Dr. Quiroz por WhatsApp y agenda tu procedimiento.",
   },
   {
     question: "¿Cómo agendo una cita?",
@@ -1104,16 +1104,16 @@ export const consultasFaqs: FAQ[] = [
 export const doctorFaqs: FAQ[] = [
   {
     question: "¿Qué certificaciones tiene el Dr. Omar Quiroz?",
-    answer: `El Dr. Quiroz está certificado por el Consejo Mexicano de Cirugía General (CMCG, registro ${DOCTOR.cedulas.consejoCirugiaGeneral}) y por el Consejo Mexicano de Cirugía Bariátrica (${DOCTOR.cedulas.consejoBariatrica}). Cuenta además con Alta Especialidad en Endoscopia Gastrointestinal por la UNAM (Cédula ${DOCTOR.cedulas.endoscopia}). Su cédula profesional como Médico Cirujano es ${DOCTOR.cedulas.medicoGeneral} y su cédula de especialidad en Cirugía General es ${DOCTOR.cedulas.especialidad}.`,
+    answer: `El Dr. Quiroz está certificado por el Consejo Mexicano de Cirugía General (CMCG, registro ${DOCTOR.cedulas.consejoCirugiaGeneral}) y por el Consejo Mexicano de Cirugía Bariátrica (${DOCTOR.cedulas.consejoBariatrica}). Cuenta además con Alta Especialidad en Endoscopia Gastrointestinal por la UNAM (Cédula ${DOCTOR.cedulas.endoscopia}). Su cédula profesional como Médico Cirujano es ${DOCTOR.cedulas.medicoGeneral} y su cédula de especialidad en Cirugía General es ${DOCTOR.cedulas.especialidad}. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu cita.`,
   },
   {
     question: "¿Dónde atiende el Dr. Omar Quiroz?",
     answer:
-      "El Dr. Quiroz atiende en Hospital Amerimed Mérida, Consultorio 517, en Chichi Suárez, Mérida, Yucatán. El consultorio es accesible desde Cholul, Temozón Norte, Conkal y toda el área metropolitana.",
+      "El Dr. Quiroz atiende en Hospital Amerimed Mérida, Consultorio 517, en Chichi Suárez, Mérida, Yucatán. El consultorio es accesible desde Cholul, Temozón Norte, Conkal y toda el área metropolitana. Escríbele al Dr. Quiroz por WhatsApp y agenda tu cita.",
   },
   {
     question: "¿Cuánto cuesta la consulta con el Dr. Quiroz?",
-    answer: `La consulta de valoración tiene un costo desde ${mxn(ADDITIONAL_FEES.consultation.amount)}. Incluye evaluación completa y plan de tratamiento personalizado. Puedes ver todos los precios en nuestra página de precios.`,
+    answer: `La consulta de valoración tiene un costo desde ${mxn(ADDITIONAL_FEES.consultation.amount)}. Incluye evaluación completa y plan de tratamiento personalizado. Puedes ver todos los precios en nuestra página de precios. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu consulta.`,
   },
   {
     question: "¿Cómo agendo una cita con el Dr. Quiroz?",
@@ -1123,7 +1123,7 @@ export const doctorFaqs: FAQ[] = [
   {
     question: "¿Qué procedimientos realiza el Dr. Quiroz?",
     answer:
-      "El Dr. Quiroz realiza endoscopias, colonoscopias, CPRE, ligadura de várices, ligadura de hemorroides, y más de 20 procedimientos endoscópicos diagnósticos y terapéuticos. Todos con técnicas mínimamente invasivas.",
+      "El Dr. Quiroz realiza endoscopias, colonoscopias, CPRE, ligadura de várices, ligadura de hemorroides, y más de 20 procedimientos endoscópicos diagnósticos y terapéuticos. Todos con técnicas mínimamente invasivas. Escríbele al Dr. Quiroz por WhatsApp y agenda tu procedimiento.",
   },
   {
     question: "¿El Dr. Quiroz acepta seguros médicos?",
@@ -1145,7 +1145,7 @@ const contactoFaqs: FAQ[] = [
   {
     question: "¿Necesito referencia médica para agendar?",
     answer:
-      "No. Puedes agendar directamente sin referencia. Si tienes estudios previos o indicación de otro médico, tráelos a tu cita para que el doctor los revise.",
+      "No. Puedes agendar directamente sin referencia. Si tienes estudios previos o indicación de otro médico, tráelos a tu cita para que el doctor los revise. Escríbele al Dr. Quiroz por WhatsApp y agenda tu cita.",
   },
   {
     question: "¿Trabajan con seguros médicos?",
@@ -1155,12 +1155,12 @@ const contactoFaqs: FAQ[] = [
   {
     question: "¿Dónde está el consultorio?",
     answer:
-      "Hospital Amerimed Mérida, Consultorio 517, Chichi Suárez, 97306 Mérida, Yuc. Contamos con estacionamiento gratuito y fácil acceso desde el Periférico Norte.",
+      "Hospital Amerimed Mérida, Consultorio 517, Chichi Suárez, 97306 Mérida, Yuc. Contamos con estacionamiento gratuito y fácil acceso desde el Periférico Norte. Escríbele al Dr. Quiroz por WhatsApp y agenda tu cita.",
   },
   {
     question: "¿Cuánto tiempo tardan en darme cita?",
     answer:
-      "Generalmente agendamos dentro de la misma semana. Para emergencias digestivas (sangrado, dolor severo, obstrucción), ofrecemos atención inmediata — llama al 999 236 0153.",
+      "Generalmente agendamos dentro de la misma semana. Para emergencias digestivas (sangrado, dolor severo, obstrucción), escríbele al Dr. Quiroz por WhatsApp al 999 236 0153 para atención inmediata.",
   },
 ]
 
@@ -1174,7 +1174,7 @@ export const eusFaqs: FAQ[] = [
   {
     question: "¿Qué es el ultrasonido endoscópico y cuándo se necesita?",
     answer:
-      "El ultrasonido endoscópico (USE) combina una cámara endoscópica con un transductor de ultrasonido para obtener imágenes detalladas de las paredes del esófago, estómago, duodeno, páncreas y vías biliares — estructuras que el ultrasonido abdominal convencional no puede ver con claridad. Se indica principalmente para evaluar tumores del tubo digestivo, lesiones del páncreas, cálculos en el conducto biliar, y para guiar biopsias de tejidos profundos (USE-PAAF).",
+      "El ultrasonido endoscópico (USE) combina una cámara endoscópica con un transductor de ultrasonido para obtener imágenes detalladas de las paredes del esófago, estómago, duodeno, páncreas y vías biliares — estructuras que el ultrasonido abdominal convencional no puede ver con claridad. Se indica principalmente para evaluar tumores del tubo digestivo, lesiones del páncreas, cálculos en el conducto biliar, y para guiar biopsias de tejidos profundos (USE-PAAF). Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
   {
     question: "¿Cuánto cuesta el ultrasonido endoscópico en Mérida?",
@@ -1184,32 +1184,32 @@ export const eusFaqs: FAQ[] = [
   {
     question: "¿Duele el ultrasonido endoscópico?",
     answer:
-      "No. El procedimiento se realiza con sedación, igual que una endoscopia convencional. Estarás dormido durante todo el estudio y no sentirás nada. Al despertar, la mayoría de los pacientes solo refieren una leve sensación de distensión que desaparece en minutos.",
+      "No. El procedimiento se realiza con sedación, igual que una endoscopia convencional. Estarás dormido durante todo el estudio y no sentirás nada. Al despertar, la mayoría de los pacientes solo refieren una leve sensación de distensión que desaparece en minutos. Escríbele al Dr. Quiroz por WhatsApp y te explica cómo será tu sedación.",
   },
   {
     question: "¿Cómo me preparo para un ultrasonido endoscópico?",
     answer:
-      "La preparación es similar a la de una endoscopia alta: ayuno de 6 a 8 horas antes del procedimiento y suspender ciertos medicamentos según indicación médica. El Dr. Quiroz te dará las instrucciones específicas al momento de agendar tu estudio.",
+      "La preparación es similar a la de una endoscopia alta: ayuno de 6 a 8 horas antes del procedimiento y suspender ciertos medicamentos según indicación médica. Agenda por WhatsApp y el Dr. Quiroz te envía las instrucciones específicas para tu estudio.",
   },
   {
     question: "¿Cuánto dura el procedimiento y cuándo puedo volver a mi rutina?",
     answer:
-      "El estudio dura entre 30 y 60 minutos dependiendo de la complejidad. Por la sedación, necesitarás descansar unas horas y venir acompañado. La mayoría de los pacientes retoman sus actividades normales al día siguiente.",
+      "El estudio dura entre 30 y 60 minutos dependiendo de la complejidad. Por la sedación, necesitarás descansar unas horas y venir acompañado. La mayoría de los pacientes retoman sus actividades normales al día siguiente. Escríbele al Dr. Quiroz por WhatsApp y te explica qué esperar el día de tu estudio.",
   },
   {
     question: "¿Cuáles son los riesgos del ultrasonido endoscópico?",
     answer:
-      "Es un procedimiento seguro con una tasa de complicaciones menor al 1%. Los riesgos son los mismos que en cualquier endoscopia: reacción a la sedación, sangrado o perforación, todos muy poco frecuentes. Si se realiza punción (USE-PAAF), existe un riesgo mínimo adicional de infección o pancreatitis, que el médico evalúa caso por caso antes de indicarlo.",
+      "Es un procedimiento seguro con una tasa de complicaciones menor al 1%. Los riesgos son los mismos que en cualquier endoscopia: reacción a la sedación, sangrado o perforación, todos muy poco frecuentes. Si se realiza punción (USE-PAAF), existe un riesgo mínimo adicional de infección o pancreatitis, que el médico evalúa caso por caso antes de indicarlo. Escríbele al Dr. Quiroz por WhatsApp y te explica los riesgos en tu caso.",
   },
   {
     question: "¿Está disponible el ultrasonido endoscópico en la Península de Yucatán?",
     answer:
-      "El Dr. Omar Quiroz está incorporando el ultrasonido endoscópico a su práctica en Mérida. Si tu médico te lo indicó y no quieres viajar a otra ciudad, escríbenos: el Dr. Quiroz puede orientarte sobre tu caso y confirmarte disponibilidad.",
+      "El Dr. Omar Quiroz está incorporando el ultrasonido endoscópico a su práctica en Mérida. Si tu médico te lo indicó y no quieres viajar a otra ciudad, escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso y te confirma disponibilidad.",
   },
   {
     question: "¿En qué se diferencia el ultrasonido endoscópico del ultrasonido abdominal normal?",
     answer:
-      "El ultrasonido abdominal se realiza desde afuera del cuerpo y su imagen se ve limitada por los huesos, el gas intestinal y la distancia. El ultrasonido endoscópico coloca el transductor directamente dentro del tubo digestivo, a milímetros del tejido que se quiere ver — lo que permite detectar lesiones de 2 a 3 mm que el ultrasonido convencional no puede identificar.",
+      "El ultrasonido abdominal se realiza desde afuera del cuerpo y su imagen se ve limitada por los huesos, el gas intestinal y la distancia. El ultrasonido endoscópico coloca el transductor directamente dentro del tubo digestivo, a milímetros del tejido que se quiere ver — lo que permite detectar lesiones de 2 a 3 mm que el ultrasonido convencional no puede identificar. Escríbele al Dr. Quiroz por WhatsApp y te orienta sobre tu caso.",
   },
 ]
 
