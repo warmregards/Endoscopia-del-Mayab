@@ -16,6 +16,7 @@ import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import AppointmentForm from "@/components/AppointmentForm"
+import ComparisonTable from "@/components/ComparisonTable"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -315,6 +316,13 @@ export default function EndoscopiaPage() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-background
+          Anchor target for /endoscopia-merida#comparacion. Shared component
+          with /precios so the trust/value story stays identical everywhere.
+          ══════════════════════════════════════════════════════════════════ */}
+      <ComparisonTable background="background" />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2B: APPOINTMENT FORM (on-page booking) — bg-accent-light
