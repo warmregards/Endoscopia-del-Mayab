@@ -35,7 +35,12 @@ import {
 } from "@/lib/pricing"
 import { waHref, waMessage } from "@/lib/clinic"
 import { captureAttribution, getStoredAttribution } from "@/lib/attribution"
-import { pushAppointmentRequest } from "@/lib/gtm"
+import {
+  pushAppointmentRequest,
+  pushAppointmentFormView,
+  pushAppointmentFormFocus,
+  pushAppointmentFormStart,
+} from "@/lib/gtm"
 import { cn } from "@/lib/utils"
 
 type Procedure = "endoscopia" | "colonoscopia"
@@ -112,6 +117,12 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
   const nameRef = useRef<HTMLInputElement>(null)
   const phoneRef = useRef<HTMLInputElement>(null)
 
+  // ── Funnel events (each fires at most once per page load) ─────────────────
+  const formRef = useRef<HTMLFormElement>(null)
+  const firedView = useRef(false)
+  const firedFocus = useRef(false)
+  const firedStart = useRef(false)
+
   // ── Submission state ──────────────────────────────────────────────────────
   const [submitting, setSubmitting] = useState(false)
   const [folio, setFolio] = useState<string | null>(null)
@@ -121,6 +132,41 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
   useEffect(() => {
     captureAttribution()
   }, [])
+
+  // Funnel top: fire `appointment_form_view` once when the form scrolls into
+  // view. Distinct from focus/start so we can tell "saw it" from "used it".
+  useEffect(() => {
+    const el = formRef.current
+    if (!el || firedView.current) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting) && !firedView.current) {
+          firedView.current = true
+          pushAppointmentFormView({ service: procedure, pagePath: sourcePage })
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [procedure, sourcePage])
+
+  // First focus of any field ("clicked in"). React's onFocus bubbles, so a
+  // single handler on the form covers every field. Fires once.
+  function handleFormFocus() {
+    if (firedFocus.current) return
+    firedFocus.current = true
+    pushAppointmentFormFocus({ service: procedure, pagePath: sourcePage })
+  }
+
+  // First real input into any field ("started typing"). onInput bubbles from
+  // the text fields; distinct from focus. Fires once.
+  function handleFormInput() {
+    if (firedStart.current) return
+    firedStart.current = true
+    pushAppointmentFormStart({ service: procedure, pagePath: sourcePage })
+  }
 
   // ── Live estimate (always "Desde", recomputed on cross-sell toggle) ───────
   const estimate = useMemo(() => {
@@ -254,7 +300,10 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
   // ── Form ──────────────────────────────────────────────────────────────────
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
+      onFocus={handleFormFocus}
+      onInput={handleFormInput}
       noValidate
       className="mx-auto w-full max-w-[520px] rounded-2xl border border-border bg-background p-6 shadow-sm sm:p-8"
     >
