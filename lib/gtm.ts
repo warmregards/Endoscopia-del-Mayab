@@ -9,6 +9,9 @@
 //   cta_view        — WhatsApp button enters viewport
 //   pricing_view    — user scrolls to pricing section
 //   faq_expand      — user clicks FAQ accordion item
+//   appointment_form_view  — appointment form scrolled into viewport (funnel top)
+//   appointment_form_focus — first focus of any appointment form field
+//   appointment_form_start — first real input into any appointment form field
 //   appointment_request — on-page appointment form delivered (stronger conversion signal)
 //   page_view       — standard (handled by Next.js, helper here for SPA edge cases)
 
@@ -58,6 +61,24 @@ interface FaqExpandEvent {
   page_path: string
 }
 
+interface AppointmentFormViewEvent {
+  event: "appointment_form_view"
+  service?: string
+  page_path: string
+}
+
+interface AppointmentFormFocusEvent {
+  event: "appointment_form_focus"
+  service?: string
+  page_path: string
+}
+
+interface AppointmentFormStartEvent {
+  event: "appointment_form_start"
+  service?: string
+  page_path: string
+}
+
 interface AppointmentRequestEvent {
   event: "appointment_request"
   service?: string
@@ -79,6 +100,9 @@ type DataLayerEvent =
   | CtaViewEvent
   | PricingViewEvent
   | FaqExpandEvent
+  | AppointmentFormViewEvent
+  | AppointmentFormFocusEvent
+  | AppointmentFormStartEvent
   | AppointmentRequestEvent
   | PageViewEvent
 
@@ -226,6 +250,63 @@ export function pushFaqExpand(
     faq_question: question,
     service,
     page_path: pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track the appointment form entering the viewport (funnel top).
+ * Fire ONCE per page load via an IntersectionObserver — answers "did they
+ * even see the form?" before any interaction.
+ *
+ * @example
+ *   pushAppointmentFormView({ service: "endoscopia" })
+ */
+export function pushAppointmentFormView(params: {
+  service?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "appointment_form_view",
+    service: params.service,
+    page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track the first focus of any appointment form field ("clicked in").
+ * Fire ONCE per page load. The gap from view → focus measures enticement;
+ * the gap from focus → start measures whether the first field deters.
+ *
+ * @example
+ *   pushAppointmentFormFocus({ service: "endoscopia" })
+ */
+export function pushAppointmentFormFocus(params: {
+  service?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "appointment_form_focus",
+    service: params.service,
+    page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track the first real input into any appointment form field ("started typing").
+ * Fire ONCE per page load. Distinct from focus — start means a value was
+ * actually entered. The gap from start → appointment_request measures abandon.
+ *
+ * @example
+ *   pushAppointmentFormStart({ service: "endoscopia" })
+ */
+export function pushAppointmentFormStart(params: {
+  service?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "appointment_form_start",
+    service: params.service,
+    page_path: params.pagePath || currentPath(),
   })
 }
 
