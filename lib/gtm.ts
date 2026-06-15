@@ -24,6 +24,8 @@ interface WhatsAppClickEvent {
   cta_id: string
   cta_number: string
   service?: string
+  /** Per-click ref code (EDM-XXXXXX) — joins this click to the /api/ref record. */
+  ref_code?: string
   page_path: string
 }
 
@@ -146,6 +148,7 @@ export function pushWhatsAppClick(params: {
   ctaId: string
   number: string
   service?: string
+  refCode?: string
   pagePath?: string
 }): void {
   push({
@@ -153,6 +156,7 @@ export function pushWhatsAppClick(params: {
     cta_id: params.ctaId,
     cta_number: params.number,
     service: params.service,
+    ref_code: params.refCode,
     page_path: params.pagePath || currentPath(),
   })
 }

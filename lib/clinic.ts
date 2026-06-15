@@ -217,3 +217,15 @@ export function waHref(opts?: {
 export function waMessage(procedureName: string): string {
   return `Hola Dr. Quiroz, me interesa agendar una ${procedureName}. ¿Cuál es la disponibilidad?`
 }
+
+/**
+ * Append a ref code line to a WhatsApp message body so it lands in the doctor's
+ * first received message. Keeps the visible copy intact and only adds the line.
+ *
+ * @example
+ *   withRefCode(waMessage("Colonoscopia"), "EDM-7K4QP2")
+ *   // → "Hola Dr. Quiroz, …\n\n(Ref: EDM-7K4QP2)"
+ */
+export function withRefCode(message: string, code: string): string {
+  return `${message}\n\n(Ref: ${code})`
+}

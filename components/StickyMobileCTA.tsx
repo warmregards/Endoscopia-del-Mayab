@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { Phone } from "lucide-react"
-import { CLINIC, waHref, telHref } from "@/lib/clinic"
+import { CLINIC, waHref, telHref, withRefCode } from "@/lib/clinic"
+import {
+  captureAttribution,
+  generateRefCode,
+  sendRefBeacon,
+  toRefPayload,
+} from "@/lib/attribution"
 import { pushWhatsAppClick, pushPhoneClick } from "@/lib/gtm"
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -38,6 +44,29 @@ export default function StickyMobileCTA() {
 
   if (!visible) return null
 
+  function handleWhatsAppClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    const code = generateRefCode()
+    const attr = captureAttribution()
+    const pagePath =
+      typeof window !== "undefined" ? window.location.pathname : undefined
+
+    sendRefBeacon(
+      toRefPayload(code, attr, { service: "global", page_path: pagePath })
+    )
+
+    // Sticky CTA uses the clinic default message; append the ref line to it.
+    e.currentTarget.href = waHref({
+      text: withRefCode(CLINIC.whatsapp.defaultText, code),
+    })
+
+    pushWhatsAppClick({
+      ctaId: "cta-sticky-wa",
+      number: CLINIC.whatsapp.number,
+      service: "global",
+      refCode: code,
+    })
+  }
+
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 md:hidden px-4 py-2 bg-white/70 backdrop-blur-xl border-t border-border/50 safe-area-bottom">
       <div className="flex gap-2 items-center">
@@ -45,13 +74,7 @@ export default function StickyMobileCTA() {
           href={waHref({})}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() =>
-            pushWhatsAppClick({
-              ctaId: "cta-sticky-wa",
-              number: CLINIC.whatsapp.number,
-              service: "global",
-            })
-          }
+          onClick={handleWhatsAppClick}
           className="flex-1 flex items-center justify-center gap-2 bg-action-primary hover:bg-action-primary-hover text-white min-h-[48px] rounded-xl text-[15px] font-bold shadow-sm transition-colors"
         >
           <WhatsAppIcon className="h-5 w-5" />

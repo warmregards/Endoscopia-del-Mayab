@@ -28,6 +28,8 @@ export interface Attribution {
   gclid?: string
   gbraid?: string
   wbraid?: string
+  /** Meta/Facebook click ID — captured for the WhatsApp ref-code path. */
+  fbclid?: string
   utm?: Utm
 }
 
@@ -37,6 +39,7 @@ function prune(attr: Attribution): Attribution {
   if (attr.gclid) out.gclid = attr.gclid
   if (attr.gbraid) out.gbraid = attr.gbraid
   if (attr.wbraid) out.wbraid = attr.wbraid
+  if (attr.fbclid) out.fbclid = attr.fbclid
   if (attr.utm) {
     const utm: Utm = {}
     for (const k of ["source", "medium", "campaign", "term", "content"] as const) {
@@ -56,6 +59,7 @@ function readFromUrl(): Attribution {
     gclid: val("gclid"),
     gbraid: val("gbraid"),
     wbraid: val("wbraid"),
+    fbclid: val("fbclid"),
     utm: {
       source: val("utm_source"),
       medium: val("utm_medium"),
@@ -120,12 +124,15 @@ export function captureAttribution(): Attribution {
   const stored = getStoredAttribution()
   const fromUrl = readFromUrl()
 
-  // URL values take precedence; stored fills the gaps (first-touch retained
-  // when this pageview carries nothing new).
+  // URL values take precedence; stored fills the gaps. Last-touch by design: a
+  // fresh click ID from this pageview overwrites the stored one (this feeds
+  // Google Ads offline conversions, which credit the last paid click). The
+  // stored value is retained only when this pageview carries nothing new.
   const merged: Attribution = prune({
     gclid: fromUrl.gclid ?? stored.gclid,
     gbraid: fromUrl.gbraid ?? stored.gbraid,
     wbraid: fromUrl.wbraid ?? stored.wbraid,
+    fbclid: fromUrl.fbclid ?? stored.fbclid,
     utm: { ...stored.utm, ...fromUrl.utm },
   })
 
@@ -134,4 +141,83 @@ export function captureAttribution(): Attribution {
   if (Object.keys(fromUrl).length > 0) persist(merged)
 
   return merged
+}
+
+// ---------------------------------------------------------------------------
+// Ref-code path (WhatsApp). WhatsApp is the dominant conversion channel; to
+// recover the ad click after a patient leaves for wa.me, we mint a per-click
+// ref code, ship { code -> stored attribution } to /api/ref, and append the
+// code to the WhatsApp pre-fill so it lands in Dr. Quiroz's first message.
+// ---------------------------------------------------------------------------
+
+// Crockford-style base32, unambiguous (no I/O/0/1). 2^32 is divisible by 32,
+// so `value % 32` is unbiased.
+const REF_ALPHABET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
+
+/** Server- and client-side guard for ref codes. Keep in sync with /api/ref. */
+export const REF_CODE_RE = /^EDM-[2-9A-HJ-NP-Z]{6}$/
+
+/** Generate a per-click ref code: EDM-XXXXXX (6 unambiguous base32 chars). */
+export function generateRefCode(): string {
+  const c = (typeof globalThis !== "undefined" && globalThis.crypto) || window.crypto
+  const arr = new Uint32Array(6)
+  c.getRandomValues(arr)
+  let s = ""
+  for (let i = 0; i < 6; i++) s += REF_ALPHABET[arr[i] % REF_ALPHABET.length]
+  return `EDM-${s}`
+}
+
+/** Flat payload shape posted to /api/ref. */
+export interface RefBeaconPayload {
+  code: string
+  gclid?: string
+  fbclid?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_term?: string
+  service?: string
+  page_path?: string
+}
+
+/** Flatten stored attribution into the /api/ref payload (drops empty fields). */
+export function toRefPayload(
+  code: string,
+  attr: Attribution,
+  extra: { service?: string; page_path?: string } = {}
+): RefBeaconPayload {
+  const payload: RefBeaconPayload = { code }
+  if (attr.gclid) payload.gclid = attr.gclid
+  if (attr.fbclid) payload.fbclid = attr.fbclid
+  if (attr.utm?.source) payload.utm_source = attr.utm.source
+  if (attr.utm?.medium) payload.utm_medium = attr.utm.medium
+  if (attr.utm?.campaign) payload.utm_campaign = attr.utm.campaign
+  if (attr.utm?.term) payload.utm_term = attr.utm.term
+  if (extra.service) payload.service = extra.service
+  if (extra.page_path) payload.page_path = extra.page_path
+  return payload
+}
+
+/**
+ * Fire-and-forget the ref code + attribution to /api/ref. Uses sendBeacon so
+ * the request survives the tab switch to WhatsApp; falls back to fetch
+ * keepalive. Never throws — a tracking failure must not block navigation.
+ */
+export function sendRefBeacon(payload: RefBeaconPayload): void {
+  if (typeof window === "undefined") return
+  try {
+    const json = JSON.stringify(payload)
+    if (typeof navigator !== "undefined" && navigator.sendBeacon) {
+      const blob = new Blob([json], { type: "application/json" })
+      if (navigator.sendBeacon("/api/ref", blob)) return
+    }
+    void fetch("/api/ref", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: json,
+      keepalive: true,
+    }).catch(() => {})
+  } catch {
+    /* never block navigation on a tracking failure */
+  }
 }

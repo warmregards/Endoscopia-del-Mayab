@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
 import ScrollToTop from "@/components/ScrollToTop";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import AttributionCapture from "@/components/AttributionCapture";
 
 // ✅ Use next/font; no extra <link> preconnects needed for fonts.
 import { Montserrat, Open_Sans } from "next/font/google";
@@ -123,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ) : null}
 
         <ThemeProvider attribute="class" defaultTheme="light">
+          <AttributionCapture />
           <Suspense fallback={null}>
             <ScrollToTop />
           </Suspense>
