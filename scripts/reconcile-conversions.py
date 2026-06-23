@@ -21,7 +21,9 @@ Flow:
     2. Normalize ref codes on both sides (strip, uppercase, prepend EDM- to bare
        6-char codes), drop anything not matching ^EDM-[2-9A-HJ-NP-Z]{6}$.
     3. Inner-join Prepsync[<field>] against the ledger's `code`.
-    4. Write the Google Ads CSV (rows with a gclid only).
+    4. Collapse shared-gclid duplicates: where multiple booked codes carry the
+       same gclid, keep only the earliest-minted code (one ad click → one
+       conversion). Write the Google Ads CSV (rows with a gclid only).
     5. Print a reconciliation summary.
 """
 
@@ -199,12 +201,11 @@ def main():
     # Keep only booked/sent rows.
     sent_rows = [r for r in rows if str(r.get(estado_col, "")).strip() == "Enviado"]
 
-    output_rows = []          # rows written to Google Ads CSV (have gclid)
+    candidates = []           # qualifying (gclid, code, created, value, row) pre-dedupe
     matched_count = 0         # Prepsync rows matched to a ledger code
     matched_codes = set()     # normalized codes that matched something
     no_gclid = []             # (code) matched but ledger has no gclid
     unmatched_prepsync = []   # booked rows whose code is blank/typo/unknown
-    total_value = 0.0
 
     for r in sent_rows:
         code = normalize_ref(r.get(field_col))
@@ -228,9 +229,36 @@ def main():
             print(f"[reconcile] WARN: unparseable date for {code}: {r.get(date_col)!r}",
                   file=sys.stderr)
         value_str = f"{value:.2f}" if value is not None else ""
-        if value is not None:
-            total_value += value
-        output_rows.append([gclid, CONVERSION_NAME, ctime or "", value_str, CONVERSION_CURRENCY])
+        row = [gclid, CONVERSION_NAME, ctime or "", value_str, CONVERSION_CURRENCY]
+        candidates.append({
+            "gclid": gclid,
+            "code": code,
+            "created": str(rec.get("created") or ""),  # ISO 8601 → sorts chronologically
+            "value": value,
+            "row": row,
+        })
+
+    # Collapse shared-gclid duplicates: one ad click (gclid) must yield at most
+    # one uploaded conversion. When the same patient taps WhatsApp more than once
+    # the stored gclid is re-stamped onto several ref codes; if more than one of
+    # those books, keep only the earliest-minted code (ledger `created`) and drop
+    # the rest. "Count: One" on the Google Ads conversion action would absorb
+    # these too, but deduping at the source keeps the upload correct regardless.
+    by_gclid = {}
+    for c in candidates:
+        by_gclid.setdefault(c["gclid"], []).append(c)
+
+    output_rows = []          # rows written to Google Ads CSV (deduped by gclid)
+    total_value = 0.0
+    collapsed = []            # (gclid, kept_code, [dropped_codes]) for the summary
+    for gclid, group in by_gclid.items():  # dict preserves first-seen order
+        group.sort(key=lambda c: (c["created"], c["code"]))  # earliest first, code tiebreak
+        kept = group[0]
+        output_rows.append(kept["row"])
+        if kept["value"] is not None:
+            total_value += kept["value"]
+        if len(group) > 1:
+            collapsed.append((gclid, kept["code"], [c["code"] for c in group[1:]]))
 
     # Codes that were clicked but never booked = lost leads.
     unmatched_codes = [c for c in ledger if c not in matched_codes]
@@ -250,6 +278,9 @@ def main():
     print(f"  → written to Google Ads CSV:      {len(output_rows)}")
     print(f"  → matched but NO gclid:           {len(no_gclid)}", end="")
     print(f"  {sorted(no_gclid)}" if no_gclid else "")
+    print(f"  → gclid duplicates collapsed:      {len(collapsed)}")
+    for gclid, kept, dropped in collapsed:
+        print(f"      …{gclid[-12:]}  kept {kept}  dropped {dropped}")
     print(f"Unmatched booked rows (blank/typo): {len(unmatched_prepsync)}", end="")
     print(f"  {unmatched_prepsync}" if unmatched_prepsync else "")
     print(f"Unmatched ref codes (lost leads):   {len(unmatched_codes)}", end="")
