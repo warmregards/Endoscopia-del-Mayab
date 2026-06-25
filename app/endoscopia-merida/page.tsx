@@ -16,6 +16,7 @@ import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import AppointmentForm from "@/components/AppointmentForm"
+import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import ComparisonTable from "@/components/ComparisonTable"
 
 export const revalidate = 86400
@@ -161,6 +162,10 @@ export default function EndoscopiaPage() {
           </div>
         </div>
       </section>
+
+      {/* Thin online-booking banner — surfaces the on-page form (below) within
+          the first viewport. Secondary to the hero WhatsApp CTA by design. */}
+      <OnlineBookingBanner procedure="endoscopia" />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: PRICING (promoted) — bg-muted
@@ -331,7 +336,7 @@ export default function EndoscopiaPage() {
           section and the white section that follows. Additional path; the
           existing hero WhatsApp/phone CTAs are unchanged.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-accent-light">
+      <section id="agendar" className="scroll-mt-24 bg-accent-light">
         <div className="container-page section-padding">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">

@@ -81,6 +81,14 @@ interface AppointmentFormStartEvent {
   page_path: string
 }
 
+interface AppointmentCtaClickEvent {
+  event: "appointment_cta_click"
+  service?: string
+  /** Where the CTA lives (e.g. "hero-banner") — distinguishes entry points. */
+  position?: string
+  page_path: string
+}
+
 interface AppointmentRequestEvent {
   event: "appointment_request"
   service?: string
@@ -105,6 +113,7 @@ type DataLayerEvent =
   | AppointmentFormViewEvent
   | AppointmentFormFocusEvent
   | AppointmentFormStartEvent
+  | AppointmentCtaClickEvent
   | AppointmentRequestEvent
   | PageViewEvent
 
@@ -310,6 +319,27 @@ export function pushAppointmentFormStart(params: {
   push({
     event: "appointment_form_start",
     service: params.service,
+    page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a click on an appointment CTA that routes to the on-page form (e.g. the
+ * hero banner). Measures the banner → form_view → focus → request funnel so we
+ * can tell whether surfacing the form higher up actually drives completions.
+ *
+ * @example
+ *   pushAppointmentCtaClick({ service: "endoscopia", position: "hero-banner" })
+ */
+export function pushAppointmentCtaClick(params: {
+  service?: string
+  position?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "appointment_cta_click",
+    service: params.service,
+    position: params.position,
     page_path: params.pagePath || currentPath(),
   })
 }
