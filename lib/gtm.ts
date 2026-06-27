@@ -97,6 +97,14 @@ interface AppointmentRequestEvent {
   page_path: string
 }
 
+interface VideoPlayEvent {
+  event: "video_play"
+  video_id: string
+  video_title?: string
+  service?: string
+  page_path: string
+}
+
 interface PageViewEvent {
   event: "page_view"
   page_path: string
@@ -115,6 +123,7 @@ type DataLayerEvent =
   | AppointmentFormStartEvent
   | AppointmentCtaClickEvent
   | AppointmentRequestEvent
+  | VideoPlayEvent
   | PageViewEvent
 
 declare global {
@@ -365,6 +374,28 @@ export function pushAppointmentRequest(params: {
     service: params.service,
     cross_sell: params.crossSell,
     folio: params.folio,
+    page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a click-to-play on an embedded video (YouTubeEmbed facade).
+ * Fires once, when the user actually loads the player — not on page view.
+ *
+ * @example
+ *   pushVideoPlay({ videoId: "UHUdTSp4K1o", videoTitle: "CPRE explicada", service: "CPRE" })
+ */
+export function pushVideoPlay(params: {
+  videoId: string
+  videoTitle?: string
+  service?: string
+  pagePath?: string
+}): void {
+  push({
+    event: "video_play",
+    video_id: params.videoId,
+    video_title: params.videoTitle,
+    service: params.service,
     page_path: params.pagePath || currentPath(),
   })
 }

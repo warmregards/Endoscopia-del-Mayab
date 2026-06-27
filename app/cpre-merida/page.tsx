@@ -16,6 +16,7 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -210,6 +211,13 @@ export default function CprePage() {
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Qué es una CPRE?
             </h2>
+
+            <YouTubeEmbed
+              id="UHUdTSp4K1o"
+              title="CPRE en Mérida — Endoscopia del Mayab"
+              caption="CPRE en Mérida — Endoscopia del Mayab"
+              service="CPRE"
+            />
 
             <p className="text-foreground/80 leading-relaxed max-w-3xl">
               Endoscopio especializado con fluoroscopía que entra por la boca y muestra en tiempo real tus conductos biliares y pancreáticos. Trata cálculos en el conducto, estenosis biliares y obstrucciones — y coloca prótesis si es necesario, en el mismo procedimiento. 30–90 minutos bajo sedación profunda. Sin cirugía abierta, sin cortes, sin dolor.
