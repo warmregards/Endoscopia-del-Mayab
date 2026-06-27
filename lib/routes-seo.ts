@@ -99,9 +99,9 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/cpre-playa-del-carmen",
     key: "cpre",
     titleOverride:
-      "CPRE en Mérida para Pacientes de Quintana Roo | Desde $25,000",
+      "CPRE en Mérida para Pacientes de Quintana Roo | Desde $26,000",
     descriptionOverride:
-      "Atendemos pacientes de Playa del Carmen, Cancún y Tulum en Hospital Amerimed Mérida. CPRE con Dr. Quiroz desde $25,000 MXN. Facilitamos traslado.",
+      "Atendemos pacientes de Playa del Carmen, Cancún y Tulum en Hospital Amerimed Mérida. CPRE con Dr. Quiroz desde $26,000 MXN. Facilitamos traslado.",
   },
 
   // ── Therapeutic Procedures ──────────────────────────────────────────────

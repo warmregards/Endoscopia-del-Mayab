@@ -27,6 +27,7 @@ import { DOCTOR } from "@/lib/doctor"
 import { toSchemaOfferCatalog, SERVICES } from "@/lib/services"
 import type { ServiceKey } from "@/lib/pricing"
 import { PRICING, hasPrice } from "@/lib/pricing"
+import type { Video } from "@/lib/videos"
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -414,74 +415,40 @@ export function pricingItemList(
 // VideoObject (for pages embedding a YouTube video)
 // ---------------------------------------------------------------------------
 
-export interface VideoChapter {
-  /** Chapter label as shown in the video. */
-  name: string
-  /** Start offset in whole seconds from the beginning of the video. */
-  start: number
-}
-
-export interface VideoSchemaParams {
-  /** YouTube video ID — the part after `youtu.be/` or `watch?v=`. */
-  videoId: string
-  /** Video title. */
-  name: string
-  /** Plain-language video description. */
-  description: string
-  /** Upload date, ISO 8601 (e.g. "2026-06-26"). */
-  uploadDate: string
-  /** Duration, ISO 8601 (e.g. "PT6M18S"). */
-  duration: string
-  /** Total length in seconds — closes the final chapter's endOffset. */
-  durationSeconds: number
-  /** Page the video lives on, e.g. "/cpre-merida" (sets the canonical url). */
-  path?: string
-  /** Chapter markers — surfaced by Google as "key moments". */
-  chapters?: VideoChapter[]
-}
-
 /**
- * Generate VideoObject JSON-LD for an embedded YouTube video. Eligible for
- * video rich results / Google video search. Pass `chapters` to mark up the
- * "key moments" carousel.
+ * Generate VideoObject JSON-LD from a registry entry (`lib/videos.ts`).
+ * Eligible for video rich results / Google video search; `chapters` are
+ * marked up as the "key moments" carousel.
  *
  * @example
- *   videoSchema({
- *     videoId: "UHUdTSp4K1o",
- *     name: "CPRE en Mérida: qué es...",
- *     description: "La CPRE trata cálculos...",
- *     uploadDate: "2026-06-26",
- *     duration: "PT6M18S",
- *     durationSeconds: 378,
- *     path: "/cpre-merida",
- *     chapters: [{ name: "Introducción", start: 0 }, ...],
- *   })
+ *   import { getVideo } from "@/lib/videos"
+ *   videoSchema(getVideo("cpre"))
  */
-export function videoSchema(params: VideoSchemaParams) {
-  const watchUrl = `https://www.youtube.com/watch?v=${params.videoId}`
-  const chapters = params.chapters ?? []
+export function videoSchema(video: Video) {
+  const watchUrl = `https://www.youtube.com/watch?v=${video.id}`
+  const chapters = video.chapters ?? []
 
   return prune({
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    name: params.name,
-    description: params.description,
+    name: video.title,
+    description: video.description,
     thumbnailUrl: [
-      `https://i.ytimg.com/vi/${params.videoId}/maxresdefault.jpg`,
-      `https://i.ytimg.com/vi/${params.videoId}/hqdefault.jpg`,
+      `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`,
+      `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
     ],
-    uploadDate: params.uploadDate,
-    duration: params.duration,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
     contentUrl: watchUrl,
-    embedUrl: `https://www.youtube-nocookie.com/embed/${params.videoId}`,
-    url: params.path ? `${SITE_URL}${params.path}` : undefined,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+    url: video.path ? `${SITE_URL}${video.path}` : undefined,
     publisher: { "@id": CLINIC_ID },
     hasPart: chapters.map((ch, i) => ({
       "@type": "Clip",
       name: ch.name,
       startOffset: ch.start,
       endOffset:
-        i < chapters.length - 1 ? chapters[i + 1].start : params.durationSeconds,
+        i < chapters.length - 1 ? chapters[i + 1].start : video.durationSeconds,
       url: `${watchUrl}&t=${ch.start}s`,
     })),
   })

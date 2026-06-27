@@ -3,6 +3,7 @@ import { PRICING, displayFrom, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
 import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -67,27 +68,8 @@ const includedItems = [
   "Reporte con fotos el mismo día",
 ]
 
-/* ── CPRE explainer video (YouTube) ────────────────────────────────────── */
-const CPRE_VIDEO = {
-  id: "UHUdTSp4K1o",
-  title:
-    "CPRE en Mérida: qué es, cuándo es urgente y cómo se trata sin cirugía abierta",
-  description:
-    "La CPRE trata cálculos en la vía biliar, obstrucciones, ictericia y pancreatitis biliar —y muchas veces resuelve el problema en una sola sesión, sin cirugía abierta. El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica qué es, cuándo es urgente, qué tan segura es y cómo se realiza, bajo sedación profunda y con rayos X en tiempo real, con tecnología SpyGlass para los casos complejos. Recibe pacientes de toda la península (Cancún, Playa del Carmen, Quintana Roo).",
-  uploadDate: "2026-06-26",
-  duration: "PT6M18S",
-  durationSeconds: 378,
-  chapters: [
-    { name: "Introducción", start: 0 },
-    { name: "¿Qué es la CPRE y para qué sirve?", start: 15 },
-    { name: "¿Cuándo es urgente una CPRE?", start: 128 },
-    { name: "¿La CPRE es peligrosa?", start: 198 },
-    { name: "¿Cómo se realiza y cuánto dura?", start: 285 },
-    { name: "¿Atiende pacientes de Cancún y Playa del Carmen?", start: 324 },
-  ],
-}
-
 export default function CprePage() {
+  const video = getVideo("cpre")
   return (
     <>
       {/* ── JSON-LD Schema ─────────────────────────────────────────────── */}
@@ -128,16 +110,7 @@ export default function CprePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            videoSchema({
-              videoId: CPRE_VIDEO.id,
-              name: CPRE_VIDEO.title,
-              description: CPRE_VIDEO.description,
-              uploadDate: CPRE_VIDEO.uploadDate,
-              duration: CPRE_VIDEO.duration,
-              durationSeconds: CPRE_VIDEO.durationSeconds,
-              path: "/cpre-merida",
-              chapters: CPRE_VIDEO.chapters,
-            })
+            videoSchema(video)
           ),
         }}
       />
@@ -250,10 +223,10 @@ export default function CprePage() {
             </h2>
 
             <YouTubeEmbed
-              id={CPRE_VIDEO.id}
-              title={CPRE_VIDEO.title}
-              caption={CPRE_VIDEO.title}
-              service="CPRE"
+              id={video.id}
+              title={video.title}
+              caption={video.title}
+              service={video.service}
             />
 
             <p className="text-foreground/80 leading-relaxed max-w-3xl">

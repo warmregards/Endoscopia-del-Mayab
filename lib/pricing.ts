@@ -45,7 +45,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   endoscopia: { from: 4500, currency: "MXN", label: "Endoscopia (EGD)" },
   colonoscopia: { from: 5000, currency: "MXN", label: "Colonoscopia" },
   panendoscopia: { from: 4500, currency: "MXN", label: "Panendoscopia" },
-  cpre: { from: 25000, currency: "MXN", label: "CPRE" },
+  cpre: { from: 26000, currency: "MXN", label: "CPRE" },
   ligadura_hemorroides: { from: 15000, currency: "MXN", label: "Ligadura de hemorroides internas" },
   ligadura_varices: { from: 15000, currency: "MXN", label: "Ligadura de várices esofágicas" },
   gastrostomia_peg: { from: 16000, currency: "MXN", label: "Gastrostomía endoscópica (PEG)" },

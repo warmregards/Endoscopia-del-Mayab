@@ -41,7 +41,7 @@
 
 ### DO NOT change:
 - **Any existing URL paths.** All 27 current routes must be preserved exactly. No slug changes.
-- **The WhatsApp-first booking flow.** No forms, no Doctoralia integration, no multi-step booking.
+- **The WhatsApp-first booking flow.** WhatsApp remains the primary CTA everywhere. The ONE sanctioned exception is the appointment intake form (`AppointmentForm` → `/api/intake`) on the endoscopia/colonoscopia pages — see "Appointment Intake Form" below. No new forms on other pages, no Doctoralia integration, no multi-step booking.
 - **The "Desde $X MXN" pricing format.** Use `displayFrom()` or `mxn()` from `lib/pricing.ts`.
 - **Spanish-only content.** No English pages (yet).
 - **The phone number:** +52 999 236 0153
@@ -55,6 +55,75 @@
 
 ---
 
+## Appointment Intake Form
+
+The ONE sanctioned form on the site. WhatsApp is still the primary CTA everywhere; this
+is an additive lead-capture experiment, not a replacement for the WhatsApp flow.
+
+- **Component:** `components/AppointmentForm.tsx` (client). Takes a `procedure` prop
+  (`"endoscopia" | "colonoscopia"`). Rendered only on `app/endoscopia-merida/page.tsx`
+  and `app/colonoscopia-merida/page.tsx`. Do not add it to other pages.
+- **API route:** `app/api/intake/route.ts` (`POST /api/intake`, `runtime = "nodejs"`).
+  Validates input (Zod + libphonenumber-js MX phone), runs an anti-spam honeypot,
+  generates a folio (`EDM-XXXX`), and notifies Telegram. No DB, no email.
+- **Delivery:** Telegram Bot API `sendMessage`. Requires `TELEGRAM_BOT_TOKEN` +
+  `TELEGRAM_CHAT_ID` (server-only env vars). Missing/invalid → route returns 500 and
+  the form shows its WhatsApp fallback ("No pudimos enviar tu solicitud…"). It never
+  silently drops a request.
+- **Attribution:** captures `gclid`/`gbraid`/`wbraid` + UTM from `lib/attribution.ts`
+  (cookie + localStorage, ~90 days) and fires the `appointment_request` GTM event only
+  after a 200 response.
+- **Debugging "form not working":** it's almost always the Telegram config, not the
+  code. Check Vercel function logs for `[intake] Telegram …`. Known gotcha: if the
+  Telegram group is upgraded to a supergroup, its chat ID changes (to the `-100…` form)
+  and `TELEGRAM_CHAT_ID` in Vercel must be updated + redeployed.
+
+---
+
+## Video Embeds (YouTube)
+
+All embedded videos MUST follow this structure — never hardcode a YouTube ID,
+`<iframe>`, or VideoObject schema inline on a page.
+
+- **Data:** every video is one entry in `lib/videos.ts` → `VIDEOS`, keyed by a
+  short slug (usually the page key). The `Video` type carries everything both
+  the player and the schema need: `id`, `title`, `description`, `uploadDate`
+  (ISO), `duration` (ISO 8601, e.g. `PT6M18S`), `durationSeconds`, `path`,
+  `service`, and optional `chapters` (`{ name, start }` in seconds).
+- **Player:** `components/YouTubeEmbed.tsx` — a lazy click-to-load facade
+  (thumbnail + play button; loads the `youtube-nocookie` iframe only on click,
+  to stay fast on mobile). It fires `pushVideoPlay()` on play.
+- **Schema:** `videoSchema(video)` in `lib/schema.ts` emits `VideoObject`
+  JSON-LD (with `Clip` "key moments" from `chapters`) for video rich-result
+  eligibility — this is the SEO point of embedding on-domain.
+
+**Pattern to add a video to a page:**
+
+```tsx
+import { videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
+
+const video = getVideo("cpre")
+// ...
+<script type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema(video)) }} />
+<YouTubeEmbed id={video.id} title={video.title} caption={video.title} service={video.service} />
+```
+
+**Where it goes:** high on the page (top ~25%), and inside an existing section
+so the `bg-background`↔`bg-muted` alternation is preserved (don't add a new
+section that forces a cascade of background flips).
+
+**Getting the metadata:** `id`, `uploadDate`, `duration`/`durationSeconds`, and
+`title` can be read straight off YouTube; `description` + `chapters` come from
+the video's YouTube description (the timestamp list). The channel
+(`@DrOmarQuiroz`) is already in `CLINIC.sameAs`, so the site↔channel entity link
+exists — embedding videos on-domain reinforces it but does NOT transfer channel
+authority to the site.
+
+---
+
 ## File Structure
 
 ```
@@ -65,6 +134,7 @@ app/
 ├── fonts.ts                # Font exports (montserrat, openSans)
 ├── robots.ts               # Dynamic robots.txt
 ├── sitemap.ts              # Dynamic sitemap.xml
+├── api/intake/route.ts     # POST /api/intake — appointment form → Telegram (see "Appointment Intake Form")
 ├── [procedure-slug]/       # 22 procedure pages, each has page.tsx
 │   └── page.tsx
 ├── dr-omar-quiroz/         # Doctor profile
@@ -80,10 +150,12 @@ components/                   # ⚠️ READ components/README.md BEFORE ADDING C
 ├── Footer.tsx              # Site footer — all NAP+W from CLINIC (server)
 ├── WhatsAppButton.tsx      # Primary CTA — pushWhatsAppClick() (client)
 ├── CallButton.tsx          # Secondary CTA — pushPhoneClick() (client)
+├── AppointmentForm.tsx     # Intake form (endoscopia/colonoscopia only) → /api/intake (client)
 ├── Faq.tsx                 # Accordion FAQ + inline faqSchema() JSON-LD (client)
 ├── GoogleReviews.tsx       # Review display — getGoogleReviews() with fallback (server async)
 ├── MapEmbed.tsx            # Google Maps iframe (server)
 ├── ProceduresGrid.tsx      # Service catalog — derives from SERVICES data (server)
+├── YouTubeEmbed.tsx        # Lazy click-to-load YouTube facade → pushVideoPlay() (client) — see "Video Embeds"
 ├── ScrollToTop.tsx         # Scroll restoration on route change (client)
 └── theme-provider.tsx      # next-themes wrapper, forces light mode (client)
 
@@ -99,6 +171,7 @@ lib/                          # ⚠️ READ lib/README.md BEFORE TOUCHING COMPON
 ├── faq.ts                  # FAQ content for every page → getFaqsFor()
 ├── gtm.ts                  # pushWhatsAppClick(), pushPhoneClick(), scroll/view events
 ├── reviews.ts              # Google Reviews API + static fallback + schema helper
+├── videos.ts               # VIDEOS registry + getVideo() — embedded YouTube data (see "Video Embeds")
 └── utils.ts                # cn() (clsx + tailwind-merge)
 ```
 
@@ -564,7 +637,7 @@ Design decisions should serve these personas in order:
 |-----------|---------------------|-------------------|--------|
 | Endoscopia | $4,500 MXN | ~$5,500–6,500 | — |
 | Colonoscopia | $5,000 MXN | ~$6,000–7,000 | — |
-| CPRE | $24,700 MXN | ~$34,000 | ~$40,000 |
+| CPRE | $26,000 MXN | ~$34,000 | ~$40,000 |
 
 **Why prices are low:** Dr. Quiroz owns his equipment outright (paid cash), hospital overhead fixed at ~$20K/month. Not a budget-quality play — same hospital, same equipment, lower cost.
 
@@ -642,6 +715,8 @@ Run through this before every `git commit`:
 | `NEXT_PUBLIC_WHATSAPP` | WhatsApp number digits only (default: 529992360153) |
 | `GOOGLE_PLACE_ID` | Google Place ID for reviews API |
 | `GOOGLE_PLACES_API_KEY` | Google Places API key (optional — fallback reviews used without it) |
+| `TELEGRAM_BOT_TOKEN` | Telegram bot token for appointment intake notifications (server-only, no `NEXT_PUBLIC_`) |
+| `TELEGRAM_CHAT_ID` | Telegram chat/supergroup ID that receives intake submissions. ⚠️ Supergroups use the `-100…` form; if a group is upgraded to a supergroup its ID changes and must be updated here |
 
 ---
 
@@ -689,7 +764,7 @@ Schema is now handled exclusively by `/lib/schema.ts` functions called inline in
 
 - **Don't create a blog/CMS system yet.** Content lives in page.tsx files directly.
 - **Don't add authentication or user accounts.**
-- **Don't add a contact form.** WhatsApp IS the contact mechanism.
+- **Don't add new contact forms.** WhatsApp is the contact mechanism everywhere except the one sanctioned appointment intake form on the endoscopia/colonoscopia pages (see "Appointment Intake Form"). Don't add forms to other pages.
 - **Don't use `next/image` with external URLs** unless configured in `next.config.mjs`.
 - **Don't add English content** (data shows US traffic is bots).
 - **This app is light-mode only. No dark mode.** The `@custom-variant dark` registration is kept in globals.css for shadcn compatibility but `.dark` class is never applied via `forcedTheme="light"` in the theme provider.
