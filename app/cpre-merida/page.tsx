@@ -2,7 +2,7 @@ import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -67,6 +67,26 @@ const includedItems = [
   "Reporte con fotos el mismo día",
 ]
 
+/* ── CPRE explainer video (YouTube) ────────────────────────────────────── */
+const CPRE_VIDEO = {
+  id: "UHUdTSp4K1o",
+  title:
+    "CPRE en Mérida: qué es, cuándo es urgente y cómo se trata sin cirugía abierta",
+  description:
+    "La CPRE trata cálculos en la vía biliar, obstrucciones, ictericia y pancreatitis biliar —y muchas veces resuelve el problema en una sola sesión, sin cirugía abierta. El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica qué es, cuándo es urgente, qué tan segura es y cómo se realiza, bajo sedación profunda y con rayos X en tiempo real, con tecnología SpyGlass para los casos complejos. Recibe pacientes de toda la península (Cancún, Playa del Carmen, Quintana Roo).",
+  uploadDate: "2026-06-26",
+  duration: "PT6M18S",
+  durationSeconds: 378,
+  chapters: [
+    { name: "Introducción", start: 0 },
+    { name: "¿Qué es la CPRE y para qué sirve?", start: 15 },
+    { name: "¿Cuándo es urgente una CPRE?", start: 128 },
+    { name: "¿La CPRE es peligrosa?", start: 198 },
+    { name: "¿Cómo se realiza y cuánto dura?", start: 285 },
+    { name: "¿Atiende pacientes de Cancún y Playa del Carmen?", start: 324 },
+  ],
+}
+
 export default function CprePage() {
   return (
     <>
@@ -101,6 +121,23 @@ export default function CprePage() {
               { name: "Inicio", path: "/" },
               { name: "CPRE en Mérida", path: "/cpre-merida" },
             ])
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            videoSchema({
+              videoId: CPRE_VIDEO.id,
+              name: CPRE_VIDEO.title,
+              description: CPRE_VIDEO.description,
+              uploadDate: CPRE_VIDEO.uploadDate,
+              duration: CPRE_VIDEO.duration,
+              durationSeconds: CPRE_VIDEO.durationSeconds,
+              path: "/cpre-merida",
+              chapters: CPRE_VIDEO.chapters,
+            })
           ),
         }}
       />
@@ -213,9 +250,9 @@ export default function CprePage() {
             </h2>
 
             <YouTubeEmbed
-              id="UHUdTSp4K1o"
-              title="CPRE en Mérida — Endoscopia del Mayab"
-              caption="CPRE en Mérida — Endoscopia del Mayab"
+              id={CPRE_VIDEO.id}
+              title={CPRE_VIDEO.title}
+              caption={CPRE_VIDEO.title}
               service="CPRE"
             />
 
