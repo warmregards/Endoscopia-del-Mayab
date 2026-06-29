@@ -188,6 +188,15 @@ export default function EndoscopiaPage() {
               </p>
             </div>
 
+            <div className="max-w-3xl mx-auto w-full">
+              <YouTubeEmbed
+                id={video.id}
+                title={video.title}
+                caption={video.title}
+                service={video.service}
+              />
+            </div>
+
             {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
@@ -367,13 +376,6 @@ export default function EndoscopiaPage() {
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Qué es una endoscopia?
             </h2>
-
-            <YouTubeEmbed
-              id={video.id}
-              title={video.title}
-              caption={video.title}
-              service={video.service}
-            />
 
             <p className="text-foreground/80 leading-relaxed max-w-3xl">
               Cámara flexible HD que entra por la boca y muestra en tiempo real
