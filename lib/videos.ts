@@ -40,6 +40,25 @@ export interface Video {
 }
 
 export const VIDEOS = {
+  endoscopia: {
+    id: "kyunUdvltHk",
+    title: "Endoscopia en Mérida: qué es, precio y si duele",
+    description:
+      "¿Te indicaron una endoscopia, panendoscopia o gastroscopia? Las tres son el mismo estudio. El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica qué es, cuánto cuesta, si duele, qué enfermedades detecta y cómo prepararte. Revisa tu esófago, estómago y duodeno con cámara flexible de alta definición y bajo sedación, con toma de biopsias sin costo, con endoscopista y anestesiólogo certificados. Hospital Amerimed, Mérida, Yucatán.",
+    uploadDate: "2026-06-27",
+    duration: "PT5M25S",
+    durationSeconds: 325,
+    path: "/endoscopia-merida",
+    service: "endoscopia",
+    chapters: [
+      { name: "Introducción", start: 0 },
+      { name: "¿Qué es una endoscopia digestiva y para qué sirve?", start: 17 },
+      { name: "¿Cuánto cuesta una endoscopia en Mérida?", start: 73 },
+      { name: "¿Duele la endoscopia?", start: 137 },
+      { name: "¿Qué enfermedades detecta una endoscopia?", start: 204 },
+      { name: "¿Cómo me preparo para una endoscopia?", start: 271 },
+    ],
+  },
   cpre: {
     id: "UHUdTSp4K1o",
     title:

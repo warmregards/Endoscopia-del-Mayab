@@ -2,7 +2,8 @@ import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import {
   CheckCircle2,
@@ -18,6 +19,7 @@ import GoogleReviews from "@/components/GoogleReviews"
 import AppointmentForm from "@/components/AppointmentForm"
 import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import ComparisonTable from "@/components/ComparisonTable"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -59,6 +61,7 @@ export default function EndoscopiaPage() {
   const endoBase = PRICING.endoscopia.from ?? 0
   const consultaFee = ADDITIONAL_FEES.consultation.amount
   const biopsyFee = ADDITIONAL_FEES.biopsy.amount
+  const video = getVideo("endoscopia")
 
   return (
     <>
@@ -364,6 +367,13 @@ export default function EndoscopiaPage() {
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Qué es una endoscopia?
             </h2>
+
+            <YouTubeEmbed
+              id={video.id}
+              title={video.title}
+              caption={video.title}
+              service={video.service}
+            />
 
             <p className="text-foreground/80 leading-relaxed max-w-3xl">
               Cámara flexible HD que entra por la boca y muestra en tiempo real
@@ -784,6 +794,12 @@ export default function EndoscopiaPage() {
               { name: "Endoscopia en Mérida", path: "/endoscopia-merida" },
             ])
           ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema(video)),
         }}
       />
     </>
