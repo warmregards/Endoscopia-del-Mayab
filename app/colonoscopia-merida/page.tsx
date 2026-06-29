@@ -2,7 +2,8 @@ import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, INCLUDED_IN_PRICE, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import {
   CheckCircle2,
@@ -19,6 +20,7 @@ import AppointmentForm from "@/components/AppointmentForm"
 import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 import ComparisonTable from "@/components/ComparisonTable"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata = metaFor("colonoscopia")
@@ -76,6 +78,7 @@ export default function ColonoscopiaPage() {
   const colonBase = PRICING.colonoscopia.from ?? 0
   const consultaFee = ADDITIONAL_FEES.consultation.amount
   const biopsyFee = ADDITIONAL_FEES.biopsy.amount
+  const video = getVideo("colonoscopia")
 
   return (
     <>
@@ -113,6 +116,14 @@ export default function ColonoscopiaPage() {
               { name: "Colonoscopia en Mérida", path: "/colonoscopia-merida" },
             ])
           ),
+        }}
+      />
+
+      {/* ── JSON-LD: VideoObject ─────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema(video)),
         }}
       />
 
@@ -233,6 +244,15 @@ export default function ColonoscopiaPage() {
               <p className="text-muted-foreground mt-2">
                 Precio fijo y transparente. Sin cargos ocultos.
               </p>
+            </div>
+
+            <div className="max-w-3xl mx-auto w-full">
+              <YouTubeEmbed
+                id={video.id}
+                title={video.title}
+                caption={video.title}
+                service={video.service}
+              />
             </div>
 
             {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}

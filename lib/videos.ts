@@ -40,6 +40,28 @@ export interface Video {
 }
 
 export const VIDEOS = {
+  colonoscopia: {
+    id: "ZfzmgwvuvrM",
+    title: "Colonoscopia en Mérida: precio, dolor, preparación y más",
+    description:
+      "¿Duele? ¿Cuánto cuesta? ¿A qué edad? El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General, egresado de la UNAM— responde las 8 dudas más comunes sobre la colonoscopia en Mérida. Realiza colonoscopia con sedación de anestesiólogo certificado y equipo de alta definición en Hospital Amerimed, para la detección y prevención del cáncer colorrectal, con retiro de pólipos y toma de biopsias sin límite en la misma sesión.",
+    uploadDate: "2026-06-29",
+    duration: "PT8M31S",
+    durationSeconds: 511,
+    path: "/colonoscopia-merida",
+    service: "colonoscopia",
+    chapters: [
+      { name: "Introducción", start: 0 },
+      { name: "¿Qué es una colonoscopia y a qué edad debo hacérmela?", start: 11 },
+      { name: "¿Cuánto cuesta una colonoscopia en Mérida?", start: 76 },
+      { name: "¿Duele la colonoscopia?", start: 127 },
+      { name: "¿Cómo es la preparación?", start: 183 },
+      { name: "¿Es peligrosa la colonoscopia?", start: 254 },
+      { name: "Colonoscopia tradicional vs. virtual", start: 306 },
+      { name: "¿La biopsia de colon cuesta extra?", start: 391 },
+      { name: "¿Tu seguro cubre la colonoscopia?", start: 447 },
+    ],
+  },
   endoscopia: {
     id: "kyunUdvltHk",
     title: "Endoscopia en Mérida: qué es, precio y si duele",
