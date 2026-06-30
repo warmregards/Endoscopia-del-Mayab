@@ -88,7 +88,9 @@ All embedded videos MUST follow this structure — never hardcode a YouTube ID,
 - **Data:** every video is one entry in `lib/videos.ts` → `VIDEOS`, keyed by a
   short slug (usually the page key). The `Video` type carries everything both
   the player and the schema need: `id`, `title`, `description`, `uploadDate`
-  (ISO), `duration` (ISO 8601, e.g. `PT6M18S`), `durationSeconds`, `path`,
+  (ISO 8601 **with timezone offset**, e.g. `2026-06-26T10:08:29-07:00` — a bare
+  date trips Search Console's "missing a timezone" warning), `duration`
+  (ISO 8601, e.g. `PT6M18S`), `durationSeconds`, `path`,
   `service`, and optional `chapters` (`{ name, start }` in seconds).
 - **Player:** `components/YouTubeEmbed.tsx` — a lazy click-to-load facade
   (thumbnail + play button; loads the `youtube-nocookie` iframe only on click,
