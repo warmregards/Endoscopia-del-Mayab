@@ -65,6 +65,17 @@ GADS_HEADER = [
     "Conversion Currency",
 ]
 
+# Google Ads Conversion Adjustments upload (RETRACT) — removes a previously
+# uploaded conversion. "Conversion Time" must match the original upload (we reuse
+# booked_at, which is stable), and "Adjustment Time" is when the retraction fires.
+GADS_ADJ_HEADER = [
+    "Google Click ID",
+    "Conversion Name",
+    "Conversion Time",
+    "Adjustment Type",
+    "Adjustment Time",
+]
+
 # Candidate headers for the appointment-date column (matched case-insensitively
 # after stripping). Prepsync exports vary; --date-col overrides.
 DATE_COL_CANDIDATES = [
@@ -205,10 +216,11 @@ def iso_utc_to_merida_local(raw):
 
 
 def load_from_csv(args):
-    """Read a Finance-tab export → list of {ref, value, date} booking records.
+    """Read a Finance-tab export → (active, cancelled) booking-record lists.
 
-    Keeps only Estado == "Enviado" (prep sent). Date is the appointment date,
-    already in Yucatán local time as exported.
+    Active = Estado "Enviado" (prep sent) → conversions. Cancelled = Estado
+    "Cancelada" → retractions. Date is the appointment date, already in Yucatán
+    local time as exported.
     """
     try:
         with open(args.prepsync, "r", encoding="utf-8-sig", newline="") as f:
@@ -230,24 +242,28 @@ def load_from_csv(args):
         date_col = resolve_col(fieldnames, DATE_COL_CANDIDATES[0],
                                fallbacks=tuple(DATE_COL_CANDIDATES[1:]))
 
-    records = []
+    active, cancelled = [], []
     for r in rows:
-        if str(r.get(estado_col, "")).strip() != "Enviado":
-            continue
-        records.append({
+        estado = str(r.get(estado_col, "")).strip().lower()
+        rec = {
             "ref": r.get(field_col),
             "value": r.get(value_col),
             "date": r.get(date_col),
-        })
-    return records
+        }
+        if estado == "enviado":
+            active.append(rec)
+        elif estado == "cancelada":
+            cancelled.append(rec)
+    return active, cancelled
 
 
 def load_from_supabase(args):
-    """Query Supabase → list of {ref, value, date} booking records.
+    """Query Supabase → (active, cancelled) booking-record lists.
 
     Booking-timed conversions: date is booked_at (always past), value is
-    cost_estimate (procedure price). Excludes cancelled appointments and anything
-    booked more than --lookback-days ago. Uses the service role key (bypasses RLS).
+    cost_estimate (procedure price). Pulls every ref-coded appointment booked
+    within --lookback-days, splitting cancelled ones out for retraction. Uses the
+    service role key (bypasses RLS).
     """
     base = os.environ.get("SUPABASE_URL", "").rstrip("/")
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
@@ -259,7 +275,6 @@ def load_from_supabase(args):
         .strftime("%Y-%m-%dT%H:%M:%SZ")
     params = {
         "select": "ref_ads,booked_at,scheduled_at,prep_status,cost_estimate",
-        "prep_status": "neq.cancelada",
         "ref_ads": "not.is.null",
         "booked_at": f"gte.{cutoff}",
         "limit": "5000",
@@ -276,17 +291,74 @@ def load_from_supabase(args):
     except Exception as e:  # noqa: BLE001 — surface any network/HTTP failure and abort
         sys.exit(f"[reconcile] ERROR: Supabase query failed: {e}")
 
-    records = []
+    active, cancelled = [], []
     for row in data:
         # Fall back to scheduled_at only for pre-migration rows that predate
         # booked_at and haven't been re-synced yet.
         raw_dt = row.get("booked_at") or row.get("scheduled_at")
-        records.append({
+        rec = {
             "ref": row.get("ref_ads"),
             "value": row.get("cost_estimate"),
             "date": iso_utc_to_merida_local(raw_dt),
+        }
+        if str(row.get("prep_status") or "").strip().lower() == "cancelada":
+            cancelled.append(rec)
+        else:
+            active.append(rec)
+    return active, cancelled
+
+
+def collect_candidates(records, ledger):
+    """Join booking records against the ledger and collapse shared-gclid dupes.
+
+    Returns (kept, stats). Each kept candidate is {gclid, code, created, value,
+    ctime}. When one gclid is stamped on several booked codes (a patient tapping
+    WhatsApp more than once), only the earliest-minted code survives — one ad
+    click yields at most one conversion (and at most one retraction).
+    """
+    candidates = []
+    stats = {"matched": 0, "matched_codes": set(), "no_gclid": [],
+             "unmatched": [], "collapsed": []}
+
+    for r in records:
+        code = normalize_ref(r.get("ref"))
+        rec = ledger.get(code) if code else None
+        if not rec:
+            stats["unmatched"].append(str(r.get("ref") or "").strip())
+            continue
+
+        stats["matched"] += 1
+        stats["matched_codes"].add(code)
+
+        gclid = str(rec.get("gclid") or "").strip()
+        if not gclid:
+            stats["no_gclid"].append(code)
+            continue
+
+        ctime = parse_datetime(r.get("date"))
+        if ctime is None:
+            print(f"[reconcile] WARN: unparseable date for {code}: {r.get('date')!r}",
+                  file=sys.stderr)
+        candidates.append({
+            "gclid": gclid,
+            "code": code,
+            "created": str(rec.get("created") or ""),  # ISO 8601 → sorts chronologically
+            "value": parse_value(r.get("value")),
+            "ctime": ctime or "",
         })
-    return records
+
+    by_gclid = {}
+    for c in candidates:
+        by_gclid.setdefault(c["gclid"], []).append(c)
+
+    kept = []
+    for gclid, group in by_gclid.items():  # dict preserves first-seen order
+        group.sort(key=lambda c: (c["created"], c["code"]))  # earliest first, code tiebreak
+        kept.append(group[0])
+        if len(group) > 1:
+            stats["collapsed"].append((gclid, group[0]["code"], [c["code"] for c in group[1:]]))
+
+    return kept, stats
 
 
 def main():
@@ -300,102 +372,73 @@ def main():
     ap.add_argument("--field", default="Ref Ads", help="Prepsync ref-code column header (CSV mode)")
     ap.add_argument("--value-col", default="Ganancia", help='value column, CSV mode (e.g. "Ganancia" or "Total")')
     ap.add_argument("--date-col", default=None, help="appointment-date column, CSV mode (autodetected if omitted)")
-    ap.add_argument("--out", default="google-ads-offline-conversions.csv", help="output CSV path")
+    ap.add_argument("--out", default="google-ads-offline-conversions.csv", help="output conversions CSV path")
+    ap.add_argument("--adjustments-out", default="google-ads-conversion-adjustments.csv",
+                    help="output conversion-adjustments (RETRACT) CSV path")
     args = ap.parse_args()
 
     if args.from_supabase == bool(args.prepsync):
         sys.exit("[reconcile] ERROR: pass exactly one of --from-supabase or --prepsync <csv>.")
 
     ledger = load_ledger(args.refs)
-    input_rows = load_from_supabase(args) if args.from_supabase else load_from_csv(args)
+    active_rows, cancelled_rows = \
+        load_from_supabase(args) if args.from_supabase else load_from_csv(args)
 
-    candidates = []           # qualifying (gclid, code, created, value, row) pre-dedupe
-    matched_count = 0         # booking rows matched to a ledger code
-    matched_codes = set()     # normalized codes that matched something
-    no_gclid = []             # (code) matched but ledger has no gclid
-    unmatched_prepsync = []   # booked rows whose code is blank/typo/unknown
+    conv, conv_stats = collect_candidates(active_rows, ledger)
+    retr, retr_stats = collect_candidates(cancelled_rows, ledger)
 
-    for r in input_rows:
-        code = normalize_ref(r.get("ref"))
-        rec = ledger.get(code) if code else None
-        if not rec:
-            unmatched_prepsync.append((str(r.get("ref") or "").strip()))
-            continue
+    # Don't retract a gclid that also has a live booking (e.g. same patient
+    # rebooked after cancelling one appointment) — the live conversion wins.
+    active_gclids = {c["gclid"] for c in conv}
+    retr = [c for c in retr if c["gclid"] not in active_gclids]
 
-        matched_count += 1
-        matched_codes.add(code)
+    # Adjustment time = now, Yucatán local. Google requires it >= the original
+    # conversion time and in the past; run time satisfies both.
+    adj_time = datetime.now(timezone(timedelta(hours=-6))) \
+        .strftime("%Y-%m-%d %H:%M:%S") + TZ_OFFSET
 
-        gclid = str(rec.get("gclid") or "").strip()
-        value = parse_value(r.get("value"))
-        ctime = parse_datetime(r.get("date"))
+    conv_out = [[c["gclid"], CONVERSION_NAME, c["ctime"],
+                 f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY]
+                for c in conv]
+    retr_out = [[c["gclid"], CONVERSION_NAME, c["ctime"], "RETRACT", adj_time] for c in retr]
 
-        if not gclid:
-            no_gclid.append(code)
-            continue
-
-        if ctime is None:
-            print(f"[reconcile] WARN: unparseable date for {code}: {r.get('date')!r}",
-                  file=sys.stderr)
-        value_str = f"{value:.2f}" if value is not None else ""
-        row = [gclid, CONVERSION_NAME, ctime or "", value_str, CONVERSION_CURRENCY]
-        candidates.append({
-            "gclid": gclid,
-            "code": code,
-            "created": str(rec.get("created") or ""),  # ISO 8601 → sorts chronologically
-            "value": value,
-            "row": row,
-        })
-
-    # Collapse shared-gclid duplicates: one ad click (gclid) must yield at most
-    # one uploaded conversion. When the same patient taps WhatsApp more than once
-    # the stored gclid is re-stamped onto several ref codes; if more than one of
-    # those books, keep only the earliest-minted code (ledger `created`) and drop
-    # the rest. "Count: One" on the Google Ads conversion action would absorb
-    # these too, but deduping at the source keeps the upload correct regardless.
-    by_gclid = {}
-    for c in candidates:
-        by_gclid.setdefault(c["gclid"], []).append(c)
-
-    output_rows = []          # rows written to Google Ads CSV (deduped by gclid)
-    total_value = 0.0
-    collapsed = []            # (gclid, kept_code, [dropped_codes]) for the summary
-    for gclid, group in by_gclid.items():  # dict preserves first-seen order
-        group.sort(key=lambda c: (c["created"], c["code"]))  # earliest first, code tiebreak
-        kept = group[0]
-        output_rows.append(kept["row"])
-        if kept["value"] is not None:
-            total_value += kept["value"]
-        if len(group) > 1:
-            collapsed.append((gclid, kept["code"], [c["code"] for c in group[1:]]))
-
-    # Codes that were clicked but never booked = lost leads.
+    total_value = sum(c["value"] for c in conv if c["value"] is not None)
+    # Codes that were clicked but never booked (in either bucket) = lost leads.
+    matched_codes = conv_stats["matched_codes"] | retr_stats["matched_codes"]
     unmatched_codes = [c for c in ledger if c not in matched_codes]
 
-    # Write Google Ads CSV.
     with open(args.out, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         w.writerow(GADS_HEADER)
-        w.writerows(output_rows)
+        w.writerows(conv_out)
+
+    with open(args.adjustments_out, "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(GADS_ADJ_HEADER)
+        w.writerows(retr_out)
 
     # Summary.
     print("─" * 60)
     print("Reconciliation summary")
     print("─" * 60)
-    print(f"Booking rows considered:            {len(input_rows)}")
-    print(f"Matched to a ref code:              {matched_count}")
-    print(f"  → written to Google Ads CSV:      {len(output_rows)}")
-    print(f"  → matched but NO gclid:           {len(no_gclid)}", end="")
-    print(f"  {sorted(no_gclid)}" if no_gclid else "")
-    print(f"  → gclid duplicates collapsed:      {len(collapsed)}")
-    for gclid, kept, dropped in collapsed:
+    print(f"Booking rows considered:            {len(active_rows)}")
+    print(f"Matched to a ref code:              {conv_stats['matched']}")
+    print(f"  → written to conversions CSV:     {len(conv_out)}")
+    print(f"  → matched but NO gclid:           {len(conv_stats['no_gclid'])}", end="")
+    print(f"  {sorted(conv_stats['no_gclid'])}" if conv_stats["no_gclid"] else "")
+    print(f"  → gclid duplicates collapsed:     {len(conv_stats['collapsed'])}")
+    for gclid, kept, dropped in conv_stats["collapsed"]:
         print(f"      …{gclid[-12:]}  kept {kept}  dropped {dropped}")
-    print(f"Unmatched booked rows (blank/typo): {len(unmatched_prepsync)}", end="")
-    print(f"  {unmatched_prepsync}" if unmatched_prepsync else "")
+    print(f"Unmatched booked rows (blank/typo): {len(conv_stats['unmatched'])}", end="")
+    print(f"  {conv_stats['unmatched']}" if conv_stats["unmatched"] else "")
+    print(f"Cancelled rows considered:          {len(cancelled_rows)}")
+    print(f"  → RETRACT rows written:           {len(retr_out)}")
     print(f"Unmatched ref codes (lost leads):   {len(unmatched_codes)}", end="")
     print(f"  {sorted(unmatched_codes)}" if unmatched_codes else "")
     print(f"Total attributed value:             {total_value:.2f} {CONVERSION_CURRENCY}")
     print("─" * 60)
-    print(f"Wrote {len(output_rows)} conversion(s) → {args.out}")
+    print(f"Wrote {len(conv_out)} conversion(s) → {args.out}")
+    print(f"Wrote {len(retr_out)} retraction(s) → {args.adjustments_out}")
 
 
 if __name__ == "__main__":

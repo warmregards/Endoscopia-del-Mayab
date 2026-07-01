@@ -31,20 +31,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Reconcile bookings → offline conversions
+      - name: Reconcile bookings → offline conversions + retractions
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           python scripts/reconcile-conversions.py \
             --from-supabase \
-            --out data/offline-conversions.csv
+            --out data/offline-conversions.csv \
+            --adjustments-out data/offline-conversion-retractions.csv
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/offline-conversions.csv
-          git diff --cached --quiet -- data/offline-conversions.csv \
+          git add data/offline-conversions.csv data/offline-conversion-retractions.csv
+          git diff --cached --quiet \
             || git commit -m "chore: refresh weekly offline conversions"
           git push
