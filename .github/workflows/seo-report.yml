@@ -2,8 +2,10 @@ name: Monthly SEO Report
 
 on:
   schedule:
-    # 1st of every month at 3am Merida time (CST = UTC-6)
-    - cron: '0 9 1 * *'
+    # 4th of every month at 3am Merida time (CST = UTC-6).
+    # Runs on the 4th (not 1st) so the prior month's GSC data has
+    # fully finalized — GSC revises the last ~2-3 days for a few days.
+    - cron: '0 9 4 * *'
   workflow_dispatch: # Manual trigger for testing
 
 permissions:
