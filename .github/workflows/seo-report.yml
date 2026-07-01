@@ -2,8 +2,8 @@ name: Monthly SEO Report
 
 on:
   schedule:
-    # 1st of every month at 9am Merida time (CST = UTC-6)
-    - cron: '0 15 1 * *'
+    # 1st of every month at 3am Merida time (CST = UTC-6)
+    - cron: '0 9 1 * *'
   workflow_dispatch: # Manual trigger for testing
 
 permissions:
