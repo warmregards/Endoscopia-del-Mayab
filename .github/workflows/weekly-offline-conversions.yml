@@ -1,0 +1,50 @@
+name: Weekly offline conversions
+
+# Joins the ref-code/GCLID ledger (data/ref-codes.csv) against PrepSync bookings
+# in Supabase and overwrites data/offline-conversions.csv — a Google Ads Offline
+# Conversion Import file. Supabase is the source of truth (PrepSync pushes daily),
+# so the output is fully derived and safe to regenerate/overwrite every run.
+#
+# Upload the committed CSV in Google Ads → Goals → Conversions → Uploads. The
+# "Conversion Name" column ("Cita Realizada") must match an Import conversion
+# action in the account.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays 07:00 UTC = 01:00 Mérida (Yucatán is UTC-6, no DST)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-offline-conversions
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Reconcile bookings → offline conversions
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python scripts/reconcile-conversions.py \
+            --from-supabase \
+            --out data/offline-conversions.csv
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/offline-conversions.csv
+          git diff --cached --quiet -- data/offline-conversions.csv \
+            || git commit -m "chore: refresh weekly offline conversions"
+          git push
