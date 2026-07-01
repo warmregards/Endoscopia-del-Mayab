@@ -3,8 +3,16 @@
   "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
   "total": 87,
-  "fetchedAt": "2026-06-30T09:26:44.697Z",
+  "fetchedAt": "2026-07-01T09:38:42.393Z",
   "reviews": [
+    {
+      "author_name": "LMI KARINA LS",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVttxyh3f4frwnJ-OtSGHzKDCBJ0YxpHrLAYnOcT51j6as7N6k-=s128-c0x00000000-cc-rp-mo-ba2",
+      "rating": 5,
+      "relative_time_description": "Hace 1 mes",
+      "text": "El dia de hoy fuimos atendidos por el Dr. Omar , muy profesional . y amable. nos explico a detalle el procedimiento de endoscopia. Recomiendo ampliamente",
+      "time": 1779998175
+    },
     {
       "author_name": "Emily Bench",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUCIWloMu5--fenKNJgchPbOYpxmWUadmJ_9toUWLjJ3MvtwqhX=s128-c0x00000000-cc-rp-mo",
@@ -12,14 +20,6 @@
       "relative_time_description": "Hace 3 meses",
       "text": "Quiero expresar mi más sincero agradecimiento al Dr. Quiroz por la excelente atención recibida. Es un doctor sumamente amable, con una calidad humana que se percibe desde el primer momento. Se toma el tiempo de explicar absolutamente todo con claridad y paciencia, lo cual genera una gran tranquilidad y confianza como paciente.\n\nSu trato es impecable: elegante, profesional y muy respetuoso. La clínica también me encantó; es un espacio sencillo, pero a la vez moderno, limpio y altamente eficiente, lo cual habla muy bien de su organización y atención al detalle.\n\nEl procedimiento fue rápido y realizado con gran profesionalismo. Al finalizar, el doctor nuevamente se aseguró de explicar cada paso a seguir, sin dejar dudas. Algo que valoro muchísimo es que envía los resultados por WhatsApp y mantiene comunicación por esa vía. Hoy en día, eso marca una gran diferencia, ya que como pacientes muchas veces sentimos distancia con los médicos, y este tipo de cercanía nos hace sentir acompañados, atendidos y con acceso a quien sigue siendo nuestra autoridad en temas de salud.\n\nSin duda, una experiencia excelente de principio a fin. Lo recomiendo ampliamente.",
       "time": 1774987693
-    },
-    {
-      "author_name": "Daniel Gutiérrez",
-      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKaA04tuh2EF6XOX1uWQiyH3IJGr0SLhj-8jF1coFGdXWUD-A=s128-c0x00000000-cc-rp-mo",
-      "rating": 5,
-      "relative_time_description": "Hace 3 meses",
-      "text": "Fui a Mérida y necesitaba realizarme una endoscopia. Todo excelente. El Dr. Omar Quiroz es súper atento y profesional.",
-      "time": 1772739195
     },
     {
       "author_name": "Paola Castillo",
