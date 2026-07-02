@@ -95,6 +95,12 @@ export const CLINIC = {
 
   // ── Branding ────────────────────────────────────────────────────────────
   logoUrl: "/endoscopia-del-mayab-logo.png",
+  /** Horizontal teal wordmark (icon + "ENDOSCOPIA DEL MAYAB"), for on-page brand bars */
+  wordmarkUrl: "/endoscopia-logo.png",
+  /** Host hospital the practice operates inside (for trust marks, alt text) */
+  hospitalName: "Hospital Amerimed",
+  /** Logo of the host hospital (Amerimed) — shown as a "located at" trust mark */
+  hospitalLogoUrl: "/amerimed-hospitals-logo.png",
   imageUrl: "/endoscopia-og.png",
   priceRange: "$$",
   paymentAccepted: "Tarjeta, Efectivo, Transferencia",

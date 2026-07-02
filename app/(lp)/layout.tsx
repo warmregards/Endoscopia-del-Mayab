@@ -10,9 +10,10 @@ import { CLINIC } from "@/lib/clinic";
  * Flight payload, or mounted on an LP. Attention ratio 1:1.
  *
  * The one exception is a slim, NON-navigational brand bar below — brand
- * presence only (logo + wordmark), no link, no href, no menu. It exists so the
- * ad-clicked visitor sees who they're dealing with; it must never become a
- * navigation escape hatch. The only exits on an LP stay the WhatsApp/phone CTAs.
+ * presence only (practice wordmark + host-hospital mark), no link, no href, no
+ * menu. It exists so the ad-clicked visitor sees who they're dealing with; it
+ * must never become a navigation escape hatch. The only exits on an LP stay the
+ * WhatsApp/phone CTAs.
  *
  * Each LP renders its own noindex metadata and its own page-local sticky CTA.
  */
@@ -25,19 +26,29 @@ export default function LpLayout({
     <>
       {/* Non-navigational brand bar — a <div>, deliberately not an <a>/<nav>. */}
       <div className="flex h-14 items-center border-b border-border/50 bg-background">
-        <div className="container-narrow flex items-center gap-3">
+        <div className="container-narrow flex items-center gap-4">
+          {/* Practice wordmark (icon + "Endoscopia del Mayab") */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={CLINIC.logoUrl}
+            src={CLINIC.wordmarkUrl}
             alt={CLINIC.name}
-            width={32}
+            width={144}
             height={32}
             className="h-8 w-auto"
             decoding="async"
           />
-          <span className="font-serif text-lg font-bold tracking-tight text-foreground">
-            {CLINIC.name}
-          </span>
+          {/* Visual divider — not a control */}
+          <span aria-hidden className="h-6 w-px bg-border" />
+          {/* Host-hospital trust mark — where the practice is located */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={CLINIC.hospitalLogoUrl}
+            alt={CLINIC.hospitalName}
+            width={85}
+            height={32}
+            className="h-8 w-auto"
+            decoding="async"
+          />
         </div>
       </div>
 
