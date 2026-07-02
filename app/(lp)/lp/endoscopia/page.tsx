@@ -152,6 +152,11 @@ export default function LpEndoscopiaPage() {
               {mxn(ADDITIONAL_FEES.biopsy.amount)}), solo si se toman biopsias —
               se te informa antes.
             </p>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              Trabajamos con las principales aseguradoras. Escríbenos y validamos
+              tu cobertura.
+            </p>
           </div>
 
           {/* Competitor anchor strip */}

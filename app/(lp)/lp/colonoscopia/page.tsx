@@ -7,6 +7,9 @@ import {
   Clock,
   CalendarCheck,
   Timer,
+  Droplets,
+  GlassWater,
+  BellRing,
 } from "lucide-react";
 
 import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing";
@@ -164,6 +167,11 @@ export default function LpColonoscopiaPage() {
               {mxn(ADDITIONAL_FEES.biopsy.amount)}), solo si se toman biopsias —
               se te informa antes.
             </p>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              Trabajamos con las principales aseguradoras. Escríbenos y validamos
+              tu cobertura.
+            </p>
           </div>
 
           {/* Competitor anchor strip */}
@@ -291,6 +299,72 @@ export default function LpColonoscopiaPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 4.5 — PREPARACIÓN (bg-background) — colonoscopia ONLY
+          Prep dread, not the procedure, is colonoscopy's #1 silent conversion
+          killer. Turn the biggest objection into a reason to message: state
+          only the invariants (volumes, split-dose, clear liquids) and route all
+          per-appointment TIMING to personalized WhatsApp guidance. No fixed
+          clock values anywhere — a wrong time on a medical page can botch a prep.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-narrow section-padding">
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            La preparación es más fácil de lo que crees
+          </h2>
+
+          <p className="mt-4 text-muted-foreground">
+            Sabemos que la preparación es lo que más preocupa — más que el
+            estudio. La hacemos en dosis divididas para que sea más llevadera, y
+            te guiamos en cada paso.
+          </p>
+
+          <ul className="mt-6 space-y-4">
+            {[
+              {
+                icon: Droplets,
+                lead: "Se toma en dos partes de 2 litros",
+                rest: " (preparación Nulytely) — dividida se tolera mucho mejor que todo de una vez.",
+              },
+              {
+                icon: GlassWater,
+                lead: "Solo líquidos claros",
+                rest: " durante la preparación; te decimos exactamente qué sí y qué no.",
+              },
+              {
+                icon: BellRing,
+                lead: "Los horarios dependen de la hora de tu estudio",
+                rest: " — por eso te los damos personalizados por WhatsApp, con recordatorios de cuándo tomar cada parte.",
+              },
+            ].map(({ icon: Icon, lead, rest }) => (
+              <li
+                key={lead}
+                className="flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-sm"
+              >
+                <Icon className="mt-0.5 h-6 w-6 shrink-0 text-accent" />
+                <span className="text-foreground">
+                  <strong className="font-semibold text-foreground">
+                    {lead}
+                  </strong>
+                  {rest}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8">
+            <WhatsAppButton
+              variant="primary"
+              service="colonoscopia"
+              position="lp-prep"
+              procedureName="Colonoscopia"
+              label="Escríbenos y te damos tu horario de preparación"
+              className="w-full sm:w-auto sm:px-8"
+            />
+          </div>
         </div>
       </section>
 
