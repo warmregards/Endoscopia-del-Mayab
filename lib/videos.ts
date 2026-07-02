@@ -87,6 +87,26 @@ export const VIDEOS = {
       { name: "¿Cómo me preparo para una endoscopia?", start: 271 },
     ],
   },
+  ligadura_hemorroides: {
+    id: "Pfit_gb3NGY",
+    title: "Ligadura de Hemorroides Internas en Mérida | Sin Cirugía",
+    description:
+      "¿Sabías que las hemorroides internas sí se pueden tratar sin cirugía? La ligadura interna de hemorroides es un procedimiento ambulatorio, sin dolor, que tarda de 5 a 10 minutos. El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica en qué consiste, si duele, cuántas sesiones necesitas y cómo es la recuperación. Está indicado principalmente para hemorroides internas grado 1 y grado 2: molestias al evacuar, comezón, sangrado o sensación de incomodidad.",
+    uploadDate: "2026-06-02T18:30:00-06:00",
+    duration: "PT3M55S",
+    durationSeconds: 235,
+    path: "/ligadura-hemorroides-internas-merida",
+    service: "ligadura-hemorroides",
+    chapters: [
+      { name: "Hemorroides internas sin cirugía", start: 0 },
+      { name: "¿Cómo funciona la ligadura de hemorroides?", start: 33 },
+      { name: "Hemorroides internas vs. externas", start: 55 },
+      { name: "¿Duele el procedimiento?", start: 92 },
+      { name: "¿Cuántas sesiones necesitas?", start: 135 },
+      { name: "Recuperación en 24 a 48 horas", start: 171 },
+      { name: "Agenda tu cita en Mérida", start: 221 },
+    ],
+  },
   cpre: {
     id: "UHUdTSp4K1o",
     title:

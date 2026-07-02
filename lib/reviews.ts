@@ -157,7 +157,7 @@ export async function getGoogleReviews(
  *
  * @example
  *   const rating = await toSchemaRating()
- *   // → { "@type": "AggregateRating", ratingValue: 5, reviewCount: 80, bestRating: 5 }
+ *   // → { "@type": "AggregateRating", ratingValue: 5, reviewCount: 87, bestRating: 5 }
  */
 export async function toSchemaRating(): Promise<{
   "@type": "AggregateRating"

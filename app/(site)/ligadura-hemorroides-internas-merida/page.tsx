@@ -2,7 +2,8 @@ import { metaFor } from "@/lib/routes-seo"
 import { mxn, displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import Image from "next/image"
 import { CheckCircle2, MapPin, Clock, AlertTriangle } from "lucide-react"
@@ -10,6 +11,7 @@ import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata = metaFor("ligadura_hemorroides")
@@ -47,6 +49,8 @@ const STEPS = [
 ]
 
 export default function LigaduraHemorroidesPage() {
+  const video = getVideo("ligadura_hemorroides")
+
   return (
     <>
       {/* ── Section 1: Hero ── bg-background */}
@@ -111,6 +115,15 @@ export default function LigaduraHemorroidesPage() {
             minutos. Pacientes de zonas como Cholul, Temozón Norte y Francisco
             de Montejo llegan en menos de 20 minutos.
           </p>
+
+          <div className="max-w-3xl mx-auto w-full mb-8">
+            <YouTubeEmbed
+              id={video.id}
+              title={video.title}
+              caption={video.title}
+              service={video.service}
+            />
+          </div>
 
           <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
             Hemorroides Grado 1, 2, 3 y 4: ¿Cuál Necesita Ligadura?
@@ -515,6 +528,12 @@ export default function LigaduraHemorroidesPage() {
               },
             ])
           ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema(video)),
         }}
       />
     </>
