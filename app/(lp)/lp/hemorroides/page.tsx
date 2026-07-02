@@ -61,7 +61,7 @@ export default function LpHemorroidesPage() {
           surgery fear + embarrassment are the two objections that block booking.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
-        <div className="container-narrow section-padding">
+        <div className="container-narrow pt-6 pb-12 md:py-16">
           {/* Eyebrow / trust bar */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
@@ -78,7 +78,7 @@ export default function LpHemorroidesPage() {
             </span>
           </div>
 
-          <h1 className="mt-6 font-serif text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
+          <h1 className="mt-4 font-serif text-[1.75rem] font-extrabold leading-tight tracking-tight text-foreground md:mt-6 md:text-5xl">
             Ligadura de hemorroides en Mérida sin cirugía
           </h1>
 
@@ -89,7 +89,7 @@ export default function LpHemorroidesPage() {
           </p>
 
           {/* Price badge */}
-          <div className="mt-6 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4">
+          <div className="mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6">
             <span className="text-2xl font-bold text-text-accent md:text-3xl">
               {PRICE}
             </span>
@@ -101,7 +101,7 @@ export default function LpHemorroidesPage() {
           {/* CTAs */}
           <div
             id="hero-ctas"
-            className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
+            className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-8"
           >
             <WhatsAppButton
               variant="primary"
@@ -221,7 +221,7 @@ export default function LpHemorroidesPage() {
                   position="lp-doctor"
                   procedureName="Ligadura de hemorroides"
                   label="Escribirle al Dr. Quiroz"
-                  className="text-sm"
+                  className="min-h-[48px] text-sm"
                 />
               </div>
             </div>
