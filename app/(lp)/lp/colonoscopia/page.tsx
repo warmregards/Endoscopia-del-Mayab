@@ -6,11 +6,11 @@ import {
   ShieldCheck,
   Clock,
   CalendarCheck,
-  FileText,
+  Timer,
 } from "lucide-react";
 
 import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing";
-import { CLINIC, waMessage } from "@/lib/clinic";
+import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CallButton from "@/components/CallButton";
@@ -20,27 +20,31 @@ import LpVideo from "@/components/LpVideo";
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
+//
+// ⚠️ Experiment: both arms of the Colonoscopia bid-strategy experiment (control
+// = Max Clicks, treatment = Max Conversions) must point their Final URL at THIS
+// same /lp/colonoscopia. A separate LP for the treatment arm would stack a
+// second variable onto the bid test. See 04_MANUAL_ITEMS for the swap steps.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
-  title: "Endoscopia en Mérida desde $4,500 MXN | Dr. Omar Quiroz",
+  title: "Colonoscopia en Mérida desde $5,000 MXN | Dr. Omar Quiroz",
   description:
-    "Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $4,500 MXN, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.",
+    "Colonoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $5,000 MXN, retiro de pólipos en la misma sesión. Agenda por WhatsApp.",
   robots: { index: false, follow: false },
 };
 
 export const revalidate = 86400;
 
 // ---------------------------------------------------------------------------
-// Self-hosted trust clip (Section 3.5). Null until the vertical clip is shot +
-// a poster frame exported; the section renders nothing until then — never a
-// visible placeholder. Drop the files in /public and fill this in to enable.
-// Never a YouTube embed.
+// Self-hosted trust clip (Section 3.5). Left null until the vertical clip is
+// shot + a poster frame exported. Drop the files in /public and fill this in
+// to enable the section — no other change needed. Never a YouTube embed.
 //
-// endoscopia ~15s script (tú-form, brand-compliant):
-//   "Una endoscopia con sedación no duele y no la vas a recordar; un
-//    anestesiólogo te acompaña todo el tiempo, y ese mismo día te entrego tu
-//    reporte con fotografías. Si tienes dudas, escríbeme por WhatsApp — te
-//    contesto yo."
+// Colonoscopia script (~15s): prep reassurance is the highest-leverage line —
+// prep anxiety is colonoscopy's #1 booking blocker.
+//   "En la colonoscopia te explico la preparación paso a paso para que sea
+//    sencilla. Es con sedación, y si encuentro un pólipo lo retiro en la misma
+//    sesión. Escríbeme por WhatsApp y te oriento directamente."
 // ---------------------------------------------------------------------------
 const TRUST_VIDEO: {
   src: string;
@@ -48,15 +52,17 @@ const TRUST_VIDEO: {
   captionsSrc?: string;
 } | null = null;
 
-const PRICE = displayFrom("endoscopia"); // "Desde $4,500 MXN"
+const PRICE = displayFrom("colonoscopia"); // "Desde $5,000 MXN"
 const { ratingValue, reviewCount } = CLINIC.aggregateRating;
 
-export default function LpEndoscopiaPage() {
+export default function LpColonoscopiaPage() {
   return (
     <div className="pb-24 md:pb-0">
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
           Message match + price + one-tap CTA in the first viewport.
+          "Resultados en 20 minutos" carries colonoscopy's strongest ad asset
+          onto the page for message match.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-narrow section-padding">
@@ -72,17 +78,17 @@ export default function LpEndoscopiaPage() {
             </span>
             <span className="inline-flex items-center gap-1">
               <Clock className="h-4 w-4 text-accent" />
-              Resultados el mismo día
+              Resultados en 20 minutos
             </span>
           </div>
 
           <h1 className="mt-6 font-serif text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
-            Endoscopia en Mérida con sedación
+            Colonoscopia en Mérida con sedación
           </h1>
 
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            Estudio con sedación, reporte con fotografías HD el mismo día, y
-            precio cerrado desde el primer contacto.
+            Estudio con sedación, detección y retiro de pólipos en la misma
+            sesión, y precio cerrado desde el inicio.
           </p>
 
           {/* Price badge */}
@@ -102,15 +108,15 @@ export default function LpEndoscopiaPage() {
           >
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-hero"
-              procedureName="Endoscopia"
+              procedureName="Colonoscopia"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
             <CallButton
               variant="ghost"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-hero"
               label="Llamar ahora"
               className="w-full sm:w-auto"
@@ -145,6 +151,12 @@ export default function LpEndoscopiaPage() {
                   <span className="text-foreground">{item}</span>
                 </li>
               ))}
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <span className="font-medium text-foreground">
+                  Polipectomía en la misma sesión si es necesario
+                </span>
+              </li>
             </ul>
 
             <p className="mt-6 text-sm text-muted-foreground">
@@ -157,16 +169,16 @@ export default function LpEndoscopiaPage() {
           {/* Competitor anchor strip */}
           <div className="mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground">
             Otros centros en Mérida:{" "}
-            <span className="font-semibold">~$5,500–$6,500</span>. Mismo
+            <span className="font-semibold">~$6,000–$7,000</span>. Mismo
             hospital, mismo equipo, menor costo.
           </div>
 
           <div className="mt-8">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-precio"
-              procedureName="Endoscopia"
+              procedureName="Colonoscopia"
               label="Confirmar mi precio por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
@@ -222,9 +234,9 @@ export default function LpEndoscopiaPage() {
                 <WhatsAppButton
                   variant="primary"
                   size="compact"
-                  service="endoscopia"
+                  service="colonoscopia"
                   position="lp-doctor"
-                  procedureName="Endoscopia"
+                  procedureName="Colonoscopia"
                   label="Escribirle al Dr. Quiroz"
                   className="text-sm"
                 />
@@ -232,17 +244,16 @@ export default function LpEndoscopiaPage() {
             </div>
           </div>
 
-          {/* SECTION 3.5 — Trust video. Renders nothing until TRUST_VIDEO is
-              set (see const above) — no placeholder ever shown to a visitor. */}
+          {/* SECTION 3.5 — Trust video (renders only once a clip is configured) */}
           {TRUST_VIDEO && (
             <div className="mt-10">
               <LpVideo
                 src={TRUST_VIDEO.src}
                 poster={TRUST_VIDEO.poster}
                 captionsSrc={TRUST_VIDEO.captionsSrc}
-                service="endoscopia"
-                videoId="lp-endoscopia-trust"
-                title="El Dr. Omar Quiroz sobre la endoscopia con sedación"
+                service="colonoscopia"
+                videoId="lp-colonoscopia-trust"
+                title="El Dr. Omar Quiroz sobre la colonoscopia con sedación"
                 caption={`El Dr. Omar Quiroz — ${DOCTOR.descriptor}.`}
               />
             </div>
@@ -252,7 +263,8 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 4 — RAPIDEZ / DISPONIBILIDAD (bg-muted)
-          Honest urgency + remove "how long will this take" friction.
+          Honest urgency + colonoscopy's strongest ad angles: 20-min results
+          and detection + polyp removal in a single session.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -260,10 +272,14 @@ export default function LpEndoscopiaPage() {
             Agenda hoy, estudio mañana
           </h2>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               { icon: CalendarCheck, text: "Sin lista de espera" },
-              { icon: FileText, text: "Reporte el mismo día del estudio" },
+              { icon: Timer, text: "Resultados en 20 minutos" },
+              {
+                icon: CheckCircle2,
+                text: "Detección y retiro de pólipos en una sola sesión",
+              },
               { icon: Clock, text: CLINIC.hours.display },
             ].map(({ icon: Icon, text }) => (
               <li
@@ -289,7 +305,9 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6 — FAQ CORTA (bg-muted)
-          Only the questions that block booking. Not the full educational FAQ.
+          Only the questions that block booking. Prep replaces endoscopia's
+          generic Q — prep anxiety is colonoscopy's #1 booking blocker, and
+          "te guiamos por WhatsApp" doubles as a conversion hook.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -300,20 +318,20 @@ export default function LpEndoscopiaPage() {
           <div className="mt-6 space-y-4">
             {[
               {
-                q: "¿La endoscopia duele?",
-                a: "Con sedación no sientes ni recuerdas el procedimiento. Un anestesiólogo te acompaña todo el tiempo.",
+                q: "¿La colonoscopia duele?",
+                a: "Con sedación no sientes ni recuerdas el estudio; un anestesiólogo te acompaña todo el tiempo.",
+              },
+              {
+                q: "¿Cómo es la preparación?",
+                a: "Te damos instrucciones claras de la dieta y el laxante el día previo. Te guiamos por WhatsApp paso a paso.",
               },
               {
                 q: "¿Qué incluye el precio?",
-                a: "Sedación, toma de biopsias sin límite, sala de recuperación, valoración y reporte con fotos HD.",
+                a: "Sedación, retiro de pólipos y biopsias sin límite, sala de recuperación, valoración y reporte HD.",
               },
               {
                 q: "¿Necesito acompañante?",
                 a: "Sí, por la sedación necesitas que alguien te lleve a casa. El estudio y la recuperación toman aproximadamente una hora.",
-              },
-              {
-                q: "¿Dónde se realiza?",
-                a: "En Hospital Amerimed, Consultorio 517, Mérida.",
               },
             ].map(({ q, a }) => (
               <div
@@ -334,9 +352,9 @@ export default function LpEndoscopiaPage() {
             </p>
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-faq"
-              procedureName="Endoscopia"
+              procedureName="Colonoscopia"
               label="Preguntar por WhatsApp"
               className="w-full shrink-0 sm:w-auto"
             />
@@ -350,7 +368,7 @@ export default function LpEndoscopiaPage() {
       <section className="bg-primary">
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
-            ¿Listo para agendar tu endoscopia?
+            ¿Listo para agendar tu colonoscopia?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
             Precio cerrado {PRICE.toLowerCase()}. Te contesta el Dr. Quiroz
@@ -360,15 +378,15 @@ export default function LpEndoscopiaPage() {
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row sm:items-center">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-bottom"
-              procedureName="Endoscopia"
+              procedureName="Colonoscopia"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-10"
             />
             <CallButton
               variant="inverse"
-              service="endoscopia"
+              service="colonoscopia"
               position="lp-bottom"
               label={`Llamar al ${CLINIC.phone.display}`}
               className="w-full sm:w-auto"
@@ -384,15 +402,15 @@ export default function LpEndoscopiaPage() {
         <div className="flex items-center gap-2">
           <WhatsAppButton
             variant="primary"
-            service="endoscopia"
+            service="colonoscopia"
             position="lp-sticky"
-            procedureName="Endoscopia"
+            procedureName="Colonoscopia"
             label="Agendar por WhatsApp"
             className="min-h-[48px] flex-1"
           />
           <CallButton
             variant="secondary"
-            service="endoscopia"
+            service="colonoscopia"
             position="lp-sticky"
             label="Llamar"
             className="min-h-[48px] shrink-0 px-4 text-sm"

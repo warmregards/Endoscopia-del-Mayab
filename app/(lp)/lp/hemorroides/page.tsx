@@ -5,12 +5,12 @@ import {
   CheckCircle2,
   ShieldCheck,
   Clock,
-  CalendarCheck,
-  FileText,
+  Activity,
+  EyeOff,
 } from "lucide-react";
 
-import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing";
-import { CLINIC, waMessage } from "@/lib/clinic";
+import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing";
+import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CallButton from "@/components/CallButton";
@@ -22,25 +22,26 @@ import LpVideo from "@/components/LpVideo";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
-  title: "Endoscopia en Mérida desde $4,500 MXN | Dr. Omar Quiroz",
+  title: "Ligadura de hemorroides en Mérida sin cirugía | Dr. Omar Quiroz",
   description:
-    "Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $4,500 MXN, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.",
+    "Ligadura de hemorroides internas en Mérida, sin cirugía mayor ni hospitalización, con sedación. Atención discreta con el Dr. Quiroz. Agenda por WhatsApp.",
   robots: { index: false, follow: false },
 };
 
 export const revalidate = 86400;
 
 // ---------------------------------------------------------------------------
-// Self-hosted trust clip (Section 3.5). Null until the vertical clip is shot +
-// a poster frame exported; the section renders nothing until then — never a
-// visible placeholder. Drop the files in /public and fill this in to enable.
-// Never a YouTube embed.
+// Self-hosted trust clip (Section 3.5). Left null until the vertical clip is
+// shot + a poster frame exported. Drop the files in /public and fill this in
+// to enable the section — no other change needed. Never a YouTube embed.
 //
-// endoscopia ~15s script (tú-form, brand-compliant):
-//   "Una endoscopia con sedación no duele y no la vas a recordar; un
-//    anestesiólogo te acompaña todo el tiempo, y ese mismo día te entrego tu
-//    reporte con fotografías. Si tienes dudas, escríbeme por WhatsApp — te
-//    contesto yo."
+// Use the UNIVERSAL 20s clip for this LP (don't shoot a procedure-specific one
+// for hemorroides — low volume, not worth the caption-correction overhead):
+//   "Hola, soy el Dr. Omar Quiroz, Endoscopista Gastrointestinal y Cirujano
+//    General. Sé que hacerte un estudio da nervios y que el precio importa —
+//    por eso el precio es cerrado, sin sorpresas, y cuando escribes por
+//    WhatsApp te contesto yo directamente, no una recepcionista. Nos vemos en
+//    Hospital Amerimed."
 // ---------------------------------------------------------------------------
 const TRUST_VIDEO: {
   src: string;
@@ -48,15 +49,16 @@ const TRUST_VIDEO: {
   captionsSrc?: string;
 } | null = null;
 
-const PRICE = displayFrom("endoscopia"); // "Desde $4,500 MXN"
+const PRICE = displayFrom("ligadura_hemorroides"); // "Desde $15,000 MXN"
 const { ratingValue, reviewCount } = CLINIC.aggregateRating;
 
-export default function LpEndoscopiaPage() {
+export default function LpHemorroidesPage() {
   return (
     <div className="pb-24 md:pb-0">
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
-          Message match + price + one-tap CTA in the first viewport.
+          "Avoid surgery, avoid downtime, discreet" is the strongest driver here —
+          surgery fear + embarrassment are the two objections that block booking.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-narrow section-padding">
@@ -67,22 +69,23 @@ export default function LpEndoscopiaPage() {
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
             </span>
             <span className="inline-flex items-center gap-1">
-              <MapPin className="h-4 w-4 text-accent" />
-              Hospital Amerimed
+              <ShieldCheck className="h-4 w-4 text-accent" />
+              Sin cirugía
             </span>
             <span className="inline-flex items-center gap-1">
-              <Clock className="h-4 w-4 text-accent" />
-              Resultados el mismo día
+              <CheckCircle2 className="h-4 w-4 text-accent" />
+              Sin hospitalización
             </span>
           </div>
 
           <h1 className="mt-6 font-serif text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
-            Endoscopia en Mérida con sedación
+            Ligadura de hemorroides en Mérida sin cirugía
           </h1>
 
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            Estudio con sedación, reporte con fotografías HD el mismo día, y
-            precio cerrado desde el primer contacto.
+            Tratamiento de hemorroides internas por ligadura endoscópica — sin
+            cirugía mayor, sin hospitalización, con sedación, por un{" "}
+            {DOCTOR.descriptor}.
           </p>
 
           {/* Price badge */}
@@ -91,7 +94,7 @@ export default function LpEndoscopiaPage() {
               {PRICE}
             </span>
             <span className="mt-1 text-sm text-muted-foreground">
-              Sedación, biopsias y reporte incluidos.
+              Procedimiento ambulatorio con sedación.
             </span>
           </div>
 
@@ -102,15 +105,15 @@ export default function LpEndoscopiaPage() {
           >
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-hero"
-              procedureName="Endoscopia"
+              procedureName="Ligadura de hemorroides"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
             <CallButton
               variant="ghost"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-hero"
               label="Llamar ahora"
               className="w-full sm:w-auto"
@@ -127,7 +130,7 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
-          Kill the hidden-costs objection + anchor against competitors.
+          Soft value anchor (not a competitor-price row): avoid surgery costs.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -146,27 +149,19 @@ export default function LpEndoscopiaPage() {
                 </li>
               ))}
             </ul>
-
-            <p className="mt-6 text-sm text-muted-foreground">
-              Único costo adicional posible: lectura de patología (
-              {mxn(ADDITIONAL_FEES.biopsy.amount)}), solo si se toman biopsias —
-              se te informa antes.
-            </p>
           </div>
 
-          {/* Competitor anchor strip */}
+          {/* Soft value anchor — not a competitor price */}
           <div className="mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground">
-            Otros centros en Mérida:{" "}
-            <span className="font-semibold">~$5,500–$6,500</span>. Mismo
-            hospital, mismo equipo, menor costo.
+            Sin los costos ni la recuperación de una cirugía tradicional.
           </div>
 
           <div className="mt-8">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-precio"
-              procedureName="Endoscopia"
+              procedureName="Ligadura de hemorroides"
               label="Confirmar mi precio por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
@@ -176,7 +171,7 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3 — POR QUÉ CON EL DR. QUIROZ (bg-background)
-          Authority: a named specialist, not a faceless clinic.
+          Authority + discretion (embarrassment is a booking objection here).
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
@@ -214,17 +209,17 @@ export default function LpEndoscopiaPage() {
               </ul>
 
               <p className="mt-6 text-foreground">
-                Cuando escribes, te contesta directamente el doctor — no una
-                recepcionista.
+                Atención discreta y directa: cuando escribes, te contesta el
+                doctor — no una recepcionista.
               </p>
 
               <div className="mt-6">
                 <WhatsAppButton
                   variant="primary"
                   size="compact"
-                  service="endoscopia"
+                  service="ligadura_hemorroides"
                   position="lp-doctor"
-                  procedureName="Endoscopia"
+                  procedureName="Ligadura de hemorroides"
                   label="Escribirle al Dr. Quiroz"
                   className="text-sm"
                 />
@@ -232,17 +227,16 @@ export default function LpEndoscopiaPage() {
             </div>
           </div>
 
-          {/* SECTION 3.5 — Trust video. Renders nothing until TRUST_VIDEO is
-              set (see const above) — no placeholder ever shown to a visitor. */}
+          {/* SECTION 3.5 — Trust video (renders only once a clip is configured) */}
           {TRUST_VIDEO && (
             <div className="mt-10">
               <LpVideo
                 src={TRUST_VIDEO.src}
                 poster={TRUST_VIDEO.poster}
                 captionsSrc={TRUST_VIDEO.captionsSrc}
-                service="endoscopia"
-                videoId="lp-endoscopia-trust"
-                title="El Dr. Omar Quiroz sobre la endoscopia con sedación"
+                service="ligadura_hemorroides"
+                videoId="lp-hemorroides-trust"
+                title="El Dr. Omar Quiroz sobre la ligadura de hemorroides"
                 caption={`El Dr. Omar Quiroz — ${DOCTOR.descriptor}.`}
               />
             </div>
@@ -251,19 +245,27 @@ export default function LpEndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 4 — RAPIDEZ / DISPONIBILIDAD (bg-muted)
-          Honest urgency + remove "how long will this take" friction.
+          SECTION 4 — SIN CIRUGÍA, SIN VERGÜENZA (bg-muted)
+          Discretion + no-surgery are the two objections that block this booking.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-            Agenda hoy, estudio mañana
+            Un procedimiento discreto y rápido
           </h2>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <p className="mt-4 inline-flex items-start gap-2 text-foreground">
+            <EyeOff className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+            La ligadura trata las hemorroides internas colocando una banda; sin
+            cirugía mayor y sin hospitalización. Atención discreta y directa con
+            el Dr. Quiroz.
+          </p>
+
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
-              { icon: CalendarCheck, text: "Sin lista de espera" },
-              { icon: FileText, text: "Reporte el mismo día del estudio" },
+              { icon: ShieldCheck, text: "Sin cirugía mayor" },
+              { icon: CheckCircle2, text: "Ambulatorio, sin hospitalización" },
+              { icon: Activity, text: "Sedación con anestesiólogo" },
               { icon: Clock, text: CLINIC.hours.display },
             ].map(({ icon: Icon, text }) => (
               <li
@@ -275,11 +277,23 @@ export default function LpEndoscopiaPage() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-8">
+            <WhatsAppButton
+              variant="primary"
+              service="ligadura_hemorroides"
+              position="lp-urgencia"
+              procedureName="Ligadura de hemorroides"
+              label="Escribir al Dr. Quiroz ahora"
+              className="w-full sm:w-auto sm:px-8"
+            />
+          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5 — RESEÑAS (renders its own section, gradient bg)
+          showPlaceLink={false}: no outbound Google exit on a paid LP (1:1 ratio).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews
         title="Lo que dicen nuestros pacientes"
@@ -289,7 +303,7 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6 — FAQ CORTA (bg-muted)
-          Only the questions that block booking. Not the full educational FAQ.
+          Only the questions that block booking.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -300,20 +314,16 @@ export default function LpEndoscopiaPage() {
           <div className="mt-6 space-y-4">
             {[
               {
-                q: "¿La endoscopia duele?",
-                a: "Con sedación no sientes ni recuerdas el procedimiento. Un anestesiólogo te acompaña todo el tiempo.",
+                q: "¿Necesito cirugía?",
+                a: "En la mayoría de hemorroides internas, no. La ligadura es ambulatoria y sin hospitalización.",
               },
               {
-                q: "¿Qué incluye el precio?",
-                a: "Sedación, toma de biopsias sin límite, sala de recuperación, valoración y reporte con fotos HD.",
+                q: "¿Duele?",
+                a: "Es un procedimiento rápido; se maneja con sedación y molestias mínimas.",
               },
               {
-                q: "¿Necesito acompañante?",
-                a: "Sí, por la sedación necesitas que alguien te lleve a casa. El estudio y la recuperación toman aproximadamente una hora.",
-              },
-              {
-                q: "¿Dónde se realiza?",
-                a: "En Hospital Amerimed, Consultorio 517, Mérida.",
+                q: "¿Cuándo puedo volver a mis actividades?",
+                a: "La recuperación suele ser rápida; el Dr. Quiroz te da las indicaciones.",
               },
             ].map(({ q, a }) => (
               <div
@@ -334,9 +344,9 @@ export default function LpEndoscopiaPage() {
             </p>
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-faq"
-              procedureName="Endoscopia"
+              procedureName="Ligadura de hemorroides"
               label="Preguntar por WhatsApp"
               className="w-full shrink-0 sm:w-auto"
             />
@@ -350,25 +360,24 @@ export default function LpEndoscopiaPage() {
       <section className="bg-primary">
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
-            ¿Listo para agendar tu endoscopia?
+            ¿Listo para tratar tus hemorroides sin cirugía?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
-            Precio cerrado {PRICE.toLowerCase()}. Te contesta el Dr. Quiroz
-            directamente.
+            Atención discreta. Te contesta directamente el Dr. Quiroz.
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row sm:items-center">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-bottom"
-              procedureName="Endoscopia"
+              procedureName="Ligadura de hemorroides"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-10"
             />
             <CallButton
               variant="inverse"
-              service="endoscopia"
+              service="ligadura_hemorroides"
               position="lp-bottom"
               label={`Llamar al ${CLINIC.phone.display}`}
               className="w-full sm:w-auto"
@@ -384,15 +393,15 @@ export default function LpEndoscopiaPage() {
         <div className="flex items-center gap-2">
           <WhatsAppButton
             variant="primary"
-            service="endoscopia"
+            service="ligadura_hemorroides"
             position="lp-sticky"
-            procedureName="Endoscopia"
+            procedureName="Ligadura de hemorroides"
             label="Agendar por WhatsApp"
             className="min-h-[48px] flex-1"
           />
           <CallButton
             variant="secondary"
-            service="endoscopia"
+            service="ligadura_hemorroides"
             position="lp-sticky"
             label="Llamar"
             className="min-h-[48px] shrink-0 px-4 text-sm"

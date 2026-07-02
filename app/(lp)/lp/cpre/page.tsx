@@ -5,12 +5,12 @@ import {
   CheckCircle2,
   ShieldCheck,
   Clock,
-  CalendarCheck,
-  FileText,
+  Timer,
+  Activity,
 } from "lucide-react";
 
-import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing";
-import { CLINIC, waMessage } from "@/lib/clinic";
+import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing";
+import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CallButton from "@/components/CallButton";
@@ -22,25 +22,25 @@ import LpVideo from "@/components/LpVideo";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
-  title: "Endoscopia en Mérida desde $4,500 MXN | Dr. Omar Quiroz",
+  title: "CPRE en Mérida sin cirugía abierta | Dr. Omar Quiroz",
   description:
-    "Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $4,500 MXN, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.",
+    "CPRE endoscópica en Hospital Amerimed, Mérida: extracción de cálculos y desobstrucción biliar sin cirugía abierta, con sedación. Agenda por WhatsApp.",
   robots: { index: false, follow: false },
 };
 
 export const revalidate = 86400;
 
 // ---------------------------------------------------------------------------
-// Self-hosted trust clip (Section 3.5). Null until the vertical clip is shot +
-// a poster frame exported; the section renders nothing until then — never a
-// visible placeholder. Drop the files in /public and fill this in to enable.
-// Never a YouTube embed.
+// Self-hosted trust clip (Section 3.5). Left null until the vertical clip is
+// shot + a poster frame exported. Drop the files in /public and fill this in
+// to enable the section — no other change needed. Never a YouTube embed.
 //
-// endoscopia ~15s script (tú-form, brand-compliant):
-//   "Una endoscopia con sedación no duele y no la vas a recordar; un
-//    anestesiólogo te acompaña todo el tiempo, y ese mismo día te entrego tu
-//    reporte con fotografías. Si tienes dudas, escríbeme por WhatsApp — te
-//    contesto yo."
+// CPRE script (~15s): highest-anxiety, highest-margin page — a procedure-
+// specific clip may pay for itself here alone. Lead with "sin cirugía abierta"
+// + urgency (ictericia/dolor), not price.
+//   "La CPRE resuelve la obstrucción de la vía biliar sin cirugía abierta, con
+//    sedación y recuperación rápida. Si tienes dolor o coloración amarilla,
+//    escríbeme hoy por WhatsApp y valoramos tu caso."
 // ---------------------------------------------------------------------------
 const TRUST_VIDEO: {
   src: string;
@@ -48,15 +48,16 @@ const TRUST_VIDEO: {
   captionsSrc?: string;
 } | null = null;
 
-const PRICE = displayFrom("endoscopia"); // "Desde $4,500 MXN"
+const PRICE = displayFrom("cpre"); // "Desde $26,000 MXN"
 const { ratingValue, reviewCount } = CLINIC.aggregateRating;
 
-export default function LpEndoscopiaPage() {
+export default function LpCprePage() {
   return (
     <div className="pb-24 md:pb-0">
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
-          Message match + price + one-tap CTA in the first viewport.
+          High-ticket/urgent framing: avoid open surgery + specialist capability,
+          one-tap CTA in the first viewport. NOT bargain framing.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-narrow section-padding">
@@ -71,18 +72,18 @@ export default function LpEndoscopiaPage() {
               Hospital Amerimed
             </span>
             <span className="inline-flex items-center gap-1">
-              <Clock className="h-4 w-4 text-accent" />
-              Resultados el mismo día
+              <ShieldCheck className="h-4 w-4 text-accent" />
+              Sin cirugía abierta
             </span>
           </div>
 
           <h1 className="mt-6 font-serif text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
-            Endoscopia en Mérida con sedación
+            CPRE en Mérida sin cirugía abierta
           </h1>
 
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            Estudio con sedación, reporte con fotografías HD el mismo día, y
-            precio cerrado desde el primer contacto.
+            Extracción de cálculos y desobstrucción de la vía biliar por
+            endoscopia, con sedación, por un {DOCTOR.descriptor}.
           </p>
 
           {/* Price badge */}
@@ -91,7 +92,7 @@ export default function LpEndoscopiaPage() {
               {PRICE}
             </span>
             <span className="mt-1 text-sm text-muted-foreground">
-              Sedación, biopsias y reporte incluidos.
+              Procedimiento hospitalario con sedación e insumos.
             </span>
           </div>
 
@@ -102,15 +103,15 @@ export default function LpEndoscopiaPage() {
           >
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="cpre"
               position="lp-hero"
-              procedureName="Endoscopia"
+              procedureName="CPRE"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
             <CallButton
               variant="ghost"
-              service="endoscopia"
+              service="cpre"
               position="lp-hero"
               label="Llamar ahora"
               className="w-full sm:w-auto"
@@ -127,7 +128,8 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
-          Kill the hidden-costs objection + anchor against competitors.
+          High-ticket anchor: competitors are far higher — frames $26k as value,
+          not a bargain. Kill the hidden-costs objection.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -146,27 +148,22 @@ export default function LpEndoscopiaPage() {
                 </li>
               ))}
             </ul>
-
-            <p className="mt-6 text-sm text-muted-foreground">
-              Único costo adicional posible: lectura de patología (
-              {mxn(ADDITIONAL_FEES.biopsy.amount)}), solo si se toman biopsias —
-              se te informa antes.
-            </p>
           </div>
 
           {/* Competitor anchor strip */}
           <div className="mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground">
-            Otros centros en Mérida:{" "}
-            <span className="font-semibold">~$5,500–$6,500</span>. Mismo
-            hospital, mismo equipo, menor costo.
+            En Mérida otros centros:{" "}
+            <span className="font-semibold">~$34,000</span>. En Cancún:{" "}
+            <span className="font-semibold">~$40,000</span>. Mismo hospital,
+            mismo equipo, menor costo.
           </div>
 
           <div className="mt-8">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="cpre"
               position="lp-precio"
-              procedureName="Endoscopia"
+              procedureName="CPRE"
               label="Confirmar mi precio por WhatsApp"
               className="w-full sm:w-auto sm:px-8"
             />
@@ -176,7 +173,7 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3 — POR QUÉ CON EL DR. QUIROZ (bg-background)
-          Authority: a named specialist, not a faceless clinic.
+          Authority for an advanced procedure: a named specialist, HD equipment.
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
@@ -214,17 +211,18 @@ export default function LpEndoscopiaPage() {
               </ul>
 
               <p className="mt-6 text-foreground">
-                Cuando escribes, te contesta directamente el doctor — no una
-                recepcionista.
+                La CPRE es un procedimiento avanzado; se realiza en Hospital
+                Amerimed con equipo Olympus HD. Cuando escribes, te contesta
+                directamente el doctor — no una recepcionista.
               </p>
 
               <div className="mt-6">
                 <WhatsAppButton
                   variant="primary"
                   size="compact"
-                  service="endoscopia"
+                  service="cpre"
                   position="lp-doctor"
-                  procedureName="Endoscopia"
+                  procedureName="CPRE"
                   label="Escribirle al Dr. Quiroz"
                   className="text-sm"
                 />
@@ -232,17 +230,16 @@ export default function LpEndoscopiaPage() {
             </div>
           </div>
 
-          {/* SECTION 3.5 — Trust video. Renders nothing until TRUST_VIDEO is
-              set (see const above) — no placeholder ever shown to a visitor. */}
+          {/* SECTION 3.5 — Trust video (renders only once a clip is configured) */}
           {TRUST_VIDEO && (
             <div className="mt-10">
               <LpVideo
                 src={TRUST_VIDEO.src}
                 poster={TRUST_VIDEO.poster}
                 captionsSrc={TRUST_VIDEO.captionsSrc}
-                service="endoscopia"
-                videoId="lp-endoscopia-trust"
-                title="El Dr. Omar Quiroz sobre la endoscopia con sedación"
+                service="cpre"
+                videoId="lp-cpre-trust"
+                title="El Dr. Omar Quiroz sobre la CPRE sin cirugía abierta"
                 caption={`El Dr. Omar Quiroz — ${DOCTOR.descriptor}.`}
               />
             </div>
@@ -251,19 +248,26 @@ export default function LpEndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 4 — RAPIDEZ / DISPONIBILIDAD (bg-muted)
-          Honest urgency + remove "how long will this take" friction.
+          SECTION 4 — SIN CIRUGÍA / URGENCIA (bg-muted)
+          Reassurance + speed of access to a specialist. Many arrive scared or
+          in pain (obstrucción biliar) — remove the "how bad is this" friction.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-            Agenda hoy, estudio mañana
+            Sin cirugía abierta, con recuperación rápida
           </h2>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <p className="mt-4 text-foreground">
+            Si tienes ictericia, dolor intenso o fiebre, escríbenos hoy — el Dr.
+            Quiroz valora tu caso y te indica los pasos.
+          </p>
+
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
-              { icon: CalendarCheck, text: "Sin lista de espera" },
-              { icon: FileText, text: "Reporte el mismo día del estudio" },
+              { icon: ShieldCheck, text: "Sin incisiones — procedimiento endoscópico" },
+              { icon: Activity, text: "Sedación con anestesiólogo" },
+              { icon: Timer, text: "Recuperación más rápida que la cirugía tradicional" },
               { icon: Clock, text: CLINIC.hours.display },
             ].map(({ icon: Icon, text }) => (
               <li
@@ -275,11 +279,23 @@ export default function LpEndoscopiaPage() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-8">
+            <WhatsAppButton
+              variant="primary"
+              service="cpre"
+              position="lp-urgencia"
+              procedureName="CPRE"
+              label="Escribir al Dr. Quiroz ahora"
+              className="w-full sm:w-auto sm:px-8"
+            />
+          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5 — RESEÑAS (renders its own section, gradient bg)
+          showPlaceLink={false}: no outbound Google exit on a paid LP (1:1 ratio).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews
         title="Lo que dicen nuestros pacientes"
@@ -289,7 +305,7 @@ export default function LpEndoscopiaPage() {
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6 — FAQ CORTA (bg-muted)
-          Only the questions that block booking. Not the full educational FAQ.
+          Only the questions that block booking for a high-anxiety procedure.
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-muted">
         <div className="container-narrow section-padding">
@@ -300,20 +316,16 @@ export default function LpEndoscopiaPage() {
           <div className="mt-6 space-y-4">
             {[
               {
-                q: "¿La endoscopia duele?",
-                a: "Con sedación no sientes ni recuerdas el procedimiento. Un anestesiólogo te acompaña todo el tiempo.",
+                q: "¿La CPRE requiere cirugía abierta?",
+                a: "No. Es endoscópica, con sedación, sin incisiones. La recuperación es mucho más rápida que una cirugía tradicional.",
+              },
+              {
+                q: "¿Es urgente lo mío?",
+                a: "Si tienes ictericia, dolor intenso o fiebre, escríbenos hoy; el Dr. Quiroz valora tu caso y te indica los pasos.",
               },
               {
                 q: "¿Qué incluye el precio?",
-                a: "Sedación, toma de biopsias sin límite, sala de recuperación, valoración y reporte con fotos HD.",
-              },
-              {
-                q: "¿Necesito acompañante?",
-                a: "Sí, por la sedación necesitas que alguien te lleve a casa. El estudio y la recuperación toman aproximadamente una hora.",
-              },
-              {
-                q: "¿Dónde se realiza?",
-                a: "En Hospital Amerimed, Consultorio 517, Mérida.",
+                a: "Procedimiento hospitalario, sedación con anestesiólogo, insumos y reporte.",
               },
             ].map(({ q, a }) => (
               <div
@@ -334,9 +346,9 @@ export default function LpEndoscopiaPage() {
             </p>
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="cpre"
               position="lp-faq"
-              procedureName="Endoscopia"
+              procedureName="CPRE"
               label="Preguntar por WhatsApp"
               className="w-full shrink-0 sm:w-auto"
             />
@@ -350,25 +362,24 @@ export default function LpEndoscopiaPage() {
       <section className="bg-primary">
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
-            ¿Listo para agendar tu endoscopia?
+            ¿Necesitas una CPRE en Mérida?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
-            Precio cerrado {PRICE.toLowerCase()}. Te contesta el Dr. Quiroz
-            directamente.
+            Te contesta directamente el Dr. Quiroz.
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row sm:items-center">
             <WhatsAppButton
               variant="primary"
-              service="endoscopia"
+              service="cpre"
               position="lp-bottom"
-              procedureName="Endoscopia"
+              procedureName="CPRE"
               label="Agendar por WhatsApp"
               className="w-full sm:w-auto sm:px-10"
             />
             <CallButton
               variant="inverse"
-              service="endoscopia"
+              service="cpre"
               position="lp-bottom"
               label={`Llamar al ${CLINIC.phone.display}`}
               className="w-full sm:w-auto"
@@ -384,15 +395,15 @@ export default function LpEndoscopiaPage() {
         <div className="flex items-center gap-2">
           <WhatsAppButton
             variant="primary"
-            service="endoscopia"
+            service="cpre"
             position="lp-sticky"
-            procedureName="Endoscopia"
+            procedureName="CPRE"
             label="Agendar por WhatsApp"
             className="min-h-[48px] flex-1"
           />
           <CallButton
             variant="secondary"
-            service="endoscopia"
+            service="cpre"
             position="lp-sticky"
             label="Llamar"
             className="min-h-[48px] shrink-0 px-4 text-sm"

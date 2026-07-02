@@ -17,6 +17,13 @@ export const DOCTOR = {
   medicalSpecialty: "Gastroenterology",
   /** UI-facing label (Spanish) */
   medicalSpecialtyDisplay: "Endoscopia Gastrointestinal",
+  /**
+   * Patient-facing role line used on landing pages / trust strips.
+   * The two-hat framing (endoscopist + surgeon) that patients care about —
+   * distinct from medicalSpecialtyDisplay (single Spanish specialty label) and
+   * from title (short credential). Never hardcode this string in a page.
+   */
+  descriptor: "Endoscopista Gastrointestinal y Cirujano General",
   profileUrl: "/dr-omar-quiroz",
 
   // ── Photos ──────────────────────────────────────────────────────────────
