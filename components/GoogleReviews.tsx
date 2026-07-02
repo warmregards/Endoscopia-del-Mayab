@@ -21,6 +21,12 @@ type Props = {
   /** Google sends max 5 reviews; cap to [1..5]. Default 4. */
   limit?: number;
   className?: string;
+  /**
+   * Render the "Ver más en Google" outbound link. Default true.
+   * Set false on paid /lp/* landing pages to preserve the 1:1 attention ratio
+   * (the only exits allowed there are the WhatsApp/Call CTAs).
+   */
+  showPlaceLink?: boolean;
 };
 
 function ReviewsSkeleton() {
@@ -67,6 +73,7 @@ async function GoogleReviewsAsync({
   title = "Opiniones de pacientes (Google)",
   limit = 4,
   className = "",
+  showPlaceLink = true,
 }: Props) {
   const maxReviews = Math.max(1, Math.min(5, limit));
 
@@ -106,7 +113,7 @@ async function GoogleReviewsAsync({
             </p>
           </div>
 
-          {placeUrl && (
+          {showPlaceLink && placeUrl && (
             <a
               href={placeUrl}
               target="_blank"

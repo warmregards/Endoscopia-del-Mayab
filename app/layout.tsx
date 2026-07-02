@@ -3,12 +3,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import { globalGraph } from "@/lib/schema";
 import { ThemeProvider } from "@/components/theme-provider";
-import Footer from "@/components/Footer";
-import SiteHeader from "@/components/SiteHeader";
 import ScrollToTop from "@/components/ScrollToTop";
-import StickyMobileCTA from "@/components/StickyMobileCTA";
 import AttributionCapture from "@/components/AttributionCapture";
 
 // ✅ Use next/font; no extra <link> preconnects needed for fonts.
@@ -129,28 +125,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ScrollToTop />
           </Suspense>
 
-          {/* A11y skip link */}
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2 rounded"
-          >
-            Saltar al contenido
-          </a>
-
-          <SiteHeader />
-          <main id="main">{children}</main>
-          <Footer />
-          <StickyMobileCTA />
+          {/* Site chrome (header/footer/sticky CTA) and global JSON-LD live in
+              the (site) route group layout so paid /lp/* landing pages — a
+              separate (lp) group — never mount them. This is a hard boundary,
+              not a runtime gate: the chrome is not in the LP layout tree at all,
+              so nothing is server-rendered, serialized, or mounted for it. */}
+          {children}
         </ThemeProvider>
-
-        {/* Structured data — placed at end of body so it doesn't push the H1
-            further down the byte stream. Google docs explicitly allow JSON-LD
-            anywhere in the document (head or body); crawlers parse the full
-            response. Saves ~12.6 KB of pre-H1 markup on the homepage. */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
-        />
       </body>
     </html>
   );
