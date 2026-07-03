@@ -38,6 +38,23 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ref-codes.csv
-          git diff --cached --quiet -- data/ref-codes.csv \
-            || git commit -m "chore: refresh ref-code ledger"
-          git push
+          if git diff --cached --quiet -- data/ref-codes.csv; then
+            echo "No ledger changes."
+            exit 0
+          fi
+          git commit -m "chore: refresh ref-code ledger"
+          # Push with rebase-retry: this workflow shares the 06:00 UTC slot with
+          # fetch-reviews (and manual/local pushes race too), so a plain push
+          # often loses to a concurrent commit and is rejected non-fast-forward.
+          # Our commit only touches data/ref-codes.csv, so rebasing onto whatever
+          # landed is always a clean, conflict-free replay.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt) — rebasing on latest main…"
+            git pull --rebase --autostash origin main
+          done
+          echo "::error::Failed to push ref-code ledger after 5 attempts."
+          exit 1

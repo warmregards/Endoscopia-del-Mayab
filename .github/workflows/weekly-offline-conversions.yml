@@ -46,6 +46,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/offline-conversions.csv data/offline-conversion-retractions.csv
-          git diff --cached --quiet \
-            || git commit -m "chore: refresh weekly offline conversions"
-          git push
+          if git diff --cached --quiet; then
+            echo "No conversion changes."
+            exit 0
+          fi
+          git commit -m "chore: refresh weekly offline conversions"
+          # Push with rebase-retry to survive a concurrent push to main.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt) — rebasing on latest main…"
+            git pull --rebase --autostash origin main
+          done
+          echo "::error::Failed to push offline conversions after 5 attempts."
+          exit 1

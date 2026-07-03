@@ -36,6 +36,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/reviews.json
-          git diff --cached --quiet -- data/reviews.json \
-            || git commit -m "chore: refresh reviews"
-          git push
+          if git diff --cached --quiet -- data/reviews.json; then
+            echo "No review changes."
+            exit 0
+          fi
+          git commit -m "chore: refresh reviews"
+          # Push with rebase-retry: shares the 06:00 UTC slot with
+          # dump-ref-codes, so a plain push often loses the race and is rejected
+          # non-fast-forward. Only data/reviews.json changes → clean rebase.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt) — rebasing on latest main…"
+            git pull --rebase --autostash origin main
+          done
+          echo "::error::Failed to push reviews after 5 attempts."
+          exit 1
