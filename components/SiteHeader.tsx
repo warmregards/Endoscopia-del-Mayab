@@ -72,21 +72,34 @@ export default function SiteHeader() {
   return (
     <>
       <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/90">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center"
-            aria-label="Inicio - Endoscopia del Mayab"
-          >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          {/* Left: practice logo (home link) + host-hospital trust mark */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <Link
+              href="/"
+              className="flex items-center shrink-0"
+              aria-label="Inicio - Endoscopia del Mayab"
+            >
+              <Image
+                src="/endoscopia-logo.png"
+                alt="Endoscopia del Mayab"
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
+            </Link>
+            {/* Divider — not a control */}
+            <span aria-hidden className="h-6 w-px bg-border shrink-0" />
+            {/* Host-hospital trust mark — smaller than the practice logo */}
             <Image
-              src="/endoscopia-logo.png"
-              alt="Endoscopia del Mayab"
-              width={180}
-              height={40}
-              className="h-10 w-auto"
-              priority
+              src={CLINIC.hospitalLogoUrl}
+              alt={CLINIC.hospitalName}
+              width={85}
+              height={32}
+              className="h-5 sm:h-6 w-auto shrink-0"
             />
-          </Link>
+          </div>
 
           {/* Desktop nav */}
           <nav
