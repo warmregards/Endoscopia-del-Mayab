@@ -679,6 +679,31 @@ import { pushScrollDepth, pushPricingView, pushCtaView } from "@/lib/gtm"
 
 **All old `pushCta()` calls have been migrated.** If you see `pushCta` anywhere, it's dead code.
 
+### Google Ads conversions must trigger on the bare event, never path-scoped
+
+Conversion triggers (`whatsapp_click` / `phone_click`) in the GTM container MUST fire
+on the Custom Event name alone. NEVER add a Page Path, `cta_id`, or `position`
+condition to an Ads conversion trigger.
+
+Why: every CTA emits a byte-identical event regardless of page — same event name,
+`service`, `cta_number`, `ref_code`. The ONLY fields that differ by page are
+`page_path`, `cta_id` (`…-lp-…`), and `position` (`lp-…`). A trigger scoped to old
+URLs (e.g. "Page Path contains `endoscopia-merida`" or "excludes `/lp/`") fires on
+public pages and SILENTLY misses every `/lp/` click. GA4 still logs it (the GA4 tag
+has no such condition), so the symptom is: GA4 realtime shows `whatsapp_click`, but
+Ads conversions read zero on the new pages.
+
+**Regression signature** (any new route — LP, microsite, campaign page):
+GA4 = events present, Google Ads = 0 conversions on the new path.
+**Fix:** open the Ads conversion trigger in GTM → remove any path/`cta_id`/`position`
+condition → trigger on Custom Event = `whatsapp_click` (and `phone_click`) only →
+publish. Same applies to the GCLID/ref-code offline beacon trigger — path-scoping it
+breaks Cita Realizada reconciliation for the new pages.
+
+This lives in the GTM container UI, NOT the repo. **No code change causes or fixes it** —
+so when Ads conversions read zero on a new route, check the trigger scope here before
+touching `lib/gtm.ts` or the button components (which are already correct).
+
 ---
 
 ## Pre-Commit Checklist
