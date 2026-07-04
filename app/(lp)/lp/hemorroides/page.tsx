@@ -13,6 +13,7 @@ import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing";
 import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
@@ -349,6 +350,15 @@ export default function LpHemorroidesPage() {
               procedureName="Ligadura de hemorroides"
               label="Preguntar por WhatsApp"
               className="w-full shrink-0 sm:w-auto"
+            />
+          </div>
+
+          {/* Escape hatch — full guide for info-seekers (fires lp_exit_to_guide) */}
+          <div className="mt-8 text-center">
+            <LpGuideLink
+              href="/ligadura-hemorroides-internas-merida"
+              label="Ver la guía completa de la ligadura de hemorroides"
+              service="ligadura_hemorroides"
             />
           </div>
         </div>

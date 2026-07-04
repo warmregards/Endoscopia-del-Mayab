@@ -13,6 +13,7 @@ import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing";
 import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
@@ -351,6 +352,15 @@ export default function LpCprePage() {
               procedureName="CPRE"
               label="Preguntar por WhatsApp"
               className="w-full shrink-0 sm:w-auto"
+            />
+          </div>
+
+          {/* Escape hatch — full guide for info-seekers (fires lp_exit_to_guide) */}
+          <div className="mt-8 text-center">
+            <LpGuideLink
+              href="/cpre-merida"
+              label="Ver la guía completa de la CPRE"
+              service="cpre"
             />
           </div>
         </div>

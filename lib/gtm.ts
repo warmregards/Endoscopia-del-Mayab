@@ -105,6 +105,14 @@ interface VideoPlayEvent {
   page_path: string
 }
 
+interface LpExitToGuideEvent {
+  event: "lp_exit_to_guide"
+  service?: string
+  /** The full public guide path the visitor is exiting the LP toward. */
+  destination: string
+  page_path: string
+}
+
 interface PageViewEvent {
   event: "page_view"
   page_path: string
@@ -124,6 +132,7 @@ type DataLayerEvent =
   | AppointmentCtaClickEvent
   | AppointmentRequestEvent
   | VideoPlayEvent
+  | LpExitToGuideEvent
   | PageViewEvent
 
 declare global {
@@ -396,6 +405,27 @@ export function pushVideoPlay(params: {
     video_id: params.videoId,
     video_title: params.videoTitle,
     service: params.service,
+    page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a click on an LP's escape-hatch link to the matching full public guide.
+ * Fires as `lp_exit_to_guide` with the service + destination path so LP-vs-guide
+ * exits can be segmented (and compared against `whatsapp_click` on the same LP).
+ *
+ * @example
+ *   pushLpExitToGuide({ service: "endoscopia", destination: "/endoscopia-merida" })
+ */
+export function pushLpExitToGuide(params: {
+  service?: string
+  destination: string
+  pagePath?: string
+}): void {
+  push({
+    event: "lp_exit_to_guide",
+    service: params.service,
+    destination: params.destination,
     page_path: params.pagePath || currentPath(),
   })
 }
