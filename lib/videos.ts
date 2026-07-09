@@ -107,6 +107,24 @@ export const VIDEOS = {
       { name: "Agenda tu cita en Mérida", start: 221 },
     ],
   },
+  ligadura_varices: {
+    id: "0ljUQlAZtz4",
+    title: "Ligadura de Várices Esofágicas en Mérida | Dr. Omar Quiroz",
+    description:
+      "Ligadura de várices esofágicas en Mérida, Yucatán. El Dr. Omar Quiroz —endoscopista gastrointestinal y cirujano general— explica qué son las várices esofágicas y por qué aparecen (cirrosis hepática e hipertensión portal), cuándo está indicada la ligadura, cuántas sesiones se necesitan para erradicarlas, la diferencia entre várices del esófago y del estómago (ligadura o esclerosis), y los cuidados posteriores: medicamentos, dieta y actividad física. Se realiza bajo sedación en Hospital Amerimed.",
+    uploadDate: "2026-07-07T12:00:00-06:00",
+    duration: "PT4M37S",
+    durationSeconds: 277,
+    path: "/ligadura-varices-esofagicas-merida",
+    service: "ligadura_varices",
+    chapters: [
+      { name: "¿Qué son las várices esofágicas?", start: 0 },
+      { name: "¿Cuántas sesiones necesito?", start: 86 },
+      { name: "Esófago vs. estómago: ligadura o esclerosis", start: 128 },
+      { name: "Cuidados después de la ligadura", start: 201 },
+      { name: "Dónde encontrarme", start: 248 },
+    ],
+  },
   cpre: {
     id: "UHUdTSp4K1o",
     title:

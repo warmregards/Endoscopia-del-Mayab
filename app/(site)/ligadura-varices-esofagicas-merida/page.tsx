@@ -2,7 +2,8 @@ import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -18,6 +19,7 @@ import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -56,6 +58,8 @@ const relatedProcedures = [
 /* ══════════════════════════════════════════════════════════════════════════ */
 
 export default function LigaduraVaricesPage() {
+  const video = getVideo("ligadura_varices")
+
   return (
     <>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
@@ -92,6 +96,14 @@ export default function LigaduraVaricesPage() {
               { name: "Ligadura de Várices Esofágicas", path: "/ligadura-varices-esofagicas-merida" },
             ])
           ),
+        }}
+      />
+
+      {/* ── JSON-LD: VideoObject ───────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema(video)),
         }}
       />
 
@@ -228,6 +240,17 @@ export default function LigaduraVaricesPage() {
                 erradicar las várices residuales, seguido de vigilancia
                 endoscópica periódica.
               </p>
+            </div>
+
+            {/* Explainer video — high on page; inside the muted definition
+                section to preserve the bg-background↔bg-muted alternation. */}
+            <div className="max-w-3xl mx-auto w-full">
+              <YouTubeEmbed
+                id={video.id}
+                title={video.title}
+                caption={video.title}
+                service={video.service}
+              />
             </div>
 
             {/* Cross-link to esclerosis */}
