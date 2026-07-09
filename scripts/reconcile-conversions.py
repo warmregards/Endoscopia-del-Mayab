@@ -3,8 +3,9 @@
 scripts/reconcile-conversions.py
 
 Monthly offline-conversion reconciliation → Google Ads. Emits TWO upload paths,
-both for the same "Cita Realizada" conversion action, deduped by Order ID (the
-appointment uuid) so a booking counted in both never double-counts:
+each to its own conversion action ("GCLID Google Ads Matching" and "ECL Google
+Ads Matching") so gclid vs ECL match rates can be tracked separately; deduped by
+Order ID (the appointment uuid) so a booking counted in both never double-counts:
 
   1. gclid Offline Conversion Import — joins the WhatsApp ref-code ledger
      (data/ref-codes.csv, from dump-ref-codes.mjs) to the booking's ref code to
@@ -63,7 +64,12 @@ REF_RE = re.compile(r"^EDM-[2-9A-HJ-NP-Z]{6}$")
 REF_BODY_RE = re.compile(r"^[2-9A-HJ-NP-Z]{6}$")
 REF_EMBEDDED_RE = re.compile(r"EDM-[2-9A-HJ-NP-Z]{6}")
 
-CONVERSION_NAME = "Cita Realizada"
+# Two distinct conversion actions, one per matching method, so gclid vs ECL match
+# rates can be monitored separately in Google Ads. Each feed's sheet writes its own
+# name into the "Conversion Name" column, which routes the row to the right action.
+# Order ID (appointment uuid) still dedupes a booking reported in BOTH feeds.
+GCLID_CONVERSION_NAME = "GCLID Google Ads Matching"
+ECL_CONVERSION_NAME = "ECL Google Ads Matching"
 CONVERSION_CURRENCY = "MXN"
 # Yucatán is fixed UTC-6 year-round (no DST), so the offset is a constant.
 # NOTE: Google Ads' scheduled Google-Sheets upload rejects a colon in the offset
@@ -525,20 +531,20 @@ def main():
     adj_time = datetime.now(timezone(timedelta(hours=-6))) \
         .strftime("%Y-%m-%d %H:%M:%S") + TZ_OFFSET
 
-    conv_out = [[c["gclid"], CONVERSION_NAME, c["ctime"],
+    conv_out = [[c["gclid"], GCLID_CONVERSION_NAME, c["ctime"],
                  f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
                  c["order_id"]]
                 for c in conv]
-    retr_out = [[c["gclid"], CONVERSION_NAME, c["ctime"], "RETRACT", adj_time, c["order_id"]] for c in retr]
+    retr_out = [[c["gclid"], GCLID_CONVERSION_NAME, c["ctime"], "RETRACT", adj_time, c["order_id"]] for c in retr]
 
     # Enhanced Conversions for Leads (hashed phone) — every booking, not just the
     # ref-coded ones. Google matches the paid ones; Order ID dedupes vs the gclid file.
     ecl_conv, ecl_retr, ecl_stats = build_ecl(active_rows, cancelled_rows)
-    ecl_conv_out = [[c["phone_hash"], CONVERSION_NAME, c["ctime"],
+    ecl_conv_out = [[c["phone_hash"], ECL_CONVERSION_NAME, c["ctime"],
                      f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
                      c["order_id"]]
                     for c in ecl_conv]
-    ecl_retr_out = [[c["order_id"], CONVERSION_NAME, "RETRACT", adj_time] for c in ecl_retr]
+    ecl_retr_out = [[c["order_id"], ECL_CONVERSION_NAME, "RETRACT", adj_time] for c in ecl_retr]
 
     total_value = sum(c["value"] for c in conv if c["value"] is not None)
     ecl_total_value = sum(c["value"] for c in ecl_conv if c["value"] is not None)

@@ -1,9 +1,9 @@
 name: Offline conversions (daily)
 
-# Reconciles PrepSync bookings (Supabase) into TWO Google Ads upload files for the
-# "Cita Realizada" action, deduped by Order ID (appointment uuid):
-#   - data/offline-conversions.csv      — gclid Offline Conversion Import (~7%, ref-coded)
-#   - data/enhanced-conversions.csv     — Enhanced Conversions for Leads (hashed phone, ~all)
+# Reconciles PrepSync bookings (Supabase) into TWO Google Ads upload files, each to
+# its own conversion action, deduped by Order ID (appointment uuid):
+#   - data/offline-conversions.csv      — "GCLID Google Ads Matching" — gclid Offline Conversion Import (~7%, ref-coded)
+#   - data/enhanced-conversions.csv     — "ECL Google Ads Matching"   — Enhanced Conversions for Leads (hashed phone, ~all)
 # Supabase is the source of truth (PrepSync pushes daily), so both are fully
 # derived and safe to regenerate/overwrite every run.
 #
