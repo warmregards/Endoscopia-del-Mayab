@@ -451,19 +451,30 @@ def collect_candidates(records, ledger):
     return kept, stats
 
 
-def build_ecl(active, cancelled):
+def build_ecl(active, cancelled, exclude_ids=frozenset()):
     """Build Enhanced-Conversions-for-Leads rows keyed on the hashed phone.
 
     Every active booking whose calendar_phone normalizes to E.164 becomes one
-    conversion (Order ID = appointment uuid, so Google dedupes — including
-    against the gclid file). Cancelled bookings become Order-ID-keyed
-    retractions. Unlike the gclid path there is no per-identifier collapse: one
-    booking = one Order ID = one conversion. Returns (conv, retr, stats).
+    conversion (Order ID = appointment uuid). Cancelled bookings become
+    Order-ID-keyed retractions. Unlike the gclid path there is no per-identifier
+    collapse: one booking = one Order ID = one conversion. Returns (conv, retr,
+    stats).
+
+    Mutual exclusion ("gclid wins"): any Order ID in `exclude_ids` already went
+    to the gclid feed and is dropped here, so each appointment uuid lands in
+    exactly ONE conversion action. This is required because the two feeds now go
+    to two SEPARATE actions ("GCLID/ECL Google Ads Matching"); Google's Order-ID
+    dedup only works *within* one action, so it can't dedupe across them for us
+    the way it did when both shared a single action.
     """
-    stats = {"active": len(active), "with_phone": 0, "bad_phone": [], "no_id": 0}
+    stats = {"active": len(active), "with_phone": 0, "bad_phone": [], "no_id": 0,
+             "excluded_gclid": 0}
     conv = []
     for r in active:
         oid = str(r.get("id") or "")
+        if oid and oid in exclude_ids:
+            stats["excluded_gclid"] += 1  # gclid feed already claimed this booking
+            continue
         e164 = normalize_phone_mx(r.get("phone"))
         if not e164:
             if str(r.get("phone") or "").strip():
@@ -485,7 +496,9 @@ def build_ecl(active, cancelled):
     seen = set()
     for r in cancelled:
         oid = str(r.get("id") or "")
-        if oid and oid not in seen:
+        # Skip Order IDs the gclid feed owns — their retraction goes to the gclid
+        # adjustments file, keeping the exclusion symmetric on the cancel side.
+        if oid and oid not in seen and oid not in exclude_ids:
             seen.add(oid)
             retr.append({"order_id": oid})
     return conv, retr, stats
@@ -538,8 +551,15 @@ def main():
     retr_out = [[c["gclid"], GCLID_CONVERSION_NAME, c["ctime"], "RETRACT", adj_time, c["order_id"]] for c in retr]
 
     # Enhanced Conversions for Leads (hashed phone) — every booking, not just the
-    # ref-coded ones. Google matches the paid ones; Order ID dedupes vs the gclid file.
-    ecl_conv, ecl_retr, ecl_stats = build_ecl(active_rows, cancelled_rows)
+    # ref-coded ones, MINUS any Order ID the gclid feed already claimed (mutual
+    # exclusion, "gclid wins"). The two feeds now target two separate conversion
+    # actions, so Google can't dedupe across them; we must guarantee one booking
+    # lands in exactly one feed here, or a booking with both a ref code and a
+    # matchable phone would double-count once both actions are Primary.
+    gclid_order_ids = {c["order_id"] for c in conv if c["order_id"]} \
+        | {c["order_id"] for c in retr if c["order_id"]}
+    ecl_conv, ecl_retr, ecl_stats = build_ecl(active_rows, cancelled_rows,
+                                              exclude_ids=gclid_order_ids)
     ecl_conv_out = [[c["phone_hash"], ECL_CONVERSION_NAME, c["ctime"],
                      f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
                      c["order_id"]]
@@ -595,6 +615,7 @@ def main():
     print("Enhanced Conversions for Leads (hashed phone)")
     print("─" * 60)
     print(f"Active bookings considered:         {ecl_stats['active']}")
+    print(f"  → excluded (already in gclid feed):{ecl_stats['excluded_gclid']}")
     print(f"  → with a usable phone (ECL rows): {ecl_stats['with_phone']}")
     print(f"  → phone present but unparseable:  {len(ecl_stats['bad_phone'])}", end="")
     print(f"  {ecl_stats['bad_phone']}" if ecl_stats["bad_phone"] else "")
