@@ -22,6 +22,14 @@ key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 if not base or not key:
     sys.exit("[diagnose] need SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY in env")
 
+# PROJECT-MATCH CHECK. PrepSync writes to prod project "pvmjuxwcfpzbvxrpqlxl".
+# We only print a boolean (the full URL is a masked secret), so nothing leaks.
+# True  → website reads PrepSync's prod → genuinely empty → PrepSync never pushed.
+# False → project MISMATCH → website reads an empty sibling → repoint the secret.
+PREPSYNC_PROD = "pvmjuxwcfpzbvxrpqlxl"
+print(f"[diagnose] website SUPABASE_URL points at PrepSync prod "
+      f"({PREPSYNC_PROD}): {PREPSYNC_PROD in base}")
+
 
 def get(path):
     req = urllib.request.Request(
