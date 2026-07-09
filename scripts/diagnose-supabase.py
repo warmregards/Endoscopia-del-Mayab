@@ -30,6 +30,20 @@ PREPSYNC_PROD = "pvmjuxwcfpzbvxrpqlxl"
 print(f"[diagnose] website SUPABASE_URL points at PrepSync prod "
       f"({PREPSYNC_PROD}): {PREPSYNC_PROD in base}")
 
+# Decode the KEY's JWT claims (role + project ref) WITHOUT printing the key.
+# A real service_role key bypasses RLS; an anon key is filtered by the
+# authenticated-only "_own" policies → returns 0 rows even when the table is full.
+import base64  # noqa: E402
+try:
+    _payload = key.split(".")[1]
+    _payload += "=" * (-len(_payload) % 4)
+    _claims = json.loads(base64.urlsafe_b64decode(_payload))
+    print(f"[diagnose] key role claim: {_claims.get('role')!r}  "
+          f"(need 'service_role'; 'anon' → RLS hides all rows)   "
+          f"key ref: {_claims.get('ref')!r}")
+except Exception as _e:  # noqa: BLE001
+    print(f"[diagnose] could not decode key claims: {_e}")
+
 
 def get(path):
     req = urllib.request.Request(
