@@ -64,14 +64,14 @@ print("=" * 64)
 st, cr, body = get("appointments?select=id&limit=1")
 total = cr.split("/")[-1] if cr else "?"
 print(f"GET appointments?select=id  ->  HTTP {st}   total rows = {total}")
-if st != 200:
+if st not in (200, 206):
     print("BODY:", body)
     sys.exit("[diagnose] appointments table not reachable — wrong table name, "
              "project, or key. See body above.")
 
 cols = "id,booked_at,scheduled_at,ref_ads,prep_status,calendar_phone,cost_estimate"
 st, cr, rows = get(f"appointments?select={cols}&limit=2000")
-if st != 200:
+if st not in (200, 206):
     print(f"GET appointments?select={cols}  ->  HTTP {st}")
     print("BODY:", rows)
     sys.exit("[diagnose] one of the needed columns doesn't exist — see body above.")
