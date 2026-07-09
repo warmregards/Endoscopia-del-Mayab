@@ -2,11 +2,21 @@
 """
 scripts/reconcile-conversions.py
 
-Monthly offline-conversion reconciliation. Joins the WhatsApp ref-code ledger
-(data/ref-codes.csv, produced by dump-ref-codes.mjs) against a Prepsync booking
-export, and emits a Google Ads Offline Conversion Import CSV — turning "this
-gclid clicked WhatsApp" + "this ref code booked & showed up" into an uploadable
-conversion with a peso value.
+Monthly offline-conversion reconciliation → Google Ads. Emits TWO upload paths,
+both for the same "Cita Realizada" conversion action, deduped by Order ID (the
+appointment uuid) so a booking counted in both never double-counts:
+
+  1. gclid Offline Conversion Import — joins the WhatsApp ref-code ledger
+     (data/ref-codes.csv, from dump-ref-codes.mjs) to the booking's ref code to
+     recover the gclid. Deterministic, works even when the patient wasn't signed
+     into Google — but only covers the ~7% of bookings that carry a ref code.
+  2. Enhanced Conversions for Leads (hashed phone) — SHA-256 of the patient's
+     WhatsApp contact number (appointments.calendar_phone) in E.164. Covers
+     ~every booking; Google matches the paid ones back to the ad click on its
+     side (no gclid needed). Misses only patients not signed into Google.
+
+The two are complementary: each recovers conversions the other loses. Upload all
+bookings via both; Google keeps the ad-attributable ones and dedupes by Order ID.
 
 Standalone repo tooling — NOT part of the deployed app. Python 3, stdlib only.
 
@@ -40,6 +50,7 @@ Flow:
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import re
@@ -63,6 +74,7 @@ GADS_HEADER = [
     "Conversion Time",
     "Conversion Value",
     "Conversion Currency",
+    "Order ID",  # = appointment uuid → dedup key (also dedupes vs the ECL file)
 ]
 
 # Google Ads Conversion Adjustments upload (RETRACT) — removes a previously
@@ -72,6 +84,28 @@ GADS_ADJ_HEADER = [
     "Google Click ID",
     "Conversion Name",
     "Conversion Time",
+    "Adjustment Type",
+    "Adjustment Time",
+    "Order ID",
+]
+
+# Enhanced Conversions for Leads upload (hashed phone). Keyed on the SHA-256 of
+# the patient's WhatsApp contact number in E.164 — Google matches it back to the
+# ad click server-side, so it needs no gclid. Order ID = appointment uuid, so a
+# booking reported here AND in the gclid file above collapses to one conversion.
+GADS_ECL_HEADER = [
+    "Phone Number",  # SHA-256 hex of the E.164 number (already-hashed upload)
+    "Conversion Name",
+    "Conversion Time",
+    "Conversion Value",
+    "Conversion Currency",
+    "Order ID",
+]
+
+# ECL retractions are keyed by Order ID (no phone needed to remove a conversion).
+GADS_ECL_ADJ_HEADER = [
+    "Order ID",
+    "Conversion Name",
     "Adjustment Type",
     "Adjustment Time",
 ]
@@ -131,6 +165,40 @@ def parse_value(raw):
         return float(s)
     except ValueError:
         return None
+
+
+def normalize_phone_mx(raw):
+    """Best-effort normalize a free-text MX phone to E.164 (+52##########), or None.
+
+    `appointments.calendar_phone` is un-normalized free text (whatever Omar typed
+    or the calendar description carried — spaces, dashes, parens, an optional +,
+    with or without 52). Mirrors the app's WhatsApp-link rule (history/page.tsx):
+    strip to digits, then a bare 10-digit number is assumed Mexican and prefixed
+    with 52. Also accepts numbers already carrying 52 (with or without the legacy
+    mobile '1'). Returns None when it can't confidently produce 10 national digits.
+    """
+    if raw is None:
+        return None
+    digits = re.sub(r"\D", "", str(raw))
+    if not digits:
+        return None
+    if len(digits) == 10:
+        national = digits
+    elif len(digits) == 12 and digits.startswith("52"):
+        national = digits[2:]
+    elif len(digits) == 13 and digits.startswith("521"):
+        national = digits[3:]  # legacy "+52 1 <10-digit mobile>"
+    else:
+        return None
+    if len(national) != 10:
+        return None
+    return "+52" + national
+
+
+def sha256_hex(value):
+    """Lowercase hex SHA-256 of a UTF-8 string — Google's enhanced-conversions
+    hashing. Input must already be normalized (trimmed, E.164)."""
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
 def parse_datetime(raw):
@@ -245,8 +313,11 @@ def load_from_csv(args):
     active, cancelled = [], []
     for r in rows:
         estado = str(r.get(estado_col, "")).strip().lower()
+        # CSV mode has no id/phone → the ECL path stays empty here (Supabase only).
         rec = {
+            "id": None,
             "ref": r.get(field_col),
+            "phone": None,
             "value": r.get(value_col),
             "date": r.get(date_col),
         }
@@ -273,9 +344,12 @@ def load_from_supabase(args):
 
     cutoff = (datetime.now(timezone.utc) - timedelta(days=args.lookback_days)) \
         .strftime("%Y-%m-%dT%H:%M:%SZ")
+    # No `ref_ads not.is.null` filter: the ECL (hashed-phone) path wants EVERY
+    # booking, not just the ~7% that carry a WhatsApp ref code. The gclid path
+    # still only emits rows whose ref code joins the ledger, so its output is
+    # unchanged — it just no longer starves the phone path of the other 93%.
     params = {
-        "select": "ref_ads,booked_at,scheduled_at,prep_status,cost_estimate",
-        "ref_ads": "not.is.null",
+        "select": "id,calendar_phone,ref_ads,booked_at,scheduled_at,prep_status,cost_estimate",
         "booked_at": f"gte.{cutoff}",
         "limit": "5000",
     }
@@ -297,7 +371,9 @@ def load_from_supabase(args):
         # booked_at and haven't been re-synced yet.
         raw_dt = row.get("booked_at") or row.get("scheduled_at")
         rec = {
+            "id": row.get("id"),
             "ref": row.get("ref_ads"),
+            "phone": row.get("calendar_phone"),
             "value": row.get("cost_estimate"),
             "date": iso_utc_to_merida_local(raw_dt),
         }
@@ -321,10 +397,14 @@ def collect_candidates(records, ledger):
              "unmatched": [], "collapsed": []}
 
     for r in records:
+        raw_ref = str(r.get("ref") or "").strip()
         code = normalize_ref(r.get("ref"))
         rec = ledger.get(code) if code else None
         if not rec:
-            stats["unmatched"].append(str(r.get("ref") or "").strip())
+            # Only a *non-empty* ref that fails to join is a typo/miss. Blank-ref
+            # rows are just non-ad bookings (the 93%) and belong to the ECL path.
+            if raw_ref:
+                stats["unmatched"].append(raw_ref)
             continue
 
         stats["matched"] += 1
@@ -342,6 +422,7 @@ def collect_candidates(records, ledger):
         candidates.append({
             "gclid": gclid,
             "code": code,
+            "order_id": str(r.get("id") or ""),
             "created": str(rec.get("created") or ""),  # ISO 8601 → sorts chronologically
             "value": parse_value(r.get("value")),
             "ctime": ctime or "",
@@ -361,6 +442,46 @@ def collect_candidates(records, ledger):
     return kept, stats
 
 
+def build_ecl(active, cancelled):
+    """Build Enhanced-Conversions-for-Leads rows keyed on the hashed phone.
+
+    Every active booking whose calendar_phone normalizes to E.164 becomes one
+    conversion (Order ID = appointment uuid, so Google dedupes — including
+    against the gclid file). Cancelled bookings become Order-ID-keyed
+    retractions. Unlike the gclid path there is no per-identifier collapse: one
+    booking = one Order ID = one conversion. Returns (conv, retr, stats).
+    """
+    stats = {"active": len(active), "with_phone": 0, "bad_phone": [], "no_id": 0}
+    conv = []
+    for r in active:
+        oid = str(r.get("id") or "")
+        e164 = normalize_phone_mx(r.get("phone"))
+        if not e164:
+            if str(r.get("phone") or "").strip():
+                stats["bad_phone"].append(str(r.get("phone")).strip())
+            continue
+        if not oid:
+            stats["no_id"] += 1
+            continue
+        stats["with_phone"] += 1
+        ctime = parse_datetime(r.get("date"))
+        conv.append({
+            "order_id": oid,
+            "phone_hash": sha256_hex(e164),
+            "value": parse_value(r.get("value")),
+            "ctime": ctime or "",
+        })
+
+    retr = []
+    seen = set()
+    for r in cancelled:
+        oid = str(r.get("id") or "")
+        if oid and oid not in seen:
+            seen.add(oid)
+            retr.append({"order_id": oid})
+    return conv, retr, stats
+
+
 def main():
     ap = argparse.ArgumentParser(description="Reconcile ref codes → Google Ads offline conversions.")
     ap.add_argument("--refs", default="data/ref-codes.csv", help="ref-codes ledger CSV")
@@ -372,9 +493,13 @@ def main():
     ap.add_argument("--field", default="Ref Ads", help="Prepsync ref-code column header (CSV mode)")
     ap.add_argument("--value-col", default="Ganancia", help='value column, CSV mode (e.g. "Ganancia" or "Total")')
     ap.add_argument("--date-col", default=None, help="appointment-date column, CSV mode (autodetected if omitted)")
-    ap.add_argument("--out", default="google-ads-offline-conversions.csv", help="output conversions CSV path")
+    ap.add_argument("--out", default="google-ads-offline-conversions.csv", help="output gclid conversions CSV path")
     ap.add_argument("--adjustments-out", default="google-ads-conversion-adjustments.csv",
-                    help="output conversion-adjustments (RETRACT) CSV path")
+                    help="output gclid conversion-adjustments (RETRACT) CSV path")
+    ap.add_argument("--ecl-out", default="google-ads-enhanced-conversions.csv",
+                    help="output Enhanced-Conversions-for-Leads (hashed phone) CSV path")
+    ap.add_argument("--ecl-adjustments-out", default="google-ads-enhanced-conversion-adjustments.csv",
+                    help="output ECL conversion-adjustments (RETRACT) CSV path")
     args = ap.parse_args()
 
     if args.from_supabase == bool(args.prepsync):
@@ -398,11 +523,22 @@ def main():
         .strftime("%Y-%m-%d %H:%M:%S") + TZ_OFFSET
 
     conv_out = [[c["gclid"], CONVERSION_NAME, c["ctime"],
-                 f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY]
+                 f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
+                 c["order_id"]]
                 for c in conv]
-    retr_out = [[c["gclid"], CONVERSION_NAME, c["ctime"], "RETRACT", adj_time] for c in retr]
+    retr_out = [[c["gclid"], CONVERSION_NAME, c["ctime"], "RETRACT", adj_time, c["order_id"]] for c in retr]
+
+    # Enhanced Conversions for Leads (hashed phone) — every booking, not just the
+    # ref-coded ones. Google matches the paid ones; Order ID dedupes vs the gclid file.
+    ecl_conv, ecl_retr, ecl_stats = build_ecl(active_rows, cancelled_rows)
+    ecl_conv_out = [[c["phone_hash"], CONVERSION_NAME, c["ctime"],
+                     f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
+                     c["order_id"]]
+                    for c in ecl_conv]
+    ecl_retr_out = [[c["order_id"], CONVERSION_NAME, "RETRACT", adj_time] for c in ecl_retr]
 
     total_value = sum(c["value"] for c in conv if c["value"] is not None)
+    ecl_total_value = sum(c["value"] for c in ecl_conv if c["value"] is not None)
     # Codes that were clicked but never booked (in either bucket) = lost leads.
     matched_codes = conv_stats["matched_codes"] | retr_stats["matched_codes"]
     unmatched_codes = [c for c in ledger if c not in matched_codes]
@@ -416,6 +552,16 @@ def main():
         w = csv.writer(f)
         w.writerow(GADS_ADJ_HEADER)
         w.writerows(retr_out)
+
+    with open(args.ecl_out, "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(GADS_ECL_HEADER)
+        w.writerows(ecl_conv_out)
+
+    with open(args.ecl_adjustments_out, "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(GADS_ECL_ADJ_HEADER)
+        w.writerows(ecl_retr_out)
 
     # Summary.
     print("─" * 60)
@@ -437,8 +583,20 @@ def main():
     print(f"  {sorted(unmatched_codes)}" if unmatched_codes else "")
     print(f"Total attributed value:             {total_value:.2f} {CONVERSION_CURRENCY}")
     print("─" * 60)
-    print(f"Wrote {len(conv_out)} conversion(s) → {args.out}")
-    print(f"Wrote {len(retr_out)} retraction(s) → {args.adjustments_out}")
+    print("Enhanced Conversions for Leads (hashed phone)")
+    print("─" * 60)
+    print(f"Active bookings considered:         {ecl_stats['active']}")
+    print(f"  → with a usable phone (ECL rows): {ecl_stats['with_phone']}")
+    print(f"  → phone present but unparseable:  {len(ecl_stats['bad_phone'])}", end="")
+    print(f"  {ecl_stats['bad_phone']}" if ecl_stats["bad_phone"] else "")
+    print(f"  → dropped (no Order ID/uuid):     {ecl_stats['no_id']}")
+    print(f"  → RETRACT rows written:           {len(ecl_retr_out)}")
+    print(f"ECL attributed value (pre-match):   {ecl_total_value:.2f} {CONVERSION_CURRENCY}")
+    print("─" * 60)
+    print(f"Wrote {len(conv_out)} gclid conversion(s) → {args.out}")
+    print(f"Wrote {len(retr_out)} gclid retraction(s) → {args.adjustments_out}")
+    print(f"Wrote {len(ecl_conv_out)} ECL conversion(s) → {args.ecl_out}")
+    print(f"Wrote {len(ecl_retr_out)} ECL retraction(s) → {args.ecl_adjustments_out}")
 
 
 if __name__ == "__main__":
