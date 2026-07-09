@@ -75,9 +75,14 @@ jobs:
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
         run: |
           pip install --quiet google-api-python-client google-auth
+          # One feed per spreadsheet, written to each sheet's FIRST tab (what a
+          # scheduled Google Ads upload reads). Retraction feeds are intentionally
+          # not pushed — reconcile still writes their CSVs for audit/history.
+          # gclid Offline Conversion Import (Google Click ID):
           python scripts/push-to-sheet.py \
             --sheet-id "1MXXLoaRyCm1RmXmOW_gAWJpIll09TeTUgpVMp5Zs-qo" \
-            --map "gclid conversions=data/offline-conversions.csv" \
-            --map "gclid retractions=data/offline-conversion-retractions.csv" \
-            --map "ECL conversions=data/enhanced-conversions.csv" \
-            --map "ECL retractions=data/enhanced-conversion-adjustments.csv"
+            --csv data/offline-conversions.csv
+          # Enhanced Conversions for Leads (hashed phone) — its own sheet:
+          python scripts/push-to-sheet.py \
+            --sheet-id "1pJBzmvwxrhi4i_v6I1FHCUrV42ZwtUa7skU_YZxfeJE" \
+            --csv data/enhanced-conversions.csv

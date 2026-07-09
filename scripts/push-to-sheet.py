@@ -49,26 +49,20 @@ def read_csv(path):
         return list(csv.reader(f))
 
 
-def parse_map(s):
-    if "=" not in s:
-        sys.exit(f"[push-to-sheet] ERROR: --map must be 'Tab=path.csv', got {s!r}")
-    tab, path = s.split("=", 1)
-    return tab.strip(), path.strip()
-
-
 def a1(tab):
     """A1 range for a whole sheet — single-quote the title (it may contain spaces)."""
     return "'" + tab.replace("'", "''") + "'"
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Mirror conversion CSVs into a Google Sheet.")
+    ap = argparse.ArgumentParser(description="Write one conversion CSV to one Google Sheet tab.")
     ap.add_argument("--sheet-id", required=True, help="target spreadsheet ID")
-    ap.add_argument("--map", action="append", default=[], metavar="TAB=CSV",
-                    help="write CSV to tab TAB (repeatable)")
+    ap.add_argument("--csv", required=True, help="CSV file to write")
+    ap.add_argument("--tab", default=None,
+                    help="target tab; default = the spreadsheet's FIRST tab (what Google Ads reads)")
     args = ap.parse_args()
-    if not args.map:
-        sys.exit("[push-to-sheet] ERROR: pass at least one --map 'Tab=path.csv'.")
+    if not os.path.exists(args.csv):
+        sys.exit(f"[push-to-sheet] ERROR: csv not found: {args.csv}")
 
     from googleapiclient.discovery import build
     from googleapiclient.errors import HttpError
@@ -83,31 +77,26 @@ def main():
     except HttpError as e:
         sys.exit(f"[push-to-sheet] ERROR: cannot open sheet {args.sheet_id} — "
                  f"is it shared with {creds.service_account_email}? {e}")
-    existing = {s["properties"]["title"] for s in meta.get("sheets", [])}
-
-    for raw in args.map:
-        tab, path = parse_map(raw)
-        if not os.path.exists(path):
-            print(f"[push-to-sheet] skip {tab!r}: {path} not found")
-            continue
-        rows = read_csv(path)
-        if tab not in existing:
-            svc.spreadsheets().batchUpdate(
-                spreadsheetId=args.sheet_id,
-                body={"requests": [{"addSheet": {"properties": {"title": tab}}}]},
-            ).execute()
-            existing.add(tab)
-        svc.spreadsheets().values().clear(spreadsheetId=args.sheet_id, range=a1(tab)).execute()
-        svc.spreadsheets().values().update(
+    titles = [s["properties"]["title"] for s in meta.get("sheets", [])]
+    first = titles[0] if titles else "Sheet1"
+    # Default to the FIRST tab — that's the one Google Ads' scheduled upload reads.
+    tab = args.tab or first
+    if tab not in titles:
+        svc.spreadsheets().batchUpdate(
             spreadsheetId=args.sheet_id,
-            range=a1(tab) + "!A1",
-            valueInputOption="RAW",
-            body={"values": rows or [[]]},
+            body={"requests": [{"addSheet": {"properties": {"title": tab}}}]},
         ).execute()
-        data_rows = max(len(rows) - 1, 0)  # minus header
-        print(f"[push-to-sheet] wrote {data_rows} data row(s) → tab {tab!r}")
 
-    print("[push-to-sheet] done.")
+    rows = read_csv(args.csv)
+    svc.spreadsheets().values().clear(spreadsheetId=args.sheet_id, range=a1(tab)).execute()
+    svc.spreadsheets().values().update(
+        spreadsheetId=args.sheet_id,
+        range=a1(tab) + "!A1",
+        valueInputOption="RAW",
+        body={"values": rows or [[]]},
+    ).execute()
+    print(f"[push-to-sheet] wrote {max(len(rows) - 1, 0)} data row(s) from {args.csv} "
+          f"→ tab {tab!r}  (first tab of this sheet: {first!r})")
 
 
 if __name__ == "__main__":
