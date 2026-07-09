@@ -66,7 +66,10 @@ REF_EMBEDDED_RE = re.compile(r"EDM-[2-9A-HJ-NP-Z]{6}")
 CONVERSION_NAME = "Cita Realizada"
 CONVERSION_CURRENCY = "MXN"
 # Yucatán is fixed UTC-6 year-round (no DST), so the offset is a constant.
-TZ_OFFSET = "-06:00"
+# NOTE: Google Ads' scheduled Google-Sheets upload rejects a colon in the offset
+# ("...-06:00" → "invalid / Missing Conversion Time"). It wants +/-HHMM with no
+# colon, so this is "-0600", producing e.g. "2026-04-08 17:19:17-0600".
+TZ_OFFSET = "-0600"
 
 GADS_HEADER = [
     "Google Click ID",
