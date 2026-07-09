@@ -1,13 +1,15 @@
 name: Weekly offline conversions
 
-# Joins the ref-code/GCLID ledger (data/ref-codes.csv) against PrepSync bookings
-# in Supabase and overwrites data/offline-conversions.csv — a Google Ads Offline
-# Conversion Import file. Supabase is the source of truth (PrepSync pushes daily),
-# so the output is fully derived and safe to regenerate/overwrite every run.
+# Reconciles PrepSync bookings (Supabase) into TWO Google Ads upload files for the
+# "Cita Realizada" action, deduped by Order ID (appointment uuid):
+#   - data/offline-conversions.csv      — gclid Offline Conversion Import (~7%, ref-coded)
+#   - data/enhanced-conversions.csv     — Enhanced Conversions for Leads (hashed phone, ~all)
+# Supabase is the source of truth (PrepSync pushes daily), so both are fully
+# derived and safe to regenerate/overwrite every run.
 #
-# Upload the committed CSV in Google Ads → Goals → Conversions → Uploads. The
-# "Conversion Name" column ("Cita Realizada") must match an Import conversion
-# action in the account.
+# The files are then mirrored into a Google Sheet (push-to-sheet.py) so Google Ads
+# can ingest them via a *scheduled* Google Sheets upload — no manual weekly upload.
+# Sheet ID + the service account are in the "Push conversions to Google Sheet" step.
 
 on:
   schedule:
@@ -31,7 +33,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Reconcile bookings → offline conversions + retractions
+      - name: Reconcile bookings → offline conversions (gclid + ECL)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -39,13 +41,16 @@ jobs:
           python scripts/reconcile-conversions.py \
             --from-supabase \
             --out data/offline-conversions.csv \
-            --adjustments-out data/offline-conversion-retractions.csv
+            --adjustments-out data/offline-conversion-retractions.csv \
+            --ecl-out data/enhanced-conversions.csv \
+            --ecl-adjustments-out data/enhanced-conversion-adjustments.csv
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/offline-conversions.csv data/offline-conversion-retractions.csv
+          git add data/offline-conversions.csv data/offline-conversion-retractions.csv \
+                  data/enhanced-conversions.csv data/enhanced-conversion-adjustments.csv
           if git diff --cached --quiet; then
             echo "No conversion changes."
             exit 0
@@ -62,3 +67,17 @@ jobs:
           done
           echo "::error::Failed to push offline conversions after 5 attempts."
           exit 1
+
+      - name: Push conversions to Google Sheet (for scheduled Ads upload)
+        env:
+          # Same service account as the SEO workflow. push-to-sheet.py prints the
+          # SA email it authenticates as — the Sheet must be shared (Editor) with it.
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+        run: |
+          pip install --quiet google-api-python-client google-auth
+          python scripts/push-to-sheet.py \
+            --sheet-id "1MXXLoaRyCm1RmXmOW_gAWJpIll09TeTUgpVMp5Zs-qo" \
+            --map "gclid conversions=data/offline-conversions.csv" \
+            --map "gclid retractions=data/offline-conversion-retractions.csv" \
+            --map "ECL conversions=data/enhanced-conversions.csv" \
+            --map "ECL retractions=data/enhanced-conversion-adjustments.csv"
