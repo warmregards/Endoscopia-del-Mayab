@@ -98,3 +98,63 @@ for r in rows[:8]:
           f"sched={r.get('scheduled_at')} ref={r.get('ref_ads')} "
           f"status={r.get('prep_status')} cost={r.get('cost_estimate')} phone={cp}")
 print("=" * 64)
+
+
+# ── Recent-bookings breakdown ────────────────────────────────────────────────
+# Answers "are the last few days' appointments matchable?" for each recent row,
+# report whether its phone normalizes to E.164 MX (→ eligible for the ECL feed)
+# and whether it carries a ref code (→ eligible for the gclid feed). No names.
+import re  # noqa: E402
+
+
+def phone_verdict(raw):
+    """Mirror reconcile-conversions.normalize_phone_mx → 'E164-OK' or a reason."""
+    if not str(raw or "").strip():
+        return "NO-PHONE"
+    digits = re.sub(r"\D", "", str(raw))
+    if len(digits) == 10:
+        return "E164-OK"
+    if len(digits) == 12 and digits.startswith("52"):
+        return "E164-OK"
+    if len(digits) == 13 and digits.startswith("521"):
+        return "E164-OK"
+    return f"BAD({len(digits)}d)"  # won't produce an ECL row
+
+
+def recent_report(label, filter_expr, order_col):
+    st, cr, rows = get(
+        f"appointments?select={cols}&{filter_expr}&order={order_col}.desc&limit=200")
+    if st not in (200, 206):
+        print(f"[{label}] query failed HTTP {st}: {rows}")
+        return
+    print("=" * 64)
+    print(f"{label}  ({len(rows)} row(s))")
+    print("-" * 64)
+    ecl_ok = ref_ok = 0
+    for r in rows:
+        pv = phone_verdict(r.get("calendar_phone"))
+        has_ref = bool(str(r.get("ref_ads") or "").strip())
+        active = str(r.get("prep_status") or "").strip().lower() != "cancelada"
+        if pv == "E164-OK" and active:
+            ecl_ok += 1
+        if has_ref and active:
+            ref_ok += 1
+        print(f"  booked={str(r.get('booked_at'))[:16]} "
+              f"sched={str(r.get('scheduled_at'))[:16]} "
+              f"status={str(r.get('prep_status') or '')[:9]:<9} "
+              f"cost={str(r.get('cost_estimate') or '-'):<6} "
+              f"phone={pv:<9} ref={r.get('ref_ads') or '-'}")
+    print("-" * 64)
+    print(f"  → active + phone normalizes (ECL-eligible): {ecl_ok}")
+    print(f"  → active + has ref code (gclid-eligible):   {ref_ok}")
+
+
+now = datetime.now(timezone.utc)
+b14 = (now - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
+recent_report(f"BOOKED in last 14 days (booked_at ≥ {b14[:10]})",
+              f"booked_at=gte.{b14}", "booked_at")
+s14 = (now - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
+s_hi = (now + timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+recent_report(f"SCHEDULED in last 14 days (scheduled_at {s14[:10]}…{s_hi[:10]})",
+              f"scheduled_at=gte.{s14}&scheduled_at=lt.{s_hi}", "scheduled_at")
+print("=" * 64)
