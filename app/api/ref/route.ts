@@ -88,6 +88,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false }, { status: 500 })
   }
 
+  // Log successes too (not just failures) so a Vercel-log count of stored rows
+  // can be compared against whatsapp_click volume to size beacon loss — the one
+  // WhatsApp attribution loss vector that is otherwise silent.
+  console.log(
+    `[ref] stored code=${code} service=${record.service ?? "-"} gclid=${record.gclid ? "y" : "n"}`
+  )
+
   // Never echo stored data back.
   return NextResponse.json({ ok: true })
 }

@@ -33,7 +33,8 @@ import {
   INCLUDED_IN_PRICE,
   type ServiceKey,
 } from "@/lib/pricing"
-import { waHref, waMessage } from "@/lib/clinic"
+import { waMessage } from "@/lib/clinic"
+import WhatsAppLink from "@/components/WhatsAppLink"
 import { captureAttribution, getStoredAttribution } from "@/lib/attribution"
 import {
   pushAppointmentRequest,
@@ -573,15 +574,14 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
               No pudimos enviar tu solicitud. Escríbenos por WhatsApp y te
               atendemos de inmediato.
             </p>
-            <a
-              href={waHref({ text: waMessage(config.displayName) })}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={waMessage(config.displayName)}
+              service={procedure}
               className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-action-primary px-4 font-semibold text-white transition-colors hover:bg-action-primary-hover"
             >
               <MessageCircle className="h-4 w-4" />
               Escribir por WhatsApp
-            </a>
+            </WhatsAppLink>
           </div>
         )}
 

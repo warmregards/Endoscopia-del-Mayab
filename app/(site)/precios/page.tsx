@@ -6,7 +6,7 @@ import {
   ADDITIONAL_FEES,
   INCLUDED_IN_PRICE,
 } from "@/lib/pricing"
-import { CLINIC, waHref } from "@/lib/clinic"
+import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
 import {
   servicesByCategory,
@@ -31,6 +31,7 @@ import {
 } from "lucide-react"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import WhatsAppLink from "@/components/WhatsAppLink"
 import CallButton from "@/components/CallButton"
 import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 import ComparisonTable from "@/components/ComparisonTable"
@@ -471,14 +472,13 @@ export default function PreciosPage() {
 
             <p className="text-sm text-muted-foreground">
               ¿Dudas sobre tu cobertura?{" "}
-              <a
-                href={waHref({ text: "Hola Dr. Quiroz, tengo dudas sobre la cobertura de mi seguro para un procedimiento endoscópico." })}
-                target="_blank"
-                rel="noopener noreferrer"
+              <WhatsAppLink
+                message="Hola Dr. Quiroz, tengo dudas sobre la cobertura de mi seguro para un procedimiento endoscópico."
+                service="precios-seguro"
                 className="text-primary hover:underline"
               >
                 Escríbenos por WhatsApp
-              </a>{" "}
+              </WhatsAppLink>{" "}
               y te orientamos.
             </p>
           </div>
@@ -661,15 +661,14 @@ function ServiceRow({ service, isLast }: { service: ServiceItem; isLast: boolean
             {price}
           </span>
         ) : (
-          <a
-            href={waHref({ text: waText })}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            message={waText}
+            service={service.slug}
             className="inline-flex items-center gap-2 text-sm font-semibold text-action-primary hover:underline"
           >
             <MessageCircle className="h-4 w-4" />
             Solicitar cotización
-          </a>
+          </WhatsAppLink>
         )}
         <Link
           href={`/${service.slug}`}

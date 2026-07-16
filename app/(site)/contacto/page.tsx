@@ -1,6 +1,6 @@
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom } from "@/lib/pricing"
-import { CLINIC, telHref, waHref } from "@/lib/clinic"
+import { CLINIC, telHref } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
 import { breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
@@ -8,6 +8,7 @@ import Link from "next/link"
 import { MapPin, Phone, MessageCircle, Clock, Star, ChevronRight } from "lucide-react"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import WhatsAppLink from "@/components/WhatsAppLink"
 import GoogleReviews from "@/components/GoogleReviews"
 import MapEmbed from "@/components/MapEmbed"
 import Faq from "@/components/Faq"
@@ -113,14 +114,12 @@ export default function ContactoPage() {
                 <MessageCircle className="h-5 w-5 text-text-accent flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold text-foreground">WhatsApp</p>
-                  <a
-                    href={waHref()}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <WhatsAppLink
+                    service="contacto"
                     className="text-text-accent hover:underline"
                   >
                     {CLINIC.phone.display}
-                  </a>
+                  </WhatsAppLink>
                 </div>
               </div>
 

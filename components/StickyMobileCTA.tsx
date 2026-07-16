@@ -2,14 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { Phone } from "lucide-react"
-import { CLINIC, waHref, telHref, withRefCode } from "@/lib/clinic"
-import {
-  captureAttribution,
-  generateRefCode,
-  sendRefBeacon,
-  toRefPayload,
-} from "@/lib/attribution"
-import { pushWhatsAppClick, pushPhoneClick } from "@/lib/gtm"
+import { CLINIC, waHref, telHref } from "@/lib/clinic"
+import { useWhatsAppRef } from "@/lib/useWhatsAppRef"
+import { pushPhoneClick } from "@/lib/gtm"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -42,30 +37,13 @@ export default function StickyMobileCTA() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  // Sticky CTA uses the clinic default message; the hook appends the ref line.
+  const handleWhatsAppClick = useWhatsAppRef({
+    service: "global",
+    ctaId: "cta-sticky-wa",
+  })
+
   if (!visible) return null
-
-  function handleWhatsAppClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    const code = generateRefCode()
-    const attr = captureAttribution()
-    const pagePath =
-      typeof window !== "undefined" ? window.location.pathname : undefined
-
-    sendRefBeacon(
-      toRefPayload(code, attr, { service: "global", page_path: pagePath })
-    )
-
-    // Sticky CTA uses the clinic default message; append the ref line to it.
-    e.currentTarget.href = waHref({
-      text: withRefCode(CLINIC.whatsapp.defaultText, code),
-    })
-
-    pushWhatsAppClick({
-      ctaId: "cta-sticky-wa",
-      number: CLINIC.whatsapp.number,
-      service: "global",
-      refCode: code,
-    })
-  }
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 md:hidden px-4 py-2 bg-white/70 backdrop-blur-xl border-t border-border/50 safe-area-bottom">

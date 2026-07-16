@@ -1,14 +1,8 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
-import { CLINIC, waHref, waMessage, withRefCode } from "@/lib/clinic";
-import {
-  captureAttribution,
-  generateRefCode,
-  sendRefBeacon,
-  toRefPayload,
-} from "@/lib/attribution";
-import { pushWhatsAppClick } from "@/lib/gtm";
+import { waHref, waMessage } from "@/lib/clinic";
+import { useWhatsAppRef } from "@/lib/useWhatsAppRef";
 import { cn } from "@/lib/utils";
 
 type WhatsAppButtonProps = {
@@ -40,28 +34,8 @@ export default function WhatsAppButton({
   // (with the ref code) is computed in onClick — codes must be unique per tap.
   const href = waHref(text !== undefined ? { text } : undefined);
 
-  // The message body waHref would use when no override is set.
-  const baseMessage = text !== undefined ? text : CLINIC.whatsapp.defaultText;
-
-  function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    const code = generateRefCode();
-    const attr = captureAttribution();
-    const pagePath =
-      typeof window !== "undefined" ? window.location.pathname : undefined;
-
-    // Fire-and-forget the attribution; survives the tab switch to WhatsApp.
-    sendRefBeacon(toRefPayload(code, attr, { service, page_path: pagePath }));
-
-    // Rebuild the href with the ref line appended, before default navigation.
-    e.currentTarget.href = waHref({ text: withRefCode(baseMessage, code) });
-
-    pushWhatsAppClick({
-      ctaId,
-      number: CLINIC.whatsapp.number,
-      service,
-      refCode: code,
-    });
-  }
+  // Minting + tracking live in the shared hook (undefined text → clinic default).
+  const handleClick = useWhatsAppRef({ service, ctaId, message: text });
 
   return (
     <a
