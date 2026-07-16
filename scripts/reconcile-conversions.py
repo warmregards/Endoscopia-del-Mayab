@@ -4,8 +4,12 @@ scripts/reconcile-conversions.py
 
 Monthly offline-conversion reconciliation → Google Ads. Emits TWO upload paths,
 each to its own conversion action ("GCLID Google Ads Matching" and "ECL Google
-Ads Matching") so gclid vs ECL match rates can be tracked separately; deduped by
-Order ID (the appointment uuid) so a booking counted in both never double-counts:
+Ads Matching") so gclid vs ECL match rates can be tracked separately. Order ID
+(the appointment uuid) is the dedup key; by default a booking with both a ref
+code and a matchable phone is emitted in BOTH feeds (so the gclid-coded bookings
+act as a known-positive control for whether ECL matches — the summary reports the
+overlap). Pass --exclude-gclid-orders to make gclid win and keep each booking in
+exactly one feed once either action is promoted to Primary:
 
   1. gclid Offline Conversion Import — joins the WhatsApp ref-code ledger
      (data/ref-codes.csv, from dump-ref-codes.mjs) to the booking's ref code to
@@ -17,7 +21,10 @@ Order ID (the appointment uuid) so a booking counted in both never double-counts
      side (no gclid needed). Misses only patients not signed into Google.
 
 The two are complementary: each recovers conversions the other loses. Upload all
-bookings via both; Google keeps the ad-attributable ones and dedupes by Order ID.
+bookings via both; Google keeps the ad-attributable ones and (within a single
+action) dedupes by Order ID. Across the two separate actions it can't dedupe for
+us, so --exclude-gclid-orders is the lever that prevents cross-action
+double-counting when it matters (i.e. once bidding depends on either action).
 
 Standalone repo tooling — NOT part of the deployed app. Python 3, stdlib only.
 
@@ -451,7 +458,7 @@ def collect_candidates(records, ledger):
     return kept, stats
 
 
-def build_ecl(active, cancelled, exclude_ids=frozenset()):
+def build_ecl(active, cancelled, gclid_order_ids=frozenset(), exclude_gclid_orders=False):
     """Build Enhanced-Conversions-for-Leads rows keyed on the hashed phone.
 
     Every active booking whose calendar_phone normalizes to E.164 becomes one
@@ -460,19 +467,26 @@ def build_ecl(active, cancelled, exclude_ids=frozenset()):
     collapse: one booking = one Order ID = one conversion. Returns (conv, retr,
     stats).
 
-    Mutual exclusion ("gclid wins"): any Order ID in `exclude_ids` already went
-    to the gclid feed and is dropped here, so each appointment uuid lands in
-    exactly ONE conversion action. This is required because the two feeds now go
-    to two SEPARATE actions ("GCLID/ECL Google Ads Matching"); Google's Order-ID
-    dedup only works *within* one action, so it can't dedupe across them for us
-    the way it did when both shared a single action.
+    Mutual exclusion ("gclid wins") is OPT-IN via `exclude_gclid_orders`. When
+    on, any Order ID already in the gclid feed (`gclid_order_ids`) is dropped
+    here so each appointment uuid lands in exactly ONE conversion action — needed
+    once both feeds are Primary, because the two go to SEPARATE actions
+    ("GCLID/ECL Google Ads Matching") and Google's Order-ID dedup only works
+    *within* one action, not across them.
+
+    It defaults OFF so the gclid-coded bookings — a known-positive control group,
+    since Google definitely has those clicks — ALSO flow through ECL, letting us
+    watch whether ECL matches them back. Regardless of the flag,
+    `stats["overlap_gclid"]` counts the emitted ECL rows whose Order ID is in the
+    gclid feed: the overlap match rate we're measuring.
     """
     stats = {"active": len(active), "with_phone": 0, "bad_phone": [], "no_id": 0,
-             "excluded_gclid": 0}
+             "excluded_gclid": 0, "overlap_gclid": 0}
     conv = []
     for r in active:
         oid = str(r.get("id") or "")
-        if oid and oid in exclude_ids:
+        in_gclid_feed = bool(oid) and oid in gclid_order_ids
+        if in_gclid_feed and exclude_gclid_orders:
             stats["excluded_gclid"] += 1  # gclid feed already claimed this booking
             continue
         e164 = normalize_phone_mx(r.get("phone"))
@@ -484,6 +498,8 @@ def build_ecl(active, cancelled, exclude_ids=frozenset()):
             stats["no_id"] += 1
             continue
         stats["with_phone"] += 1
+        if in_gclid_feed:
+            stats["overlap_gclid"] += 1  # emitted here AND present in the gclid feed
         ctime = parse_datetime(r.get("date"))
         conv.append({
             "order_id": oid,
@@ -496,11 +512,14 @@ def build_ecl(active, cancelled, exclude_ids=frozenset()):
     seen = set()
     for r in cancelled:
         oid = str(r.get("id") or "")
-        # Skip Order IDs the gclid feed owns — their retraction goes to the gclid
-        # adjustments file, keeping the exclusion symmetric on the cancel side.
-        if oid and oid not in seen and oid not in exclude_ids:
-            seen.add(oid)
-            retr.append({"order_id": oid})
+        if not oid or oid in seen:
+            continue
+        # When excluding, a gclid-owned Order ID's retraction goes to the gclid
+        # adjustments file instead, keeping the exclusion symmetric on cancels.
+        if exclude_gclid_orders and oid in gclid_order_ids:
+            continue
+        seen.add(oid)
+        retr.append({"order_id": oid})
     return conv, retr, stats
 
 
@@ -522,6 +541,11 @@ def main():
                     help="output Enhanced-Conversions-for-Leads (hashed phone) CSV path")
     ap.add_argument("--ecl-adjustments-out", default="google-ads-enhanced-conversion-adjustments.csv",
                     help="output ECL conversion-adjustments (RETRACT) CSV path")
+    ap.add_argument("--exclude-gclid-orders", action="store_true",
+                    help="drop from the ECL feed any Order ID already in the gclid feed "
+                         "(mutual exclusion, 'gclid wins'). Default OFF: gclid-coded bookings "
+                         "also flow through ECL as a known-positive control group. Enable only "
+                         "before promoting either conversion action to Primary, to stop double-counting.")
     args = ap.parse_args()
 
     if args.from_supabase == bool(args.prepsync):
@@ -551,15 +575,17 @@ def main():
     retr_out = [[c["gclid"], GCLID_CONVERSION_NAME, c["ctime"], "RETRACT", adj_time, c["order_id"]] for c in retr]
 
     # Enhanced Conversions for Leads (hashed phone) — every booking, not just the
-    # ref-coded ones, MINUS any Order ID the gclid feed already claimed (mutual
-    # exclusion, "gclid wins"). The two feeds now target two separate conversion
-    # actions, so Google can't dedupe across them; we must guarantee one booking
-    # lands in exactly one feed here, or a booking with both a ref code and a
-    # matchable phone would double-count once both actions are Primary.
+    # ref-coded ones. Mutual exclusion ("gclid wins") is OPT-IN via
+    # --exclude-gclid-orders (default OFF); while off, gclid-coded bookings ALSO
+    # emit here so we can watch whether Google's ECL matches those known-positive
+    # controls back to the click. `gclid_order_ids` is passed regardless so the
+    # overlap count is reported either way — flip the flag on before promoting
+    # either action to Primary to stop the double-count once bidding depends on it.
     gclid_order_ids = {c["order_id"] for c in conv if c["order_id"]} \
         | {c["order_id"] for c in retr if c["order_id"]}
     ecl_conv, ecl_retr, ecl_stats = build_ecl(active_rows, cancelled_rows,
-                                              exclude_ids=gclid_order_ids)
+                                              gclid_order_ids=gclid_order_ids,
+                                              exclude_gclid_orders=args.exclude_gclid_orders)
     ecl_conv_out = [[c["phone_hash"], ECL_CONVERSION_NAME, c["ctime"],
                      f"{c['value']:.2f}" if c["value"] is not None else "", CONVERSION_CURRENCY,
                      c["order_id"]]
@@ -614,7 +640,9 @@ def main():
     print("─" * 60)
     print("Enhanced Conversions for Leads (hashed phone)")
     print("─" * 60)
+    excl_mode = "ON — gclid wins" if args.exclude_gclid_orders else "OFF — both feeds emit"
     print(f"Active bookings considered:         {ecl_stats['active']}")
+    print(f"  → gclid mutual exclusion:         {excl_mode}")
     print(f"  → excluded (already in gclid feed):{ecl_stats['excluded_gclid']}")
     print(f"  → with a usable phone (ECL rows): {ecl_stats['with_phone']}")
     print(f"  → phone present but unparseable:  {len(ecl_stats['bad_phone'])}", end="")
@@ -622,6 +650,14 @@ def main():
     print(f"  → dropped (no Order ID/uuid):     {ecl_stats['no_id']}")
     print(f"  → RETRACT rows written:           {len(ecl_retr_out)}")
     print(f"ECL attributed value (pre-match):   {ecl_total_value:.2f} {CONVERSION_CURRENCY}")
+    # gclid↔ECL overlap: the control-group match test. With exclusion OFF, these
+    # ECL rows share an Order ID with a known-positive gclid conversion, so
+    # watching whether Google matches them tells us if ECL works for this account.
+    total_ecl_rows = len(ecl_conv_out)
+    overlap = ecl_stats["overlap_gclid"]
+    overlap_rate = (overlap / total_ecl_rows * 100) if total_ecl_rows else 0.0
+    print(f"Total ECL rows written:             {total_ecl_rows}")
+    print(f"  → Order ID also in gclid feed:    {overlap}  ({overlap_rate:.1f}% overlap — control group)")
     print("─" * 60)
     print(f"Wrote {len(conv_out)} gclid conversion(s) → {args.out}")
     print(f"Wrote {len(retr_out)} gclid retraction(s) → {args.adjustments_out}")
