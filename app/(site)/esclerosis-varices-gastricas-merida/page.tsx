@@ -18,6 +18,7 @@ import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
+import DoctorAuthority from "@/components/DoctorAuthority"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -472,6 +473,8 @@ export default function EsclerosisVaricesGastricasPage() {
                 />
               </div>
             </div>
+
+            <DoctorAuthority variant="strip" />
           </div>
         </div>
       </section>

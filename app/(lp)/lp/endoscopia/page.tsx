@@ -3,7 +3,6 @@ import {
   Star,
   MapPin,
   CheckCircle2,
-  ShieldCheck,
   Clock,
   CalendarCheck,
   FileText,
@@ -13,6 +12,7 @@ import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pric
 import { CLINIC, waMessage } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DoctorAuthority from "@/components/DoctorAuthority";
 import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -187,56 +187,14 @@ export default function LpEndoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-narrow section-padding">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
-            <img
-              src={DOCTOR.photos.headshot}
-              alt={DOCTOR.name}
-              width={160}
-              height={160}
-              className="h-32 w-32 shrink-0 rounded-2xl object-cover sm:h-40 sm:w-40"
-              loading="lazy"
-              decoding="async"
-            />
-
-            <div className="flex-1">
-              <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                Te atiende el Dr. Omar Quiroz
-              </h2>
-              <p className="mt-2 font-semibold text-text-brand">
-                {DOCTOR.descriptor}
-              </p>
-
-              {/* Credential chips */}
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {DOCTOR.credentials.map((c) => (
-                  <li
-                    key={c}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent-light px-3 py-1 text-xs font-medium text-accent"
-                  >
-                    <ShieldCheck className="h-4 w-4" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 text-foreground">
-                Cuando escribes, te contesta directamente el doctor — no una
-                recepcionista.
-              </p>
-
-              <div className="mt-6">
-                <WhatsAppButton
-                  variant="primary"
-                  size="compact"
-                  service="endoscopia"
-                  position="lp-doctor"
-                  procedureName="Endoscopia"
-                  label="Escribirle al Dr. Quiroz"
-                  className="min-h-[48px] text-sm"
-                />
-              </div>
-            </div>
-          </div>
+          <DoctorAuthority
+            variant="compact"
+            service="endoscopia"
+            position="lp-doctor"
+            procedureName="Endoscopia"
+            procedureContext="El especialista que realiza tu endoscopia se formó y dirigió servicios de endoscopia en centros de referencia nacionales."
+            profileLink={false}
+          />
 
           {/* SECTION 3.5 — Trust video. Renders nothing until TRUST_VIDEO is
               set (see const above) — no placeholder ever shown to a visitor. */}

@@ -20,6 +20,7 @@ import AppointmentForm from "@/components/AppointmentForm"
 import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import ComparisonTable from "@/components/ComparisonTable"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
+import DoctorAuthority from "@/components/DoctorAuthority"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -335,11 +336,31 @@ export default function EndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-background
+          SECTION 2B2: TE ATIENDE EL DR. QUIROZ — bg-background
+          Unified doctor-authority block + training/leadership logo strip.
+          One component (components/DoctorAuthority.tsx), shared across every
+          procedure page and LP.
+          ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-background">
+        <div className="container-page section-padding">
+          <DoctorAuthority
+            variant="compact"
+            service="endoscopia"
+            position="procedure-doctor"
+            procedureName="Endoscopia"
+            procedureContext="El especialista que realiza tu endoscopia se formó y dirigió servicios de endoscopia en centros de referencia nacionales."
+            profileLink={true}
+          />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-muted
           Anchor target for /endoscopia-merida#comparacion. Shared component
           with /precios so the trust/value story stays identical everywhere.
+          Background is muted so it alternates with the doctor block above.
           ══════════════════════════════════════════════════════════════════ */}
-      <ComparisonTable background="background" />
+      <ComparisonTable background="muted" />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2B: APPOINTMENT FORM (on-page booking) — bg-accent-light

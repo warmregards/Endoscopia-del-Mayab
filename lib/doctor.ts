@@ -187,3 +187,91 @@ export const DOCTOR = {
     "https://www.youtube.com/@DrOmarQuiroz",
   ] as string[],
 } as const
+
+// ── Formación y experiencia hospitalaria ──────────────────────────────────
+// Chronological trajectory ending in Mérida (where he practices now).
+// Consumed ONLY by <DoctorAuthority> (compact logo strip + timeline). Never
+// hardcode any of this in the component — read from here.
+//
+//   logo          optional — component falls back to an org-initials monogram.
+//   logoW/logoH   intrinsic pixel dims of the asset — required by next/image
+//                 for a string `src` (keeps aspect ratio correct at any height).
+//   category      "formacion" | "liderazgo" — drives the timeline badge.
+//   showInCompact appears in the procedure-page / LP compact logo strip.
+//   order         sort key (floats allowed so entries can slot between others).
+export const DOCTOR_TRAINING = [
+  {
+    id: "unam",
+    org: "UNAM",
+    logo: "/logos/unam.png",
+    logoW: 320,
+    logoH: 320,
+    role: "Formación médica y alta especialidad",
+    detail:
+      "Médico Cirujano, Cirugía General y Alta Especialidad en Endoscopia Gastrointestinal.",
+    location: "Ciudad de México",
+    category: "formacion" as const,
+    order: 1,
+    showInCompact: true,
+  },
+  {
+    id: "abc",
+    org: "Centro Médico ABC",
+    logo: "/logos/abc.png",
+    logoW: 607,
+    logoH: 506,
+    role: "Rotación en laparoscopía avanzada",
+    detail:
+      "Entrenamiento en cirugía mínimamente invasiva en uno de los hospitales privados de referencia del país.",
+    location: "Ciudad de México",
+    category: "formacion" as const,
+    order: 2,
+    showInCompact: true,
+  },
+  {
+    id: "20-noviembre",
+    org: "Hospital 20 de Noviembre",
+    logo: "/logos/20-noviembre.png",
+    logoW: 447,
+    logoH: 447,
+    role: "Alta especialidad",
+    detail:
+      "Formación en el Centro Médico Nacional 20 de Noviembre, centro de referencia nacional de alta complejidad.",
+    location: "Ciudad de México",
+    category: "formacion" as const,
+    order: 2.5,
+    showInCompact: false,
+  },
+  {
+    id: "pemex",
+    org: "PEMEX",
+    logo: "/logos/pemex.png",
+    logoW: 2090,
+    logoH: 575,
+    role: "Endoscopista titular",
+    detail: "Endoscopista principal en el centro médico nacional de PEMEX.",
+    location: "Ciudad de México",
+    category: "liderazgo" as const,
+    order: 3,
+    showInCompact: true,
+  },
+  {
+    id: "issste",
+    org: "ISSSTE Mérida",
+    logo: "/logos/issste.svg",
+    logoW: 2300,
+    logoH: 720,
+    role: "Jefe de Endoscopia",
+    detail:
+      "Dirigió el servicio de endoscopia de uno de los hospitales públicos más grandes de Yucatán.",
+    location: "Mérida, Yucatán",
+    category: "liderazgo" as const,
+    order: 4,
+    showInCompact: true,
+  },
+] as const
+
+export const TRAINING_CATEGORY_LABEL: Record<string, string> = {
+  formacion: "Formación",
+  liderazgo: "Liderazgo",
+}

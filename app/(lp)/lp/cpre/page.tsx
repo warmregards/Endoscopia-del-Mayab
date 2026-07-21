@@ -13,6 +13,7 @@ import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing";
 import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DoctorAuthority from "@/components/DoctorAuthority";
 import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -179,57 +180,14 @@ export default function LpCprePage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className="bg-background">
         <div className="container-narrow section-padding">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
-            <img
-              src={DOCTOR.photos.headshot}
-              alt={DOCTOR.name}
-              width={160}
-              height={160}
-              className="h-32 w-32 shrink-0 rounded-2xl object-cover sm:h-40 sm:w-40"
-              loading="lazy"
-              decoding="async"
-            />
-
-            <div className="flex-1">
-              <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                Te atiende el Dr. Omar Quiroz
-              </h2>
-              <p className="mt-2 font-semibold text-text-brand">
-                {DOCTOR.descriptor}
-              </p>
-
-              {/* Credential chips */}
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {DOCTOR.credentials.map((c) => (
-                  <li
-                    key={c}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent-light px-3 py-1 text-xs font-medium text-accent"
-                  >
-                    <ShieldCheck className="h-4 w-4" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 text-foreground">
-                La CPRE es un procedimiento avanzado; se realiza en Hospital
-                Amerimed con equipo Olympus HD. Cuando escribes, te contesta
-                directamente el doctor — no una recepcionista.
-              </p>
-
-              <div className="mt-6">
-                <WhatsAppButton
-                  variant="primary"
-                  size="compact"
-                  service="cpre"
-                  position="lp-doctor"
-                  procedureName="CPRE"
-                  label="Escribirle al Dr. Quiroz"
-                  className="min-h-[48px] text-sm"
-                />
-              </div>
-            </div>
-          </div>
+          <DoctorAuthority
+            variant="compact"
+            service="cpre"
+            position="lp-doctor"
+            procedureName="CPRE"
+            procedureContext="La CPRE es un procedimiento avanzado; el especialista que la realiza se formó y dirigió endoscopia en centros de referencia nacionales."
+            profileLink={false}
+          />
 
           {/* SECTION 3.5 — Trust video (renders only once a clip is configured) */}
           {TRUST_VIDEO && (

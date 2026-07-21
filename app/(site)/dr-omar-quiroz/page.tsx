@@ -20,6 +20,7 @@ import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
 import Faq from "@/components/Faq"
 import GoogleReviews from "@/components/GoogleReviews"
+import DoctorAuthority from "@/components/DoctorAuthority"
 
 export const revalidate = 86400
 export const metadata = metaFor("doctor")
@@ -228,35 +229,12 @@ export default function DoctorOmarQuirozPage() {
           </h2>
 
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Left: Education Timeline */}
-            <div className="space-y-4">
-              <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                Trayectoria Académica
+            {/* Left: Formación y experiencia hospitalaria */}
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-6">
+                Formación y experiencia hospitalaria
               </h3>
-              {[
-                { title: "Médico Cirujano", sub: `UNAM · Cédula ${DOCTOR.cedulas.medicoGeneral}`, highlight: true },
-                { title: "Cirugía General — UNAM", sub: `Cédula de Especialidad ${DOCTOR.cedulas.especialidad}` },
-                { title: "Alta Especialidad en Endoscopia Gastrointestinal — UNAM", sub: `Cédula ${DOCTOR.cedulas.endoscopia}` },
-                { title: "Rotación Laparoscópica Avanzada", sub: "Centro Médico ABC, CDMX" },
-                { title: "Fellowship Bariátrico", sub: "Gastric Sleeve Center, Florida" },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className={`border rounded-xl p-6 ${item.highlight ? "border-accent/30 bg-accent-light/5" : "border-border"}`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${item.highlight ? "bg-accent-light" : "bg-muted"}`}>
-                      <GraduationCap className={`h-4 w-4 ${item.highlight ? "text-text-accent" : "text-primary"}`} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className={`text-sm ${item.highlight ? "text-text-accent font-medium" : "text-muted-foreground"}`}>
-                        {item.sub}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <DoctorAuthority variant="timeline" />
             </div>
 
             {/* Right: Certifications & Memberships */}

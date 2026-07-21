@@ -11,6 +11,7 @@ import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import DoctorAuthority from "@/components/DoctorAuthority"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
@@ -425,6 +426,8 @@ export default function LigaduraHemorroidesPage() {
               />
             </div>
           </div>
+
+          <DoctorAuthority variant="strip" className="mt-8" />
         </div>
       </section>
 
