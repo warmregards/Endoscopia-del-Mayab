@@ -114,14 +114,14 @@ function TrainingLogoStrip() {
       <p className="font-serif text-[11px] font-bold uppercase tracking-[0.1em] text-text-accent">
         Dónde se formó y dirigió
       </p>
-      <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-4">
+      <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-6">
         {strip.map((t) => (
           <li key={t.id} className="group">
-            <figure className="m-0 flex items-center gap-3">
+            <figure className="m-0 flex items-center gap-4">
               <TrainingLogo
                 entry={t}
-                imgClassName="h-10 w-auto object-contain grayscale transition duration-200 group-hover:grayscale-0 group-focus-within:grayscale-0"
-                monogramClassName="h-10 w-10 text-sm"
+                imgClassName="h-14 w-auto max-w-[168px] object-contain grayscale transition duration-200 group-hover:grayscale-0 group-focus-within:grayscale-0"
+                monogramClassName="h-14 w-14 text-base"
               />
               <figcaption className="flex flex-col">
                 <span className="font-serif text-[13px] font-bold leading-tight text-foreground">
