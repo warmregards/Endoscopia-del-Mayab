@@ -269,7 +269,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     path: "/emergencias-digestivas-merida",
     titleOverride: "Emergencias Digestivas en Mérida | 24/7 | Endoscopia del Mayab",
     descriptionOverride:
-      "Atención endoscópica urgente en Mérida para hemorragia digestiva, impactación alimentaria y cuerpos extraños. Dr. Omar Quiroz por WhatsApp 999 236 0153.",
+      "Atención endoscópica de emergencia en Mérida: sangrado, perforaciones esofágica e intestinal, cuerpos extraños. Dr. Omar Quiroz, WhatsApp 999 236 0153.",
   },
   consultas: {
     type: "service",

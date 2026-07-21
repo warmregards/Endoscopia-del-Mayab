@@ -371,8 +371,109 @@ export default function EmergenciasDigestivasPage() {
         </div>
       </section>
 
-      {/* ── Section 6: FAQ ── bg-muted */}
-      <div className="bg-muted">
+      {/* ── Section 6: Perforación digestiva ── bg-muted ── */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">
+            Perforación digestiva: esofágica, gástrica e intestinal
+          </h2>
+
+          <p className="text-foreground/80 max-w-3xl mb-8">
+            Una perforación del tubo digestivo es una ruptura en la pared del
+            esófago, estómago o intestino que deja escapar contenido digestivo
+            hacia el tórax o la cavidad abdominal. Es una urgencia médica: sin
+            atención oportuna puede derivar en mediastinitis, peritonitis o
+            sepsis. Mientras más rápido se valora, más opciones de tratamiento
+            sin cirugía abierta existen.
+          </p>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Señales de alarma */}
+            <div className="rounded-2xl border border-red-200 bg-red-50/50 p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                  <AlertTriangle className="h-6 w-6 text-red-600" />
+                </div>
+                <h3 className="font-serif text-lg font-semibold text-foreground">
+                  Señales de alarma
+                </h3>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                {[
+                  "Dolor abdominal o torácico súbito e intenso",
+                  "Abdomen rígido, distendido o muy sensible al tacto",
+                  "Fiebre, escalofríos o taquicardia",
+                  "Dolor al tragar o dificultad para respirar (perforación esofágica)",
+                  "Vómito con sangre o evacuaciones negras",
+                ].map((symptom) => (
+                  <div key={symptom} className="flex items-start gap-4">
+                    <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-1" />
+                    <span className="text-sm text-foreground/80">{symptom}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-sm text-foreground/80 mb-6">
+                Si presentas estos síntomas, escribe por WhatsApp de inmediato o
+                acude al servicio de urgencias más cercano.
+              </p>
+
+              <WhatsAppButton
+                service="urgencias"
+                position="perforacion-alarma"
+                procedureName="Perforación Digestiva"
+                className="text-sm"
+              />
+            </div>
+
+            {/* Causas + Tratamiento */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+                  Causas frecuentes
+                </h3>
+                <p className="text-sm text-foreground/80">
+                  Úlcera péptica perforada, cuerpos extraños impactados,
+                  complicación de una endoscopia o colonoscopia, obstrucción
+                  intestinal, enfermedad diverticular y traumatismos.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
+                  Tratamiento — cierre sin cirugía abierta
+                </h3>
+                <p className="text-sm text-foreground/80">
+                  En casos seleccionados, una perforación puede cerrarse por vía
+                  endoscópica sin cirugía abierta, mediante{" "}
+                  <Link
+                    href="/cierre-fistulas-clips-endoscopicos-merida"
+                    className="text-primary hover:underline"
+                  >
+                    clips endoscópicos
+                  </Link>{" "}
+                  o{" "}
+                  <Link
+                    href="/sutura-endoscopica-merida"
+                    className="text-primary hover:underline"
+                  >
+                    sutura endoscópica
+                  </Link>
+                  . El {DOCTOR.name}, {DOCTOR.descriptor}, evalúa cada caso y
+                  —al dominar tanto la endoscopia terapéutica como la cirugía—
+                  resuelve la complicación por el método más seguro para ti,
+                  incluyendo la resolución quirúrgica en la misma sesión cuando
+                  es necesario.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 7: FAQ ── bg-background ── */}
+      <div className="bg-background">
         <Faq
           routeKey="emergencias"
           service="urgencias"
@@ -380,8 +481,8 @@ export default function EmergenciasDigestivasPage() {
         />
       </div>
 
-      {/* ── Section 7: Practical Info + Location ── bg-background */}
-      <section className="bg-background">
+      {/* ── Section 8: Practical Info + Location ── bg-muted ── */}
+      <section className="bg-muted">
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
@@ -513,7 +614,7 @@ export default function EmergenciasDigestivasPage() {
         </div>
       </section>
 
-      {/* ── Section 8: Final CTA ── bg-primary */}
+      {/* ── Section 9: Final CTA ── bg-primary */}
       <section className="bg-primary">
         <div className="container-page section-padding text-center">
           <h2
@@ -551,7 +652,7 @@ export default function EmergenciasDigestivasPage() {
         </div>
       </section>
 
-      {/* ── Section 9: Related Procedures ── bg-background */}
+      {/* ── Section 10: Related Procedures ── bg-background */}
       <section className="bg-background">
         <div className="container-page section-padding">
           <h2

@@ -1047,6 +1047,25 @@ export const emergenciasFaqs: FAQ[] = [
     answer:
       "En Hospital Amerimed Mérida, Consultorio 517, en la zona de Chichi Suárez. Fácil acceso desde Altabrisa, Temozón Norte, Cholul y el Centro Histórico de Mérida. Estacionamiento disponible. Escríbele al Dr. Quiroz por WhatsApp y coordinamos tu llegada.",
   },
+  {
+    question: "¿Cuáles son los síntomas de una perforación digestiva?",
+    answer:
+      "Dolor abdominal o torácico súbito e intenso, abdomen rígido o distendido, fiebre, taquicardia y —en perforación esofágica— dolor al tragar o dificultad para respirar. También puede haber vómito con sangre o evacuaciones negras. Es una urgencia: escribe por WhatsApp al 999 236 0153 o acude a urgencias de inmediato.",
+  },
+  {
+    question: "¿La perforación esofágica o intestinal es una emergencia?",
+    answer:
+      "Sí. Una perforación del esófago, estómago o intestino es potencialmente grave y requiere valoración inmediata, porque el contenido digestivo que escapa puede causar infección seria (mediastinitis o peritonitis). Mientras antes se atiende, mayor probabilidad de resolverla sin cirugía abierta. Contacta por WhatsApp al 999 236 0153.",
+  },
+  {
+    question: "¿Se puede cerrar una perforación sin cirugía abierta?",
+    answer: `En casos seleccionados, sí. Muchas perforaciones se cierran por vía endoscópica con clips endoscópicos o sutura endoscópica, sin necesidad de cirugía abierta. El ${DOCTOR.name}, ${DOCTOR.descriptor}, domina ambas técnicas y también la cirugía, por lo que puede resolver la complicación por el método más seguro —incluso quirúrgicamente en la misma sesión si el caso lo requiere.`,
+  },
+  {
+    question: "¿Qué causa una perforación del tubo digestivo?",
+    answer:
+      "Las causas más frecuentes son la úlcera péptica perforada, cuerpos extraños impactados, complicaciones de una endoscopia o colonoscopia, obstrucción intestinal, enfermedad diverticular y traumatismos. La valoración endoscópica determina el origen y el mejor tratamiento.",
+  },
 ]
 
 // ---------------------------------------------------------------------------
