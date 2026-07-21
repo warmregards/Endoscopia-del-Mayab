@@ -460,11 +460,11 @@ export default function EmergenciasDigestivasPage() {
                   >
                     sutura endoscópica
                   </Link>
-                  . El {DOCTOR.name}, Endoscopista Gastrointestinal y Cirujano
-                  General, evalúa cada caso y —al dominar tanto la endoscopia
-                  terapéutica como la cirugía— resuelve la complicación por el
-                  método más seguro para ti, incluyendo la resolución quirúrgica
-                  en la misma sesión cuando es necesario.
+                  . El {DOCTOR.name}, {DOCTOR.descriptor}, evalúa cada caso y
+                  —al dominar tanto la endoscopia terapéutica como la cirugía—
+                  resuelve la complicación por el método más seguro para ti,
+                  incluyendo la resolución quirúrgica en la misma sesión cuando
+                  es necesario.
                 </p>
               </div>
             </div>

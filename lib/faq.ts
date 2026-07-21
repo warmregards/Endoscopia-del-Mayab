@@ -1059,8 +1059,7 @@ export const emergenciasFaqs: FAQ[] = [
   },
   {
     question: "¿Se puede cerrar una perforación sin cirugía abierta?",
-    answer:
-      "En casos seleccionados, sí. Muchas perforaciones se cierran por vía endoscópica con clips endoscópicos o sutura endoscópica, sin necesidad de cirugía abierta. El Dr. Omar Quiroz, Endoscopista Gastrointestinal y Cirujano General, domina ambas técnicas y también la cirugía, por lo que puede resolver la complicación por el método más seguro —incluso quirúrgicamente en la misma sesión si el caso lo requiere.",
+    answer: `En casos seleccionados, sí. Muchas perforaciones se cierran por vía endoscópica con clips endoscópicos o sutura endoscópica, sin necesidad de cirugía abierta. El ${DOCTOR.name}, ${DOCTOR.descriptor}, domina ambas técnicas y también la cirugía, por lo que puede resolver la complicación por el método más seguro —incluso quirúrgicamente en la misma sesión si el caso lo requiere.`,
   },
   {
     question: "¿Qué causa una perforación del tubo digestivo?",
