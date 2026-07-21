@@ -49,9 +49,10 @@ type TrainingEntry = (typeof DOCTOR_TRAINING)[number]
 const CONTACT_LINE =
   "Cuando escribes, te contesta directamente el doctor — no una recepcionista."
 
-// Default first sentence of the compact intro (tú-form).
+// Default first sentence of the compact intro (tú-form). No leadership claim —
+// he was adscrito, not a department head (see DOCTOR_TRAINING).
 const DEFAULT_INTRO =
-  "El especialista que te atiende se formó y dirigió servicios de endoscopia en centros de referencia nacionales."
+  "El especialista que te atiende se formó y ejerció como endoscopista en centros de referencia nacionales."
 
 const byOrder = (a: TrainingEntry, b: TrainingEntry) => a.order - b.order
 
@@ -112,7 +113,7 @@ function TrainingLogoStrip() {
   return (
     <>
       <p className="font-serif text-[11px] font-bold uppercase tracking-[0.1em] text-text-accent">
-        Dónde se formó y dirigió
+        Dónde se formó y ejerció
       </p>
       <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-6">
         {strip.map((t) => (
@@ -159,7 +160,7 @@ export default function DoctorAuthority({
         />
         <ol className="relative">
           {timeline.map((t, i) => {
-            const isLead = t.category === "liderazgo"
+            const isExperiencia = t.category === "experiencia"
             const isLast = i === timeline.length - 1
             return (
               <li
@@ -179,7 +180,7 @@ export default function DoctorAuthority({
                   <span
                     className={cn(
                       "inline-block rounded px-2 py-0.5 font-serif text-[10px] font-bold uppercase tracking-wide",
-                      isLead
+                      isExperiencia
                         ? "bg-accent-light text-text-accent"
                         : "bg-muted text-primary"
                     )}

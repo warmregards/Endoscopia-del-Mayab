@@ -178,7 +178,7 @@ export default function LpLigaduraVaricesPage() {
             service="ligadura_varices"
             position="lp-doctor"
             procedureName="Ligadura de várices esofágicas"
-            procedureContext="El especialista que realiza tu ligadura de várices esofágicas se formó y dirigió endoscopia en centros de referencia nacionales."
+            procedureContext="El especialista que realiza tu ligadura de várices esofágicas se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={false}
           />
 

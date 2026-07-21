@@ -183,7 +183,7 @@ export default function LpHemorroidesPage() {
             service="ligadura_hemorroides"
             position="lp-doctor"
             procedureName="Ligadura de hemorroides"
-            procedureContext="Atención discreta y directa: el especialista que realiza tu ligadura de hemorroides se formó y dirigió endoscopia en centros de referencia nacionales."
+            procedureContext="Atención discreta y directa: el especialista que realiza tu ligadura de hemorroides se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={false}
           />
 

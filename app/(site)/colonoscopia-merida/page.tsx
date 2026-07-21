@@ -402,7 +402,7 @@ export default function ColonoscopiaPage() {
             service="colonoscopia"
             position="procedure-doctor"
             procedureName="Colonoscopia"
-            procedureContext="El especialista que realiza tu colonoscopia se formó y dirigió endoscopia en centros de referencia nacionales."
+            procedureContext="El especialista que realiza tu colonoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={true}
           />
         </div>

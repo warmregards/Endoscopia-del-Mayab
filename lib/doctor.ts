@@ -189,16 +189,22 @@ export const DOCTOR = {
 } as const
 
 // ── Formación y experiencia hospitalaria ──────────────────────────────────
-// Chronological trajectory ending in Mérida (where he practices now).
+// Chronological trajectory ending in Mérida (where he practices now). Sourced
+// from Dr. Quiroz's own account — do NOT inflate titles. He was `adscrito`
+// (attending staff), not department head: never "Jefe"/"titular"/"principal".
 // Consumed ONLY by <DoctorAuthority> (compact logo strip + timeline). Never
 // hardcode any of this in the component — read from here.
 //
 //   logo          optional — component falls back to an org-initials monogram.
 //   logoW/logoH   intrinsic pixel dims of the asset — required by next/image
 //                 for a string `src` (keeps aspect ratio correct at any height).
-//   category      "formacion" | "liderazgo" — drives the timeline badge.
+//   category      "formacion" | "experiencia" — drives the timeline badge.
 //   showInCompact appears in the procedure-page / LP compact logo strip.
 //   order         sort key (floats allowed so entries can slot between others).
+//
+// Brand wall: bariatría (Hospital General de Tláhuac) lives on omar.doctor and
+// must NEVER appear here. Laparoscopy (ABC / Jackson South) is surgery-brand and
+// stays commented pending an explicit decision.
 export const DOCTOR_TRAINING = [
   {
     id: "unam",
@@ -206,72 +212,101 @@ export const DOCTOR_TRAINING = [
     logo: "/logos/unam.png",
     logoW: 320,
     logoH: 320,
-    role: "Formación médica y alta especialidad",
-    detail:
-      "Médico Cirujano, Cirugía General y Alta Especialidad en Endoscopia Gastrointestinal.",
+    role: "Médico Cirujano",
+    detail: "Formación médica en la Universidad Nacional Autónoma de México.",
     location: "Ciudad de México",
     category: "formacion" as const,
     order: 1,
     showInCompact: true,
   },
   {
-    id: "abc",
-    org: "Centro Médico ABC",
-    logo: "/logos/abc.png",
-    logoW: 607,
-    logoH: 506,
-    role: "Rotación en laparoscopía avanzada",
-    detail:
-      "Entrenamiento en cirugía mínimamente invasiva en uno de los hospitales privados de referencia del país.",
-    location: "Ciudad de México",
-    category: "formacion" as const,
-    order: 2,
-    showInCompact: true,
-  },
-  {
-    id: "20-noviembre",
-    org: "Hospital 20 de Noviembre",
-    logo: "/logos/20-noviembre.png",
-    logoW: 447,
-    logoH: 447,
-    role: "Alta especialidad",
-    detail:
-      "Formación en el Centro Médico Nacional 20 de Noviembre, centro de referencia nacional de alta complejidad.",
-    location: "Ciudad de México",
-    category: "formacion" as const,
-    order: 2.5,
-    showInCompact: false,
-  },
-  {
-    id: "pemex",
-    org: "PEMEX",
+    id: "pemex-sur",
+    org: "Hospital Central Sur de Alta Especialidad de Pemex",
     logo: "/logos/pemex.png",
     logoW: 2090,
     logoH: 575,
-    role: "Endoscopista titular",
-    detail: "Endoscopista principal en el centro médico nacional de PEMEX.",
+    role: "Especialidad en Cirugía General y Gastrointestinal",
+    detail:
+      "Especialidad en cirugía general con enfoque gastrointestinal (aval UNAM · cédula EGI/CMCG).",
     location: "Ciudad de México",
-    category: "liderazgo" as const,
-    order: 3,
-    showInCompact: true,
+    category: "formacion" as const,
+    order: 2,
+    showInCompact: false, // PEMEX shown once in the compact strip — see pemex-norte
   },
   {
-    id: "issste",
-    org: "ISSSTE Mérida",
-    logo: "/logos/issste.svg",
-    logoW: 2300,
-    logoH: 720,
-    role: "Jefe de Endoscopia",
+    id: "pemex-norte",
+    org: "Hospital Central Norte de Pemex",
+    logo: "/logos/pemex.png",
+    logoW: 2090,
+    logoH: 575,
+    role: "Alta Especialidad en Endoscopia Gastrointestinal",
     detail:
-      "Dirigió el servicio de endoscopia de uno de los hospitales públicos más grandes de Yucatán.",
-    location: "Mérida, Yucatán",
-    category: "liderazgo" as const,
+      "Alta especialidad en endoscopia gastrointestinal; posteriormente médico adscrito de cirugía general y endoscopia.",
+    location: "Ciudad de México",
+    category: "formacion" as const,
+    order: 3,
+    showInCompact: true, // the headline endoscopy credential
+  },
+  {
+    id: "cmn-20-noviembre",
+    org: "CMN 20 de Noviembre (ISSSTE)",
+    logo: "/logos/20-noviembre.png",
+    logoW: 447,
+    logoH: 447,
+    role: "Médico adscrito — Cirugía General",
+    detail:
+      "Médico adscrito de cirugía general en el Centro Médico Nacional 20 de Noviembre.",
+    location: "Ciudad de México",
+    category: "experiencia" as const,
     order: 4,
     showInCompact: true,
   },
+  {
+    id: "hr-merida",
+    org: "Hospital Regional Mérida (ISSSTE)",
+    logo: "/logos/issste.svg",
+    logoW: 2300,
+    logoH: 720,
+    role: "Médico adscrito — Endoscopia Gastrointestinal",
+    detail: "Médico adscrito de endoscopia gastrointestinal en Mérida, Yucatán.",
+    location: "Mérida, Yucatán",
+    category: "experiencia" as const,
+    order: 5,
+    showInCompact: true,
+  },
+
+  // ── BORDERLINE (laparoscopía — Cirujano General, leans surgery-brand). Decide. ──
+  // {
+  //   id: "abc",
+  //   org: "Centro Médico ABC",
+  //   logo: "/logos/abc.png",
+  //   logoW: 607,
+  //   logoH: 506,
+  //   role: "Alta Especialidad en Cirugía Laparoscópica",
+  //   detail:
+  //     "Alta especialidad en cirugía laparoscópica en uno de los hospitales privados de referencia del país.",
+  //   location: "Ciudad de México",
+  //   category: "formacion" as const,
+  //   order: 3.5,
+  //   showInCompact: false,
+  // },
+  // {
+  //   id: "jackson-south",
+  //   org: "Jackson South Medical Center", // formerly Jackson South Community Hospital
+  //   logo: null,                          // no logo on hand + US-hospital mark = IP caution
+  //   role: "Entrenamiento en Cirugía Laparoscópica",
+  //   detail: "Entrenamiento en cirugía laparoscópica en Miami, Estados Unidos.",
+  //   location: "Miami, EE. UU.",
+  //   category: "formacion" as const,
+  //   order: 3.6,
+  //   showInCompact: false,
+  // },
+
+  // ── EXCLUDED (bariatría → omar.doctor, brand wall) ──
+  // Hospital General de Tláhuac — Alta Especialidad en Cirugía Bariátrica. Do NOT add here.
 ] as const
 
 export const TRAINING_CATEGORY_LABEL: Record<string, string> = {
   formacion: "Formación",
-  liderazgo: "Liderazgo",
+  experiencia: "Experiencia hospitalaria", // was "Liderazgo" — adscrito ≠ leadership
 }

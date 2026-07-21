@@ -192,7 +192,7 @@ export default function LpEndoscopiaPage() {
             service="endoscopia"
             position="lp-doctor"
             procedureName="Endoscopia"
-            procedureContext="El especialista que realiza tu endoscopia se formó y dirigió servicios de endoscopia en centros de referencia nacionales."
+            procedureContext="El especialista que realiza tu endoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={false}
           />
 

@@ -185,7 +185,7 @@ export default function LpCprePage() {
             service="cpre"
             position="lp-doctor"
             procedureName="CPRE"
-            procedureContext="La CPRE es un procedimiento avanzado; el especialista que la realiza se formó y dirigió endoscopia en centros de referencia nacionales."
+            procedureContext="La CPRE es un procedimiento avanzado; el especialista que la realiza se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={false}
           />
 

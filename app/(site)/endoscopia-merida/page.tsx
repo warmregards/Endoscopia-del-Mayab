@@ -348,7 +348,7 @@ export default function EndoscopiaPage() {
             service="endoscopia"
             position="procedure-doctor"
             procedureName="Endoscopia"
-            procedureContext="El especialista que realiza tu endoscopia se formó y dirigió servicios de endoscopia en centros de referencia nacionales."
+            procedureContext="El especialista que realiza tu endoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
             profileLink={true}
           />
         </div>
