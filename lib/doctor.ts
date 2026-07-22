@@ -203,8 +203,9 @@ export const DOCTOR = {
 //   order         sort key (floats allowed so entries can slot between others).
 //
 // Brand wall: bariatría (Hospital General de Tláhuac) lives on omar.doctor and
-// must NEVER appear here. Laparoscopy (ABC / Jackson South) is surgery-brand and
-// stays commented pending an explicit decision.
+// must NEVER appear here. Laparoscopy (ABC / Jackson South) is the Cirujano
+// General credential — kept timeline-only (showInCompact:false), out of the
+// endoscopy-focused compact strip.
 export const DOCTOR_TRAINING = [
   {
     id: "unam",
@@ -275,32 +276,33 @@ export const DOCTOR_TRAINING = [
     showInCompact: true,
   },
 
-  // ── BORDERLINE (laparoscopía — Cirujano General, leans surgery-brand). Decide. ──
-  // {
-  //   id: "abc",
-  //   org: "Centro Médico ABC",
-  //   logo: "/logos/abc.png",
-  //   logoW: 607,
-  //   logoH: 506,
-  //   role: "Alta Especialidad en Cirugía Laparoscópica",
-  //   detail:
-  //     "Alta especialidad en cirugía laparoscópica en uno de los hospitales privados de referencia del país.",
-  //   location: "Ciudad de México",
-  //   category: "formacion" as const,
-  //   order: 3.5,
-  //   showInCompact: false,
-  // },
-  // {
-  //   id: "jackson-south",
-  //   org: "Jackson South Medical Center", // formerly Jackson South Community Hospital
-  //   logo: null,                          // no logo on hand + US-hospital mark = IP caution
-  //   role: "Entrenamiento en Cirugía Laparoscópica",
-  //   detail: "Entrenamiento en cirugía laparoscópica en Miami, Estados Unidos.",
-  //   location: "Miami, EE. UU.",
-  //   category: "formacion" as const,
-  //   order: 3.6,
-  //   showInCompact: false,
-  // },
+  // ── Laparoscopía (Cirujano General). Timeline-only; kept out of the compact
+  //    strip so the strip stays endoscopy-focused. ──
+  {
+    id: "abc",
+    org: "Centro Médico ABC",
+    logo: "/logos/abc.png",
+    logoW: 607,
+    logoH: 506,
+    role: "Alta Especialidad en Cirugía Laparoscópica",
+    detail:
+      "Alta especialidad en cirugía laparoscópica en uno de los hospitales privados de referencia del país.",
+    location: "Ciudad de México",
+    category: "formacion" as const,
+    order: 3.5,
+    showInCompact: false,
+  },
+  {
+    id: "jackson-south",
+    org: "Jackson South Medical Center", // formerly Jackson South Community Hospital
+    logo: null, // no logo on hand → org-initials monogram fallback
+    role: "Entrenamiento en Cirugía Laparoscópica",
+    detail: "Entrenamiento en cirugía laparoscópica en Miami, Estados Unidos.",
+    location: "Miami, EE. UU.",
+    category: "formacion" as const,
+    order: 3.6,
+    showInCompact: false,
+  },
 
   // ── EXCLUDED (bariatría → omar.doctor, brand wall) ──
   // Hospital General de Tláhuac — Alta Especialidad en Cirugía Bariátrica. Do NOT add here.

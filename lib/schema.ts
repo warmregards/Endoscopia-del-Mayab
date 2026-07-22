@@ -171,11 +171,18 @@ function physicianEntity() {
     // Schema.org: "Gastroenterology" is pragmatic closest. Dr. Quiroz actual specialty: Endoscopia Gastrointestinal (Cédula EGI230072)
     medicalSpecialty: DOCTOR.medicalSpecialty,
     worksFor: { "@id": CLINIC_ID },
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Universidad Nacional Autónoma de México (UNAM)",
-      sameAs: "https://www.unam.mx/",
-    },
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Universidad Nacional Autónoma de México (UNAM)",
+        sameAs: "https://www.unam.mx/",
+      },
+      {
+        "@type": "MedicalOrganization",
+        name: "Centro Médico ABC",
+        sameAs: "https://centromedicoabc.com/",
+      },
+    ],
     memberOf: DOCTOR.schemaMemberOf,
     hasCredential: DOCTOR.schemaCredentials,
     knowsAbout: DOCTOR.schemaKnowsAbout,
