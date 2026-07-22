@@ -115,22 +115,28 @@ function TrainingLogoStrip() {
       <p className="font-serif text-[11px] font-bold uppercase tracking-[0.1em] text-text-accent">
         Dónde se formó y ejerció
       </p>
-      <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-6">
+      {/* Fixed logo slot (h-14 w-24) keeps every label aligned regardless of
+          each mark's aspect ratio. Full colour — the grayscale→hover reveal
+          never fired on touch, so mobile (most traffic) only saw grey. */}
+      <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {strip.map((t) => (
-          <li key={t.id} className="group">
-            <figure className="m-0 flex items-center gap-4">
+          <li
+            key={t.id}
+            className="flex items-center gap-4 rounded-xl border border-border bg-card p-4"
+          >
+            <div className="h-14 w-24 shrink-0">
               <TrainingLogo
                 entry={t}
-                imgClassName="h-14 w-auto max-w-[168px] object-contain grayscale transition duration-200 group-hover:grayscale-0 group-focus-within:grayscale-0"
-                monogramClassName="h-14 w-14 text-base"
+                imgClassName="h-full w-full object-contain"
+                monogramClassName="flex h-full w-full items-center justify-center rounded-lg text-sm"
               />
-              <figcaption className="flex flex-col">
-                <span className="font-serif text-[13px] font-bold leading-tight text-foreground">
-                  {t.role}
-                </span>
-                <span className="text-xs text-muted-foreground">{t.org}</span>
-              </figcaption>
-            </figure>
+            </div>
+            <div className="min-w-0">
+              <p className="font-serif text-sm font-bold leading-snug text-foreground">
+                {t.role}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">{t.org}</p>
+            </div>
           </li>
         ))}
       </ul>
