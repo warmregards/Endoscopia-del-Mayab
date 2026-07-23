@@ -3,8 +3,16 @@
   "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
   "total": 89,
-  "fetchedAt": "2026-07-22T08:21:09.217Z",
+  "fetchedAt": "2026-07-23T08:23:09.980Z",
   "reviews": [
+    {
+      "author_name": "damaris santos",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXQ8QP-tU8uc8l_q3A2PaWvMSPgwo2fIwXZ2KliMjZVpA9tHtc=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "Hace 3 semanas",
+      "text": "Quiero agradecer públicamente al Dr. Omar Quiroz por la atención que le dio a mi mamá en Amerimed, desde el primer momento se tomó el tiempo de explicarnos el diagnóstico y el plan de manejo de forma clara, sin tecnicismos innecesarios. *Valoramos mucho que siempre contestó nuestras preguntas, incluso fuera de horario, y que nos dio tranquilidad en un momento difícil.*\n\nSu trato humano, su paciencia para explicar y su seguimiento puntual marcaron la diferencia. Se nota que es un médico actualizado y que realmente le importa el bienestar de sus pacientes.\n\nMi familia y yo estamos muy agradecidos con él. Dios me lo bendiga siempre Doctor Omar.",
+      "time": 1782395272
+    },
     {
       "author_name": "LMI KARINA LS",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVttxyh3f4frwnJ-OtSGHzKDCBJ0YxpHrLAYnOcT51j6as7N6k-=s128-c0x00000000-cc-rp-mo-ba2",
@@ -20,14 +28,6 @@
       "relative_time_description": "Hace 3 meses",
       "text": "Quiero expresar mi más sincero agradecimiento al Dr. Quiroz por la excelente atención recibida. Es un doctor sumamente amable, con una calidad humana que se percibe desde el primer momento. Se toma el tiempo de explicar absolutamente todo con claridad y paciencia, lo cual genera una gran tranquilidad y confianza como paciente.\n\nSu trato es impecable: elegante, profesional y muy respetuoso. La clínica también me encantó; es un espacio sencillo, pero a la vez moderno, limpio y altamente eficiente, lo cual habla muy bien de su organización y atención al detalle.\n\nEl procedimiento fue rápido y realizado con gran profesionalismo. Al finalizar, el doctor nuevamente se aseguró de explicar cada paso a seguir, sin dejar dudas. Algo que valoro muchísimo es que envía los resultados por WhatsApp y mantiene comunicación por esa vía. Hoy en día, eso marca una gran diferencia, ya que como pacientes muchas veces sentimos distancia con los médicos, y este tipo de cercanía nos hace sentir acompañados, atendidos y con acceso a quien sigue siendo nuestra autoridad en temas de salud.\n\nSin duda, una experiencia excelente de principio a fin. Lo recomiendo ampliamente.",
       "time": 1774987693
-    },
-    {
-      "author_name": "Paola Castillo",
-      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXc8hCTXVE8r0Qsr9tSigGep0RuDZHrWdpMC1QIZw94W6YzvdneKw=s128-c0x00000000-cc-rp-mo",
-      "rating": 5,
-      "relative_time_description": "Hace 4 meses",
-      "text": "Muy agradecida con el Dr Omar Quiroz y su equipo. Profesionalismo, claridad en la información y una atención excepcional. Excelente doctor, humano y comprometido. 100% recomendable.",
-      "time": 1772728702
     },
     {
       "author_name": "Ubaldo Couoh",
