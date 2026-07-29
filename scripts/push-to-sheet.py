@@ -24,9 +24,21 @@ import argparse
 import csv
 import json
 import os
+import ssl
 import sys
+import time
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+# Network hardening. The Sheets calls occasionally hit a slow/hung socket on the
+# GitHub runner (symptom: "TimeoutError: The read operation timed out" on
+# values().clear()), which failed the whole daily job even though reconcile had
+# already produced + committed the CSVs. An explicit read timeout turns a hang
+# into a fast error, and the retry loop rides out transient blips. Every call
+# here is idempotent (full clear + rewrite each run), so retrying is safe.
+HTTP_TIMEOUT_SECONDS = 30
+MAX_ATTEMPTS = 4  # 1 try + 3 retries, backing off 2s / 4s / 8s
+_RETRYABLE_HTTP_STATUS = {408, 429, 500, 502, 503, 504}
 
 
 def load_credentials():
@@ -54,6 +66,53 @@ def a1(tab):
     return "'" + tab.replace("'", "''") + "'"
 
 
+def authed_http(creds):
+    """httplib2 client with an explicit read timeout, wrapped so token refresh
+    still works. Without a timeout a hung socket can stall the whole job."""
+    import httplib2
+    from google_auth_httplib2 import AuthorizedHttp
+
+    return AuthorizedHttp(creds, http=httplib2.Http(timeout=HTTP_TIMEOUT_SECONDS))
+
+
+def is_retryable(exc):
+    """Transient network blips + Google 5xx/429 — safe to retry (calls idempotent)."""
+    # socket.timeout is an alias of TimeoutError; ConnectionError/OSError cover resets.
+    if isinstance(exc, (TimeoutError, ConnectionError, OSError, ssl.SSLError)):
+        return True
+    try:
+        from googleapiclient.errors import HttpError
+
+        if isinstance(exc, HttpError):
+            status = exc.resp.status if exc.resp is not None else None
+            return status in _RETRYABLE_HTTP_STATUS
+    except Exception:
+        pass
+    try:
+        import httplib2
+
+        if isinstance(exc, httplib2.HttpLib2Error):
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def execute(request, label):
+    """Run a Sheets API request, retrying transient network/5xx failures."""
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            return request.execute()
+        except Exception as e:  # noqa: BLE001 — routed by is_retryable()
+            if attempt == MAX_ATTEMPTS or not is_retryable(e):
+                raise
+            wait = 2 ** attempt
+            print(f"[push-to-sheet] {label} failed "
+                  f"({type(e).__name__}: {e}); retry {attempt}/{MAX_ATTEMPTS - 1} "
+                  f"in {wait}s", file=sys.stderr)
+            time.sleep(wait)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Write one conversion CSV to one Google Sheet tab.")
     ap.add_argument("--sheet-id", required=True, help="target spreadsheet ID")
@@ -70,10 +129,10 @@ def main():
     creds = load_credentials()
     print(f"[push-to-sheet] Authenticating as: {creds.service_account_email}")
     print("[push-to-sheet] The Sheet must be shared (Editor) with THAT address.")
-    svc = build("sheets", "v4", credentials=creds, cache_discovery=False)
+    svc = build("sheets", "v4", http=authed_http(creds), cache_discovery=False)
 
     try:
-        meta = svc.spreadsheets().get(spreadsheetId=args.sheet_id).execute()
+        meta = execute(svc.spreadsheets().get(spreadsheetId=args.sheet_id), "open sheet")
     except HttpError as e:
         sys.exit(f"[push-to-sheet] ERROR: cannot open sheet {args.sheet_id} — "
                  f"is it shared with {creds.service_account_email}? {e}")
@@ -82,19 +141,20 @@ def main():
     # Default to the FIRST tab — that's the one Google Ads' scheduled upload reads.
     tab = args.tab or first
     if tab not in titles:
-        svc.spreadsheets().batchUpdate(
+        execute(svc.spreadsheets().batchUpdate(
             spreadsheetId=args.sheet_id,
             body={"requests": [{"addSheet": {"properties": {"title": tab}}}]},
-        ).execute()
+        ), "add tab")
 
     rows = read_csv(args.csv)
-    svc.spreadsheets().values().clear(spreadsheetId=args.sheet_id, range=a1(tab)).execute()
-    svc.spreadsheets().values().update(
+    execute(svc.spreadsheets().values().clear(
+        spreadsheetId=args.sheet_id, range=a1(tab)), "clear tab")
+    execute(svc.spreadsheets().values().update(
         spreadsheetId=args.sheet_id,
         range=a1(tab) + "!A1",
         valueInputOption="RAW",
         body={"values": rows or [[]]},
-    ).execute()
+    ), "write rows")
     print(f"[push-to-sheet] wrote {max(len(rows) - 1, 0)} data row(s) from {args.csv} "
           f"→ tab {tab!r}  (first tab of this sheet: {first!r})")
 
