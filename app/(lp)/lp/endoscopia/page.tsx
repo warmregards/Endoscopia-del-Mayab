@@ -17,6 +17,7 @@ import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
+import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
 
 // ---------------------------------------------------------------------------
@@ -33,10 +34,9 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 // ---------------------------------------------------------------------------
-// Self-hosted trust clip (Section 3.5). Null until the vertical clip is shot +
-// a poster frame exported; the section renders nothing until then — never a
-// visible placeholder. Drop the files in /public and fill this in to enable.
-// Never a YouTube embed.
+// Self-hosted trust clip (Section 3.5) — one shared vertical clip for every LP,
+// sourced from ../trust-video (assets in /public). Swap or disable it there in
+// one place. Never a YouTube embed.
 //
 // endoscopia ~15s script (tú-form, brand-compliant):
 //   "Una endoscopia con sedación no duele y no la vas a recordar; un
@@ -44,11 +44,7 @@ export const revalidate = 86400;
 //    reporte con fotografías. Si tienes dudas, escríbeme por WhatsApp — te
 //    contesto yo."
 // ---------------------------------------------------------------------------
-const TRUST_VIDEO: {
-  src: string;
-  poster: string;
-  captionsSrc?: string;
-} | null = null;
+const TRUST_VIDEO = LP_TRUST_VIDEO;
 
 const PRICE = displayFrom("endoscopia"); // "Desde $4,500 MXN"
 

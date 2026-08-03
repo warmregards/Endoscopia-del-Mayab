@@ -18,6 +18,7 @@ import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
+import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
 
 // ---------------------------------------------------------------------------
@@ -34,9 +35,9 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 // ---------------------------------------------------------------------------
-// Self-hosted trust clip (Section 3.5). Left null until the vertical clip is
-// shot + a poster frame exported. Drop the files in /public and fill this in
-// to enable the section — no other change needed. Never a YouTube embed.
+// Self-hosted trust clip (Section 3.5) — one shared vertical clip for every LP,
+// sourced from ../trust-video (assets in /public). Swap or disable it there in
+// one place. Never a YouTube embed.
 //
 // CPRE script (~15s): highest-anxiety, highest-margin page — a procedure-
 // specific clip may pay for itself here alone. Lead with "sin cirugía abierta"
@@ -45,11 +46,7 @@ export const revalidate = 86400;
 //    sedación y recuperación rápida. Si tienes dolor o coloración amarilla,
 //    escríbeme hoy por WhatsApp y valoramos tu caso."
 // ---------------------------------------------------------------------------
-const TRUST_VIDEO: {
-  src: string;
-  poster: string;
-  captionsSrc?: string;
-} | null = null;
+const TRUST_VIDEO = LP_TRUST_VIDEO;
 
 const PRICE = displayFrom("cpre"); // "Desde $26,000 MXN"
 
