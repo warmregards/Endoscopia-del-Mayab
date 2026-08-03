@@ -20,6 +20,7 @@ import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
+import { getGoogleReviews } from "@/lib/reviews";
 
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
@@ -57,9 +58,15 @@ const TRUST_VIDEO: {
 } | null = null;
 
 const PRICE = displayFrom("colonoscopia"); // "Desde $5,000 MXN"
-const { ratingValue, reviewCount } = CLINIC.aggregateRating;
 
-export default function LpColonoscopiaPage() {
+export default async function LpColonoscopiaPage() {
+  // Hero rating/count from the same live source as <GoogleReviews> (data/reviews.json),
+  // so the two never disagree; CLINIC.aggregateRating is the fallback.
+  const {
+    rating: ratingValue = CLINIC.aggregateRating.ratingValue,
+    total: reviewCount = CLINIC.aggregateRating.reviewCount,
+  } = await getGoogleReviews({ maxReviews: 1 });
+
   return (
     <div className="pb-24 md:pb-0">
       {/* ══════════════════════════════════════════════════════════════════
@@ -139,7 +146,7 @@ export default function LpColonoscopiaPage() {
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
           Kill the hidden-costs objection + anchor against competitors.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="precio" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Precio cerrado, sin sorpresas
@@ -200,7 +207,7 @@ export default function LpColonoscopiaPage() {
           Authority: a named specialist, not a faceless clinic.
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section id="especialista" className="bg-background">
         <div className="container-narrow section-padding">
           <DoctorAuthority
             variant="compact"
@@ -233,7 +240,7 @@ export default function LpColonoscopiaPage() {
           Honest urgency + colonoscopy's strongest ad angles: 20-min results
           and detection + polyp removal in a single session.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="disponibilidad" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Agenda hoy, estudio mañana
@@ -269,7 +276,7 @@ export default function LpColonoscopiaPage() {
           per-appointment TIMING to personalized WhatsApp guidance. No fixed
           clock values anywhere — a wrong time on a medical page can botch a prep.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section id="preparacion" className="bg-background">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             La preparación es más fácil de lo que crees
@@ -342,7 +349,7 @@ export default function LpColonoscopiaPage() {
           generic Q — prep anxiety is colonoscopy's #1 booking blocker, and
           "te guiamos por WhatsApp" doubles as a conversion hook.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="preguntas" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
             Preguntas frecuentes

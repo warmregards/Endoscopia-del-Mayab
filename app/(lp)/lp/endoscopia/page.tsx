@@ -17,6 +17,7 @@ import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
+import { getGoogleReviews } from "@/lib/reviews";
 
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
@@ -50,9 +51,15 @@ const TRUST_VIDEO: {
 } | null = null;
 
 const PRICE = displayFrom("endoscopia"); // "Desde $4,500 MXN"
-const { ratingValue, reviewCount } = CLINIC.aggregateRating;
 
-export default function LpEndoscopiaPage() {
+export default async function LpEndoscopiaPage() {
+  // Hero rating/count from the same live source as <GoogleReviews> (data/reviews.json),
+  // so the two never disagree; CLINIC.aggregateRating is the fallback.
+  const {
+    rating: ratingValue = CLINIC.aggregateRating.ratingValue,
+    total: reviewCount = CLINIC.aggregateRating.reviewCount,
+  } = await getGoogleReviews({ maxReviews: 1 });
+
   return (
     <div className="pb-24 md:pb-0">
       {/* ══════════════════════════════════════════════════════════════════
@@ -130,7 +137,7 @@ export default function LpEndoscopiaPage() {
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
           Kill the hidden-costs objection + anchor against competitors.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="precio" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Precio cerrado, sin sorpresas
@@ -185,7 +192,7 @@ export default function LpEndoscopiaPage() {
           Authority: a named specialist, not a faceless clinic.
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section id="especialista" className="bg-background">
         <div className="container-narrow section-padding">
           <DoctorAuthority
             variant="compact"
@@ -218,7 +225,7 @@ export default function LpEndoscopiaPage() {
           SECTION 4 — RAPIDEZ / DISPONIBILIDAD (bg-muted)
           Honest urgency + remove "how long will this take" friction.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="disponibilidad" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Agenda hoy, estudio mañana
@@ -255,7 +262,7 @@ export default function LpEndoscopiaPage() {
           SECTION 6 — FAQ CORTA (bg-muted)
           Only the questions that block booking. Not the full educational FAQ.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section id="preguntas" className="bg-muted">
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
             Preguntas frecuentes
