@@ -19,6 +19,7 @@ import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
 import DoctorAuthority from "@/components/DoctorAuthority"
+import MapEmbed from "@/components/MapEmbed"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -341,12 +342,40 @@ export default function CprePage() {
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
-              ¿CPRE o cirugía abierta? Compara las opciones
+              ¿Piedras en la vesícula? CPRE o cirugía — cuál te toca
             </h2>
 
-            <p className="text-foreground/80 leading-relaxed max-w-3xl">
-              Si tu médico te indicó una CPRE, es porque las otras opciones no resuelven el problema o requieren una intervención mayor. Esta es la diferencia:
-            </p>
+            <div className="max-w-3xl space-y-4 text-foreground/80 leading-relaxed">
+              <p>
+                Antes de decidir el tratamiento conviene saber dónde están las
+                piedras. Si los cálculos están dentro de la vesícula, el
+                tratamiento es quitar la vesícula con cirugía —la{" "}
+                <a
+                  href="https://omar.doctor"
+                  target="_blank"
+                  rel="noopener"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  cirugía de vesícula (colecistectomía)
+                </a>
+                . Si una piedra se pasó de la vesícula al conducto biliar
+                (coledocolitiasis), primero se limpia el conducto con una CPRE
+                —sin abrir el abdomen— y después suele programarse la cirugía de
+                la vesícula.
+              </p>
+              <p>
+                ¿Cómo saber cuál es tu caso? Con un ultrasonido, más análisis de
+                enzimas hepáticas y bilirrubina. Y hay señales de urgencia que no
+                debes dejar pasar: piel u ojos amarillos (ictericia), fiebre con
+                dolor abdominal, u orina oscura. Si tienes alguna, busca atención
+                pronto.
+              </p>
+              <p>
+                Si tu médico te indicó una CPRE, es porque las otras opciones no
+                resuelven el problema o requieren una intervención mayor. Esta es
+                la diferencia:
+              </p>
+            </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               <div className="rounded-xl border border-border bg-background p-6">
@@ -441,15 +470,6 @@ export default function CprePage() {
               </div>
             </div>
 
-            <div className="rounded-xl bg-muted border border-border p-6 mt-8 max-w-4xl mx-auto">
-              <h3 className="font-serif font-semibold text-foreground mb-2">
-                ¿Por qué pocos hospitales hacen CPRE?
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                La CPRE requiere infraestructura altamente especializada: duodenoscopio dedicado, fluoroscopía digital en tiempo real, sala de quirófano con anestesiólogo y endoscopista con entrenamiento avanzado. Por eso muchos hospitales de la península de Yucatán refieren estos casos a especialistas en Mérida — incluyendo pacientes de Cancún, Playa del Carmen y Campeche que viajan al Hospital Amerimed Mérida, Yucatán.
-              </p>
-            </div>
-
             {/* What's included */}
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
@@ -488,6 +508,38 @@ export default function CprePage() {
       <section id="preparacion-cpre" className="bg-muted">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
+            {/* ¿Dónde se hace la CPRE? — P4 Change A: promoted from a buried H3
+                to its own H2 to answer the location query ("hospitales donde
+                hacen cpre", pos ~17). The "why few hospitals" reasoning moves
+                here as an H3. */}
+            <div className="space-y-6">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                ¿Dónde se hace la CPRE en Mérida?
+              </h2>
+              <p className="text-foreground/80 leading-relaxed max-w-3xl">
+                La CPRE se realiza en {CLINIC.hospitalName}: {CLINIC.address.display}.
+                Es un procedimiento de quirófano — requiere sala con fluoroscopía
+                digital en tiempo real, duodenoscopio Olympus, anestesiólogo y,
+                para los casos complejos, colangioscopia SpyGlass. El {DOCTOR.name}{" "}
+                cuenta con este equipo y realiza el estudio ahí mismo.
+              </p>
+              <MapEmbed />
+              <div className="rounded-xl bg-background border border-border p-6 max-w-4xl">
+                <h3 className="font-serif font-semibold text-foreground mb-2">
+                  ¿Por qué pocos hospitales hacen CPRE?
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  La CPRE requiere infraestructura altamente especializada:
+                  duodenoscopio dedicado, fluoroscopía digital en tiempo real,
+                  quirófano con anestesiólogo y un endoscopista con entrenamiento
+                  avanzado. Por eso muchos hospitales de la Península de Yucatán
+                  refieren estos casos a Mérida — incluyendo pacientes de Cancún,
+                  Playa del Carmen, Campeche y todo Quintana Roo que viajan al{" "}
+                  {CLINIC.hospitalName}.
+                </p>
+              </div>
+            </div>
+
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Cómo es el procedimiento de una CPRE?
             </h2>
@@ -734,12 +786,27 @@ export default function CprePage() {
               El anestesiólogo monitorea tus signos vitales continuamente durante todo el estudio. Al despertar, puedes tener leve incomodidad en la garganta y sensación de hinchazón abdominal — ambas desaparecen solas en pocas horas. La recuperación toma 2–3 horas en sala del hospital antes del alta.
             </p>
 
-            <h3 className="font-serif font-semibold text-lg text-foreground">
-              ¿Es Peligrosa la CPRE?
-            </h3>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+              ¿La CPRE es peligrosa? Riesgos reales y cómo se manejan
+            </h2>
 
             <p className="text-foreground/80 leading-relaxed max-w-3xl">
               La CPRE es más compleja que una endoscopia convencional, pero es segura en manos experimentadas. El riesgo más descrito es pancreatitis post-CPRE — una inflamación temporal del páncreas que ocurre en 2–5% de los casos y se resuelve con manejo médico en 24–72 horas. El sangrado y la perforación son poco frecuentes (menos del 1%). El {DOCTOR.name} es endoscopista y cirujano — si surge una complicación, puede resolverla sin necesidad de referirte a otro especialista.
+            </p>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              Para reducir estos riesgos se toman medidas concretas: profilaxis
+              (antibióticos o antiinflamatorios cuando están indicados),
+              fluoroscopía en tiempo real para guiar cada maniobra, y un operador
+              con experiencia. Son los tres factores que más bajan la tasa de
+              complicaciones.
+            </p>
+
+            <p className="text-foreground/80 leading-relaxed max-w-3xl">
+              En casa, vigila estas señales en las horas siguientes y busca
+              atención de inmediato si aparecen: dolor abdominal intenso o que
+              empeora, fiebre, vómito persistente, o evacuaciones negras. Son poco
+              frecuentes, pero conviene reconocerlas a tiempo.
             </p>
           </div>
         </div>
