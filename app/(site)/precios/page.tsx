@@ -3,6 +3,7 @@ import {
   PRICING,
   mxn,
   displayFrom,
+  displayWithPathology,
   ADDITIONAL_FEES,
   INCLUDED_IN_PRICE,
 } from "@/lib/pricing"
@@ -349,7 +350,12 @@ export default function PreciosPage() {
               </h3>
               <div className="border border-border rounded-xl overflow-hidden bg-card">
                 {diagnosticServices.map((s, i) => (
-                  <ServiceRow key={s.slug} service={s} isLast={i === diagnosticServices.length - 1} />
+                  <ServiceRow
+                    key={s.slug}
+                    service={s}
+                    isLast={i === diagnosticServices.length - 1}
+                    showPathology
+                  />
                 ))}
               </div>
             </div>
@@ -632,7 +638,16 @@ function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
 
 /* ── Service Row Component ────────────────────────────────────────────── */
 
-function ServiceRow({ service, isLast }: { service: ServiceItem; isLast: boolean }) {
+function ServiceRow({
+  service,
+  isLast,
+  showPathology = false,
+}: {
+  service: ServiceItem
+  isLast: boolean
+  /** Show the all-in "con biopsia" figure below the base price (diagnostic rows). */
+  showPathology?: boolean
+}) {
   const price = service.quoteOnly
     ? null
     : displayFrom(service.pricingKey)
@@ -657,9 +672,16 @@ function ServiceRow({ service, isLast }: { service: ServiceItem; isLast: boolean
       </div>
       <div className="flex items-center gap-4">
         {price ? (
-          <span className="font-semibold text-text-accent whitespace-nowrap">
-            {price}
-          </span>
+          <div className="text-left sm:text-right leading-tight">
+            <span className="font-semibold text-text-accent whitespace-nowrap">
+              {price}
+            </span>
+            {showPathology && (
+              <span className="block text-xs font-normal text-muted-foreground whitespace-nowrap">
+                con biopsia {displayWithPathology(service.pricingKey, "desde")}
+              </span>
+            )}
+          </div>
         ) : (
           <WhatsAppLink
             message={waText}

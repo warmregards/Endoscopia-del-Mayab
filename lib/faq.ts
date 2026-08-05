@@ -31,7 +31,7 @@
 //     Q6: Risks (fear → "riesgos", "complicaciones")
 //     Q7: Procedure-specific extra (varies per page)
 
-import { PRICING as PRICES, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
+import { PRICING as PRICES, mxn, ADDITIONAL_FEES, displayWithPathology } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
 import { CLINIC } from "@/lib/clinic"
 import type { RouteKey } from "@/lib/routes-seo"
@@ -128,6 +128,14 @@ export const endoscopiaFaqs: FAQ[] = [
     answer: `Endoscopia en Mérida desde ${price("endoscopia")}. Incluye valoración pre-endoscópica, sedación con anestesiólogo, equipo Olympus HD, toma de biopsias sin límite (un solo costo sin importar cuántas se tomen), sala de recuperación y reporte digital con imágenes. Único costo adicional posible: lectura de patología ${biopsyFee()}. Pídele tu cotización al ${DOCTOR.name} por WhatsApp y confirma tu total exacto.`,
   },
   {
+    question: "¿Cuánto cuesta una endoscopia con biopsia?",
+    answer: `${displayWithPathology(
+      "endoscopia"
+    )}, todo incluido. La toma de biopsias ya viene incluida en el precio de la endoscopia, sin límite de muestras; lo único que se suma es la lectura del patólogo externo (${biopsyFee()}), una tarifa única sin importar cuántas muestras se procesen. Escríbele al ${
+      DOCTOR.name
+    } por WhatsApp y te confirma el total exacto.`,
+  },
+  {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",
     answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. Si encontramos una lesión que requiera intervención adicional (por ejemplo, control de un sangrado o colocación de hemoclips), el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve cualquier duda sobre el precio antes de agendar.`,
   },
@@ -185,6 +193,14 @@ export const endoscopiaFaqs: FAQ[] = [
     } por WhatsApp y te confirma el total exacto.`,
   },
   {
+    question: "¿Cuánto cuesta una panendoscopia con biopsia?",
+    answer: `${displayWithPathology(
+      "endoscopia"
+    )}, todo incluido — la panendoscopia es la misma endoscopia. La toma de muestras ya está incluida, sin límite; solo se suma la lectura del patólogo externo (${biopsyFee()}), una tarifa única sin importar cuántas se tomen. Escríbele al ${
+      DOCTOR.name
+    } por WhatsApp y te confirma el total exacto.`,
+  },
+  {
     question: "¿Hacen endoscopia en Salud Digna o Chopo?",
     answer:
       "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado. Escríbele al Dr. Quiroz por WhatsApp y agenda tu endoscopia donde sí se realiza.",
@@ -233,6 +249,14 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Cuánto cuesta una colonoscopia y qué incluye?",
     answer: `Colonoscopia en Mérida desde ${price("colonoscopia")}. Incluye sedación con anestesiólogo, equipo Olympus HD, biopsias sin límite, sala de recuperación, valoración pre-procedimiento y reporte con imágenes. Los pólipos pequeños descubiertos durante el estudio se extirpan en la misma sesión sin costo adicional. Pólipos grandes o lesiones que requieran intervención adicional se cotizan antes de cualquier cargo. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el total de tu colonoscopia.`,
+  },
+  {
+    question: "¿Cuánto cuesta una colonoscopia con biopsia?",
+    answer: `${displayWithPathology(
+      "colonoscopia"
+    )}, todo incluido. La toma de biopsias ya viene incluida en el precio de la colonoscopia, sin límite de muestras; lo único que se suma es la lectura del patólogo externo (${biopsyFee()}), una tarifa única sin importar cuántas se procesen. Escríbele al ${
+      DOCTOR.name
+    } por WhatsApp y te confirma el total exacto.`,
   },
   {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",

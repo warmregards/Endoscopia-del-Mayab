@@ -148,6 +148,34 @@ export const displayFrom = (key: ServiceKey, prefix = "Desde"): string => {
   return prefix ? `${prefix} ${formatted}` : formatted
 }
 
+/**
+ * All-in figure when biopsies are taken: base price + the external
+ * pathologist's interpretation fee. IMPORTANT: taking the samples is already
+ * included in the base price — this only adds the pathologist's flat reading
+ * fee (ADDITIONAL_FEES.biopsy), regardless of how many samples. Named
+ * "pathology", not "biopsy", so callers don't imply that sampling costs extra.
+ * Returns undefined for quote-only services.
+ */
+export const withPathology = (key: ServiceKey): number | undefined => {
+  const base = PRICING[key].from
+  return typeof base === "number"
+    ? base + ADDITIONAL_FEES.biopsy.amount
+    : undefined
+}
+
+/**
+ * UI display for the biopsy-inclusive figure: "Desde $5,700 MXN"
+ * (or "Precio bajo cotización" for quote-only services).
+ */
+export const displayWithPathology = (key: ServiceKey, prefix = "Desde"): string => {
+  const total = withPathology(key)
+  if (typeof total !== "number") {
+    return "Precio bajo cotización"
+  }
+  const formatted = mxn(total)
+  return prefix ? `${prefix} ${formatted}` : formatted
+}
+
 // ---------------------------------------------------------------------------
 // Data Helpers
 // ---------------------------------------------------------------------------

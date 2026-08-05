@@ -14,18 +14,31 @@
 // /ligadura-varices-esofagicas-merida.
 
 import { CheckCircle2 } from "lucide-react"
-import { ADDITIONAL_FEES, mxn } from "@/lib/pricing"
+import {
+  ADDITIONAL_FEES,
+  mxn,
+  hasPrice,
+  displayWithPathology,
+  type ServiceKey,
+} from "@/lib/pricing"
 
 interface BiopsyDifferentiatorProps {
   /** Headline above the two-bullet structure. */
   headline?: string
   /** Optional context paragraph between headline and bullets. */
   intro?: string
+  /**
+   * When set to a priced procedure key, appends the all-in figure (base +
+   * pathologist's reading) so the combined "con biopsia" number is visible.
+   * Omit on generic/therapeutic uses where a single figure wouldn't apply.
+   */
+  pricingKey?: ServiceKey
 }
 
 export default function BiopsyDifferentiator({
   headline = "Si se requieren biopsias: tarifa única en ambos lados.",
   intro,
+  pricingKey,
 }: BiopsyDifferentiatorProps) {
   return (
     <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
@@ -51,6 +64,11 @@ export default function BiopsyDifferentiator({
           </span>
         </li>
       </ul>
+      {pricingKey && hasPrice(pricingKey) && (
+        <p className="text-sm font-semibold text-foreground border-t border-accent/20 pt-4">
+          Todo incluido, con biopsia: {displayWithPathology(pricingKey)}.
+        </p>
+      )}
     </div>
   )
 }

@@ -344,6 +344,7 @@ export default function ColonoscopiaPage() {
             <BiopsyDifferentiator
               headline="Biopsias: tarifa única en ambos lados, no por muestra."
               intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
+              pricingKey="colonoscopia"
             />
 
             {/* GEO definitive paragraph */}
