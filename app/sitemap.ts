@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next"
 import { VIDEOS, type Video } from "@/lib/videos"
+import { ROUTE_LASTMOD } from "@/lib/sitemap-lastmod"
 
-// Revalidate the sitemap daily so lastModified doesn't go stale
+// Per-URL lastModified is sourced from lib/sitemap-lastmod.ts (each route's last
+// git commit date), NOT new Date() — so the value is stable across deploys and
+// only changes when a route's content changes, which keeps the lastmod signal
+// trustworthy. Regenerate the map with: node scripts/gen-sitemap-lastmod.mjs
 export const revalidate = 86400
 
 // Video sitemap entries — sourced from lib/videos.ts, keyed by the page each
@@ -86,13 +90,13 @@ const routes: RouteCfg[] = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
-
   return routes.map(({ path, changeFrequency, priority }) => {
     const video = videoByPath[path]
+    const lastModified = ROUTE_LASTMOD[path]
     return {
       url: `${baseUrl}${path}`,
-      lastModified: now,
+      // Omit rather than fake it if a route is missing from the map.
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency,
       priority,
       ...(video ? { videos: [toSitemapVideo(video)] } : {}),
