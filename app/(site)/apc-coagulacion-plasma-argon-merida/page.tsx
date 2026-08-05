@@ -29,7 +29,44 @@ const includedItems = [
   "Aplicación de plasma de argón con equipo ERBE",
 ]
 
+// Condition-first entry points (P7): each H3 opens with the symptom the patient
+// actually notices, not the clinical name. Proctitis leads (largest untapped
+// segment) and is written at most length; GAVE second. Substance mirrors
+// apcFaqs (Barrett, GAVE, proctitis) — no new clinical claims.
 const conditions = [
+  {
+    title: "Sangrado rectal después de radioterapia (proctitis por radiación)",
+    desc: (
+      <>
+        Es el caso peor atendido en Mérida: pacientes que recibieron radioterapia
+        pélvica —por cáncer de próstata, cérvix o recto— y que, meses o incluso
+        años después de terminar el tratamiento, empiezan a notar sangrado
+        rectal. Ese retraso es la razón por la que muchos no lo relacionan con la
+        radioterapia y no saben que tiene solución. El sangrado viene de vasos
+        frágiles (telangiectasias) que la radiación dejó en la mucosa del recto.
+        El APC los coagula sin contacto directo y es el tratamiento endoscópico
+        de primera línea para esta condición; generalmente se necesitan de 2 a 4
+        sesiones según la extensión.
+      </>
+    ),
+  },
+  {
+    title: "Anemia y cansancio sin causa clara (ectasia vascular gástrica, GAVE)",
+    desc: (
+      <>
+        A menudo empieza como cansancio y una hemoglobina baja que vuelve a caer a
+        pesar del hierro. Una causa posible es la GAVE —&ldquo;estómago en
+        sandía&rdquo; por su apariencia endoscópica con franjas rojas—, donde
+        vasos anormales del antro gástrico sangran de forma crónica. El APC
+        coagula esos vasos sin dañar el tejido alrededor, hasta controlar el
+        sangrado; suele requerir 2–4 sesiones. Se confirma durante una{" "}
+        <Link href="/endoscopia-merida" className="text-primary hover:underline">
+          endoscopia
+        </Link>
+        .
+      </>
+    ),
+  },
   {
     title: "Esófago de Barrett con displasia",
     desc: (
@@ -46,18 +83,7 @@ const conditions = [
     ),
   },
   {
-    title: "Ectasia vascular antral gástrica (GAVE)",
-    desc: (
-      <>
-        También conocida como &ldquo;estómago sandía&rdquo; por su apariencia
-        endoscópica con franjas rojas, la GAVE causa sangrado crónico y anemia
-        por deficiencia de hierro. El APC coagula los vasos sanguíneos anormales
-        sin dañar el tejido circundante. Usualmente requiere 2–4 sesiones.
-      </>
-    ),
-  },
-  {
-    title: "Angiodisplasias del tubo digestivo",
+    title: "Sangrado digestivo oculto por angiodisplasias",
     desc: (
       <>
         Malformaciones vasculares que causan sangrado oculto o visible en
@@ -76,19 +102,7 @@ const conditions = [
     ),
   },
   {
-    title: "Proctitis por radiación",
-    desc: (
-      <>
-        Efecto secundario frecuente en pacientes que recibieron radioterapia
-        pélvica (próstata, cérvix, recto). Causa sangrado rectal por vasos
-        sanguíneos frágiles en la mucosa del recto. El APC es el tratamiento
-        endoscópico de primera línea. Generalmente se necesitan múltiples
-        sesiones.
-      </>
-    ),
-  },
-  {
-    title: "Sangrado post-polipectomía",
+    title: "Control de sangrado después de una resección",
     desc: (
       <>
         Después de remover pólipos durante una{" "}
@@ -104,7 +118,7 @@ const conditions = [
     ),
   },
   {
-    title: "Desvitalización tumoral paliativa",
+    title: "Dificultad para tragar por un tumor (tratamiento paliativo)",
     desc: (
       <>
         Para tumores obstructivos de esófago o estómago no candidatos a cirugía,

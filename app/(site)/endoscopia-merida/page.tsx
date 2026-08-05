@@ -483,7 +483,14 @@ export default function EndoscopiaPage() {
               <p className="text-foreground/80 leading-relaxed max-w-3xl">
                 La endoscopia permite ver directamente la mucosa de esófago,
                 estómago y duodeno — no adivina como una radiografía o
-                ultrasonido. Estos son los diagnósticos más frecuentes:
+                ultrasonido. También identifica lesiones vasculares como{" "}
+                <Link
+                  href="/apc-coagulacion-plasma-argon-merida"
+                  className="text-primary hover:underline"
+                >
+                  la GAVE, una causa de anemia que reaparece a pesar del hierro
+                </Link>
+                . Estos son los diagnósticos más frecuentes:
               </p>
             </div>
 

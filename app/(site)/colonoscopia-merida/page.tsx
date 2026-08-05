@@ -543,6 +543,14 @@ export default function ColonoscopiaPage() {
               >
                 ligadura de hemorroides con banda elástica
               </Link>
+              . ¿Sangrado rectal que empezó meses o años después de una
+              radioterapia pélvica? Puede ser{" "}
+              <Link
+                href="/apc-coagulacion-plasma-argon-merida"
+                className="text-primary hover:underline"
+              >
+                proctitis por radiación, que se trata con argón plasma
+              </Link>
               .
             </p>
           </div>
