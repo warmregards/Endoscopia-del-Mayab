@@ -64,6 +64,12 @@ const comparisonRows = [
     hospital: "2–3 días",
     us: "Mismo día",
   },
+  {
+    label: "Si encuentran algo tratable durante el estudio",
+    lab: "Solo diagnóstico; te refieren a otra cita",
+    hospital: "Según quién esté en turno",
+    us: "En la misma sesión — también es cirujano general",
+  },
 ]
 
 export default function ComparisonTable({
