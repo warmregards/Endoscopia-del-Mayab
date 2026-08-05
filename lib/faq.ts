@@ -975,7 +975,7 @@ export const apcFaqs: FAQ[] = [
   {
     question: "Vivo en Cancún / Playa del Carmen / Campeche — ¿puedo tratarme en Mérida?",
     answer:
-      "Sí. Mérida es la única ciudad en la Península de Yucatán donde se realiza tratamiento con argón plasma. Recibimos pacientes de Cancún, Playa del Carmen, Tulum, Campeche, Chetumal y Belice. Agenda por WhatsApp y coordinamos tu cita — muchos pacientes combinan valoración y primera sesión en la misma visita para minimizar traslados.",
+      "Sí. El tratamiento con argón plasma está disponible en Mérida y recibimos pacientes de Cancún, Playa del Carmen, Tulum, Campeche, Chetumal y Belice que viajan para realizárselo. Agenda por WhatsApp y coordinamos tu cita — muchos pacientes combinan valoración y primera sesión en la misma visita para minimizar traslados.",
   },
 ]
 

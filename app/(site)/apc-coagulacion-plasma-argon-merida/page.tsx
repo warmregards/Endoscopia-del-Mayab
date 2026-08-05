@@ -338,8 +338,8 @@ export default function APCPage() {
                 Precio de APC en Mérida — equipo ERBE propio
               </h2>
               <p className="text-muted-foreground">
-                El único equipo ERBE propio en la Península de Yucatán — sin
-                rentar equipo, precio justo por sesión
+                Equipo ERBE propio del consultorio, no rentado por sesión — por
+                eso el precio por sesión es más accesible
               </p>
             </div>
 
@@ -406,10 +406,11 @@ export default function APCPage() {
               </h3>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 El Dr. Quiroz cuenta con su propio generador electroquirúrgico
-                ERBE — no renta equipo por sesión como otros proveedores. Mérida
-                es la única ciudad en la Península de Yucatán donde se realiza
-                este tratamiento. Recibimos pacientes de Cancún, Playa del
-                Carmen, Tulum, Campeche, Valladolid, Chetumal y Belice.
+                ERBE — no renta equipo por sesión como otros proveedores, lo que
+                reduce el costo operativo. El tratamiento está disponible en
+                Mérida y recibimos pacientes de Cancún, Playa del Carmen, Tulum,
+                Campeche, Valladolid, Chetumal y Belice que viajan para
+                realizárselo.
               </p>
             </div>
 

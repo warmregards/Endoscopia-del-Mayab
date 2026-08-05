@@ -213,9 +213,9 @@ export default function Page() {
                     &ldquo;Cuando nos escribes, te contesta el doctor directamente.&rdquo;
                   </p>
                   <p className="text-foreground/80 text-sm mb-6 max-w-md leading-relaxed">
-                    El único endoscopista certificado en Mérida con consultorio propio
-                    en Hospital Amerimed — tu procedimiento lo realiza el mismo doctor
-                    que te atiende por WhatsApp.
+                    Endoscopista certificado con consultorio propio en Hospital
+                    Amerimed — tu procedimiento lo realiza el mismo doctor que te
+                    atiende por WhatsApp.
                   </p>
 
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4">

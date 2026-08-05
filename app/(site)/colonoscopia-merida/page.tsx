@@ -463,8 +463,9 @@ export default function ColonoscopiaPage() {
                 Según guías internacionales de gastroenterología, el 90% de los
                 casos de cáncer colorrectal son curables con detección temprana
                 mediante colonoscopia de tamizaje. Cuando se detecta en etapa
-                avanzada, la supervivencia baja al 14%. La colonoscopia es la
-                única prueba que detecta y trata en el mismo procedimiento.
+                avanzada, la supervivencia baja al 14%. La colonoscopia detecta y
+                trata en la misma sesión: un pólipo encontrado es un pólipo
+                extirpado.
               </p>
 
               <p className="text-foreground/80 leading-relaxed">
