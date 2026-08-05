@@ -200,7 +200,7 @@ If you add a new semantic token to :root, you MUST also add its bridge.
 
 ### Pricing (`lib/pricing.ts`)
 - `PRICING` record — 22 procedures, each with optional `from` price
-- `ADDITIONAL_FEES` — biopsy ($1,200) and consultation ($800) fees
+- `ADDITIONAL_FEES` — biopsy ($1,200) and consultation ($900) fees
 - `INCLUDED_IN_PRICE` — array of what's included in base price (for UI display)
 - `mxn()`, `displayFrom()`, `hasPrice()`, `priceData()` — formatting helpers
 
