@@ -69,6 +69,20 @@ export default function YouTubeEmbed({
             </span>
           </button>
         )}
+
+        {/* Crawlable fallback: a real iframe in the server-rendered HTML for
+            no-JS clients and search crawlers. The click-to-load facade above
+            hides the player behind a user click that Googlebot never performs,
+            so without this the VideoObject markup has no discoverable player. */}
+        <noscript>
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src={`https://www.youtube-nocookie.com/embed/${id}`}
+            title={title}
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </noscript>
       </div>
       {caption && (
         <figcaption className="text-center text-sm text-muted-foreground">

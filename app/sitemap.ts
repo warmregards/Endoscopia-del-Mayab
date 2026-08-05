@@ -1,7 +1,32 @@
 import type { MetadataRoute } from "next"
+import { VIDEOS, type Video } from "@/lib/videos"
 
 // Revalidate the sitemap daily so lastModified doesn't go stale
 export const revalidate = 86400
+
+// Video sitemap entries — sourced from lib/videos.ts, keyed by the page each
+// video is embedded on. Next injects the video: namespace automatically when a
+// sitemap entry carries `videos`. This is how Google discovers the embedded
+// YouTube videos for video rich results (the on-page player is a lazy facade).
+const videoByPath: Record<string, Video> = Object.fromEntries(
+  Object.values(VIDEOS).map((v) => [v.path, v])
+)
+
+type SitemapVideo = NonNullable<MetadataRoute.Sitemap[number]["videos"]>[number]
+
+function toSitemapVideo(v: Video): SitemapVideo {
+  return {
+    title: v.title,
+    // maxresdefault matches videoSchema()'s primary thumbnail; these are HD
+    // uploads (the on-page facade also defaults to it).
+    thumbnail_loc: `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`,
+    description: v.description,
+    player_loc: `https://www.youtube-nocookie.com/embed/${v.id}`,
+    duration: v.durationSeconds,
+    publication_date: v.uploadDate,
+    family_friendly: "yes",
+  }
+}
 
 // Use the canonical host (www) by default; strip any trailing slash
 const rawBase = process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com"
@@ -62,11 +87,15 @@ const routes: RouteCfg[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
-  return routes.map(({ path, changeFrequency, priority }) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: now,
-    changeFrequency,
-    priority,
-    // alternates: { languages: { "es-MX": `${baseUrl}${path}` } }, // enable when you add more locales
-  }))
+  return routes.map(({ path, changeFrequency, priority }) => {
+    const video = videoByPath[path]
+    return {
+      url: `${baseUrl}${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority,
+      ...(video ? { videos: [toSitemapVideo(video)] } : {}),
+      // alternates: { languages: { "es-MX": `${baseUrl}${path}` } }, // enable when you add more locales
+    }
+  })
 }
