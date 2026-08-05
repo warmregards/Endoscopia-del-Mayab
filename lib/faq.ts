@@ -177,6 +177,14 @@ export const endoscopiaFaqs: FAQ[] = [
       "Sí. Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD (esofagogastroduodenoscopia) son nombres diferentes para el mismo estudio: una revisión de esófago, estómago y duodeno con cámara flexible bajo sedación. El precio es el mismo sin importar cómo lo solicites. Agenda por WhatsApp con el Dr. Quiroz sin importar el nombre con que te lo indicaron.",
   },
   {
+    question: "¿Cuánto cuesta una panendoscopia?",
+    answer: `La panendoscopia cuesta lo mismo que la endoscopia: desde ${price(
+      "endoscopia"
+    )}. Son el mismo estudio —la revisión de esófago, estómago y duodeno bajo sedación—, así que el precio no cambia por el nombre que aparezca en tu orden médica. Incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación y reporte con imágenes. Escríbele al ${
+      DOCTOR.name
+    } por WhatsApp y te confirma el total exacto.`,
+  },
+  {
     question: "¿Hacen endoscopia en Salud Digna o Chopo?",
     answer:
       "No. Salud Digna y Chopo son laboratorios de análisis clínicos — no cuentan con endoscopios, quirófano ni anestesiólogo para realizar endoscopias. Para un procedimiento endoscópico necesitas un endoscopista certificado en un hospital equipado. Escríbele al Dr. Quiroz por WhatsApp y agenda tu endoscopia donde sí se realiza.",

@@ -71,7 +71,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     key: "endoscopia",
     serviceDisplayOverride: "Endoscopia Gastrointestinal",
     descriptionExtra:
-      "Diagnóstico de esófago, estómago y duodeno con sedación segura y resultados el mismo día en Hospital Amerimed.",
+      "También llamada panendoscopia o gastroscopia. Revisa esófago, estómago y duodeno con sedación, el mismo día.",
   },
   colonoscopia: {
     type: "service",

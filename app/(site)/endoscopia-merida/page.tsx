@@ -15,6 +15,7 @@ import {
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import WhatsAppLink from "@/components/WhatsAppLink"
 import GoogleReviews from "@/components/GoogleReviews"
 import AppointmentForm from "@/components/AppointmentForm"
 import OnlineBookingBanner from "@/components/OnlineBookingBanner"
@@ -179,6 +180,38 @@ export default function EndoscopiaPage() {
       <section id="precio" className="scroll-mt-24 bg-muted">
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
+            {/* Synonym reinforcement (P1): panendoscopia / gastroscopia / EGD are
+                the same study — establish that, and that the price is identical,
+                right where the number is stated. Targets "panendoscopia precio". */}
+            <div className="space-y-4">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                Panendoscopia, gastroscopia, EGD: el mismo estudio, el mismo precio
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD
+                (esofagogastroduodenoscopia) son nombres distintos para el mismo
+                estudio: la revisión de tu esófago, estómago y duodeno con una
+                cámara flexible bajo sedación. Cada laboratorio, hospital o
+                aseguradora lo nombra a su manera, y esa confusión de nombres es
+                justo lo que te trajo aquí. El precio de la panendoscopia es el
+                mismo que el de la endoscopia —{" "}
+                <span className="font-semibold text-foreground">
+                  {displayFrom("endoscopia")}
+                </span>{" "}
+                — y no cambia según el nombre que aparezca en tu orden médica. Si
+                te indicaron una panendoscopia,{" "}
+                <WhatsAppLink
+                  service="endoscopia"
+                  ctaId="cta-endoscopia-panendoscopia-wa"
+                  message="Hola Dr. Quiroz, me indicaron una panendoscopia. ¿Cuál es el costo y la disponibilidad?"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  escríbele al Dr. Quiroz por WhatsApp
+                </WhatsAppLink>{" "}
+                y agenda tu estudio con el nombre que te hayan dado.
+              </p>
+            </div>
+
             <div className="space-y-4">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 Precio de endoscopia en Mérida: {displayFrom("endoscopia")} todo incluido
