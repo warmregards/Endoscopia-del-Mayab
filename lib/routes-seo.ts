@@ -81,6 +81,14 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     descriptionExtra:
       "Detección y prevención de cáncer colorrectal con tecnología Olympus HD.",
   },
+  capsula_endoscopica: {
+    type: "service",
+    service: "Cápsula endoscópica",
+    path: "/capsula-endoscopica-merida",
+    key: "capsula_endoscopica", // quote-only → no "Desde $X" in the generated title
+    descriptionExtra:
+      "Cámara que se traga para revisar el intestino delgado: sangrado digestivo, anemia o sospecha de Crohn.",
+  },
   cpre: {
     type: "service",
     service: "CPRE",

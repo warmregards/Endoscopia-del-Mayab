@@ -551,6 +551,14 @@ export default function ColonoscopiaPage() {
               >
                 proctitis por radiación, que se trata con argón plasma
               </Link>
+              . ¿El origen de un sangrado no apareció en la colonoscopia ni en la
+              endoscopia? El intestino delgado puede revisarse con una{" "}
+              <Link
+                href="/capsula-endoscopica-merida"
+                className="text-primary hover:underline"
+              >
+                cápsula endoscópica
+              </Link>
               .
             </p>
           </div>

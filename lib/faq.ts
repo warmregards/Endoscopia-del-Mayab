@@ -1272,6 +1272,37 @@ export const eusFaqs: FAQ[] = [
   },
 ]
 
+export const capsulaFaqs: FAQ[] = [
+  {
+    question: "¿Qué es la cápsula endoscópica?",
+    answer: `Es una cámara del tamaño de una cápsula que te tragas y que va tomando fotografías del intestino delgado — el tramo que ni la endoscopia ni la colonoscopia alcanzan a ver. Por eso existe: cuando el problema está en esa zona intermedia, es la forma de revisarla sin cirugía. Escríbele al ${DOCTOR.name} por WhatsApp y te orienta si es lo que necesitas.`,
+  },
+  {
+    question: "¿Cuándo se necesita una cápsula endoscópica?",
+    answer: `Se reserva para situaciones concretas: sangrado digestivo cuya fuente no apareció en la endoscopia ni en la colonoscopia, sospecha de enfermedad de Crohn en el intestino delgado, o anemia por falta de hierro con ambos estudios normales. Es un estudio de alto costo, así que se indica solo cuando de verdad aporta. Si un estudio convencional puede responder tu pregunta primero, el ${DOCTOR.name} te lo dice directamente. Escríbele por WhatsApp con tu caso.`,
+  },
+  {
+    question: "¿Cuánto cuesta la cápsula endoscópica en Mérida?",
+    answer: `Es un estudio de alto costo que se cotiza según tu caso — la cotización cubre la cápsula, el estudio y la interpretación de la grabación. Escríbele al ${DOCTOR.name} por WhatsApp con tu indicación médica y te da el precio, normalmente el mismo día.`,
+  },
+  {
+    question: "¿Cómo funciona el estudio?",
+    answer: `Te tragas la cápsula con un poco de agua y haces tu vida normal mientras graba durante 8 a 12 horas. No requiere sedación. La cápsula se elimina sola de forma natural en las siguientes evacuaciones — no hay que recuperarla. Al terminar, el ${DOCTOR.name} revisa la grabación y te explica los hallazgos. Escríbele por WhatsApp y agenda.`,
+  },
+  {
+    question: "¿Cómo me preparo para la cápsula endoscópica?",
+    answer: `La preparación incluye ayuno y una restricción de la dieta las horas previas, según el protocolo que te indique el ${DOCTOR.name} al agendar. El objetivo es que el intestino delgado esté limpio para que las imágenes sean claras. Escríbele por WhatsApp y te da las indicaciones exactas para tu cita.`,
+  },
+  {
+    question: "¿Quién realiza e interpreta el estudio?",
+    answer: `El ${DOCTOR.name} consigue la cápsula, supervisa el estudio e interpreta él mismo la grabación — no se envía a un tercero. Eso significa que quien te explica los resultados es el mismo médico que te atiende. Escríbele por WhatsApp y resuelve tus dudas antes de agendar.`,
+  },
+  {
+    question: "¿Tiene riesgos la cápsula endoscópica?",
+    answer: `Es un estudio muy seguro. El riesgo principal es que la cápsula se retenga si hay una estrechez u obstrucción en el intestino — por eso, cuando existe esa sospecha, se evalúa antes con estudios de imagen o una cápsula de prueba disoluble. El ${DOCTOR.name} revisa tu historia para descartarlo antes de indicarla. Escríbele por WhatsApp y te orienta sobre tu caso.`,
+  },
+]
+
 // ---------------------------------------------------------------------------
 // Route map — keys MUST match routes-seo.ts RouteKey exactly
 // ---------------------------------------------------------------------------
@@ -1281,6 +1312,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   precios: preciosFaqs,
   endoscopia: endoscopiaFaqs,
   colonoscopia: colonoscopiaFaqs,
+  capsula_endoscopica: capsulaFaqs,
 
   cpre: cpreFaqs,
   cpre_playa_del_carmen: cprePlayaDelCarmenFaqs,

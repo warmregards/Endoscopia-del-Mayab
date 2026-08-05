@@ -74,6 +74,16 @@ export const SERVICES: ServiceItem[] = [
     priceFrom: PRICING.colonoscopia?.from,
     trafficTier: "high", // 1,436 GA4 sessions
   },
+  {
+    name: "Cápsula endoscópica",
+    displayName: "Cápsula Endoscópica en Mérida",
+    gbpServiceName: "Cápsula endoscópica", // must match the GBP service name byte-for-byte
+    slug: "capsula-endoscopica-merida",
+    pricingKey: "capsula_endoscopica",
+    category: "diagnostic",
+    quoteOnly: true,
+    trafficTier: "low",
+  },
   // ── Therapeutic / Interventional ────────────────────────────────────────
   {
     name: "CPRE",

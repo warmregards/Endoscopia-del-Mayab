@@ -43,6 +43,7 @@ const routes: RouteCfg[] = [
   { path: "/", changeFrequency: "weekly", priority: 1.0 },
   { path: "/endoscopia-merida", changeFrequency: "weekly", priority: 0.9 },
   { path: "/colonoscopia-merida", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/capsula-endoscopica-merida", changeFrequency: "monthly", priority: 0.7 },
 
   // Terapéuticas / avanzadas
   { path: "/cpre-merida", changeFrequency: "monthly", priority: 0.8 },

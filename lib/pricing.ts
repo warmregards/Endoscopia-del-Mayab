@@ -31,6 +31,7 @@ export type ServiceKey =
   | "retiro_balon_gastrico"
   | "apc"
   | "eus"
+  | "capsula_endoscopica"
 
 type CurrencyCode = "MXN"
 
@@ -64,6 +65,7 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   sutura_endoscopica: { currency: "MXN", label: "Sutura endoscópica" },
   esd: { currency: "MXN", label: "Disección endoscópica submucosa (ESD)" },
   emr: { currency: "MXN", label: "Resección endoscópica mucosa (EMR)" },
+  capsula_endoscopica: { currency: "MXN", label: "Cápsula endoscópica" },
 
   retiro_balon_gastrico: { from: 15000, currency: "MXN", label: "Retiro de balón gástrico" },
   apc: { from: 15000, currency: "MXN", label: "Coagulación con plasma de argón (APC)" },

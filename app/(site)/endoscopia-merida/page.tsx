@@ -734,7 +734,11 @@ export default function EndoscopiaPage() {
               <p className="text-sm text-foreground/80 mt-4">
                 Si se detectan lesiones que requieren tratamiento (como esófago de Barrett con displasia o angiodisplasias), contamos con equipo ERBE propio para realizar{" "}
                 <Link href="/apc-coagulacion-plasma-argon-merida" className="text-primary hover:underline">coagulación con plasma de argón (APC)</Link>
-                {" "}sin necesidad de referirte a otro especialista.
+                {" "}sin necesidad de referirte a otro especialista. Y si el
+                origen de un sangrado no aparece en esófago, estómago ni duodeno,
+                el intestino delgado puede revisarse con una{" "}
+                <Link href="/capsula-endoscopica-merida" className="text-primary hover:underline">cápsula endoscópica</Link>
+                .
               </p>
             </div>
 
