@@ -17,6 +17,7 @@ import {
   Phone,
 } from "lucide-react"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import WhatsAppLink from "@/components/WhatsAppLink"
 import CallButton from "@/components/CallButton"
 import Faq from "@/components/Faq"
 import GoogleReviews from "@/components/GoogleReviews"
@@ -224,6 +225,47 @@ export default function DoctorOmarQuirozPage() {
       {/* ── Section 3: Credentials & Education ── bg-background */}
       <section className="bg-background">
         <div className="container-page section-padding">
+          {/* Disambiguation (P6): gastroenterólogo vs. endoscopista. Placed atop
+              the credentials because the credential list is what answers it. The
+              word "gastroenterólogo" appears only as the generic profession being
+              contrasted — Dr. Quiroz is never described as one. */}
+          <div className="max-w-3xl space-y-4 mb-12">
+            <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+              ¿Gastroenterólogo o endoscopista? Cuál necesitas
+            </h2>
+            <p className="text-foreground/80 leading-relaxed">
+              Es una duda común, y la respuesta depende de lo que necesites. El
+              gastroenterólogo se enfoca en el manejo médico de las enfermedades
+              digestivas crónicas a lo largo del tiempo: tratamiento, medicamentos
+              y seguimiento. El endoscopista gastrointestinal realiza e interpreta
+              el estudio endoscópico en sí.
+            </p>
+            <p className="text-foreground/80 leading-relaxed">
+              El {DOCTOR.name} es Endoscopista Gastrointestinal y Cirujano
+              General. Esa doble formación es la diferencia práctica: si durante tu
+              estudio se encuentra algo que requiere tratamiento —un pólipo, una
+              lesión que sangra, una estenosis— puede resolverlo en la misma
+              sesión, en lugar de convertirse en una referencia a otro médico y
+              otra cita.
+            </p>
+            <p className="text-foreground/80 leading-relaxed">
+              En pocas palabras: si necesitas que te realicen un estudio
+              endoscópico, buscas un endoscopista; si necesitas el manejo médico a
+              largo plazo de una condición digestiva crónica, buscas un
+              gastroenterólogo.{" "}
+              <WhatsAppLink
+                service="doctor"
+                ctaId="cta-doctor-disambiguacion-wa"
+                message="Hola Dr. Quiroz, tengo una duda: no sé si necesito un endoscopista o un gastroenterólogo. ¿Me puede orientar?"
+                className="font-semibold text-primary hover:underline"
+              >
+                Escríbele al Dr. Quiroz por WhatsApp
+              </WhatsAppLink>{" "}
+              con tu caso y, si lo que necesitas es lo segundo, te lo dice
+              directamente y te orienta a dónde acudir.
+            </p>
+          </div>
+
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Formación y Certificaciones
           </h2>

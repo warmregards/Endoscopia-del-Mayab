@@ -62,6 +62,10 @@ export const homeFaqs: FAQ[] = [
     answer: `Endoscopia desde ${price("endoscopia")}, colonoscopia desde ${price("colonoscopia")}, CPRE desde ${price("cpre")}. Todos los precios incluyen anestesia, biopsias sin límite, sala de recuperación y valoración pre-endoscópica. Sin cargos ocultos — la lectura de patología (${biopsyFee()}) es el único costo adicional posible. Escríbele al ${DOCTOR.name} por WhatsApp y te confirma el total exacto para tu procedimiento.`,
   },
   {
+    question: "¿El Dr. Quiroz es gastroenterólogo?",
+    answer: `El ${DOCTOR.name} es Endoscopista Gastrointestinal y Cirujano General, no gastroenterólogo. El endoscopista realiza e interpreta el estudio endoscópico; por su formación como cirujano, además puede tratar en la misma sesión lo que encuentre —un pólipo, un sangrado, una estenosis— sin referirte a otro médico. Si necesitas el manejo médico a largo plazo de un gastroenterólogo, te lo indica y te orienta. Escríbele por WhatsApp y te confirma qué necesitas.`,
+  },
+  {
     question: "¿Duele la endoscopia o colonoscopia?",
     answer:
       "No. Todos los procedimientos se realizan con sedación consciente administrada por anestesiólogo — no sentirás dolor ni molestia durante el estudio. La mayoría de los pacientes no recuerdan nada del procedimiento y despiertan cómodamente en la sala de recuperación. Escríbele al Dr. Quiroz por WhatsApp y te explica exactamente cómo será tu sedación.",
@@ -1156,6 +1160,10 @@ export const doctorFaqs: FAQ[] = [
   {
     question: "¿Qué certificaciones tiene el Dr. Omar Quiroz?",
     answer: `El Dr. Quiroz está certificado por el Consejo Mexicano de Cirugía General (CMCG, registro ${DOCTOR.cedulas.consejoCirugiaGeneral}) y por el Consejo Mexicano de Cirugía Bariátrica (${DOCTOR.cedulas.consejoBariatrica}). Cuenta además con Alta Especialidad en Endoscopia Gastrointestinal por la UNAM (Cédula ${DOCTOR.cedulas.endoscopia}). Su cédula profesional como Médico Cirujano es ${DOCTOR.cedulas.medicoGeneral} y su cédula de especialidad en Cirugía General es ${DOCTOR.cedulas.especialidad}. Escríbele al ${DOCTOR.name} por WhatsApp y agenda tu cita.`,
+  },
+  {
+    question: "¿El Dr. Quiroz es gastroenterólogo?",
+    answer: `El ${DOCTOR.name} es Endoscopista Gastrointestinal y Cirujano General, no gastroenterólogo. La diferencia es práctica: el endoscopista realiza e interpreta el estudio endoscópico, y por su formación como cirujano puede tratar en la misma sesión lo que encuentre —un pólipo, un sangrado, una estenosis— sin referirte a otro médico. Si tu caso requiere el manejo médico a largo plazo que da un gastroenterólogo, te lo dice directamente y te orienta. Escríbele por WhatsApp y te confirma qué necesitas.`,
   },
   {
     question: "¿Dónde atiende el Dr. Omar Quiroz?",
