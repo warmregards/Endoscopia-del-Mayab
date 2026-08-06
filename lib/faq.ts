@@ -48,7 +48,9 @@ export type FAQ = { question: string; answer: string }
 // ---------------------------------------------------------------------------
 
 const price = (k: ServiceKey) => mxn(PRICES[k].from)
-const biopsyFee = () => mxn(ADDITIONAL_FEES.biopsy.amount)
+// NBSP between the amount and "MXN" — FAQ answers are plain strings rendered
+// into a <p>, so a normal space lets "$1,200 MXN" split across two lines.
+const biopsyFee = () => mxn(ADDITIONAL_FEES.biopsy.amount).replace(" ", "\u00A0")
 
 // ---------------------------------------------------------------------------
 // HOME — conversion-focused, addresses top cross-procedure concerns

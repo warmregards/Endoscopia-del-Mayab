@@ -5,6 +5,7 @@ import { buildMeta } from "@/lib/seo"
 import { PRICING, mxn, displayFrom, ADDITIONAL_FEES } from "@/lib/pricing"
 import { SERVICES, servicesByCategory } from "@/lib/services"
 import { CLINIC } from "@/lib/clinic"
+import { getGoogleReviews } from "@/lib/reviews"
 import { DOCTOR } from "@/lib/doctor"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
@@ -46,7 +47,15 @@ const diagnosticServices = servicesByCategory("diagnostic")
 const therapeuticServices = servicesByCategory("therapeutic")
 const advancedServices = servicesByCategory("advanced")
 
-export default function Page() {
+export default async function Page() {
+  // Hero rating/count from the same live source as <GoogleReviews>
+  // (data/reviews.json), so the two never disagree; CLINIC.aggregateRating is
+  // the fallback.
+  const {
+    rating: ratingValue = CLINIC.aggregateRating.ratingValue,
+    total: reviewCount = CLINIC.aggregateRating.reviewCount,
+  } = await getGoogleReviews({ maxReviews: 1 })
+
   return (
     <>
       {/* ── Section 1: Hero ── */}
@@ -59,7 +68,7 @@ export default function Page() {
               ))}
             </div>
             <span className="text-sm font-semibold text-foreground">
-              {CLINIC.aggregateRating.ratingValue} ({CLINIC.aggregateRating.reviewCount} reseñas)
+              {ratingValue.toFixed(1)} ({reviewCount} reseñas)
             </span>
             <span className="text-sm text-muted-foreground">·</span>
             <div className="flex items-center gap-1">
@@ -203,7 +212,7 @@ export default function Page() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h2 className="font-serif font-bold text-foreground text-xl mb-1">
+                  <h2 className="font-serif font-bold text-foreground text-xl md:text-2xl mb-1">
                     {DOCTOR.name}
                   </h2>
                   <p className="text-primary font-medium text-sm mb-4">
@@ -223,7 +232,7 @@ export default function Page() {
                       service="homepage"
                       position="doctor-trust"
                       label="Escribir al Dr. Quiroz"
-                      className="text-sm px-4 py-2 rounded-lg"
+                      className="text-sm px-4 py-2 rounded-lg min-h-[44px]"
                     />
                     <Link
                       href={DOCTOR.profileUrl}
@@ -239,20 +248,24 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Biopsias differentiator callout ── */}
-      <div className="bg-background">
-        <div className="container-page py-6">
-          <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-5">
+      {/* ── Section 4: Biopsias differentiator ──
+          Competitive claim — gets full section weight (48px padding, primary H2
+          tier), not the thin-banner treatment it used to have. bg-muted keeps
+          the background↔muted alternation intact against the doctor strip above
+          and the (near-white) reviews gradient below. */}
+      <section className="bg-muted">
+        <div className="container-page section-padding">
+          <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex items-start gap-4">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent/15 shrink-0">
                   <ShieldCheck className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-foreground text-lg mb-2">
+                  <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
                     Biopsias ilimitadas — sin cargos extra por muestra
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+                  </h2>
+                  <p className="text-sm text-foreground leading-relaxed max-w-lg">
                     La lectura de biopsias por el patólogo tiene un costo fijo de{" "}
                     <span className="font-semibold text-foreground">
                       {mxn(ADDITIONAL_FEES.biopsy.amount)}
@@ -270,7 +283,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ── Google Reviews — Social Proof ── */}
       <GoogleReviews />
@@ -340,7 +353,7 @@ export default function Page() {
 
           {/* Diagnóstico */}
           <h3 className="font-serif font-semibold text-foreground text-lg mb-4">Diagnóstico</h3>
-          <div className="rounded-xl overflow-hidden border border-border shadow-sm mb-8">
+          <div className="rounded-2xl overflow-hidden border border-border shadow-sm mb-8">
             {diagnosticServices.map((svc, i) => (
               <Link
                 key={svc.slug}
@@ -357,7 +370,7 @@ export default function Page() {
 
           {/* Terapéutico */}
           <h3 className="font-serif font-semibold text-foreground text-lg mb-4">Terapéutico</h3>
-          <div className="rounded-xl overflow-hidden border border-border shadow-sm mb-2">
+          <div className="rounded-2xl overflow-hidden border border-border shadow-sm mb-2">
             {therapeuticServices.slice(0, 4).map((svc, i) => (
               <Link
                 key={svc.slug}
@@ -373,11 +386,11 @@ export default function Page() {
           </div>
           {therapeuticServices.length > 4 && (
             <details className="mb-8 group">
-              <summary className="flex items-center gap-2 text-sm font-semibold text-primary cursor-pointer px-3 py-2 -ml-3 rounded-md hover:bg-muted transition-colors list-none [&::-webkit-details-marker]:hidden">
+              <summary className="flex items-center gap-2 text-sm font-semibold text-primary cursor-pointer px-3 py-2 -ml-3 rounded-lg hover:bg-muted transition-colors list-none [&::-webkit-details-marker]:hidden">
                 Ver {therapeuticServices.length - 4} más
                 <ChevronDown className="h-4 w-4 group-open:rotate-180 transition-transform" />
               </summary>
-              <div className="rounded-xl overflow-hidden border border-border shadow-sm mt-2">
+              <div className="rounded-2xl overflow-hidden border border-border shadow-sm mt-2">
                 {therapeuticServices.slice(4).map((svc, i) => (
                   <Link
                     key={svc.slug}
@@ -401,7 +414,7 @@ export default function Page() {
               <span className="badge-quote">Cotización</span>
               <ChevronDown className="h-4 w-4 text-muted-foreground group-open:rotate-180 transition-transform" />
             </summary>
-            <div className="rounded-xl overflow-hidden border border-border shadow-sm">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
               {advancedServices.map((svc, i) => (
                 <Link
                   key={svc.slug}
@@ -417,7 +430,7 @@ export default function Page() {
 
           {/* Consultas */}
           <h3 className="font-serif font-semibold text-foreground text-lg mb-4">Consultas</h3>
-          <div className="rounded-xl overflow-hidden border border-border shadow-sm mb-8">
+          <div className="rounded-2xl overflow-hidden border border-border shadow-sm mb-8">
             <Link href="/emergencias-digestivas-merida" className="service-row">
               <span className="text-sm font-medium text-primary">Emergencias Digestivas</span>
               <ArrowRight className="h-4 w-4 text-muted-foreground" />
@@ -470,8 +483,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Section 7: Bottom CTA ── */}
-      <section className="cta-section">
+      {/* ── Section 7: Bottom CTA ──
+          id is read by <StickyMobileCTA>: the sticky bar retracts while this
+          section is on screen so it can't sit on top of these CTAs. */}
+      <section id="bottom-cta" className="cta-section">
         <div className="container-page section-padding text-center">
           <h2 className="cta-heading">¿Listo para agendar?</h2>
           <p className="cta-subtext">El Dr. Quiroz te atiende personalmente.</p>

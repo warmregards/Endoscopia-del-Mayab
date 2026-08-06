@@ -5,6 +5,7 @@ import { Phone } from "lucide-react"
 import { CLINIC, waHref, telHref } from "@/lib/clinic"
 import { useWhatsAppRef } from "@/lib/useWhatsAppRef"
 import { pushPhoneClick } from "@/lib/gtm"
+import { cn } from "@/lib/utils"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -15,7 +16,11 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function StickyMobileCTA() {
-  const [visible, setVisible] = useState(false)
+  // Two independent gates: the bar shows once the hero CTAs are out of view,
+  // and retracts again while an on-page CTA block it would cover is on screen.
+  const [pastHero, setPastHero] = useState(false)
+  const [coveringCta, setCoveringCta] = useState(false)
+  const visible = pastHero && !coveringCta
 
   useEffect(() => {
     const heroCtas = document.getElementById("hero-ctas")
@@ -23,7 +28,7 @@ export default function StickyMobileCTA() {
     // If a hero CTA section exists, use IntersectionObserver
     if (heroCtas) {
       const observer = new IntersectionObserver(
-        ([entry]) => setVisible(!entry.isIntersecting),
+        ([entry]) => setPastHero(!entry.isIntersecting),
         { threshold: 0 }
       )
       observer.observe(heroCtas)
@@ -31,10 +36,25 @@ export default function StickyMobileCTA() {
     }
 
     // Fallback: show after scrolling 300px
-    const onScroll = () => setVisible(window.scrollY > 300)
+    const onScroll = () => setPastHero(window.scrollY > 300)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  // The bottom CTA section renders its own WhatsApp/Call pair. The fixed bar
+  // is ~57px tall and lands right on that pair at a natural scroll resting
+  // position, so hide the bar for as long as the section is on screen.
+  useEffect(() => {
+    const bottomCta = document.getElementById("bottom-cta")
+    if (!bottomCta) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setCoveringCta(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(bottomCta)
+    return () => observer.disconnect()
   }, [])
 
   // Sticky CTA uses the clinic default message; the hook appends the ref line.
@@ -43,10 +63,18 @@ export default function StickyMobileCTA() {
     ctaId: "cta-sticky-wa",
   })
 
-  if (!visible) return null
-
+  // Kept mounted and slid out of frame (rather than unmounted) so showing and
+  // hiding can animate. `inert` takes it out of the tab order + a11y tree while
+  // retracted; motion-reduce drops the animation but not the hiding itself.
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 md:hidden px-4 py-2 bg-white/70 backdrop-blur-xl border-t border-border/50 safe-area-bottom">
+    <div
+      inert={!visible}
+      className={cn(
+        "fixed bottom-0 inset-x-0 z-40 md:hidden px-4 py-2 bg-white/70 backdrop-blur-xl border-t border-border/50 safe-area-bottom",
+        "transition-transform duration-200 ease-out motion-reduce:transition-none",
+        visible ? "translate-y-0" : "translate-y-full"
+      )}
+    >
       <div className="flex gap-2 items-center">
         <a
           href={waHref({})}
