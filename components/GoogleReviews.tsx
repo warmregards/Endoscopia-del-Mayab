@@ -1,5 +1,6 @@
 // /components/GoogleReviews.tsx
 import { Suspense } from "react";
+import { Star } from "lucide-react";
 import { getGoogleReviews } from "@/lib/reviews";
 import { CLINIC } from "@/lib/clinic";
 
@@ -31,7 +32,7 @@ type Props = {
 
 function ReviewsSkeleton() {
   return (
-    <section className="py-16 bg-gradient-to-b from-muted/20 to-background">
+    <section className="section-padding bg-gradient-to-b from-muted/20 to-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <div className="h-8 w-64 bg-muted rounded animate-pulse" />
@@ -98,17 +99,22 @@ async function GoogleReviewsAsync({
 
   return (
     <section
-      className={`py-16 bg-gradient-to-b from-muted/20 to-background ${className}`}
+      className={`section-padding bg-gradient-to-b from-muted/20 to-background ${className}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
               {title}
             </h2>
             <p className="text-foreground/70">
               {placeName || CLINIC.name}
-              {rating ? ` — ${rating.toFixed(1)}★` : ""}
+              {rating ? (
+                <span className="inline-flex items-center gap-1 align-middle">
+                  {` — ${rating.toFixed(1)}`}
+                  <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
+                </span>
+              ) : ""}
               {total ? ` (${total} opiniones)` : ""}
             </p>
           </div>
@@ -118,7 +124,7 @@ async function GoogleReviewsAsync({
               href={placeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-accent-strong text-accent-strong-foreground font-semibold hover:bg-accent-strong/90"
+              className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-lg bg-accent-strong text-accent-strong-foreground font-semibold hover:bg-accent-strong/90"
             >
               Ver más en Google
             </a>
@@ -126,45 +132,83 @@ async function GoogleReviewsAsync({
         </div>
 
         <ul className="grid gap-6 md:grid-cols-2">
-          {safeReviews.map((r, i) => (
-            <li
-              key={i}
-              className="rounded-2xl border border-border bg-background p-5 shadow-sm"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                {r.profile_photo_url ? (
-                  <img
-                    src={resizeGoogleProfilePhoto(r.profile_photo_url)}
-                    alt={r.author_name}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div className="h-10 w-10 rounded-full bg-muted" />
-                )}
-                <div>
-                  <div className="font-semibold text-foreground">
-                    {r.author_name}
-                  </div>
-                  <div className="text-xs text-foreground/60">
-                    {r.relative_time_description}
+          {safeReviews.map((r, i) => {
+            // Google review text can arrive with literal * emphasis markup — strip it.
+            const body = (r.text ?? "").replace(/\*/g, "");
+            const stars = Math.max(0, Math.min(5, Math.round(r.rating)));
+            const isLong = body.length > 220;
+            return (
+              <li
+                key={i}
+                className="rounded-2xl border border-border bg-background p-5 shadow-sm"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  {r.profile_photo_url ? (
+                    <img
+                      src={resizeGoogleProfilePhoto(r.profile_photo_url)}
+                      alt={r.author_name}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="h-10 w-10 rounded-full bg-muted" />
+                  )}
+                  <div>
+                    <div className="font-semibold text-foreground">
+                      {r.author_name}
+                    </div>
+                    <div className="text-xs text-foreground/60">
+                      {r.relative_time_description}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mb-2 text-sm text-foreground">
-                {"★".repeat(Math.max(0, Math.min(5, Math.round(r.rating))))}
-              </div>
+                <div className="mb-2 flex gap-0.5" aria-label={`${stars} de 5 estrellas`}>
+                  {Array.from({ length: stars }).map((_, s) => (
+                    <Star
+                      key={s}
+                      className="h-4 w-4 fill-feedback-warning text-feedback-warning"
+                    />
+                  ))}
+                </div>
 
-              <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
-                {r.text}
-              </p>
-            </li>
-          ))}
+                {isLong ? (
+                  // CSS-only "Leer más": full text stays in the DOM (crawlable),
+                  // clamped to 4 lines until the checkbox toggles it open in place.
+                  <>
+                    <input
+                      type="checkbox"
+                      id={`review-more-${i}`}
+                      className="peer sr-only"
+                    />
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line line-clamp-4 peer-checked:line-clamp-none">
+                      {body}
+                    </p>
+                    <label
+                      htmlFor={`review-more-${i}`}
+                      className="mt-2 inline-block cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:hidden"
+                    >
+                      Leer más
+                    </label>
+                    <label
+                      htmlFor={`review-more-${i}`}
+                      className="mt-2 hidden cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:inline-block"
+                    >
+                      Leer menos
+                    </label>
+                  </>
+                ) : (
+                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                    {body}
+                  </p>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <p className="mt-6 text-xs text-foreground/60">
