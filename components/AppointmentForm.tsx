@@ -71,7 +71,7 @@ const PROCEDURE_CONFIG: Record<Procedure, ProcedureConfig> = {
 }
 
 const INPUT_BASE =
-  "w-full min-h-[48px] rounded-xl border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
+  "w-full min-h-[48px] rounded-xl border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
 
 /** Returns a Spanish error message for an invalid name, or null if valid. */
 function validateName(value: string): string | null {
@@ -403,7 +403,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
                 className={cn(
                   INPUT_BASE,
                   "flex items-center justify-between text-left",
-                  !date && "text-muted-foreground/70"
+                  !date && "text-muted-foreground"
                 )}
               >
                 <span>

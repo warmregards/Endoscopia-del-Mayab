@@ -442,7 +442,7 @@ export default function CprePage() {
                 <p className="text-2xl font-bold text-muted-foreground line-through">
                   $40,000+ MXN
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   + estudios + traslado
                 </p>
               </div>
@@ -454,7 +454,7 @@ export default function CprePage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {displayFrom("cpre")}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">Precio base — sin sorpresas</p>
+                <p className="text-sm text-accent mt-2">Precio base — sin sorpresas</p>
               </div>
 
               <div className="p-6 rounded-2xl border border-border text-center">
@@ -464,7 +464,7 @@ export default function CprePage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   &ldquo;Gratis&rdquo;
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   2–6 meses espera
                 </p>
               </div>
@@ -596,7 +596,7 @@ export default function CprePage() {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent/10 border border-accent/20">
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-5 w-5 text-accent" />
                 <span className="font-semibold text-foreground">
                   Duración total:

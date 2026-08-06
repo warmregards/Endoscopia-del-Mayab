@@ -240,7 +240,7 @@ export default function EndoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Desde {mxn(MARKET_BENCHMARKS.endoscopia.hospitalMayor.from)}
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Hospitales privados de mayor tamaño en Mérida
                 </p>
               </div>
@@ -252,7 +252,7 @@ export default function EndoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Desde {mxn(MARKET_BENCHMARKS.endoscopia.hospitalPrivado.from)}
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   + anestesia, + patología, + estudios facturados por separado
                 </p>
               </div>
@@ -264,7 +264,7 @@ export default function EndoscopiaPage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {displayFrom("endoscopia")}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
+                <p className="text-sm text-accent mt-2">Sin cargos ocultos</p>
               </div>
 
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
@@ -274,7 +274,7 @@ export default function EndoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Sin costo directo
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Lista de espera: 3–6 meses
                 </p>
               </div>
@@ -667,7 +667,7 @@ export default function EndoscopiaPage() {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent/10 border border-accent/20">
+              <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-4 w-4 text-accent" />
                 <span className="font-semibold text-foreground">
                   Duración total:
@@ -819,7 +819,7 @@ export default function EndoscopiaPage() {
               ? Pueden combinarse en la misma sesión de sedación.
             </p>
 
-            <address className="not-italic text-sm text-white/60">
+            <address className="not-italic text-sm text-white/80">
               {CLINIC.name} · {CLINIC.phone.display} ·{" "}
               {CLINIC.address.display}
             </address>

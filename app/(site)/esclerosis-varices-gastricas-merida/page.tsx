@@ -563,7 +563,7 @@ export default function EsclerosisVaricesGastricasPage() {
               />
             </div>
 
-            <address className="not-italic text-sm text-white/60">
+            <address className="not-italic text-sm text-white/80">
               {CLINIC.name} · {CLINIC.phone.display} ·{" "}
               {CLINIC.address.display}
             </address>

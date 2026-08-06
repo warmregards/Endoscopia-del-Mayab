@@ -367,7 +367,7 @@ export default async function LpEndoscopiaPage() {
             className="min-h-[48px] flex-1"
           />
           <CallButton
-            variant="secondary"
+            variant="ghost"
             service="endoscopia"
             position="lp-sticky"
             label="Llamar"

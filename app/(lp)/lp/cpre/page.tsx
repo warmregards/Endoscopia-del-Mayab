@@ -374,7 +374,7 @@ export default async function LpCprePage() {
             className="min-h-[48px] flex-1"
           />
           <CallButton
-            variant="secondary"
+            variant="ghost"
             service="cpre"
             position="lp-sticky"
             label="Llamar"

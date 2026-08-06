@@ -158,7 +158,7 @@ export const endoscopiaFaqs: FAQ[] = [
   // Current answer is a placeholder — replace with confirmed methods.
   {
     question: "¿Qué formas de pago aceptan?",
-    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
+    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display.replace(/ /g, "\u00A0")} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
   },
   {
     question: "¿Duele la endoscopia?",
@@ -281,7 +281,7 @@ export const colonoscopiaFaqs: FAQ[] = [
   // Current answer is a placeholder — replace with confirmed methods.
   {
     question: "¿Qué formas de pago aceptan?",
-    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
+    answer: `Aceptamos efectivo, transferencia bancaria y tarjetas de crédito y débito. Para detalles sobre meses sin intereses o convenios específicos con tu banco, contáctanos por WhatsApp al ${CLINIC.phone.display.replace(/ /g, "\u00A0")} y el ${DOCTOR.name} te confirma las opciones disponibles para tu procedimiento.`,
   },
   {
     question: "¿Duele la colonoscopia?",
@@ -296,7 +296,7 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Cuánto dura una colonoscopia?",
     answer:
-      "El procedimiento dura 25–45 minutos. La estancia total es de 3–4 horas. Puedes comer ligero el mismo día y retomar actividades al siguiente. Si se extirpan pólipos grandes, se dan indicaciones adicionales de cuidado. Agenda por WhatsApp y el Dr. Quiroz te explica qué esperar el día de tu estudio.",
+      "El procedimiento dura 25–45\u00A0minutos. La estancia total es de 3–4\u00A0horas. Puedes comer ligero el mismo día y retomar actividades al siguiente. Si se extirpan pólipos grandes, se dan indicaciones adicionales de cuidado. Agenda por WhatsApp y el Dr. Quiroz te explica qué esperar el día de tu estudio.",
   },
   {
     question: "¿Es peligrosa la colonoscopia?",

@@ -265,7 +265,7 @@ export default function ColonoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Desde {mxn(MARKET_BENCHMARKS.colonoscopia.hospitalMayor.from)}
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Hospitales privados de mayor tamaño en Mérida
                 </p>
               </div>
@@ -277,7 +277,7 @@ export default function ColonoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Desde {mxn(MARKET_BENCHMARKS.colonoscopia.hospitalPrivado.from)}
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   + anestesia, + patología, + recuperación por separado
                 </p>
               </div>
@@ -289,7 +289,7 @@ export default function ColonoscopiaPage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {mxn(PRICING.colonoscopia.from)}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">Sin cargos ocultos</p>
+                <p className="text-sm text-accent mt-2">Sin cargos ocultos</p>
               </div>
 
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
@@ -299,7 +299,7 @@ export default function ColonoscopiaPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   Sin costo directo
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Lista de espera: 3–12 meses
                 </p>
               </div>
@@ -314,7 +314,7 @@ export default function ColonoscopiaPage() {
                 <div className="flex justify-between items-baseline border-b border-border pb-4">
                   <span className="text-sm text-foreground/80">Colonoscopia base</span>
                   <span className="font-semibold text-text-accent">
-                    {mxn(colonBase)}
+                    {mxn(colonBase).replace(" ", "\u00A0")}
                   </span>
                 </div>
                 <div className="flex justify-between items-baseline border-b border-border pb-4">
@@ -322,7 +322,7 @@ export default function ColonoscopiaPage() {
                     Base + consulta de valoración
                   </span>
                   <span className="font-semibold text-text-accent">
-                    {mxn(colonBase + consultaFee)}
+                    {mxn(colonBase + consultaFee).replace(" ", "\u00A0")}
                   </span>
                 </div>
                 <div className="flex justify-between items-baseline">
@@ -330,7 +330,7 @@ export default function ColonoscopiaPage() {
                     Base + consulta + patología (si hay biopsias)
                   </span>
                   <span className="font-semibold text-text-accent">
-                    {mxn(colonBase + consultaFee + biopsyFee)}
+                    {mxn(colonBase + consultaFee + biopsyFee).replace(" ", "\u00A0")}
                   </span>
                 </div>
               </div>
@@ -687,12 +687,12 @@ export default function ColonoscopiaPage() {
 
             {/* Recovery callout */}
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent/10 border border-accent/20">
+              <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-4 w-4 text-accent" />
                 <span className="font-semibold text-foreground">
                   Tiempo total en hospital: aproximadamente 2 horas.
                 </span>
-                <span className="text-muted-foreground">
+                <span className="text-foreground/80">
                   Te vas el mismo día.
                 </span>
               </div>
@@ -838,11 +838,52 @@ export default function ColonoscopiaPage() {
         </div>
       </section>
 
+      {/* ── Mid-page conversion CTA — fills the dead zone after "Resultados".
+          Thin accent-light banner = visual separator, exempt from bg
+          alternation (see design system Color Punctuation). ── */}
+      <section className="bg-accent-light">
+        <div className="container-page py-8">
+          <div className="max-w-3xl mx-auto flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+            <p className="font-serif text-lg font-semibold text-foreground">
+              ¿Listo para tu colonoscopia? El {DOCTOR.name} te responde
+              personalmente.
+            </p>
+            <WhatsAppButton
+              service="colonoscopia"
+              position="mid-resultados"
+              procedureName="Colonoscopia"
+              label="Agendar por WhatsApp"
+              className="w-full shrink-0 sm:w-auto"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: GOOGLE REVIEWS
           Component wraps itself in <section> (gradient muted → background).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews />
+
+      {/* ── Mid-page conversion CTA — fills the dead zone after reviews,
+          before the FAQ. Thin accent-light banner, exempt from bg
+          alternation. ── */}
+      <section className="bg-accent-light">
+        <div className="container-page py-8">
+          <div className="max-w-3xl mx-auto flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+            <p className="font-serif text-lg font-semibold text-foreground">
+              Agenda tu colonoscopia esta semana — hay citas disponibles.
+            </p>
+            <WhatsAppButton
+              service="colonoscopia"
+              position="mid-reviews"
+              procedureName="Colonoscopia"
+              label="Agendar por WhatsApp"
+              className="w-full shrink-0 sm:w-auto"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: FAQ — bg-muted
@@ -885,7 +926,7 @@ export default function ColonoscopiaPage() {
               />
             </div>
 
-            <address className="not-italic text-sm text-white/60">
+            <address className="not-italic text-sm text-white/80">
               {CLINIC.name} · {CLINIC.phone.display} ·{" "}
               {CLINIC.address.display}
             </address>

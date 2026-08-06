@@ -368,7 +368,7 @@ export default async function LpLigaduraVaricesPage() {
             className="min-h-[48px] flex-1"
           />
           <CallButton
-            variant="secondary"
+            variant="ghost"
             service="ligadura_varices"
             position="lp-sticky"
             label="Llamar"

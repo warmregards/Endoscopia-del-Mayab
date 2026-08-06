@@ -373,7 +373,7 @@ export default async function LpHemorroidesPage() {
             className="min-h-[48px] flex-1"
           />
           <CallButton
-            variant="secondary"
+            variant="ghost"
             service="ligadura_hemorroides"
             position="lp-sticky"
             label="Llamar"

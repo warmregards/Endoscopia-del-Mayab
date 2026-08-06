@@ -183,6 +183,7 @@ async function GoogleReviewsAsync({
                     <input
                       type="checkbox"
                       id={`review-more-${i}`}
+                      aria-label={`Mostrar reseña completa de ${r.author_name}`}
                       className="peer sr-only"
                     />
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line line-clamp-4 peer-checked:line-clamp-none">
@@ -190,13 +191,13 @@ async function GoogleReviewsAsync({
                     </p>
                     <label
                       htmlFor={`review-more-${i}`}
-                      className="mt-2 inline-block cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:hidden"
+                      className="mt-1 inline-flex min-h-[44px] items-center cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:hidden"
                     >
                       Leer más
                     </label>
                     <label
                       htmlFor={`review-more-${i}`}
-                      className="mt-2 hidden cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:inline-block"
+                      className="mt-1 hidden min-h-[44px] items-center cursor-pointer text-sm font-semibold text-primary hover:underline peer-checked:inline-flex"
                     >
                       Leer menos
                     </label>

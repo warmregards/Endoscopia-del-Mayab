@@ -366,7 +366,7 @@ export default function APCPage() {
                 <p className="text-2xl font-bold text-muted-foreground line-through">
                   $25,000–$30,000
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Rentan equipo por sesión
                 </p>
               </div>
@@ -378,7 +378,7 @@ export default function APCPage() {
                 <p className="font-serif font-bold text-text-accent text-3xl">
                   {displayFrom("apc")}
                 </p>
-                <p className="text-sm text-accent/80 mt-2">
+                <p className="text-sm text-accent mt-2">
                   Equipo ERBE propio — todo incluido
                 </p>
               </div>
@@ -390,7 +390,7 @@ export default function APCPage() {
                 <p className="text-2xl font-bold text-muted-foreground">
                   $150,000+
                 </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   Semanas de recuperación
                 </p>
               </div>

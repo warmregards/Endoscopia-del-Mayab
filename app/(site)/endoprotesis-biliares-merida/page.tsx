@@ -539,7 +539,7 @@ export default function EndoprotesisBiliaresPage() {
           </div>
 
           <div className="pt-8 border-t border-white/20 mt-8">
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-white/80">
               <Link
                 href="/cpre-merida"
                 className="text-white/80 hover:underline"

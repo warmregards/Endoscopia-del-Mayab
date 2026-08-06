@@ -544,11 +544,11 @@ export default function PreciosPage() {
               />
             </div>
 
-            <p className="text-white/60 text-sm">
+            <p className="text-white/80 text-sm">
               El {DOCTOR.name} le responde personalmente
             </p>
 
-            <address className="not-italic text-sm text-white/60">
+            <address className="not-italic text-sm text-white/80">
               {CLINIC.name} · {CLINIC.phone.display} ·{" "}
               {CLINIC.address.display}
             </address>
