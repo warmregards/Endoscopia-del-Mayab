@@ -180,7 +180,7 @@ export default function EndoprotesisEsofagicasPage() {
               ¿Cuánto cuesta una endoprótesis esofágica?
             </h2>
 
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-foreground leading-relaxed">
               El costo depende del tipo de stent (cubierto, parcialmente cubierto, sin cubrir),
               el diámetro y longitud necesarios, y la complejidad de tu caso. Envíanos tus
               estudios por WhatsApp para una cotización personalizada.
@@ -330,7 +330,7 @@ export default function EndoprotesisEsofagicasPage() {
                 {DOCTOR.bioShort}
               </p>
 
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Como cirujano general certificado con subespecialidad en endoscopia,
                 el {DOCTOR.name} maneja tanto la colocación del stent como cualquier
                 complicación quirúrgica — sin referirte a otro especialista.

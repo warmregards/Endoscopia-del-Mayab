@@ -133,7 +133,7 @@ export default function CprePage() {
                 {displayFrom("cpre")} · Sedación con anestesiólogo · Sin cirugía abierta
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-lg text-foreground leading-relaxed max-w-2xl">
                 Tratamiento directo de cálculos en el conducto biliar, estenosis biliares y obstrucciones en 30–90 minutos en Hospital Amerimed Mérida, Yucatán. Endoscopio especializado con fluoroscopía digital ve tus conductos biliares en tiempo real — sin abrir.
               </p>
 
@@ -235,7 +235,7 @@ export default function CprePage() {
               Endoscopio especializado con fluoroscopía que entra por la boca y muestra en tiempo real tus conductos biliares y pancreáticos. Trata cálculos en el conducto, estenosis biliares y obstrucciones — y coloca prótesis si es necesario, en el mismo procedimiento. 30–90 minutos bajo sedación profunda. Sin cirugía abierta, sin cortes, sin dolor.
             </p>
 
-            <p className="text-sm text-muted-foreground max-w-3xl">
+            <p className="text-sm text-foreground max-w-3xl">
               A diferencia del ultrasonido o la tomografía, la CPRE ve directamente el interior del conducto biliar — y lo trata en la misma sesión.
             </p>
 
@@ -485,7 +485,7 @@ export default function CprePage() {
                   )
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mt-6 max-w-3xl mx-auto text-center">
+              <p className="text-sm text-foreground mt-6 max-w-3xl mx-auto text-center">
                 Costos adicionales posibles si se requiere intervención terapéutica: esfinterotomía, extracción de cálculos múltiples, colocación de prótesis biliar (plástica o metálica), o uso de SpyGlass. Todo se cotiza antes del procedimiento.
               </p>
             </div>
@@ -528,7 +528,7 @@ export default function CprePage() {
                 <h3 className="font-serif font-semibold text-foreground mb-2">
                   ¿Por qué pocos hospitales hacen CPRE?
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-foreground leading-relaxed">
                   La CPRE requiere infraestructura altamente especializada:
                   duodenoscopio dedicado, fluoroscopía digital en tiempo real,
                   quirófano con anestesiólogo y un endoscopista con entrenamiento
@@ -884,7 +884,7 @@ export default function CprePage() {
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
             Otros procedimientos
           </h2>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-foreground mb-8">
             ¿Tu CPRE puede requerir dilatación o colocación de prótesis? Ambos procedimientos se realizan en la misma sesión cuando está indicado — sin segunda intervención.
           </p>
 
@@ -932,7 +932,7 @@ export default function CprePage() {
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 ¿Listo para agendar tu CPRE?
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-foreground">
                 Envía tu ultrasonido y laboratorios por WhatsApp. El {DOCTOR.name} revisa tu caso y te confirma si la CPRE es necesaria antes de agendar.
               </p>
             </div>
@@ -953,7 +953,7 @@ export default function CprePage() {
                 <p className="font-semibold text-foreground mb-1">
                   ¿Primera CPRE?
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground">
                   Consulta de valoración {mxn(ADDITIONAL_FEES.consultation.amount)} con el {DOCTOR.name} en Mérida, Yucatán — revisa tus estudios, confirma si la CPRE es necesaria y te da cotización exacta.
                 </p>
               </div>

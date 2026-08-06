@@ -168,7 +168,7 @@ export default function DiseccionSubmucosaPage() {
           </h2>
 
           <div className="max-w-3xl space-y-6">
-            <p className="text-muted-foreground">
+            <p className="text-foreground">
               El precio de la ESD se cotiza de forma personalizada porque cada
               lesión varía en tamaño, ubicación y complejidad técnica. Al
               contactarnos, el {DOCTOR.name} evalúa tu caso y te da un presupuesto

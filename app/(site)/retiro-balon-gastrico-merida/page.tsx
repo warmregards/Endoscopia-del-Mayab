@@ -63,7 +63,7 @@ export default function RetiroBalonGastricoPage() {
               Retiro de Balón Gástrico en Mérida
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-foreground leading-relaxed">
               El {DOCTOR.name} realiza la extracción endoscópica de todos los tipos
               de balón gástrico (Orbera, Reshape, Spatz) en {CLINIC.address.streetAddress},
               zona Altabrisa-{CLINIC.address.neighborhood}, {CLINIC.address.addressLocality}, {CLINIC.address.addressRegion}. Procedimiento
@@ -116,7 +116,7 @@ export default function RetiroBalonGastricoPage() {
             ¿Cuándo Se Retira el Balón Gástrico?
           </h2>
 
-          <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+          <p className="text-foreground leading-relaxed mb-6 max-w-3xl">
             El balón intragástrico tiene un tiempo de vida definido por el
             fabricante. Dejarlo más tiempo del indicado puede causar
             complicaciones. Existen tres escenarios principales para su retiro:
@@ -362,7 +362,7 @@ export default function RetiroBalonGastricoPage() {
                 {DOCTOR.name} — Endoscopista y Cirujano
               </h2>
 
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Como endoscopista certificado, el {DOCTOR.name} tiene experiencia
                 con todos los tipos de balón gástrico: Orbera, Reshape y Spatz.
                 Como cirujano general, puede resolver complicaciones sin referirte

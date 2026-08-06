@@ -485,7 +485,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
         >
           <span
             className={cn(
-              "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md border transition-colors",
+              "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg border transition-colors",
               crossSell
                 ? "border-accent bg-accent text-white"
                 : "border-border bg-background"

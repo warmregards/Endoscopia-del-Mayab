@@ -145,7 +145,7 @@ export default function SiteHeader() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="md:hidden p-2 rounded-md text-foreground/80 hover:text-link"
+            className="md:hidden p-2 rounded-lg text-foreground/80 hover:text-link"
             aria-label="Abrir menú"
             aria-controls="mobile-menu"
             aria-expanded={open}
@@ -195,7 +195,7 @@ export default function SiteHeader() {
             </Link>
             <button
               type="button"
-              className="p-2 rounded-md text-foreground/80 hover:text-link"
+              className="p-2 rounded-lg text-foreground/80 hover:text-link"
               onClick={() => setOpen(false)}
               aria-label="Cerrar menú"
             >

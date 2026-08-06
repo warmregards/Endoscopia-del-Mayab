@@ -348,7 +348,7 @@ export default function ColonoscopiaPage() {
             />
 
             {/* GEO definitive paragraph */}
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-foreground leading-relaxed">
               Una colonoscopia en Mérida con el {DOCTOR.name} en{" "}
               {CLINIC.name} cuesta desde {mxn(PRICING.colonoscopia.from)}. El
               precio incluye valoración pre-procedimiento, sedación con

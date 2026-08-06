@@ -191,7 +191,7 @@ export default function PreciosPage() {
               <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
                 Precio de Endoscopia, Colonoscopia y CPRE en Mérida, Yucatán
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <p className="text-lg text-foreground leading-relaxed max-w-3xl">
                 Conoce el precio de endoscopia y el precio de colonoscopia en
                 Mérida con cotizaciones transparentes — sedación, sala de
                 recuperación y reporte el mismo día incluidos. Sin sorpresas

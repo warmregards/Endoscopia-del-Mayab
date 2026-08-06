@@ -71,7 +71,7 @@ export default async function LpHemorroidesPage() {
           {/* Eyebrow / trust bar */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
-              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+              <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
             </span>
             <span className="inline-flex items-center gap-1">

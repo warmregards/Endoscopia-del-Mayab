@@ -85,7 +85,7 @@ export default function EndoscopiaPage() {
                 {displayFrom("endoscopia")} · Sedación incluida · Resultados el mismo día
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-lg text-foreground leading-relaxed max-w-2xl">
                 Diagnóstico directo de gastritis, úlceras, reflujo y
                 H.&nbsp;pylori en 15–25 minutos. Cámara HD Olympus ve tu
                 estómago en tiempo real — sin adivinar.
@@ -187,7 +187,7 @@ export default function EndoscopiaPage() {
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 Panendoscopia, gastroscopia, EGD: el mismo estudio, el mismo precio
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Panendoscopia, gastroscopia, endoscopia digestiva alta y EGD
                 (esofagogastroduodenoscopia) son nombres distintos para el mismo
                 estudio: la revisión de tu esófago, estómago y duodeno con una
@@ -320,7 +320,7 @@ export default function EndoscopiaPage() {
               <h3 className="font-serif font-semibold text-foreground mb-2">
                 ¿Hacen endoscopia en Salud Digna o Chopo?
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              <p className="text-sm text-foreground leading-relaxed mb-4">
                 No. Salud Digna y Chopo son laboratorios de análisis clínicos —
                 no cuentan con endoscopios, quirófano ni anestesiólogo para
                 realizar endoscopias. Si tu médico te indicó una endoscopia,

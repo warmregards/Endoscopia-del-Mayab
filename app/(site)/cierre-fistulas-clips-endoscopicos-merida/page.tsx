@@ -63,7 +63,7 @@ export default function CierreFistulasPage() {
               Cierre de Fístulas y Perforaciones Digestivas en Mérida
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-foreground leading-relaxed">
               Reparación mínimamente invasiva de perforaciones y fístulas del
               tracto digestivo con clips endoscópicos, sin cirugía abierta. El{" "}
               {DOCTOR.name} realiza este procedimiento en Hospital Amerimed
@@ -117,7 +117,7 @@ export default function CierreFistulasPage() {
               ¿Qué es el Cierre Endoscópico de Fístulas?
             </h2>
 
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-foreground leading-relaxed">
               El cierre endoscópico utiliza clips metálicos especializados para
               reparar perforaciones o fugas en el tracto digestivo sin necesidad
               de cirugía abierta. Es una alternativa menos invasiva con tiempo de
@@ -167,7 +167,7 @@ export default function CierreFistulasPage() {
               Costo del Cierre de Fístulas en Mérida
             </h2>
 
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-foreground leading-relaxed">
               El costo del cierre de fístulas varía según la complejidad del
               caso, el número de clips necesarios y la ubicación de la fístula.
               Ofrecemos cotización personalizada sin compromiso después de una
@@ -335,7 +335,7 @@ export default function CierreFistulasPage() {
                 ))}
               </div>
 
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Como cirujano con formación en endoscopia, el {DOCTOR.name} puede
                 manejar complicaciones que requieren intervención quirúrgica
                 inmediata si el cierre endoscópico no es suficiente.

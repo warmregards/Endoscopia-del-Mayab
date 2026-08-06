@@ -77,7 +77,7 @@ export default async function LpColonoscopiaPage() {
           {/* Eyebrow / trust bar */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
-              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+              <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
             </span>
             <span className="inline-flex items-center gap-1">
@@ -279,7 +279,7 @@ export default async function LpColonoscopiaPage() {
             La preparación es más fácil de lo que crees
           </h2>
 
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4 text-foreground">
             Sabemos que la preparación es lo que más preocupa — más que el
             estudio. La hacemos en dosis divididas para que sea más llevadera, y
             te guiamos en cada paso.

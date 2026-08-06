@@ -249,7 +249,7 @@ export default function ConsultasDigestivasPage() {
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                 Chequeo Digestivo Preventivo
               </h3>
-              <p className="text-sm text-muted-foreground mb-6">
+              <p className="text-sm text-foreground mb-6">
                 Evaluación preventiva para detección temprana de cáncer
                 colorrectal y gástrico. Recomendado a partir de los 45 años o
                 con antecedentes familiares.

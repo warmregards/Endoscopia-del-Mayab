@@ -49,7 +49,7 @@ export default function ServiceCatalog() {
         {!showAllTherapeutic && (
           <button
             onClick={() => setShowAllTherapeutic(true)}
-            className="flex items-center gap-1.5 text-sm font-semibold text-text-brand hover:text-action-secondary px-3 py-2 -ml-3 rounded-md hover:bg-surface-sunken transition-colors mb-6"
+            className="flex items-center gap-1.5 text-sm font-semibold text-text-brand hover:text-action-secondary px-3 py-2 -ml-3 rounded-lg hover:bg-surface-sunken transition-colors mb-6"
             aria-expanded={showAllTherapeutic}
           >
             Ver {therapeuticProcedures.length - 4} más
@@ -67,7 +67,7 @@ export default function ServiceCatalog() {
             <h3 className="text-overline text-text-primary">
               Procedimientos Avanzados
             </h3>
-            <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-700 border border-amber-500/20">
+            <span className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-700 border border-amber-500/20">
               Cotización
             </span>
             <ChevronDown className={`h-4 w-4 text-text-secondary transition-transform ${showAdvanced ? "rotate-180" : ""}`} />

@@ -123,7 +123,7 @@ export default function DilatacionBiliarPage() {
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             ¿Qué es la Dilatación Biliar?
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-3xl">
+          <p className="mt-4 text-foreground max-w-3xl">
             Es un procedimiento endoscópico que permite abrir conductos biliares
             que se han estrechado, restaurando el flujo normal de bilis sin
             necesidad de cirugía abierta. Se realiza con sedación en Hospital

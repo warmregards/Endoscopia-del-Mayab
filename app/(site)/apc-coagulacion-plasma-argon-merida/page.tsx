@@ -203,7 +203,7 @@ export default function APCPage() {
                 {displayFrom("apc")} · Equipo ERBE propio · Hospital Amerimed
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-lg text-foreground leading-relaxed max-w-2xl">
                 Tratamiento endoscópico sin contacto para sangrado digestivo,
                 esófago de Barrett y ablación de lesiones — con el precio más
                 accesible de la Península de Yucatán.
@@ -314,7 +314,7 @@ export default function APCPage() {
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 ¿Qué condiciones trata el APC?
               </h2>
-              <p className="text-muted-foreground max-w-3xl">
+              <p className="text-foreground max-w-3xl">
                 El plasma de argón es efectivo para condiciones donde se necesita
                 coagular tejido de forma precisa y controlada — sin contacto
                 directo y con penetración limitada.

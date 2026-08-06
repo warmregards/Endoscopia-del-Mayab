@@ -3,6 +3,7 @@ import Link from "next/link"
 import { metaFor } from "@/lib/routes-seo"
 import { DOCTOR } from "@/lib/doctor"
 import { CLINIC, telHref } from "@/lib/clinic"
+import { getGoogleReviews } from "@/lib/reviews"
 import { ADDITIONAL_FEES, mxn } from "@/lib/pricing"
 import { breadcrumbSchema } from "@/lib/schema"
 import {
@@ -15,6 +16,7 @@ import {
   Heart,
   Activity,
   Phone,
+  Star,
 } from "lucide-react"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import WhatsAppLink from "@/components/WhatsAppLink"
@@ -26,11 +28,17 @@ import DoctorAuthority from "@/components/DoctorAuthority"
 export const revalidate = 86400
 export const metadata = metaFor("doctor")
 
-export default function DoctorOmarQuirozPage() {
+export default async function DoctorOmarQuirozPage() {
   const primaryHospital = DOCTOR.hospitals.find((h) => h.type === "primary")!
   const secondaryHospitals = DOCTOR.hospitals.filter(
     (h) => h.type === "secondary"
   )
+  // Live rating/count from data/reviews.json (same source as <GoogleReviews>),
+  // with CLINIC.aggregateRating as fallback.
+  const {
+    rating: ratingValue = CLINIC.aggregateRating.ratingValue,
+    total: reviewCount = CLINIC.aggregateRating.reviewCount,
+  } = await getGoogleReviews({ maxReviews: 1 })
 
   return (
     <>
@@ -367,11 +375,12 @@ export default function DoctorOmarQuirozPage() {
                   </div>
                 </div>
                 <div className="flex-1 text-center p-4 rounded-xl bg-muted border border-border">
-                  <div className="text-2xl font-bold text-text-accent">
-                    {CLINIC.aggregateRating.ratingValue}★
+                  <div className="flex items-center justify-center gap-2 text-2xl font-bold text-text-accent">
+                    {ratingValue.toFixed(1)}
+                    <Star className="h-5 w-5 fill-feedback-warning text-feedback-warning" />
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    {CLINIC.aggregateRating.reviewCount} opiniones
+                    {reviewCount} opiniones
                   </div>
                 </div>
               </div>
@@ -390,7 +399,7 @@ export default function DoctorOmarQuirozPage() {
           {/* Primary hospital */}
           <div className="bg-background border border-border rounded-xl p-8 mb-6">
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center px-2 py-1 rounded-md bg-accent-light text-xs font-medium text-text-accent">
+              <span className="inline-flex items-center px-2 py-1 rounded-lg bg-accent-light text-xs font-medium text-text-accent">
                 Consultorio Principal
               </span>
             </div>
@@ -437,7 +446,7 @@ export default function DoctorOmarQuirozPage() {
                 key={h.name}
                 className="bg-background/60 border border-border rounded-xl p-6"
               >
-                <span className="inline-flex items-center px-2 py-1 rounded-md bg-muted text-xs font-medium text-muted-foreground mb-4">
+                <span className="inline-flex items-center px-2 py-1 rounded-lg bg-muted text-xs font-medium text-muted-foreground mb-4">
                   También opera en
                 </span>
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">

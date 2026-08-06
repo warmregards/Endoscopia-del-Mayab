@@ -31,7 +31,7 @@ export default function DoctorSection() {
               {DOCTOR.credentials.map((item, i) => (
                 <span
                   key={item}
-                  className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md border ${
+                  className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border ${
                     i < 3
                       ? "bg-action-secondary/8 border-action-secondary/20 text-action-secondary"
                       : "bg-surface-sunken border-border-default text-text-secondary"
@@ -48,7 +48,7 @@ export default function DoctorSection() {
         <div className="mt-6">
           <Link
             href={DOCTOR.profileUrl}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-text-brand hover:text-action-secondary px-4 py-2.5 rounded-[var(--radius-interactive)] border border-border-default hover:border-action-primary/30 hover:bg-surface-sunken transition-all group"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-text-brand hover:text-action-secondary px-4 py-2.5 rounded-full border border-border-default hover:border-action-primary/30 hover:bg-surface-sunken transition-all group"
           >
             Ver perfil completo
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

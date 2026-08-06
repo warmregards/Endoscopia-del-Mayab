@@ -331,6 +331,24 @@
     @apply py-16;
   }
 
+  /* Desktop step-up. This MUST stay inside @layer utilities and MUST stay
+     directly below the base definitions above: unlayered CSS outranks every
+     cascade layer, so while this block sat at top level it would have silently
+     beaten any py-, pt- or pb- utility (including lg: and xl: variants) on any
+     element also carrying .section-padding — exactly how the unlayered
+     `@media (min-width: 640px) { h2 { … } }` block forced every supporting-tier
+     H2 up to 30px. Specificity here is identical to the rules above (0,1,0),
+     so source order alone decides: keep this block after them. */
+  @media (min-width: 1024px) {
+    .section-padding {
+      @apply py-16;
+    }
+
+    .section-padding-lg {
+      @apply py-24;
+    }
+  }
+
   /* Safe area padding for sticky bottom bars (notch devices) */
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -444,11 +462,18 @@
   }
 
   /* Homepage-specific utilities */
+  /* Card-like surface (bordered container holding a content block) → rounded-2xl.
+     rounded-xl is reserved for buttons, inputs and small panels. */
   .procedure-card {
-    @apply relative block bg-card rounded-xl border border-border shadow-sm p-6;
+    @apply relative block bg-card rounded-2xl border border-border shadow-sm p-6;
     @apply hover:shadow-md hover:border-accent/30 transition-all;
   }
 
+  /* Intentionally has NO border radius. Service rows are a flat divider list:
+     with 25 entries under "Todos los Servicios", rounding each row would read as
+     25 stacked cards instead of one scannable directory. The rounded-2xl group
+     wrapper (with overflow-hidden) supplies the outer corners. Do not add a
+     radius here. */
   .service-row {
     @apply flex flex-col sm:flex-row sm:justify-between sm:items-center;
     @apply px-4 py-4 bg-card hover:bg-muted/50 transition-colors;
@@ -462,7 +487,7 @@
   }
 
   .badge-quote {
-    @apply text-[11px] font-semibold px-2.5 py-1 rounded-md;
+    @apply text-[11px] font-semibold px-2.5 py-1 rounded-lg;
     @apply bg-amber-500/10 text-amber-700 border border-amber-500/20;
   }
 
@@ -586,7 +611,7 @@
   }
 
   .emergency-heading {
-    @apply font-serif font-bold text-red-900 text-xl mb-1;
+    @apply font-serif font-bold text-red-900 text-xl md:text-2xl mb-1;
   }
 
   .emergency-text {
@@ -660,27 +685,27 @@
    RESPONSIVE TYPOGRAPHY — Mobile-first scaling
    ═══════════════════════════════════════════════════════════════════════════ */
 
-@media (min-width: 640px) {
-  h1 {
-    @apply text-4xl;
+/* Element-level heading defaults, for headings that carry no explicit size
+   utility. These MUST stay inside @layer base: unlayered CSS outranks every
+   cascade layer, so while these rules sat at top level they overrode the
+   utility classes on every <h2> at ≥640px — silently forcing supporting-tier
+   headings (text-xl md:text-2xl) up to 30px and reintroducing a third H2 tier.
+   Breakpoints match the two documented tiers in CLAUDE.md. */
+@layer base {
+  @media (min-width: 768px) {
+    h1 {
+      @apply text-4xl;
+    }
+
+    h2 {
+      @apply text-3xl;
+    }
   }
 
-  h2 {
-    @apply text-3xl;
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 {
-    @apply text-5xl;
-  }
-
-  .section-padding {
-    @apply py-16;
-  }
-
-  .section-padding-lg {
-    @apply py-24;
+  @media (min-width: 1024px) {
+    h1 {
+      @apply text-5xl;
+    }
   }
 }
 

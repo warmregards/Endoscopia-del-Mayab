@@ -1,6 +1,7 @@
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom } from "@/lib/pricing"
 import { CLINIC, telHref } from "@/lib/clinic"
+import { getGoogleReviews } from "@/lib/reviews"
 import { DOCTOR } from "@/lib/doctor"
 import { breadcrumbSchema } from "@/lib/schema"
 import Image from "next/image"
@@ -16,7 +17,14 @@ import Faq from "@/components/Faq"
 export const revalidate = 86400
 export const metadata = metaFor("contacto")
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
+  // Live rating/count from data/reviews.json (same source as <GoogleReviews>),
+  // with CLINIC.aggregateRating as fallback.
+  const {
+    rating: ratingValue = CLINIC.aggregateRating.ratingValue,
+    total: reviewCount = CLINIC.aggregateRating.reviewCount,
+  } = await getGoogleReviews({ maxReviews: 1 })
+
   return (
     <>
       {/* Breadcrumb JSON-LD */}
@@ -47,8 +55,8 @@ export default function ContactoPage() {
           {/* Trust badges */}
           <div className="flex flex-wrap gap-4 mt-6">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium">
-              <Star className="h-4 w-4 text-text-accent" />
-              {CLINIC.aggregateRating.ratingValue} — {CLINIC.aggregateRating.reviewCount} reseñas en Google
+              <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
+              {ratingValue.toFixed(1)} — {reviewCount} reseñas en Google
             </span>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-sm font-medium">
               <MapPin className="h-4 w-4 text-primary" />

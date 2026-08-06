@@ -84,7 +84,7 @@ export default function EndoprotesisBiliaresPage() {
               Endoprótesis Biliares en Mérida
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-lg text-foreground leading-relaxed max-w-2xl">
               Stents biliares para restaurar el flujo biliar obstruido por
               cálculos, estenosis o tumores. Colocación mediante{" "}
               <Link
@@ -137,7 +137,7 @@ export default function EndoprotesisBiliaresPage() {
             ¿Qué son las Endoprótesis Biliares?
           </h2>
 
-          <p className="text-muted-foreground leading-relaxed max-w-3xl mb-8">
+          <p className="text-foreground leading-relaxed max-w-3xl mb-8">
             Las endoprótesis biliares son tubos pequeños (stents) que se colocan
             durante una{" "}
             <Link
@@ -238,7 +238,7 @@ export default function EndoprotesisBiliaresPage() {
               </span>
             </div>
 
-            <p className="text-muted-foreground mb-6">
+            <p className="text-foreground mb-6">
               El precio varía según el tipo de prótesis (plástica o metálica),
               la complejidad anatómica, los procedimientos adicionales necesarios
               y el tiempo de estancia hospitalaria.

@@ -227,7 +227,7 @@ export default function ExtraccionCuerposExtranosPage() {
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
                 Extracción en niños
               </h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-foreground mb-4">
                 La ingestión accidental de objetos es una de las emergencias
                 pediátricas más comunes. Monedas, pilas botón, imanes y juguetes
                 pequeños requieren evaluación inmediata. El {DOCTOR.name} tiene
@@ -372,7 +372,7 @@ export default function ExtraccionCuerposExtranosPage() {
 
             <div className="space-y-4">
               <p className="text-muted-foreground">{DOCTOR.bioShort}</p>
-              <p className="text-muted-foreground">
+              <p className="text-foreground">
                 Endoscopista y cirujano general certificado. En extracciones
                 complicadas donde la endoscopia no es suficiente, el{" "}
                 {DOCTOR.name} puede resolver quirúrgicamente en el momento — sin
@@ -383,7 +383,7 @@ export default function ExtraccionCuerposExtranosPage() {
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
-                    className="inline-flex items-center px-2 py-1 rounded-md bg-accent-light text-xs font-medium text-foreground"
+                    className="inline-flex items-center px-2 py-1 rounded-lg bg-accent-light text-xs font-medium text-foreground"
                   >
                     {cred}
                   </span>

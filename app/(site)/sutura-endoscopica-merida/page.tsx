@@ -66,7 +66,7 @@ export default function SuturaEndoscopicaPage() {
                 Sutura Endoscópica en Mérida
               </h1>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-lg text-foreground leading-relaxed max-w-2xl">
                 Reparación de perforaciones y defectos gastrointestinales sin cirugía abierta.
                 El Dr. Omar Quiroz realiza sutura endoscópica en {CLINIC.address.streetAddress},{" "}
                 {CLINIC.address.addressLocality}, con técnica mínimamente invasiva y cotización
@@ -180,7 +180,7 @@ export default function SuturaEndoscopicaPage() {
               Costo de Sutura Endoscópica en Mérida
             </h2>
 
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-foreground leading-relaxed mb-6">
               El costo varía según el tipo de defecto, su ubicación y el dispositivo de sutura
               utilizado. Te ofrecemos una cotización personalizada y transparente antes del
               procedimiento. Escríbenos por WhatsApp para recibir tu presupuesto.
@@ -277,7 +277,7 @@ export default function SuturaEndoscopicaPage() {
               <h3 className="font-serif text-lg font-semibold text-foreground">
                 Recuperación
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 La mayoría de pacientes reciben alta el mismo día. La recuperación incluye ayuno
                 inicial con progresión gradual a dieta blanda en 24-48 horas. El regreso a
                 actividades normales toma de 3 a 7 días. Incluimos seguimiento por 30 días para
@@ -340,7 +340,7 @@ export default function SuturaEndoscopicaPage() {
                   ))}
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   Como cirujano y endoscopista, el Dr. Quiroz puede resolver complicaciones
                   inmediatamente durante el procedimiento sin necesidad de referir a otro
                   especialista. Esta doble formación es clave en suturas endoscópicas, donde la

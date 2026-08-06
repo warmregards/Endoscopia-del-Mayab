@@ -349,7 +349,7 @@ export default function EndoprotesisDuodenalesPage() {
                 <h3 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                   Manejo de Complicaciones
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground">
                   Si durante la colocación surgen complicaciones como perforación
                   o sangrado, el {DOCTOR.name} puede resolverlas quirúrgicamente
                   en la misma sesión, evitando traslados de emergencia.
@@ -385,7 +385,7 @@ export default function EndoprotesisDuodenalesPage() {
                     <h3 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                       Transparencia en Expectativas
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-foreground text-sm">
                       Las endoprótesis duodenales son principalmente un
                       tratamiento paliativo para mejorar calidad de vida. El éxito
                       se mide por la mejoría en síntomas y capacidad de
