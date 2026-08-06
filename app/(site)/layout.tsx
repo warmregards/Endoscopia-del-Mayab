@@ -14,11 +14,12 @@ import StickyMobileCTA from "@/components/StickyMobileCTA";
  * chrome-free layout. Because the chrome is declared here — not in the root
  * layout — LP pages never render, serialize, or mount any of it.
  */
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const graph = await globalGraph();
   return (
     <>
       {/* A11y skip link */}
@@ -39,7 +40,7 @@ export default function SiteLayout({
           anywhere in the document; crawlers parse the full response. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
     </>
   );

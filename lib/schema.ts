@@ -28,6 +28,7 @@ import { toSchemaOfferCatalog, SERVICES } from "@/lib/services"
 import type { ServiceKey } from "@/lib/pricing"
 import { PRICING, hasPrice } from "@/lib/pricing"
 import type { Video } from "@/lib/videos"
+import { toSchemaRating } from "@/lib/reviews"
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -87,7 +88,9 @@ function websiteEntity() {
 // Entity: MedicalClinic (Organization)
 // ---------------------------------------------------------------------------
 
-function clinicEntity() {
+function clinicEntity(
+  aggregateRating: Awaited<ReturnType<typeof toSchemaRating>>,
+) {
   return {
     "@type": "MedicalClinic",
     "@id": CLINIC_ID,
@@ -137,12 +140,7 @@ function clinicEntity() {
     sameAs: CLINIC.sameAs,
     knowsAbout: CLINIC.knowsAbout,
     hasOfferCatalog: toSchemaOfferCatalog(),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: CLINIC.aggregateRating.ratingValue,
-      reviewCount: CLINIC.aggregateRating.reviewCount,
-      bestRating: 5,
-    },
+    aggregateRating,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: CLINIC.phone.schema,
@@ -198,17 +196,24 @@ function physicianEntity() {
  * Generate the global JSON-LD @graph containing WebSite, MedicalClinic, and Physician.
  * Inject this once in the root layout.
  *
+ * Async — pulls the live review count, so the layout must await it.
+ *
  * @example
  *   // app/layout.tsx
+ *   const graph = await globalGraph()
  *   <script
  *     type="application/ld+json"
- *     dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+ *     dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
  *   />
  */
-export function globalGraph() {
+export async function globalGraph() {
+  // Pull the live rating/count (data/reviews.json, refreshed daily by CI) so the
+  // JSON-LD AggregateRating matches the count shown on the page. Falls back to
+  // CLINIC.aggregateRating inside toSchemaRating().
+  const aggregateRating = await toSchemaRating()
   return prune({
     "@context": "https://schema.org",
-    "@graph": [websiteEntity(), clinicEntity(), physicianEntity()],
+    "@graph": [websiteEntity(), clinicEntity(aggregateRating), physicianEntity()],
   })
 }
 

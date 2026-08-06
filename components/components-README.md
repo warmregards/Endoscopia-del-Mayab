@@ -96,8 +96,10 @@ Schema JSON-LD is **not** handled by components. It's inline in layouts and page
 ```tsx
 // layout.tsx — global graph (once)
 import { globalGraph } from "@/lib/schema"
+// globalGraph() is async (pulls the live review count) — await it in the layout
+const graph = await globalGraph()
 <script type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(globalGraph()) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
 />
 
 // procedure page.tsx — per-procedure
