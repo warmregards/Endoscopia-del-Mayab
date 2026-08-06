@@ -371,7 +371,8 @@ export default async function LpEndoscopiaPage() {
             service="endoscopia"
             position="lp-sticky"
             label="Llamar"
-            className="min-h-[48px] shrink-0 px-4 text-sm"
+            iconOnly
+            className="min-h-[48px] w-12 shrink-0 px-0"
           />
         </div>
       </div>
