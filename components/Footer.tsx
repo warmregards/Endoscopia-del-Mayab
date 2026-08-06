@@ -69,13 +69,14 @@ export default function Footer() {
               service="footer"
               position="footer"
               size="compact"
-              className="w-full justify-center rounded-xl shadow-sm"
+              className="w-full justify-center rounded-xl border border-transparent shadow-sm"
             />
             <CallButton
               service="footer"
               position="footer"
               size="compact"
-              className="w-full justify-center rounded-xl border border-white/20 shadow-sm"
+              variant="inverse"
+              className="w-full justify-center rounded-xl border border-white/20"
             />
           </div>
           <p className="mt-4 text-sm text-text-footer-label">

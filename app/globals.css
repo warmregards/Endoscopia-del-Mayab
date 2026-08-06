@@ -79,7 +79,7 @@
     --text-brand: var(--brand-navy-500);
     --text-accent: var(--brand-teal-700);
     --text-footer-label: 0 0% 85%;      /* Footer section labels (dimmer than body) */
-    --text-footer-accent: var(--brand-teal-100);  /* Footer accent text (bright teal) */
+    --text-footer-accent: var(--brand-teal-100);  /* Footer accent text (bright teal) — unused (kept intentionally; do not delete) */
 
     /* Interactive elements */
     --action-primary: var(--brand-teal-500);
@@ -182,7 +182,7 @@
   --color-text-brand: hsl(var(--text-brand));
   --color-text-accent: hsl(var(--text-accent));
   --color-text-footer-label: hsl(var(--text-footer-label));
-  --color-text-footer-accent: hsl(var(--text-footer-accent));
+  --color-text-footer-accent: hsl(var(--text-footer-accent)); /* unused (bridge kept intentionally; do not delete) */
 
   /* State colors */
   --color-success: hsl(var(--success));
