@@ -3,8 +3,16 @@
   "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
   "total": 97,
-  "fetchedAt": "2026-08-16T06:31:51.196Z",
+  "fetchedAt": "2026-08-17T06:43:33.585Z",
   "reviews": [
+    {
+      "author_name": "Liliana Sabala",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL7rCGknrYi36ksAlePCtaCsbMDH1wZEWr6FwZYDkRRocNdkg=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "Hace 2 semanas",
+      "text": "El Dr. Omar Quiroz nos brindó una excelente atención, aclaró todas nuestras inquietudes.Es muy profesional, siempre estuvo pendiente en nuestro proceso . Lo recomiendo 100%.",
+      "time": 1785270005
+    },
     {
       "author_name": "damaris santos",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXQ8QP-tU8uc8l_q3A2PaWvMSPgwo2fIwXZ2KliMjZVpA9tHtc=s128-c0x00000000-cc-rp-mo",
@@ -28,14 +36,6 @@
       "relative_time_description": "Hace 4 meses",
       "text": "Quiero expresar mi más sincero agradecimiento al Dr. Quiroz por la excelente atención recibida. Es un doctor sumamente amable, con una calidad humana que se percibe desde el primer momento. Se toma el tiempo de explicar absolutamente todo con claridad y paciencia, lo cual genera una gran tranquilidad y confianza como paciente.\n\nSu trato es impecable: elegante, profesional y muy respetuoso. La clínica también me encantó; es un espacio sencillo, pero a la vez moderno, limpio y altamente eficiente, lo cual habla muy bien de su organización y atención al detalle.\n\nEl procedimiento fue rápido y realizado con gran profesionalismo. Al finalizar, el doctor nuevamente se aseguró de explicar cada paso a seguir, sin dejar dudas. Algo que valoro muchísimo es que envía los resultados por WhatsApp y mantiene comunicación por esa vía. Hoy en día, eso marca una gran diferencia, ya que como pacientes muchas veces sentimos distancia con los médicos, y este tipo de cercanía nos hace sentir acompañados, atendidos y con acceso a quien sigue siendo nuestra autoridad en temas de salud.\n\nSin duda, una experiencia excelente de principio a fin. Lo recomiendo ampliamente.",
       "time": 1774987693
-    },
-    {
-      "author_name": "Ubaldo Couoh",
-      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKzY000e9rugVEabaqIdsg_jenlofqv7mkxshyCZ3diZLdstA=s128-c0x00000000-cc-rp-mo-ba2",
-      "rating": 5,
-      "relative_time_description": "Hace 7 meses",
-      "text": "Servicio exelente desde el momento de realizar la cita hasta la realización del estudio. De. Omar Quiroz muy servicial, amable y muy clara toda la explicación sobre sus estudios. Muy recomendable.",
-      "time": 1768418836
     },
     {
       "author_name": "Pablo Canek",
