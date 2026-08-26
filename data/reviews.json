@@ -3,13 +3,13 @@
   "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
   "total": 98,
-  "fetchedAt": "2026-08-25T06:38:00.194Z",
+  "fetchedAt": "2026-08-26T06:39:35.938Z",
   "reviews": [
     {
       "author_name": "Liliana Sabala",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL7rCGknrYi36ksAlePCtaCsbMDH1wZEWr6FwZYDkRRocNdkg=s128-c0x00000000-cc-rp-mo",
       "rating": 5,
-      "relative_time_description": "Hace 3 semanas",
+      "relative_time_description": "Hace 4 semanas",
       "text": "El Dr. Omar Quiroz nos brindó una excelente atención, aclaró todas nuestras inquietudes.Es muy profesional, siempre estuvo pendiente en nuestro proceso . Lo recomiendo 100%.",
       "time": 1785270005
     },
@@ -41,7 +41,7 @@
       "author_name": "Pablo Canek",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIaW0TNBbJnNoSKP_OxkmapYqPTlOZKu5taVqqc7DWd9d7XDw=s128-c0x00000000-cc-rp-mo",
       "rating": 5,
-      "relative_time_description": "Hace 12 meses",
+      "relative_time_description": "Hace un año",
       "text": "El Dr. Omar Quiroz, cirujano y endoscopista gastrointestinal en Mérida, Yucatán, me realizó una endoscopia en el Hospital Amerimed. Desde la primera cita me explicó con claridad el procedimiento y resolvió todas mis dudas. El estudio fue rápido, seguro y sin molestias. Recomiendo al Dr. Omar Quiroz y a su equipo de Endoscopia del Mayab si necesitan realizarse una endoscopia o colonoscopia en Mérida.",
       "time": 1756144936
     }
