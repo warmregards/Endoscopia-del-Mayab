@@ -2,7 +2,8 @@ import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
-import { procedureSchema, breadcrumbSchema } from "@/lib/schema"
+import { procedureSchema, breadcrumbSchema, videoSchema } from "@/lib/schema"
+import { getVideo } from "@/lib/videos"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -18,11 +19,14 @@ import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import GoogleReviews from "@/components/GoogleReviews"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
 
 export const revalidate = 86400
 export const metadata = metaFor("retiro_balon")
 
 export default function RetiroBalonGastricoPage() {
+  const video = getVideo("retiro_balon")
+
   const jsonLdProcedure = procedureSchema({
     name: "Retiro de Balón Gástrico en Mérida",
     path: "/retiro-balon-gastrico-merida",
@@ -46,6 +50,10 @@ export default function RetiroBalonGastricoPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema(video)) }}
       />
 
       {/* ── SECTION 1: HERO ── bg-background */}
@@ -148,6 +156,15 @@ export default function RetiroBalonGastricoPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="max-w-3xl mx-auto w-full mb-6">
+            <YouTubeEmbed
+              id={video.id}
+              title={video.title}
+              caption={video.title}
+              service={video.service}
+            />
           </div>
 
           <div className="bg-accent-light border border-accent/20 rounded-xl p-6 mb-6">

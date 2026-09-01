@@ -145,6 +145,26 @@ export const VIDEOS = {
       { name: "¿Atiende pacientes de Cancún y Playa del Carmen?", start: 324 },
     ],
   },
+  retiro_balon: {
+    id: "LyLdE_ItOh8",
+    title: "Retiro del balón intragástrico: cómo se hace y cuándo",
+    description:
+      "¿Ya se acerca el final de tu tratamiento con balón intragástrico? El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica cómo se retira el balón por endoscopia, con sedación intravenosa y sin dolor, en 10 a 15 minutos. Cuándo toca el retiro según el tipo de balón (de 6 a 8 meses y de 10 a 12 meses), las tres razones por las que a veces se adelanta —intolerancia, migración o haber alcanzado la meta de peso— y qué sigue después para mantener tus resultados. Hospital Amerimed, Mérida, Yucatán.",
+    uploadDate: "2026-08-31T13:08:59-07:00",
+    duration: "PT4M1S",
+    durationSeconds: 241,
+    path: "/retiro-balon-gastrico-merida",
+    service: "retiro balon",
+    chapters: [
+      { name: "Introducción", start: 0 },
+      { name: "Los dos tipos de balón: 6–8 y 10–12 meses", start: 14 },
+      { name: "Cuándo se adelanta el retiro", start: 34 },
+      { name: "Cómo se retira el balón por endoscopía", start: 85 },
+      { name: "Sedación, duración y seguridad", start: 114 },
+      { name: "¿Qué pasa después del retiro?", start: 159 },
+      { name: "Cómo mantener tu peso y qué sigue", start: 204 },
+    ],
+  },
 } satisfies Record<string, Video>
 
 export type VideoKey = keyof typeof VIDEOS
