@@ -13,7 +13,7 @@ $GOOGLE_APPLICATION_CREDENTIALS path. It PRINTS the service-account email it
 authenticates as — share the Sheet (Editor) with exactly that address; a 403 on
 write means the Sheet isn't shared with it yet.
 
-  python scripts/push-to-sheet.py --sheet-id <ID> \
+  python3 scripts/push-to-sheet.py --sheet-id <ID> \
       --map "gclid conversions=data/offline-conversions.csv" \
       --map "ECL conversions=data/enhanced-conversions.csv"
 

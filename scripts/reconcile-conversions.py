@@ -31,13 +31,13 @@ Standalone repo tooling — NOT part of the deployed app. Python 3, stdlib only.
 Two input sources feed the same join/dedup/format pipeline:
 
   Manual  (run locally by Sanel from a Finance-tab CSV export):
-    python scripts/reconcile-conversions.py --prepsync export.csv
-    python scripts/reconcile-conversions.py --prepsync export.csv \
+    python3 scripts/reconcile-conversions.py --prepsync export.csv
+    python3 scripts/reconcile-conversions.py --prepsync export.csv \
         --value-col Total --field "Ref Ads" --out conversions.csv
 
   Automated (the weekly GitHub Action — reads Supabase directly):
     SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
-        python scripts/reconcile-conversions.py --from-supabase \
+        python3 scripts/reconcile-conversions.py --from-supabase \
         --out data/offline-conversions.csv
 
 Flow:

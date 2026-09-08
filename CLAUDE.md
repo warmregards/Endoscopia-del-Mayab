@@ -706,6 +706,26 @@ touching `lib/gtm.ts` or the button components (which are already correct).
 
 ---
 
+## Google Ads + Analytics Data Access
+
+Ads reporting is available three ways — see `docs/google-ads-mcp.md` for setup.
+
+- **Claude Code / Claude desktop app:** the read-only `googleads/google-ads-mcp` and
+  `googleanalytics/google-analytics-mcp` servers
+  (GAQL `search`, `list_accessible_customers`). Config for Claude Code is `.mcp.json` at the
+  repo root; it reads `${GOOGLE_ADS_*}` from the shell, so no secrets are committed.
+- **Cowork / any cloud session:** cannot reach a local MCP server. Use
+  `python3 scripts/ads-pull.py --report all --days 90` → writes CSVs to `data/ads/`, and
+  `python3 scripts/ga4-pull.py --report all --days 90` → `data/ga4/`. Cowork reads both
+  directly. Replaces the manual Search-terms / GA4 UI exports in the monthly review.
+- **Auth:** OAuth user credentials via `gcloud auth application-default login` with the
+  `adwords` scope. The `google-credentials.json` service account used by `seo-report.mjs`
+  does NOT work for the Ads API — plain service accounts are rejected.
+
+The MCP server is read-only. Offline conversion uploads stay in `reconcile-conversions.py`.
+
+---
+
 ## Pre-Commit Checklist
 
 Run through this before every `git commit`:
