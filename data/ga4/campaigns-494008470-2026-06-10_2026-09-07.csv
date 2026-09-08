@@ -1,0 +1,23 @@
+sessionCampaignName,sessionSource,sessionMedium,sessions,conversions,engagementRate
+Endoscopia,google,cpc,2013,335,0.5599
+Colonoscopia,google,cpc,1171,153,0.5474
+(organic),google,organic,708,184,0.5664
+(direct),(direct),(none),305,27,0.2492
+Colon Max Conversions,google,cpc,157,33,0.4968
+CPRE,google,cpc,149,13,0.4966
+Hemorroides,google,cpc,71,11,0.7324
+Ligadura Esofagica,google,cpc,65,4,0.5692
+(cross-network),(data not available),(data not available),50,11,0.86
+(not set),google,cpc,33,3,0.4848
+(ai-assistant),chatgpt.com,ai-assistant,25,10,0.64
+(referral),l.wl.co,referral,19,0,0.8421
+(organic),bing,organic,16,3,0.5625
+(organic),google,cpc,8,0,0
+(referral),reddit.com,referral,6,0,0.1667
+(referral),facebook.com,referral,5,0,1
+(not set),(not set),(not set),4,1,0
+(organic),duckduckgo,organic,2,0,1
+(referral),lm.facebook.com,referral,2,1,1
+(ai-assistant),claude.ai,ai-assistant,1,0,1
+(referral),agent.baixyn.com,referral,1,0,1
+(referral),mx.search.yahoo.com,referral,1,1,1

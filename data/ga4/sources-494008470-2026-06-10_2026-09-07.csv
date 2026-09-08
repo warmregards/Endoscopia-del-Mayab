@@ -1,0 +1,16 @@
+sessionDefaultChannelGroup,sessionSource,sessionMedium,sessions,conversions,engagementRate
+Paid Search,google,cpc,3694,552,0.549
+Organic Search,google,organic,708,184,0.5664
+Direct,(direct),(none),305,27,0.2492
+Cross-network,(data not available),(data not available),50,11,0.86
+AI Assistant,chatgpt.com,ai-assistant,25,10,0.64
+Referral,l.wl.co,referral,19,0,0.8421
+Organic Search,bing,organic,16,3,0.5625
+Organic Social,reddit.com,referral,6,0,0.1667
+Organic Social,facebook.com,referral,5,0,1
+Unassigned,(not set),(not set),4,1,0
+Organic Search,duckduckgo,organic,2,0,1
+Organic Social,lm.facebook.com,referral,2,1,1
+AI Assistant,claude.ai,ai-assistant,1,0,1
+Organic Search,mx.search.yahoo.com,referral,1,1,1
+Referral,agent.baixyn.com,referral,1,0,1

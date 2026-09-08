@@ -1,0 +1,7 @@
+campaign_id,campaign_name,campaign_status,campaign_advertising_channel_type,impressions,clicks,ctr,average_cpc,cost,conversions,cost_per_conversion,conversions_from_interactions_rate,search_impression_share
+22898633652,Endoscopia,ENABLED,SEARCH,17503,2792,0.1595,29.93,83551.73,266.6598,313.33,0.0955,0.657
+22904603642,Colonoscopia,ENABLED,SEARCH,9432,1573,0.1668,35.75,56241.88,103.3258,544.32,0.0657,0.7083
+23930091784,Colon Max Conversions,ENABLED,SEARCH,1520,216,0.1421,44.06,9517.51,18,528.75,0.0833,0.7817
+22900848936,CPRE,ENABLED,SEARCH,1424,193,0.1355,42.87,8273.37,8,1034.17,0.0415,0.8057
+23074407065,Ligadura Esofagica,ENABLED,SEARCH,1159,89,0.0768,86.57,7704.71,4,1926.18,0.0449,0.7442
+23871270952,Hemorroides,ENABLED,SEARCH,677,91,0.1344,67.69,6160.12,2,3080.06,0.022,0.8821

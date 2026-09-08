@@ -1,0 +1,19 @@
+campaign_name,device,impressions,clicks,ctr,cost,conversions,conversions_from_interactions_rate
+Endoscopia,MOBILE,16178,2620,0.1619,77745.4,246.8265,0.0942
+Colonoscopia,MOBILE,8714,1465,0.1681,51821.53,94.6591,0.0646
+Colon Max Conversions,MOBILE,1367,206,0.1507,8866.91,17,0.0825
+CPRE,MOBILE,1274,182,0.1429,7526.0,8,0.044
+Ligadura Esofagica,MOBILE,1048,79,0.0754,6308.04,3.5,0.0443
+Hemorroides,MOBILE,601,88,0.1464,5890.4,2,0.0227
+Endoscopia,DESKTOP,1289,165,0.128,5549.9,19.8333,0.1202
+Colonoscopia,DESKTOP,682,105,0.154,4311.17,8.6667,0.0825
+Ligadura Esofagica,DESKTOP,108,10,0.0926,1396.67,0.5,0.05
+CPRE,DESKTOP,148,11,0.0743,747.37,0,0
+Colon Max Conversions,DESKTOP,147,10,0.068,650.61,1,0.1
+Hemorroides,DESKTOP,74,3,0.0405,269.72,0,0
+Endoscopia,TABLET,36,7,0.1944,256.42,0,0
+Colonoscopia,TABLET,36,3,0.0833,109.18,0,0
+CPRE,TABLET,2,0,0,0.0,0,
+Ligadura Esofagica,TABLET,3,0,0,0.0,0,
+Hemorroides,TABLET,2,0,0,0.0,0,
+Colon Max Conversions,TABLET,6,0,0,0.0,0,

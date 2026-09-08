@@ -1,0 +1,473 @@
+date,campaign_name,impressions,clicks,cost,conversions
+2026-06-10,Endoscopia,185,26,854.28,6
+2026-06-10,CPRE,16,4,129.56,0
+2026-06-10,Colonoscopia,53,11,393.9,0
+2026-06-10,Ligadura Esofagica,6,0,0.0,0
+2026-06-10,Hemorroides,5,3,85.65,0
+2026-06-10,Colon Max Conversions,63,8,200.25,1
+2026-06-11,Endoscopia,184,21,700.03,1
+2026-06-11,CPRE,10,0,0.0,0
+2026-06-11,Colonoscopia,56,12,383.37,0
+2026-06-11,Ligadura Esofagica,9,0,0.0,0
+2026-06-11,Hemorroides,2,0,0.0,0
+2026-06-11,Colon Max Conversions,71,11,375.31,1
+2026-06-12,Endoscopia,176,28,675.06,0
+2026-06-12,CPRE,14,1,16.17,0
+2026-06-12,Colonoscopia,53,8,326.78,0.9978
+2026-06-12,Ligadura Esofagica,15,1,76.69,0
+2026-06-12,Hemorroides,12,2,155.58,0
+2026-06-12,Colon Max Conversions,47,9,304.09,1
+2026-06-13,Endoscopia,124,20,545.11,0
+2026-06-13,CPRE,18,4,96.22,0
+2026-06-13,Colonoscopia,55,6,279.96,0
+2026-06-13,Ligadura Esofagica,9,0,0.0,0
+2026-06-13,Hemorroides,11,0,0.0,0
+2026-06-13,Colon Max Conversions,73,11,517.37,1.0022
+2026-06-14,Endoscopia,161,25,797.67,1
+2026-06-14,CPRE,13,2,187.58,0
+2026-06-14,Colonoscopia,35,2,58.92,1
+2026-06-14,Ligadura Esofagica,8,0,0.0,0
+2026-06-14,Hemorroides,15,4,183.99,0
+2026-06-14,Colon Max Conversions,66,10,458.29,0
+2026-06-15,Endoscopia,303,35,1302.14,3
+2026-06-15,CPRE,14,0,0.0,0
+2026-06-15,Colonoscopia,70,5,219.3,0
+2026-06-15,Ligadura Esofagica,15,1,40.44,0
+2026-06-15,Hemorroides,24,4,183.91,0
+2026-06-15,Colon Max Conversions,52,9,489.62,1
+2026-06-16,Endoscopia,149,29,867.21,7
+2026-06-16,CPRE,17,3,198.09,0
+2026-06-16,Colonoscopia,82,5,215.19,0
+2026-06-16,Ligadura Esofagica,15,1,56.1,0
+2026-06-16,Hemorroides,7,1,26.39,0
+2026-06-16,Colon Max Conversions,68,10,385.11,1
+2026-06-17,Endoscopia,185,34,837.48,4
+2026-06-17,CPRE,9,2,113.45,0
+2026-06-17,Colonoscopia,92,8,389.48,0
+2026-06-17,Ligadura Esofagica,10,1,46.29,0
+2026-06-17,Hemorroides,10,1,26.24,0
+2026-06-17,Colon Max Conversions,99,11,358.12,0
+2026-06-18,Endoscopia,184,28,863.93,2.0034
+2026-06-18,CPRE,14,0,0.0,0
+2026-06-18,Colonoscopia,86,15,447.07,2
+2026-06-18,Ligadura Esofagica,5,1,20.06,0
+2026-06-18,Hemorroides,6,1,39.18,0
+2026-06-18,Colon Max Conversions,79,4,223.67,0
+2026-06-19,Endoscopia,201,28,765.18,2
+2026-06-19,CPRE,22,3,72.25,0
+2026-06-19,Colonoscopia,83,7,217.82,0
+2026-06-19,Ligadura Esofagica,13,0,0.0,0
+2026-06-19,Hemorroides,6,0,0.0,0
+2026-06-19,Colon Max Conversions,46,12,605.97,1
+2026-06-20,Endoscopia,108,18,568.23,3
+2026-06-20,CPRE,9,1,26.6,0
+2026-06-20,Colonoscopia,35,3,122.49,0
+2026-06-20,Ligadura Esofagica,2,0,0.0,0
+2026-06-20,Hemorroides,6,2,107.23,0
+2026-06-20,Colon Max Conversions,51,4,297.38,0
+2026-06-21,Endoscopia,92,12,340.46,0
+2026-06-21,CPRE,4,1,87.03,0
+2026-06-21,Colonoscopia,48,5,219.89,1
+2026-06-21,Ligadura Esofagica,21,4,270.45,0
+2026-06-21,Hemorroides,5,1,61.83,0
+2026-06-21,Colon Max Conversions,32,7,287.9,0
+2026-06-22,Endoscopia,284,37,1106.59,2.0015
+2026-06-22,CPRE,25,3,115.92,0
+2026-06-22,Colonoscopia,67,11,460.49,1
+2026-06-22,Ligadura Esofagica,15,0,0.0,0
+2026-06-22,Hemorroides,12,0,0.0,0
+2026-06-22,Colon Max Conversions,58,10,485.74,1
+2026-06-23,Endoscopia,180,27,1108.77,1.9991
+2026-06-23,CPRE,27,4,198.78,0
+2026-06-23,Colonoscopia,85,8,369.45,2
+2026-06-23,Ligadura Esofagica,11,1,62.53,0
+2026-06-23,Hemorroides,8,1,38.24,0
+2026-06-23,Colon Max Conversions,79,3,141.01,0
+2026-06-24,Endoscopia,221,25,869.73,3.003
+2026-06-24,CPRE,11,1,19.82,0
+2026-06-24,Colonoscopia,114,19,779.89,0
+2026-06-24,Ligadura Esofagica,14,0,0.0,0
+2026-06-24,Hemorroides,4,0,0.0,0
+2026-06-24,Colon Max Conversions,73,18,653.97,4
+2026-06-25,Endoscopia,134,23,863.83,3
+2026-06-25,CPRE,24,0,0.0,0
+2026-06-25,Colonoscopia,99,11,339.95,0
+2026-06-25,Ligadura Esofagica,11,0,0.0,0
+2026-06-25,Hemorroides,4,0,0.0,0
+2026-06-25,Colon Max Conversions,36,10,386.57,2
+2026-06-26,Endoscopia,163,19,562.74,3
+2026-06-26,CPRE,33,4,176.18,0
+2026-06-26,Colonoscopia,86,10,374.14,0
+2026-06-26,Ligadura Esofagica,15,1,29.67,0
+2026-06-26,Hemorroides,9,0,0.0,0
+2026-06-26,Colon Max Conversions,54,9,353.19,0
+2026-06-27,Endoscopia,101,21,459.57,0
+2026-06-27,CPRE,19,7,167.1,1
+2026-06-27,Colonoscopia,47,4,152.61,0
+2026-06-27,Ligadura Esofagica,3,0,0.0,0
+2026-06-27,Hemorroides,7,0,0.0,0
+2026-06-27,Colon Max Conversions,45,3,186.19,0
+2026-06-28,Endoscopia,109,18,444.42,0
+2026-06-28,CPRE,15,3,150.39,0
+2026-06-28,Colonoscopia,50,5,171.49,0
+2026-06-28,Ligadura Esofagica,8,1,78.11,0
+2026-06-28,Hemorroides,7,0,0.0,0
+2026-06-28,Colon Max Conversions,40,6,361.68,0
+2026-06-29,Endoscopia,255,37,1047.2,3
+2026-06-29,CPRE,15,4,178.83,0
+2026-06-29,Colonoscopia,116,13,566.14,0
+2026-06-29,Ligadura Esofagica,9,0,0.0,0
+2026-06-29,Hemorroides,2,1,25.19,0
+2026-06-29,Colon Max Conversions,51,10,442.28,3
+2026-06-30,Endoscopia,178,29,966.94,3
+2026-06-30,CPRE,16,3,106.9,0
+2026-06-30,Colonoscopia,86,19,740.19,2
+2026-06-30,Ligadura Esofagica,11,0,0.0,0
+2026-06-30,Hemorroides,12,0,0.0,0
+2026-06-30,Colon Max Conversions,40,4,162.95,0
+2026-07-01,Endoscopia,160,27,746.5,1.0023
+2026-07-01,CPRE,16,4,139.37,0
+2026-07-01,Colonoscopia,63,6,304.6,0
+2026-07-01,Ligadura Esofagica,16,4,212.95,0
+2026-07-01,Hemorroides,7,1,18.86,0
+2026-07-01,Colon Max Conversions,35,11,383.23,0
+2026-07-02,Endoscopia,138,29,876.43,0
+2026-07-02,CPRE,14,0,0.0,0
+2026-07-02,Colonoscopia,60,13,459.73,0
+2026-07-02,Ligadura Esofagica,30,3,200.2,0
+2026-07-02,Hemorroides,10,0,0.0,0
+2026-07-02,Colon Max Conversions,57,5,208.1,0
+2026-07-03,Endoscopia,162,21,580.71,0
+2026-07-03,CPRE,17,3,196.81,0
+2026-07-03,Colonoscopia,49,11,396.16,1
+2026-07-03,Ligadura Esofagica,9,0,0.0,0
+2026-07-03,Hemorroides,8,1,153.16,0
+2026-07-03,Colon Max Conversions,66,7,394.25,0.9978
+2026-07-04,Endoscopia,130,29,871.08,0
+2026-07-04,CPRE,6,1,89.48,0
+2026-07-04,Colonoscopia,33,3,121.43,1
+2026-07-04,Ligadura Esofagica,18,1,77.09,0
+2026-07-04,Hemorroides,6,0,0.0,0
+2026-07-04,Colon Max Conversions,63,6,251.03,0
+2026-07-05,Endoscopia,110,17,554.07,0
+2026-07-05,CPRE,9,1,54.13,0
+2026-07-05,Colonoscopia,37,5,197.34,0
+2026-07-05,Ligadura Esofagica,14,1,68.36,0
+2026-07-05,Hemorroides,10,1,29.21,0
+2026-07-05,Colon Max Conversions,35,4,386.26,0
+2026-07-06,Endoscopia,155,26,1024.52,4.9982
+2026-07-06,CPRE,13,3,133.42,0
+2026-07-06,Colonoscopia,132,23,989.07,3
+2026-07-06,Ligadura Esofagica,17,3,245.33,0
+2026-07-06,Hemorroides,5,2,113.29,0
+2026-07-06,Colon Max Conversions,41,4,217.98,0
+2026-07-07,Endoscopia,210,32,1059.29,5.0023
+2026-07-07,CPRE,9,3,119.46,0
+2026-07-07,Colonoscopia,69,19,1099.89,0
+2026-07-07,Ligadura Esofagica,28,2,241.93,0
+2026-07-07,Hemorroides,12,0,0.0,0
+2026-07-08,Endoscopia,151,40,1027.25,3
+2026-07-08,CPRE,21,1,25.89,0
+2026-07-08,Colonoscopia,90,21,685.77,4
+2026-07-08,Ligadura Esofagica,5,0,0.0,0
+2026-07-08,Hemorroides,2,0,0.0,0
+2026-07-09,Endoscopia,135,31,927.44,1.0012
+2026-07-09,CPRE,17,3,89.87,0
+2026-07-09,Colonoscopia,88,19,755.2,1
+2026-07-09,Ligadura Esofagica,11,1,57.9,0
+2026-07-09,Hemorroides,9,2,150.99,0
+2026-07-10,Endoscopia,197,38,1109.54,2.9978
+2026-07-10,CPRE,25,3,165.17,0
+2026-07-10,Colonoscopia,95,23,814.37,2.9955
+2026-07-10,Ligadura Esofagica,17,2,51.92,0
+2026-07-10,Hemorroides,10,2,253.29,0
+2026-07-11,Endoscopia,114,24,992.34,2.0023
+2026-07-11,CPRE,5,3,109.54,0
+2026-07-11,Colonoscopia,64,10,310.07,0
+2026-07-11,Ligadura Esofagica,10,1,36.67,0
+2026-07-11,Hemorroides,8,0,0.0,0
+2026-07-12,Endoscopia,188,34,1095.64,3.9932
+2026-07-12,CPRE,5,4,72.46,0
+2026-07-12,Colonoscopia,90,16,517.76,3
+2026-07-12,Ligadura Esofagica,22,1,92.43,1
+2026-07-12,Hemorroides,2,2,42.88,0
+2026-07-13,Endoscopia,204,26,1018.65,3.3311
+2026-07-13,CPRE,13,3,124.85,0
+2026-07-13,Colonoscopia,125,35,1368.19,1
+2026-07-13,Ligadura Esofagica,19,1,11.83,0
+2026-07-13,Hemorroides,6,1,85.84,0
+2026-07-14,Endoscopia,141,36,1024.33,8.6644
+2026-07-14,CPRE,16,3,112.97,0
+2026-07-14,Colonoscopia,95,19,654.96,1
+2026-07-14,Ligadura Esofagica,13,0,0.0,0
+2026-07-14,Hemorroides,10,0,0.0,0
+2026-07-15,Endoscopia,229,42,1268.97,3.9977
+2026-07-15,CPRE,20,3,59.25,1
+2026-07-15,Colonoscopia,136,24,900.28,1
+2026-07-15,Ligadura Esofagica,11,0,0.0,0
+2026-07-15,Hemorroides,5,3,73.68,0
+2026-07-16,Endoscopia,199,40,1178.41,3.9982
+2026-07-16,CPRE,14,10,299.89,1
+2026-07-16,Colonoscopia,119,19,705.74,0
+2026-07-16,Ligadura Esofagica,19,2,214.95,0
+2026-07-16,Hemorroides,35,3,175.13,0
+2026-07-17,Endoscopia,142,26,858.75,4
+2026-07-17,CPRE,19,4,160.78,0
+2026-07-17,Colonoscopia,91,15,609.02,1
+2026-07-17,Ligadura Esofagica,12,0,0.0,0
+2026-07-18,Endoscopia,124,21,540.97,3.0022
+2026-07-18,CPRE,9,4,159.99,0
+2026-07-18,Colonoscopia,60,8,359.44,0
+2026-07-18,Ligadura Esofagica,14,0,0.0,0
+2026-07-18,Hemorroides,3,0,0.0,0
+2026-07-19,Endoscopia,112,16,577.47,0
+2026-07-19,CPRE,12,4,136.36,0
+2026-07-19,Colonoscopia,101,12,660.41,0
+2026-07-19,Ligadura Esofagica,11,1,133.01,0
+2026-07-19,Hemorroides,9,3,120.47,0
+2026-07-20,Endoscopia,271,56,1826.59,7.9988
+2026-07-20,CPRE,19,4,181.46,0
+2026-07-20,Colonoscopia,187,28,1102.15,2
+2026-07-20,Ligadura Esofagica,14,0,0.0,0
+2026-07-20,Hemorroides,11,3,179.22,0
+2026-07-21,Endoscopia,169,36,1041.44,4
+2026-07-21,CPRE,20,3,149.29,0
+2026-07-21,Colonoscopia,109,19,987.26,0
+2026-07-21,Ligadura Esofagica,4,0,0.0,0
+2026-07-21,Hemorroides,6,1,182.81,0
+2026-07-22,Endoscopia,185,40,1078.13,7.6655
+2026-07-22,CPRE,10,3,148.8,0
+2026-07-22,Colonoscopia,95,23,745.64,1
+2026-07-22,Ligadura Esofagica,3,4,471.32,0
+2026-07-22,Hemorroides,8,3,363.41,0
+2026-07-23,Endoscopia,204,39,943.47,4.5
+2026-07-23,CPRE,6,0,0.0,0
+2026-07-23,Colonoscopia,108,22,705.25,3.8333
+2026-07-23,Ligadura Esofagica,7,0,0.0,0
+2026-07-23,Hemorroides,14,2,192.21,0
+2026-07-24,Endoscopia,207,31,881.77,3
+2026-07-24,CPRE,20,4,142.26,0
+2026-07-24,Colonoscopia,82,22,711.22,0
+2026-07-24,Ligadura Esofagica,6,0,0.0,0
+2026-07-24,Hemorroides,6,1,56.06,0
+2026-07-25,Endoscopia,144,29,784.86,2.0011
+2026-07-25,CPRE,10,0,0.0,0
+2026-07-25,Colonoscopia,101,13,418.18,3
+2026-07-25,Ligadura Esofagica,14,1,31.75,0
+2026-07-25,Hemorroides,2,0,0.0,0
+2026-07-26,Endoscopia,106,34,827.08,1
+2026-07-26,CPRE,16,1,49.73,0
+2026-07-26,Colonoscopia,105,12,421.17,3
+2026-07-26,Hemorroides,6,1,42.21,0
+2026-07-27,Endoscopia,232,28,721.57,0.9988
+2026-07-27,CPRE,20,4,226.8,0
+2026-07-27,Colonoscopia,134,25,1234.46,0
+2026-07-27,Ligadura Esofagica,18,3,232.7,1
+2026-07-27,Hemorroides,10,1,68.39,0
+2026-07-28,Endoscopia,296,41,1307.9,2.1667
+2026-07-28,CPRE,42,3,91.3,0
+2026-07-28,Colonoscopia,112,20,715.56,0.3343
+2026-07-28,Ligadura Esofagica,8,1,63.24,0
+2026-07-28,Hemorroides,3,0,0.0,0
+2026-07-29,Endoscopia,229,41,1168.62,3.5
+2026-07-29,CPRE,17,2,71.93,0
+2026-07-29,Colonoscopia,105,20,697.24,0
+2026-07-29,Ligadura Esofagica,17,1,166.39,0
+2026-07-29,Hemorroides,10,1,27.5,0
+2026-07-30,Endoscopia,235,36,915.48,4
+2026-07-30,CPRE,11,2,75.04,0
+2026-07-30,Colonoscopia,126,14,605.63,0
+2026-07-30,Ligadura Esofagica,13,1,167.22,0
+2026-07-30,Hemorroides,8,0,0.0,0
+2026-07-31,Endoscopia,181,32,824.08,5
+2026-07-31,CPRE,36,5,299.48,1
+2026-07-31,Colonoscopia,108,19,702.77,0
+2026-07-31,Ligadura Esofagica,8,1,46.86,0
+2026-07-31,Hemorroides,10,0,0.0,0
+2026-08-01,Endoscopia,143,21,653.25,4
+2026-08-01,CPRE,19,1,32.08,0
+2026-08-01,Colonoscopia,95,8,287.54,0
+2026-08-01,Ligadura Esofagica,6,0,0.0,0
+2026-08-01,Hemorroides,7,0,0.0,0
+2026-08-02,Endoscopia,131,17,589.02,0.833
+2026-08-02,CPRE,9,0,0.0,0
+2026-08-02,Colonoscopia,120,23,1274.41,2.5
+2026-08-02,Ligadura Esofagica,4,0,0.0,0
+2026-08-02,Hemorroides,7,1,29.97,0
+2026-08-03,Endoscopia,282,43,1989.78,4.6659
+2026-08-03,CPRE,9,0,0.0,0
+2026-08-03,Colonoscopia,77,25,718.81,5
+2026-08-03,Ligadura Esofagica,8,3,490.08,0
+2026-08-03,Hemorroides,6,1,87.61,0
+2026-08-04,Endoscopia,164,29,1148.07,2
+2026-08-04,CPRE,10,0,0.0,0
+2026-08-04,Colonoscopia,78,22,692.71,2
+2026-08-04,Ligadura Esofagica,7,2,329.06,0
+2026-08-04,Hemorroides,6,2,52.99,0
+2026-08-05,Endoscopia,199,45,1105.83,2.0011
+2026-08-05,CPRE,24,3,178.48,0
+2026-08-05,Colonoscopia,107,24,849.1,0
+2026-08-05,Ligadura Esofagica,8,3,375.21,0
+2026-08-05,Hemorroides,4,1,32.66,0
+2026-08-06,Endoscopia,231,32,1206.87,3.0011
+2026-08-06,CPRE,11,1,11.39,0
+2026-08-06,Colonoscopia,159,18,621.25,0
+2026-08-06,Ligadura Esofagica,9,0,0.0,0
+2026-08-06,Hemorroides,14,1,52.18,0
+2026-08-07,Endoscopia,184,28,791.75,2.8667
+2026-08-07,CPRE,18,0,0.0,0
+2026-08-07,Colonoscopia,151,25,867.28,2.3333
+2026-08-07,Ligadura Esofagica,3,0,0.0,0
+2026-08-07,Hemorroides,2,1,31.29,0
+2026-08-08,Endoscopia,134,31,480.15,7.8011
+2026-08-08,CPRE,12,0,0.0,0
+2026-08-08,Colonoscopia,96,21,592.99,2
+2026-08-08,Ligadura Esofagica,4,0,0.0,0
+2026-08-08,Hemorroides,2,0,0.0,0
+2026-08-09,Endoscopia,173,19,539.78,1
+2026-08-09,CPRE,2,0,0.0,0
+2026-08-09,Colonoscopia,83,11,376.52,0
+2026-08-09,Ligadura Esofagica,14,2,123.29,0.5
+2026-08-09,Hemorroides,4,0,0.0,0
+2026-08-10,Endoscopia,321,45,1434.22,4.7489
+2026-08-10,CPRE,28,3,235.81,0
+2026-08-10,Colonoscopia,120,32,1249.07,2
+2026-08-10,Ligadura Esofagica,20,0,0.0,0
+2026-08-10,Hemorroides,4,1,34.82,0
+2026-08-11,Endoscopia,234,38,1224.05,9.7489
+2026-08-11,CPRE,16,3,217.75,0
+2026-08-11,Colonoscopia,103,19,788.22,1
+2026-08-11,Ligadura Esofagica,8,1,166.55,0
+2026-08-11,Hemorroides,5,1,24.07,0
+2026-08-12,Endoscopia,161,34,1186.29,2
+2026-08-12,CPRE,20,1,89.0,0
+2026-08-12,Colonoscopia,113,20,818.4,0.9989
+2026-08-12,Ligadura Esofagica,23,0,0.0,0
+2026-08-12,Hemorroides,4,0,0.0,0
+2026-08-13,Endoscopia,287,37,1072.71,0.9989
+2026-08-13,CPRE,21,5,268.81,0
+2026-08-13,Colonoscopia,101,27,818.55,4
+2026-08-13,Ligadura Esofagica,13,3,336.63,0.5
+2026-08-13,Hemorroides,10,2,461.94,0
+2026-08-14,Endoscopia,168,30,985.96,3.4989
+2026-08-14,CPRE,26,2,33.22,0
+2026-08-14,Colonoscopia,123,19,692.5,0
+2026-08-14,Ligadura Esofagica,12,3,388.94,0
+2026-08-14,Hemorroides,2,1,52.81,0
+2026-08-15,Endoscopia,170,23,621.48,3
+2026-08-15,CPRE,1,0,0.0,0
+2026-08-15,Colonoscopia,127,18,615.65,0
+2026-08-15,Ligadura Esofagica,16,2,219.25,0
+2026-08-15,Hemorroides,13,5,600.46,1
+2026-08-16,Endoscopia,170,27,839.72,2.9989
+2026-08-16,Colonoscopia,104,19,890.38,0
+2026-08-16,Ligadura Esofagica,10,1,169.27,0
+2026-08-17,Endoscopia,255,43,1401.08,10.4978
+2026-08-17,CPRE,10,0,0.0,0
+2026-08-17,Colonoscopia,143,26,688.66,4.0009
+2026-08-17,Ligadura Esofagica,6,0,0.0,0
+2026-08-17,Hemorroides,12,3,174.63,0
+2026-08-18,Endoscopia,207,30,980.69,4.5
+2026-08-18,CPRE,17,0,0.0,0
+2026-08-18,Colonoscopia,125,32,734.41,1
+2026-08-18,Ligadura Esofagica,15,2,217.31,0
+2026-08-18,Hemorroides,5,0,0.0,0
+2026-08-19,Endoscopia,216,45,1008.79,2
+2026-08-19,CPRE,22,3,133.56,0
+2026-08-19,Colonoscopia,176,25,784.03,4.9989
+2026-08-19,Ligadura Esofagica,26,1,38.09,0
+2026-08-19,Hemorroides,12,3,121.48,0
+2026-08-20,Endoscopia,191,37,981.04,2
+2026-08-20,CPRE,10,0,0.0,0
+2026-08-20,Colonoscopia,125,27,764.27,0.9986
+2026-08-20,Ligadura Esofagica,13,2,109.05,0
+2026-08-20,Hemorroides,5,0,0.0,0
+2026-08-21,Endoscopia,273,31,664.25,4
+2026-08-21,CPRE,16,1,11.73,0
+2026-08-21,Colonoscopia,149,17,496.76,0
+2026-08-21,Ligadura Esofagica,19,1,47.61,0
+2026-08-21,Hemorroides,8,1,252.36,0
+2026-08-22,Endoscopia,185,19,625.86,1.3333
+2026-08-22,CPRE,6,2,169.94,0
+2026-08-22,Colonoscopia,132,15,515.89,0
+2026-08-22,Ligadura Esofagica,14,1,56.89,0
+2026-08-22,Hemorroides,9,2,71.9,0
+2026-08-23,Endoscopia,159,30,1247.32,2
+2026-08-23,CPRE,7,0,0.0,0
+2026-08-23,Colonoscopia,114,19,808.67,0.6667
+2026-08-23,Ligadura Esofagica,8,2,254.98,0
+2026-08-23,Hemorroides,18,1,35.45,0
+2026-08-24,Endoscopia,280,35,1357.35,1
+2026-08-24,CPRE,32,2,37.49,0.9991
+2026-08-24,Colonoscopia,179,26,998.47,2
+2026-08-24,Ligadura Esofagica,16,0,0.0,0
+2026-08-24,Hemorroides,2,0,0.0,0
+2026-08-25,Endoscopia,321,29,1093.73,3
+2026-08-25,CPRE,20,1,22.95,0
+2026-08-25,Colonoscopia,105,25,639.32,1
+2026-08-25,Ligadura Esofagica,30,1,31.65,0
+2026-08-25,Hemorroides,10,0,0.0,0
+2026-08-26,Endoscopia,231,35,1002.84,1
+2026-08-26,CPRE,26,3,166.13,1
+2026-08-26,Colonoscopia,178,26,835.75,5.6667
+2026-08-26,Ligadura Esofagica,22,0,0.0,0
+2026-08-26,Hemorroides,4,1,51.25,1
+2026-08-27,Endoscopia,228,41,1030.62,4.3333
+2026-08-27,CPRE,18,0,0.0,0
+2026-08-27,Colonoscopia,113,23,652.98,0.9987
+2026-08-27,Ligadura Esofagica,23,3,317.37,0
+2026-08-27,Hemorroides,8,2,462.83,0
+2026-08-28,Endoscopia,268,35,961.18,1
+2026-08-28,CPRE,15,3,130.78,1
+2026-08-28,Colonoscopia,139,24,713.65,4
+2026-08-28,Ligadura Esofagica,15,1,22.36,1
+2026-08-28,Hemorroides,3,0,0.0,0
+2026-08-29,Endoscopia,125,22,537.28,1
+2026-08-29,CPRE,3,0,0.0,0
+2026-08-29,Colonoscopia,110,18,598.32,0
+2026-08-29,Ligadura Esofagica,19,3,178.09,0
+2026-08-29,Hemorroides,5,0,0.0,0
+2026-08-30,Endoscopia,109,18,383.31,2
+2026-08-30,Colonoscopia,116,17,685.47,2
+2026-08-30,Ligadura Esofagica,9,1,5.91,0
+2026-08-30,Hemorroides,4,1,91.41,0
+2026-08-31,Endoscopia,301,39,764.27,4
+2026-08-31,CPRE,9,1,90.85,0
+2026-08-31,Colonoscopia,149,20,729.65,0
+2026-08-31,Ligadura Esofagica,30,0,0.0,0
+2026-08-31,Hemorroides,6,0,0.0,0
+2026-09-01,Endoscopia,288,41,1019.49,5.6667
+2026-09-01,CPRE,28,2,32.97,0
+2026-09-01,Colonoscopia,125,28,815.85,1
+2026-09-01,Ligadura Esofagica,17,0,0.0,0
+2026-09-01,Hemorroides,1,0,0.0,0
+2026-09-02,Endoscopia,392,50,1267.15,5.3333
+2026-09-02,CPRE,20,2,47.1,0
+2026-09-02,Colonoscopia,150,23,716.28,0
+2026-09-02,Ligadura Esofagica,14,0,0.0,0
+2026-09-02,Hemorroides,11,1,54.0,0
+2026-09-03,Endoscopia,316,38,1213.56,2
+2026-09-03,CPRE,39,6,272.8,1
+2026-09-03,Colonoscopia,187,33,857.19,4
+2026-09-03,Ligadura Esofagica,9,0,0.0,0
+2026-09-03,Hemorroides,19,4,121.96,0
+2026-09-04,Endoscopia,216,31,989.55,1
+2026-09-04,CPRE,12,1,24.19,0
+2026-09-04,Colonoscopia,186,23,643.26,1
+2026-09-04,Ligadura Esofagica,23,0,0.0,0
+2026-09-04,Hemorroides,2,0,0.0,0
+2026-09-05,Endoscopia,160,31,841.8,2
+2026-09-05,CPRE,20,4,179.46,0
+2026-09-05,Colonoscopia,155,19,453.84,1
+2026-09-05,Ligadura Esofagica,13,2,49.02,0
+2026-09-05,Hemorroides,8,0,0.0,0
+2026-09-06,Endoscopia,207,21,629.79,0
+2026-09-06,CPRE,31,2,160.24,0
+2026-09-06,Colonoscopia,166,27,856.37,2
+2026-09-06,Ligadura Esofagica,12,2,273.71,0
+2026-09-06,Hemorroides,8,0,0.0,0
+2026-09-07,Endoscopia,286,54,1481.94,7
+2026-09-07,CPRE,5,0,0.0,0
+2026-09-07,Colonoscopia,186,24,914.94,1.999
+2026-09-07,Ligadura Esofagica,8,0,0.0,0
+2026-09-07,Hemorroides,2,0,0.0,0
