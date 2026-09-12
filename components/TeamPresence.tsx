@@ -34,6 +34,13 @@ type TeamPresenceProps = {
    * <LpGuideLink> so the exit fires `lp_exit_to_guide`.
    */
   renderLink?: (href: string, label: string) => React.ReactNode;
+  /**
+   * Drop the section background + container/padding chrome and render the
+   * heading as an h3. For placement INSIDE an existing section — the LPs sit
+   * it under <LpVideo>, where the surrounding section already supplies
+   * container-narrow + section-padding and its own h2. `tone` is ignored.
+   */
+  bare?: boolean;
 };
 
 const PROCEDURE_LABEL: Record<TeamPresenceProcedure, string> = {
@@ -50,18 +57,24 @@ export default function TeamPresence({
   heading,
   linkLabel = "Conoce al equipo y verifica sus cédulas",
   renderLink,
+  bare = false,
 }: TeamPresenceProps) {
   const compact = variant === "compact";
   const avatar = compact ? 48 : 64;
   const title = heading ?? `Quién estará contigo en tu ${PROCEDURE_LABEL[procedure]}`;
+  const Heading = bare ? "h3" : "h2";
 
   return (
-    <TeamBlockView className={tone === "muted" ? "bg-muted" : "bg-background"}>
-      <div className="container-page section-padding">
+    <TeamBlockView
+      className={
+        bare ? undefined : tone === "muted" ? "bg-muted" : "bg-background"
+      }
+    >
+      <div className={bare ? undefined : "container-page section-padding"}>
         <div className="max-w-3xl">
-          <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
+          <Heading className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
             {title}
-          </h2>
+          </Heading>
 
           <ul className="mt-6 space-y-6">
             {TEAM.map((m) => (
