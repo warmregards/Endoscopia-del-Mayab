@@ -302,17 +302,17 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     type: "service",
     service: "Preparación para Endoscopia",
     path: "/preparacion-endoscopia",
-    titleOverride: "Preparación para Endoscopia: ayuno de 8 horas y qué llevar",
+    titleOverride: "Preparación para Endoscopia en Mérida: ayuno de 8 horas",
     descriptionOverride:
-      "Cómo prepararte para tu endoscopia en Mérida: ayuno total de 8 horas (ni agua), horarios para cita de mañana o tarde, diabetes, anticoagulantes y qué llevar.",
+      "En Hospital Amerimed, Mérida: cómo prepararte para tu endoscopia. Ayuno total de 8 horas (ni agua), horarios de mañana o tarde, diabetes y anticoagulantes.",
   },
   preparacion_colonoscopia: {
     type: "service",
     service: "Preparación para Colonoscopia",
     path: "/preparacion-colonoscopia",
-    titleOverride: "Preparación para Colonoscopia: dieta líquida y Nulytely paso a paso",
+    titleOverride: "Preparación para Colonoscopia en Mérida: dieta líquida y Nulytely",
     descriptionOverride:
-      "Cómo prepararte para tu colonoscopia: dieta de líquidos claros, Nulytely paso a paso, ayuno, diabetes y anticoagulantes. Tu cronograma exacto llega al agendar.",
+      "En Hospital Amerimed, Mérida: cómo prepararte para tu colonoscopia. Dieta de líquidos claros, Nulytely paso a paso, ayuno, diabetes y anticoagulantes.",
   },
 
 } as const

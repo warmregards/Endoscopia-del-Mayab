@@ -1,5 +1,6 @@
 import { metaFor } from "@/lib/routes-seo"
 import { DOCTOR } from "@/lib/doctor"
+import { CLINIC } from "@/lib/clinic"
 import { breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
 import {
@@ -64,7 +65,8 @@ export default function PreparacionColonoscopiaPage() {
             </h1>
 
             <p className="text-lg text-foreground leading-relaxed">
-              Una buena limpieza del colon es clave para un estudio completo. Si
+              Preparación para tu estudio con el {DOCTOR.name} en{" "}
+              {CLINIC.hospitalName}, {CLINIC.address.addressLocality}. Una buena limpieza del colon es clave para un estudio completo. Si
               la preparación no es adecuada, el estudio puede tener que
               reprogramarse.
             </p>

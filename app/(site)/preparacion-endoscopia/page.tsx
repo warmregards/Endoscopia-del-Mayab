@@ -70,6 +70,11 @@ export default function PreparacionEndoscopiaPage() {
               Cómo prepararte para tu endoscopia
             </h1>
 
+            <p className="text-lg text-foreground leading-relaxed">
+              Preparación para tu estudio con el {DOCTOR.name} en{" "}
+              {CLINIC.hospitalName}, {CLINIC.address.addressLocality}.
+            </p>
+
             <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-2">
               <p className="text-sm font-medium text-muted-foreground">Regla principal</p>
               <p className="font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight">
