@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { VIDEOS, type Video } from "@/lib/videos"
+import { VIDEOS, isPublished, type Video } from "@/lib/videos"
 import { ROUTE_LASTMOD } from "@/lib/sitemap-lastmod"
 
 // Per-URL lastModified is sourced from lib/sitemap-lastmod.ts (each route's last
@@ -12,8 +12,12 @@ export const revalidate = 86400
 // video is embedded on. Next injects the video: namespace automatically when a
 // sitemap entry carries `videos`. This is how Google discovers the embedded
 // YouTube videos for video rich results (the on-page player is a lazy facade).
+// Entries still carrying the placeholder id are skipped — a fake id would ship
+// a broken player_loc/thumbnail_loc. They join the sitemap once the id is real.
 const videoByPath: Record<string, Video> = Object.fromEntries(
-  Object.values(VIDEOS).map((v) => [v.path, v])
+  Object.values(VIDEOS)
+    .filter(isPublished)
+    .map((v) => [v.path, v])
 )
 
 type SitemapVideo = NonNullable<MetadataRoute.Sitemap[number]["videos"]>[number]
@@ -78,6 +82,7 @@ const routes: RouteCfg[] = [
   { path: "/consultas-digestivas-merida", changeFrequency: "weekly", priority: 0.8 },
   // Institucional
   { path: "/dr-omar-quiroz", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/equipo-medico", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contacto", changeFrequency: "monthly", priority: 0.6 },
 
   { path: "/precios", changeFrequency: "weekly", priority: 0.9 },

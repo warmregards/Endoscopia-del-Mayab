@@ -13,6 +13,7 @@
 //   appointment_form_focus — first focus of any appointment form field
 //   appointment_form_start — first real input into any appointment form field
 //   appointment_request — on-page appointment form delivered (stronger conversion signal)
+//   team_cta_click  — CTA clicked from team content (/equipo-medico or a TeamPresence block)
 //   page_view       — standard (handled by Next.js, helper here for SPA edge cases)
 
 // ---------------------------------------------------------------------------
@@ -113,6 +114,13 @@ interface LpExitToGuideEvent {
   page_path: string
 }
 
+interface TeamCtaClickEvent {
+  event: "team_cta_click"
+  /** Page the CTA was clicked from — "/equipo-medico" for the team page itself. */
+  source_page: string
+  page_path: string
+}
+
 interface PageViewEvent {
   event: "page_view"
   page_path: string
@@ -133,6 +141,7 @@ type DataLayerEvent =
   | AppointmentRequestEvent
   | VideoPlayEvent
   | LpExitToGuideEvent
+  | TeamCtaClickEvent
   | PageViewEvent
 
 declare global {
@@ -427,6 +436,24 @@ export function pushLpExitToGuide(params: {
     service: params.service,
     destination: params.destination,
     page_path: params.pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a CTA click that originates from team content (the /equipo-medico page,
+ * or a <TeamPresence> block embedded on another page). Fires ALONGSIDE the
+ * button's own `whatsapp_click` / `phone_click` — it never replaces it, so the
+ * per-click ref code minted by useWhatsAppRef still rides on the WhatsApp event
+ * and Ads conversions are unaffected.
+ *
+ * @example
+ *   pushTeamCtaClick("/equipo-medico")
+ */
+export function pushTeamCtaClick(source: string, pagePath?: string): void {
+  push({
+    event: "team_cta_click",
+    source_page: source,
+    page_path: pagePath || currentPath(),
   })
 }
 

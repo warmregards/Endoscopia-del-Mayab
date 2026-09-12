@@ -19,6 +19,11 @@ type CallButtonProps = {
    * sticky bars where a labelled "Llamar" would squeeze the WhatsApp CTA.
    */
   iconOnly?: boolean;
+  /**
+   * Extra side-effect to run on click, IN ADDITION to the built-in
+   * `phone_click` push — never instead of it.
+   */
+  onClick?: () => void;
 };
 
 export default function CallButton({
@@ -30,6 +35,7 @@ export default function CallButton({
   size = "default",
   id,
   iconOnly = false,
+  onClick,
 }: CallButtonProps) {
   const ctaId = id ?? `cta-${service}-${position}-call`;
 
@@ -49,13 +55,14 @@ export default function CallButton({
           "bg-transparent border border-border text-foreground hover:bg-muted",
         className
       )}
-      onClick={() =>
+      onClick={() => {
         pushPhoneClick({
           ctaId,
           number: CLINIC.phone.e164,
           service,
-        })
-      }
+        });
+        onClick?.();
+      }}
     >
       <Phone className={iconOnly ? "h-5 w-5" : "h-4 w-4"} />
       {!iconOnly && label}

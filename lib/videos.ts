@@ -45,6 +45,14 @@ export interface Video {
   chapters?: VideoChapter[]
 }
 
+/**
+ * Sentinel for an entry registered before its YouTube id exists. Pages gate the
+ * embed on `isPublished()` so the surrounding section still renders, and the
+ * sitemap skips the entry — a fake id would otherwise ship a broken player_loc.
+ * Replace the id (and fill in `chapters`) to publish; no other change needed.
+ */
+export const PLACEHOLDER_VIDEO_ID = "TODO_SANEL"
+
 export const VIDEOS = {
   colonoscopia: {
     id: "ZfzmgwvuvrM",
@@ -165,6 +173,25 @@ export const VIDEOS = {
       { name: "Cómo mantener tu peso y qué sigue", start: 204 },
     ],
   },
+  // ── Not yet published ──────────────────────────────────────────────────
+  // TODO(sanel): replace `id` with the real YouTube id and fill in `chapters`,
+  // `uploadDate`, `duration`, `durationSeconds` off YouTube. Until then
+  // isPublished() is false: /equipo-medico renders without the player and the
+  // sitemap omits the video entry.
+  verificar_medico: {
+    id: PLACEHOLDER_VIDEO_ID,
+    title:
+      "¿Cómo saber si tu médico es real? Verifica cédulas y certificaciones",
+    description:
+      "El Dr. Omar Quiroz —Endoscopista Gastrointestinal y Cirujano General— explica cómo verificar por tu cuenta que el médico que va a realizar tu procedimiento es quien dice ser: dónde buscar una cédula profesional en el Registro Nacional de Profesionistas, en qué se distingue la cédula de especialidad de la de médico general, qué significa estar certificado por un Consejo y qué preguntar antes de una endoscopia o colonoscopia con sedación.",
+    uploadDate: "2026-01-01T00:00:00-06:00",
+    duration: "PT0S",
+    durationSeconds: 0,
+    path: "/equipo-medico",
+    service: "equipo",
+    // TODO(sanel): chapters — copy the timestamp list from the YouTube description.
+    chapters: [],
+  },
 } satisfies Record<string, Video>
 
 export type VideoKey = keyof typeof VIDEOS
@@ -173,3 +200,7 @@ export type VideoKey = keyof typeof VIDEOS
 export function getVideo(key: VideoKey): Video {
   return VIDEOS[key]
 }
+
+/** True once a registry entry has a real YouTube id. */
+export const isPublished = (v: Video): boolean =>
+  v.id !== PLACEHOLDER_VIDEO_ID
