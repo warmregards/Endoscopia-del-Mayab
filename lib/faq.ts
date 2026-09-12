@@ -31,7 +31,7 @@
 //     Q6: Risks (fear → "riesgos", "complicaciones")
 //     Q7: Procedure-specific extra (varies per page)
 
-import { PRICING as PRICES, mxn, ADDITIONAL_FEES, displayWithPathology } from "@/lib/pricing"
+import { PRICING as PRICES, mxn, ADDITIONAL_FEES, displayFrom, displayWithPathology } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
 import { CLINIC } from "@/lib/clinic"
 import type { RouteKey } from "@/lib/routes-seo"
@@ -51,6 +51,42 @@ const price = (k: ServiceKey) => mxn(PRICES[k].from)
 // NBSP between the amount and "MXN" — FAQ answers are plain strings rendered
 // into a <p>, so a normal space lets "$1,200 MXN" split across two lines.
 const biopsyFee = () => mxn(ADDITIONAL_FEES.biopsy.amount).replace(" ", "\u00A0")
+
+/** Look up an FAQ by exact question so pages can reuse answers without copying
+ *  them. Throws at build time if the question was renamed. */
+function pick(list: FAQ[], question: string): FAQ {
+  const found = list.find((f) => f.question === question)
+  if (!found) throw new Error(`[faq] question not found: "${question}"`)
+  return found
+}
+
+// ---------------------------------------------------------------------------
+// SHARED \u2014 "particular" (private-pay) + same-day answers.
+// Reused verbatim on /precios, /endoscopia-merida, /colonoscopia-merida and
+// /pacientes-de-fuera-de-merida. Targets the "particular" query cluster.
+// ---------------------------------------------------------------------------
+
+const particularEndoscopiaFaq: FAQ = {
+  question: "\u00BFCu\u00E1nto cuesta una endoscopia particular en M\u00E9rida?",
+  answer: `${displayFrom("endoscopia")}, con sedaci\u00F3n por anestesi\u00F3logo, biopsias sin l\u00EDmite y reporte con fotos incluidos. La lectura de patolog\u00EDa, solo si hay biopsias, tiene un costo adicional de ${biopsyFee()}. Sin seguro ni tr\u00E1mites: precio directo.`,
+}
+
+const particularColonoscopiaFaq: FAQ = {
+  question: "\u00BFCu\u00E1nto cuesta una colonoscopia particular?",
+  answer: `${displayFrom("colonoscopia")}, con sedaci\u00F3n por anestesi\u00F3logo, biopsias sin l\u00EDmite y reporte con fotos incluidos. La lectura de patolog\u00EDa, solo si hay biopsias, tiene un costo adicional de ${biopsyFee()}. Te confirmamos el costo total por WhatsApp antes de viajar.`,
+}
+
+const mismoDiaEndoscopiaFaq: FAQ = {
+  question: "\u00BFPuedo hacerme la endoscopia el mismo d\u00EDa que llego a M\u00E9rida?",
+  answer:
+    "S\u00ED, si llegas en ayuno total de 8 horas (ni agua) y confirmaste tu lugar por WhatsApp o tel\u00E9fono. Los estudios son por la ma\u00F1ana \u2014 llega antes del mediod\u00EDa, y en general antes de las 11 AM.",
+}
+
+const mismoDiaColonoscopiaFaq: FAQ = {
+  question: "\u00BFPuedo hacerme la colonoscopia el mismo d\u00EDa que llego?",
+  answer:
+    "No: necesita preparaci\u00F3n desde el d\u00EDa anterior, y siempre coordinada con nosotros. Si vienes de lejos, ll\u00E1manos: te explicamos c\u00F3mo prepararte en casa y viajar la ma\u00F1ana del estudio, o llegar un d\u00EDa antes.",
+}
 
 // ---------------------------------------------------------------------------
 // HOME — conversion-focused, addresses top cross-procedure concerns
@@ -141,6 +177,7 @@ export const endoscopiaFaqs: FAQ[] = [
       DOCTOR.name
     } por WhatsApp y te confirma el total exacto.`,
   },
+  particularEndoscopiaFaq,
   {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",
     answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. Si encontramos una lesión que requiera intervención adicional (por ejemplo, control de un sangrado o colocación de hemoclips), el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve cualquier duda sobre el precio antes de agendar.`,
@@ -168,8 +205,9 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Qué preparación necesito antes del estudio?",
     answer:
-      "Ayuno estricto de 8–12 horas. Algunos medicamentos pueden ajustarse — el Dr. Quiroz te indica cuáles al agendar. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación. Agenda por WhatsApp y el Dr. Quiroz te envía tu guía de preparación exacta.",
+      "Ayuno total de 8 horas: sin comer ni beber nada, ni agua. La cena del día anterior, solo líquidos claros (agua, té, gelatina). Si tomas medicamento para la presión, tómalo con un sorbo pequeño de agua. Si tienes diabetes o tomas anticoagulantes, el Dr. Quiroz te indica los ajustes al agendar — no los suspendas por tu cuenta. Debes acudir con acompañante adulto y no podrás conducir el mismo día por la sedación. Consulta la guía completa en nuestra página de preparación para endoscopia. Las instrucciones detalladas se envían por WhatsApp al agendar.",
   },
+  mismoDiaEndoscopiaFaq,
   {
     question: "¿Cuánto dura una endoscopia?",
     answer:
@@ -264,6 +302,7 @@ export const colonoscopiaFaqs: FAQ[] = [
       DOCTOR.name
     } por WhatsApp y te confirma el total exacto.`,
   },
+  particularColonoscopiaFaq,
   {
     question: "¿Aumenta el costo si encuentran algo durante el estudio?",
     answer: `El precio base incluye sedación con anestesiólogo, biopsias sin límite, sala de recuperación, valoración pre-procedimiento, equipo Olympus HD y reporte con imágenes. También incluye la extracción de pólipos pequeños descubiertos durante la colonoscopia. Si encontramos pólipos grandes o lesiones que requieran intervención adicional, el ${DOCTOR.name} te lo comunica antes de cualquier cargo extra y te entrega la cotización detallada. El único costo adicional rutinario es la lectura de patología (${biopsyFee()}), solo si se toman biopsias y se te informa antes del procedimiento. Escríbele al ${DOCTOR.name} por WhatsApp y resuelve cualquier duda sobre el precio antes de agendar.`,
@@ -291,8 +330,9 @@ export const colonoscopiaFaqs: FAQ[] = [
   {
     question: "¿Cómo es la preparación intestinal?",
     answer:
-      "Usamos soluciones de polietilenglicol en 2 tomas, más dieta líquida el día previo. La buena preparación es clave para un estudio completo — si no es adecuada, puede reprogramarse. Agenda por WhatsApp y el Dr. Quiroz te envía las instrucciones de preparación detalladas.",
+      "Dieta de líquidos claros el día anterior (nada de color rojo) y una solución de limpieza intestinal de polietilenglicol, con ayuno total antes del estudio. La buena preparación es clave para un estudio completo — si no es adecuada, puede reprogramarse. La preparación siempre se coordina con nosotros: la cantidad de solución y los horarios dependen de tu caso y de la hora de tu cita. Consulta la guía completa en nuestra página de preparación para colonoscopia. Las instrucciones detalladas se envían por WhatsApp al agendar.",
   },
+  mismoDiaColonoscopiaFaq,
   {
     question: "¿Cuánto dura una colonoscopia?",
     answer:
@@ -1023,6 +1063,13 @@ export const apcFaqs: FAQ[] = [
 // ---------------------------------------------------------------------------
 
 export const preciosFaqs: FAQ[] = [
+  particularEndoscopiaFaq,
+  particularColonoscopiaFaq,
+  {
+    question: "¿Qué significa \"precio particular\"?",
+    answer:
+      "Que pagas directo, sin seguro ni IMSS, y el precio ya incluye sedación, biopsias y reporte. No hay cargos ocultos.",
+  },
   {
     question: "¿Qué incluye el precio de cada procedimiento?",
     answer:
@@ -1306,6 +1353,68 @@ export const capsulaFaqs: FAQ[] = [
 ]
 
 // ---------------------------------------------------------------------------
+// PACIENTES DE FUERA DE MÉRIDA — out-of-town hub
+// Job: get the patient to message BEFORE they travel (unscheduled arrivals
+// lose the trip — no prep, long wait). Say "de fuera de Mérida", never the
+// loaded local term for outsiders.
+// ---------------------------------------------------------------------------
+
+export const fueraDeMeridaFaqs: FAQ[] = [
+  {
+    question: "¿Atienden pacientes de otros municipios?",
+    answer:
+      "Sí. Una parte importante de nuestros pacientes viene de Valladolid, Ticul, Tizimín, Tekax, Peto, Progreso y otras comunidades de Yucatán, así como de Quintana Roo. Muchos llegan enviados por su médico local.",
+  },
+  particularEndoscopiaFaq,
+  particularColonoscopiaFaq,
+  {
+    question: "¿Puedo llegar sin cita?",
+    answer:
+      "Puedes, pero no te lo recomendamos. Sin cita, se atiende primero a los pacientes agendados y la espera puede ser de varias horas; y si llegas sin preparación, casi siempre hay que reprogramar. En ambos casos pierdes el viaje. Escríbenos un día antes y te apartamos lugar a una hora fija.",
+  },
+  {
+    question: "¿Puedo mandar mis estudios antes de viajar?",
+    answer:
+      "Sí. Envía fotos de tus estudios previos por WhatsApp; el Dr. Quiroz los revisa y te dice si conviene hacer el estudio en tu primera visita.",
+  },
+  {
+    question: "¿Cómo puedo pagar?",
+    answer:
+      "Efectivo, transferencia o tarjeta. El precio es el mismo para todos los pacientes, vengan de donde vengan.",
+  },
+  {
+    question: "¿Puedo regresar a mi pueblo el mismo día?",
+    answer:
+      "Sí, para endoscopia, colonoscopia y consulta — siempre con acompañante adulto, porque después de la sedación no puedes conducir ni caminar bien por unas horas.",
+  },
+  {
+    question: "Mi médico de mi pueblo me envió. ¿Qué hago?",
+    answer:
+      "Escríbenos por WhatsApp y dinos quién te envió. Después del estudio recibes un enlace con tu reporte, fotos y video; puedes compartírselo tú, o nosotros se lo enviamos directamente para que dé seguimiento allá.",
+  },
+]
+
+// ---------------------------------------------------------------------------
+// PREPARACIÓN — subsets of the procedure FAQs (same answers, no copies)
+// ---------------------------------------------------------------------------
+
+export const preparacionEndoscopiaFaqs: FAQ[] = [
+  pick(endoscopiaFaqs, "¿Qué preparación necesito antes del estudio?"),
+  mismoDiaEndoscopiaFaq,
+  pick(endoscopiaFaqs, "¿Cuánto dura una endoscopia?"),
+  pick(endoscopiaFaqs, "¿Duele la endoscopia?"),
+  pick(endoscopiaFaqs, "¿Cuánto cuesta una endoscopia con biopsia?"),
+]
+
+export const preparacionColonoscopiaFaqs: FAQ[] = [
+  pick(colonoscopiaFaqs, "¿Cómo es la preparación intestinal?"),
+  mismoDiaColonoscopiaFaq,
+  pick(colonoscopiaFaqs, "¿Cuánto dura una colonoscopia?"),
+  pick(colonoscopiaFaqs, "¿Duele la colonoscopia?"),
+  pick(colonoscopiaFaqs, "¿Se pueden hacer colonoscopia y endoscopia el mismo día?"),
+]
+
+// ---------------------------------------------------------------------------
 // Route map — keys MUST match routes-seo.ts RouteKey exactly
 // ---------------------------------------------------------------------------
 
@@ -1341,6 +1450,9 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   consultas: consultasFaqs,
   contacto: contactoFaqs,
   doctor: doctorFaqs,
+  fuera_merida: fueraDeMeridaFaqs,
+  preparacion_endoscopia: preparacionEndoscopiaFaqs,
+  preparacion_colonoscopia: preparacionColonoscopiaFaqs,
 }
 
 /**

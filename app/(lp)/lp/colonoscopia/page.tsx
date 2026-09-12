@@ -33,9 +33,8 @@ import { getGoogleReviews } from "@/lib/reviews";
 // second variable onto the bid test. See 04_MANUAL_ITEMS for the swap steps.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
-  title: "Colonoscopia en Mérida desde $5,000 MXN | Dr. Omar Quiroz",
-  description:
-    "Colonoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $5,000 MXN, retiro de pólipos en la misma sesión. Agenda por WhatsApp.",
+  title: `Colonoscopia en Mérida ${displayFrom("colonoscopia", "desde")} | Dr. Omar Quiroz`,
+  description: `Colonoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado ${displayFrom("colonoscopia", "desde")}, retiro de pólipos en la misma sesión. Agenda por WhatsApp.`,
   robots: { index: false, follow: false },
 };
 

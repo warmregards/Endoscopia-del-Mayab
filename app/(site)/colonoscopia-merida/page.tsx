@@ -11,6 +11,7 @@ import {
   AlertTriangle,
   Clock,
   MapPin,
+  ArrowRight,
 } from "lucide-react"
 import Faq from "@/components/Faq"
 import CallButton from "@/components/CallButton"
@@ -22,6 +23,7 @@ import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 import ComparisonTable from "@/components/ComparisonTable"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
 import DoctorAuthority from "@/components/DoctorAuthority"
+import FueraDeMeridaStrip from "@/components/FueraDeMeridaStrip"
 
 export const revalidate = 86400
 export const metadata = metaFor("colonoscopia")
@@ -386,6 +388,8 @@ export default function ColonoscopiaPage() {
                 </div>
               ))}
             </div>
+
+            <FueraDeMeridaStrip />
           </div>
         </div>
       </section>
@@ -596,7 +600,8 @@ export default function ColonoscopiaPage() {
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                     <span>
-                      Laxante en dos tomas (tarde y madrugada) según indicación
+                      Solución de limpieza intestinal la noche anterior, con
+                      horarios según la hora de tu cita
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -690,7 +695,7 @@ export default function ColonoscopiaPage() {
               <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-4 w-4 text-accent" />
                 <span className="font-semibold text-foreground">
-                  Tiempo total en hospital: aproximadamente 2 horas.
+                  Tiempo total en hospital: de 3 a 4 horas.
                 </span>
                 <span className="text-foreground/80">
                   Te vas el mismo día.
@@ -711,6 +716,15 @@ export default function ColonoscopiaPage() {
                 más incómoda es la preparación intestinal del día anterior, no el
                 procedimiento en sí.
               </p>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/preparacion-colonoscopia"
+                className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 hover:underline transition-all"
+              >
+                Ver la guía completa de preparación <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
 
             <p className="text-sm text-muted-foreground text-center">

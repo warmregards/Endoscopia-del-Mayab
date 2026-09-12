@@ -25,9 +25,8 @@ import { getGoogleReviews } from "@/lib/reviews";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
-  title: "Endoscopia en Mérida desde $4,500 MXN | Dr. Omar Quiroz",
-  description:
-    "Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado desde $4,500 MXN, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.",
+  title: `Endoscopia en Mérida ${displayFrom("endoscopia", "desde")} | Dr. Omar Quiroz`,
+  description: `Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado ${displayFrom("endoscopia", "desde")}, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.`,
   robots: { index: false, follow: false },
 };
 

@@ -82,6 +82,11 @@ const routes: RouteCfg[] = [
 
   { path: "/precios", changeFrequency: "weekly", priority: 0.9 },
 
+  // Logística / preparación (organic-only)
+  { path: "/pacientes-de-fuera-de-merida", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/preparacion-endoscopia", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/preparacion-colonoscopia", changeFrequency: "monthly", priority: 0.6 },
+
   // TODO (recommended to add soon)
   // { path: "/ubicacion-hospitales-merida", changeFrequency: "monthly", priority: 0.7 },
   // { path: "/aviso-de-privacidad", changeFrequency: "yearly", priority: 0.3 },

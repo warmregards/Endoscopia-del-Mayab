@@ -122,6 +122,8 @@ export const CLINIC = {
     region: "Yucatán",
     secondaryRegions: ["Quintana Roo"],
     country: "MX",
+    /** Emitted as schema City entries in areaServed. Metro area + the
+     *  Yucatán towns patients actually travel from (matches the Ads geo footprint). */
     municipalities: [
       "Umán",
       "Conkal",
@@ -133,7 +135,31 @@ export const CLINIC = {
       "Komchen",
       "Chuburná",
       "Chicxulub",
+      "Valladolid",
+      "Tizimín",
+      "Ticul",
+      "Tekax",
+      "Peto",
+      "Motul",
+      "Izamal",
+      "Oxkutzcab",
+      "Tzucacab",
     ],
+  },
+
+  // ── Directions for patients arriving from outside Mérida ────────────────
+  directions: {
+    /** Periférico exit closest to the hospital */
+    exitName: "Calle 149 (Los Héroes)",
+    parking: "Estacionamiento gratuito",
+    busStop: {
+      name: "Los Héroes Exterior",
+      /** Va y Ven stop pin */
+      mapUrl: "https://maps.app.goo.gl/eR1sHW21X3o6Zjnv7",
+      walk: "10 minutos a pie (1 km)",
+    },
+    /** What to tell a taxi / DiDi driver */
+    taxiDestination: "Hospital Amerimed, Periférico Norte",
   },
 
   // ── Reviews ─────────────────────────────────────────────────────────────

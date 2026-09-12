@@ -36,6 +36,7 @@ import WhatsAppLink from "@/components/WhatsAppLink"
 import CallButton from "@/components/CallButton"
 import BiopsyDifferentiator from "@/components/BiopsyDifferentiator"
 import ComparisonTable from "@/components/ComparisonTable"
+import FueraDeMeridaStrip from "@/components/FueraDeMeridaStrip"
 
 export const revalidate = 86400
 export const metadata = metaFor("precios")
@@ -199,6 +200,38 @@ export default function PreciosPage() {
               </p>
             </div>
 
+            {/* "Particular" block — first viewport on mobile. Targets the
+                private-pay query cluster ("endoscopia particular precio"). */}
+            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
+                ¿Cuánto cuesta una endoscopia o colonoscopia particular?
+              </h2>
+              <div className="space-y-2 text-foreground/80 leading-relaxed">
+                <p>
+                  Endoscopia:{" "}
+                  <span className="font-semibold text-text-accent whitespace-nowrap">
+                    {displayFrom("endoscopia", "desde")}
+                  </span>
+                  . Colonoscopia:{" "}
+                  <span className="font-semibold text-text-accent whitespace-nowrap">
+                    {displayFrom("colonoscopia", "desde")}
+                  </span>
+                  .
+                </p>
+                <p>
+                  Particular quiere decir sin seguro ni trámites: pagas directo y
+                  el precio ya incluye sedación, biopsias y reporte.
+                </p>
+              </div>
+              <WhatsAppButton
+                service="precios"
+                position="particular"
+                label="Confirmar precio particular"
+                message="Hola, quiero el precio particular de ____ (endoscopia / colonoscopia). ¿Me lo confirman?"
+                className="w-full sm:w-auto sm:px-8"
+              />
+            </div>
+
             {/* Price anchor cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {heroAnchors.map((item) => (
@@ -239,6 +272,12 @@ export default function PreciosPage() {
                 className="sm:px-8"
               />
             </div>
+
+            <FueraDeMeridaStrip
+              heading="¿Vienes de fuera de Mérida?"
+              body="Confirma precio, fecha y preparación antes de viajar."
+              linkLabel="Ver guía antes de viajar"
+            />
           </div>
         </div>
       </section>
@@ -481,6 +520,7 @@ export default function PreciosPage() {
               <WhatsAppLink
                 message="Hola Dr. Quiroz, tengo dudas sobre la cobertura de mi seguro para un procedimiento endoscópico."
                 service="precios-seguro"
+                ctaId="cta-precios-seguros-wa"
                 className="text-primary hover:underline"
               >
                 Escríbenos por WhatsApp
@@ -686,6 +726,7 @@ function ServiceRow({
           <WhatsAppLink
             message={waText}
             service={service.slug}
+            ctaId={`cta-precios-cotizacion-${service.slug}-wa`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-action-primary hover:underline"
           >
             <MessageCircle className="h-4 w-4" />

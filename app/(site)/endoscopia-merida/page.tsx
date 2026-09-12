@@ -22,6 +22,7 @@ import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import ComparisonTable from "@/components/ComparisonTable"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
 import DoctorAuthority from "@/components/DoctorAuthority"
+import FueraDeMeridaStrip from "@/components/FueraDeMeridaStrip"
 
 export const revalidate = 86400
 export const metadata: import("next").Metadata = {
@@ -364,6 +365,8 @@ export default function EndoscopiaPage() {
                 Ver todos los precios y procedimientos <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+
+            <FueraDeMeridaStrip />
           </div>
         </div>
       </section>
@@ -676,6 +679,15 @@ export default function EndoscopiaPage() {
                   15–25 min procedimiento + 30–45 min recuperación
                 </span>
               </div>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/preparacion-endoscopia"
+                className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 hover:underline transition-all"
+              >
+                Ver la guía completa de preparación <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
 
             {/* Fear-based reassurance — targets "duele la endoscopia" + "es peligrosa la endoscopia" */}

@@ -300,7 +300,8 @@ export function buildPricingMeta(
   const colonPrice = mxn(PRICING.colonoscopia.from)
 
   return buildMeta({
-    title: `Precio de Endoscopia, Colonoscopia y CPRE en Mérida | Desde ${endoPrice}`,
+    // "particular" = private-pay intent cluster (pos 5–7, 1.37% CTR). Exactly 70 chars.
+    title: "Precios de Endoscopia y Colonoscopia en Mérida: particular, sin seguro",
     description: buildDescription([
       `Precio de Endoscopia desde ${endoPrice} y precio de Colonoscopia desde ${colonPrice} en Mérida.`,
       "Sedación, sala de recuperación y reporte el mismo día incluidos.",

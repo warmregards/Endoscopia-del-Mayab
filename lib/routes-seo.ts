@@ -20,7 +20,7 @@ import {
   buildDoctorMeta,
   buildContactMeta,
 } from "@/lib/seo"
-import type { ServiceKey } from "@/lib/pricing"
+import { displayFrom, type ServiceKey } from "@/lib/pricing"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -286,6 +286,33 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
     titleOverride: "Consulta con Endoscopista Gastrointestinal en Mérida | Dr. Quiroz",
     descriptionOverride:
       "Consulta con el Dr. Omar Quiroz, endoscopista gastrointestinal en Mérida. Reflujo, dolor abdominal, sangrado y disfagia. Desde $900 MXN. Hospital Amerimed.",
+  },
+
+  // ── Patient logistics / preparation (indexed, organic-only — never Ads) ──
+  // Naming rule: "de fuera de Mérida" / "de otro municipio" — never the loaded
+  // local term for outsiders, in any URL, title, copy or tracking value.
+  fuera_merida: {
+    type: "service",
+    service: "Pacientes de fuera de Mérida",
+    path: "/pacientes-de-fuera-de-merida",
+    titleOverride: "Pacientes de fuera de Mérida | Endoscopia y Colonoscopia particular",
+    descriptionOverride: `¿Vienes de otro municipio de Yucatán? Confirma precio, fecha y preparación por WhatsApp antes de viajar. Endoscopia ${displayFrom("endoscopia", "desde")}. Estacionamiento gratis.`,
+  },
+  preparacion_endoscopia: {
+    type: "service",
+    service: "Preparación para Endoscopia",
+    path: "/preparacion-endoscopia",
+    titleOverride: "Preparación para Endoscopia: ayuno de 8 horas y qué llevar",
+    descriptionOverride:
+      "Cómo prepararte para tu endoscopia en Mérida: ayuno total de 8 horas (ni agua), horarios para cita de mañana o tarde, diabetes, anticoagulantes y qué llevar.",
+  },
+  preparacion_colonoscopia: {
+    type: "service",
+    service: "Preparación para Colonoscopia",
+    path: "/preparacion-colonoscopia",
+    titleOverride: "Preparación para Colonoscopia: dieta líquida y Nulytely paso a paso",
+    descriptionOverride:
+      "Cómo prepararte para tu colonoscopia: dieta de líquidos claros, Nulytely paso a paso, ayuno, diabetes y anticoagulantes. Tu cronograma exacto llega al agendar.",
   },
 
 } as const

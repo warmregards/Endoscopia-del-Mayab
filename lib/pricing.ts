@@ -32,6 +32,7 @@ export type ServiceKey =
   | "apc"
   | "eus"
   | "capsula_endoscopica"
+  | "doble" // Endoscopia + colonoscopia, same day, one sedation. Not a page — a combined price row.
 
 type CurrencyCode = "MXN"
 
@@ -70,6 +71,10 @@ export const PRICING: Record<ServiceKey, PriceEntry> = {
   retiro_balon_gastrico: { from: 15000, currency: "MXN", label: "Retiro de balón gástrico" },
   apc: { from: 15000, currency: "MXN", label: "Coagulación con plasma de argón (APC)" },
   eus: { from: 25000, currency: "MXN", label: "Ultrasonido Endoscópico (USE)" },
+
+  // Combined study — billed as "Doble" in PrepSync. NOT panendoscopia
+  // (panendoscopia is a synonym for endoscopia, same study, same price).
+  doble: { from: 9500, currency: "MXN", label: "Endoscopia + Colonoscopia (mismo día)" },
 } as const
 
 // ---------------------------------------------------------------------------

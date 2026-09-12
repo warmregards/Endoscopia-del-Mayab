@@ -136,6 +136,10 @@ function clinicEntity(
         "@type": "State" as const,
         name: r,
       })),
+      ...CLINIC.areaServed.municipalities.map((m) => ({
+        "@type": "City" as const,
+        name: m,
+      })),
     ],
     sameAs: CLINIC.sameAs,
     knowsAbout: CLINIC.knowsAbout,

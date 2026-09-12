@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { href: "/precios", label: "Precios" },
   { href: "/consultas-digestivas-merida", label: "Consultas" },
   { href: "/emergencias-digestivas-merida", label: "Emergencias" },
+  { href: "/pacientes-de-fuera-de-merida", label: "Pacientes de fuera de Mérida" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
 
