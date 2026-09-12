@@ -14,12 +14,14 @@ import {
 import { displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing";
 import { CLINIC } from "@/lib/clinic";
 import { DOCTOR } from "@/lib/doctor";
+import { FEMALE_PRESENCE_LINE } from "@/lib/team";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import DoctorAuthority from "@/components/DoctorAuthority";
 import LpGuideLink from "@/components/LpGuideLink";
 import CallButton from "@/components/CallButton";
 import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
+import TeamPresence from "@/components/TeamPresence";
 import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
 
@@ -228,6 +230,22 @@ export default async function LpColonoscopiaPage() {
               />
             </div>
           )}
+
+          {/* Quién estará contigo — bare (no section chrome) so it sits inside
+              this section and the LP's bg alternation is untouched. Its link
+              routes through LpGuideLink: an intentional exit to an indexed page
+              that carries the same WhatsApp CTA, tracked as lp_exit_to_guide
+              with destination /equipo-medico#verifica. */}
+          <div className="mt-8">
+            <TeamPresence
+              procedure="colonoscopia"
+              variant="compact"
+              bare
+              renderLink={(href, linkLabel) => (
+                <LpGuideLink href={href} label={linkLabel} service="colonoscopia" />
+              )}
+            />
+          </div>
         </div>
       </section>
 
@@ -364,6 +382,14 @@ export default async function LpColonoscopiaPage() {
               {
                 q: "¿Qué incluye el precio?",
                 a: "Sedación, retiro de pólipos y biopsias sin límite, sala de recuperación, valoración y reporte HD.",
+              },
+              {
+                q: "¿Habrá una mujer presente durante mi colonoscopia?",
+                a: `Sí. ${FEMALE_PRESENCE_LINE}`,
+              },
+              {
+                q: "¿Quién administra la sedación?",
+                a: "Un médico anestesiólogo certificado por el Consejo Mexicano de Anestesiología, no el endoscopista. Monitorea tus signos vitales durante todo el estudio.",
               },
               {
                 q: "¿Necesito acompañante?",
