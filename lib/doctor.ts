@@ -30,6 +30,13 @@ export const DOCTOR = {
   photos: {
     /** Primary headshot for profile page and schema `image` */
     headshot: "/dr-omar-quiroz.webp",
+    /**
+     * Full-body team portrait (800×1000) shot in the same set as the rest of
+     * the team — used on /equipo-medico and <TeamPresence> so the three
+     * portraits read as one photo session. Not a replacement for `headshot`,
+     * which stays the brand/circular crop used everywhere else.
+     */
+    team: "/equipo/omar-quiroz.webp",
     /** OG/Twitter card image (1200×630) — falls back to headshot if not set */
     og: "/omar-open-graph.jpg",
   },

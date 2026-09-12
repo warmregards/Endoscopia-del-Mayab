@@ -124,6 +124,14 @@ export default function SiteHeader() {
               Precios
             </Link>
             <Link
+              href="/equipo-medico"
+              className="text-foreground/80 hover:text-link font-medium"
+              data-cta="nav"
+              data-cta-link="nav:Equipo"
+            >
+              Equipo
+            </Link>
+            <Link
               href="/emergencias-digestivas-merida"
               className="text-foreground/80 hover:text-link font-medium"
               data-cta="nav"
@@ -248,6 +256,15 @@ export default function SiteHeader() {
                 {s.label}
               </Link>
             ))}
+            <Link
+              href="/equipo-medico"
+              className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"
+              onClick={() => setOpen(false)}
+              data-cta="nav"
+              data-cta-link="nav:Equipo"
+            >
+              Equipo
+            </Link>
             <Link
               href="/emergencias-digestivas-merida"
               className="block w-full py-4 px-4 sm:px-6 text-lg font-medium text-foreground border-b border-border"

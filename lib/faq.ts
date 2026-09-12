@@ -34,6 +34,7 @@
 import { PRICING as PRICES, mxn, ADDITIONAL_FEES, displayFrom, displayWithPathology } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
 import { CLINIC } from "@/lib/clinic"
+import { FEMALE_PRESENCE_LINE, getMember } from "@/lib/team"
 import type { RouteKey } from "@/lib/routes-seo"
 import type { ServiceKey } from "@/lib/pricing"
 
@@ -1415,6 +1416,47 @@ export const preparacionColonoscopiaFaqs: FAQ[] = [
 ]
 
 // ---------------------------------------------------------------------------
+// EQUIPO — who is in the room, and how to verify them
+// ---------------------------------------------------------------------------
+//
+// Framing rules (see lib/team.ts):
+//   - The female-presence guarantee is FEMALE_PRESENCE_LINE verbatim — generic
+//     by design. Never name the nurse inside the guarantee sentence.
+//   - Verification is framed as what to ask at ANY clinic and as an invitation
+//     to verify us first. Never a sentence about what other clinics do.
+
+const anestesiologo = getMember("anestesiologo")
+const enfermera = getMember("enfermera")
+
+export const teamFaqs: FAQ[] = [
+  {
+    question: "¿Habrá una mujer presente durante mi procedimiento?",
+    answer: `Sí. ${FEMALE_PRESENCE_LINE} Si prefieres, puedes pedir que te acompañe también en la valoración previa. Solo dínoslo por WhatsApp al agendar.`,
+  },
+  {
+    question: "¿Quién administra la sedación?",
+    answer: `El ${anestesiologo.displayName}, médico anestesiólogo certificado por el Consejo Mexicano de Anestesiología (cédula de especialidad ${anestesiologo.cedulas.especialidad}). Él administra la sedación y monitorea tus signos vitales durante todo el estudio, y te acompaña al despertar en la sala de recuperación. El endoscopista nunca administra su propia sedación.`,
+  },
+  {
+    question: "¿El anestesiólogo es médico?",
+    answer:
+      "Sí. Un anestesiólogo es un médico que, después de la carrera, cursó una especialidad de tres años o más en anestesiología y tiene su propia cédula de especialidad. No es lo mismo que un técnico ni que personal administrativo.",
+  },
+  {
+    question: "¿Cómo verifico la cédula de un médico?",
+    answer: `Toda cédula profesional en México es pública. Entra al Registro Nacional de Profesionistas de la SEP (cedulaprofesional.sep.gob.mx), busca por nombre y confirma que aparezca la cédula de la especialidad que ejerce, no solo la de médico general. Para la certificación del Consejo, consulta el padrón de CONACEM. Aquí tienes las nuestras para que empieces por nosotros: ${DOCTOR.name}, cédula de médico cirujano ${DOCTOR.cedulas.medicoGeneral}, especialidad en Cirugía General ${DOCTOR.cedulas.especialidad} y alta especialidad en Endoscopia Gastrointestinal ${DOCTOR.cedulas.endoscopia}; ${anestesiologo.displayName}, especialidad en Anestesiología ${anestesiologo.cedulas.especialidad} y Consejo Mexicano de Anestesiología ${anestesiologo.cedulas.consejo}; ${enfermera.displayName}, cédula profesional de Enfermería ${enfermera.cedulas.profesional}.`,
+  },
+  {
+    question: "¿Qué hace la enfermera durante una colonoscopia?",
+    answer: `${enfermera.duringProcedure.join(" ")} ${FEMALE_PRESENCE_LINE}`,
+  },
+  {
+    question: "¿Es el mismo equipo en todos los procedimientos?",
+    answer: `Sí en endoscopia y colonoscopia: el ${DOCTOR.name} realiza el estudio, el ${anestesiologo.displayName} administra la sedación y una enfermera del equipo está en la sala. En procedimientos terapéuticos y CPRE el anestesiólogo siempre está presente; el equipo de enfermería puede variar según el hospital y el horario. Si quieres saber exactamente quién estará contigo, pregúntalo por WhatsApp al agendar.`,
+  },
+]
+
+// ---------------------------------------------------------------------------
 // Route map — keys MUST match routes-seo.ts RouteKey exactly
 // ---------------------------------------------------------------------------
 
@@ -1453,6 +1495,7 @@ const BY_ROUTE: Partial<Record<RouteKey, FAQ[]>> = {
   fuera_merida: fueraDeMeridaFaqs,
   preparacion_endoscopia: preparacionEndoscopiaFaqs,
   preparacion_colonoscopia: preparacionColonoscopiaFaqs,
+  equipo: teamFaqs,
 }
 
 /**

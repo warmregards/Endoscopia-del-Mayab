@@ -29,6 +29,7 @@ export const ROUTE_LASTMOD: Record<string, string> = {
   "/endoprotesis-duodenales-merida": "2026-08-05",
   "/endoprotesis-esofagicas-merida": "2026-08-05",
   "/endoscopia-merida": "2026-09-12",
+  "/equipo-medico": "2026-09-12",
   "/esclerosis-varices-gastricas-merida": "2026-08-05",
   "/extraccion-cuerpos-extranos-endoscopia-merida": "2026-08-05",
   "/gastrostomia-endoscopica-peg-merida": "2026-07-02",

@@ -13,6 +13,7 @@
 import type { Metadata } from "next"
 import { PRICING, hasPrice, mxn, type ServiceKey } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
+import { DOCTOR } from "@/lib/doctor"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -331,6 +332,34 @@ export function buildDoctorMeta(
     ]),
     path: "/dr-omar-quiroz",
     ogType: "profile",
+    ...overrides,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Team page builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Title: Equipo médico | Endoscopista, anestesiólogo y enfermera certificados
+ * Description: who is in the room + verifiable credentials (Persona 3 + 5).
+ *
+ * No OG composite exists yet — falls back to the doctor card image. Swap in a
+ * 1200×630 group shot via `overrides.ogImage` once one is produced.
+ */
+export function buildTeamMeta(
+  overrides?: Partial<BuildMetaParams>
+): Metadata {
+  return buildMeta({
+    title: "Equipo médico | Endoscopista, anestesiólogo y enfermera certificados",
+    description: buildDescription([
+      "Conoce al equipo que estará contigo en tu endoscopia o colonoscopia en Mérida.",
+      "Endoscopista, anestesiólogo y enfermera certificados, con cédulas verificables.",
+      "Agenda por WhatsApp.",
+    ]),
+    path: "/equipo-medico",
+    ogType: "website",
+    ogImage: DOCTOR.photos.og,
     ...overrides,
   })
 }

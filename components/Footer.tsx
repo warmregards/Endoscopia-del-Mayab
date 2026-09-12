@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { href: "/cpre-merida", label: "CPRE" },
   { href: "/precios", label: "Precios" },
   { href: "/consultas-digestivas-merida", label: "Consultas" },
+  { href: "/equipo-medico", label: "Equipo" },
   { href: "/emergencias-digestivas-merida", label: "Emergencias" },
   { href: "/pacientes-de-fuera-de-merida", label: "Pacientes de fuera de Mérida" },
   { href: "/contacto", label: "Contacto" },

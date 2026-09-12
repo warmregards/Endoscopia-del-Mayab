@@ -19,6 +19,7 @@ import {
   buildPricingMeta,
   buildDoctorMeta,
   buildContactMeta,
+  buildTeamMeta,
 } from "@/lib/seo"
 import { displayFrom, type ServiceKey } from "@/lib/pricing"
 
@@ -47,7 +48,7 @@ interface ServiceRouteCfg {
 }
 
 interface SpecialRouteCfg {
-  type: "home" | "pricing" | "doctor" | "contact"
+  type: "home" | "pricing" | "doctor" | "contact" | "team"
 }
 
 type RouteCfg = ServiceRouteCfg | SpecialRouteCfg
@@ -62,6 +63,7 @@ export const ROUTES_SEO: Record<string, RouteCfg> = {
   precios: { type: "pricing" },
   doctor: { type: "doctor" },
   contacto: { type: "contact" },
+  equipo: { type: "team" },
 
   // ── Core Procedure Pages ────────────────────────────────────────────────
   endoscopia: {
@@ -341,6 +343,7 @@ export function metaFor(route: RouteKey): Metadata {
   if (cfg.type === "pricing") return buildPricingMeta()
   if (cfg.type === "doctor") return buildDoctorMeta()
   if (cfg.type === "contact") return buildContactMeta()
+  if (cfg.type === "team") return buildTeamMeta()
 
   // Service/procedure pages use the standard builder
   return buildServiceMeta({

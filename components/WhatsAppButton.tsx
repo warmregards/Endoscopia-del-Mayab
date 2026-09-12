@@ -15,6 +15,12 @@ type WhatsAppButtonProps = {
   variant?: "primary" | "outline";
   size?: "default" | "compact";
   id?: string;
+  /**
+   * Extra side-effect to run on click, IN ADDITION to the built-in ref-code
+   * minting + `whatsapp_click` push — never instead of them. Use it for a
+   * secondary analytics event (e.g. pushTeamCtaClick), not for navigation.
+   */
+  onClick?: () => void;
 };
 
 export default function WhatsAppButton({
@@ -27,6 +33,7 @@ export default function WhatsAppButton({
   variant = "primary",
   size = "default",
   id,
+  onClick,
 }: WhatsAppButtonProps) {
   const ctaId = id ?? `cta-${service}-${position}-wa`;
   const text = message ?? (procedureName ? waMessage(procedureName) : undefined);
@@ -35,7 +42,7 @@ export default function WhatsAppButton({
   const href = waHref(text !== undefined ? { text } : undefined);
 
   // Minting + tracking live in the shared hook (undefined text → clinic default).
-  const handleClick = useWhatsAppRef({ service, ctaId, message: text });
+  const mintAndTrack = useWhatsAppRef({ service, ctaId, message: text });
 
   return (
     <a
@@ -52,7 +59,10 @@ export default function WhatsAppButton({
           "bg-transparent border-2 border-action-primary text-action-primary hover:bg-action-primary hover:text-white",
         className
       )}
-      onClick={handleClick}
+      onClick={(e) => {
+        mintAndTrack(e);
+        onClick?.();
+      }}
     >
       <MessageCircle className="h-4 w-4" />
       {label}

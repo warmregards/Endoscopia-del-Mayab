@@ -24,6 +24,7 @@
 
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
+import { TEAM, type TeamMember } from "@/lib/team"
 import { toSchemaOfferCatalog, SERVICES } from "@/lib/services"
 import type { ServiceKey } from "@/lib/pricing"
 import { PRICING, hasPrice } from "@/lib/pricing"
@@ -38,6 +39,7 @@ const SITE_URL = CLINIC.url
 const CLINIC_ID = `${SITE_URL}#clinic`
 const PHYSICIAN_ID = `${SITE_URL}#physician`
 const WEBSITE_ID = `${SITE_URL}#website`
+const TEAM_PATH = "/equipo-medico"
 
 // ---------------------------------------------------------------------------
 // Utility
@@ -143,6 +145,11 @@ function clinicEntity(
     ],
     sameAs: CLINIC.sameAs,
     knowsAbout: CLINIC.knowsAbout,
+    // The procedure team (lib/team.ts). Dr. Quiroz is a bare @id reference to
+    // the Physician node in the same graph — never duplicated here.
+    employee: TEAM.map((m) =>
+      m.slug === "endoscopista" ? { "@id": PHYSICIAN_ID } : memberEntity(m),
+    ),
     hasOfferCatalog: toSchemaOfferCatalog(),
     aggregateRating,
     contactPoint: {
@@ -193,6 +200,37 @@ function physicianEntity() {
 }
 
 // ---------------------------------------------------------------------------
+// Entity: procedure team (lib/team.ts)
+// ---------------------------------------------------------------------------
+
+/**
+ * Canonical @id for a team member. Dr. Quiroz is already the Physician node in
+ * the global graph, so his entry resolves to PHYSICIAN_ID — never a second node.
+ */
+function memberId(m: TeamMember): string {
+  return m.slug === "endoscopista" ? PHYSICIAN_ID : `${SITE_URL}#${m.slug}`
+}
+
+/** Full node for a team member who isn't already in the graph. */
+function memberEntity(m: TeamMember) {
+  return {
+    "@type": m.schemaType,
+    "@id": memberId(m),
+    name: m.name,
+    jobTitle: m.schemaJobTitle,
+    image: `${SITE_URL}${m.photo}`,
+    worksFor: { "@id": CLINIC_ID },
+    hasCredential: m.schemaCredentials,
+    memberOf: m.schemaMemberOf,
+    ...(m.schemaType === "Physician" && { medicalSpecialty: "Anesthesiology" }),
+  }
+}
+
+/** Members that need their own node — everyone except Dr. Quiroz. */
+const standaloneMembers = () =>
+  TEAM.filter((m) => m.slug !== "endoscopista")
+
+// ---------------------------------------------------------------------------
 // Global @graph (every page via layout.tsx)
 // ---------------------------------------------------------------------------
 
@@ -217,7 +255,43 @@ export async function globalGraph() {
   const aggregateRating = await toSchemaRating()
   return prune({
     "@context": "https://schema.org",
-    "@graph": [websiteEntity(), clinicEntity(aggregateRating), physicianEntity()],
+    "@graph": [
+      websiteEntity(),
+      clinicEntity(aggregateRating),
+      physicianEntity(),
+      // Anestesiólogo + enfermera as top-level nodes so the team ships
+      // site-wide and any page can reference them by @id.
+      ...standaloneMembers().map(memberEntity),
+    ],
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Team page: WebPage + mainEntity
+// ---------------------------------------------------------------------------
+
+/**
+ * WebPage JSON-LD for /equipo-medico. Points at the clinic entity and lists the
+ * three team members as mainEntity via their @ids — every node they reference
+ * already ships in the global @graph, so nothing is duplicated here.
+ *
+ * @example
+ *   <script type="application/ld+json"
+ *     dangerouslySetInnerHTML={{ __html: JSON.stringify(teamPageSchema()) }} />
+ */
+export function teamPageSchema() {
+  return prune({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}${TEAM_PATH}#webpage`,
+    url: `${SITE_URL}${TEAM_PATH}`,
+    name: `Equipo médico — ${CLINIC.name}`,
+    description:
+      "Endoscopista, anestesiólogo y enfermera que están contigo en cada endoscopia y colonoscopia, con sus cédulas profesionales verificables.",
+    inLanguage: "es",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: [{ "@id": CLINIC_ID }],
+    mainEntity: TEAM.map((m) => ({ "@id": memberId(m) })),
   })
 }
 
