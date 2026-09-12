@@ -323,11 +323,6 @@ export default function EquipoMedicoPage() {
               </div>
             </div>
           </div>
-
-          <p className="mt-4 max-w-3xl text-sm text-muted-foreground">
-            Si prefieres que una mujer te acompañe también en tu valoración
-            previa, dínoslo al agendar.
-          </p>
         </div>
       </section>
 

@@ -1461,7 +1461,7 @@ export const preparacionColonoscopiaFaqs: FAQ[] = [
 export const teamFaqs: FAQ[] = [
   {
     question: "¿Habrá una mujer presente durante mi procedimiento?",
-    answer: `Sí. ${FEMALE_PRESENCE_LINE} Si prefieres, puedes pedir que te acompañe también en la valoración previa. Solo dínoslo por WhatsApp al agendar.`,
+    answer: `Sí. ${FEMALE_PRESENCE_LINE}`,
   },
   {
     question: "¿Quién administra la sedación?",
