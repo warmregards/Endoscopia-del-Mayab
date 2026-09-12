@@ -53,6 +53,11 @@ const price = (k: ServiceKey) => mxn(PRICES[k].from)
 // into a <p>, so a normal space lets "$1,200 MXN" split across two lines.
 const biopsyFee = () => mxn(ADDITIONAL_FEES.biopsy.amount).replace(" ", "\u00A0")
 
+// Procedure team (lib/team.ts). Hoisted here because FAQ arrays throughout the
+// file interpolate them — a const declared lower down would be in its TDZ.
+const anestesiologo = getMember("anestesiologo")
+const enfermera = getMember("enfermera")
+
 /** Look up an FAQ by exact question so pages can reuse answers without copying
  *  them. Throws at build time if the question was renamed. */
 function pick(list: FAQ[], question: string): FAQ {
@@ -148,6 +153,10 @@ export const homeFaqs: FAQ[] = [
     question: "¿Atienden pacientes de Cancún y Playa del Carmen?",
     answer:
       "Sí. Recibimos pacientes de toda la Península de Yucatán para endoscopias, colonoscopias, CPRE y todos nuestros procedimientos. Hospital Amerimed Mérida está a menos de 3 horas de Playa del Carmen. Contacta por WhatsApp al 999 236 0153.",
+  },
+  {
+    question: "¿Quién administra la anestesia?",
+    answer: `Un médico anestesiólogo certificado por el Consejo Mexicano de Anestesiología, no el endoscopista. Monitorea tus signos vitales durante todo el estudio y te acompaña en la recuperación. Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
   },
 ]
 
@@ -275,6 +284,14 @@ export const endoscopiaFaqs: FAQ[] = [
     answer:
       "Tu médico puede indicar una endoscopia si tienes: acidez o reflujo que no mejora con medicamento, dolor abdominal recurrente, dificultad para tragar, náusea o vómito persistente, pérdida de peso inexplicada, anemia sin causa clara, o sospecha de H. pylori. También se usa como control después de tratar úlceras o como tamizaje si hay antecedentes de cáncer gástrico. Escríbele al Dr. Quiroz por WhatsApp y te dice si una endoscopia es lo indicado para tus síntomas.",
   },
+  {
+    question: "¿Habrá una mujer presente durante mi endoscopia?",
+    answer: `Sí. ${FEMALE_PRESENCE_LINE} Nuestra enfermera te recibe, está contigo dentro de la sala y cuida tu recuperación. Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
+  },
+  {
+    question: "¿Quién administra la sedación en la endoscopia?",
+    answer: `Un médico anestesiólogo certificado: el ${anestesiologo.displayName}, certificado por el Consejo Mexicano de Anestesiología (${anestesiologo.cedulas.consejo}). Ajusta la sedación a tu caso, monitorea tus signos vitales durante todo el estudio y te acompaña al despertar. Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -378,6 +395,18 @@ export const colonoscopiaFaqs: FAQ[] = [
     question: "¿Dónde hacen colonoscopia en Mérida?",
     answer:
       "En Hospital Amerimed Mérida (Consultorio 517, Chichí Suárez). Contamos con colonoscopio Olympus HD, sala de recuperación privada y anestesiólogo dedicado. La colonoscopia requiere equipo hospitalario con sedación — no se realiza en laboratorios como Chopo o Salud Digna. Agenda por WhatsApp al 999 236 0153.",
+  },
+  {
+    question: "¿Habrá una mujer presente durante mi colonoscopia?",
+    answer: `Sí. ${FEMALE_PRESENCE_LINE} Nuestra enfermera te recibe, está contigo dentro de la sala y cuida tu recuperación. Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
+  },
+  {
+    question: "¿Quién administra la sedación en la colonoscopia?",
+    answer: `Un médico anestesiólogo certificado: el ${anestesiologo.displayName}, certificado por el Consejo Mexicano de Anestesiología (${anestesiologo.cedulas.consejo}). Ajusta la sedación a tu caso, monitorea tus signos vitales durante todo el estudio y te acompaña al despertar. Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
+  },
+  {
+    question: "¿La colonoscopia es diferente en mujeres?",
+    answer: `El estudio y la preparación son iguales, y las indicaciones de detección empiezan a la misma edad. Si estás embarazada o en lactancia dínoslo al agendar para valorar el momento adecuado y el tipo de sedación. Muchas pacientes prefieren que haya una mujer en la sala: en nuestro equipo siempre la hay. ${FEMALE_PRESENCE_LINE}`,
   },
 ]
 
@@ -1239,6 +1268,10 @@ export const doctorFaqs: FAQ[] = [
     answer:
       "Sí. El Dr. Quiroz trabaja con todas las aseguradoras principales de la región. Contacta por WhatsApp para confirmar cobertura con tu póliza específica.",
   },
+  {
+    question: "¿Quién más está en la sala durante el procedimiento?",
+    answer: `Además del ${DOCTOR.name}, un médico anestesiólogo certificado (${anestesiologo.displayName}, Consejo Mexicano de Anestesiología ${anestesiologo.cedulas.consejo}) que administra y monitorea tu sedación, y una enfermera titulada que te recibe, te acompaña dentro de la sala y cuida tu recuperación. ${FEMALE_PRESENCE_LINE} Puedes conocer al equipo completo y verificar sus cédulas en la página de Equipo médico.`,
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -1424,9 +1457,6 @@ export const preparacionColonoscopiaFaqs: FAQ[] = [
 //     by design. Never name the nurse inside the guarantee sentence.
 //   - Verification is framed as what to ask at ANY clinic and as an invitation
 //     to verify us first. Never a sentence about what other clinics do.
-
-const anestesiologo = getMember("anestesiologo")
-const enfermera = getMember("enfermera")
 
 export const teamFaqs: FAQ[] = [
   {
