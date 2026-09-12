@@ -35,8 +35,14 @@ export interface TeamMember {
   bioShort: string
   /** 3 bullets: what this person does before / during / after the procedure. */
   duringProcedure: string[]
-  /** UI chips. */
+  /** UI chips — full labels, for the /equipo-medico sections. */
   credentials: string[]
+  /**
+   * Short credential chips for the compact team cards (<TeamPresence>), where
+   * a card is ~1/3 of a section wide. Max two render. Deliberately terser than
+   * `credentials`, which stays the full list /equipo-medico shows.
+   */
+  chips: string[]
   cedulas: Record<string, string>
   presentIn: ServiceKey[] | "all"
   schemaType: "Physician" | "Person"
@@ -51,6 +57,14 @@ export interface TeamMember {
   schemaMemberOf?: Array<{ "@type": "Organization"; name: string }>
 }
 
+// Cédula numbers that feed BOTH a member's `chips` and their `cedulas` — hoisted
+// so each number is written exactly once in the codebase. (Dr. Quiroz's come
+// from DOCTOR.cedulas.)
+const CEDULAS = {
+  anestesiologo: { especialidad: "14141958", consejo: "18542" },
+  enfermera: { profesional: "13089376" },
+} as const
+
 export const TEAM: TeamMember[] = [
   {
     slug: "endoscopista",
@@ -61,13 +75,20 @@ export const TEAM: TeamMember[] = [
     // brand headshot used elsewhere lives at DOCTOR.photos.headshot.
     photo: DOCTOR.photos.team,
     bio: DOCTOR.bio,
-    bioShort: DOCTOR.bioShort,
+    // Not DOCTOR.bioShort: that one opens with "Endoscopista certificado",
+    // which duplicates the role label rendered directly above it on the cards.
+    bioShort:
+      "15+ años de experiencia. Egresado de la UNAM, certificado por el CMCG.",
     duringProcedure: [
       "Realiza tu valoración pre-endoscópica y responde tus dudas por WhatsApp directamente.",
       "Ejecuta el procedimiento con equipo Olympus HD y toma las biopsias necesarias.",
       "Te explica los hallazgos el mismo día y da seguimiento a tus resultados.",
     ],
     credentials: [...DOCTOR.credentials],
+    chips: [
+      `Cédula Esp. ${DOCTOR.cedulas.endoscopia}`,
+      `CMCG ${DOCTOR.cedulas.consejoCirugiaGeneral}`,
+    ],
     cedulas: { ...DOCTOR.cedulas },
     presentIn: "all",
     schemaType: "Physician",
@@ -83,7 +104,7 @@ export const TEAM: TeamMember[] = [
     photo: "/equipo/manuel-burgos.webp",
     bio: "Médico especialista en anestesiología, certificado por el Consejo Mexicano de Anestesiología. Administra y monitorea la sedación en cada endoscopia, colonoscopia y procedimiento terapéutico del equipo, dentro de quirófano en Hospital Amerimed.",
     bioShort:
-      "Anestesiólogo certificado. Administra y monitorea tu sedación en cada procedimiento.",
+      "Administra y monitorea tu sedación durante todo el procedimiento.",
     duringProcedure: [
       "Revisa tu historial y ajusta el tipo y la dosis de sedación a tu caso antes de iniciar.",
       "Monitorea tus signos vitales de forma continua durante todo el estudio.",
@@ -91,16 +112,17 @@ export const TEAM: TeamMember[] = [
     ],
     credentials: [
       "Especialidad en Anestesiología",
-      "Cédula Esp. 14141958",
-      "Consejo Mexicano de Anestesiología: 18542",
+      `Cédula Esp. ${CEDULAS.anestesiologo.especialidad}`,
+      `Consejo Mexicano de Anestesiología: ${CEDULAS.anestesiologo.consejo}`,
       // TODO(sanel): add "Cédula Prof. XXXXXXX" (médico general) once supplied.
     ],
-    cedulas: {
-      // TODO(sanel): medicoGeneral — cédula profesional de médico cirujano,
-      // pending. Adds a row to the /equipo-medico#verifica table when supplied.
-      especialidad: "14141958",
-      consejo: "18542",
-    },
+    chips: [
+      `Cédula Esp. ${CEDULAS.anestesiologo.especialidad}`,
+      `Consejo Anestesiología ${CEDULAS.anestesiologo.consejo}`,
+    ],
+    // TODO(sanel): medicoGeneral — cédula profesional de médico cirujano,
+    // pending. Adds a row to the /equipo-medico#verifica table when supplied.
+    cedulas: { ...CEDULAS.anestesiologo },
     presentIn: "all",
     schemaType: "Physician",
     schemaJobTitle: "Anestesiólogo",
@@ -111,13 +133,13 @@ export const TEAM: TeamMember[] = [
         "@type": "EducationalOccupationalCredential",
         credentialCategory: "Medical Specialty",
         name: "Anestesiología",
-        identifier: "Cédula 14141958",
+        identifier: `Cédula ${CEDULAS.anestesiologo.especialidad}`,
       },
       {
         "@type": "EducationalOccupationalCredential",
         credentialCategory: "Board Certification",
         name: "Consejo Mexicano de Anestesiología",
-        identifier: "18542",
+        identifier: CEDULAS.anestesiologo.consejo,
       },
     ],
     schemaMemberOf: [
@@ -132,7 +154,7 @@ export const TEAM: TeamMember[] = [
     photo: "/equipo/estephania-bass.webp",
     bio: "Enfermera titulada con cédula profesional. Está presente en cada endoscopia y colonoscopia del equipo, de principio a fin: te recibe, te prepara, te acompaña durante el estudio y cuida tu recuperación.",
     bioShort:
-      "Enfermera titulada. Presente en cada endoscopia y colonoscopia, de principio a fin.",
+      "Presente en cada endoscopia y colonoscopia, de principio a fin.",
     duringProcedure: [
       "Te recibe, verifica tu preparación y coloca tu acceso venoso.",
       "Está a tu lado dentro de la sala durante todo el procedimiento.",
@@ -140,8 +162,11 @@ export const TEAM: TeamMember[] = [
     ],
     // TODO(sanel): confirm the degree title (Licenciatura vs. Técnica) before
     // upgrading this chip past the neutral "Enfermería".
-    credentials: ["Enfermería · Cédula profesional 13089376"],
-    cedulas: { profesional: "13089376" },
+    credentials: [
+      `Enfermería · Cédula profesional ${CEDULAS.enfermera.profesional}`,
+    ],
+    chips: [`Cédula profesional ${CEDULAS.enfermera.profesional}`],
+    cedulas: { ...CEDULAS.enfermera },
     presentIn: ["endoscopia", "colonoscopia", "panendoscopia"],
     schemaType: "Person",
     schemaJobTitle: "Enfermera",
@@ -150,7 +175,7 @@ export const TEAM: TeamMember[] = [
         "@type": "EducationalOccupationalCredential",
         credentialCategory: "Professional License",
         name: "Enfermería",
-        identifier: "Cédula 13089376",
+        identifier: `Cédula ${CEDULAS.enfermera.profesional}`,
       },
     ],
   },
