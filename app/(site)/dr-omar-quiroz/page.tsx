@@ -24,6 +24,7 @@ import CallButton from "@/components/CallButton"
 import Faq from "@/components/Faq"
 import GoogleReviews from "@/components/GoogleReviews"
 import DoctorAuthority from "@/components/DoctorAuthority"
+import TeamPresence from "@/components/TeamPresence"
 
 export const revalidate = 86400
 export const metadata = metaFor("doctor")
@@ -499,6 +500,22 @@ export default async function DoctorOmarQuirozPage() {
 
       {/* ── Section 6: Reviews ── bg-muted */}
       <GoogleReviews />
+
+      {/* ── Section 6B: Su equipo ── bg-muted
+          Compact "quién más está en la sala" block. Placed after the reviews
+          rather than straight after the credentials because the credentials
+          section is followed by the muted Location block — dropping a muted
+          section between them would have put two muted sections back to back
+          and forced a background flip through two unrelated sections. Here the
+          reviews gradient ends white, so muted → white (FAQ) still alternates.
+          ── */}
+      <TeamPresence
+        procedure="endoscopia"
+        variant="compact"
+        tone="muted"
+        heading="Su equipo en cada procedimiento"
+        linkLabel="Conoce a todo el equipo"
+      />
 
       {/* ── Section 7: FAQ ── bg-background */}
       <section className="bg-background">

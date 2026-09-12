@@ -7,6 +7,7 @@ import { SERVICES, servicesByCategory } from "@/lib/services"
 import { CLINIC } from "@/lib/clinic"
 import { getGoogleReviews } from "@/lib/reviews"
 import { DOCTOR } from "@/lib/doctor"
+import { TEAM } from "@/lib/team"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
 import CallButton from "@/components/CallButton"
@@ -241,6 +242,34 @@ export default async function Page() {
                       Ver perfil completo <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
+
+                  {/* Equipo completo — three avatars route to /equipo-medico.
+                      Lives inside the doctor card (rather than as its own
+                      trust item) so the homepage section count and the
+                      bg-background ↔ bg-muted alternation stay untouched. */}
+                  <Link
+                    href="/equipo-medico"
+                    className="group mt-6 flex items-center gap-4 hover:underline"
+                  >
+                    <span className="flex shrink-0 -space-x-2">
+                      {TEAM.map((m) => (
+                        <Image
+                          key={m.slug}
+                          src={m.photo}
+                          alt=""
+                          aria-hidden
+                          width={32}
+                          height={32}
+                          sizes="32px"
+                          className="h-8 w-8 rounded-full border-2 border-background object-cover object-top"
+                        />
+                      ))}
+                    </span>
+                    <span className="text-sm font-semibold text-primary">
+                      Equipo certificado completo
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </div>
               </div>
             </div>

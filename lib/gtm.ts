@@ -14,6 +14,7 @@
 //   appointment_form_start — first real input into any appointment form field
 //   appointment_request — on-page appointment form delivered (stronger conversion signal)
 //   team_cta_click  — CTA clicked from team content (/equipo-medico or a TeamPresence block)
+//   team_block_view — a TeamPresence block was half on screen (fires once per page load)
 //   page_view       — standard (handled by Next.js, helper here for SPA edge cases)
 
 // ---------------------------------------------------------------------------
@@ -121,6 +122,13 @@ interface TeamCtaClickEvent {
   page_path: string
 }
 
+interface TeamBlockViewEvent {
+  event: "team_block_view"
+  /** Page the block was seen on. */
+  source_page: string
+  page_path: string
+}
+
 interface PageViewEvent {
   event: "page_view"
   page_path: string
@@ -142,6 +150,7 @@ type DataLayerEvent =
   | VideoPlayEvent
   | LpExitToGuideEvent
   | TeamCtaClickEvent
+  | TeamBlockViewEvent
   | PageViewEvent
 
 declare global {
@@ -452,6 +461,23 @@ export function pushLpExitToGuide(params: {
 export function pushTeamCtaClick(source: string, pagePath?: string): void {
   push({
     event: "team_cta_click",
+    source_page: source,
+    page_path: pagePath || currentPath(),
+  })
+}
+
+/**
+ * Track a <TeamPresence> block reaching 50% visibility. Fire ONCE per page
+ * load (the observer disconnects itself) — it answers "did they actually see
+ * who is in the room?" ahead of the CTA, so team_block_view → whatsapp_click
+ * reads as a funnel rather than two unrelated counts.
+ *
+ * @example
+ *   pushTeamBlockView("/colonoscopia-merida")
+ */
+export function pushTeamBlockView(source: string, pagePath?: string): void {
+  push({
+    event: "team_block_view",
     source_page: source,
     page_path: pagePath || currentPath(),
   })

@@ -20,6 +20,7 @@ import GoogleReviews from "@/components/GoogleReviews"
 import AppointmentForm from "@/components/AppointmentForm"
 import OnlineBookingBanner from "@/components/OnlineBookingBanner"
 import ComparisonTable from "@/components/ComparisonTable"
+import TeamPresence from "@/components/TeamPresence"
 import YouTubeEmbed from "@/components/YouTubeEmbed"
 import DoctorAuthority from "@/components/DoctorAuthority"
 import FueraDeMeridaStrip from "@/components/FueraDeMeridaStrip"
@@ -391,12 +392,22 @@ export default function EndoscopiaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-muted
+          SECTION 2B3: QUIÉN ESTARÁ CONTIGO — bg-muted
+          Extends the doctor block above into the full procedure team
+          (endoscopista + anestesiólogo + enfermera) right before the
+          certification comparison. Muted so it alternates against the
+          background doctor block above and the comparison below.
+          ══════════════════════════════════════════════════════════════════ */}
+      <TeamPresence procedure="endoscopia" tone="muted" />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-background
           Anchor target for /endoscopia-merida#comparacion. Shared component
           with /precios so the trust/value story stays identical everywhere.
-          Background is muted so it alternates with the doctor block above.
+          Background flipped to white when the team block landed above it —
+          it now alternates against that muted block, not the doctor block.
           ══════════════════════════════════════════════════════════════════ */}
-      <ComparisonTable background="muted" />
+      <ComparisonTable background="background" />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2B: APPOINTMENT FORM (on-page booking) — bg-accent-light
