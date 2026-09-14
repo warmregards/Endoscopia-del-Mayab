@@ -9,7 +9,7 @@
 //     ("Endoscopista Gastrointestinal y Cirujano General") — never
 //     "gastroenterólogo", never "único".
 //   - The female-presence promise is phrased generically (FEMALE_PRESENCE_LINE).
-//     Estephania is named and pictured on cards and in her own section, but the
+//     Estefania is named and pictured on cards and in her own section, but the
 //     guarantee sentence never names her.
 //   - Verification copy is framed as questions to ask at ANY clinic and as an
 //     invitation to verify us first — never as a claim about other clinics.
@@ -71,8 +71,7 @@ export const TEAM: TeamMember[] = [
     name: DOCTOR.name,
     displayName: DOCTOR.name,
     role: DOCTOR.descriptor,
-    // Team-page portrait (same studio set as Manuel + Estephania). The circular
-    // brand headshot used elsewhere lives at DOCTOR.photos.headshot.
+    // Same canonical portrait as DOCTOR.photos.headshot (the homepage photo).
     photo: DOCTOR.photos.team,
     bio: DOCTOR.bio,
     // Not DOCTOR.bioShort: that one opens with "Endoscopista certificado",
@@ -148,10 +147,10 @@ export const TEAM: TeamMember[] = [
   },
   {
     slug: "enfermera",
-    name: "Estephania Bass",
-    displayName: "Estephania Bass",
+    name: "Estefania Baas",
+    displayName: "Estefania Baas",
     role: "Enfermera titulada",
-    photo: "/equipo/estephania-bass.webp",
+    photo: "/equipo/estefania-baas.webp",
     bio: "Enfermera titulada con cédula profesional. Está presente en cada endoscopia y colonoscopia del equipo, de principio a fin: te recibe, te prepara, te acompaña durante el estudio y cuida tu recuperación.",
     bioShort:
       "Presente en cada endoscopia y colonoscopia, de principio a fin.",
