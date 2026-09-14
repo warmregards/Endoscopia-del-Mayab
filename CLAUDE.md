@@ -9,7 +9,7 @@
 
 - [ ] GBP: Verify services link changed from `http://www.endoscopiadelmayab.com/servicios` to `https://www.endoscopiadelmayab.com/` (Search Console shows 390 impressions still hitting the old HTTP URL)
 - [ ] GSC: Use URL Inspection tool to request re-indexing of `https://www.endoscopiadelmayab.com/precios` (currently only non-www version indexed)
-- [ ] GTM container (Lighthouse 2026-09-14): remove the Google Ads tag(s) that load `gtag/js?id=AW-7988764543`. That ID is the Ads *customer* ID, not a tag ID — the account's real conversion tracking ID is AW-11400367057, which reports "no recent data". Verified via the Ads API: both web conversions (`whatsapp_click`, `phone_click`) are GA4-imported (`GOOGLE_ANALYTICS_4_CUSTOM`), every Ads-tag audience has 0 members, and no campaign/ad group targets one. The script is ~1/3 of GTM's main-thread cost and does nothing. Keep the GA4 Google tag (G-GZMK9ZGX2K) and the Conversion Linker. Do NOT change the `whatsapp_click` / `phone_click` trigger scope (see "Google Ads conversions must trigger on the bare event").
+- [x] GTM container (2026-09-14): the dead `AW-7988764543` Google tag was removed from GTM-KSKRNRK3. Web conversions are GA4-imported via G-GZMK9ZGX2K; the account's real Ads tag is AW-11400367057 (unused). If Ads remarketing is ever wanted, use that ID. Do NOT change the `whatsapp_click` / `phone_click` trigger scope.
 - [ ] After the 2026-09-14 GTM gating change (`app/layout.tsx`: GTM boots on onload→idle or first interaction), watch Ads conversions + GA4 sessions for 48h. A drop in GA4 sessions (short bounces) is the expected trade-off; a drop in Ads conversions is not — check the trigger scope first.
 
 ---
