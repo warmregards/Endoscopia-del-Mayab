@@ -154,7 +154,7 @@ export default function Footer() {
               href="https://www.sanel.design"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-text-inverse transition-colors"
+              className="text-text-footer-label underline hover:text-text-inverse transition-colors"
             >
               Sanel Design Studio
             </a>

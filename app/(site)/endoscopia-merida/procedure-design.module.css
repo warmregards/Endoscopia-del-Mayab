@@ -103,6 +103,8 @@
 .pricePanel > div > div:first-child > p:first-of-type { color: #d9e4d8; margin: 0 0 8px; font-size: 14px; }
 .pricePanel > div > div:first-child > p:last-child { font-family: Georgia,serif; font-size: 34px; font-weight: 400; line-height: 1.2; color: #fffefa; margin: 0; letter-spacing: -.035em; }
 .pricePanel h3 { text-align: left; font-size: 25px; }
+/* Price card title is an <h2> (heading order), styled like the former h3. */
+.procedure .pricePanel h2 { text-align: left; font-size: 25px; line-height: 1.2; }
 .pricePanel > div > p:last-child { padding-top: 18px; border-top: 1px solid var(--rule); text-align: left; font-size: 13px; }
 .hero + section { background: #e9eee4; }
 .hero + section :global(.max-w-3xl) { max-width: 1160px; }
@@ -177,6 +179,7 @@
  .procedure :global(.section-padding) { padding-block: 56px; }
  .procedure h2 { font-size: 32px; }
  .procedure h3 { font-size: 26px; }
+ .procedure .pricePanel h2 { font-size: 26px; }
  .hero :global(.section-padding) { padding-top: 32px; padding-bottom: 40px; }
  .hero h1 { font-size: 40px; }
  .hero h1 + p { font-size: 17px; }

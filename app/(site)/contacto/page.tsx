@@ -141,7 +141,7 @@ export default async function ContactoPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-border text-sm text-foreground/70 space-y-2">
+              <div className="pt-4 border-t border-border text-sm text-foreground/80 space-y-2">
                 <p>Estacionamiento gratuito disponible</p>
                 <p>
                   Fácil acceso desde Periférico Norte, colonia{" "}
@@ -245,7 +245,7 @@ export default async function ContactoPage() {
                 <p className={`text-lg font-bold text-text-accent ${pages.anchorPrice}`}>
                   {displayFrom(key)}
                 </p>
-                <p className="text-sm text-foreground/70">
+                <p className="text-sm text-foreground/80">
                   Incluye sedación, biopsias y recuperación
                 </p>
               </div>

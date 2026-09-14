@@ -104,9 +104,9 @@ export default function EmrPage() {
                 </div>
 
                 <div className={`mt-6 p-6 rounded-xl bg-muted border border-border ${pages.panelBody} ${pages.plainBox}`}>
-                  <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
+                  <h2 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
                     Incluye
-                  </h3>
+                  </h2>
                   <div className="space-y-2">
                     {INCLUDED_IN_PRICE.map((item) => (
                       <div key={item} className="flex items-center gap-2">
@@ -153,7 +153,7 @@ export default function EmrPage() {
             <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border ${pages.quietNote}`}>
               <Clock className="h-5 w-5 text-accent-strong" />
               <span className="font-semibold text-foreground">30–45 minutos</span>
-              <span className="text-foreground/70">· Sedación segura · Ambulatorio</span>
+              <span className="text-foreground/80">· Sedación segura · Ambulatorio</span>
             </div>
           </div>
         </div>

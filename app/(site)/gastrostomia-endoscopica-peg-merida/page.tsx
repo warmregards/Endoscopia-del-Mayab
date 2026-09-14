@@ -150,7 +150,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
               {displayFrom("gastrostomia_peg")}
             </div>
 
-            <div className={`flex flex-col sm:flex-row gap-4 text-sm text-foreground/70 ${pages.chips}`}>
+            <div className={`flex flex-col sm:flex-row gap-4 text-sm text-foreground/80 ${pages.chips}`}>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
                 {CLINIC.address.streetAddress},{" "}
@@ -285,14 +285,14 @@ export default function GastrostomiaEndoscopicaPEGPage() {
             </div>
 
             <div className={`mt-6 p-4 rounded-xl bg-muted border border-border ${pages.quietNote}`}>
-              <p className="text-sm text-foreground/70">
+              <p className="text-sm text-foreground/80">
                 Interpretación de biopsias por el patólogo externo (si se{" "}
                 toman): <strong>{mxn(ADDITIONAL_FEES.biopsy.amount)}</strong>{" "}
                 tarifa única
               </p>
             </div>
 
-            <p className="mt-4 text-sm text-foreground/60">
+            <p className="mt-4 text-sm text-muted-foreground">
               Precio base para pacientes con anatomía gástrica normal. Casos
               complejos se evalúan individualmente.
             </p>
@@ -333,7 +333,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
             ))}
           </div>
 
-          <p className="mt-8 text-sm text-foreground/70">
+          <p className="mt-8 text-sm text-foreground/80">
             Agenda tu evaluación. Horario: {CLINIC.hours.display}.
             A minutos de Cholul, Temozón Norte, Altabrisa y el Centro de Mérida.
           </p>

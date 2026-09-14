@@ -127,9 +127,9 @@ export default function CapsulaEndoscopicaPage() {
                 </div>
 
                 <div className={`mt-6 p-6 rounded-xl bg-muted border border-border ${pages.panelBody} ${pages.plainBox}`}>
-                  <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
+                  <h2 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
                     La cotización cubre
-                  </h3>
+                  </h2>
                   <div className="space-y-2">
                     {[
                       "La cápsula endoscópica",
@@ -182,7 +182,7 @@ export default function CapsulaEndoscopicaPage() {
             <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border ${pages.quietNote}`}>
               <Clock className="h-5 w-5 text-accent" />
               <span className="font-semibold text-foreground">8–12 horas de grabación</span>
-              <span className="text-foreground/70">· Sin sedación · Ambulatorio</span>
+              <span className="text-foreground/80">· Sin sedación · Ambulatorio</span>
             </div>
           </div>
         </div>

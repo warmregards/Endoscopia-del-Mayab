@@ -86,7 +86,7 @@ export default function EmergenciasDigestivasPage() {
             <div className={`w-full lg:max-w-md ${pages.pricePanel}`}>
               <div className={`bg-background rounded-2xl border border-border shadow-lg p-8 ${pages.panel}`}>
                 <div className={`text-center space-y-4 mb-6 ${pages.panelHead} ${pages.panelHeadAlert}`}>
-                  <div className="text-sm font-medium text-foreground/60">
+                  <div className="text-sm font-medium text-muted-foreground">
                     Emergencias 24/7
                   </div>
                   <div className={`text-2xl font-bold text-red-600 ${pages.panelPrice}`}>
@@ -502,7 +502,7 @@ export default function EmergenciasDigestivasPage() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">WhatsApp</p>
-                    <p className="text-sm text-foreground/70">
+                    <p className="text-sm text-foreground/80">
                       {CLINIC.phone.display}
                     </p>
                   </div>
@@ -514,7 +514,7 @@ export default function EmergenciasDigestivasPage() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">Teléfono</p>
-                    <p className="text-sm text-foreground/70">
+                    <p className="text-sm text-foreground/80">
                       {CLINIC.phone.display}
                     </p>
                   </div>
@@ -526,10 +526,10 @@ export default function EmergenciasDigestivasPage() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">Dirección</p>
-                    <p className="text-sm text-foreground/70">
+                    <p className="text-sm text-foreground/80">
                       {CLINIC.address.display}
                     </p>
-                    <p className="text-xs text-foreground/60 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Acceso fácil desde Altabrisa, Temozón Norte, Cholul y
                       Centro Histórico
                     </p>
@@ -542,10 +542,10 @@ export default function EmergenciasDigestivasPage() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">Horario</p>
-                    <p className="text-sm text-foreground/70">
+                    <p className="text-sm text-foreground/80">
                       {CLINIC.hours.display}
                     </p>
-                    <p className="text-xs text-foreground/60 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Emergencias: disponibilidad extendida por WhatsApp
                     </p>
                   </div>
@@ -595,7 +595,7 @@ export default function EmergenciasDigestivasPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm text-foreground/70 mt-2">
+                <p className="text-sm text-foreground/80 mt-2">
                   <Link
                     href="/precios"
                     className="text-primary hover:underline"

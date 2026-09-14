@@ -170,9 +170,9 @@ export default function ExtraccionCuerposExtranosPage() {
 
             {/* Emergency callout */}
             <div className={`bg-red-50 border border-red-200 rounded-xl p-6 mt-8 ${pages.alert}`}>
-              <h3 className="font-serif text-lg font-semibold text-red-800 mb-4">
+              <h2 className="font-serif text-lg font-semibold text-red-800 mb-4">
                 ¿Cuándo es urgencia médica?
-              </h3>
+              </h2>
               <ul className="space-y-2 text-red-700">
                 <li>
                   <strong>Dolor severo</strong> en pecho, garganta o estómago

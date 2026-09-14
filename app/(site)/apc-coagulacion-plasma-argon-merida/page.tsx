@@ -256,9 +256,9 @@ export default function APCPage() {
                 </div>
 
                 <div className={`mt-8 space-y-4 ${pages.panelBody}`}>
-                  <h3 className="text-lg font-serif font-bold text-foreground text-center">
+                  <h2 className="text-lg font-serif font-bold text-foreground text-center">
                     ¿Qué incluye el precio?
-                  </h3>
+                  </h2>
                   {includedItems.map((item) => (
                     <div key={item} className="flex items-center gap-3">
                       <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -501,7 +501,7 @@ export default function APCPage() {
                         </span>
                         <span className="font-semibold text-foreground">{s.label}</span>
                       </div>
-                      <p className="text-sm text-foreground/70">{s.desc}</p>
+                      <p className="text-sm text-foreground/80">{s.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -526,7 +526,7 @@ export default function APCPage() {
                       </span>
                       <div>
                         <span className="font-semibold text-foreground">{t.time}</span>
-                        <p className="text-sm text-foreground/70">{t.label}</p>
+                        <p className="text-sm text-foreground/80">{t.label}</p>
                       </div>
                     </div>
                   ))}

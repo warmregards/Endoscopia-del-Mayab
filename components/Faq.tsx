@@ -60,7 +60,7 @@ export default function Faq({
         </span>
         <span aria-hidden className="flex-shrink-0">
           <svg
-            className="w-5 h-5 text-foreground/60 group-open:rotate-180 transition-transform duration-200"
+            className="w-5 h-5 text-muted-foreground group-open:rotate-180 transition-transform duration-200"
             viewBox="0 0 24 24"
             fill="none"
           >

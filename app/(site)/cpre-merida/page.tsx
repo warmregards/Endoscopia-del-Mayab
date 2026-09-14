@@ -190,9 +190,9 @@ export default function CprePage() {
                 </div>
 
                 <div className={`mt-8 space-y-4 ${pages.panelBody}`}>
-                  <h3 className="text-lg font-serif font-bold text-foreground text-center">
+                  <h2 className="text-lg font-serif font-bold text-foreground text-center">
                     Lo que incluye el precio base
-                  </h3>
+                  </h2>
                   {includedItems.map((item) => (
                     <div key={item} className="flex items-center gap-3">
                       <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />

@@ -88,7 +88,7 @@ function ProcedureCard({ s }: { s: ServiceItem }) {
           {s.displayName}
         </h3>
         {!s.quoteOnly && pricing?.from !== undefined && (
-          <p className="text-xs text-foreground/60">Desde {mxn(pricing.from)}</p>
+          <p className="text-xs text-muted-foreground">Desde {mxn(pricing.from)}</p>
         )}
       </div>
 
@@ -147,7 +147,7 @@ export default function ProceduresGrid() {
           <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground">
             Todos los Procedimientos
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
             Catálogo completo de procedimientos endoscópicos especializados
           </p>
         </div>

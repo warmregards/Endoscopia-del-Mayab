@@ -99,7 +99,7 @@ export default async function Page() {
             <span className="font-serif font-bold text-text-accent text-3xl sm:text-4xl tracking-tight">
               {displayFrom("endoscopia")}
             </span>
-            <span className="text-sm text-foreground/60 leading-snug">
+            <span className="text-sm text-muted-foreground leading-snug">
               Anestesia y biopsias incluidas
             </span>
           </div>

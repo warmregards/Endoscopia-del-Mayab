@@ -107,7 +107,7 @@ async function GoogleReviewsAsync({
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
               {title}
             </h2>
-            <p className="text-foreground/70">
+            <p className="text-foreground/80">
               {placeName || CLINIC.name}
               {rating ? (
                 <span className="inline-flex items-center gap-1 align-middle">
@@ -161,7 +161,7 @@ async function GoogleReviewsAsync({
                     <div className="font-semibold text-foreground">
                       {r.author_name}
                     </div>
-                    <div className="text-xs text-foreground/60">
+                    <div className="text-xs text-muted-foreground">
                       {r.relative_time_description}
                     </div>
                   </div>
@@ -213,7 +213,7 @@ async function GoogleReviewsAsync({
           })}
         </ul>
 
-        <p className="mt-6 text-xs text-foreground/60">
+        <p className="mt-6 text-xs text-muted-foreground">
           Fuente: {attribution || "Google"}
         </p>
       </div>

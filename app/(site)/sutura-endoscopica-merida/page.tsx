@@ -104,7 +104,7 @@ export default function SuturaEndoscopicaPage() {
             <div className="w-full lg:w-80 space-y-4">
               {/* Price Card */}
               <div className={`p-6 rounded-xl border border-border bg-card shadow-sm ${pages.panelSurface}`}>
-                <h3 className="font-semibold text-foreground mb-2">Precio según caso</h3>
+                <h2 className="text-xl font-semibold text-foreground mb-2">Precio según caso</h2>
                 <p className={`text-2xl font-bold text-text-accent mb-2 ${pages.figure}`}>
                   {mxn(PRICING.sutura_endoscopica.from)}
                 </p>

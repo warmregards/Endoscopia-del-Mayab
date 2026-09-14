@@ -93,7 +93,7 @@ export default function EndoprotesisColonicasPage() {
               />
             </div>
 
-            <div className={`flex flex-wrap gap-6 text-sm text-foreground/70 ${pages.chips}`}>
+            <div className={`flex flex-wrap gap-6 text-sm text-foreground/80 ${pages.chips}`}>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-accent" />
                 {CLINIC.address.streetAddress.split(",")[0]}, Mérida

@@ -63,7 +63,7 @@ export default function DilatacionEsofagicaPage() {
               Dilatación Esofágica en Mérida
             </h1>
 
-            <p className="text-lg text-foreground/70">
+            <p className="text-lg text-foreground/80">
               Tratamiento endoscópico para estenosis esofágica. Mejora tu
               capacidad de tragar sin cirugía abierta.
             </p>
