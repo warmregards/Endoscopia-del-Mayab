@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import {
   PRICING,
@@ -90,7 +92,7 @@ export default function PacientesDeFueraDeMeridaPage() {
   const { directions } = CLINIC
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -107,7 +109,7 @@ export default function PacientesDeFueraDeMeridaPage() {
           SECTION 1: HERO — bg-background
           "Confirma antes de viajar" framed as protecting the patient's trip.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
@@ -124,7 +126,7 @@ export default function PacientesDeFueraDeMeridaPage() {
             </p>
 
             {/* Price badge — first viewport */}
-            <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
+            <div className={`inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-6 py-4 rounded-xl bg-accent-light border border-accent/20 ${pages.priceNote}`}>
               <span className="text-sm font-medium text-foreground">
                 Precio particular
               </span>
@@ -133,7 +135,7 @@ export default function PacientesDeFueraDeMeridaPage() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="hero"
@@ -155,17 +157,17 @@ export default function PacientesDeFueraDeMeridaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: POR QUÉ CONFIRMAR — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               Por qué confirmar antes de viajar
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${pages.openGrid}`}>
               {whyConfirm.map(({ icon: Icon, title, text }) => (
                 <div
                   key={title}
-                  className="bg-card border border-border rounded-xl p-6 space-y-4"
+                  className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}
                 >
                   <Icon className="h-6 w-6 text-accent" aria-hidden />
                   <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
@@ -182,7 +184,7 @@ export default function PacientesDeFueraDeMeridaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: PRECIOS PARTICULARES — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -251,7 +253,7 @@ export default function PacientesDeFueraDeMeridaPage() {
           SECTION 4: ¿MISMO DÍA? — bg-muted
           The question the unscheduled walk-ins actually had.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -259,7 +261,7 @@ export default function PacientesDeFueraDeMeridaPage() {
             </h2>
 
             <div className="space-y-6">
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Endoscopia — sí, si llegas en ayuno total
                 </h3>
@@ -289,7 +291,7 @@ export default function PacientesDeFueraDeMeridaPage() {
                 </Link>
               </div>
 
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Colonoscopia — no el mismo día
                 </h3>
@@ -335,7 +337,7 @@ export default function PacientesDeFueraDeMeridaPage() {
                 </Link>
               </div>
 
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Consulta — con cita, y siempre en persona
                 </h3>
@@ -351,7 +353,7 @@ export default function PacientesDeFueraDeMeridaPage() {
                 </p>
               </div>
 
-              <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
+              <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight flex items-center gap-2">
                   <Clock className="h-5 w-5 text-accent" aria-hidden />
                   Llega por la mañana
@@ -388,7 +390,7 @@ export default function PacientesDeFueraDeMeridaPage() {
           SECTION 5: CUÁNTO TIEMPO — bg-background
           Sedation is not "walk in and out" — sets the expectation up front.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <div className="space-y-2">
@@ -400,14 +402,14 @@ export default function PacientesDeFueraDeMeridaPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${pages.openGrid}`}>
               {timeInHospital.map((t) => (
                 <div
                   key={t.label}
-                  className="bg-card border border-border rounded-xl p-6 space-y-2"
+                  className={`bg-card border border-border rounded-xl p-6 space-y-2 ${pages.open}`}
                 >
                   <p className="text-sm font-medium text-muted-foreground">{t.label}</p>
-                  <p className="font-serif font-bold text-foreground text-xl tracking-tight">
+                  <p className={`font-serif font-bold text-foreground text-xl tracking-tight ${pages.serifFigure}`}>
                     {t.time}
                   </p>
                   {t.detail && (
@@ -432,7 +434,7 @@ export default function PacientesDeFueraDeMeridaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: CÓMO LLEGAR — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl space-y-8">
             <div className="space-y-2">
@@ -449,8 +451,8 @@ export default function PacientesDeFueraDeMeridaPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight flex items-center gap-2">
                   <Car className="h-5 w-5 text-accent" aria-hidden />
                   En carretera
@@ -469,7 +471,7 @@ export default function PacientesDeFueraDeMeridaPage() {
                 </p>
               </div>
 
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight flex items-center gap-2">
                   <Bus className="h-5 w-5 text-accent" aria-hidden />
                   En autobús
@@ -500,7 +502,7 @@ export default function PacientesDeFueraDeMeridaPage() {
               </div>
             </div>
 
-            <div className="rounded-xl overflow-hidden">
+            <div className={`rounded-xl overflow-hidden ${pages.frame}`}>
               <MapEmbed />
             </div>
           </div>
@@ -510,10 +512,10 @@ export default function PacientesDeFueraDeMeridaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: QUÉ TRAER + TU REPORTE — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
-          <div className="max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+          <div className={`max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+            <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
               <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
                 Qué traer
               </h2>
@@ -538,7 +540,7 @@ export default function PacientesDeFueraDeMeridaPage() {
               </ul>
             </div>
 
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
               <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight flex items-center gap-2">
                 <FileText className="h-6 w-6 text-accent" aria-hidden />
                 Tu reporte, el mismo día
@@ -563,14 +565,14 @@ export default function PacientesDeFueraDeMeridaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: FAQ — bg-muted (FAQPage JSON-LD injected by <Faq>)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.faq}`}>
         <Faq routeKey="fuera_merida" service={SERVICE} />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 9: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -583,7 +585,7 @@ export default function PacientesDeFueraDeMeridaPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="bottom-cta"
@@ -600,6 +602,6 @@ export default function PacientesDeFueraDeMeridaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

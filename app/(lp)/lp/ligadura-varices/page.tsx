@@ -20,6 +20,8 @@ import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
 import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
+import system from "../../../(site)/design-system.module.css";
+import pages from "../../../(site)/design-pages.module.css";
 
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
@@ -62,15 +64,15 @@ export default async function LpLigaduraVaricesPage() {
   } = await getGoogleReviews({ maxReviews: 1 });
 
   return (
-    <div className="pb-24 md:pb-0">
+    <div className={`pb-24 md:pb-0 ${pages.page} ${system.system}`}>
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
           Clinical/urgent framing: control del sangrado + one-tap CTA above fold.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${pages.lpHero} ${system.hero}`}>
         <div className="container-narrow pt-6 pb-12 md:py-16">
           {/* Eyebrow / trust bar */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+          <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground ${pages.chips}`}>
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
               <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
@@ -89,13 +91,13 @@ export default async function LpLigaduraVaricesPage() {
             Ligadura de várices esofágicas en Mérida
           </h1>
 
-          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+          <p className={`mt-4 text-base text-muted-foreground md:text-lg ${pages.lead}`}>
             Tratamiento endoscópico para prevenir y controlar el sangrado por
             várices esofágicas, con sedación, por un {DOCTOR.descriptor}.
           </p>
 
           {/* Price badge */}
-          <div className="mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6">
+          <div className={`mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6 ${pages.priceBadge}`}>
             <span className="text-2xl font-bold text-text-accent md:text-3xl">
               {PRICE}
             </span>
@@ -127,7 +129,7 @@ export default async function LpLigaduraVaricesPage() {
           </div>
 
           {/* Location line */}
-          <p className="mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground">
+          <p className={`mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground ${pages.location}`}>
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             Hospital Amerimed, Consultorio 517 · Chichí Suárez, Mérida
           </p>
@@ -138,14 +140,14 @@ export default async function LpLigaduraVaricesPage() {
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
           Clinical, not price-comparison led — NO competitor anchor row.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="bg-muted">
+      <section id="precio" className={`bg-muted ${pages.surface}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Precio cerrado, sin sorpresas
           </h2>
 
-          <div className="mt-6 rounded-xl border border-border bg-card p-6 shadow-sm">
-            <div className="text-3xl font-bold text-text-accent">{PRICE}</div>
+          <div className={`mt-6 rounded-xl border border-border bg-card p-6 shadow-sm ${pages.panelSurface}`}>
+            <div className={`text-3xl font-bold text-text-accent ${pages.priceFigure}`}>{PRICE}</div>
 
             <ul className="mt-6 space-y-3">
               {INCLUDED_IN_PRICE.map((item) => (
@@ -175,7 +177,7 @@ export default async function LpLigaduraVaricesPage() {
           Authority: a named specialist, not a faceless clinic.
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="especialista" className="bg-background">
+      <section id="especialista" className={`bg-background ${system.doctor} ${pages.inverse} ${pages.authority}`}>
         <div className="container-narrow section-padding">
           <DoctorAuthority
             variant="compact"
@@ -183,6 +185,7 @@ export default async function LpLigaduraVaricesPage() {
             position="lp-doctor"
             procedureName="Ligadura de várices esofágicas"
             procedureContext="El especialista que realiza tu ligadura de várices esofágicas se formó y ejerció como endoscopista en centros de referencia nacionales."
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 
@@ -208,7 +211,7 @@ export default async function LpLigaduraVaricesPage() {
           Reassurance + speed of access — patients often arrive scared or after
           a bleed. Remove the "how serious is this" friction.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="disponibilidad" className="bg-muted">
+      <section id="disponibilidad" className={`bg-muted ${pages.paper}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Prevención del sangrado por várices
@@ -220,7 +223,7 @@ export default async function LpLigaduraVaricesPage() {
             sangrado o tienes cirrosis, escríbenos para valorar tu caso.
           </p>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+          <ul className={`mt-6 grid gap-4 sm:grid-cols-2 ${pages.factList}`}>
             {[
               { icon: HeartPulse, text: "Control y prevención del sangrado" },
               { icon: ShieldCheck, text: "Bandas por endoscopia, sin cirugía abierta" },
@@ -255,6 +258,7 @@ export default async function LpLigaduraVaricesPage() {
           showPlaceLink={false}: no outbound Google exit on a paid LP (1:1 ratio).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews
+        className={system.reviews}
         title="Lo que dicen nuestros pacientes"
         limit={3}
         showPlaceLink={false}
@@ -264,13 +268,13 @@ export default async function LpLigaduraVaricesPage() {
           SECTION 6 — FAQ CORTA (bg-muted)
           Only the questions that block booking.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="preguntas" className="bg-muted">
+      <section id="preguntas" className={`bg-muted ${system.faq}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
             Preguntas frecuentes
           </h2>
 
-          <div className="mt-6 space-y-4">
+          <div className={`mt-6 space-y-4 ${pages.qaList}`}>
             {[
               {
                 q: "¿Duele la ligadura?",
@@ -297,7 +301,7 @@ export default async function LpLigaduraVaricesPage() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className={`mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between ${pages.note}`}>
             <p className="text-foreground">
               ¿Tienes otra duda? Escríbele al Dr. Quiroz por WhatsApp.
             </p>
@@ -325,7 +329,7 @@ export default async function LpLigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7 — CIERRE / BOTTOM CTA (bg-primary navy)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
             ¿Necesitas una ligadura de várices en Mérida?

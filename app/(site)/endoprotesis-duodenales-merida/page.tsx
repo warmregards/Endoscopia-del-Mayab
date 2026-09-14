@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -22,12 +24,12 @@ export const metadata = metaFor("endoprotesis_duodenales")
 
 export default function EndoprotesisDuodenalesPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── Section 1: Hero ── bg-background ── */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent/20">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/10 border border-accent/20 ${pages.eyebrow}`}>
               <ShieldCheck className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-text-accent">
                 Alternativa Paliativa No Quirúrgica
@@ -74,7 +76,7 @@ export default function EndoprotesisDuodenalesPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="endoprotesis duodenal"
                 position="hero"
@@ -99,7 +101,7 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 2: Definition + Indications ── bg-muted ── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
             ¿Qué Son las Endoprótesis Duodenales?
@@ -121,7 +123,7 @@ export default function EndoprotesisDuodenalesPage() {
             </p>
           </div>
 
-          <div className="mt-8 p-6 rounded-xl bg-background border border-border">
+          <div className={`mt-8 p-6 rounded-xl bg-background border border-border ${pages.panelSurface}`}>
             <div className="flex items-center gap-2 mb-4">
               <AlertTriangle className="h-5 w-5 text-muted-foreground" />
               <h3 className="text-lg font-serif font-semibold text-foreground tracking-tight">
@@ -151,7 +153,7 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 3: Pricing & What's Included ── bg-background ── */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
             Costo de Endoprótesis Duodenales en Mérida
@@ -164,7 +166,7 @@ export default function EndoprotesisDuodenalesPage() {
               situación y te proporciona una cotización personalizada.
             </p>
 
-            <div className="p-6 rounded-xl border border-border bg-muted/30">
+            <div className={`p-6 rounded-xl border border-border bg-muted/30 ${pages.panelSurface}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground tracking-tight mb-4">
                 Tu procedimiento incluye:
               </h3>
@@ -178,7 +180,7 @@ export default function EndoprotesisDuodenalesPage() {
               </ul>
             </div>
 
-            <div className="p-4 rounded-lg bg-muted/50 border border-border">
+            <div className={`p-4 rounded-lg bg-muted/50 border border-border ${pages.quietNote}`}>
               <p className="text-sm text-foreground">
                 <strong>Costo adicional si aplica:</strong>{" "}
                 {mxn(ADDITIONAL_FEES.biopsy.amount)} —{" "}
@@ -206,13 +208,13 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 4: What to Expect ── bg-muted ── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             ¿Cómo es el Procedimiento?
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-4 mb-16">
+          <div className={`grid gap-6 md:grid-cols-4 mb-16 ${pages.steps}`}>
             {[
               {
                 step: 1,
@@ -237,9 +239,9 @@ export default function EndoprotesisDuodenalesPage() {
             ].map(({ step, title, desc }) => (
               <div
                 key={step}
-                className="text-center p-6 rounded-2xl border border-border bg-background"
+                className={`text-center p-6 rounded-2xl border border-border bg-background ${pages.step}`}
               >
-                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                <div className={`w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   {step}
                 </div>
                 <h3 className="font-serif font-semibold text-foreground mb-2">
@@ -250,8 +252,8 @@ export default function EndoprotesisDuodenalesPage() {
             ))}
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="p-8 rounded-2xl border border-border bg-background">
+          <div className={`grid gap-8 lg:grid-cols-2 ${pages.openGrid}`}>
+            <div className={`p-8 rounded-2xl border border-border bg-background ${pages.open}`}>
               <h3 className="text-xl font-serif font-semibold text-foreground tracking-tight mb-6">
                 Beneficios del Procedimiento
               </h3>
@@ -275,7 +277,7 @@ export default function EndoprotesisDuodenalesPage() {
               </div>
             </div>
 
-            <div className="p-8 rounded-2xl border border-border bg-background">
+            <div className={`p-8 rounded-2xl border border-border bg-background ${pages.open}`}>
               <h3 className="text-xl font-serif font-semibold text-foreground tracking-tight mb-6">
                 Recuperación
               </h3>
@@ -300,7 +302,7 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 5: Doctor Credentials ── bg-background ── */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Tu Especialista: {DOCTOR.name}
@@ -308,7 +310,7 @@ export default function EndoprotesisDuodenalesPage() {
 
           <div className="grid gap-8 md:grid-cols-2 items-start">
             <div className="space-y-6">
-              <div className="overflow-hidden rounded-2xl">
+              <div className={`overflow-hidden rounded-2xl ${pages.portrait}`}>
                 <Image
                   src={DOCTOR.photos.headshot}
                   alt={DOCTOR.name}
@@ -345,7 +347,7 @@ export default function EndoprotesisDuodenalesPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="p-6 rounded-xl border border-border bg-card">
+              <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                   Manejo de Complicaciones
                 </h3>
@@ -356,7 +358,7 @@ export default function EndoprotesisDuodenalesPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl border border-border bg-card">
+              <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                   Evaluación Quirúrgica Simultánea
                 </h3>
@@ -367,7 +369,7 @@ export default function EndoprotesisDuodenalesPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl border border-border bg-card">
+              <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                   Anatomía Duodenal Compleja
                 </h3>
@@ -378,7 +380,7 @@ export default function EndoprotesisDuodenalesPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl bg-accent-light/10 border border-accent/20">
+              <div className={`p-6 rounded-xl bg-accent-light/10 border border-accent/20 ${pages.open}`}>
                 <div className="flex items-start gap-4">
                   <ShieldCheck className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
                   <div>
@@ -400,22 +402,19 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 6: Google Reviews ── bg-muted ── */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Section 7: FAQ + Related Procedures ── bg-background ── */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="endoprotesis_duodenales" service="endoprotesis duodenal" />
+      </section>
+      <section className={pages.surface}>
         <div className="container-page section-padding">
-          <Faq routeKey="endoprotesis_duodenales" service="endoprotesis duodenal" />
-
-          <div className="mt-16">
+          <div>
             <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
               Procedimientos Relacionados
             </h3>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
               {[
                 {
                   name: "Endoprótesis Biliares",
@@ -436,7 +435,7 @@ export default function EndoprotesisDuodenalesPage() {
                 <Link
                   key={proc.href}
                   href={proc.href}
-                  className="group block p-6 bg-card border border-border rounded-xl shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                  className={`group block p-6 bg-card border border-border rounded-xl shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
                 >
                   <h4 className="font-serif font-semibold text-foreground mb-2 tracking-tight">
                     {proc.name}
@@ -455,7 +454,7 @@ export default function EndoprotesisDuodenalesPage() {
       </section>
 
       {/* ── Section 8: Bottom CTA ── bg-primary ── */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight mb-4">
             ¿Necesitas Evaluación para Endoprótesis Duodenales?
@@ -464,7 +463,7 @@ export default function EndoprotesisDuodenalesPage() {
             El {DOCTOR.name} evaluará tu caso y te orientará sobre la mejor
             opción de tratamiento.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="endoprotesis duodenal"
               position="bottom-cta"
@@ -516,6 +515,6 @@ export default function EndoprotesisDuodenalesPage() {
           ),
         }}
       />
-    </>
+    </div>
   )
 }

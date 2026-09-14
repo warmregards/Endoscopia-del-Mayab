@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -62,7 +64,7 @@ const relatedProcedures = [
 
 export default function CprePlayaDelCarmenPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD: MedicalProcedure with areaServed for Quintana Roo */}
       <script
         type="application/ld+json"
@@ -112,7 +114,7 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 1: HERO — bg-background
           Serves: ALL personas
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
@@ -125,14 +127,14 @@ export default function CprePlayaDelCarmenPage() {
             </p>
 
             {/* Price badge */}
-            <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
+            <div className={`inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20 ${pages.heroPrice}`}>
               <span className="text-2xl sm:text-3xl font-bold text-text-accent">
                 {displayFrom("cpre")}
               </span>
             </div>
 
             {/* Trust chips */}
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
               {trustChips.map((chip) => (
                 <div key={chip} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -142,7 +144,7 @@ export default function CprePlayaDelCarmenPage() {
             </div>
 
             {/* CTAs — WhatsApp FIRST */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="CPRE"
                 position="hero"
@@ -170,7 +172,7 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 2: Definition + Why Mérida — bg-muted
           Serves: P4 (procedure seeker), P1 (location seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -208,7 +210,7 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 3: Travel Logistics — bg-background
           Serves: P1 (QR location seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -259,7 +261,7 @@ export default function CprePlayaDelCarmenPage() {
             </div>
 
             {/* Post-procedure logistics */}
-            <div className="rounded-xl bg-accent-light border border-accent/20 p-6 space-y-2">
+            <div className={`rounded-xl bg-accent-light border border-accent/20 p-6 space-y-2 ${pages.note}`}>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-accent flex-shrink-0" />
                 <span className="font-semibold text-foreground">
@@ -282,7 +284,7 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 4: Pricing + Value — bg-muted
           Serves: P2 (price shopper)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -290,7 +292,7 @@ export default function CprePlayaDelCarmenPage() {
             </h2>
 
             {/* Price badge */}
-            <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-background border border-border shadow-sm">
+            <div className={`inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-background border border-border shadow-sm ${pages.heroPrice}`}>
               <span className="text-2xl sm:text-3xl font-bold text-text-accent">
                 {displayFrom("cpre")}
               </span>
@@ -312,7 +314,7 @@ export default function CprePlayaDelCarmenPage() {
             </p>
 
             {/* Value comparison */}
-            <div className="rounded-xl bg-background border border-border p-6 space-y-4">
+            <div className={`rounded-xl bg-background border border-border p-6 space-y-4 ${pages.panelSurface}`}>
               <p className="text-foreground/80 leading-relaxed">
                 La misma CPRE en hospitales privados de Cancún cuesta $40,000+
                 MXN. Incluso sumando el costo de transporte y una noche de
@@ -345,20 +347,20 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 5: Doctor Credentials — bg-background
           Serves: P3 (referred patient)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
               {DOCTOR.name} — Especialista en CPRE
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-8 items-start">
+            <div className={`flex flex-col sm:flex-row gap-8 items-start ${pages.portraitRow}`}>
               <Image
                 src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={200}
                 height={200}
-                className="rounded-2xl flex-shrink-0"
+                className={`rounded-2xl flex-shrink-0 ${pages.portraitImg}`}
               />
               <div className="space-y-4">
                 <p className="text-foreground/80 leading-relaxed">
@@ -371,7 +373,7 @@ export default function CprePlayaDelCarmenPage() {
                 </p>
 
                 {/* Credentials */}
-                <div className="flex flex-wrap gap-2">
+                <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                   {DOCTOR.credentials.map((cred) => (
                     <span
                       key={cred}
@@ -399,17 +401,13 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 6: Google Reviews — bg-muted
           Serves: P3 (referred patients traveling from QR)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: FAQ — bg-background
           Serves: P5 (researcher), P1 (QR location seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.faq}`}>
         <Faq
           routeKey="cpre_playa_del_carmen"
           service="CPRE"
@@ -421,18 +419,18 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 7: Related Procedures — bg-background
           Serves: P4 (procedure seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
             Otros Procedimientos Disponibles para Pacientes de Quintana Roo
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {relatedProcedures.map((proc) => (
               <Link
                 key={proc.slug}
                 href={proc.slug}
-                className="group block p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group block p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="text-lg font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                   {proc.name}
@@ -453,7 +451,7 @@ export default function CprePlayaDelCarmenPage() {
           SECTION 8: Bottom CTA — bg-primary
           Serves: ALL personas
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
             ¿Necesitas una CPRE? Escríbenos desde Quintana Roo
@@ -463,7 +461,7 @@ export default function CprePlayaDelCarmenPage() {
             del {DOCTOR.name}. Atendemos pacientes de Playa del Carmen, Cancún,
             Tulum y toda la Riviera Maya.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="CPRE"
               position="bottom-cta"
@@ -479,6 +477,6 @@ export default function CprePlayaDelCarmenPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

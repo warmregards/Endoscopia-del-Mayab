@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, BadgeCheck, ExternalLink, ShieldCheck } from "lucide-react"
@@ -41,7 +43,7 @@ const verifyByPerson = VERIFY_ROWS.reduce<
 
 function CredentialChip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full bg-accent-light border border-accent/20 px-4 py-2 text-xs font-medium text-foreground">
+    <span className={`inline-flex items-center gap-2 rounded-full bg-accent-light border border-accent/20 px-4 py-2 text-xs font-medium text-foreground ${pages.chip}`}>
       <BadgeCheck className="h-4 w-4 shrink-0 text-text-accent" />
       {children}
     </span>
@@ -63,12 +65,12 @@ function DuringProcedure({
           {heading}
         </h3>
       )}
-      <ol className="space-y-4">
+      <ol className={`space-y-4 ${pages.stepList}`}>
         {steps.map((step, i) => (
           <li key={step} className="flex gap-4">
             <span
               aria-hidden
-              className="inline-flex h-6 shrink-0 items-center rounded-full bg-accent-light px-2 text-xs font-semibold text-text-accent"
+              className={`inline-flex h-6 shrink-0 items-center rounded-full bg-accent-light px-2 text-xs font-semibold text-text-accent ${pages.stepLabel}`}
             >
               {labels[i] ?? i + 1}
             </span>
@@ -87,7 +89,7 @@ export default function EquipoMedicoPage() {
   const showVideo = isPublished(video)
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD: WebPage + team mainEntity ──────────────────────────── */}
       <script
         type="application/ld+json"
@@ -122,23 +124,23 @@ export default function EquipoMedicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-4">
             <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
               El equipo que estará contigo en tu procedimiento
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className={`text-lg text-muted-foreground leading-relaxed ${pages.lead}`}>
               Endoscopista, anestesiólogo y enfermera — los tres certificados,
               los tres en la sala.
             </p>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className={`mt-8 grid grid-cols-1 gap-6 md:grid-cols-3 ${pages.openGrid}`}>
             {TEAM.map((m) => (
               <article
                 key={m.slug}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:border-accent/30 hover:shadow-md"
+                className={`group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:border-accent/30 hover:shadow-md ${pages.personCard}`}
               >
                 <div className="relative aspect-[4/5] w-full bg-muted">
                   <Image
@@ -190,7 +192,7 @@ export default function EquipoMedicoPage() {
           SECTION 2: ENDOSCOPISTA — bg-muted
           Short by design: /dr-omar-quiroz is canonical for him.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="endoscopista" className="scroll-mt-24 bg-muted">
+      <section id="endoscopista" className={`scroll-mt-24 bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
@@ -217,11 +219,11 @@ export default function EquipoMedicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: ANESTESIÓLOGO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="anestesiologo" className="scroll-mt-24 bg-background">
+      <section id="anestesiologo" className={`scroll-mt-24 bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
             <div className="w-full shrink-0 lg:w-80">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+              <div className={`relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border bg-muted ${pages.frame}`}>
                 <Image
                   src={anestesiologo.photo}
                   alt={`${anestesiologo.displayName} — ${anestesiologo.role}`}
@@ -241,11 +243,11 @@ export default function EquipoMedicoPage() {
                 {anestesiologo.bio}
               </p>
 
-              <div className="rounded-xl border border-accent/20 bg-accent-light p-6">
+              <div className={`rounded-xl border border-accent/20 bg-accent-light p-6 ${pages.note}`}>
                 <p className="text-sm font-semibold uppercase tracking-wide text-text-accent">
                   Consejo Mexicano de Anestesiología
                 </p>
-                <p className="mt-2 font-serif text-2xl font-bold tracking-tight text-foreground">
+                <p className={`mt-2 font-serif text-2xl font-bold tracking-tight text-foreground ${pages.figure}`}>
                   {anestesiologo.cedulas.consejo}
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -273,7 +275,7 @@ export default function EquipoMedicoPage() {
           SECTION 4: ENFERMERA — bg-muted
           The guarantee sentence is generic by design (FEMALE_PRESENCE_LINE).
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="enfermera" className="scroll-mt-24 bg-muted">
+      <section id="enfermera" className={`scroll-mt-24 bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-4">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
@@ -285,10 +287,10 @@ export default function EquipoMedicoPage() {
             </p>
           </div>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-background">
-            <div className="flex flex-col gap-8 p-6 sm:flex-row sm:p-8">
+          <div className={`mt-8 overflow-hidden rounded-2xl border border-border bg-background ${pages.open}`}>
+            <div className={`flex flex-col gap-8 p-6 sm:flex-row sm:p-8 ${pages.flush}`}>
               <div className="w-full shrink-0 sm:w-64">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-muted">
+                <div className={`relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-muted ${pages.frame}`}>
                   <Image
                     src={enfermera.photo}
                     alt={`${enfermera.displayName} — ${enfermera.role}`}
@@ -331,7 +333,7 @@ export default function EquipoMedicoPage() {
           Framed as what to ask anywhere, starting with us. Never a claim
           about what other clinics do.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="verifica" className="scroll-mt-24 bg-background">
+      <section id="verifica" className={`scroll-mt-24 bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-4">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
@@ -349,7 +351,7 @@ export default function EquipoMedicoPage() {
             {verifyByPerson.map((group) => (
               <div
                 key={group.person}
-                className="rounded-xl border border-border bg-card p-6"
+                className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}
               >
                 <h3 className="font-serif text-lg font-semibold tracking-tight text-foreground">
                   {group.person}
@@ -421,7 +423,7 @@ export default function EquipoMedicoPage() {
                 <li key={item.q} className="flex gap-4">
                   <span
                     aria-hidden
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary ${pages.numberBadge}`}
                   >
                     {i + 1}
                   </span>
@@ -460,7 +462,7 @@ export default function EquipoMedicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: FAQ — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="faqs-equipo" className="bg-muted">
+      <section id="faqs-equipo" className={`bg-muted ${system.faq}`}>
         <Faq
           routeKey="equipo"
           service="equipo"
@@ -471,7 +473,7 @@ export default function EquipoMedicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-2xl space-y-8 text-center">
             <div className="space-y-2">
@@ -484,12 +486,14 @@ export default function EquipoMedicoPage() {
               </p>
             </div>
 
-            <TeamCta
-              position="bottom-cta"
-              source={SOURCE}
-              tone="dark"
-              className="justify-center"
-            />
+            <div data-sticky-bottom-cta>
+              <TeamCta
+                position="bottom-cta"
+                source={SOURCE}
+                tone="dark"
+                className="justify-center"
+              />
+            </div>
 
             <p className="flex items-center justify-center gap-2 text-sm text-white/80">
               <ShieldCheck className="h-4 w-4 shrink-0" />
@@ -502,6 +506,6 @@ export default function EquipoMedicoPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

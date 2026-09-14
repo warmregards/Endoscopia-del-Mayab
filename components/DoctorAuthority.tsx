@@ -38,6 +38,8 @@ interface DoctorAuthorityProps {
   procedureContext?: string
   /** Render the headshot — compact only, default true */
   showImage?: boolean
+  /** Optional portrait override for an approved page design. */
+  portraitSrc?: string
   /** Render the "Conoce al Dr. Quiroz →" link — default true; set false on noindex LPs */
   profileLink?: boolean
   className?: string
@@ -151,6 +153,7 @@ export default function DoctorAuthority({
   procedureName,
   procedureContext,
   showImage = true,
+  portraitSrc,
   profileLink = true,
   className,
 }: DoctorAuthorityProps) {
@@ -231,10 +234,10 @@ export default function DoctorAuthority({
     >
       {showImage && (
         <Image
-          src={DOCTOR.photos.headshot}
+          src={portraitSrc ?? DOCTOR.photos.headshot}
           alt={`${DOCTOR.name} — ${DOCTOR.descriptor}`}
-          width={160}
-          height={160}
+          width={portraitSrc ? 320 : 160}
+          height={portraitSrc ? 400 : 160}
           className="h-32 w-32 shrink-0 rounded-2xl object-cover sm:h-40 sm:w-40"
         />
       )}

@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, displayFrom } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -26,7 +28,7 @@ export const metadata = metaFor("capsula_endoscopica")
 
 export default function CapsulaEndoscopicaPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -65,9 +67,9 @@ export default function CapsulaEndoscopicaPage() {
       />
 
       {/* SECTION 1: HERO — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
             {/* Content */}
             <div className="flex-1 space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
@@ -80,7 +82,7 @@ export default function CapsulaEndoscopicaPage() {
                 no alcanzan. Sin sedación y sin cirugía.
               </p>
 
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                 {[
                   "Sin sedación",
                   `${DOCTOR.worksFor.hospital}`,
@@ -94,7 +96,7 @@ export default function CapsulaEndoscopicaPage() {
                 ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton service="cápsula endoscópica" position="hero" />
                 <CallButton
                   service="cápsula endoscópica"
@@ -105,17 +107,17 @@ export default function CapsulaEndoscopicaPage() {
             </div>
 
             {/* Quote Card */}
-            <div className="w-full lg:max-w-md">
-              <div className="bg-background rounded-2xl p-8 border border-border shadow-sm">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mx-auto">
+            <div className={`w-full lg:max-w-md ${pages.pricePanel}`}>
+              <div className={`bg-background rounded-2xl p-8 border border-border shadow-sm ${pages.panel}`}>
+                <div className={`text-center space-y-4 ${pages.panelHead}`}>
+                  <div className={`w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mx-auto ${pages.panelIcon}`}>
                     <Pill className="h-8 w-8 text-accent" />
                   </div>
                   <div className="space-y-2">
                     <div className="text-sm font-medium text-muted-foreground">
                       {DOCTOR.name}
                     </div>
-                    <div className="text-2xl font-bold text-text-accent">
+                    <div className={`text-2xl font-bold text-text-accent ${pages.panelPrice}`}>
                       {mxn(PRICING.capsula_endoscopica.from)}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -124,7 +126,7 @@ export default function CapsulaEndoscopicaPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 p-6 rounded-xl bg-muted border border-border">
+                <div className={`mt-6 p-6 rounded-xl bg-muted border border-border ${pages.panelBody} ${pages.plainBox}`}>
                   <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
                     La cotización cubre
                   </h3>
@@ -148,7 +150,7 @@ export default function CapsulaEndoscopicaPage() {
       </section>
 
       {/* SECTION 2: DEFINITION — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
@@ -177,7 +179,7 @@ export default function CapsulaEndoscopicaPage() {
               cirugía.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border ${pages.quietNote}`}>
               <Clock className="h-5 w-5 text-accent" />
               <span className="font-semibold text-foreground">8–12 horas de grabación</span>
               <span className="text-foreground/70">· Sin sedación · Ambulatorio</span>
@@ -187,14 +189,14 @@ export default function CapsulaEndoscopicaPage() {
       </section>
 
       {/* SECTION 3: INDICATIONS & LOCATION — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             ¿Cuándo se necesita una cápsula endoscópica?
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 max-w-4xl">
+          <div className={`grid gap-8 md:grid-cols-2 max-w-4xl ${pages.openGrid}`}>
             {/* Indications Card */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <Search className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -232,7 +234,7 @@ export default function CapsulaEndoscopicaPage() {
             </div>
 
             {/* Location Card */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -265,14 +267,14 @@ export default function CapsulaEndoscopicaPage() {
       </section>
 
       {/* SECTION 4: HOW IT WORKS, PREP & RISK — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Cómo funciona, preparación y seguridad
           </h2>
-          <div className="grid gap-8 md:grid-cols-3 max-w-5xl">
+          <div className={`grid gap-8 md:grid-cols-3 max-w-5xl ${pages.openGrid}`}>
             {/* Cómo funciona */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <Camera className="h-6 w-6 text-accent" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -296,7 +298,7 @@ export default function CapsulaEndoscopicaPage() {
             </div>
 
             {/* Preparación */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <FileText className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -322,7 +324,7 @@ export default function CapsulaEndoscopicaPage() {
             </div>
 
             {/* Seguridad */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <AlertTriangle className="h-6 w-6 text-accent" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -342,18 +344,18 @@ export default function CapsulaEndoscopicaPage() {
       </section>
 
       {/* SECTION 5: DOCTOR — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Quién realiza e interpreta tu estudio
           </h2>
-          <div className="flex flex-col md:flex-row items-start gap-8 max-w-4xl">
+          <div className={`flex flex-col md:flex-row items-start gap-8 max-w-4xl ${pages.portraitRow}`}>
             <Image
               src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}
-              className="rounded-2xl w-full max-w-[280px]"
+              className={`rounded-2xl w-full max-w-[280px] ${pages.portraitImg}`}
             />
             <div className="space-y-4">
               <Link href={DOCTOR.profileUrl}>
@@ -362,7 +364,7 @@ export default function CapsulaEndoscopicaPage() {
                 </h3>
               </Link>
               <p className="text-foreground/80 leading-relaxed">{DOCTOR.bioShort}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.slice(0, 4).map((cred) => (
                   <span
                     key={cred}
@@ -388,21 +390,15 @@ export default function CapsulaEndoscopicaPage() {
       </section>
 
       {/* SECTION 6: REVIEWS — bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* SECTION 7: FAQ — bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="capsula_endoscopica" service="cápsula endoscópica" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="capsula_endoscopica" service="cápsula endoscópica" />
       </section>
 
       {/* SECTION 8: CTA + RELATED — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding">
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
@@ -414,7 +410,7 @@ export default function CapsulaEndoscopicaPage() {
               cápsula endoscópica es lo que necesitas — o si un estudio
               convencional responde primero.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton service="cápsula endoscópica" position="cta" />
               <CallButton
                 service="cápsula endoscópica"
@@ -426,13 +422,13 @@ export default function CapsulaEndoscopicaPage() {
 
           {/* Related Procedures */}
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
+            <h2 className={`text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8 ${system.closingSub}`}>
               Estudios relacionados
             </h2>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
               <Link
                 href="/endoscopia-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Search className="h-6 w-6 text-primary" />
@@ -451,7 +447,7 @@ export default function CapsulaEndoscopicaPage() {
 
               <Link
                 href="/colonoscopia-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Search className="h-6 w-6 text-accent" />
@@ -470,7 +466,7 @@ export default function CapsulaEndoscopicaPage() {
 
               <Link
                 href="/emergencias-digestivas-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <ShieldCheck className="h-6 w-6 text-primary" />
@@ -490,6 +486,6 @@ export default function CapsulaEndoscopicaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

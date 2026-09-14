@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { DOCTOR } from "@/lib/doctor"
 import { CLINIC } from "@/lib/clinic"
@@ -39,7 +41,7 @@ const exampleSchedule: { time: string; step: string; note?: string; strong?: boo
 
 export default function PreparacionColonoscopiaPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -57,7 +59,7 @@ export default function PreparacionColonoscopiaPage() {
           SECTION 1: HERO — bg-background
           Coordination gate is prominent, before any schedule.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
@@ -71,8 +73,8 @@ export default function PreparacionColonoscopiaPage() {
               reprogramarse.
             </p>
 
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
-              <p className="font-serif font-bold text-foreground text-xl tracking-tight">
+            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
+              <p className={`font-serif font-bold text-foreground text-xl tracking-tight ${pages.serifFigure}`}>
                 La preparación para colonoscopia se coordina siempre con nosotros.
               </p>
               <p className="text-foreground/80 leading-relaxed">
@@ -85,7 +87,7 @@ export default function PreparacionColonoscopiaPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="hero"
@@ -102,10 +104,10 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: QUÉ COMPRAR + QUÉ COMER — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
-          <div className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+          <div className={`max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+            <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
               <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight flex items-center gap-2">
                 <ShoppingBag className="h-6 w-6 text-accent" aria-hidden />
                 Qué comprar
@@ -121,7 +123,7 @@ export default function PreparacionColonoscopiaPage() {
               </p>
             </div>
 
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
               <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight flex items-center gap-2">
                 <UtensilsCrossed className="h-6 w-6 text-accent" aria-hidden />
                 El día anterior
@@ -139,7 +141,7 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: CRONOGRAMA DE EJEMPLO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <div className="space-y-2">
@@ -159,7 +161,7 @@ export default function PreparacionColonoscopiaPage() {
                     i < exampleSchedule.length - 1 ? "border-b border-border" : ""
                   } ${s.strong ? "bg-accent-light" : ""}`}
                 >
-                  <span className="font-serif font-bold text-text-accent whitespace-nowrap sm:w-24">
+                  <span className={`font-serif font-bold text-text-accent whitespace-nowrap sm:w-24 ${pages.serifFigure}`}>
                     {s.time}
                   </span>
                   <span className="font-semibold text-foreground">{s.step}</span>
@@ -191,14 +193,14 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 4: DIABETES + ANTICOAGULANTES — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
               Si tomas medicamentos
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Si tienes diabetes
                 </h3>
@@ -210,7 +212,7 @@ export default function PreparacionColonoscopiaPage() {
                   </strong>
                 </p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Si tomas anticoagulantes
                 </h3>
@@ -232,7 +234,7 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: FUERA DE MÉRIDA + DÍA DEL ESTUDIO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <div className="space-y-4">
@@ -287,14 +289,14 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: FAQ — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.faq}`}>
         <Faq routeKey="preparacion_colonoscopia" service={SERVICE} />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -305,7 +307,7 @@ export default function PreparacionColonoscopiaPage() {
                 Escríbenos y te enviamos tu preparación para la hora de tu cita.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="bottom-cta"
@@ -318,6 +320,6 @@ export default function PreparacionColonoscopiaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

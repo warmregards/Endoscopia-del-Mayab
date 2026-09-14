@@ -1,0 +1,246 @@
+/* /colonoscopia-merida composition for the design refresh.
+   Shared tokens, type roles, CTAs, doctor band, reviews, FAQ, closing and page
+   chrome come from ../design-system.module.css — do not restate them here.
+   Content, links, schema and tracking are unchanged; this file only regroups. */
+
+/* ── Page palette and generic type (mirrors the reviewed endoscopy page) ── */
+.page {
+  --background: 48 71% 99%; --muted: 48 30% 96%; --accent-light: 93 23% 91%; --border: 103 10% 84%;
+  color: var(--ink);
+  background: var(--paper);
+}
+.page h1, .page h2, .page h3 { color: var(--ink); text-wrap: balance; }
+.page h2 { font-size: var(--design-heading); line-height: 1.15; }
+.page h3 { font-size: var(--design-subheading); line-height: 1.2; }
+.page p, .page li { line-height: 1.8; }
+.page :global(.text-sm) { font-size: 15px; }
+.page :global(.text-xs) { font-size: 13px; }
+.page :global(.text-foreground), .page :global(.text-primary) { color: var(--ink); }
+.page :global(.text-muted-foreground), .page :global(.text-foreground\/80) { color: var(--muted-ink); }
+.page :global(.border-border) { border-color: var(--rule); }
+.page :global(.max-w-5xl) { max-width: 1160px; }
+
+/* ── Hero: introduction left, cost panel right ── */
+.hero { background: var(--paper); border-bottom: 1px solid var(--rule); }
+.hero :global(.container-page) > div { gap: 72px; align-items: center; }
+.eyebrow { margin-bottom: 12px; padding: 0; border: 0; border-radius: 0; background: none; font-size: 13px; line-height: 1.5; font-weight: 600; letter-spacing: .02em; color: #42604d; }
+.hero h1 { max-width: 700px; }
+.hero h1 + p { max-width: 520px; font-size: 19px; font-weight: 500; line-height: 1.6; }
+.hero h1 + p + p { max-width: 540px; font-size: var(--design-body); line-height: 1.75; }
+.hero :global(.hidden.md\:flex) { gap: 14px 24px; font-size: 13px; }
+.location { font-size: 14px; }
+
+.pricePanel { max-width: 410px; flex-shrink: 0; }
+.pricePanel > div { padding: 0 28px 24px; border: 1px solid #b8c8ba; border-radius: 12px; background: var(--surface); box-shadow: none; overflow: hidden; }
+.pricePanel > div > * { margin-block: 0; }
+.pricePanel > div > div:first-child { margin: 0 -28px 24px; padding: 20px 28px 24px; background: var(--ink); text-align: left; }
+.pricePanel > div > div:first-child > p { margin: 0; font-size: 14px; line-height: 1.5; color: #d9e4d8; }
+.pricePanel > div > div:first-child > p:first-child { margin-bottom: 4px; }
+.pricePanel > div > div:first-child > p:nth-child(2) { font-family: Georgia, 'Times New Roman', serif; font-size: 34px; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--inverse); }
+.pricePanel > div > div:first-child > p:last-child { margin-top: 4px; }
+.pricePanel > div > div:nth-child(2) > div { gap: 12px; }
+.pricePanel > div > div:last-child { margin-top: 24px; padding: 18px 0 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; }
+.pricePanel > div > div:last-child p { font-size: 13px; line-height: 1.6; }
+
+/* Online-booking strip (OnlineBookingBanner renders the section after the hero). */
+.hero + section { background: var(--sage); }
+.hero + section :global(.max-w-3xl) { max-width: 1160px; }
+.hero + section :global(.max-w-3xl) > div { align-items: flex-start; gap: 12px; }
+.hero + section :global(.max-w-3xl) > div > svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 4px; }
+.hero + section :global(.max-w-3xl) > div > div { display: grid; gap: 6px; }
+.hero + section :global(.max-w-3xl) > div p { margin: 0; }
+.hero + section :global(.font-serif) { font-family: Georgia, serif; font-size: 25px; font-weight: 400; line-height: 1.2; }
+.hero + section :global(.font-serif) + p { line-height: 1.65; }
+.hero + section a { border-width: 1px; border-radius: var(--design-radius); font-size: 14px; }
+
+/* ── Pricing: benchmarks full width, supporting notes in an 880px reading column ── */
+.pricing { background: var(--surface); }
+.pricingColumn { max-width: 1160px; }
+.pricingColumn > * { margin-block: 0; }
+.pricingColumn > * + * { margin-top: 48px; }
+.pricingColumn > .geo + .costNote { margin-top: 16px; }
+.pricing h2 { max-width: 920px; }
+
+.benchmarks { gap: 0; border-block: 1px solid var(--rule); }
+.benchmarks > div { padding: 28px 24px; border: 0; border-radius: 0; background: none; text-align: left; }
+.benchmarks > div + div { border-left: 1px solid var(--rule); }
+.benchmarks > div > p:first-child { min-height: 54px; font-size: 15px; font-weight: 500; }
+.benchmarks > div > p:nth-child(2) { font-family: Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.25; letter-spacing: -.035em; }
+.benchmarks > div:nth-child(3) { background: var(--sage); }
+
+.totals { max-width: 880px; margin-inline: auto; padding: 32px; border: 0; border-radius: 0; background: var(--paper); }
+.totals > p:first-child { font-family: Georgia, serif; font-size: 28px; font-weight: 400; }
+.totals :global(.justify-between) { gap: 24px; }
+.totals :global(.justify-between) > span:last-child { flex-shrink: 0; }
+.totals > p:last-child { max-width: 680px; margin: 24px 0 0; padding: 2px 0 2px 14px; border-left: 2px solid #80a08f; color: #42604d; font-size: 14px; line-height: 1.65; }
+
+.biopsy { max-width: 880px; margin-inline: auto; }
+.biopsy > div { padding: 28px 32px; border: 0; border-radius: 6px; background: var(--sage); }
+.biopsy > div > * { margin-block: 0; }
+.biopsy > div > p:first-child { font-family: Georgia, serif; font-size: 25px; font-weight: 400; line-height: 1.25; letter-spacing: -.035em; }
+.biopsy > div > p:first-child + p { margin-top: 8px; line-height: 1.75; }
+.biopsy ul { display: grid; gap: 8px; margin-top: 16px; }
+.biopsy ul > li { margin: 0; line-height: 1.75; }
+.biopsy ul svg { margin-top: 6px; }
+.biopsy > div > p:last-child { margin-top: 20px; padding-top: 16px; border-top: 1px solid #c3cfc0; font-size: 14px; line-height: 1.5; }
+
+.geo { max-width: 880px; margin-inline: auto; line-height: 1.75; }
+.costNote { max-width: 880px; margin-inline: auto; padding: 2px 0 2px 14px; border: 0; border-left: 2px solid #80a08f; border-radius: 0; background: none; }
+.page .costNote p { margin: 0; color: #42604d; font-size: 14px; line-height: 1.65; }
+
+.differentiators { gap: 32px 40px; }
+.differentiators > div { padding: 20px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: none; }
+.differentiators > div > p:first-child { margin-bottom: 4px; line-height: 1.5; }
+.differentiators > div > p:last-child { font-size: 14px; line-height: 1.65; }
+
+/* ── Doctor authority (band colours, H2 and CTA come from system.doctor) ── */
+.doctor img { border-radius: var(--design-photo-radius); }
+.doctor :global(.container-page) > div { gap: 40px; }
+.doctor :global(.container-page) > div > img { width: 200px; height: 250px; object-fit: cover; object-position: top; }
+.doctor :global(.flex-1) > p { font-size: var(--design-body); line-height: 1.75; color: var(--inverse-muted); }
+.doctor :global(.flex-1) > p:first-of-type { margin: 10px 0 24px; font-size: 15px; font-weight: 400; }
+.doctor :global(.flex-1) > ul { gap: 12px 24px; margin: 0; }
+.doctor :global(.flex-1) > ul li { padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--inverse-muted); font-size: var(--design-meta); line-height: 1.5; }
+.doctor :global(.flex-1) > ul svg { flex-shrink: 0; }
+.doctor :global(.flex-1) > div:first-of-type { margin-top: 28px; padding-top: 28px; border-color: #ffffff30; }
+.doctor :global(.flex-1) > div:first-of-type > p { margin: 0 0 18px; font-family: inherit; font-size: 12px; color: var(--inverse-muted); }
+.doctor :global(.flex-1) > div:first-of-type ul { gap: 0 24px; margin: 0; }
+.doctor :global(.flex-1) > div:first-of-type li { align-items: center; gap: 16px; padding: 18px 0; border: 0; border-top: 1px solid #ffffff30; border-radius: 0; background: transparent; }
+.doctor :global(.flex-1) > div:first-of-type li > div:first-child { width: 72px; height: 64px; padding: 8px; border-radius: 6px; background: var(--surface); }
+.doctor :global(.flex-1) > div:first-of-type li img { border-radius: 0; }
+.doctor :global(.flex-1) > div:first-of-type li p { margin: 0; font-family: inherit; font-size: 15px; line-height: 1.45; color: var(--inverse); }
+.doctor :global(.flex-1) > div:first-of-type li p + p { margin-top: 4px; font-size: 14px; color: #c5d6cb; }
+.doctor :global(.flex-1) > div:last-child { gap: 12px; }
+.doctor :global(.flex-1) > div:last-child > a:last-child { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border: 1px solid #91a99a; border-radius: var(--design-radius); color: var(--inverse); }
+
+/* ── Team (TeamPresence renders the section after the doctor band) ── */
+.doctor + section { background: var(--paper); }
+.doctor + section article { padding: 28px 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: transparent; }
+.doctor + section article > img { margin-bottom: 8px; border-radius: var(--design-photo-radius); }
+.doctor + section article > p { margin-block: 0; }
+.doctor + section article > p:first-of-type { font-family: Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1.25; }
+.doctor + section article > div { margin-top: 8px; }
+.doctor + section article span:global(.rounded-full) { padding: 4px 0; border: 0; border-radius: 0; background: transparent; }
+.doctor + section :global(.max-w-5xl) > div:last-child > a { justify-content: space-between; min-height: 48px; padding: 12px 16px; border: 1px solid #8aa18f; border-radius: var(--design-radius); line-height: 1.5; }
+.doctor + section :global(.max-w-5xl) > div:last-child > a svg { flex-shrink: 0; }
+
+/* ── Certified-endoscopist comparison ── */
+.page :global(#comparacion) { background: var(--surface); }
+.page :global(#comparacion) th, .page :global(#comparacion) td { border-radius: 0; }
+.page :global(#comparacion) th:last-child, .page :global(#comparacion) td:last-child { border: 0; background: var(--sage); }
+.page :global(#comparacion) :global(.md\:hidden) > div { padding: 24px 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; }
+.page :global(#comparacion) :global(.justify-between) { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+.page :global(#comparacion) :global(.justify-between) > span:last-child { text-align: right; }
+
+/* ── Booking form ── */
+.booking { background: var(--sage); }
+.booking :global(.container-page) { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.booking :global(.container-page) > div:first-child { position: sticky; top: 120px; margin: 0; text-align: left; }
+.booking :global(.container-page) > div:last-child { margin-top: 0; }
+.booking form { border: 1px solid #bdcbbb; border-radius: 12px; box-shadow: none; }
+.booking :is(input, select, button) { border-radius: 6px; }
+.booking form > div:nth-child(2) { display: flex; align-items: flex-start; padding: 12px 0; border-block: 1px solid var(--rule); border-radius: 0; background: transparent; color: #42604d; font-size: 14px; line-height: 1.55; }
+.booking form > div:nth-child(2) svg { flex-shrink: 0; margin-top: 3px; }
+/* The date picker is portaled outside .page. */
+:global(body):has(.page) :global([data-radix-popper-content-wrapper]) { --accent: 163 36% 30%; }
+
+/* ── Educational sections: open ruled groups instead of cards ── */
+.intro { background: var(--surface); }
+.intro :global(.max-w-4xl) { max-width: 880px; }
+.intro p, .intro li, .process p, .process li, .results p, .results li { line-height: 1.75; }
+.indications { gap: 32px 40px; }
+.indications > div { padding: 24px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: transparent; }
+.indications > div > div:first-child { align-items: flex-start; gap: 12px; }
+.indications > div > div:first-child > svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 6px; }
+.indications li svg, .steps li svg, .followUp li svg { margin-top: 5px; }
+.crossLinks { padding-top: 24px; border-top: 1px solid var(--rule); }
+/* Link-dense routing copy: muted text so the ink links stay distinguishable. */
+.crossLinks, .crossLinks p { color: var(--muted-ink); font-size: 15px; }
+.crossLinks a { text-decoration: underline; text-decoration-color: #9fb3a5; text-underline-offset: 3px; }
+
+.process { background: var(--paper); }
+.steps { gap: 32px; }
+.steps > div { padding: 20px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: transparent; text-align: left; }
+.steps > div > div:first-child { justify-content: flex-start; margin-left: 0; background: none; color: #6a8371; font-family: Georgia, serif; font-size: 44px; font-weight: 400; }
+.duration > div { flex-wrap: wrap; justify-content: center; border: 0; border-radius: 6px; }
+.pain { padding: 24px 0 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; }
+
+.results { background: var(--surface); }
+.results :global(.grid) { gap: 32px 64px; }
+.timeline > div { margin-block: 0; padding: 24px 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: transparent; }
+.followUp { align-self: start; padding: 28px 32px; border-radius: 6px; }
+
+/* ── Mid-page WhatsApp strips ── */
+.midCta { background: var(--sage); }
+.midCta :global(.max-w-3xl) { max-width: 1160px; gap: 16px 40px; }
+.midCta p { max-width: 720px; font-family: Georgia, serif; font-size: 25px; font-weight: 400; line-height: 1.3; letter-spacing: -.035em; }
+
+/* ── Interaction ── */
+@media (hover:hover) {
+  .doctor :global(.flex-1) > div:last-child > a:last-child:hover { background: #ffffff12; }
+  .doctor + section :global(.max-w-5xl) > div:last-child > a:hover { background: var(--sage); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .page a:global(.transition-all) { transition: none; }
+  .page a:global(.transition-all):hover { gap: .5rem; }
+}
+
+/* ── Responsive ── */
+@media (min-width:1024px) {
+  .benchmarks > div { padding-inline: 16px; }
+  .benchmarks > div > p:nth-child(2) { font-size: clamp(20px, 2vw, 26px); }
+}
+@media (max-width:1023px) {
+  .hero :global(.container-page) > div { gap: 40px; }
+  .pricePanel { max-width: none; }
+  .benchmarks > div:nth-child(3) { border-left: 0; }
+  .booking :global(.container-page) { gap: 32px; }
+}
+@media (max-width:767px) {
+  .hero h1 + p { font-size: 17px; }
+  .actions { flex-direction: row; gap: 10px; }
+  .actions a[id$="-wa"] { flex: 1; }
+  .actions a[id$="-call"] { width: auto; }
+  .pricePanel > div { padding-inline: 24px; }
+  .pricePanel > div > div:first-child { margin-inline: -24px; padding-inline: 24px; }
+  .pricePanel > div > div:first-child > p:nth-child(2) { font-size: 28px; }
+
+  .hero + section :global(.max-w-3xl) { align-items: stretch; gap: 20px; text-align: left; }
+  .hero + section :global(.font-serif) { font-size: 24px; }
+
+  .benchmarks > div { padding: 24px 0; }
+  .benchmarks > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+  .benchmarks > div:nth-child(3) { padding: 24px; }
+  .benchmarks > div > p:first-child { min-height: 0; }
+  .totals { padding: 24px 20px; }
+  .totals :global(.justify-between) { gap: 16px; }
+  .biopsy > div { padding: 24px 20px; }
+  .biopsy > div > p:first-child { font-size: 24px; }
+  .differentiators { gap: 24px 20px; }
+
+  .doctor :global(.container-page) > div { gap: 24px; }
+  .doctor :global(.container-page) > div > img { width: 160px; height: 200px; }
+  .doctor :global(.flex-1) > div:last-child { flex-direction: column; align-items: stretch; }
+  .doctor :global(.flex-1) > div:last-child > a { width: 100%; }
+
+  .page :global(#comparacion) :global(.justify-between) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 12px; }
+  .page :global(#comparacion) :global(.justify-between):last-child { display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0; padding: 14px 16px; border-radius: 6px; }
+  .page :global(#comparacion) :global(.justify-between):last-child > span:first-child { white-space: nowrap; font-size: 14px; font-weight: 500; }
+  .page :global(#comparacion) :global(.justify-between):last-child > span:last-child { text-align: left; font-size: 16px; line-height: 1.5; }
+
+  .booking :global(.container-page) { display: block; }
+  .booking :global(.container-page) > div:first-child { position: static; }
+  .booking :global(.container-page) > div:last-child { margin-top: 28px; }
+
+  /* Keep the clock beside the note instead of stranded above centered lines. */
+  .duration { text-align: left; }
+  .duration > div { display: grid; grid-template-columns: 16px 1fr; gap: 4px 12px; align-items: start; padding: 16px 20px; }
+  .duration > div > svg { margin-top: 4px; }
+  .duration > div > span:last-child { grid-column: 2; }
+  .followUp { padding: 24px 20px; }
+  .midCta :global(.max-w-3xl) { align-items: stretch; gap: 16px; text-align: left; }
+  .midCta p { font-size: 24px; }
+}
+@media (max-width:380px) {
+  :global(body):has(.page) :global(.rdp-root) { --rdp-day-width: 36px; --rdp-day_button-width: 34px; }
+}

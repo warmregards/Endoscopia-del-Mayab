@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, displayFrom, ADDITIONAL_FEES, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -37,7 +39,7 @@ const RELATED_PROCEDURES = [
 
 export default function DilatacionBiliarPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -72,7 +74,7 @@ export default function DilatacionBiliarPage() {
       />
 
       {/* Section 1: Hero */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
             Dilatación Biliar en Mérida
@@ -82,8 +84,8 @@ export default function DilatacionBiliarPage() {
             sin cirugía abierta.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 text-sm font-medium text-text-accent">
+          <div className={`mt-8 flex flex-wrap gap-4 ${pages.badges}`}>
+            <span className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 text-sm font-medium text-text-accent ${pages.heroPrice}`}>
               Desde {mxn(PRICING.dilatacion_biliar.from)}
             </span>
             <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm font-medium text-foreground">
@@ -97,7 +99,7 @@ export default function DilatacionBiliarPage() {
             </span>
           </div>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+          <div className={`mt-8 flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
             <WhatsAppButton
               service="dilatacion biliar"
               position="hero"
@@ -118,7 +120,7 @@ export default function DilatacionBiliarPage() {
       </section>
 
       {/* Section 2: ¿Qué es? */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             ¿Qué es la Dilatación Biliar?
@@ -152,7 +154,7 @@ export default function DilatacionBiliarPage() {
             ))}
           </ul>
 
-          <div className="mt-8 rounded-xl bg-accent-light border border-accent/20 p-4">
+          <div className={`mt-8 rounded-xl bg-accent-light border border-accent/20 p-4 ${pages.note}`}>
             <p className="text-sm font-medium text-text-accent">
               Ventaja: evita cirugía abierta con recuperación en 24–48 horas.
             </p>
@@ -161,12 +163,12 @@ export default function DilatacionBiliarPage() {
       </section>
 
       {/* Section 3: Precio */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Costo de Dilatación Biliar
           </h2>
-          <p className="mt-4 text-3xl font-bold text-text-accent">
+          <p className={`mt-4 text-3xl font-bold text-text-accent ${pages.priceFigure}`}>
             Desde {mxn(PRICING.dilatacion_biliar.from)}
           </p>
 
@@ -204,13 +206,13 @@ export default function DilatacionBiliarPage() {
       </section>
 
       {/* Section 4: Preparación */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             ¿Cómo es el Procedimiento?
           </h2>
 
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className={`mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 ${pages.steps}`}>
             {[
               {
                 title: "Antes",
@@ -227,7 +229,7 @@ export default function DilatacionBiliarPage() {
             ].map((step) => (
               <div
                 key={step.title}
-                className="bg-card border border-border rounded-xl p-6 shadow-sm"
+                className={`bg-card border border-border rounded-xl p-6 shadow-sm ${pages.step}`}
               >
                 <h3 className="font-serif text-lg font-semibold text-foreground">
                   {step.title}
@@ -242,19 +244,19 @@ export default function DilatacionBiliarPage() {
       </section>
 
       {/* Section 5: Doctor */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Tu Especialista en Dilatación Biliar
           </h2>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-8">
+          <div className={`mt-8 flex flex-col sm:flex-row gap-8 ${pages.portraitRow}`}>
             <Image
               src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}
-              className="rounded-2xl object-cover"
+              className={`rounded-2xl object-cover ${pages.portraitImg}`}
             />
             <div className="flex flex-col justify-center">
               <h3 className="font-serif text-lg font-semibold text-foreground">
@@ -293,27 +295,21 @@ export default function DilatacionBiliarPage() {
       </section>
 
       {/* Section 6: Reviews */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* Section 7: FAQ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="dilatacion_biliar" service="dilatacion biliar" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="dilatacion_biliar" service="dilatacion biliar" />
       </section>
 
       {/* Section 8: Related Procedures + Bottom CTA */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-8">
           {/* Related procedures */}
-          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+          <h2 className={`text-xl md:text-2xl font-serif font-bold text-white tracking-tight ${system.closingSub}`}>
             Procedimientos Relacionados
           </h2>
-          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div className={`grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto ${pages.closingLinks}`}>
             {RELATED_PROCEDURES.map((proc) => (
               <Link
                 key={proc.href}
@@ -333,7 +329,7 @@ export default function DilatacionBiliarPage() {
             Escríbenos por WhatsApp para una valoración personalizada con el{" "}
             {DOCTOR.name}.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="dilatacion biliar"
               position="cta section"
@@ -348,6 +344,6 @@ export default function DilatacionBiliarPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

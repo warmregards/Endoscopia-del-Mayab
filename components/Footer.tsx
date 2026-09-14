@@ -81,9 +81,6 @@ export default function Footer() {
               className="w-full justify-center rounded-xl border border-white/20"
             />
           </div>
-          <p className="mt-4 text-sm text-text-footer-label">
-            {CLINIC.phone.display}
-          </p>
         </div>
 
         {/* Hours & Address */}
@@ -150,9 +147,20 @@ export default function Footer() {
       {/* Copyright */}
       <div className="border-t mt-8 pt-8 border-white/20">
         <div className="max-w-6xl mx-auto px-4 text-center text-text-footer-label text-sm">
-          <p>
+          <p className="text-xs leading-relaxed">
             &copy; {year} Dr. Omar Quiroz - {CLINIC.name}. Todos los derechos
-            reservados.
+            reservados. Diseño{" "}
+            <a
+              href="https://www.sanel.design"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-text-inverse transition-colors"
+            >
+              Sanel Design Studio
+            </a>
+          </p>
+          <p className="mt-2 text-xs leading-relaxed">
+            COFEPRIS: 2431012002A00355
           </p>
         </div>
       </div>

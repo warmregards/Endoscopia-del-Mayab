@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, displayFrom, ADDITIONAL_FEES, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -27,7 +29,7 @@ export default function EmrPage() {
   const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "")
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -53,9 +55,9 @@ export default function EmrPage() {
       />
 
       {/* SECTION 1: HERO — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
             {/* Content */}
             <div className="flex-1 space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
@@ -67,7 +69,7 @@ export default function EmrPage() {
                 con cotización personalizada según tu caso.
               </p>
 
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                 {[
                   "Procedimiento ambulatorio",
                   `${DOCTOR.worksFor.hospital}`,
@@ -81,27 +83,27 @@ export default function EmrPage() {
                 ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton service="resección endoscópica mucosa (EMR)" position="hero" />
                 <CallButton service="resección endoscópica mucosa (EMR)" position="hero" variant="ghost" />
               </div>
             </div>
 
             {/* Pricing Card */}
-            <div className="w-full lg:max-w-md">
-              <div className="bg-background rounded-2xl p-8 border border-border shadow-sm">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mx-auto">
+            <div className={`w-full lg:max-w-md ${pages.pricePanel}`}>
+              <div className={`bg-background rounded-2xl p-8 border border-border shadow-sm ${pages.panel}`}>
+                <div className={`text-center space-y-4 ${pages.panelHead}`}>
+                  <div className={`w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mx-auto ${pages.panelIcon}`}>
                     <Microscope className="h-8 w-8 text-accent-strong" />
                   </div>
                   <div className="space-y-2">
                     <div className="text-sm font-medium text-muted-foreground">{DOCTOR.name}</div>
-                    <div className="text-2xl font-bold text-text-accent">{mxn(PRICING.emr.from)}</div>
+                    <div className={`text-2xl font-bold text-text-accent ${pages.panelPrice}`}>{mxn(PRICING.emr.from)}</div>
                     <div className="text-sm text-muted-foreground">Según complejidad del caso</div>
                   </div>
                 </div>
 
-                <div className="mt-6 p-6 rounded-xl bg-muted border border-border">
+                <div className={`mt-6 p-6 rounded-xl bg-muted border border-border ${pages.panelBody} ${pages.plainBox}`}>
                   <h3 className="text-lg font-serif font-bold text-foreground mb-4 text-center">
                     Incluye
                   </h3>
@@ -121,7 +123,7 @@ export default function EmrPage() {
       </section>
 
       {/* SECTION 2: DEFINITION — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
@@ -148,7 +150,7 @@ export default function EmrPage() {
               adecuada o si necesitas un abordaje diferente.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border ${pages.quietNote}`}>
               <Clock className="h-5 w-5 text-accent-strong" />
               <span className="font-semibold text-foreground">30–45 minutos</span>
               <span className="text-foreground/70">· Sedación segura · Ambulatorio</span>
@@ -158,14 +160,14 @@ export default function EmrPage() {
       </section>
 
       {/* SECTION 3: PRICING & LOCATION — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Costo de EMR en Mérida
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 max-w-4xl">
+          <div className={`grid gap-8 md:grid-cols-2 max-w-4xl ${pages.openGrid}`}>
             {/* Pricing Card */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <FileText className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -200,7 +202,7 @@ export default function EmrPage() {
             </div>
 
             {/* Location Card */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}>
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -230,14 +232,14 @@ export default function EmrPage() {
       </section>
 
       {/* SECTION 4: PREPARATION & RECOVERY — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Preparación y Recuperación
           </h2>
-          <div className="grid gap-8 md:grid-cols-3 max-w-5xl">
+          <div className={`grid gap-8 md:grid-cols-3 max-w-5xl ${pages.steps}`}>
             {/* Antes */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Antes</h3>
               <ul className="space-y-2 text-sm text-foreground/80">
                 <li className="flex items-start gap-2">
@@ -260,7 +262,7 @@ export default function EmrPage() {
             </div>
 
             {/* Durante */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Durante</h3>
               <ul className="space-y-2 text-sm text-foreground/80">
                 <li className="flex items-start gap-2">
@@ -283,7 +285,7 @@ export default function EmrPage() {
             </div>
 
             {/* Después */}
-            <div className="p-6 rounded-xl border border-border bg-card">
+            <div className={`p-6 rounded-xl border border-border bg-card ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">Después</h3>
               <ul className="space-y-2 text-sm text-foreground/80">
                 <li className="flex items-start gap-2">
@@ -309,18 +311,18 @@ export default function EmrPage() {
       </section>
 
       {/* SECTION 5: DOCTOR — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Tu Especialista en Resección Endoscópica
           </h2>
-          <div className="flex flex-col md:flex-row items-start gap-8 max-w-4xl">
+          <div className={`flex flex-col md:flex-row items-start gap-8 max-w-4xl ${pages.portraitRow}`}>
             <Image
               src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}
-              className="rounded-2xl w-full max-w-[280px]"
+              className={`rounded-2xl w-full max-w-[280px] ${pages.portraitImg}`}
             />
             <div className="space-y-4">
               <Link href={DOCTOR.profileUrl}>
@@ -331,7 +333,7 @@ export default function EmrPage() {
               <p className="text-foreground/80 leading-relaxed">
                 {DOCTOR.bioShort}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.slice(0, 4).map((cred) => (
                   <span
                     key={cred}
@@ -353,21 +355,15 @@ export default function EmrPage() {
       </section>
 
       {/* SECTION 6: REVIEWS — bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* SECTION 7: FAQ — bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="emr" service="resección endoscópica mucosa (EMR)" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="emr" service="resección endoscópica mucosa (EMR)" />
       </section>
 
       {/* SECTION 8: CTA + RELATED — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding">
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
@@ -378,7 +374,7 @@ export default function EmrPage() {
               No todos los pólipos necesitan cirugía. Escríbenos para evaluar
               si EMR es la opción adecuada para tu caso.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton service="resección endoscópica mucosa (EMR)" position="cta" />
               <CallButton service="resección endoscópica mucosa (EMR)" position="cta" variant="ghost" />
             </div>
@@ -386,13 +382,13 @@ export default function EmrPage() {
 
           {/* Related Procedures */}
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
+            <h2 className={`text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8 ${system.closingSub}`}>
               Procedimientos Relacionados
             </h2>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
               <Link
                 href="/colonoscopia-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Microscope className="h-6 w-6 text-primary" />
@@ -410,7 +406,7 @@ export default function EmrPage() {
 
               <Link
                 href="/diseccion-endoscopica-submucosa-esd-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Target className="h-6 w-6 text-accent-strong" />
@@ -428,7 +424,7 @@ export default function EmrPage() {
 
               <Link
                 href="/apc-coagulacion-plasma-argon-merida"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Zap className="h-6 w-6 text-primary" />
@@ -447,6 +443,6 @@ export default function EmrPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

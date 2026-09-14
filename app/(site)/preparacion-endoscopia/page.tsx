@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -46,7 +48,7 @@ const schedules = [
 
 export default function PreparacionEndoscopiaPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -63,7 +65,7 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
@@ -75,9 +77,9 @@ export default function PreparacionEndoscopiaPage() {
               {CLINIC.hospitalName}, {CLINIC.address.addressLocality}.
             </p>
 
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-2">
+            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-2 ${pages.note}`}>
               <p className="text-sm font-medium text-muted-foreground">Regla principal</p>
-              <p className="font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight">
+              <p className={`font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight ${pages.serifFigure}`}>
                 Ayuno total de 8 horas antes del estudio — sin comer ni beber
                 nada, ni agua.
               </p>
@@ -91,7 +93,7 @@ export default function PreparacionEndoscopiaPage() {
               </strong>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="hero"
@@ -108,7 +110,7 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: DÍA ANTERIOR + CRONOGRAMA — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <div className="space-y-2">
@@ -120,11 +122,11 @@ export default function PreparacionEndoscopiaPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
               {schedules.map(({ icon: Icon, title, clear, fast }) => (
                 <div
                   key={title}
-                  className="bg-card border border-border rounded-xl p-6 space-y-4"
+                  className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}
                 >
                   <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight flex items-center gap-2">
                     <Icon className="h-5 w-5 text-accent" aria-hidden />
@@ -136,7 +138,7 @@ export default function PreparacionEndoscopiaPage() {
               ))}
             </div>
 
-            <div className="bg-card border border-border rounded-xl p-6 space-y-2">
+            <div className={`bg-card border border-border rounded-xl p-6 space-y-2 ${pages.open}`}>
               <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                 El día del estudio
               </h3>
@@ -152,14 +154,14 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: DIABETES + ANTICOAGULANTES — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
               Si tomas medicamentos
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Si tienes diabetes
                 </h3>
@@ -169,7 +171,7 @@ export default function PreparacionEndoscopiaPage() {
                   para tomarlos después.
                 </p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
                   Si tomas anticoagulantes
                 </h3>
@@ -191,7 +193,7 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 4: AL LLEGAR — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
@@ -253,14 +255,14 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: FAQ — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.faq}`}>
         <Faq routeKey="preparacion_endoscopia" service={SERVICE} />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -271,7 +273,7 @@ export default function PreparacionEndoscopiaPage() {
                 Escríbenos y te enviamos la preparación para la hora de tu cita.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service={SERVICE}
                 position="bottom-cta"
@@ -284,6 +286,6 @@ export default function PreparacionEndoscopiaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES, mxn } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -37,7 +39,7 @@ const RELATED_PROCEDURES = [
 
 export default function EndoprotesisEsofagicasPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -68,7 +70,7 @@ export default function EndoprotesisEsofagicasPage() {
       />
 
       {/* §1 Hero → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <div className="space-y-4">
@@ -82,8 +84,8 @@ export default function EndoprotesisEsofagicasPage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.badges}`}>
+              <span className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20 ${pages.heroPrice}`}>
                 <CheckCircle2 className="h-4 w-4 text-text-accent" />
                 {displayFrom("endoprotesis_esofagicas")}
               </span>
@@ -101,7 +103,7 @@ export default function EndoprotesisEsofagicasPage() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="endoprótesis esofágica"
                 position="hero"
@@ -127,7 +129,7 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §2 Definition → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
@@ -149,7 +151,7 @@ export default function EndoprotesisEsofagicasPage() {
               </p>
             </div>
 
-            <div className="rounded-xl bg-background border border-border p-6">
+            <div className={`rounded-xl bg-background border border-border p-6 ${pages.panelSurface}`}>
               <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-4">
                 Se indica cuando:
               </h3>
@@ -173,7 +175,7 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §3 Pricing / Quote → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
@@ -186,7 +188,7 @@ export default function EndoprotesisEsofagicasPage() {
               estudios por WhatsApp para una cotización personalizada.
             </p>
 
-            <div className="rounded-xl border border-border bg-muted p-6">
+            <div className={`rounded-xl border border-border bg-muted p-6 ${pages.panelSurface}`}>
               <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-4">
                 Qué incluye tu procedimiento
               </h3>
@@ -223,15 +225,15 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §3.5 Preparation & Recovery → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-foreground">
               Preparación y qué esperar
             </h2>
 
-            <div className="grid gap-6 md:grid-cols-3">
-              <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.steps}`}>
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
                   Antes
                 </h3>
@@ -255,7 +257,7 @@ export default function EndoprotesisEsofagicasPage() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
                   Durante (30–45 min)
                 </h3>
@@ -279,7 +281,7 @@ export default function EndoprotesisEsofagicasPage() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
                   Después
                 </h3>
@@ -308,16 +310,16 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §4 Doctor Credentials → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
                 src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={280}
                 height={350}
-                className="rounded-2xl"
+                className={`rounded-2xl ${pages.portraitImg}`}
               />
             </div>
 
@@ -336,7 +338,7 @@ export default function EndoprotesisEsofagicasPage() {
                 complicación quirúrgica — sin referirte a otro especialista.
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -368,32 +370,26 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §5 Google Reviews → bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* §6 FAQ → bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="endoprotesis_esofagicas" service="endoprótesis esofágica" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="endoprotesis_esofagicas" service="endoprótesis esofágica" />
       </section>
 
       {/* §7 Related Procedures → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold text-xl md:text-2xl tracking-tight text-foreground mb-8">
             Procedimientos relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {RELATED_PROCEDURES.map((proc) => (
               <Link
                 key={proc.slug}
                 href={`/${proc.slug}`}
-                className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif font-semibold text-lg tracking-tight text-foreground mb-2">
                   {proc.name}
@@ -414,7 +410,7 @@ export default function EndoprotesisEsofagicasPage() {
       </section>
 
       {/* §8 Bottom CTA → bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse} ${pages.closingText}`}>
         <div className="container-page py-16 text-center space-y-6">
           <h2 className="font-serif font-bold text-2xl md:text-3xl tracking-tight text-primary-foreground">
             ¿Necesitas valoración para endoprótesis esofágica?
@@ -423,7 +419,7 @@ export default function EndoprotesisEsofagicasPage() {
             Envía tus estudios por WhatsApp y el {DOCTOR.name} te orienta sobre la
             mejor opción para tu caso.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="endoprótesis esofágica"
               position="bottom-cta"
@@ -439,6 +435,6 @@ export default function EndoprotesisEsofagicasPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

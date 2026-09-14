@@ -418,6 +418,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
               <Popover.Content
                 align="start"
                 sideOffset={8}
+                collisionPadding={8}
                 className="z-50 rounded-2xl border border-border bg-background p-3 shadow-lg"
                 style={
                   {
@@ -524,7 +525,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
             <span className="text-sm font-medium text-foreground">
               Estimado desde
             </span>
-            <span className="font-serif text-xl font-bold text-text-accent">
+            <span className="whitespace-nowrap font-serif text-xl font-bold text-text-accent">
               {estimate}
             </span>
           </div>

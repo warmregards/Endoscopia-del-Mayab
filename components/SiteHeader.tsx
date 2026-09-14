@@ -81,11 +81,12 @@ export default function SiteHeader() {
               aria-label="Inicio - Endoscopia del Mayab"
             >
               <Image
-                src="/endoscopia-logo.png"
+                src={CLINIC.wordmarkUrl}
                 alt="Endoscopia del Mayab"
                 width={180}
                 height={40}
                 className="h-10 w-auto"
+                unoptimized
                 priority
               />
             </Link>
@@ -194,11 +195,12 @@ export default function SiteHeader() {
               onClick={() => setOpen(false)}
             >
               <Image
-                src="/endoscopia-logo.png"
+                src={CLINIC.wordmarkUrl}
                 alt="Endoscopia del Mayab"
                 width={180}
                 height={40}
                 className="h-10 w-auto"
+                unoptimized
               />
             </Link>
             <button

@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -25,7 +27,7 @@ export const metadata = metaFor("endoprotesis_colonicas")
 
 export default function EndoprotesisColonicasPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD: MedicalProcedure */}
       <script
         type="application/ld+json"
@@ -60,10 +62,10 @@ export default function EndoprotesisColonicasPage() {
       />
 
       {/* S1: HERO — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-sm font-medium text-red-700">
+            <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-sm font-medium text-red-700 ${pages.eyebrow} ${pages.eyebrowAlert}`}>
               <AlertTriangle className="h-4 w-4" />
               Atención de urgencias disponible
             </span>
@@ -77,7 +79,7 @@ export default function EndoprotesisColonicasPage() {
               urgencia. Evaluación inmediata en {CLINIC.address.streetAddress}.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="endoprotesis colonica"
                 position="hero"
@@ -91,7 +93,7 @@ export default function EndoprotesisColonicasPage() {
               />
             </div>
 
-            <div className="flex flex-wrap gap-6 text-sm text-foreground/70">
+            <div className={`flex flex-wrap gap-6 text-sm text-foreground/70 ${pages.chips}`}>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-accent" />
                 {CLINIC.address.streetAddress.split(",")[0]}, Mérida
@@ -110,7 +112,7 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S2: DEFINITION — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
@@ -167,16 +169,16 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S3: PRICING — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
               Costo de Endoprótesis Colónica en Mérida
             </h2>
 
-            <div className="rounded-xl border border-border bg-card p-6 md:p-8 space-y-6">
+            <div className={`rounded-xl border border-border bg-card p-6 md:p-8 space-y-6 ${pages.panelSurface}`}>
               <div>
-                <p className="text-2xl font-bold text-text-accent">
+                <p className={`text-2xl font-bold text-text-accent ${pages.figure}`}>
                   {mxn(PRICING.endoprotesis_colonicas.from)}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
@@ -225,7 +227,7 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S4: PROCESS — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
@@ -261,7 +263,7 @@ export default function EndoprotesisColonicasPage() {
                 },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-bold text-sm">
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-bold text-sm ${pages.numberBadge}`}>
                     {step}
                   </div>
                   <div>
@@ -274,7 +276,7 @@ export default function EndoprotesisColonicasPage() {
               ))}
             </div>
 
-            <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
+            <div className={`mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground ${pages.quietNote}`}>
               <Clock className="h-4 w-4 text-accent" />
               Procedimiento: 30–45 minutos | Alivio de obstrucción: inmediato
             </div>
@@ -283,7 +285,7 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S5: DOCTOR — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
@@ -296,14 +298,14 @@ export default function EndoprotesisColonicasPage() {
               </Link>
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-8">
+            <div className={`flex flex-col sm:flex-row gap-8 ${pages.portraitRow}`}>
               <div className="flex-shrink-0">
                 <Image
                   src={DOCTOR.photos.headshot}
                   alt={`${DOCTOR.name} — Endoscopista y Cirujano`}
                   width={280}
                   height={280}
-                  className="rounded-2xl"
+                  className={`rounded-2xl ${pages.portraitImg}`}
                 />
               </div>
 
@@ -345,14 +347,10 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S6: REVIEWS — bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* S7: FAQ — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.faq}`}>
         <Faq
           routeKey="endoprotesis_colonicas"
           service="endoprotesis colonica"
@@ -361,17 +359,17 @@ export default function EndoprotesisColonicasPage() {
       </section>
 
       {/* S8: RELATED + CTA — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           {/* Related procedures */}
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             Procedimientos relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-16">
+          <div className={`grid gap-6 md:grid-cols-3 mb-16 ${pages.relatedGrid}`}>
             <Link
               href="/dilatacion-colonica-merida"
-              className="group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Activity className="h-6 w-6 text-primary mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -384,7 +382,7 @@ export default function EndoprotesisColonicasPage() {
 
             <Link
               href="/endoprotesis-esofagicas-merida"
-              className="group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Heart className="h-6 w-6 text-primary mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -397,7 +395,7 @@ export default function EndoprotesisColonicasPage() {
 
             <Link
               href="/endoprotesis-duodenales-merida"
-              className="group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Stethoscope className="h-6 w-6 text-primary mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -410,7 +408,7 @@ export default function EndoprotesisColonicasPage() {
           </div>
 
           {/* Bottom CTA */}
-          <div className="rounded-2xl bg-primary p-8 md:p-12 text-center">
+          <div className={`rounded-2xl bg-primary p-8 md:p-12 text-center ${system.closing} ${pages.inverse}`}>
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
               ¿Necesitas evaluación para endoprótesis colónica?
             </h2>
@@ -419,7 +417,7 @@ export default function EndoprotesisColonicasPage() {
               para urgencias en {CLINIC.address.streetAddress.split(",")[0]},
               Mérida, Yucatán.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="endoprotesis colonica"
                 position="cta section"
@@ -435,6 +433,6 @@ export default function EndoprotesisColonicasPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
