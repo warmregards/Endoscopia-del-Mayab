@@ -78,26 +78,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* ❌ Remove Google Fonts preconnects — next/font inlines and preloads automatically. */}
 
         {/* GTM (head) – only in prod when ID exists.
-            strategy="lazyOnload" defers the snippet until after window.onload,
-            which means after LCP is committed. Lighthouse audit 2026-05-28
-            showed GTM was monopolizing the main thread for ~5s during the
-            LCP measurement window (462ms across 4 long tasks), preventing
-            LCP from being recorded until ~8.3s.
+            GTM + the two gtag/js loads it pulls in are the largest source of
+            main-thread blocking on every page (Lighthouse 2026-09-14: ~1s CPU,
+            all of the long tasks). The bootstrap waits for window.onload, then
+            for an idle period (requestIdleCallback, 4s timeout; plain 4s
+            timeout where rIC is unsupported) — OR the first pointerdown /
+            keydown / touchstart / scroll, whichever comes first. A CTA tap
+            therefore starts GTM immediately.
 
             Safe because lib/gtm.ts initializes window.dataLayer defensively —
-            clicks that fire before GTM loads queue in the dataLayer array
-            and replay when GTM eventually arrives. Zero tracking loss. */}
+            events pushed before GTM loads queue in the dataLayer array and
+            replay when GTM arrives. The `gtm.start` push happens at load time,
+            so GTM's own timing is unchanged. */}
         {isProd && GTM_ID ? (
           <Script
             id="gtm-head"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${GTM_ID}');
+                (function(w,d,i){
+                  var started=false,evs=['pointerdown','keydown','touchstart','scroll'];
+                  function load(){
+                    if(started)return;started=true;
+                    for(var k=0;k<evs.length;k++)w.removeEventListener(evs[k],load,true);
+                    w.dataLayer=w.dataLayer||[];
+                    w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+                    var j=d.createElement('script');j.async=true;
+                    j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+                    d.head.appendChild(j);
+                  }
+                  for(var k=0;k<evs.length;k++)w.addEventListener(evs[k],load,{capture:true,passive:true,once:true});
+                  function onIdle(){
+                    if('requestIdleCallback' in w)w.requestIdleCallback(load,{timeout:4000});
+                    else setTimeout(load,4000);
+                  }
+                  if(d.readyState==='complete')onIdle();else w.addEventListener('load',onIdle,{once:true});
+                })(window,document,'${GTM_ID}');
               `,
             }}
           />

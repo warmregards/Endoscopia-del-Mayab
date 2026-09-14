@@ -9,6 +9,8 @@
 
 - [ ] GBP: Verify services link changed from `http://www.endoscopiadelmayab.com/servicios` to `https://www.endoscopiadelmayab.com/` (Search Console shows 390 impressions still hitting the old HTTP URL)
 - [ ] GSC: Use URL Inspection tool to request re-indexing of `https://www.endoscopiadelmayab.com/precios` (currently only non-www version indexed)
+- [ ] GTM container (Lighthouse 2026-09-14): the container fetches `gtag/js` twice — once for AW-7988764543 and once for G-GZMK9ZGX2K (~340 KB, ~half of all main-thread blocking). In the GTM UI, keep ONE Google Tag and add the other ID as a linked destination so only one `gtag/js` loads. Do NOT change the `whatsapp_click` / `phone_click` conversion trigger scope while doing it (see "Google Ads conversions must trigger on the bare event").
+- [ ] After the 2026-09-14 GTM gating change (`app/layout.tsx`: GTM boots on onload→idle or first interaction), watch Ads conversions + GA4 sessions for 48h. A drop in GA4 sessions (short bounces) is the expected trade-off; a drop in Ads conversions is not — check the trigger scope first.
 
 ---
 
