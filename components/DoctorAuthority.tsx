@@ -100,6 +100,9 @@ function TrainingLogo({
       alt={alt}
       width={entry.logoW}
       height={entry.logoH}
+      // Rendered in a 96px (strip) or 48px (timeline) slot. Without sizes,
+      // next/image serves 1x/2x of the intrinsic width (up to 2300px).
+      sizes="96px"
       unoptimized={entry.logo.endsWith(".svg")}
       className={imgClassName}
     />
@@ -238,6 +241,7 @@ export default function DoctorAuthority({
           alt={`${DOCTOR.name} — ${DOCTOR.descriptor}`}
           width={portraitSrc ? 320 : 160}
           height={portraitSrc ? 400 : 160}
+          sizes="160px"
           className="h-32 w-32 shrink-0 rounded-2xl object-cover sm:h-40 sm:w-40"
         />
       )}

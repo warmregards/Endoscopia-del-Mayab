@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Play } from "lucide-react";
 import { pushVideoPlay } from "@/lib/gtm";
 
@@ -77,13 +78,13 @@ export default function LpVideo({
             aria-label={title ? `Reproducir: ${title}` : "Reproducir video"}
             className="group absolute inset-0 h-full w-full"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            {/* Optimized + resized (AVIF/WebP) instead of the raw 136 KB JPEG. */}
+            <Image
               src={poster}
               alt=""
-              className="h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
+              fill
+              sizes="320px"
+              className="object-cover"
             />
             <span className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
               <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg">

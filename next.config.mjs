@@ -16,6 +16,8 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    // YouTubeEmbed facade thumbnails (resized + long-cached via /_next/image).
+    remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com', pathname: '/vi/**' }],
   },
   async redirects() {
     return [

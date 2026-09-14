@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Play } from "lucide-react"
 import { pushVideoPlay } from "@/lib/gtm"
 
@@ -20,6 +21,10 @@ type YouTubeEmbedProps = {
  * the user clicks, then swaps in the iframe. Avoids loading YouTube's heavy
  * player on every page view — important since 82–94% of traffic is mobile.
  *
+ * The thumbnail goes through next/image (i.ytimg.com is in remotePatterns), so
+ * it is resized to the container and served AVIF/WebP with a long cache TTL
+ * instead of the raw 1280×720 maxres JPEG (2h TTL from YouTube).
+ *
  * @example
  *   <YouTubeEmbed id="UHUdTSp4K1o" title="CPRE explicada" service="CPRE" />
  */
@@ -30,6 +35,8 @@ export default function YouTubeEmbed({
   service,
 }: YouTubeEmbedProps) {
   const [active, setActive] = useState(false)
+  // Not every video has a maxres thumbnail; hqdefault always exists.
+  const [thumb, setThumb] = useState<"maxresdefault" | "hqdefault">("maxresdefault")
 
   return (
     <figure className="space-y-4">
@@ -52,16 +59,14 @@ export default function YouTubeEmbed({
             aria-label={`Reproducir video: ${title}`}
             className="group absolute inset-0 h-full w-full cursor-pointer"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+            <Image
+              src={`https://i.ytimg.com/vi/${id}/${thumb}.jpg`}
               alt={title}
-              loading="lazy"
-              onError={(e) => {
-                // Not every video has a maxres thumbnail; hqdefault always exists.
-                e.currentTarget.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-              }}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              fill
+              // Embeds sit in max-w-3xl (768px) columns or narrower.
+              sizes="(min-width: 800px) 768px, 100vw"
+              onError={() => setThumb("hqdefault")}
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
             <span className="absolute inset-0 bg-foreground/20 transition-colors group-hover:bg-foreground/30" />
             <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-accent text-white shadow-lg transition-transform duration-300 group-hover:scale-110">

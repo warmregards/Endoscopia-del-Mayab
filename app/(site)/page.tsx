@@ -142,6 +142,9 @@ export default async function Page() {
               height={1000}
               sizes="(min-width: 1200px) 480px, (min-width: 900px) 42vw, 100vw"
               priority
+              // The portrait is the LCP element on mobile too (Lighthouse
+              // 2026-09-14); fetchPriority carries onto the preload link.
+              fetchPriority="high"
             />
           </div>
         </div>
