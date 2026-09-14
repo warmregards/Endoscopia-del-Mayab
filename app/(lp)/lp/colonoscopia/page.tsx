@@ -215,7 +215,7 @@ export default async function LpColonoscopiaPage() {
             position="lp-doctor"
             procedureName="Colonoscopia"
             procedureContext="El especialista que realiza tu colonoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 

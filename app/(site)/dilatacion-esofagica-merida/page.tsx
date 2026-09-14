@@ -257,7 +257,7 @@ export default function DilatacionEsofagicaPage() {
 
             <div className={`mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start ${pages.portraitRow} ${pages.rowStart}`}>
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={300}
                 height={400}

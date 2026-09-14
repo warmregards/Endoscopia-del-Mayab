@@ -199,7 +199,7 @@ export default async function LpEndoscopiaPage() {
             position="lp-doctor"
             procedureName="Endoscopia"
             procedureContext="El especialista que realiza tu endoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 

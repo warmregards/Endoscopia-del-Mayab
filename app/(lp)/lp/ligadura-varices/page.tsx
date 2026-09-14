@@ -185,7 +185,7 @@ export default async function LpLigaduraVaricesPage() {
             position="lp-doctor"
             procedureName="Ligadura de várices esofágicas"
             procedureContext="El especialista que realiza tu ligadura de várices esofágicas se formó y ejerció como endoscopista en centros de referencia nacionales."
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 

@@ -368,7 +368,7 @@ export default function RetiroBalonGastricoPage() {
           <div className={`flex flex-col md:flex-row gap-8 items-center ${pages.portraitRow} ${pages.rowStart}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={300}
                 height={400}

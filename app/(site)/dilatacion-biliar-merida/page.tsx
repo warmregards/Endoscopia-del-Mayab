@@ -252,7 +252,7 @@ export default function DilatacionBiliarPage() {
 
           <div className={`mt-8 flex flex-col sm:flex-row gap-8 ${pages.portraitRow}`}>
             <Image
-              src="/equipo/omar-quiroz-portrait.webp"
+              src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}

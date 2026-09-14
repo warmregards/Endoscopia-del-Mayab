@@ -350,7 +350,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
           <div className={`mt-8 flex flex-col md:flex-row gap-8 ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={280}
                 height={280}

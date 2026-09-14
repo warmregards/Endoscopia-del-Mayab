@@ -312,7 +312,7 @@ export default function EndoprotesisDuodenalesPage() {
             <div className="space-y-6">
               <div className={`overflow-hidden rounded-2xl ${pages.portrait}`}>
                 <Image
-                  src="/equipo/omar-quiroz-portrait.webp"
+                  src={DOCTOR.photos.headshot}
                   alt={DOCTOR.name}
                   width={480}
                   height={480}

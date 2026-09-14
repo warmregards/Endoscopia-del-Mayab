@@ -171,7 +171,7 @@ export default async function ContactoPage() {
 
           <div className={`grid gap-8 lg:grid-cols-[280px_1fr] items-start ${pages.portraitGrid}`}>
             <Image
-              src="/equipo/omar-quiroz-portrait.webp"
+              src={DOCTOR.photos.headshot}
               alt={`${DOCTOR.name} — ${DOCTOR.title}`}
               width={320}
               height={400}

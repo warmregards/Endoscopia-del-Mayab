@@ -525,7 +525,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
             <span className="text-sm font-medium text-foreground">
               Estimado desde
             </span>
-            <span className="font-serif text-xl font-bold text-text-accent">
+            <span className="whitespace-nowrap font-serif text-xl font-bold text-text-accent">
               {estimate}
             </span>
           </div>

@@ -351,7 +351,7 @@ export default function CapsulaEndoscopicaPage() {
           </h2>
           <div className={`flex flex-col md:flex-row items-start gap-8 max-w-4xl ${pages.portraitRow}`}>
             <Image
-              src="/equipo/omar-quiroz-portrait.webp"
+              src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}

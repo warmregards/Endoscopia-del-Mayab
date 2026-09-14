@@ -323,7 +323,7 @@ export default function EmergenciasDigestivasPage() {
           <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${pages.portraitRow} ${pages.rowStart}`}>
             <div className="w-full lg:w-auto flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={400}
                 height={500}

@@ -364,7 +364,7 @@ export default function ExtraccionCuerposExtranosPage() {
           <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={200}
                 height={200}

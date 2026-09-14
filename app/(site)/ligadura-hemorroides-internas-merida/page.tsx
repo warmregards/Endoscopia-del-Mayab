@@ -383,7 +383,7 @@ export default function LigaduraHemorroidesPage() {
           <div className={`grid gap-8 md:grid-cols-2 items-start ${pages.portraitGrid}`}>
             <div className={`relative aspect-square max-w-sm mx-auto md:mx-0 ${pages.portrait}`}>
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={400}
                 height={400}

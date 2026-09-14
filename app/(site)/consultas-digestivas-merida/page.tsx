@@ -274,7 +274,7 @@ export default function ConsultasDigestivasPage() {
           <div className={`flex flex-col lg:flex-row gap-8 ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={256}
                 height={256}

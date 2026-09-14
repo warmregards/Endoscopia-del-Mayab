@@ -409,7 +409,7 @@ export default function ColonoscopiaPage() {
         <div className="container-page section-padding">
           <DoctorAuthority
             variant="compact"
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             service="colonoscopia"
             position="procedure-doctor"
             procedureName="Colonoscopia"

@@ -398,7 +398,7 @@ export default function EndoprotesisBiliaresPage() {
           <div className={`flex flex-col sm:flex-row gap-8 items-start max-w-3xl ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={320}
                 height={400}

@@ -436,7 +436,7 @@ export default function EsclerosisVaricesGastricasPage() {
             <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
               <div className={`w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 bg-muted ${pages.portrait}`}>
                 <Image
-                  src="/equipo/omar-quiroz-portrait.webp"
+                  src={DOCTOR.photos.headshot}
                   alt={DOCTOR.name}
                   width={320}
                   height={400}

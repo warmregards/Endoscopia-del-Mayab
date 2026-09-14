@@ -192,7 +192,7 @@ export default async function LpCprePage() {
             position="lp-doctor"
             procedureName="CPRE"
             procedureContext="La CPRE es un procedimiento avanzado; el especialista que la realiza se formó y ejerció como endoscopista en centros de referencia nacionales."
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 

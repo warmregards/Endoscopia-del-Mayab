@@ -108,7 +108,7 @@ export default async function DoctorOmarQuirozPage() {
             {/* Image */}
             <div className="flex-1 lg:max-w-md">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={`${DOCTOR.name} - Endoscopista en Mérida`}
                 width={500}
                 height={625}

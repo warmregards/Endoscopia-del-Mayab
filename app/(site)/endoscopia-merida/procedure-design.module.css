@@ -215,6 +215,9 @@
 :global(body):has(.procedure) :global([data-radix-popper-content-wrapper]) { --accent: 163 36% 30%; }
 @media (max-width:380px) {
  :global(body):has(.procedure) :global(.rdp-root) { --rdp-day-width: 36px; --rdp-day_button-width: 34px; }
+ /* Keep "Desde $X MXN" on one line in the narrow cost panel and benchmark card (matches design-pages .panelPrice). */
+ .pricePanel > div > div:first-child > p:last-child { font-size: 24px; white-space: nowrap; }
+ .benchmarks > div > p:nth-child(2) { font-size: 24px; white-space: nowrap; }
  :global(body):has(.procedure) :global(header a img) { height: 32px; }
  :global(body):has(.procedure) :global(header img[alt="Hospital Amerimed"]) { height: 16px; }
 }

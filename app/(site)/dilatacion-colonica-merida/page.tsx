@@ -277,7 +277,7 @@ export default function DilatacionColonicaPage() {
           <div className={`grid gap-8 lg:grid-cols-2 items-center ${pages.portraitGrid}`}>
             <div className={`relative aspect-[3/4] max-w-sm rounded-2xl overflow-hidden ${pages.portrait}`}>
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 fill
                 className="object-cover"

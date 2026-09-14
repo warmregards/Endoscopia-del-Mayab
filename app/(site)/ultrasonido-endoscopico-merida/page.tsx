@@ -260,7 +260,7 @@ export default function UltrasonidoEndoscopicoPage() {
             <div className="flex flex-col sm:flex-row gap-6 sm:items-center mb-8">
               <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0 ${pages.portrait}`}>
                 <Image
-                  src="/equipo/omar-quiroz-portrait.webp"
+                  src={DOCTOR.photos.headshot}
                   alt={DOCTOR.name}
                   width={320}
                   height={400}

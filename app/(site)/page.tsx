@@ -136,7 +136,7 @@ export default async function Page() {
           </div>
           <div className={styles.heroPhoto}>
             <Image
-              src="/equipo/omar-quiroz-portrait.webp"
+              src={DOCTOR.photos.headshot}
               alt="Dr. Omar Quiroz"
               width={800}
               height={1000}
@@ -217,7 +217,7 @@ export default async function Page() {
               <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
                 <div className={styles.doctorPortrait}>
                   <Image
-                    src="/equipo/omar-quiroz-portrait.webp"
+                    src={DOCTOR.photos.headshot}
                     alt={DOCTOR.name}
                     width={320}
                     height={400}

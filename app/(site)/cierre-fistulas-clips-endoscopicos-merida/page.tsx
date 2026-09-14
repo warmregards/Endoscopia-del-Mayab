@@ -309,7 +309,7 @@ export default function CierreFistulasPage() {
         <div className="container-page section-padding">
           <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <Image
-              src="/equipo/omar-quiroz-portrait.webp"
+              src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}

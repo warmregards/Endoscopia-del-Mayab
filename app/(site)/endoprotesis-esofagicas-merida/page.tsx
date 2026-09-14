@@ -315,7 +315,7 @@ export default function EndoprotesisEsofagicasPage() {
           <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src="/equipo/omar-quiroz-portrait.webp"
+                src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={280}
                 height={350}

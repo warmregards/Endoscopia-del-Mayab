@@ -384,7 +384,7 @@ export default function EndoscopiaPage() {
         <div className="container-page section-padding">
           <DoctorAuthority
             variant="compact"
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             service="endoscopia"
             position="procedure-doctor"
             procedureName="Endoscopia"

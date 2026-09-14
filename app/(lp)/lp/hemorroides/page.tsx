@@ -190,7 +190,7 @@ export default async function LpHemorroidesPage() {
             position="lp-doctor"
             procedureName="Ligadura de hemorroides"
             procedureContext="Atención discreta y directa: el especialista que realiza tu ligadura de hemorroides se formó y ejerció como endoscopista en centros de referencia nacionales."
-            portraitSrc="/equipo/omar-quiroz-portrait.webp"
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 
