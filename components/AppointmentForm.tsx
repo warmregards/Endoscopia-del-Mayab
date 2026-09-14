@@ -418,6 +418,7 @@ export default function AppointmentForm({ procedure }: { procedure: Procedure })
               <Popover.Content
                 align="start"
                 sideOffset={8}
+                collisionPadding={8}
                 className="z-50 rounded-2xl border border-border bg-background p-3 shadow-lg"
                 style={
                   {

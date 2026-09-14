@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -62,7 +64,7 @@ export default function LigaduraVaricesPage() {
   const video = getVideo("ligadura_varices")
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -111,12 +113,12 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
             {/* Left: Content */}
             <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-sm font-medium text-red-700">
+              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-sm font-medium text-red-700 ${pages.eyebrow} ${pages.eyebrowAlert}`}>
                 <AlertTriangle className="h-4 w-4 text-red-600" />
                 Atención de emergencia disponible 24/7
               </div>
@@ -125,13 +127,13 @@ export default function LigaduraVaricesPage() {
                 Ligadura de Várices Esofágicas en Mérida
               </h1>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className={`text-lg text-muted-foreground leading-relaxed max-w-2xl ${pages.lead}`}>
                 Control y prevención de sangrado por várices esofágicas con
                 bandas elásticas. Procedimiento ambulatorio con sedación.
               </p>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                 {[
                   "Sedación incluida",
                   "Hospital Amerimed Mérida",
@@ -145,7 +147,7 @@ export default function LigaduraVaricesPage() {
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="ligadura varices"
                   position="hero"
@@ -161,7 +163,7 @@ export default function LigaduraVaricesPage() {
               </div>
 
               {/* Location + Hours */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-sm text-muted-foreground">
+              <div className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-sm text-muted-foreground ${pages.location}`}>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-primary shrink-0" />
                   <span>{CLINIC.address.display}</span>
@@ -174,13 +176,13 @@ export default function LigaduraVaricesPage() {
             </div>
 
             {/* Right: Price card */}
-            <div className="w-full lg:max-w-sm">
-              <div className="border border-border bg-card rounded-2xl shadow-md p-6 space-y-6">
-                <div className="text-center space-y-2">
+            <div className={`w-full lg:max-w-sm ${pages.pricePanel}`}>
+              <div className={`border border-border bg-card rounded-2xl shadow-md p-6 space-y-6 ${pages.panel}`}>
+                <div className={`text-center space-y-2 ${pages.panelHead}`}>
                   <p className="text-sm font-medium text-muted-foreground">
                     {DOCTOR.name}
                   </p>
-                  <p className="font-serif font-bold text-text-accent text-2xl md:text-3xl">
+                  <p className={`font-serif font-bold text-text-accent text-2xl md:text-3xl ${pages.panelPrice}`}>
                     {mxn(PRICING.ligadura_varices.from)}
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -188,7 +190,7 @@ export default function LigaduraVaricesPage() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className={`space-y-4 ${pages.panelBody}`}>
                   {[
                     "Sedación con anestesiólogo",
                     "Equipo endoscópico terapéutico",
@@ -203,7 +205,7 @@ export default function LigaduraVaricesPage() {
                   ))}
                 </div>
 
-                <div className="bg-muted rounded-xl p-4">
+                <div className={`bg-muted rounded-xl p-4 ${pages.panelNote}`}>
                   <p className="text-xs text-muted-foreground">
                     Pueden requerirse 2–4 sesiones. Interpretación del{" "}
                     patólogo externo {mxn(ADDITIONAL_FEES.biopsy.amount)}{" "}
@@ -219,7 +221,7 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: DEFINITION + INDICATIONS — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
@@ -255,7 +257,7 @@ export default function LigaduraVaricesPage() {
             </div>
 
             {/* Cross-link to esclerosis */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 ${pages.note}`}>
               <p className="text-foreground/80">
                 <span className="font-semibold text-foreground">
                   ¿Tu médico indicó esclerosis de várices gástricas?
@@ -278,7 +280,7 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: PRICING — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
@@ -286,7 +288,7 @@ export default function LigaduraVaricesPage() {
             </h2>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <p className="font-serif font-bold text-text-accent text-3xl">
+              <p className={`font-serif font-bold text-text-accent text-3xl ${pages.priceFigure}`}>
                 Desde {mxn(PRICING.ligadura_varices.from)}
               </p>
             </div>
@@ -300,7 +302,9 @@ export default function LigaduraVaricesPage() {
             </p>
 
             {/* Biopsy differentiator — two-layer "tarifa única" story */}
-            <BiopsyDifferentiator />
+            <div className={pages.biopsy}>
+              <BiopsyDifferentiator />
+            </div>
 
             <p className="text-sm text-muted-foreground">
               <Link
@@ -317,17 +321,17 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 4: PREPARATION — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
               Preparación y qué esperar
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${pages.steps}`}>
               {/* Before */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`bg-card border border-border rounded-xl p-6 ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   1
                 </div>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
@@ -358,8 +362,8 @@ export default function LigaduraVaricesPage() {
               </div>
 
               {/* During */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`bg-card border border-border rounded-xl p-6 ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   2
                 </div>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
@@ -392,8 +396,8 @@ export default function LigaduraVaricesPage() {
               </div>
 
               {/* After */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`bg-card border border-border rounded-xl p-6 ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   3
                 </div>
                 <h3 className="font-serif font-semibold text-foreground text-center mb-4">
@@ -425,7 +429,7 @@ export default function LigaduraVaricesPage() {
             </div>
 
             {/* Warning signs */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+            <div className={`bg-red-50 border border-red-200 rounded-xl p-6 ${pages.alert}`}>
               <div className="flex items-start gap-4">
                 <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" />
                 <div>
@@ -447,20 +451,20 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: DOCTOR — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-foreground">
               Tu especialista: <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link>
             </h2>
 
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 bg-muted">
+            <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
+              <div className={`w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 bg-muted ${pages.portrait}`}>
                 <Image
-                  src={DOCTOR.photos.headshot}
+                  src="/equipo/omar-quiroz-portrait.webp"
                   alt={DOCTOR.name}
-                  width={128}
-                  height={128}
+                  width={320}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -477,7 +481,7 @@ export default function LigaduraVaricesPage() {
                 </p>
 
                 {/* Credentials */}
-                <div className="flex flex-wrap gap-2">
+                <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                   {DOCTOR.credentials.map((cred) => (
                     <span
                       key={cred}
@@ -499,7 +503,7 @@ export default function LigaduraVaricesPage() {
               </div>
             </div>
 
-            <DoctorAuthority variant="strip" />
+            <DoctorAuthority variant="strip" className={pages.strip} />
           </div>
         </div>
       </section>
@@ -507,12 +511,12 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: GOOGLE REVIEWS — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <GoogleReviews />
+      <GoogleReviews className={system.reviews} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: FAQ — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.faq}`}>
         <Faq
           routeKey="ligadura_varices"
           service="ligadura varices"
@@ -523,26 +527,26 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: RELATED PROCEDURES — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold tracking-tight text-foreground">
               Procedimientos relacionados
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${pages.relatedGrid}`}>
               {relatedProcedures.map((proc) => (
                 <Link
                   key={proc.href}
                   href={proc.href}
-                  className="group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+                  className={`group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
                 >
                   <h3 className="font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {proc.name}
                   </h3>
                   <p className="text-sm text-foreground/80 mb-4">{proc.desc}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-text-accent">
+                    <span className={`text-sm font-medium text-text-accent ${pages.relatedPrice}`}>
                       Desde {proc.price}
                     </span>
                     <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -557,7 +561,7 @@ export default function LigaduraVaricesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 9: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -570,7 +574,7 @@ export default function LigaduraVaricesPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="ligadura varices"
                 position="bottom-cta"
@@ -592,6 +596,6 @@ export default function LigaduraVaricesPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -77,7 +79,7 @@ const steps = [
 
 export default function ExtraccionCuerposExtranosPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD ──────────────────────────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -113,10 +115,10 @@ export default function ExtraccionCuerposExtranosPage() {
       />
 
       {/* ── Section 1: Hero ─────────────────────────────────────────────── */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 border border-red-200">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 border border-red-200 ${pages.eyebrow} ${pages.eyebrowAlert}`}>
               <AlertTriangle className="h-4 w-4 text-red-600" />
               <span className="text-sm font-medium text-red-700">
                 Atención de Emergencia
@@ -132,13 +134,13 @@ export default function ExtraccionCuerposExtranosPage() {
               endoscopia y sedación. Atención de emergencia disponible.
             </p>
 
-            <div className="inline-flex items-center gap-2 bg-accent-light rounded-lg px-4 py-2">
+            <div className={`inline-flex items-center gap-2 bg-accent-light rounded-lg px-4 py-2 ${pages.heroPrice}`}>
               <span className="text-text-accent text-2xl font-bold">
                 Desde {mxn(PRICING.extraccion_cuerpos_extranos.from)}
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.chips}`}>
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
                 {CLINIC.address.streetAddress.split(",")[0].trim()}
@@ -153,7 +155,7 @@ export default function ExtraccionCuerposExtranosPage() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="extracción cuerpos extraños"
                 position="hero"
@@ -167,7 +169,7 @@ export default function ExtraccionCuerposExtranosPage() {
             </div>
 
             {/* Emergency callout */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-6 mt-8">
+            <div className={`bg-red-50 border border-red-200 rounded-xl p-6 mt-8 ${pages.alert}`}>
               <h3 className="font-serif text-lg font-semibold text-red-800 mb-4">
                 ¿Cuándo es urgencia médica?
               </h3>
@@ -196,7 +198,7 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 2: Definition ───────────────────────────────────────── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             ¿Qué Es la Extracción Endoscópica de Cuerpos Extraños?
@@ -223,7 +225,7 @@ export default function ExtraccionCuerposExtranosPage() {
               Montebello.
             </p>
 
-            <div className="rounded-xl bg-background border border-border p-6 mt-6">
+            <div className={`rounded-xl bg-background border border-border p-6 mt-6 ${pages.panelSurface}`}>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
                 Extracción en niños
               </h3>
@@ -253,14 +255,14 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 3: Pricing ──────────────────────────────────────────── */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             Precio de Extracción de Cuerpos Extraños en Mérida
           </h2>
 
           <div className="max-w-3xl space-y-6">
-            <p className="text-text-accent text-3xl font-bold">
+            <p className={`text-text-accent text-3xl font-bold ${pages.priceFigure}`}>
               Desde {mxn(PRICING.extraccion_cuerpos_extranos.from)}
             </p>
 
@@ -305,7 +307,7 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 4: Process ──────────────────────────────────────────── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Qué Esperar: Desde la Llamada hasta el Alta
@@ -314,7 +316,7 @@ export default function ExtraccionCuerposExtranosPage() {
           <div className="max-w-3xl space-y-8">
             {steps.map((step) => (
               <div key={step.num} className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+                <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm ${pages.numberBadge}`}>
                   {step.num}
                 </div>
                 <div>
@@ -353,20 +355,20 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 5: Doctor ───────────────────────────────────────────── */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Tu Especialista: {DOCTOR.name}
           </h2>
 
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
                 width={200}
                 height={200}
-                className="rounded-2xl"
+                className={`rounded-2xl ${pages.portraitImg}`}
               />
             </div>
 
@@ -379,7 +381,7 @@ export default function ExtraccionCuerposExtranosPage() {
                 referirte a otro doctor ni perder tiempo valioso.
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -414,36 +416,30 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 6: Reviews ──────────────────────────────────────────── */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Section 7: FAQ ──────────────────────────────────────────────── */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq
-            routeKey="extraccion"
-            service="extracción cuerpos extraños"
-            heading="Preguntas Frecuentes sobre Extracción de Cuerpos Extraños"
-          />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq
+          routeKey="extraccion"
+          service="extracción cuerpos extraños"
+          heading="Preguntas Frecuentes sobre Extracción de Cuerpos Extraños"
+        />
       </section>
 
       {/* ── Section 8: Related Procedures ───────────────────────────────── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             Procedimientos Relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {relatedProcedures.map((proc) => (
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                   {proc.title}
@@ -466,7 +462,7 @@ export default function ExtraccionCuerposExtranosPage() {
       </section>
 
       {/* ── Section 9: Bottom CTA ───────────────────────────────────────── */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2 className="text-white font-serif text-2xl md:text-3xl font-bold mb-4">
             ¿Emergencia? Contáctanos Ahora
@@ -475,7 +471,7 @@ export default function ExtraccionCuerposExtranosPage() {
             El {DOCTOR.name} responde personalmente por WhatsApp — incluyendo
             fines de semana
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="extracción cuerpos extraños"
               position="bottom-cta"
@@ -490,6 +486,6 @@ export default function ExtraccionCuerposExtranosPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

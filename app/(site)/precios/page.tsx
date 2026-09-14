@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import {
   PRICING,
@@ -153,7 +155,7 @@ const procedureDetails: ProcedureDetail[] = [
 
 export default function PreciosPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD: Breadcrumb ─────────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -185,14 +187,14 @@ export default function PreciosPage() {
           SECTION 1: HERO — bg-background
           Price anchors for top-3 searched procedures.
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="space-y-4">
               <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
                 Precio de Endoscopia, Colonoscopia y CPRE en Mérida, Yucatán
               </h1>
-              <p className="text-lg text-foreground leading-relaxed max-w-3xl">
+              <p className={`text-lg text-foreground leading-relaxed max-w-3xl ${pages.intro}`}>
                 Conoce el precio de endoscopia y el precio de colonoscopia en
                 Mérida con cotizaciones transparentes — sedación, sala de
                 recuperación y reporte el mismo día incluidos. Sin sorpresas
@@ -202,7 +204,7 @@ export default function PreciosPage() {
 
             {/* "Particular" block — first viewport on mobile. Targets the
                 private-pay query cluster ("endoscopia particular precio"). */}
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
+            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
               <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
                 ¿Cuánto cuesta una endoscopia o colonoscopia particular?
               </h2>
@@ -233,7 +235,7 @@ export default function PreciosPage() {
             </div>
 
             {/* Price anchor cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 ${pages.anchors}`}>
               {heroAnchors.map((item) => (
                 <Link
                   key={item.key}
@@ -243,7 +245,7 @@ export default function PreciosPage() {
                   <p className="text-sm font-medium text-muted-foreground mb-2">
                     {item.label}
                   </p>
-                  <p className="font-serif font-bold text-text-accent text-2xl md:text-3xl">
+                  <p className={`font-serif font-bold text-text-accent text-2xl md:text-3xl ${pages.anchorPrice}`}>
                     {displayFrom(item.key)}
                   </p>
                   <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1 group-hover:gap-2 transition-all">
@@ -255,7 +257,7 @@ export default function PreciosPage() {
             </div>
 
             {/* Trust badges */}
-            <div className="flex flex-wrap gap-4 justify-center text-sm font-medium text-foreground/80">
+            <div className={`flex flex-wrap gap-4 justify-center text-sm font-medium text-foreground/80 ${pages.chips} ${pages.start}`}>
               {trustBadges.map((badge) => (
                 <div key={badge} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -264,7 +266,7 @@ export default function PreciosPage() {
               ))}
             </div>
 
-            <div className="flex justify-center">
+            <div className={`flex justify-center ${pages.start}`}>
               <WhatsAppButton
                 service="precios"
                 position="hero"
@@ -273,11 +275,13 @@ export default function PreciosPage() {
               />
             </div>
 
-            <FueraDeMeridaStrip
-              heading="¿Vienes de fuera de Mérida?"
-              body="Confirma precio, fecha y preparación antes de viajar."
-              linkLabel="Ver guía antes de viajar"
-            />
+            <div className={pages.routeStrip}>
+              <FueraDeMeridaStrip
+                heading="¿Vienes de fuera de Mérida?"
+                body="Confirma precio, fecha y preparación antes de viajar."
+                linkLabel="Ver guía antes de viajar"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -286,16 +290,16 @@ export default function PreciosPage() {
           SECTION 2: QUÉ INCLUYE — bg-muted
           Value differentiator for Persona 2.
           ══════════════════════════════════════════════════════════════ */}
-      <section id="que-incluye" className="bg-muted scroll-mt-24">
+      <section id="que-incluye" className={`bg-muted scroll-mt-24 ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Qué incluye el precio?
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
               {/* Included */}
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg flex items-center gap-2">
                   <CheckCircle2 className="h-6 w-6 text-accent" />
                   Incluido en el precio
@@ -311,7 +315,7 @@ export default function PreciosPage() {
               </div>
 
               {/* Not included */}
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground text-lg flex items-center gap-2">
                   <X className="h-6 w-6 text-muted-foreground" />
                   Costos adicionales
@@ -345,10 +349,12 @@ export default function PreciosPage() {
             </div>
 
             {/* Biopsy differentiator — two-layer "tarifa única" story */}
-            <BiopsyDifferentiator
-              headline="Biopsias: tarifa única en ambos lados, no por muestra."
-              intro="Cuando se requieren biopsias, la mayoría de clínicas cobra por cada muestra — tanto por tomarla como por interpretarla. 3 biopsias = 3 cargos en ambos lados."
-            />
+            <div className={pages.biopsy}>
+              <BiopsyDifferentiator
+                headline="Biopsias: tarifa única en ambos lados, no por muestra."
+                intro="Cuando se requieren biopsias, la mayoría de clínicas cobra por cada muestra — tanto por tomarla como por interpretarla. 3 biopsias = 3 cargos en ambos lados."
+              />
+            </div>
 
             <p className="text-foreground/80 leading-relaxed">
               Si necesitas endoscopia y colonoscopia, ambos estudios pueden
@@ -365,7 +371,7 @@ export default function PreciosPage() {
           #cpre — ad-routing landing targets), then the full category
           tables for all 22 services.
           ══════════════════════════════════════════════════════════════ */}
-      <section id="pricing-anchor" className="bg-background">
+      <section id="pricing-anchor" className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             {/* Per-procedure anchored cards */}
@@ -387,7 +393,7 @@ export default function PreciosPage() {
               <h3 className="font-serif font-semibold text-foreground text-lg">
                 Procedimientos Diagnósticos
               </h3>
-              <div className="border border-border rounded-xl overflow-hidden bg-card">
+              <div className={`border border-border rounded-xl overflow-hidden bg-card ${pages.serviceTable}`}>
                 {diagnosticServices.map((s, i) => (
                   <ServiceRow
                     key={s.slug}
@@ -404,7 +410,7 @@ export default function PreciosPage() {
               <h3 className="font-serif font-semibold text-foreground text-lg">
                 Procedimientos Terapéuticos
               </h3>
-              <div className="border border-border rounded-xl overflow-hidden bg-card">
+              <div className={`border border-border rounded-xl overflow-hidden bg-card ${pages.serviceTable}`}>
                 {therapeuticServices.map((s, i) => (
                   <ServiceRow key={s.slug} service={s} isLast={i === therapeuticServices.length - 1} />
                 ))}
@@ -418,7 +424,7 @@ export default function PreciosPage() {
               </h3>
 
               {/* Explainer callout */}
-              <div className="bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4">
+              <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
                 <p className="font-semibold text-foreground">
                   ¿Por qué la mayoría de estos procedimientos requieren cotización?
                 </p>
@@ -460,7 +466,7 @@ export default function PreciosPage() {
                 </p>
               </div>
 
-              <div className="border border-border rounded-xl overflow-hidden bg-card">
+              <div className={`border border-border rounded-xl overflow-hidden bg-card ${pages.serviceTable}`}>
                 {advancedServices.map((s, i) => (
                   <ServiceRow key={s.slug} service={s} isLast={i === advancedServices.length - 1} />
                 ))}
@@ -474,20 +480,22 @@ export default function PreciosPage() {
           SECTION 4: COMPETITIVE COMPARISON — bg-muted
           Implicit comparison (no competitor names).
           ══════════════════════════════════════════════════════════════ */}
-      <ComparisonTable />
+      <div className={pages.comparison}>
+        <ComparisonTable />
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════
           SECTION 5: INSURANCE & PAYMENT — bg-background
           ══════════════════════════════════════════════════════════════ */}
-      <section id="seguros" className="bg-background scroll-mt-24">
+      <section id="seguros" className={`bg-background scroll-mt-24 ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
               Seguros y Formas de Pago
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${pages.openGrid}`}>
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-6 w-6 text-accent" />
                   <h3 className="font-serif font-semibold text-foreground text-lg">
@@ -501,7 +509,7 @@ export default function PreciosPage() {
                 </p>
               </div>
 
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+              <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
                 <div className="flex items-center gap-2">
                   <Heart className="h-6 w-6 text-primary" />
                   <h3 className="font-serif font-semibold text-foreground text-lg">
@@ -532,9 +540,9 @@ export default function PreciosPage() {
       </section>
 
       {/* ── Cost-concern reassurance ── */}
-      <div className="bg-background">
+      <div className={`bg-background ${pages.paper}`}>
         <div className="container-page py-6">
-          <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-5 max-w-3xl">
+          <div className={`bg-accent-light border border-accent/20 rounded-xl px-6 py-5 max-w-3xl ${pages.note}`}>
             <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
               ¿El Precio Puede Subir?
             </h3>
@@ -550,14 +558,14 @@ export default function PreciosPage() {
       {/* ══════════════════════════════════════════════════════════════
           SECTION 6: FAQ — bg-muted
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.faq}`}>
         <Faq routeKey="precios" service="precios" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
           SECTION 7: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -570,7 +578,7 @@ export default function PreciosPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="precios"
                 position="bottom-cta"
@@ -595,7 +603,7 @@ export default function PreciosPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
@@ -611,7 +619,7 @@ function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
   return (
     <section
       id={detail.key}
-      className="scroll-mt-24 bg-card border border-border rounded-xl p-6 md:p-8 space-y-6"
+      className={`scroll-mt-24 bg-card border border-border rounded-xl p-6 md:p-8 space-y-6 ${pages.anchorBlock}`}
     >
       <div className="space-y-2">
         <h3 className="font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight">
@@ -623,10 +631,10 @@ function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
       </div>
 
       {/* Price + procedure-specific WhatsApp CTA */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-accent-light border border-accent/20 rounded-xl p-6">
+      <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-accent-light border border-accent/20 rounded-xl p-6 ${pages.priceBar}`}>
         <div>
           <p className="text-sm font-medium text-muted-foreground">Precio</p>
-          <p className="font-serif font-extrabold text-text-accent text-3xl md:text-4xl">
+          <p className={`font-serif font-extrabold text-text-accent text-3xl md:text-4xl ${pages.priceFigure}`}>
             {displayFrom(detail.key)}
           </p>
         </div>
@@ -659,7 +667,7 @@ function ProcedureAnchorCard({ detail }: { detail: ProcedureDetail }) {
       </div>
 
       {/* One-line value differentiator */}
-      <p className="text-sm font-semibold text-foreground border-l-2 border-accent pl-4 leading-relaxed">
+      <p className={`text-sm font-semibold text-foreground border-l-2 border-accent pl-4 leading-relaxed ${pages.quietNote}`}>
         {detail.differentiator}
       </p>
 
@@ -698,7 +706,7 @@ function ServiceRow({
 
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 hover:bg-muted/50 transition-colors ${
+      className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 hover:bg-muted/50 transition-colors ${pages.serviceRow} ${
         !isLast ? "border-b border-border" : ""
       }`}
     >

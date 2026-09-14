@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { mxn, displayFrom, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -53,9 +55,9 @@ export default function LigaduraHemorroidesPage() {
   const video = getVideo("ligadura_hemorroides")
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── Section 1: Hero ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
@@ -67,11 +69,11 @@ export default function LigaduraHemorroidesPage() {
               1 y 2. Sin cortes, sin hospitalización, en Mérida, Yucatán.
             </p>
 
-            <span className="inline-block px-4 py-2 rounded-full bg-accent-light text-text-accent font-semibold text-lg">
+            <span className={`inline-block px-4 py-2 rounded-full bg-accent-light text-text-accent font-semibold text-lg ${pages.heroPrice}`}>
               {displayFrom("ligadura_hemorroides")}
             </span>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 className="flex-1"
                 service={SERVICE}
@@ -86,7 +88,7 @@ export default function LigaduraHemorroidesPage() {
               />
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+            <div className={`flex flex-wrap items-center gap-6 text-sm text-muted-foreground ${pages.chips}`}>
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
                 <span>{CLINIC.address.streetAddress}</span>
@@ -101,7 +103,7 @@ export default function LigaduraHemorroidesPage() {
       </section>
 
       {/* ── Section 2: Definition + Process ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             ¿Qué Es la Ligadura de Hemorroides y Cómo Se Hace?
@@ -153,13 +155,13 @@ export default function LigaduraHemorroidesPage() {
           </p>
 
           {/* 5-step vertical timeline */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8">
+          <div className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8 ${pages.steps}`}>
             {STEPS.map((s) => (
               <div
                 key={s.n}
-                className="p-4 rounded-xl border border-border bg-card text-center"
+                className={`p-4 rounded-xl border border-border bg-card text-center ${pages.step}`}
               >
-                <div className="w-10 h-10 rounded-full bg-accent text-white font-bold text-base flex items-center justify-center mx-auto mb-4">
+                <div className={`w-10 h-10 rounded-full bg-accent text-white font-bold text-base flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   {s.n}
                 </div>
                 <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
@@ -171,7 +173,7 @@ export default function LigaduraHemorroidesPage() {
           </div>
 
           {/* Recovery callout */}
-          <div className="p-4 rounded-xl bg-accent-light border border-accent/20">
+          <div className={`p-4 rounded-xl bg-accent-light border border-accent/20 ${pages.note}`}>
             <p className="text-foreground/80 leading-relaxed">
               <strong className="text-foreground">Recuperación rápida:</strong>{" "}
               Regreso a actividades en 24-48 horas. Fibra, buena hidratación y
@@ -182,7 +184,7 @@ export default function LigaduraHemorroidesPage() {
       </section>
 
       {/* ── Section 3: Pain + Pricing + Recovery ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding space-y-16">
           {/* Pain / fear-based content */}
           <div>
@@ -211,7 +213,7 @@ export default function LigaduraHemorroidesPage() {
             <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
               Ligadura vs Cirugía: ¿Por Qué Evitar la Hemorroidectomía?
             </h3>
-            <div className="bg-accent-light border border-accent/20 rounded-xl p-6">
+            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 ${pages.note}`}>
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <p className="font-serif font-semibold text-foreground mb-2">
@@ -276,7 +278,7 @@ export default function LigaduraHemorroidesPage() {
             </h2>
 
           <div className="max-w-2xl">
-            <p className="text-4xl font-bold text-text-accent mb-6">
+            <p className={`text-4xl font-bold text-text-accent mb-6 ${pages.priceFigure}`}>
               {displayFrom("ligadura_hemorroides")}
             </p>
 
@@ -296,7 +298,7 @@ export default function LigaduraHemorroidesPage() {
               Además incluye: evaluación proctológica, bandas elásticas y observación post-procedimiento de 1–2 horas. Una sola sesión resuelve la mayoría de los casos.
             </p>
 
-            <div className="p-4 rounded-xl bg-muted border border-border mb-6 mt-6">
+            <div className={`p-4 rounded-xl bg-muted border border-border mb-6 mt-6 ${pages.quietNote}`}>
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">Costo adicional:</strong>{" "}
                 {ADDITIONAL_FEES.biopsy.label} —{" "}
@@ -351,7 +353,7 @@ export default function LigaduraHemorroidesPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-red-50 border border-red-200 max-w-3xl">
+            <div className={`p-4 rounded-xl bg-red-50 border border-red-200 max-w-3xl ${pages.alert}`}>
               <div className="flex items-start gap-4">
                 <AlertTriangle className="h-6 w-6 text-red-600 shrink-0 mt-0.5" />
                 <div>
@@ -372,16 +374,16 @@ export default function LigaduraHemorroidesPage() {
       </section>
 
       {/* ── Section 4: Doctor ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Tu Especialista: {DOCTOR.name}
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-2 items-start">
-            <div className="relative aspect-square max-w-sm mx-auto md:mx-0">
+          <div className={`grid gap-8 md:grid-cols-2 items-start ${pages.portraitGrid}`}>
+            <div className={`relative aspect-square max-w-sm mx-auto md:mx-0 ${pages.portrait}`}>
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
                 width={400}
                 height={400}
@@ -400,7 +402,7 @@ export default function LigaduraHemorroidesPage() {
                 </Link>
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((c) => (
                   <span
                     key={c}
@@ -427,33 +429,31 @@ export default function LigaduraHemorroidesPage() {
             </div>
           </div>
 
-          <DoctorAuthority variant="strip" className="mt-8" />
+          <DoctorAuthority variant="strip" className={`mt-8 ${pages.strip}`} />
         </div>
       </section>
 
       {/* ── Section 5: Reviews ── bg-background (component renders own section) */}
-      <GoogleReviews />
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Section 6: FAQ ── bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <Faq routeKey="ligadura_hemorroides" service={SERVICE} />
-        </div>
+      <section className={`bg-muted ${system.faq}`}>
+        <Faq routeKey="ligadura_hemorroides" service={SERVICE} />
       </section>
 
       {/* ── Section 7: Related Procedures ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-8">
             Procedimientos Relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {RELATED.map((r) => (
               <Link
                 key={r.slug}
                 href={`/${r.slug}`}
-                className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-2">
                   {r.name}
@@ -471,7 +471,7 @@ export default function LigaduraHemorroidesPage() {
       </section>
 
       {/* ── Section 8: Bottom CTA ── bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
             ¿Listo para Agendar tu Evaluación?
@@ -480,7 +480,7 @@ export default function LigaduraHemorroidesPage() {
             Escríbenos por WhatsApp y el {DOCTOR.name} te responde
             personalmente. Te orientamos sobre tu caso sin compromiso.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4" data-sticky-bottom-cta>
             <WhatsAppButton
               className="sm:px-10"
               service={SERVICE}
@@ -539,6 +539,6 @@ export default function LigaduraHemorroidesPage() {
           __html: JSON.stringify(videoSchema(video)),
         }}
       />
-    </>
+    </div>
   )
 }

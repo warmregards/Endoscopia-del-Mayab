@@ -1,0 +1,16 @@
+ M app/(site)/colonoscopia-merida/page.tsx
+ M app/(site)/endoscopia-merida/page.tsx
+ M app/(site)/page.tsx
+ M components/AppointmentForm.tsx
+ M components/DoctorAuthority.tsx
+ M components/Faq.tsx
+ M components/Footer.tsx
+ M components/OnlineBookingBanner.tsx
+ M components/StickyMobileCTA.tsx
+ M components/TeamPresence.tsx
+?? app/(site)/colonoscopia-merida/colonoscopia-design.module.css
+?? app/(site)/design-system.module.css
+?? app/(site)/endoscopia-merida/procedure-design.module.css
+?? app/(site)/home-design.module.css
+?? docs/design-refresh/
+?? public/equipo/omar-quiroz-portrait.webp

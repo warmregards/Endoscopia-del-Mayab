@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -73,7 +75,7 @@ const includedItems = [
 export default function CprePage() {
   const video = getVideo("cpre")
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD Schema ─────────────────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -120,25 +122,25 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-12 lg:gap-16 ${pages.heroGrid}`}>
             {/* ── Left: Content ── */}
             <div className="flex-1 space-y-6">
               <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl sm:text-4xl lg:text-5xl">
                 CPRE en Mérida
               </h1>
 
-              <p className="text-xl font-semibold text-text-accent">
+              <p className={`text-xl font-semibold text-text-accent ${pages.lead}`}>
                 {displayFrom("cpre")} · Sedación con anestesiólogo · Sin cirugía abierta
               </p>
 
-              <p className="text-lg text-foreground leading-relaxed max-w-2xl">
+              <p className={`text-lg text-foreground leading-relaxed max-w-2xl ${pages.intro}`}>
                 Tratamiento directo de cálculos en el conducto biliar, estenosis biliares y obstrucciones en 30–90 minutos en Hospital Amerimed Mérida, Yucatán. Endoscopio especializado con fluoroscopía digital ve tus conductos biliares en tiempo real — sin abrir.
               </p>
 
               {/* Trust chips */}
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                 {trustChips.map((chip) => (
                   <div key={chip} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -148,7 +150,7 @@ export default function CprePage() {
               </div>
 
               {/* CTAs — WhatsApp FIRST per spec */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="CPRE"
                   position="hero"
@@ -160,7 +162,7 @@ export default function CprePage() {
               </div>
 
               {/* Location signal */}
-              <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+              <div className={`flex flex-col gap-1 text-sm text-muted-foreground ${pages.location}`}>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-primary shrink-0" />
                   <span>{CLINIC.address.display}</span>
@@ -173,21 +175,21 @@ export default function CprePage() {
             </div>
 
             {/* ── Right: Price card ── */}
-            <div className="w-full lg:max-w-sm">
-              <div className="border-2 border-accent bg-accent/5 rounded-2xl p-8">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+            <div className={`w-full lg:max-w-sm ${pages.pricePanel}`}>
+              <div className={`border-2 border-accent bg-accent/5 rounded-2xl p-8 ${pages.panel}`}>
+                <div className={`text-center space-y-4 ${pages.panelHead}`}>
+                  <div className={`w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto ${pages.panelIcon}`}>
                     <Microscope className="h-8 w-8 text-accent" />
                   </div>
                   <p className="text-sm font-medium text-muted-foreground">
                     {DOCTOR.name}
                   </p>
-                  <p className="font-serif font-bold text-text-accent text-3xl">
+                  <p className={`font-serif font-bold text-text-accent text-3xl ${pages.panelPrice}`}>
                     {displayFrom("cpre")}
                   </p>
                 </div>
 
-                <div className="mt-8 space-y-4">
+                <div className={`mt-8 space-y-4 ${pages.panelBody}`}>
                   <h3 className="text-lg font-serif font-bold text-foreground text-center">
                     Lo que incluye el precio base
                   </h3>
@@ -205,7 +207,7 @@ export default function CprePage() {
                   </div>
                 </div>
 
-                <p className="mt-6 text-center text-sm text-accent font-medium">
+                <p className={`mt-6 text-center text-sm text-accent font-medium ${pages.panelNote}`}>
                   ✓ Mismo equipo que hospitales privados de Cancún
                 </p>
               </div>
@@ -217,7 +219,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: ¿Qué es una CPRE? — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -243,7 +245,7 @@ export default function CprePage() {
               <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                 ¿Qué trata la CPRE?
               </h3>
-              <div className="grid gap-3 md:grid-cols-2 max-w-3xl">
+              <div className={`grid gap-3 md:grid-cols-2 max-w-3xl ${pages.checkGrid}`}>
                 {[
                   "Cálculos atrapados en el conducto biliar",
                   "Estenosis (estrechamiento) de la vía biliar",
@@ -283,7 +285,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 3: ¿Por qué te indicaron una CPRE? — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -294,8 +296,8 @@ export default function CprePage() {
               La CPRE permite ver y tratar directamente el conducto biliar — no adivina como una radiografía o ultrasonido. Estas son las indicaciones más frecuentes que llevan a un médico a referir a CPRE:
             </p>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`grid gap-6 md:grid-cols-2 ${pages.openGrid}`}>
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Cálculos en el conducto biliar
                 </h3>
@@ -304,7 +306,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Pancreatitis biliar
                 </h3>
@@ -313,7 +315,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Estenosis (estrechamiento) biliar
                 </h3>
@@ -322,7 +324,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Sospecha de tumor — biopsia y diagnóstico
                 </h3>
@@ -338,7 +340,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 4: CPRE vs cirugía vs observación — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -377,8 +379,8 @@ export default function CprePage() {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-xl border border-border bg-background p-6">
+            <div className={`grid gap-6 md:grid-cols-2 lg:grid-cols-4 ${pages.openGrid}`}>
+              <div className={`rounded-xl border border-border bg-background p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Cirugía abierta
                 </h3>
@@ -387,7 +389,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className={`rounded-xl border border-border bg-background p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Laparoscopía
                 </h3>
@@ -396,7 +398,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className={`rounded-xl border border-border bg-background p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   Observación / esperar
                 </h3>
@@ -405,7 +407,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border-2 border-accent bg-accent/5 p-6">
+              <div className={`rounded-xl border-2 border-accent bg-accent/5 p-6 ${pages.open} ${pages.featured}`}>
                 <h3 className="font-serif font-semibold text-lg text-text-accent mb-4">
                   CPRE
                 </h3>
@@ -421,7 +423,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: PRECIOS — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio-cpre-merida" className="bg-background">
+      <section id="precio-cpre-merida" className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="space-y-4">
@@ -434,7 +436,7 @@ export default function CprePage() {
             </div>
 
             {/* Three-column comparison */}
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.compare}`}>
               <div className="p-6 rounded-2xl border border-border text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
                   Hospital privado en Cancún
@@ -447,7 +449,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl border-2 border-accent bg-accent/5 text-center">
+              <div className={`p-6 rounded-2xl border-2 border-accent bg-accent/5 text-center ${pages.compareOurs}`}>
                 <p className="text-lg font-bold text-text-accent mb-2">
                   {DOCTOR.name}
                 </p>
@@ -475,7 +477,7 @@ export default function CprePage() {
               <h3 className="text-xl font-serif font-bold text-foreground mb-6 text-center">
                 ¿Qué incluye el precio base de tu CPRE?
               </h3>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className={`grid gap-4 md:grid-cols-2 lg:grid-cols-3 ${pages.checkGrid}`}>
                 {[...includedItems, `Biopsia ${mxn(ADDITIONAL_FEES.biopsy.amount)} si necesaria`].map(
                   (item) => (
                     <div key={item} className="flex items-center gap-3">
@@ -485,7 +487,7 @@ export default function CprePage() {
                   )
                 )}
               </div>
-              <p className="text-sm text-foreground mt-6 max-w-3xl mx-auto text-center">
+              <p className={`text-sm text-foreground mt-6 max-w-3xl mx-auto text-center ${pages.quietNote}`}>
                 Costos adicionales posibles si se requiere intervención terapéutica: esfinterotomía, extracción de cálculos múltiples, colocación de prótesis biliar (plástica o metálica), o uso de SpyGlass. Todo se cotiza antes del procedimiento.
               </p>
             </div>
@@ -505,7 +507,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: ¿Cómo es el procedimiento? — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="preparacion-cpre" className="bg-muted">
+      <section id="preparacion-cpre" className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             {/* ¿Dónde se hace la CPRE? — P4 Change A: promoted from a buried H3
@@ -524,7 +526,7 @@ export default function CprePage() {
                 cuenta con este equipo y realiza el estudio ahí mismo.
               </p>
               <MapEmbed />
-              <div className="rounded-xl bg-background border border-border p-6 max-w-4xl">
+              <div className={`rounded-xl bg-background border border-border p-6 max-w-4xl ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-foreground mb-2">
                   ¿Por qué pocos hospitales hacen CPRE?
                 </h3>
@@ -544,10 +546,10 @@ export default function CprePage() {
               ¿Cómo es el procedimiento de una CPRE?
             </h2>
 
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.steps}`}>
               {/* Step 1 */}
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`text-center ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   1
                 </div>
                 <h3 className="font-serif font-semibold text-foreground mb-4">
@@ -562,8 +564,8 @@ export default function CprePage() {
               </div>
 
               {/* Step 2 */}
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`text-center ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   2
                 </div>
                 <h3 className="font-serif font-semibold text-foreground mb-4">
@@ -578,8 +580,8 @@ export default function CprePage() {
               </div>
 
               {/* Step 3 */}
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+              <div className={`text-center ${pages.step}`}>
+                <div className={`w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4 ${pages.stepNumber}`}>
                   3
                 </div>
                 <h3 className="font-serif font-semibold text-foreground mb-4">
@@ -595,7 +597,7 @@ export default function CprePage() {
               </div>
             </div>
 
-            <div className="text-center">
+            <div className={`text-center ${pages.duration}`}>
               <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-5 w-5 text-accent" />
                 <span className="font-semibold text-foreground">
@@ -608,8 +610,8 @@ export default function CprePage() {
             </div>
 
             {/* Fear-reassurance cards */}
-            <div className="grid gap-6 md:grid-cols-2 mt-12">
-              <div className="rounded-xl border border-border bg-background p-6">
+            <div className={`grid gap-6 md:grid-cols-2 mt-12 ${pages.openGrid}`}>
+              <div className={`rounded-xl border border-border bg-background p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   ¿Duele la CPRE?
                 </h3>
@@ -618,7 +620,7 @@ export default function CprePage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className={`rounded-xl border border-border bg-background p-6 ${pages.open}`}>
                 <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                   ¿Es peligrosa la CPRE?
                 </h3>
@@ -629,7 +631,7 @@ export default function CprePage() {
             </div>
 
             {/* Results timeline */}
-            <div className="rounded-xl bg-background border border-border p-6 mt-6">
+            <div className={`rounded-xl bg-background border border-border p-6 mt-6 ${pages.note}`}>
               <h3 className="font-serif font-semibold text-foreground mb-4">
                 ¿Cuándo recibo los resultados?
               </h3>
@@ -661,7 +663,7 @@ export default function CprePage() {
             </div>
 
             {/* Warning signs callout */}
-            <div className="rounded-xl bg-muted border border-border p-6 mt-6">
+            <div className={`rounded-xl bg-muted border border-border p-6 mt-6 ${pages.alert}`}>
               <p className="text-foreground/80 leading-relaxed">
                 <strong className="text-foreground">Señales de alarma post-CPRE:</strong>{" "}
                 fiebre mayor a 38°C, dolor abdominal intenso o vómito persistente — contacta inmediatamente al {DOCTOR.name} por WhatsApp o llama al{" "}
@@ -675,16 +677,16 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: TU ENDOSCOPISTA — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
-            <div className="flex flex-col sm:flex-row gap-6 sm:items-center mb-8">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0">
+            <div className={`flex flex-col sm:flex-row gap-6 sm:items-center mb-8 ${pages.portraitRow}`}>
+              <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0 ${pages.portrait}`}>
                 <Image
-                  src={DOCTOR.photos.headshot}
+                  src="/equipo/omar-quiroz-portrait.webp"
                   alt={DOCTOR.name}
-                  width={128}
-                  height={128}
+                  width={320}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -692,14 +694,14 @@ export default function CprePage() {
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                   Tu endoscopista en Hospital Amerimed: {DOCTOR.name}
                 </h2>
-                <p className="text-primary font-medium text-sm mt-1">
+                <p className={`text-primary font-medium text-sm mt-1 ${pages.specialty}`}>
                   Endoscopista Gastrointestinal y Cirujano General
                 </p>
               </div>
             </div>
 
             {/* Stats */}
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.stats}`}>
               {[
                 { value: "1,000+", label: "Procedimientos endoscópicos al año", color: "text-accent" },
                 { value: "15+", label: "Años experiencia en Mérida, Yucatán", color: "text-primary" },
@@ -709,7 +711,7 @@ export default function CprePage() {
                   key={stat.label}
                   className="text-center p-6 rounded-2xl border border-border bg-muted"
                 >
-                  <p className={`text-3xl font-bold ${stat.color} mb-2`}>
+                  <p className={`text-3xl font-bold ${stat.color} mb-2 ${pages.statValue}`}>
                     {stat.value}
                   </p>
                   <p className="text-sm font-medium text-muted-foreground">
@@ -747,14 +749,14 @@ export default function CprePage() {
                 </p>
                 <Link
                   href={DOCTOR.profileUrl}
-                  className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+                  className={`inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline ${pages.inverseLink}`}
                 >
                   Ver perfil completo <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
 
-            <DoctorAuthority variant="strip" />
+            <DoctorAuthority variant="strip" className={pages.strip} />
           </div>
         </div>
       </section>
@@ -762,16 +764,12 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: GOOGLE REVIEWS — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 9: ¿Duele la CPRE? — Crawlable Safety H2 — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -815,7 +813,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 10: DISAMBIGUATION + POR QUÉ REFERIDA — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -870,16 +868,14 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 11: FAQ — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="cpre" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="cpre" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 12: RELATED PROCEDURES — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
             Otros procedimientos
@@ -888,17 +884,17 @@ export default function CprePage() {
             ¿Tu CPRE puede requerir dilatación o colocación de prótesis? Ambos procedimientos se realizan en la misma sesión cuando está indicado — sin segunda intervención.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {relatedProcedures.map((proc) => (
               <Link
                 key={proc.slug}
                 href={proc.slug}
-                className="group flex flex-col p-6 rounded-2xl border border-border bg-background hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group flex flex-col p-6 rounded-2xl border border-border bg-background hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif font-bold text-foreground text-lg mb-2">
                   {proc.name}
                 </h3>
-                <p className="font-serif font-bold text-text-accent text-xl mb-2">
+                <p className={`font-serif font-bold text-text-accent text-xl mb-2 ${pages.relatedPrice}`}>
                   {displayFrom(proc.pricingKey)}
                 </p>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">
@@ -925,7 +921,7 @@ export default function CprePage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 13: BOTTOM CTA — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
@@ -937,7 +933,7 @@ export default function CprePage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="CPRE"
                 position="bottom-cta"
@@ -948,7 +944,7 @@ export default function CprePage() {
               <CallButton service="CPRE" position="bottom-cta" />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className={`grid gap-4 md:grid-cols-2 ${pages.closingNotes}`}>
               <div className="p-4 rounded-xl bg-muted border border-border">
                 <p className="font-semibold text-foreground mb-1">
                   ¿Primera CPRE?
@@ -973,6 +969,6 @@ export default function CprePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

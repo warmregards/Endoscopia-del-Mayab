@@ -1,3 +1,5 @@
+import system from "./design-system.module.css"
+import styles from "./home-design.module.css"
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, Star, Clock, Check, ArrowRight, Shield, ChevronDown, ShieldCheck, AlertTriangle } from "lucide-react"
@@ -58,10 +60,11 @@ export default async function Page() {
   } = await getGoogleReviews({ maxReviews: 1 })
 
   return (
-    <>
+    <div className={`${styles.home} ${system.system}`}>
       {/* ── Section 1: Hero ── */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
+      <section className={`${styles.hero} ${system.hero}`}>
+        <div className={`container-page ${styles.heroGrid}`} >
+          <div className={styles.heroCopy}>
           <div className="trust-bar">
             <div className="rating-stars">
               {[1, 2, 3, 4, 5].map(i => (
@@ -130,11 +133,22 @@ export default async function Page() {
           <p className="text-sm text-muted-foreground mt-2">
             A minutos de Cholul, Temozón Norte, Altabrisa, Francisco de Montejo y el Centro Histórico de Mérida.
           </p>
+          </div>
+          <div className={styles.heroPhoto}>
+            <Image
+              src="/equipo/omar-quiroz-portrait.webp"
+              alt="Dr. Omar Quiroz"
+              width={800}
+              height={1000}
+              sizes="(min-width: 1200px) 480px, (min-width: 900px) 42vw, 100vw"
+              priority
+            />
+          </div>
         </div>
       </section>
 
       {/* ── Section 2: Procedure Routing — 3 Core Cards ── */}
-      <section className="bg-muted">
+      <section className={styles.procedures}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-1">
             Procedimientos Principales
@@ -180,7 +194,7 @@ export default async function Page() {
       </section>
 
       {/* ── Section 3: Trust Strip — Dr. Quiroz ── */}
-      <section className="bg-background">
+      <section className={`${styles.doctor} ${system.doctor}`}>
         <div className="container-page section-padding">
           <div className="doctor-card">
             {/* Credential strip */}
@@ -201,25 +215,25 @@ export default async function Page() {
             {/* Main content */}
             <div className="p-6 md:p-8">
               <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0">
+                <div className={styles.doctorPortrait}>
                   <Image
-                    src={DOCTOR.photos.headshot}
+                    src="/equipo/omar-quiroz-portrait.webp"
                     alt={DOCTOR.name}
-                    width={128}
-                    height={128}
-                    sizes="(min-width: 640px) 128px, 96px"
+                    width={320}
+                    height={400}
+                    sizes="(min-width: 768px) 220px, 160px"
                     className="w-full h-full object-cover"
                   />
                 </div>
 
-                <div className="flex-1 min-w-0">
+                <div className={`flex-1 min-w-0 ${styles.doctorCopy}`}>
                   <h2 className="font-serif font-bold text-foreground text-xl md:text-2xl mb-1">
                     {DOCTOR.name}
                   </h2>
                   <p className="text-primary font-medium text-sm mb-4">
                     Endoscopista Gastrointestinal Certificado
                   </p>
-                  <p className="text-muted-foreground italic text-sm mb-4 max-w-md">
+                  <p className={styles.doctorQuote}>
                     &ldquo;Cuando nos escribes, te contesta el doctor directamente.&rdquo;
                   </p>
                   <p className="text-foreground/80 text-sm mb-6 max-w-md leading-relaxed">
@@ -258,10 +272,10 @@ export default async function Page() {
                           src={m.photo}
                           alt=""
                           aria-hidden
-                          width={32}
-                          height={32}
-                          sizes="32px"
-                          className="h-8 w-8 rounded-full border-2 border-background object-cover object-top"
+                          width={40}
+                          height={40}
+                          sizes="40px"
+                          className="h-10 w-10 rounded-full border-2 border-background object-cover object-top"
                         />
                       ))}
                     </span>
@@ -282,7 +296,7 @@ export default async function Page() {
           tier), not the thin-banner treatment it used to have. bg-muted keeps
           the background↔muted alternation intact against the doctor strip above
           and the (near-white) reviews gradient below. */}
-      <section className="bg-muted">
+      <section className={styles.biopsy}>
         <div className="container-page section-padding">
           <div className="bg-accent-light border border-accent/20 rounded-xl px-6 py-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -315,10 +329,10 @@ export default async function Page() {
       </section>
 
       {/* ── Google Reviews — Social Proof ── */}
-      <GoogleReviews />
+      <GoogleReviews className={`${styles.reviews} ${system.reviews}`} />
 
       {/* ── How It Works + Sedation Reassurance ── */}
-      <section className="bg-muted">
+      <section className={styles.steps}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-8">
             ¿Cómo Funciona? Tu Primera Cita en 3 Pasos
@@ -344,9 +358,9 @@ export default async function Page() {
             ].map((step) => (
               <div
                 key={step.n}
-                className="p-6 rounded-xl border border-border bg-card text-center"
+                className={styles.step}
               >
-                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                <div className={styles.stepNumber}>
                   {step.n}
                 </div>
                 <h3 className="font-serif font-semibold text-foreground text-lg mb-2">
@@ -374,7 +388,7 @@ export default async function Page() {
       </section>
 
       {/* ── Section 5: All Services Catalog ── */}
-      <section className="bg-background">
+      <section className={styles.catalog}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-6">
             Todos los Servicios
@@ -473,7 +487,7 @@ export default async function Page() {
       </section>
 
       {/* ── Section 6: FAQ ── */}
-      <div className="bg-muted">
+      <div className={`${styles.faq} ${system.faq}`}>
         <Faq routeKey="home" maxVisible={6} />
       </div>
 
@@ -515,7 +529,7 @@ export default async function Page() {
       {/* ── Section 7: Bottom CTA ──
           id is read by <StickyMobileCTA>: the sticky bar retracts while this
           section is on screen so it can't sit on top of these CTAs. */}
-      <section id="bottom-cta" className="cta-section">
+      <section id="bottom-cta" className={`cta-section ${system.closing}`}>
         <div className="container-page section-padding text-center">
           <h2 className="cta-heading">¿Listo para agendar?</h2>
           <p className="cta-subtext">El Dr. Quiroz te atiende personalmente.</p>
@@ -542,6 +556,6 @@ export default async function Page() {
         </div>
       </section>
 
-    </>
+    </div>
   )
 }

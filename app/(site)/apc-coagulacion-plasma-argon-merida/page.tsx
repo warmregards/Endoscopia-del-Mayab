@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, displayFrom, ADDITIONAL_FEES, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -143,7 +145,7 @@ const stats = [
 
 export default function APCPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -185,13 +187,13 @@ export default function APCPage() {
           SECTION 1: HERO — bg-background
           Split layout: left content + right price card (proven pattern)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
 
             {/* ── Left: Content ── */}
             <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
+              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground ${pages.eyebrow}`}>
                 Tratamiento endoscópico con equipo ERBE
               </div>
 
@@ -210,7 +212,7 @@ export default function APCPage() {
               </p>
 
               {/* Trust chips */}
-              <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+              <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                 {trustChips.map((chip) => (
                   <div key={chip} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -220,7 +222,7 @@ export default function APCPage() {
               </div>
 
               {/* CTAs — WhatsApp FIRST per spec */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="coagulacion plasma argon"
                   position="hero"
@@ -239,13 +241,13 @@ export default function APCPage() {
             </div>
 
             {/* ── Right: Price card ── */}
-            <div className="w-full lg:max-w-sm">
-              <div className="border-2 border-accent bg-accent/5 rounded-2xl p-8">
-                <div className="text-center space-y-4">
+            <div className={`w-full lg:max-w-sm ${pages.pricePanel}`}>
+              <div className={`border-2 border-accent bg-accent/5 rounded-2xl p-8 ${pages.panel}`}>
+                <div className={`text-center space-y-4 ${pages.panelHead}`}>
                   <p className="text-sm font-medium text-muted-foreground">
                     {DOCTOR.name}
                   </p>
-                  <p className="font-serif font-bold text-text-accent text-3xl">
+                  <p className={`font-serif font-bold text-text-accent text-3xl ${pages.panelPrice}`}>
                     {displayFrom("apc")}
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -253,7 +255,7 @@ export default function APCPage() {
                   </p>
                 </div>
 
-                <div className="mt-8 space-y-4">
+                <div className={`mt-8 space-y-4 ${pages.panelBody}`}>
                   <h3 className="text-lg font-serif font-bold text-foreground text-center">
                     ¿Qué incluye el precio?
                   </h3>
@@ -271,7 +273,7 @@ export default function APCPage() {
                   </div>
                 </div>
 
-                <p className="mt-6 text-center text-sm text-accent font-medium">
+                <p className={`mt-6 text-center text-sm text-accent font-medium ${pages.panelNote}`}>
                   ✓ Equipo ERBE propio — sin rentar equipo
                 </p>
               </div>
@@ -284,7 +286,7 @@ export default function APCPage() {
           SECTION 2: DEFINITION — bg-muted
           Short explanation + what it treats
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -307,7 +309,7 @@ export default function APCPage() {
           SECTION 3: CONDITIONS GRID — bg-background
           6 condition cards in 2-col grid — scannable, not a wall of text
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="space-y-4">
@@ -321,11 +323,11 @@ export default function APCPage() {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className={`grid gap-6 md:grid-cols-2 ${pages.openGrid}`}>
               {conditions.map((condition) => (
                 <div
                   key={condition.title}
-                  className="rounded-xl border border-border bg-card p-6"
+                  className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}
                 >
                   <h3 className="font-serif font-semibold text-lg text-foreground mb-4">
                     {condition.title}
@@ -344,7 +346,7 @@ export default function APCPage() {
           SECTION 4: PRICING COMPARISON — bg-muted
           3-col comparison + ERBE differentiator + cost context
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="space-y-4">
@@ -358,7 +360,7 @@ export default function APCPage() {
             </div>
 
             {/* Three-column comparison */}
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.compare}`}>
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
                   Otros proveedores
@@ -371,7 +373,7 @@ export default function APCPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl border-2 border-accent bg-accent/5 text-center">
+              <div className={`p-6 rounded-2xl border-2 border-accent bg-accent/5 text-center ${pages.compareOurs}`}>
                 <p className="text-lg font-bold text-text-accent mb-2">
                   {DOCTOR.name}
                 </p>
@@ -414,7 +416,7 @@ export default function APCPage() {
             </div>
 
             {/* ERBE differentiator callout */}
-            <div className="rounded-xl bg-accent-light border border-accent/20 p-6 max-w-4xl mx-auto">
+            <div className={`rounded-xl bg-accent-light border border-accent/20 p-6 max-w-4xl mx-auto ${pages.note}`}>
               <h3 className="font-serif font-semibold text-foreground mb-2">
                 ¿Por qué el precio es menor?
               </h3>
@@ -429,7 +431,7 @@ export default function APCPage() {
             </div>
 
             {/* Cost comparison context */}
-            <div className="rounded-xl bg-background border border-border p-6 max-w-4xl mx-auto">
+            <div className={`rounded-xl bg-background border border-border p-6 max-w-4xl mx-auto ${pages.panelSurface}`}>
               <h3 className="font-serif font-semibold text-foreground mb-4">
                 APC vs. tratamientos alternativos
               </h3>
@@ -472,7 +474,7 @@ export default function APCPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: PREPARATION & RECOVERY — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -492,9 +494,9 @@ export default function APCPage() {
                     { step: "3", label: "Coagulación", desc: "Aplicación controlada de plasma de argón" },
                     { step: "4", label: "Verificación", desc: "Confirmación de hemostasia efectiva" },
                   ].map((s) => (
-                    <div key={s.step} className="p-4 rounded-xl bg-muted border border-border">
+                    <div key={s.step} className={`p-4 rounded-xl bg-muted border border-border ${pages.step}`}>
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
+                        <span className={`w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold ${pages.numberBadge}`}>
                           {s.step}
                         </span>
                         <span className="font-semibold text-foreground">{s.label}</span>
@@ -519,7 +521,7 @@ export default function APCPage() {
                     { time: "7d", label: "Cicatrización completa, actividades normales" },
                   ].map((t) => (
                     <div key={t.time} className="flex items-start gap-4">
-                      <span className="flex-shrink-0 w-10 h-10 rounded-full bg-accent-light flex items-center justify-center">
+                      <span className={`flex-shrink-0 w-10 h-10 rounded-full bg-accent-light flex items-center justify-center ${pages.iconBox}`}>
                         <Clock className="h-4 w-4 text-accent" />
                       </span>
                       <div>
@@ -530,7 +532,7 @@ export default function APCPage() {
                   ))}
                 </div>
 
-                <div className="p-4 rounded-xl bg-accent-light border border-accent/20">
+                <div className={`p-4 rounded-xl bg-accent-light border border-accent/20 ${pages.note}`}>
                   <p className="text-sm text-foreground/80">
                     El número de sesiones depende de la condición tratada y la
                     extensión de la lesión. El Dr. Quiroz te explica el plan
@@ -560,16 +562,16 @@ export default function APCPage() {
           SECTION 6: DR. QUIROZ CREDENTIALS — bg-muted
           Matches endoscopia pattern: photo header + stats + 2-col bio
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="flex flex-col sm:flex-row gap-6 sm:items-center mb-8">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0">
+              <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0 ${pages.portrait}`}>
                 <Image
-                  src={DOCTOR.photos.headshot}
+                  src="/equipo/omar-quiroz-portrait.webp"
                   alt={DOCTOR.name}
-                  width={128}
-                  height={128}
+                  width={320}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -584,13 +586,13 @@ export default function APCPage() {
             </div>
 
             {/* Stats */}
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.stats}`}>
               {stats.map((stat) => (
                 <div
                   key={stat.label}
                   className="text-center p-6 rounded-2xl border border-border bg-background"
                 >
-                  <p className={`text-3xl font-bold ${stat.color} mb-2`}>
+                  <p className={`text-3xl font-bold ${stat.color} mb-2 ${pages.statValue}`}>
                     {stat.value}
                   </p>
                   <p className="text-sm font-medium text-muted-foreground">
@@ -641,25 +643,19 @@ export default function APCPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: GOOGLE REVIEWS — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: FAQ — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <Faq routeKey="apc" service="coagulacion plasma argon" />
-        </div>
+      <section className={`bg-muted ${system.faq}`}>
+        <Faq routeKey="apc" service="coagulacion plasma argon" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 9: RELATED PROCEDURES — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
             Procedimientos relacionados
@@ -669,7 +665,7 @@ export default function APCPage() {
             terapéuticos del Dr. Quiroz.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className={`grid gap-6 md:grid-cols-2 lg:grid-cols-4 ${pages.relatedGrid}`}>
             {[
               { name: "Endoscopia", desc: "Diagnóstico de esófago, estómago y duodeno.", href: "/endoscopia-merida" },
               { name: "Colonoscopia", desc: "Prevención de cáncer colorrectal.", href: "/colonoscopia-merida" },
@@ -679,7 +675,7 @@ export default function APCPage() {
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group flex flex-col p-6 rounded-2xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group flex flex-col p-6 rounded-2xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif font-bold text-foreground text-lg mb-2">
                   {proc.name}
@@ -699,7 +695,7 @@ export default function APCPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 10: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
@@ -712,7 +708,7 @@ export default function APCPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="coagulacion plasma argon"
                 position="bottom-cta"
@@ -725,6 +721,6 @@ export default function APCPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

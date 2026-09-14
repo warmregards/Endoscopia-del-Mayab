@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom, INCLUDED_IN_PRICE } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
@@ -35,7 +37,7 @@ export default function EndoprotesisBiliaresPage() {
   ).replace(/\/$/, "")
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -69,10 +71,10 @@ export default function EndoprotesisBiliaresPage() {
       />
 
       {/* Section 1: Hero → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20">
+            <div className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20 ${pages.heroPrice}`}>
               <span className="text-sm font-medium text-text-accent">
                 {displayFrom("endoprotesis_biliares")}
               </span>
@@ -96,7 +98,7 @@ export default function EndoprotesisBiliaresPage() {
               en Hospital Amerimed, Mérida, Yucatán.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className={`flex flex-wrap gap-4 ${pages.chips}`}>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
                 <span>{CLINIC.address.display}</span>
@@ -111,7 +113,7 @@ export default function EndoprotesisBiliaresPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="endoprótesis biliar"
                 position="hero"
@@ -129,7 +131,7 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 2: Definition → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6"
@@ -171,9 +173,9 @@ export default function EndoprotesisBiliaresPage() {
             ))}
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className={`grid gap-6 md:grid-cols-2 ${pages.openGrid}`}>
             {/* Stent Plástico */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
               <h3
                 className="font-serif text-lg font-semibold text-foreground mb-4"
               >
@@ -195,7 +197,7 @@ export default function EndoprotesisBiliaresPage() {
             </div>
 
             {/* Stent Metálico */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
               <h3
                 className="font-serif text-lg font-semibold text-foreground mb-4"
               >
@@ -220,7 +222,7 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 3: Pricing → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2"
@@ -231,8 +233,8 @@ export default function EndoprotesisBiliaresPage() {
             Precio personalizado según tipo de prótesis y complejidad del caso
           </p>
 
-          <div className="max-w-2xl rounded-xl border border-border bg-card p-8">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20 mb-6">
+          <div className={`max-w-2xl rounded-xl border border-border bg-card p-8 ${pages.panelSurface}`}>
+            <div className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 border border-accent/20 mb-6 ${pages.heroPrice}`}>
               <span className="text-sm font-semibold text-text-accent">
                 {displayFrom("endoprotesis_biliares")}
               </span>
@@ -280,7 +282,7 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 4: Prep & Recovery → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8"
@@ -288,9 +290,9 @@ export default function EndoprotesisBiliaresPage() {
             Preparación y Recuperación
           </h2>
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className={`grid gap-6 lg:grid-cols-2 ${pages.openGrid}`}>
             {/* Before */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
               <h3
                 className="font-serif text-lg font-semibold text-foreground mb-6"
               >
@@ -329,7 +331,7 @@ export default function EndoprotesisBiliaresPage() {
             </div>
 
             {/* After */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.open}`}>
               <h3
                 className="font-serif text-lg font-semibold text-foreground mb-6"
               >
@@ -369,7 +371,7 @@ export default function EndoprotesisBiliaresPage() {
           </div>
 
           {/* Warning signs */}
-          <div className="mt-8 rounded-xl bg-red-50 border border-red-200 p-6">
+          <div className={`mt-8 rounded-xl bg-red-50 border border-red-200 p-6 ${pages.alert}`}>
             <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-red-600" />
               Señales de Alarma — Contactar Inmediatamente
@@ -385,7 +387,7 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 5: Doctor Credentials → bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8"
@@ -393,14 +395,14 @@ export default function EndoprotesisBiliaresPage() {
             Tu Especialista en Endoprótesis Biliares
           </h2>
 
-          <div className="flex flex-col sm:flex-row gap-8 items-start max-w-3xl">
+          <div className={`flex flex-col sm:flex-row gap-8 items-start max-w-3xl ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
-                width={160}
-                height={160}
-                className="rounded-2xl object-cover"
+                width={320}
+                height={400}
+                className={`rounded-2xl object-cover ${pages.portraitImg}`}
               />
             </div>
 
@@ -416,7 +418,7 @@ export default function EndoprotesisBiliaresPage() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((c) => (
                   <span
                     key={c}
@@ -439,24 +441,18 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 6: Google Reviews → bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* Section 7: FAQ → bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq
-            routeKey="endoprotesis_biliares"
-            service="endoprótesis biliar"
-          />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq
+          routeKey="endoprotesis_biliares"
+          service="endoprótesis biliar"
+        />
       </section>
 
       {/* Section 8: Related Procedures → bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-8"
@@ -464,7 +460,7 @@ export default function EndoprotesisBiliaresPage() {
             Procedimientos Relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {[
               {
                 name: "CPRE",
@@ -488,7 +484,7 @@ export default function EndoprotesisBiliaresPage() {
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3
                   className="font-serif text-lg font-semibold text-foreground mb-2"
@@ -512,7 +508,7 @@ export default function EndoprotesisBiliaresPage() {
       </section>
 
       {/* Section 9: Bottom CTA → bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4"
@@ -524,7 +520,7 @@ export default function EndoprotesisBiliaresPage() {
             Respuesta directa por WhatsApp.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="endoprótesis biliar"
               position="bottom-cta"
@@ -571,6 +567,6 @@ export default function EndoprotesisBiliaresPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

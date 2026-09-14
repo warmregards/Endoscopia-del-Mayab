@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import styles from "./colonoscopia-design.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, INCLUDED_IN_PRICE, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -85,7 +87,7 @@ export default function ColonoscopiaPage() {
   const video = getVideo("colonoscopia")
 
   return (
-    <>
+    <div className={`${styles.page} ${system.system}`}>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -135,12 +137,12 @@ export default function ColonoscopiaPage() {
           SECTION 1: HERO — bg-background
           Serves: ALL personas. Price chip + WhatsApp CTA above fold (mobile).
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
             {/* ── Left: Content ── */}
             <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium text-text-accent">
+              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium text-text-accent ${styles.eyebrow}`}>
                 Prevención de cáncer colorrectal
               </div>
 
@@ -168,7 +170,7 @@ export default function ColonoscopiaPage() {
               </div>
 
               {/* CTAs — WhatsApp FIRST per spec */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${styles.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="colonoscopia"
                   position="hero"
@@ -184,14 +186,14 @@ export default function ColonoscopiaPage() {
               </div>
 
               {/* Location — NAP signal */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className={`flex items-center gap-2 text-sm text-muted-foreground ${styles.location}`}>
                 <MapPin className="h-4 w-4 text-primary shrink-0" />
                 <span>{CLINIC.address.display}</span>
               </div>
             </div>
 
             {/* ── Right: Price card — Persona 2 (price shopper) ── */}
-            <div className="w-full lg:max-w-sm">
+            <div className={`w-full lg:max-w-sm ${styles.pricePanel}`}>
               <div className="border border-border bg-card rounded-2xl shadow-md p-6 space-y-6">
                 <div className="text-center space-y-2">
                   <p className="text-sm font-medium text-muted-foreground">
@@ -231,15 +233,15 @@ export default function ColonoscopiaPage() {
 
       {/* Thin online-booking banner — surfaces the on-page form (below) within
           the first viewport. Secondary to the hero WhatsApp CTA by design. */}
-      <OnlineBookingBanner procedure="colonoscopia" />
+      <OnlineBookingBanner procedure="colonoscopia" highlightArrival />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: PRICING (promoted) — bg-muted
           Serves: Persona 2 (price shopper) — highest-value persona
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="scroll-mt-24 bg-muted">
+      <section id="precio" className={`scroll-mt-24 bg-muted ${styles.pricing}`}>
         <div className="container-page section-padding">
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className={`max-w-4xl mx-auto space-y-8 ${styles.pricingColumn}`}>
             <div>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 Precio de colonoscopia en Mérida:{" "}
@@ -260,7 +262,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ${styles.benchmarks}`}>
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
                   {MARKET_BENCHMARKS.colonoscopia.hospitalMayor.label}
@@ -309,7 +311,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Totales típicos por escenario — worked examples for price-intent */}
-            <div className="bg-card border border-border rounded-xl p-6">
+            <div className={`bg-card border border-border rounded-xl p-6 ${styles.totals}`}>
               <p className="font-semibold text-foreground mb-4">
                 Totales típicos por escenario
               </p>
@@ -344,14 +346,16 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Biopsy differentiator — two-layer "tarifa única" story */}
-            <BiopsyDifferentiator
-              headline="Biopsias: tarifa única en ambos lados, no por muestra."
-              intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
-              pricingKey="colonoscopia"
-            />
+            <div className={styles.biopsy}>
+              <BiopsyDifferentiator
+                headline="Biopsias: tarifa única en ambos lados, no por muestra."
+                intro={`Otros proveedores cobran por cada biopsia tomada — si necesitas 3, pagas 3 veces. Con el ${DOCTOR.name} pagas una sola vez en ambos lados (toma e interpretación).`}
+                pricingKey="colonoscopia"
+              />
+            </div>
 
             {/* GEO definitive paragraph */}
-            <p className="text-foreground leading-relaxed">
+            <p className={`text-foreground leading-relaxed ${styles.geo}`}>
               Una colonoscopia en Mérida con el {DOCTOR.name} en{" "}
               {CLINIC.name} cuesta desde {mxn(PRICING.colonoscopia.from)}. El
               precio incluye valoración pre-procedimiento, sedación con
@@ -365,7 +369,7 @@ export default function ColonoscopiaPage() {
             </p>
 
             {/* Additional cost note */}
-            <div className="bg-background border border-border rounded-xl p-4">
+            <div className={`bg-background border border-border rounded-xl p-4 ${styles.costNote}`}>
               <p className="text-sm text-muted-foreground">
                 Único costo adicional posible: interpretación del patólogo
                 externo por {mxn(ADDITIONAL_FEES.biopsy.amount)}, solo si el {DOCTOR.name} toma
@@ -374,7 +378,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Differentiators — compact 4-up strip (folded from removed "Why Choose Us" section) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${styles.differentiators}`}>
               {differentiators.map((d) => (
                 <div
                   key={d.title}
@@ -401,10 +405,11 @@ export default function ColonoscopiaPage() {
           One component (components/DoctorAuthority.tsx), shared across every
           procedure page and LP.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.doctor} ${system.doctor}`}>
         <div className="container-page section-padding">
           <DoctorAuthority
             variant="compact"
+            portraitSrc="/equipo/omar-quiroz-portrait.webp"
             service="colonoscopia"
             position="procedure-doctor"
             procedureName="Colonoscopia"
@@ -421,7 +426,7 @@ export default function ColonoscopiaPage() {
           certification comparison. Muted so it alternates against the
           background doctor block above and the comparison below.
           ══════════════════════════════════════════════════════════════════ */}
-      <TeamPresence procedure="colonoscopia" tone="muted" />
+      <TeamPresence procedure="colonoscopia" tone="muted" avatarSize={128} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-background
@@ -439,7 +444,7 @@ export default function ColonoscopiaPage() {
           section and the white section that follows. Additional path; the
           existing hero WhatsApp/phone CTAs are unchanged.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="agendar" className="scroll-mt-24 bg-accent-light">
+      <section id="agendar" className={`scroll-mt-24 bg-accent-light ${styles.booking}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -460,7 +465,7 @@ export default function ColonoscopiaPage() {
           SECTION 3: WHAT IS + WHEN — bg-background
           Serves: Persona 5 (investigator) + Persona 3 (procedure seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.intro}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -498,7 +503,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Indication cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${styles.indications}`}>
               <div className="bg-card border border-border rounded-xl p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <ShieldCheck className="h-6 w-6 text-accent" />
@@ -535,7 +540,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Cross-links */}
-            <p className="text-sm text-muted-foreground">
+            <p className={`text-sm text-muted-foreground ${styles.crossLinks}`}>
               ¿Síntomas digestivos altos (reflujo, gastritis)?{" "}
               <Link
                 href="/endoscopia-merida"
@@ -584,14 +589,14 @@ export default function ColonoscopiaPage() {
           SECTION 4: STEP-BY-STEP PROCESS — bg-muted
           Serves: Persona 5 (investigator) + Persona 3 (procedure seeker)
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="preparacion-colonoscopia" className="bg-muted">
+      <section id="preparacion-colonoscopia" className={`bg-muted ${styles.process}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
               ¿Cómo es el proceso de una colonoscopia?
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${styles.steps}`}>
               {/* Step 1 */}
               <div className="bg-card border border-border rounded-xl p-6 text-center">
                 <div className="w-12 h-12 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
@@ -702,7 +707,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Recovery callout */}
-            <div className="text-center">
+            <div className={`text-center ${styles.duration}`}>
               <div className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-accent-light border border-accent/20">
                 <Clock className="h-4 w-4 text-accent" />
                 <span className="font-semibold text-foreground">
@@ -715,7 +720,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Pain reassurance — targets "duele la colonoscopia" P5 snippet */}
-            <div className="rounded-xl bg-accent-light border border-accent/20 p-6 max-w-3xl mx-auto">
+            <div className={`rounded-xl bg-accent-light border border-accent/20 p-6 max-w-3xl mx-auto ${styles.pain}`}>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                 ¿Duele la colonoscopia?
               </h3>
@@ -755,7 +760,7 @@ export default function ColonoscopiaPage() {
           SECTION 5: RESULTS & FOLLOW-UP — bg-background
           Serves: Persona 3 (procedure seeker) + Persona 5 (investigator)
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="resultados-y-tiempos" className="bg-background">
+      <section id="resultados-y-tiempos" className={`bg-background ${styles.results}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-8">
             <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
@@ -764,7 +769,7 @@ export default function ColonoscopiaPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left — Timeline cards */}
-              <div className="space-y-6">
+              <div className={`space-y-6 ${styles.timeline}`}>
                 <div className="bg-card border border-border rounded-xl p-6">
                   <h3 className="font-serif font-semibold text-foreground mb-2">
                     Al despertar
@@ -800,7 +805,7 @@ export default function ColonoscopiaPage() {
               </div>
 
               {/* Right — Follow-up schedule */}
-              <div className="bg-accent-light rounded-2xl p-6">
+              <div className={`bg-accent-light rounded-2xl p-6 ${styles.followUp}`}>
                 <h3 className="font-serif font-semibold text-foreground mb-6">
                   Calendario de seguimiento
                 </h3>
@@ -837,7 +842,7 @@ export default function ColonoscopiaPage() {
             </div>
 
             {/* Cross-links */}
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <div className={`space-y-2 text-sm text-muted-foreground ${styles.crossLinks}`}>
               <p>
                 ¿Necesitas endoscopia y colonoscopia? Ambos estudios se
                 realizan en la misma sesión de sedación — una sola
@@ -866,7 +871,7 @@ export default function ColonoscopiaPage() {
       {/* ── Mid-page conversion CTA — fills the dead zone after "Resultados".
           Thin accent-light banner = visual separator, exempt from bg
           alternation (see design system Color Punctuation). ── */}
-      <section className="bg-accent-light">
+      <section className={`bg-accent-light ${styles.midCta}`}>
         <div className="container-page py-8">
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
             <p className="font-serif text-lg font-semibold text-foreground">
@@ -888,12 +893,12 @@ export default function ColonoscopiaPage() {
           SECTION 6: GOOGLE REVIEWS
           Component wraps itself in <section> (gradient muted → background).
           ══════════════════════════════════════════════════════════════════ */}
-      <GoogleReviews />
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Mid-page conversion CTA — fills the dead zone after reviews,
           before the FAQ. Thin accent-light banner, exempt from bg
           alternation. ── */}
-      <section className="bg-accent-light">
+      <section className={`bg-accent-light ${styles.midCta}`}>
         <div className="container-page py-8">
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
             <p className="font-serif text-lg font-semibold text-foreground">
@@ -915,7 +920,7 @@ export default function ColonoscopiaPage() {
           Serves: Persona 5 (investigator) + Persona 2 (price)
           Component injects faqSchema() JSON-LD automatically.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="faqs-colonoscopia" className="bg-muted">
+      <section id="faqs-colonoscopia" className={`bg-muted ${system.faq}`}>
         <Faq routeKey="colonoscopia" service="colonoscopia" />
       </section>
 
@@ -923,7 +928,7 @@ export default function ColonoscopiaPage() {
           SECTION 8: BOTTOM CTA — bg-primary
           Serves: ALL personas. Final conversion capture.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="contacto-colonoscopia" className="bg-primary">
+      <section id="contacto-colonoscopia" className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -936,7 +941,7 @@ export default function ColonoscopiaPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="colonoscopia"
                 position="bottom-cta"
@@ -958,6 +963,6 @@ export default function ColonoscopiaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

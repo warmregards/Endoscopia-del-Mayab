@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -42,7 +44,7 @@ export default function RetiroBalonGastricoPage() {
   ])
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProcedure) }}
@@ -57,10 +59,10 @@ export default function RetiroBalonGastricoPage() {
       />
 
       {/* ── SECTION 1: HERO ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 ${pages.eyebrow}`}>
               <ShieldCheck className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-text-accent">
                 Procedimiento Bariátrico Endoscópico
@@ -79,7 +81,7 @@ export default function RetiroBalonGastricoPage() {
               desde {mxn(PRICING.retiro_balon_gastrico.from)}.
             </p>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.chips}`}>
               {[
                 `Desde ${mxn(PRICING.retiro_balon_gastrico.from)}`,
                 "Extracción sin incisiones",
@@ -93,7 +95,7 @@ export default function RetiroBalonGastricoPage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="retiro balon"
                 position="hero"
@@ -103,7 +105,7 @@ export default function RetiroBalonGastricoPage() {
               <CallButton service="retiro balon" position="hero" variant="ghost" />
             </div>
 
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+            <div className={`flex flex-wrap gap-6 text-sm text-muted-foreground ${pages.chips}`}>
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-accent" />
                 <span>{CLINIC.address.display}</span>
@@ -118,7 +120,7 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── SECTION 2: DEFINITION ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-6">
             ¿Cuándo Se Retira el Balón Gástrico?
@@ -130,7 +132,7 @@ export default function RetiroBalonGastricoPage() {
             complicaciones. Existen tres escenarios principales para su retiro:
           </p>
 
-          <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <div className={`grid gap-4 md:grid-cols-3 mb-6 ${pages.openGrid}`}>
             {[
               {
                 title: "6 meses",
@@ -147,7 +149,7 @@ export default function RetiroBalonGastricoPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="flex items-start gap-4 p-4 rounded-xl border border-border bg-background"
+                className={`flex items-start gap-4 p-4 rounded-xl border border-border bg-background ${pages.open}`}
               >
                 <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
                 <div>
@@ -167,7 +169,7 @@ export default function RetiroBalonGastricoPage() {
             />
           </div>
 
-          <div className="bg-accent-light border border-accent/20 rounded-xl p-6 mb-6">
+          <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 mb-6 ${pages.note}`}>
             <p className="text-foreground/80 leading-relaxed">
               <strong className="text-foreground">¿Otro médico colocó tu balón?</strong>{" "}
               No importa. El {DOCTOR.name} tiene experiencia con Orbera,
@@ -193,7 +195,7 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── Fear-based content ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
             ¿Duele el Retiro de Balón Gástrico?
@@ -209,7 +211,7 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── SECTION 3: PRICING ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Precio de Retiro de Balón Gástrico en Mérida
@@ -217,12 +219,12 @@ export default function RetiroBalonGastricoPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Price card */}
-            <div className="p-8 rounded-2xl border-2 border-accent bg-accent-light/30">
+            <div className={`p-8 rounded-2xl border-2 border-accent bg-accent-light/30 lg:self-start ${pages.note}`}>
               <div className="text-center space-y-4">
                 <p className="text-sm font-medium text-text-accent uppercase tracking-wider">
                   Retiro de Balón Gástrico Completo
                 </p>
-                <p className="text-4xl font-extrabold text-text-accent font-serif">
+                <p className={`text-4xl font-extrabold text-text-accent font-serif ${pages.priceFigure}`}>
                   {mxn(PRICING.retiro_balon_gastrico.from)}
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -251,7 +253,7 @@ export default function RetiroBalonGastricoPage() {
                 ))}
               </ul>
 
-              <div className="p-4 rounded-xl bg-muted border border-border">
+              <div className={`p-4 rounded-xl bg-muted border border-border ${pages.quietNote}`}>
                 <p className="text-sm text-muted-foreground">
                   <strong className="text-foreground">Costo adicional:</strong>{" "}
                   Consulta de valoración pre-procedimiento:{" "}
@@ -275,15 +277,15 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── SECTION 4: PREPARATION ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             ¿Cómo Se Realiza el Retiro de Balón Gástrico?
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.steps}`}>
             {/* Before */}
-            <div className="p-6 rounded-xl border border-border bg-background">
+            <div className={`p-6 rounded-xl border border-border bg-background ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">
                 Antes del Procedimiento
               </h3>
@@ -308,7 +310,7 @@ export default function RetiroBalonGastricoPage() {
             </div>
 
             {/* During */}
-            <div className="p-6 rounded-xl border border-border bg-background">
+            <div className={`p-6 rounded-xl border border-border bg-background ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">
                 Durante el Procedimiento (30-45 min)
               </h3>
@@ -333,7 +335,7 @@ export default function RetiroBalonGastricoPage() {
             </div>
 
             {/* After */}
-            <div className="p-6 rounded-xl border border-border bg-background">
+            <div className={`p-6 rounded-xl border border-border bg-background ${pages.step}`}>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4">
                 Después del Procedimiento
               </h3>
@@ -361,16 +363,16 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── SECTION 5: DOCTOR CREDENTIALS ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col md:flex-row gap-8 items-center">
+          <div className={`flex flex-col md:flex-row gap-8 items-center ${pages.portraitRow} ${pages.rowStart}`}>
             <div className="flex-shrink-0">
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
                 width={300}
                 height={400}
-                className="rounded-2xl"
+                className={`rounded-2xl ${pages.portraitImg}`}
               />
             </div>
 
@@ -387,7 +389,7 @@ export default function RetiroBalonGastricoPage() {
                 de principio a fin.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className={`flex flex-wrap gap-4 ${pages.credentials}`}>
                 {[
                   "Certificado en endoscopia avanzada",
                   "Cirujano General con subespecialidad",
@@ -423,21 +425,15 @@ export default function RetiroBalonGastricoPage() {
       </section>
 
       {/* ── SECTION 6: GOOGLE REVIEWS ── bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ── SECTION 7: FAQ ── bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <Faq routeKey="retiro_balon" service="retiro balon" />
-        </div>
+      <section className={`bg-muted ${system.faq}`}>
+        <Faq routeKey="retiro_balon" service="retiro balon" />
       </section>
 
       {/* ── SECTION 8: RELATED + CTA ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding space-y-16">
           {/* Related procedures */}
           <div>
@@ -445,7 +441,7 @@ export default function RetiroBalonGastricoPage() {
               Procedimientos Endoscópicos Relacionados
             </h2>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-2 lg:grid-cols-3 ${pages.relatedGrid}`}>
               {[
                 {
                   href: "/endoscopia-merida",
@@ -472,9 +468,9 @@ export default function RetiroBalonGastricoPage() {
                 <Link
                   key={card.href}
                   href={card.href}
-                  className="group p-6 rounded-xl border border-border bg-background hover:shadow-md hover:border-accent/30 transition-all"
+                  className={`group p-6 rounded-xl border border-border bg-background hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <div className={`w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors ${pages.iconBox}`}>
                     <card.icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
@@ -493,7 +489,7 @@ export default function RetiroBalonGastricoPage() {
           </div>
 
           {/* Bottom CTA */}
-          <div className="rounded-2xl bg-primary p-8 md:p-12 text-center space-y-6">
+          <div className={`rounded-2xl bg-primary p-8 md:p-12 text-center space-y-6 ${system.closing} ${pages.inverse}`}>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
               ¿Necesitas Retirar tu Balón Gástrico?
             </h2>
@@ -502,7 +498,7 @@ export default function RetiroBalonGastricoPage() {
               {CLINIC.address.streetAddress.split(",")[0]}, cerca de Temozón Norte y Country Club, {CLINIC.address.addressLocality}.
               Disponible para casos urgentes.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="retiro balon"
                 position="cta section"
@@ -522,6 +518,6 @@ export default function RetiroBalonGastricoPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

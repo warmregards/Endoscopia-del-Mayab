@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import {
   PRICING,
@@ -81,7 +83,7 @@ const STEPS = [
 
 export default function GastrostomiaEndoscopicaPEGPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -120,10 +122,10 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       />
 
       {/* S1: HERO */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding-lg">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/20 border border-accent/20">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/20 border border-accent/20 ${pages.eyebrow}`}>
               <Stethoscope className="h-4 w-4 text-text-accent" />
               <span className="text-sm font-medium text-text-accent">
                 Procedimiento Ambulatorio
@@ -144,11 +146,11 @@ export default function GastrostomiaEndoscopicaPEGPage() {
               {CLINIC.address.addressRegion}.
             </p>
 
-            <div className="inline-flex px-4 py-2 rounded-full bg-accent-light text-text-accent font-semibold text-lg">
+            <div className={`inline-flex px-4 py-2 rounded-full bg-accent-light text-text-accent font-semibold text-lg ${pages.heroPrice}`}>
               {displayFrom("gastrostomia_peg")}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 text-sm text-foreground/70">
+            <div className={`flex flex-col sm:flex-row gap-4 text-sm text-foreground/70 ${pages.chips}`}>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
                 {CLINIC.address.streetAddress},{" "}
@@ -161,7 +163,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="gastrostomia"
                 position="hero"
@@ -178,7 +180,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S2: DEFINITION + INDICATIONS */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             ¿Qué es la gastrostomía PEG y quién la necesita?
@@ -207,7 +209,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* ── Family-focused reassurance ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Información para Familiares: Lo Que Necesitas Saber
@@ -241,18 +243,18 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S3: PRICING */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Costo de Gastrostomía PEG en Mérida
           </h2>
 
-          <div className="mt-8 rounded-2xl border border-border bg-card p-8 max-w-2xl">
+          <div className={`mt-8 rounded-2xl border border-border bg-card p-8 max-w-2xl ${pages.panelSurface}`}>
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
               <h3 className="text-xl font-serif font-semibold text-foreground">
                 Gastrostomía PEG
               </h3>
-              <p className="text-2xl font-bold text-text-accent">
+              <p className={`text-2xl font-bold text-text-accent ${pages.figure} ${pages.fitPrice}`}>
                 {displayFrom("gastrostomia_peg")}
               </p>
             </div>
@@ -282,7 +284,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
               </div>
             </div>
 
-            <div className="mt-6 p-4 rounded-xl bg-muted border border-border">
+            <div className={`mt-6 p-4 rounded-xl bg-muted border border-border ${pages.quietNote}`}>
               <p className="text-sm text-foreground/70">
                 Interpretación de biopsias por el patólogo externo (si se{" "}
                 toman): <strong>{mxn(ADDITIONAL_FEES.biopsy.amount)}</strong>{" "}
@@ -309,7 +311,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S4: PREPARATION & PROCESS */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground">
             Preparación y Proceso
@@ -318,7 +320,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
           <div className="mt-8 space-y-6">
             {STEPS.map((step, i) => (
               <div key={step.title} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
+                <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold ${pages.numberBadge}`}>
                   {i + 1}
                 </div>
                 <div>
@@ -339,20 +341,20 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S5: DOCTOR CREDENTIALS */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding-lg">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Tu Especialista: {DOCTOR.name}
           </h2>
 
-          <div className="mt-8 flex flex-col md:flex-row gap-8">
+          <div className={`mt-8 flex flex-col md:flex-row gap-8 ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
                 width={280}
                 height={280}
-                className="rounded-2xl"
+                className={`rounded-2xl ${pages.portraitImg}`}
               />
             </div>
 
@@ -361,7 +363,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
                 {DOCTOR.bioShort}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -398,21 +400,15 @@ export default function GastrostomiaEndoscopicaPEGPage() {
       </section>
 
       {/* S6: GOOGLE REVIEWS */}
-      <section className="bg-background">
-        <div className="container-page section-padding-lg">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* S7: FAQ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding-lg">
-          <Faq routeKey="gastrostomia" service="gastrostomia" />
-        </div>
+      <section className={`bg-muted ${system.faq}`}>
+        <Faq routeKey="gastrostomia" service="gastrostomia" />
       </section>
 
       {/* S8: BOTTOM CTA */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding-lg text-center">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white">
             ¿Tu familiar necesita alimentación por sonda PEG?
@@ -422,7 +418,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
             WhatsApp para agendar tu valoración.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="gastrostomia"
               position="bottom-cta"
@@ -435,7 +431,7 @@ export default function GastrostomiaEndoscopicaPEGPage() {
             />
           </div>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 ${pages.closingCards}`}>
             {RELATED.map((r) => (
               <Link
                 key={r.href}
@@ -452,6 +448,6 @@ export default function GastrostomiaEndoscopicaPEGPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

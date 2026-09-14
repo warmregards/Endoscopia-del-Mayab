@@ -1,0 +1,29 @@
+ M app/(lp)/lp/colonoscopia/page.tsx
+ M app/(lp)/lp/cpre/page.tsx
+ M app/(lp)/lp/endoscopia/page.tsx
+ M app/(lp)/lp/hemorroides/page.tsx
+ M app/(lp)/lp/ligadura-varices/page.tsx
+ M app/(site)/colonoscopia-merida/page.tsx
+ M app/(site)/contacto/page.tsx
+ M app/(site)/cpre-merida/page.tsx
+ M app/(site)/dr-omar-quiroz/page.tsx
+ M app/(site)/emergencias-digestivas-merida/page.tsx
+ M app/(site)/endoscopia-merida/page.tsx
+ M app/(site)/equipo-medico/page.tsx
+ M app/(site)/ligadura-varices-esofagicas-merida/page.tsx
+ M app/(site)/page.tsx
+ M app/(site)/precios/page.tsx
+ M components/AppointmentForm.tsx
+ M components/DoctorAuthority.tsx
+ M components/Faq.tsx
+ M components/Footer.tsx
+ M components/OnlineBookingBanner.tsx
+ M components/StickyMobileCTA.tsx
+ M components/TeamPresence.tsx
+?? app/(site)/colonoscopia-merida/colonoscopia-design.module.css
+?? app/(site)/design-pages.module.css
+?? app/(site)/design-system.module.css
+?? app/(site)/endoscopia-merida/procedure-design.module.css
+?? app/(site)/home-design.module.css
+?? docs/design-refresh/
+?? public/equipo/omar-quiroz-portrait.webp

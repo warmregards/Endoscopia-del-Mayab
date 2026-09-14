@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -25,7 +27,7 @@ export const metadata = metaFor("sutura_endoscopica")
 
 export default function SuturaEndoscopicaPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -58,9 +60,9 @@ export default function SuturaEndoscopicaPage() {
       />
 
       {/* ── Section 1: Hero ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
             <div className="flex-1 space-y-6">
               <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
                 Sutura Endoscópica en Mérida
@@ -73,7 +75,7 @@ export default function SuturaEndoscopicaPage() {
                 transparente.
               </p>
 
-              <div className="flex flex-wrap gap-4 text-sm">
+              <div className={`flex flex-wrap gap-4 text-sm ${pages.chips}`}>
                 <span className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                   Sedación profunda
@@ -88,7 +90,7 @@ export default function SuturaEndoscopicaPage() {
                 </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="sutura"
                   position="hero"
@@ -101,9 +103,9 @@ export default function SuturaEndoscopicaPage() {
 
             <div className="w-full lg:w-80 space-y-4">
               {/* Price Card */}
-              <div className="p-6 rounded-xl border border-border bg-card shadow-sm">
+              <div className={`p-6 rounded-xl border border-border bg-card shadow-sm ${pages.panelSurface}`}>
                 <h3 className="font-semibold text-foreground mb-2">Precio según caso</h3>
-                <p className="text-2xl font-bold text-text-accent mb-2">
+                <p className={`text-2xl font-bold text-text-accent mb-2 ${pages.figure}`}>
                   {mxn(PRICING.sutura_endoscopica.from)}
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -112,7 +114,7 @@ export default function SuturaEndoscopicaPage() {
               </div>
 
               {/* Location Card */}
-              <div className="p-6 rounded-xl border border-border bg-card shadow-sm">
+              <div className={`p-6 rounded-xl border border-border bg-card shadow-sm ${pages.panelSurface}`}>
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
                   <div>
@@ -129,7 +131,7 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 2: Definition + Indications ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
@@ -173,7 +175,7 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 3: Pricing / Quote ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
@@ -186,7 +188,7 @@ export default function SuturaEndoscopicaPage() {
               procedimiento. Escríbenos por WhatsApp para recibir tu presupuesto.
             </p>
 
-            <div className="p-6 rounded-xl border border-border bg-card shadow-sm mb-6">
+            <div className={`p-6 rounded-xl border border-border bg-card shadow-sm mb-6 ${pages.panelSurface}`}>
               <h3 className="font-semibold text-foreground mb-4">Qué incluye el procedimiento</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {[
@@ -224,14 +226,14 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 4: Process ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
               ¿Cómo Se Realiza la Sutura Endoscópica?
             </h2>
 
-            <ol className="space-y-4 mb-8">
+            <ol className={`space-y-4 mb-8 ${pages.stepList}`}>
               {[
                 {
                   title: "Evaluación",
@@ -255,7 +257,7 @@ export default function SuturaEndoscopicaPage() {
                 },
               ].map((step, i) => (
                 <li key={step.title} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center">
+                  <span className={`flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center ${pages.numberBadge}`}>
                     {i + 1}
                   </span>
                   <div>
@@ -266,7 +268,7 @@ export default function SuturaEndoscopicaPage() {
               ))}
             </ol>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent-light border border-accent/20 text-sm mb-8">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent-light border border-accent/20 text-sm mb-8 ${pages.quietNote}`}>
               <Clock className="h-4 w-4 text-accent" />
               <span className="font-medium text-foreground">20-45 minutos</span>
               <span className="text-muted-foreground">según complejidad del defecto</span>
@@ -285,7 +287,7 @@ export default function SuturaEndoscopicaPage() {
               </p>
 
               {/* Warning signs */}
-              <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+              <div className={`p-4 rounded-xl bg-red-50 border border-red-200 ${pages.alert}`}>
                 <div className="flex items-start gap-2 mb-2">
                   <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
                   <h4 className="font-semibold text-foreground">Contactar inmediatamente si presentas:</h4>
@@ -306,21 +308,21 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 5: Doctor Credentials ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl">
             <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
               Tu Especialista: {DOCTOR.name}
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-8">
+            <div className={`flex flex-col sm:flex-row gap-8 ${pages.portraitRow}`}>
               <div className="flex-shrink-0">
                 <Image
-                  src={DOCTOR.photos.headshot}
+                  src="/equipo/omar-quiroz-portrait.webp"
                   alt={DOCTOR.name}
                   width={200}
                   height={200}
-                  className="rounded-2xl"
+                  className={`rounded-2xl ${pages.portraitImg}`}
                 />
               </div>
               <div className="space-y-4">
@@ -328,7 +330,7 @@ export default function SuturaEndoscopicaPage() {
                   {DOCTOR.bioShort}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
+                <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                   {DOCTOR.credentials.map((cred) => (
                     <span
                       key={cred}
@@ -360,27 +362,21 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 6: Google Reviews ── bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Section 7: FAQ ── bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="sutura_endoscopica" service="sutura" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="sutura_endoscopica" service="sutura" />
       </section>
 
       {/* ── Section 8: Related Procedures ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-8">
             Procedimientos Relacionados
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {[
               {
                 icon: <Target className="h-6 w-6 text-accent" />,
@@ -404,9 +400,9 @@ export default function SuturaEndoscopicaPage() {
               <Link
                 key={card.href}
                 href={card.href}
-                className="group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
-                <div className="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4">
+                <div className={`w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4 ${pages.iconBox}`}>
                   {card.icon}
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
@@ -423,7 +419,7 @@ export default function SuturaEndoscopicaPage() {
       </section>
 
       {/* ── Section 9: Final CTA ── bg-background */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
             ¿Necesitas Sutura Endoscópica en Mérida?
@@ -433,7 +429,7 @@ export default function SuturaEndoscopicaPage() {
             WhatsApp o llámanos para agendar tu valoración.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8" data-sticky-bottom-cta>
             <WhatsAppButton
               service="sutura"
               position="final cta"
@@ -455,6 +451,6 @@ export default function SuturaEndoscopicaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

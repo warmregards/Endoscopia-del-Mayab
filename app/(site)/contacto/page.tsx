@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom } from "@/lib/pricing"
 import { CLINIC, telHref } from "@/lib/clinic"
@@ -26,7 +28,7 @@ export default async function ContactoPage() {
   } = await getGoogleReviews({ maxReviews: 1 })
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* Breadcrumb JSON-LD */}
       <script
         type="application/ld+json"
@@ -41,19 +43,19 @@ export default async function ContactoPage() {
       />
 
       {/* SECTION 1: Hero — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
             Contacto — Endoscopia del Mayab en Mérida
           </h1>
 
-          <p className="text-lg text-foreground/80 mt-4 max-w-2xl">
+          <p className={`text-lg text-foreground/80 mt-4 max-w-2xl ${pages.lead}`}>
             Agenda directo con el Dr. Omar Quiroz por WhatsApp — respuesta en
             minutos, no con una recepcionista.
           </p>
 
           {/* Trust badges */}
-          <div className="flex flex-wrap gap-4 mt-6">
+          <div className={`flex flex-wrap gap-4 mt-6 ${pages.credentials}`}>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium">
               <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} — {reviewCount} reseñas en Google
@@ -69,7 +71,7 @@ export default async function ContactoPage() {
           </div>
 
           {/* CTAs — WhatsApp first */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8" data-sticky-hero-cta>
             <WhatsAppButton
               variant="primary"
               label="Escribir por WhatsApp"
@@ -88,7 +90,7 @@ export default async function ContactoPage() {
       </section>
 
       {/* SECTION 2: Contact Info + Map — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
             Cómo Llegar y Horarios
@@ -96,7 +98,7 @@ export default async function ContactoPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* NAP+W card */}
-            <div className="rounded-2xl border border-border bg-background p-6 space-y-6">
+            <div className={`rounded-2xl border border-border bg-background p-6 space-y-6 ${pages.infoRows}`}>
               <div className="flex items-start gap-4">
                 <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                 <div>
@@ -153,7 +155,7 @@ export default async function ContactoPage() {
             </div>
 
             {/* Map */}
-            <div className="rounded-2xl overflow-hidden border border-border">
+            <div className={`rounded-2xl overflow-hidden border border-border ${pages.frame}`}>
               <MapEmbed />
             </div>
           </div>
@@ -161,19 +163,19 @@ export default async function ContactoPage() {
       </section>
 
       {/* SECTION 3: Doctor Credentials — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Tu Especialista: {DOCTOR.name}
           </h2>
 
-          <div className="grid gap-8 lg:grid-cols-[280px_1fr] items-start">
+          <div className={`grid gap-8 lg:grid-cols-[280px_1fr] items-start ${pages.portraitGrid}`}>
             <Image
-              src={DOCTOR.photos.headshot}
+              src="/equipo/omar-quiroz-portrait.webp"
               alt={`${DOCTOR.name} — ${DOCTOR.title}`}
-              width={280}
-              height={350}
-              className="rounded-2xl w-full lg:w-[280px] object-cover"
+              width={320}
+              height={400}
+              className={`rounded-2xl w-full lg:w-[280px] object-cover ${pages.portraitImg}`}
             />
 
             <div className="space-y-4">
@@ -182,7 +184,7 @@ export default async function ContactoPage() {
               </p>
               <p className="text-foreground/80">{DOCTOR.bioShort}</p>
 
-              <ul className="flex flex-wrap gap-2">
+              <ul className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.slice(0, 4).map((c) => (
                   <li
                     key={c}
@@ -198,7 +200,7 @@ export default async function ContactoPage() {
                 una recepcionista.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className={`flex flex-wrap items-center gap-4 ${pages.bandActions}`}>
                 <WhatsAppButton
                   variant="primary"
                   size="compact"
@@ -208,7 +210,7 @@ export default async function ContactoPage() {
                 />
                 <Link
                   href={DOCTOR.profileUrl}
-                  className="text-sm text-primary font-semibold hover:underline"
+                  className={`text-sm text-primary font-semibold hover:underline ${pages.inverseLink}`}
                 >
                   Ver perfil completo
                 </Link>
@@ -219,13 +221,13 @@ export default async function ContactoPage() {
       </section>
 
       {/* SECTION 4: Quick Price Reference — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight mb-8">
             Precios de Procedimientos
           </h2>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className={`grid gap-4 sm:grid-cols-3 ${pages.anchors}`}>
             {(
               [
                 { key: "endoscopia", name: "Endoscopia" },
@@ -240,7 +242,7 @@ export default async function ContactoPage() {
                 <p className="font-serif font-semibold text-foreground">
                   {name}
                 </p>
-                <p className="text-lg font-bold text-text-accent">
+                <p className={`text-lg font-bold text-text-accent ${pages.anchorPrice}`}>
                   {displayFrom(key)}
                 </p>
                 <p className="text-sm text-foreground/70">
@@ -263,10 +265,10 @@ export default async function ContactoPage() {
       </section>
 
       {/* SECTION 5: Google Reviews — bg-background */}
-      <GoogleReviews title="Lo Que Dicen Nuestros Pacientes" />
+      <GoogleReviews title="Lo Que Dicen Nuestros Pacientes" className={system.reviews} />
 
       {/* SECTION 6: FAQ — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.faq}`}>
         <Faq
           routeKey="contacto"
           service="contacto"
@@ -275,7 +277,7 @@ export default async function ContactoPage() {
       </section>
 
       {/* SECTION 7: Bottom CTA — bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.closingText}`}>
         <div className="container-page section-padding text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-primary-foreground tracking-tight">
             ¿Listo para Agendar tu Cita?
@@ -283,7 +285,7 @@ export default async function ContactoPage() {
           <p className="text-primary-foreground/80 text-lg">
             Escríbenos por WhatsApp y te contestamos en minutos.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4" data-sticky-bottom-cta>
             <WhatsAppButton
               variant="primary"
               label="Agendar por WhatsApp"
@@ -300,6 +302,6 @@ export default async function ContactoPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

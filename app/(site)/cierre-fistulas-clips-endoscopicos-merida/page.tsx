@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
@@ -16,7 +18,7 @@ export const metadata = metaFor("cierre_fistulas")
 
 export default function CierreFistulasPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -56,7 +58,7 @@ export default function CierreFistulasPage() {
       />
 
       {/* SECTION 1: HERO — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-foreground tracking-tight">
@@ -71,14 +73,14 @@ export default function CierreFistulasPage() {
               Altabrisa y toda la península.
             </p>
 
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light/10 border border-accent-light/20 px-4 py-2">
+            <div className={`inline-flex items-center gap-2 rounded-full bg-accent-light/10 border border-accent-light/20 px-4 py-2 ${pages.chip}`}>
               <ShieldCheck className="h-4 w-4 text-text-accent" />
               <span className="text-sm font-medium text-foreground">
                 Precio bajo cotización — Evaluación personalizada
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.chips}`}>
               {[
                 "Sin cirugía abierta",
                 "Hospital Amerimed",
@@ -92,7 +94,7 @@ export default function CierreFistulasPage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="cierre fistulas"
                 position="hero"
@@ -110,7 +112,7 @@ export default function CierreFistulasPage() {
       </section>
 
       {/* SECTION 2: DEFINITION + INDICATIONS — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -148,7 +150,7 @@ export default function CierreFistulasPage() {
               </ul>
             </div>
 
-            <div className="rounded-xl bg-accent-light/10 border border-accent/20 p-4">
+            <div className={`rounded-xl bg-accent-light/10 border border-accent/20 p-4 ${pages.note}`}>
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">Importante:</strong> No todas
                 las fístulas son candidatas para cierre endoscópico — se requiere
@@ -160,7 +162,7 @@ export default function CierreFistulasPage() {
       </section>
 
       {/* SECTION 3: PRICING / COTIZACIÓN — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -188,7 +190,7 @@ export default function CierreFistulasPage() {
               </ul>
             </div>
 
-            <div className="rounded-xl border border-border bg-muted p-4 space-y-1">
+            <div className={`rounded-xl border border-border bg-muted p-4 space-y-1 ${pages.quietNote}`}>
               <p className="text-sm font-semibold text-foreground">
                 Costo adicional
               </p>
@@ -218,15 +220,15 @@ export default function CierreFistulasPage() {
       </section>
 
       {/* SECTION 4: PREPARATION & RECOVERY — bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight mb-8">
             Preparación y Recuperación
           </h2>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className={`grid gap-8 lg:grid-cols-2 ${pages.openGrid}`}>
             {/* Preparación */}
-            <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+            <div className={`rounded-xl border border-border bg-card p-6 space-y-4 ${pages.open}`}>
               <div className="flex items-center gap-2">
                 <Clock className="h-6 w-6 text-text-accent" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -263,7 +265,7 @@ export default function CierreFistulasPage() {
             </div>
 
             {/* Recuperación */}
-            <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+            <div className={`rounded-xl border border-border bg-card p-6 space-y-4 ${pages.open}`}>
               <div className="flex items-center gap-2">
                 <Heart className="h-6 w-6 text-primary" />
                 <h3 className="text-lg font-serif font-semibold text-foreground">
@@ -303,15 +305,15 @@ export default function CierreFistulasPage() {
       </section>
 
       {/* SECTION 5: DOCTOR CREDENTIALS — bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <Image
-              src={DOCTOR.photos.headshot}
+              src="/equipo/omar-quiroz-portrait.webp"
               alt={DOCTOR.name}
               width={280}
               height={350}
-              className="rounded-2xl w-full max-w-[280px] h-auto mx-auto md:mx-0"
+              className={`rounded-2xl w-full max-w-[280px] h-auto mx-auto md:mx-0 ${pages.portraitImg}`}
             />
 
             <div className="flex-1 space-y-6">
@@ -323,7 +325,7 @@ export default function CierreFistulasPage() {
                 {DOCTOR.bioShort}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -362,28 +364,22 @@ export default function CierreFistulasPage() {
       </section>
 
       {/* SECTION 6: GOOGLE REVIEWS — bg-muted */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* SECTION 7: FAQ — bg-background */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="cierre_fistulas" service="cierre fistulas" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="cierre_fistulas" service="cierre fistulas" />
       </section>
 
       {/* SECTION 8: RELATED + BOTTOM CTA — bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-8">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-tight">
             ¿Listo para tu evaluación?
           </h2>
 
           {/* Related procedures */}
-          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div className={`grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto ${pages.closingLinks}`}>
             {[
               {
                 name: "Sutura Endoscópica",
@@ -411,7 +407,7 @@ export default function CierreFistulasPage() {
           </div>
           <p className="text-white/70 text-sm">{CLINIC.hours.display}</p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="cierre fistulas"
               position="bottom-cta"
@@ -427,6 +423,6 @@ export default function CierreFistulasPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

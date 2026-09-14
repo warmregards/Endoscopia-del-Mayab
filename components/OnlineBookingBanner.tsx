@@ -12,6 +12,7 @@
 // structured front door for people who'd rather not open a chat cold — not a
 // competing channel.
 
+import { useEffect, useRef } from "react"
 import { CalendarDays, ArrowRight } from "lucide-react"
 import { pushAppointmentCtaClick } from "@/lib/gtm"
 
@@ -20,10 +21,15 @@ type Procedure = "endoscopia" | "colonoscopia"
 export default function OnlineBookingBanner({
   procedure,
   targetId = "agendar",
+  highlightArrival = false,
 }: {
   procedure: Procedure
   targetId?: string
+  highlightArrival?: boolean
 }) {
+  const cleanupRef = useRef<() => void>(() => {})
+  useEffect(() => () => cleanupRef.current(), [])
+
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     pushAppointmentCtaClick({ service: procedure, position: "hero-banner" })
     const target =
@@ -32,7 +38,42 @@ export default function OnlineBookingBanner({
       // Prefer JS smooth-scroll so it works regardless of CSS scroll-behavior;
       // the href="#agendar" remains the no-JS fallback.
       e.preventDefault()
-      target.scrollIntoView({ behavior: "smooth", block: "start" })
+      cleanupRef.current()
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      if (highlightArrival) {
+        const form = target.querySelector("form") ?? target
+        let observer: IntersectionObserver | undefined
+        let animation: Animation | undefined
+        let timer: ReturnType<typeof setTimeout> | undefined
+        const previousShadow = form.style.boxShadow
+        const cleanup = () => {
+          observer?.disconnect()
+          animation?.cancel()
+          if (timer) clearTimeout(timer)
+          form.style.boxShadow = previousShadow
+        }
+        cleanupRef.current = cleanup
+        const highlight = () => {
+          observer?.disconnect()
+          if (reducedMotion) {
+            // Static, temporary state: no movement, flashing, or keyboard opening.
+            form.style.boxShadow = "0 0 0 3px #80a08f"
+            timer = setTimeout(cleanup, 1200)
+          } else {
+            animation = form.animate([
+              { boxShadow: "0 0 0 3px #80a08f00" },
+              { boxShadow: "0 0 0 3px #80a08f", offset: 0.15 },
+              { boxShadow: "0 0 0 3px #80a08f", offset: 0.65 },
+              { boxShadow: "0 0 0 3px #80a08f00" },
+            ], { duration: 1200, easing: "ease-out" })
+          }
+        }
+        observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) highlight()
+        }, { threshold: 0.15 })
+        observer.observe(form)
+      }
+      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" })
     }
   }
 

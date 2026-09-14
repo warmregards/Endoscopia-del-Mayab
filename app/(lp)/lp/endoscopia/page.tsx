@@ -21,6 +21,8 @@ import LpVideo from "@/components/LpVideo";
 import TeamPresence from "@/components/TeamPresence";
 import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
+import system from "../../../(site)/design-system.module.css";
+import pages from "../../../(site)/design-pages.module.css";
 
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
@@ -58,15 +60,15 @@ export default async function LpEndoscopiaPage() {
   } = await getGoogleReviews({ maxReviews: 1 });
 
   return (
-    <div className="pb-24 md:pb-0">
+    <div className={`pb-24 md:pb-0 ${pages.page} ${system.system}`}>
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
           Message match + price + one-tap CTA in the first viewport.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${pages.lpHero} ${system.hero}`}>
         <div className="container-narrow pt-6 pb-12 md:py-16">
           {/* Eyebrow / trust bar */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+          <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground ${pages.chips}`}>
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
               <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
@@ -85,13 +87,13 @@ export default async function LpEndoscopiaPage() {
             Endoscopia en Mérida con sedación
           </h1>
 
-          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+          <p className={`mt-4 text-base text-muted-foreground md:text-lg ${pages.lead}`}>
             Estudio con sedación, reporte con fotografías HD el mismo día, y
             precio cerrado desde el primer contacto.
           </p>
 
           {/* Price badge */}
-          <div className="mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6">
+          <div className={`mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6 ${pages.priceBadge}`}>
             <span className="text-2xl font-bold text-text-accent md:text-3xl">
               {PRICE}
             </span>
@@ -123,7 +125,7 @@ export default async function LpEndoscopiaPage() {
           </div>
 
           {/* Location line */}
-          <p className="mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground">
+          <p className={`mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground ${pages.location}`}>
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             Hospital Amerimed, Consultorio 517 · Chichí Suárez, Mérida
           </p>
@@ -134,14 +136,14 @@ export default async function LpEndoscopiaPage() {
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
           Kill the hidden-costs objection + anchor against competitors.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="bg-muted">
+      <section id="precio" className={`bg-muted ${pages.surface}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Precio cerrado, sin sorpresas
           </h2>
 
-          <div className="mt-6 rounded-xl border border-border bg-card p-6 shadow-sm">
-            <div className="text-3xl font-bold text-text-accent">{PRICE}</div>
+          <div className={`mt-6 rounded-xl border border-border bg-card p-6 shadow-sm ${pages.panelSurface}`}>
+            <div className={`text-3xl font-bold text-text-accent ${pages.priceFigure}`}>{PRICE}</div>
 
             <ul className="mt-6 space-y-3">
               {INCLUDED_IN_PRICE.map((item) => (
@@ -165,7 +167,7 @@ export default async function LpEndoscopiaPage() {
           </div>
 
           {/* Competitor anchor strip */}
-          <div className="mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground">
+          <div className={`mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground ${pages.quietNote}`}>
             Otros centros en Mérida:{" "}
             <span className="font-semibold">~$5,500–$6,500</span>. Mismo
             hospital, mismo equipo, menor costo.
@@ -189,7 +191,7 @@ export default async function LpEndoscopiaPage() {
           Authority: a named specialist, not a faceless clinic.
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="especialista" className="bg-background">
+      <section id="especialista" className={`bg-background ${system.doctor} ${pages.inverse} ${pages.authority}`}>
         <div className="container-narrow section-padding">
           <DoctorAuthority
             variant="compact"
@@ -197,6 +199,7 @@ export default async function LpEndoscopiaPage() {
             position="lp-doctor"
             procedureName="Endoscopia"
             procedureContext="El especialista que realiza tu endoscopia se formó y ejerció como endoscopista en centros de referencia nacionales."
+            portraitSrc="/equipo/omar-quiroz-portrait.webp"
             profileLink={false}
           />
 
@@ -221,7 +224,7 @@ export default async function LpEndoscopiaPage() {
               routes through LpGuideLink: an intentional exit to an indexed page
               that carries the same WhatsApp CTA, tracked as lp_exit_to_guide
               with destination /equipo-medico#verifica. */}
-          <div className="mt-8">
+          <div className={`mt-8 ${pages.team}`}>
             <TeamPresence
               procedure="endoscopia"
               variant="compact"
@@ -238,13 +241,13 @@ export default async function LpEndoscopiaPage() {
           SECTION 4 — RAPIDEZ / DISPONIBILIDAD (bg-muted)
           Honest urgency + remove "how long will this take" friction.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="disponibilidad" className="bg-muted">
+      <section id="disponibilidad" className={`bg-muted ${pages.paper}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Agenda hoy, estudio mañana
           </h2>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ul className={`mt-6 grid gap-4 sm:grid-cols-3 ${pages.factList}`}>
             {[
               { icon: CalendarCheck, text: "Sin lista de espera" },
               { icon: FileText, text: "Reporte el mismo día del estudio" },
@@ -266,6 +269,7 @@ export default async function LpEndoscopiaPage() {
           SECTION 5 — RESEÑAS (renders its own section, gradient bg)
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews
+        className={system.reviews}
         title="Lo que dicen nuestros pacientes"
         limit={3}
         showPlaceLink={false}
@@ -275,13 +279,13 @@ export default async function LpEndoscopiaPage() {
           SECTION 6 — FAQ CORTA (bg-muted)
           Only the questions that block booking. Not the full educational FAQ.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="preguntas" className="bg-muted">
+      <section id="preguntas" className={`bg-muted ${system.faq}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
             Preguntas frecuentes
           </h2>
 
-          <div className="mt-6 space-y-4">
+          <div className={`mt-6 space-y-4 ${pages.qaList}`}>
             {[
               {
                 q: "¿La endoscopia duele?",
@@ -320,7 +324,7 @@ export default async function LpEndoscopiaPage() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className={`mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between ${pages.note}`}>
             <p className="text-foreground">
               ¿Tienes otra duda? Escríbele al Dr. Quiroz por WhatsApp.
             </p>
@@ -348,7 +352,7 @@ export default async function LpEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7 — CIERRE / BOTTOM CTA (bg-primary navy)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
             ¿Listo para agendar tu endoscopia?

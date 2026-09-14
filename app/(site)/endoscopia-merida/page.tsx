@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import styles from "./procedure-design.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, displayFrom, mxn, ADDITIONAL_FEES, MARKET_BENCHMARKS } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -68,12 +70,12 @@ export default function EndoscopiaPage() {
   const video = getVideo("endoscopia")
 
   return (
-    <>
+    <div className={`${styles.procedure} ${system.system}`}>
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1: HERO — bg-background
           Serves: ALL personas. Price chip + WhatsApp CTA above fold (mobile).
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
 
@@ -104,7 +106,7 @@ export default function EndoscopiaPage() {
               </div>
 
               {/* CTAs — WhatsApp FIRST per spec */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
                 <WhatsAppButton
                   service="endoscopia"
                   position="hero"
@@ -129,7 +131,7 @@ export default function EndoscopiaPage() {
             </div>
 
             {/* ── Right: Price card — Persona 2 (price shopper) ── */}
-            <div className="w-full lg:max-w-sm">
+            <div className={`w-full lg:max-w-sm ${styles.pricePanel}`}>
               <div className="border-2 border-accent bg-accent/5 rounded-2xl p-8">
                 <div className="text-center space-y-4">
                   <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
@@ -172,14 +174,14 @@ export default function EndoscopiaPage() {
 
       {/* Thin online-booking banner — surfaces the on-page form (below) within
           the first viewport. Secondary to the hero WhatsApp CTA by design. */}
-      <OnlineBookingBanner procedure="endoscopia" />
+      <OnlineBookingBanner procedure="endoscopia" highlightArrival />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: PRICING (promoted) — bg-muted
           Serves: Persona 2 (price shopper) — highest-value persona.
           Includes Salud Digna comparison (folded from removed Disambiguation §).
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="scroll-mt-24 bg-muted">
+      <section id="precio" className={`scroll-mt-24 bg-muted ${styles.pricing}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             {/* Synonym reinforcement (P1): panendoscopia / gastroscopia / EGD are
@@ -234,7 +236,7 @@ export default function EndoscopiaPage() {
             </div>
 
             {/* 4-column market comparison — benchmarks sourced from lib/pricing.ts */}
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className={`grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ${styles.benchmarks}`}>
               <div className="p-6 rounded-2xl border border-border bg-background text-center">
                 <p className="text-lg font-bold text-muted-foreground mb-2">
                   {MARKET_BENCHMARKS.endoscopia.hospitalMayor.label}
@@ -283,7 +285,7 @@ export default function EndoscopiaPage() {
             </div>
 
             {/* Totales típicos por escenario — worked examples for price-intent */}
-            <div className="bg-card border border-border rounded-xl p-6 max-w-3xl mx-auto">
+            <div className={`bg-card border border-border rounded-xl p-6 max-w-3xl mx-auto ${styles.totals}`}>
               <p className="font-semibold text-foreground mb-4">
                 Totales típicos por escenario
               </p>
@@ -378,10 +380,11 @@ export default function EndoscopiaPage() {
           One component (components/DoctorAuthority.tsx), shared across every
           procedure page and LP.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.authority} ${system.doctor}`}>
         <div className="container-page section-padding">
           <DoctorAuthority
             variant="compact"
+            portraitSrc="/equipo/omar-quiroz-portrait.webp"
             service="endoscopia"
             position="procedure-doctor"
             procedureName="Endoscopia"
@@ -398,7 +401,7 @@ export default function EndoscopiaPage() {
           certification comparison. Muted so it alternates against the
           background doctor block above and the comparison below.
           ══════════════════════════════════════════════════════════════════ */}
-      <TeamPresence procedure="endoscopia" tone="muted" />
+      <TeamPresence procedure="endoscopia" tone="muted" avatarSize={128} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2C: CERTIFIED-ENDOSCOPIST COMPARISON — bg-background
@@ -416,7 +419,7 @@ export default function EndoscopiaPage() {
           section and the white section that follows. Additional path; the
           existing hero WhatsApp/phone CTAs are unchanged.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="agendar" className="scroll-mt-24 bg-accent-light">
+      <section id="agendar" className={`scroll-mt-24 bg-accent-light ${styles.booking}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -438,7 +441,7 @@ export default function EndoscopiaPage() {
           Serves: Persona 3 (procedure seeker) + Persona 5 (investigator)
           Panendoscopia disambiguation folded in (also captures EGD/gastroscopia terms).
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.intro}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -487,7 +490,7 @@ export default function EndoscopiaPage() {
           SECTION 4: QUÉ DETECTA + VS OTROS ESTUDIOS — bg-muted
           Merged from former §2B (Diagnósticos Comunes) + §2C (vs Other Studies).
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${styles.diagnosis}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="space-y-4">
@@ -622,7 +625,7 @@ export default function EndoscopiaPage() {
           Serves: Persona 5 (investigator — "preparación para endoscopia")
           Includes Hospital Amerimed safety closer folded from removed Sedation §.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${styles.preparation}`}>
         <div className="container-page section-padding">
           <div className="max-w-5xl mx-auto space-y-12">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -785,13 +788,13 @@ export default function EndoscopiaPage() {
           SECTION 6: GOOGLE REVIEWS
           Component wraps itself in <section> (gradient muted → background).
           ══════════════════════════════════════════════════════════════════ */}
-      <GoogleReviews />
+      <GoogleReviews className={`${styles.reviews} ${system.reviews}`} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: FAQ — bg-muted
           Component injects faqSchema() JSON-LD automatically.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${styles.faq} ${system.faq}`}>
         <Faq routeKey="endoscopia" service="endoscopia" />
       </section>
 
@@ -799,7 +802,7 @@ export default function EndoscopiaPage() {
           SECTION 8: BOTTOM CTA — bg-primary
           Final conversion. Related procedures folded as inline link line.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${styles.closing} ${system.closing}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center space-y-8">
             <div>
@@ -812,7 +815,7 @@ export default function EndoscopiaPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="endoscopia"
                 position="bottom-cta"
@@ -892,6 +895,6 @@ export default function EndoscopiaPage() {
           __html: JSON.stringify(videoSchema(video)),
         }}
       />
-    </>
+    </div>
   )
 }

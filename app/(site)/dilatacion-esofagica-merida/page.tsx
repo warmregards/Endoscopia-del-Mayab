@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
@@ -36,7 +38,7 @@ export default function DilatacionEsofagicaPage() {
   ])
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -48,10 +50,10 @@ export default function DilatacionEsofagicaPage() {
       />
 
       {/* Section 1: Hero */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="mx-auto max-w-3xl space-y-6 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2">
+          <div className={`mx-auto max-w-3xl space-y-6 text-center ${pages.heroStart}`}>
+            <div className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 ${pages.heroPrice}`}>
               <span className="font-serif text-sm font-semibold text-text-accent">
                 Desde {mxn(PRICING.dilatacion_esofagica.from)}
               </span>
@@ -66,7 +68,7 @@ export default function DilatacionEsofagicaPage() {
               capacidad de tragar sin cirugía abierta.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-foreground">
+            <div className={`flex flex-wrap justify-center gap-4 text-sm font-medium text-foreground ${pages.chips}`}>
               {[
                 "Sin cirugía abierta",
                 "Mejoría el mismo día",
@@ -80,7 +82,7 @@ export default function DilatacionEsofagicaPage() {
               ))}
             </div>
 
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <div className={`flex flex-col items-center gap-4 sm:flex-row sm:justify-center ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="dilatacion-esofagica"
                 position="hero"
@@ -98,7 +100,7 @@ export default function DilatacionEsofagicaPage() {
       </section>
 
       {/* Section 2: What Is + When Needed */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -138,7 +140,7 @@ export default function DilatacionEsofagicaPage() {
       </section>
 
       {/* Section 3: Pricing — What's Included */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -146,7 +148,7 @@ export default function DilatacionEsofagicaPage() {
             </h2>
 
             <div className="flex items-baseline gap-2">
-              <span className="font-serif text-3xl font-extrabold text-text-accent">
+              <span className={`font-serif text-3xl font-extrabold text-text-accent ${pages.priceFigure}`}>
                 Desde {mxn(PRICING.dilatacion_esofagica.from)}
               </span>
             </div>
@@ -157,7 +159,7 @@ export default function DilatacionEsofagicaPage() {
               esofágica.
             </p>
 
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.panelSurface}`}>
               <h3 className="font-serif text-lg font-semibold text-foreground">
                 Incluye
               </h3>
@@ -171,7 +173,7 @@ export default function DilatacionEsofagicaPage() {
               </ul>
             </div>
 
-            <div className="rounded-xl border border-border bg-muted p-4">
+            <div className={`rounded-xl border border-border bg-muted p-4 ${pages.quietNote}`}>
               <p className="text-sm text-foreground/80">
                 <strong>Costo adicional posible:</strong>{" "}
                 {ADDITIONAL_FEES.biopsy.label} — {mxn(ADDITIONAL_FEES.biopsy.amount)}.{" "}
@@ -190,16 +192,16 @@ export default function DilatacionEsofagicaPage() {
       </section>
 
       {/* Section 4: Preparation & Recovery */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Preparación y Recuperación
           </h2>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className={`mt-8 grid gap-6 md:grid-cols-3 ${pages.steps}`}>
             {/* Antes */}
-            <div className="rounded-xl border border-border bg-card p-6">
-              <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
+              <div className={`mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light ${pages.iconBox}`}>
                 <Clock className="h-4 w-4 text-accent" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground">
@@ -213,8 +215,8 @@ export default function DilatacionEsofagicaPage() {
             </div>
 
             {/* Durante */}
-            <div className="rounded-xl border border-border bg-card p-6">
-              <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
+              <div className={`mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light ${pages.iconBox}`}>
                 <ShieldCheck className="h-4 w-4 text-accent" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground">
@@ -228,8 +230,8 @@ export default function DilatacionEsofagicaPage() {
             </div>
 
             {/* Después */}
-            <div className="rounded-xl border border-border bg-card p-6">
-              <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
+              <div className={`mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light ${pages.iconBox}`}>
                 <CheckCircle2 className="h-4 w-4 text-accent" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground">
@@ -246,20 +248,20 @@ export default function DilatacionEsofagicaPage() {
       </section>
 
       {/* Section 5: Doctor Credentials */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="mx-auto max-w-4xl">
             <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
               Tu Especialista: <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link>
             </h2>
 
-            <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start">
+            <div className={`mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start ${pages.portraitRow} ${pages.rowStart}`}>
               <Image
-                src={DOCTOR.photos.headshot}
+                src="/equipo/omar-quiroz-portrait.webp"
                 alt={DOCTOR.name}
                 width={300}
                 height={400}
-                className="rounded-2xl"
+                className={`rounded-2xl ${pages.portraitImg}`}
               />
 
               <div className="space-y-4">
@@ -267,7 +269,7 @@ export default function DilatacionEsofagicaPage() {
                   {DOCTOR.bioShort}
                 </p>
 
-                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <ul className={`grid grid-cols-1 gap-2 sm:grid-cols-2 ${pages.credentials}`}>
                   {DOCTOR.credentials.map((cred) => (
                     <li
                       key={cred}
@@ -293,27 +295,21 @@ export default function DilatacionEsofagicaPage() {
       </section>
 
       {/* Section 6: Google Reviews */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* Section 7: FAQ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="dilatacion_esofagica" service="dilatacion-esofagica" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="dilatacion_esofagica" service="dilatacion-esofagica" />
       </section>
 
       {/* Section 8: Related Procedures + Bottom CTA */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-8">
           {/* Related procedures */}
-          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+          <h2 className={`text-xl md:text-2xl font-serif font-bold text-white tracking-tight ${system.closingSub}`}>
             Procedimientos Relacionados
           </h2>
-          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div className={`grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto ${pages.closingLinks}`}>
             {[
               { name: "Endoscopia", href: "/endoscopia-merida" },
               { name: "Endoprótesis Esofágicas", href: "/endoprotesis-esofagicas-merida" },
@@ -337,7 +333,7 @@ export default function DilatacionEsofagicaPage() {
             Agenda tu valoración con el {DOCTOR.name}. Precio transparente
             desde {mxn(PRICING.dilatacion_esofagica.from)} con todo incluido.
           </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className={`flex flex-col items-center gap-4 sm:flex-row sm:justify-center ${pages.bandActions}`} data-sticky-bottom-cta>
             <WhatsAppButton
               service="dilatacion-esofagica"
               position="bottom-cta"
@@ -352,6 +348,6 @@ export default function DilatacionEsofagicaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

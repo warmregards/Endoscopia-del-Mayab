@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { ROUTES_SEO, type RouteKey } from "@/lib/routes-seo";
 import { getFaqsFor, type FAQ } from "@/lib/faq";
 import { faqSchema } from "@/lib/schema";
@@ -154,6 +155,12 @@ export default function Faq({
           </details>
         )}
 
+        {routeKey === "home" ? (
+          <div className="home-faq-contact mt-8">
+            <p>¿No encuentras tu respuesta?</p>{" "}
+            <Link href="/contacto">Contáctanos directamente</Link>
+          </div>
+        ) : (
         <div className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-strong/10 border border-accent-strong/20">
             <svg
@@ -174,6 +181,7 @@ export default function Faq({
             </span>
           </div>
         </div>
+        )}
 
         {/* JSON‑LD for rich results (skip when already in page @graph) */}
         {schema && !noSchema && (

@@ -29,6 +29,8 @@ type TeamPresenceProps = {
    * LPs), so the same cédulas don't render twice in one screen.
    */
   variant?: "full" | "compact";
+  /** Optional portrait size for the procedure design pilot. */
+  avatarSize?: number;
   /**
    * Section background. The CALLER sets this to whatever keeps the host page's
    * bg-background ↔ bg-muted alternation intact. The cards sit on this tone.
@@ -65,6 +67,7 @@ const MAX_CHIPS = 2;
 export default function TeamPresence({
   procedure,
   variant = "full",
+  avatarSize,
   tone = "background",
   heading,
   linkLabel = "Conoce al equipo y verifica sus cédulas",
@@ -72,7 +75,7 @@ export default function TeamPresence({
   bare = false,
 }: TeamPresenceProps) {
   const compact = variant === "compact";
-  const avatar = compact ? 64 : 96;
+  const avatar = avatarSize ?? (compact ? 64 : 96);
   const title =
     heading ?? `Quién estará contigo en tu ${PROCEDURE_LABEL[procedure]}`;
   const Heading = bare ? "h3" : "h2";
