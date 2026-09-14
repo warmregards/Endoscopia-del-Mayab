@@ -14,12 +14,13 @@
 | `Footer.tsx` | Server | Site footer. All NAP+W data pulled from `CLINIC`. Social links from `CLINIC.sameAs`. |
 | `WhatsAppButton.tsx` | Client | Primary CTA. Fires `pushWhatsAppClick()`. Uses `waHref()` from clinic.ts. |
 | `CallButton.tsx` | Client | Secondary CTA. Fires `pushPhoneClick()`. Uses `telHref()` from clinic.ts. |
-| `Faq.tsx` | Client | Accordion FAQ with inline JSON-LD via `faqSchema()`. Fires `pushFaqExpand()` on toggle. |
+| `Faq.tsx` | Server | Accordion FAQ with inline JSON-LD via `faqSchema()`. Keeps lib/faq.ts out of client bundles. |
+| `FaqTracker.tsx` | Client | Tiny island inside `<Faq>`; fires `pushFaqExpand()` on `<details>` toggle. |
+| `AppointmentFormLazy.tsx` | Client | Viewport/focus-triggered `next/dynamic` loader for `AppointmentForm` (keeps day-picker, date-fns, libphonenumber off initial load). Pages import this, not the form. |
 | `GoogleReviews.tsx` | Server (async) | Fetches reviews via `getGoogleReviews()`. Falls back to static reviews automatically. |
 | `ProceduresGrid.tsx` | Server | Full service catalog. Derives categories and pricing from `SERVICES` data. |
 | `MapEmbed.tsx` | Server | Google Maps iframe. Uses `NEXT_PUBLIC_GBP_PLACE_ID` + `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`. |
 | `ScrollToTop.tsx` | Client | Scroll restoration on route change. Zero dependencies. |
-| `theme-provider.tsx` | Client | Thin next-themes wrapper. Dark mode exists but isn't a priority. |
 
 ---
 

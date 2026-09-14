@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTop from "@/components/ScrollToTop";
 import AttributionCapture from "@/components/AttributionCapture";
 
@@ -74,7 +73,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${openSans.variable}`} suppressHydrationWarning>
+    <html lang="es" className={`${montserrat.variable} ${openSans.variable}`}>
       <head>
         {/* ❌ Remove Google Fonts preconnects — next/font inlines and preloads automatically. */}
 
@@ -119,19 +118,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         ) : null}
 
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <AttributionCapture />
-          <Suspense fallback={null}>
-            <ScrollToTop />
-          </Suspense>
+        <AttributionCapture />
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
 
-          {/* Site chrome (header/footer/sticky CTA) and global JSON-LD live in
-              the (site) route group layout so paid /lp/* landing pages — a
-              separate (lp) group — never mount them. This is a hard boundary,
-              not a runtime gate: the chrome is not in the LP layout tree at all,
-              so nothing is server-rendered, serialized, or mounted for it. */}
-          {children}
-        </ThemeProvider>
+        {/* Site chrome (header/footer/sticky CTA) and global JSON-LD live in
+            the (site) route group layout so paid /lp/* landing pages — a
+            separate (lp) group — never mount them. This is a hard boundary,
+            not a runtime gate: the chrome is not in the LP layout tree at all,
+            so nothing is server-rendered, serialized, or mounted for it. */}
+        {children}
       </body>
     </html>
   );

@@ -15,7 +15,9 @@ import { DayPicker } from "react-day-picker"
 import "react-day-picker/style.css"
 import { es } from "date-fns/locale"
 import { format, startOfToday } from "date-fns"
-import { isValidPhoneNumber } from "libphonenumber-js"
+// /min metadata keeps the client bundle small; MX validity rules match the
+// full build the API route uses.
+import { isValidPhoneNumber } from "libphonenumber-js/min"
 import * as Popover from "@radix-ui/react-popover"
 import {
   CalendarDays,

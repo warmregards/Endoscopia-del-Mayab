@@ -1,12 +1,13 @@
 // /components/Faq.tsx
-"use client";
+// Server component: FAQ selection, markup and FAQPage JSON-LD are rendered on
+// the server so lib/faq.ts (every route's Q&A) never ships to the client. The
+// only client code is <FaqTracker>, which fires `faq_expand` on toggle.
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ROUTES_SEO, type RouteKey } from "@/lib/routes-seo";
+import type { RouteKey } from "@/lib/routes-seo";
 import { getFaqsFor, type FAQ } from "@/lib/faq";
 import { faqSchema } from "@/lib/schema";
-import { pushFaqExpand } from "@/lib/gtm";
+import FaqTracker from "@/components/FaqTracker";
 
 type Props =
   | { routeKey: RouteKey; faqs?: never; heading?: string; service?: string; maxVisible?: number; noSchema?: boolean }
@@ -20,29 +21,8 @@ export default function Faq({
   maxVisible = 6,
   noSchema = false,
 }: Props) {
-  const sectionRef = useRef<HTMLElement>(null);
-
   // Pick FAQs: explicit list wins, else by route
   const faqs: FAQ[] = override ?? (routeKey ? getFaqsFor(routeKey) : []);
-
-  // Track FAQ accordion expansions via event delegation
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const handler = (e: ToggleEvent) => {
-      const details = e.target as HTMLDetailsElement;
-      if (details.open) {
-        const question = details.dataset.question;
-        if (question) pushFaqExpand(question, service);
-      }
-    };
-
-    // <details> fires "toggle" event on open/close
-    section.addEventListener("toggle", handler as EventListener, true);
-    return () =>
-      section.removeEventListener("toggle", handler as EventListener, true);
-  }, [service]);
 
   if (!faqs.length) return null;
 
@@ -109,10 +89,10 @@ export default function Faq({
 
   return (
     <section
-      ref={sectionRef}
       aria-labelledby="faq-heading"
       className="section-padding"
     >
+      <FaqTracker service={service} />
       <div className="container-page">
         <div className="mb-8">
           <h2

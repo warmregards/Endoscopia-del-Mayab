@@ -41,11 +41,13 @@ export default function OnlineBookingBanner({
       cleanupRef.current()
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       if (highlightArrival) {
-        const form = target.querySelector("form") ?? target
+        // The form is lazy-loaded (AppointmentFormLazy), so it may not exist at
+        // click time. Observe the section and resolve the <form> on arrival.
+        let form: HTMLElement = target.querySelector("form") ?? target
         let observer: IntersectionObserver | undefined
         let animation: Animation | undefined
         let timer: ReturnType<typeof setTimeout> | undefined
-        const previousShadow = form.style.boxShadow
+        let previousShadow = form.style.boxShadow
         const cleanup = () => {
           observer?.disconnect()
           animation?.cancel()
@@ -55,6 +57,8 @@ export default function OnlineBookingBanner({
         cleanupRef.current = cleanup
         const highlight = () => {
           observer?.disconnect()
+          form = target.querySelector("form") ?? target
+          previousShadow = form.style.boxShadow
           if (reducedMotion) {
             // Static, temporary state: no movement, flashing, or keyboard opening.
             form.style.boxShadow = "0 0 0 3px #80a08f"
@@ -71,7 +75,7 @@ export default function OnlineBookingBanner({
         observer = new IntersectionObserver(([entry]) => {
           if (entry.isIntersecting) highlight()
         }, { threshold: 0.15 })
-        observer.observe(form)
+        observer.observe(target)
       }
       target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" })
     }
