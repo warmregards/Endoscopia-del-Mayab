@@ -92,14 +92,14 @@ export default function ComparisonTable({
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-4 pr-4 font-medium text-muted-foreground" />
-                  <th className="text-center py-4 px-4 font-semibold text-muted-foreground">
+                  <td className="text-left py-4 pr-4 font-medium text-muted-foreground" />
+                  <th scope="col" className="text-center py-4 px-4 font-semibold text-muted-foreground">
                     Laboratorio de bajo costo
                   </th>
-                  <th className="text-center py-4 px-4 font-semibold text-muted-foreground">
+                  <th scope="col" className="text-center py-4 px-4 font-semibold text-muted-foreground">
                     Hospital general
                   </th>
-                  <th className="text-center py-4 px-4 font-bold text-text-accent border-2 border-accent/20 rounded-t-xl bg-accent-light">
+                  <th scope="col" className="text-center py-4 px-4 font-bold text-text-accent border-2 border-accent/20 rounded-t-xl bg-accent-light">
                     {CLINIC.name}
                   </th>
                 </tr>
@@ -107,9 +107,10 @@ export default function ComparisonTable({
               <tbody>
                 {comparisonRows.map((row, i) => (
                   <tr key={row.label} className={i < comparisonRows.length - 1 ? "border-b border-border" : ""}>
-                    <td className="py-4 pr-4 font-medium text-foreground">
+                    {/* Row header so every data cell has a header (axe td-has-header). */}
+                    <th scope="row" className="py-4 pr-4 text-left font-medium text-foreground">
                       {row.label}
-                    </td>
+                    </th>
                     <td className="py-4 px-4 text-center text-muted-foreground">
                       {row.lab}
                     </td>
