@@ -20,6 +20,8 @@ import GoogleReviews from "@/components/GoogleReviews";
 import LpVideo from "@/components/LpVideo";
 import { TRUST_VIDEO as LP_TRUST_VIDEO } from "../trust-video";
 import { getGoogleReviews } from "@/lib/reviews";
+import system from "../../../(site)/design-system.module.css";
+import pages from "../../../(site)/design-pages.module.css";
 
 // ---------------------------------------------------------------------------
 // Metadata — inline, NOT in routes-seo.ts. Page is noindex; this exists only
@@ -60,16 +62,16 @@ export default async function LpHemorroidesPage() {
   } = await getGoogleReviews({ maxReviews: 1 });
 
   return (
-    <div className="pb-24 md:pb-0">
+    <div className={`pb-24 md:pb-0 ${pages.page} ${system.system}`}>
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — HERO (bg-background)
           "Avoid surgery, avoid downtime, discreet" is the strongest driver here —
           surgery fear + embarrassment are the two objections that block booking.
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${pages.lpHero} ${system.hero}`}>
         <div className="container-narrow pt-6 pb-12 md:py-16">
           {/* Eyebrow / trust bar */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+          <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground ${pages.chips}`}>
             <span className="inline-flex items-center gap-1 font-semibold text-foreground">
               <Star className="h-4 w-4 fill-feedback-warning text-feedback-warning" />
               {ratingValue.toFixed(1)} · {reviewCount} reseñas
@@ -88,14 +90,14 @@ export default async function LpHemorroidesPage() {
             Ligadura de hemorroides en Mérida sin cirugía
           </h1>
 
-          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+          <p className={`mt-4 text-base text-muted-foreground md:text-lg ${pages.lead}`}>
             Tratamiento de hemorroides internas por ligadura endoscópica — sin
             cirugía mayor, sin hospitalización, con sedación, por un{" "}
             {DOCTOR.descriptor}.
           </p>
 
           {/* Price badge */}
-          <div className="mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6">
+          <div className={`mt-4 inline-flex flex-col rounded-xl border border-accent/20 bg-accent-light px-6 py-4 md:mt-6 ${pages.priceBadge}`}>
             <span className="text-2xl font-bold text-text-accent md:text-3xl">
               {PRICE}
             </span>
@@ -127,7 +129,7 @@ export default async function LpHemorroidesPage() {
           </div>
 
           {/* Location line */}
-          <p className="mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground">
+          <p className={`mt-6 inline-flex items-start gap-2 text-sm text-muted-foreground ${pages.location}`}>
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             Hospital Amerimed, Consultorio 517 · Chichí Suárez, Mérida
           </p>
@@ -138,14 +140,14 @@ export default async function LpHemorroidesPage() {
           SECTION 2 — PRECIO Y QUÉ INCLUYE (bg-muted)
           Soft value anchor (not a competitor-price row): avoid surgery costs.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="precio" className="bg-muted">
+      <section id="precio" className={`bg-muted ${pages.surface}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Precio cerrado, sin sorpresas
           </h2>
 
-          <div className="mt-6 rounded-xl border border-border bg-card p-6 shadow-sm">
-            <div className="text-3xl font-bold text-text-accent">{PRICE}</div>
+          <div className={`mt-6 rounded-xl border border-border bg-card p-6 shadow-sm ${pages.panelSurface}`}>
+            <div className={`text-3xl font-bold text-text-accent ${pages.priceFigure}`}>{PRICE}</div>
 
             <ul className="mt-6 space-y-3">
               {INCLUDED_IN_PRICE.map((item) => (
@@ -158,7 +160,7 @@ export default async function LpHemorroidesPage() {
           </div>
 
           {/* Soft value anchor — not a competitor price */}
-          <div className="mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground">
+          <div className={`mt-6 rounded-xl border border-accent/20 bg-accent-light px-6 py-4 text-sm text-foreground ${pages.quietNote}`}>
             Sin los costos ni la recuperación de una cirugía tradicional.
           </div>
 
@@ -180,7 +182,7 @@ export default async function LpHemorroidesPage() {
           Authority + discretion (embarrassment is a booking objection here).
           + SECTION 3.5 trust video below the credential chips.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="especialista" className="bg-background">
+      <section id="especialista" className={`bg-background ${system.doctor} ${pages.inverse} ${pages.authority}`}>
         <div className="container-narrow section-padding">
           <DoctorAuthority
             variant="compact"
@@ -188,6 +190,7 @@ export default async function LpHemorroidesPage() {
             position="lp-doctor"
             procedureName="Ligadura de hemorroides"
             procedureContext="Atención discreta y directa: el especialista que realiza tu ligadura de hemorroides se formó y ejerció como endoscopista en centros de referencia nacionales."
+            portraitSrc={DOCTOR.photos.headshot}
             profileLink={false}
           />
 
@@ -212,7 +215,7 @@ export default async function LpHemorroidesPage() {
           SECTION 4 — SIN CIRUGÍA, SIN VERGÜENZA (bg-muted)
           Discretion + no-surgery are the two objections that block this booking.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="disponibilidad" className="bg-muted">
+      <section id="disponibilidad" className={`bg-muted ${pages.paper}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             Un procedimiento discreto y rápido
@@ -225,7 +228,7 @@ export default async function LpHemorroidesPage() {
             el Dr. Quiroz.
           </p>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+          <ul className={`mt-6 grid gap-4 sm:grid-cols-2 ${pages.factList}`}>
             {[
               { icon: ShieldCheck, text: "Sin cirugía mayor" },
               { icon: CheckCircle2, text: "Ambulatorio, sin hospitalización" },
@@ -260,6 +263,7 @@ export default async function LpHemorroidesPage() {
           showPlaceLink={false}: no outbound Google exit on a paid LP (1:1 ratio).
           ══════════════════════════════════════════════════════════════════ */}
       <GoogleReviews
+        className={system.reviews}
         title="Lo que dicen nuestros pacientes"
         limit={3}
         showPlaceLink={false}
@@ -269,13 +273,13 @@ export default async function LpHemorroidesPage() {
           SECTION 6 — FAQ CORTA (bg-muted)
           Only the questions that block booking.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="preguntas" className="bg-muted">
+      <section id="preguntas" className={`bg-muted ${system.faq}`}>
         <div className="container-narrow section-padding">
           <h2 className="font-serif text-xl font-bold tracking-tight text-foreground md:text-2xl">
             Preguntas frecuentes
           </h2>
 
-          <div className="mt-6 space-y-4">
+          <div className={`mt-6 space-y-4 ${pages.qaList}`}>
             {[
               {
                 q: "¿Necesito cirugía?",
@@ -302,7 +306,7 @@ export default async function LpHemorroidesPage() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className={`mt-8 flex flex-col items-start gap-4 rounded-2xl border border-accent/20 bg-accent-light p-6 sm:flex-row sm:items-center sm:justify-between ${pages.note}`}>
             <p className="text-foreground">
               ¿Tienes otra duda? Escríbele al Dr. Quiroz por WhatsApp.
             </p>
@@ -330,7 +334,7 @@ export default async function LpHemorroidesPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7 — CIERRE / BOTTOM CTA (bg-primary navy)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-narrow section-padding text-center">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
             ¿Listo para tratar tus hemorroides sin cirugía?

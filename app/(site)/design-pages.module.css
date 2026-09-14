@@ -1,0 +1,390 @@
+/* Shared opt-in composition roles for routes migrated after the home, endoscopy
+   and colonoscopy pilots (procedure, information and landing pages).
+   Pair `pages.page` with `system.system` on the page root, then add role classes
+   to existing elements. Tokens, headings, CTAs, doctor/reviews/FAQ/closing roles
+   and page chrome come from design-system.module.css — do not restate them here.
+   Reference pages do not import this file. Content is never changed by a role. */
+
+/* ── Page palette and generic type ── */
+.page {
+  --background: 48 71% 99%; --muted: 48 30% 96%; --accent-light: 93 23% 91%; --border: 103 10% 84%;
+  color: var(--ink);
+  background: var(--paper);
+}
+.page h1, .page h2, .page h3 { color: var(--ink); text-wrap: balance; }
+.page h2 { font-size: var(--design-heading); line-height: 1.15; }
+.page h3 { font-size: var(--design-subheading); line-height: 1.2; }
+.page p, .page li { line-height: 1.75; }
+.page :global(.text-sm) { font-size: 15px; }
+.page :global(.text-xs) { font-size: 13px; }
+.page :global(.text-foreground), .page :global(.text-primary), .page :global(.text-text-accent), .page :global(.text-text-brand) { color: var(--ink); }
+.page :global(.text-muted-foreground), .page :global(.text-foreground\/80) { color: var(--muted-ink); }
+.page :global(.border-border) { border-color: var(--rule); }
+.page :global(.max-w-4xl) { max-width: 880px; }
+.page :global(.max-w-5xl) { max-width: 1160px; }
+.page :global(.aspect-video) { border-color: var(--rule); border-radius: var(--design-photo-radius); box-shadow: none; }
+.page figcaption { font-size: 14px; line-height: 1.5; color: var(--muted-ink); }
+.page iframe { border-radius: var(--design-photo-radius); }
+
+/* ── Section surfaces (keep the paper ↔ surface rhythm explicit) ── */
+.paper { background: var(--paper); }
+.surface { background: var(--surface); }
+.sage { background: var(--sage); }
+.ruledTop { border-top: 1px solid var(--rule); }
+
+/* ── Hero: introduction left, optional cost panel right ── */
+.hero { background: var(--paper); border-bottom: 1px solid var(--rule); }
+.heroGrid { gap: 40px 72px; align-items: center; }
+.eyebrow { margin: 0 0 12px; padding: 0; border: 0; border-radius: 0; background: none; font-size: 13px; line-height: 1.5; font-weight: 600; letter-spacing: .02em; color: #42604d; }
+.eyebrowAlert { align-items: flex-start; color: #713c31; }
+.eyebrowAlert svg { flex-shrink: 0; margin-top: 2px; color: #713c31; }
+.lead { max-width: 560px; font-size: 19px; font-weight: 500; line-height: 1.6; color: var(--ink); }
+.intro { max-width: 580px; font-size: var(--design-body); line-height: 1.75; }
+.chips { gap: 12px 24px; font-size: 13px; line-height: 1.5; }
+.chips svg { flex-shrink: 0; }
+.location { gap: 8px 24px; font-size: 14px; line-height: 1.5; }
+.location svg { flex-shrink: 0; }
+
+.pricePanel { max-width: 410px; flex-shrink: 0; }
+.panel { padding: 0 28px 24px; border: 1px solid #b8c8ba; border-radius: 12px; background: var(--surface); box-shadow: none; overflow: hidden; }
+.panel > * { margin-block: 0; }
+.panelHead { margin: 0 -28px 24px; padding: 20px 28px 24px; background: var(--ink); text-align: left; }
+.panelHead > * { margin-block: 0; }
+.page .panelHead :is(p, div) { font-size: 14px; line-height: 1.5; color: #d9e4d8; }
+.page .panelHead .panelPrice { margin-top: 4px; font-family: Georgia, 'Times New Roman', serif; font-size: 34px; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--inverse); }
+.page .panelHead .panelPrice + p { margin-top: 4px; }
+.panelIcon { display: none; }
+.panelBody > * { margin-block: 0; }
+.panelBody > * + * { margin-top: 12px; }
+.panelBody > h3 { margin-bottom: 4px; font-size: 25px; text-align: left; }
+.panelNote { margin-top: 24px; padding: 18px 0 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; text-align: left; }
+.page .panelNote, .page .panelNote p { font-size: 13px; line-height: 1.6; font-weight: 400; color: #42604d; }
+
+/* ── Open content: ruled groups instead of cards ── */
+.openGrid { gap: 32px 40px; }
+.open { padding: 24px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: none; box-shadow: none; text-align: left; }
+.open > h3 { margin: 0 0 12px; }
+.featured { border-top: 3px solid var(--ink); }
+.page .featured h3 { color: var(--ink); }
+
+.steps { gap: 32px 40px; }
+.step { padding: 20px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: none; box-shadow: none; text-align: left; }
+.page .stepNumber { width: auto; height: auto; margin: 0 0 12px; justify-content: flex-start; border-radius: 0; background: none; color: #6a8371; font-family: Georgia, serif; font-size: 44px; font-weight: 400; line-height: 1; }
+.step h3 { margin: 0 0 12px; text-align: left; }
+.step ul { list-style-position: outside; padding-left: 0; }
+.step ul:global(.list-disc) { padding-left: 18px; }
+.step li svg { margin-top: 5px; }
+
+.duration { text-align: left; }
+.duration > div { flex-wrap: wrap; justify-content: flex-start; padding: 16px 20px; border: 0; border-radius: 6px; background: var(--sage); }
+
+/* Highlighted enclosures (price facts, decisions) and quiet ruled notes. */
+.note { padding: 24px 28px; border: 0; border-radius: 6px; background: var(--sage); box-shadow: none; }
+.panelSurface { padding: 28px 32px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); box-shadow: none; }
+.quietNote { padding: 2px 0 2px 16px; border: 0; border-left: 2px solid #80a08f; border-radius: 0; background: none; text-align: left; }
+.page .quietNote, .page .quietNote p { color: #42604d; font-size: 14px; line-height: 1.65; }
+/* Emergency information keeps the semantic maroon, never the booking green. */
+.alert { padding: 20px 24px; border: 0; border-left: 3px solid #713c31; border-radius: 0 6px 6px 0; background: #f6ece8; }
+.page .alert svg { color: #713c31; }
+.page .alert h3 { font-size: 22px; line-height: 1.3; }
+/* Standalone "Desde $X MXN" figure inside a pricing section. */
+.page .priceFigure { font-family: Georgia, 'Times New Roman', serif; font-size: 44px; font-weight: 400; line-height: 1.1; letter-spacing: -.035em; color: var(--ink); white-space: nowrap; }
+
+.biopsy > div { padding: 28px 32px; border: 0; border-radius: 6px; background: var(--sage); }
+.biopsy > div > * { margin-block: 0; }
+.biopsy > div > p:first-child { font-family: Georgia, serif; font-size: 25px; font-weight: 400; line-height: 1.25; letter-spacing: -.035em; color: var(--ink); }
+.biopsy ul { display: grid; gap: 8px; margin-top: 16px; }
+.biopsy ul > li { margin: 0; }
+.biopsy ul svg { margin-top: 6px; }
+.biopsy > div > p:last-child:not(:first-child) { margin-top: 20px; padding-top: 16px; border-top: 1px solid #c3cfc0; font-size: 14px; line-height: 1.5; }
+
+/* Three-way price comparison: ruled columns, practice column in sage. */
+.compare { gap: 0; border-block: 1px solid var(--rule); }
+.compare > div { padding: 28px 24px; border: 0; border-radius: 0; background: none; text-align: left; }
+.compare > div + div { border-left: 1px solid var(--rule); }
+.compare > .compareOurs { background: var(--sage); }
+.page .compare > div > p:first-child { font-size: 15px; font-weight: 500; }
+/* Scales with the three columns so "Desde $XX,XXX MXN" never wraps mid-value. */
+.page .compare > div > p:nth-child(2) { font-family: Georgia, serif; font-size: clamp(20px, 2.4vw, 30px); font-weight: 400; line-height: 1.25; letter-spacing: -.035em; white-space: nowrap; }
+
+.checkGrid { gap: 12px 32px; }
+.checkGrid svg { width: 16px; height: 16px; }
+
+/* ── Dark bands (doctor, closing): utilities flip to pale text ── */
+.inverse :global(:is(.text-foreground, .text-foreground\/80, .text-muted-foreground, .text-primary, .text-accent, .text-text-accent, .text-text-brand, .text-white\/80)) { color: var(--inverse-muted); }
+.inverse h3, .inverse strong { color: var(--inverse); }
+.inverse a:not([id^="cta-"]) { color: var(--inverse); text-decoration: underline; text-underline-offset: 3px; }
+.inverse svg { color: #a9c1b1; }
+.portraitRow { gap: 24px 40px; }
+.portrait { width: 200px; height: 250px; margin: 0; flex-shrink: 0; overflow: hidden; border: 0; border-radius: var(--design-photo-radius); background: none; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 0; }
+.specialty { margin-top: 8px; font-size: 15px; font-weight: 400; line-height: 1.5; }
+.credentials { gap: 12px 24px; }
+.credentials > * { padding: 0; border: 0; border-radius: 0; background: none; font-size: var(--design-meta); line-height: 1.5; }
+.stats { gap: 0; border-block: 1px solid #ffffff30; }
+.stats > div { padding: 24px; border: 0; border-radius: 0; background: none; text-align: left; }
+.inverse .stats > div + div { border-left: 1px solid #ffffff30; }
+.inverse .statValue { margin-bottom: 4px; font-family: Georgia, serif; font-size: 40px; font-weight: 400; line-height: 1.1; letter-spacing: -.035em; color: var(--inverse); }
+.inverseLink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 20px; border: 1px solid #91a99a; border-radius: var(--design-radius); line-height: 1.5; }
+.inverse a.inverseLink { color: var(--inverse); text-decoration: none; }
+.inverseLink svg { flex-shrink: 0; }
+/* DoctorAuthority variant="strip" inside a dark band (className hook). */
+.strip { margin-top: 8px; padding-top: 28px; border-color: #ffffff30; }
+.inverse .strip > p:first-child { margin: 0 0 18px; font-family: inherit; font-size: 12px; color: var(--inverse-muted); }
+.strip ul { gap: 0 24px; margin: 0; }
+.strip li { align-items: center; gap: 16px; padding: 18px 0; border: 0; border-top: 1px solid #ffffff30; border-radius: 0; background: transparent; }
+.strip li > div:first-child { width: 72px; height: 64px; padding: 8px; border-radius: 6px; background: var(--surface); }
+.strip li img { border-radius: 0; }
+.inverse .strip li p { margin: 0; font-family: inherit; font-size: 15px; line-height: 1.45; color: var(--inverse); }
+.inverse .strip li p + p { margin-top: 4px; font-size: 14px; color: #c5d6cb; }
+.closingNotes { gap: 0 40px; text-align: left; }
+.closingNotes > div { padding: 20px 0 0; border: 0; border-top: 1px solid #ffffff30; border-radius: 0; background: none; }
+.inverse .closingNotes p:first-child { color: var(--inverse); }
+/* Closing bands whose copy uses primary-foreground utilities: that token resolves
+   dark under the design system, so restore readable pale text (CTAs untouched). */
+.closingText :global(:is(.text-primary-foreground, .text-primary-foreground\/80)) { color: var(--inverse-muted); }
+
+/* ── Related procedures: ruled link columns ── */
+.relatedGrid { gap: 0 40px; }
+.related { padding: 24px 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: none; box-shadow: none; }
+.related:hover { box-shadow: none; border-color: #aab8aa; }
+.related h3 { margin-bottom: 8px; }
+.page .relatedPrice { font-family: Georgia, serif; font-size: 22px; font-weight: 400; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+@media (min-width:768px) and (max-width:1023px) {
+  .page .relatedPrice { font-size: 18px; }
+}
+.textLink { min-height: 48px; }
+
+/* ── Information pages: people, contact, prices, emergencies ── */
+.start { justify-content: flex-start; }
+.textStart { text-align: left; }
+.rowStart { align-items: flex-start; }
+.flush { padding: 0; }
+.page .note h2 { font-size: clamp(26px, 2.4vw, 30px); }
+.page .figure { font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--ink); }
+.panelHeadAlert { background: #713c31; }
+.page .alertList svg, .page .alert svg { color: #713c31; }
+.page .alert :global(.text-red-700), .page .eyebrowAlert :global(:is(.text-foreground, .text-red-700)) { color: #713c31; }
+.iconBox { width: auto; height: auto; align-self: flex-start; margin-top: 4px; padding: 0; border-radius: 0; background: none; }
+.frame { overflow: hidden; border: 0; border-radius: var(--design-photo-radius); }
+.heroPhoto { width: 100%; max-width: 440px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: var(--design-photo-radius); }
+.portraitImg { width: 200px; height: 250px; margin: 0; flex-shrink: 0; object-fit: cover; object-position: top; border-radius: var(--design-photo-radius); }
+.portraitGrid { gap: 24px 40px; }
+.chip { gap: 6px; padding: 0; border: 0; border-radius: 0; background: none; font-size: var(--design-meta); line-height: 1.5; }
+.stepList > li { margin: 0; padding: 12px 0; align-items: baseline; border-top: 1px solid var(--rule); }
+.stepLabel { height: auto; min-width: 72px; padding: 0; border-radius: 0; background: none; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.page .numberBadge { width: auto; height: auto; min-width: 32px; align-items: flex-start; justify-content: flex-start; border-radius: 0; background: none; font-family: Georgia, serif; font-size: 28px; font-weight: 400; line-height: 1.1; color: #6a8371; }
+.personCard { overflow: visible; padding: 24px 0 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: none; box-shadow: none; }
+.personCard:hover { box-shadow: none; border-color: #aab8aa; }
+.personCard > div:first-child { overflow: hidden; border-radius: var(--design-photo-radius); }
+.personCard > div:last-child { padding: 20px 0 0; }
+.page .personCard h2 { font-size: var(--design-subheading); line-height: 1.2; }
+.infoRows { padding: 0; border: 0; border-radius: 0; background: none; }
+.infoRows > * { margin: 0; padding: 16px 0; border-top: 1px solid var(--rule); }
+.infoRows svg { margin-top: 4px; }
+.anchors { gap: 0; border-block: 1px solid var(--rule); }
+.anchors > * { padding: 24px; border: 0; border-radius: 0; background: none; box-shadow: none; text-align: left; }
+.page .anchors > * + * { border-left: 1px solid var(--rule); }
+.anchors p { justify-content: flex-start; }
+.page .anchors .anchorPrice { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(20px, 2.6vw, 32px); font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--ink); white-space: nowrap; }
+/* Single-column anchors (below the sm three-column grid) keep a larger figure. */
+@media (max-width:639px) {
+  .page .anchors .anchorPrice { font-size: 28px; }
+}
+.serviceTable { overflow: visible; border: 0; border-block: 1px solid var(--rule); border-radius: 0; background: none; }
+.serviceRow { gap: 4px 24px; padding: 18px 0; }
+.serviceRow:hover { background: none; }
+.page .anchorBlock { padding: 32px 0 0; border: 0; border-top: 3px solid var(--ink); border-radius: 0; background: none; }
+.page .priceBar { padding: 24px 28px; border: 0; border-radius: 6px; background: var(--sage); }
+.routeStrip > div { padding: 20px 0; border: 0; border-block: 1px solid var(--rule); border-radius: 0; background: none; }
+.plainBox { padding: 0; border: 0; border-radius: 0; background: none; }
+.ruleRows > * { margin: 0; padding: 14px 0; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; background: none; }
+.statsLight { gap: 0; border-block: 1px solid var(--rule); }
+.statsLight > div { padding: 20px 16px; border: 0; border-radius: 0; background: none; text-align: left; }
+.page .statsLight > div + div { border-left: 1px solid var(--rule); }
+.page .statsLight > div > div:first-child { justify-content: flex-start; font-family: Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--ink); }
+.page .inverse .quietNote, .page .inverse .quietNote p { border-color: #91a99a; color: var(--inverse-muted); }
+
+/* TeamPresence (wrapper hook): open ruled columns, as on the procedure references. */
+.team > section { background: var(--paper); }
+.team article { gap: 8px; padding: 28px 0; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; background: transparent; }
+.team article > img { margin-bottom: 8px; border: 0; border-radius: var(--design-photo-radius); }
+.team article > p { margin-block: 0; }
+.page .team article > p:first-of-type { font-family: Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1.25; letter-spacing: -.035em; }
+.team article span:global(.rounded-full) { padding: 4px 0; border: 0; border-radius: 0; background: transparent; }
+.team :global(.max-w-5xl) > div:last-child > a { justify-content: space-between; min-height: 48px; padding: 12px 16px; border: 1px solid #8aa18f; border-radius: var(--design-radius); line-height: 1.5; }
+.team :global(.max-w-5xl) > div:last-child > a svg { flex-shrink: 0; }
+
+/* ComparisonTable (wrapper hook), matching the endoscopy/colonoscopy treatment. */
+.comparison > section { background: var(--surface); }
+.comparison th, .comparison td { border-radius: 0; }
+.comparison th:last-child, .comparison td:last-child { border: 0; background: var(--sage); }
+.comparison :global(.md\:hidden) > div { padding: 24px 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; }
+.comparison :global(.justify-between) { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+.comparison :global(.justify-between) > span:last-child { text-align: right; }
+
+@media (min-width:1024px) {
+  .portraitGrid { grid-template-columns: 200px 1fr; }
+}
+@media (max-width:767px) {
+  .page .anchors > * { padding: 20px 0; }
+  .page .anchors > * + * { border-left: 0; border-top: 1px solid var(--rule); }
+  .page .priceBar { padding: 20px; }
+  .portraitImg { width: 160px; height: 200px; }
+  .bandActions { flex-direction: column; align-items: stretch; }
+  .bandActions > a { width: 100%; }
+  .page .statsLight > div { padding: 16px 8px; }
+  .page .statsLight > div > div:first-child { font-size: 26px; }
+  .comparison :global(.justify-between) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 12px; }
+  .comparison :global(.justify-between):last-child { display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0; padding: 14px 16px; border-radius: 6px; }
+  .comparison :global(.justify-between):last-child > span:first-child { white-space: nowrap; font-size: 14px; font-weight: 500; }
+  .comparison :global(.justify-between):last-child > span:last-child { text-align: left; font-size: 16px; line-height: 1.5; }
+}
+@media (hover:hover) {
+  .anchors > a:hover { background: var(--sage); }
+  .team :global(.max-w-5xl) > div:last-child > a:hover { background: var(--sage); }
+}
+
+/* ── Paid landing pages: same tokens in the LPs' narrower conversion column ── */
+.page :global(.container-narrow) { max-width: 960px; padding-inline: var(--design-gutter); }
+.lpHero :global(.container-narrow) { padding-block: 64px 56px; }
+.page .priceBadge { padding: 16px 20px; border: 0; border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0; background: var(--sage); }
+.page .priceBadge > span:first-child { font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; color: var(--ink); white-space: nowrap; }
+.page .priceBadge > span:last-child { margin-top: 4px; font-size: 14px; line-height: 1.5; }
+.factList { gap: 0 32px; }
+.factList > li { margin: 0; padding: 16px 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; box-shadow: none; }
+.factList > li > svg { width: 20px; height: 20px; margin-top: 4px; }
+.qaList > * { margin: 0; padding: 24px 0; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; background: none; box-shadow: none; }
+.qaList > :first-child { border-top: 1px solid var(--rule); }
+.page .qaList h3 { font-size: 21px; line-height: 1.35; }
+.page .qaList p { margin-top: 8px; }
+.page :global(.aspect-\[9\/16\]) { border-radius: var(--design-photo-radius); box-shadow: none; }
+/* DoctorAuthority variant="compact" inside a dark doctor band (matches the procedure references). */
+.authority :global(.flex-1) > p { font-size: var(--design-body); line-height: 1.75; }
+.authority > div > div > img { width: 200px; height: 250px; object-fit: cover; object-position: top; border-radius: var(--design-photo-radius); }
+.authority :global(.flex-1) > p:first-of-type { margin: 10px 0 24px; font-size: 15px; font-weight: 400; }
+.authority :global(.flex-1) > ul { gap: 12px 24px; margin: 0; }
+.authority :global(.flex-1) > ul li { padding: 0; border: 0; border-radius: 0; background: transparent; font-size: var(--design-meta); line-height: 1.5; }
+.authority :global(.flex-1) > ul svg { flex-shrink: 0; }
+.authority :global(.flex-1) > div:first-of-type { margin-top: 28px; padding-top: 28px; border-color: #ffffff30; }
+.inverse.authority :global(.flex-1) > div:first-of-type > p { margin: 0 0 18px; font-family: inherit; font-size: 12px; color: var(--inverse-muted); }
+.authority :global(.flex-1) > div:first-of-type ul { gap: 0 24px; margin: 0; }
+.authority :global(.flex-1) > div:first-of-type li { align-items: center; gap: 16px; padding: 18px 0; border: 0; border-top: 1px solid #ffffff30; border-radius: 0; background: transparent; }
+.authority :global(.flex-1) > div:first-of-type li > div:first-child { width: 72px; height: 64px; padding: 8px; border-radius: 6px; background: var(--surface); }
+.authority :global(.flex-1) > div:first-of-type li img { border-radius: 0; }
+.inverse.authority :global(.flex-1) > div:first-of-type li p { margin: 0; font-family: inherit; font-size: 15px; line-height: 1.45; color: var(--inverse); }
+.inverse.authority :global(.flex-1) > div:first-of-type li p + p { margin-top: 4px; font-size: 14px; color: #c5d6cb; }
+.authority :global(.flex-1) > div:last-child { gap: 12px; }
+.inverse .team > section { background: transparent; }
+.inverse .team article { border-top-color: #ffffff30; }
+.page .inverse .team article > p:first-of-type { color: var(--inverse); }
+.team :global(.space-y-8) > div:last-child > a { justify-content: space-between; min-height: 48px; padding: 12px 16px; border: 1px solid #8aa18f; border-radius: var(--design-radius); line-height: 1.5; }
+.page .inverse .team :global(:is(.max-w-5xl, .space-y-8)) > div:last-child > a { border-color: #91a99a; color: var(--inverse); text-decoration: none; }
+@media (max-width:767px) {
+  .lpHero :global(.container-narrow) { padding-block: 32px 40px; }
+  .page .priceBadge > span:first-child { font-size: 28px; }
+  .authority > div > div > img { width: 160px; height: 200px; }
+  .authority :global(.flex-1) > div:last-child { flex-direction: column; align-items: stretch; }
+  .authority :global(.flex-1) > div:last-child > a { width: 100%; }
+}
+@media (hover:hover) {
+  .page .inverse .team :global(:is(.max-w-5xl, .space-y-8)) > div:last-child > a:hover { background: #ffffff12; }
+}
+
+/* ── Remaining procedure/information pages (added in the remaining-pages migration) ── */
+/* Hero pill row: the "Desde" pill becomes a sage price badge; context pills become plain metadata. */
+.badges { gap: 12px 24px; align-items: center; }
+.page .badges > * { padding: 0; border: 0; border-radius: 0; background: none; font-size: var(--design-meta); line-height: 1.5; color: var(--muted-ink); }
+.page .heroPrice, .page .badges > .heroPrice { padding: 8px 16px; border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0; background: var(--sage); font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 400; line-height: 1.3; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.page .heroPrice { box-shadow: none; }
+.page .heroPrice > * { font: inherit; letter-spacing: inherit; color: inherit; }
+/* Two-line price note (label + nowrap price): sage badge that tightens at narrow widths. */
+.page .priceNote { border: 0; border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0; background: var(--sage); }
+@media (max-width:380px) {
+  .page .priceNote { padding: 12px 14px; }
+  .page .priceNote > span:last-child { font-size: 14px; }
+}
+/* Centered legacy hero wrappers align with the left-aligned procedure heroes. */
+.page .heroStart { margin-inline: 0; text-align: left; }
+.page .heroStart > div { justify-content: flex-start; }
+/* Faded inverse captions (e.g. text-text-inverse/50) stay readable on dark bands. */
+.inverse :global(:is(.text-text-inverse\/50, .text-text-inverse\/70)) { color: var(--inverse-muted); }
+.page .inverse .related, .page .inverse .related:hover { border-top-color: #ffffff30; text-decoration: none; }
+/* A serif price figure that must stay on one line inside a narrow card (scales down on mobile). */
+.page .fitPrice { white-space: nowrap; }
+@media (max-width:767px) {
+  .page .fitPrice { font-size: clamp(22px, 7vw, 32px); }
+}
+/* Legacy bold `font-serif` figures and rules (not headings) follow the design's serif voice. */
+.page .serifFigure, .page .priceNote > span:last-child { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; }
+/* Icon tiles inside block cards align with their left-aligned headings. */
+.page .iconBox { justify-content: flex-start; }
+/* Legacy section-padding-lg follows the shared section rhythm (and the compact hero). */
+.page :global(.section-padding-lg) { padding-block: var(--design-section); }
+.page .hero :global(.section-padding-lg) { padding-block: 64px 56px; }
+@media (max-width:767px) {
+  .page .hero :global(.section-padding-lg) { padding-block: 32px 40px; }
+}
+/* Multi-line related cards (name + price row) inside a dark closing band. */
+.page .inverse .closingCards > a { display: block; padding: 16px 20px; border: 1px solid #91a99a; border-radius: var(--design-radius); background: none; text-align: left; text-decoration: none; }
+.page .inverse .closingCards > a :is(p, span) { color: var(--inverse); }
+.page .inverse .closingCards > a span { color: var(--inverse-muted); }
+@media (hover:hover) {
+  .page .inverse .closingCards > a:hover { background: #ffffff12; }
+}
+/* Related-procedure links inside a dark closing band: pale outlined actions. */
+.page .closingLinks { gap: 12px; margin-block-end: 64px; }
+@media (max-width:767px) {
+  .page .closingLinks { margin-block-end: 48px; }
+}
+.page .inverse .closingLinks > a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 16px; border: 1px solid #91a99a; border-radius: var(--design-radius); background: none; color: var(--inverse); font-size: 14px; font-weight: 600; line-height: 1.5; text-decoration: none; }
+@media (hover:hover) {
+  .page .inverse .closingLinks > a:hover { background: #ffffff12; }
+}
+
+/* ── Interaction ── */
+@media (hover:hover) {
+  .related:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .inverseLink:hover { background: #ffffff12; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .page :global(.transition-all), .page :global(.transition-all) * { transition: none !important; }
+  .related:hover :global(.group-hover\:gap-3) { gap: .5rem; }
+  .related:hover svg { transform: none !important; }
+}
+
+/* ── Responsive ── */
+@media (max-width:1023px) {
+  .pricePanel { max-width: none; }
+  .compare > div:nth-child(3) { border-left: 0; }
+}
+@media (max-width:767px) {
+  .lead { font-size: 17px; }
+  /* Scales with the viewport so "Desde $XX,XXX MXN" never wraps mid-value. */
+  .page .priceFigure { font-size: clamp(26px, 8.5vw, 36px); }
+  .actions { flex-direction: row; gap: 10px; }
+  .actions a[id$="-wa"] { flex: 1; }
+  .actions a[id$="-call"] { width: auto; }
+  .panel { padding-inline: 24px; }
+  .panelHead { margin-inline: -24px; padding-inline: 24px; }
+  .page .panelHead .panelPrice { font-size: 28px; }
+  .note, .panelSurface, .biopsy > div { padding: 24px 20px; }
+  .biopsy > div > p:first-child { font-size: 24px; }
+  .compare > div { padding: 24px 0; }
+  .compare > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+  .compare > .compareOurs { padding: 24px; }
+  .page .compare > div > p:nth-child(2) { font-size: clamp(22px, 7vw, 30px); }
+  .portrait { width: 160px; height: 200px; }
+  .stats > div { padding: 20px 0; }
+  .inverse .stats > div + div { border-left: 0; border-top: 1px solid #ffffff30; }
+  .duration > div { display: grid; grid-template-columns: 16px 1fr; gap: 4px 12px; align-items: start; }
+  .duration > div > svg { width: 16px; height: 16px; margin-top: 4px; }
+  .duration > div > span:last-child { grid-column: 2; }
+}
+/* Keep "Desde $X MXN" on one line in the narrow cost panel. */
+@media (max-width:380px) {
+  .page .panelHead .panelPrice { font-size: 24px; white-space: nowrap; }
+  .page .priceBadge > span:first-child { font-size: 24px; }
+  /* Standalone figures (LP price cards, precios price bar) stay inside their padded box at 320px. */
+  .page .priceFigure { font-size: clamp(22px, 7.5vw, 26px); }
+}

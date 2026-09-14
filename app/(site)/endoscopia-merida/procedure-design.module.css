@@ -1,0 +1,304 @@
+/* Single-route procedure pilot. Content and shared component behavior are preserved. */
+.procedure {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.procedure :global(.container-page), .reviews > div {
+  max-width: 1240px;
+  padding-inline: 40px;
+  margin-inline: auto;
+}
+.procedure :global(.section-padding) { padding-block: 88px; }
+.procedure h1, .procedure h2, .procedure h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.procedure h2 { font-size: clamp(32px, 3.2vw, 44px); line-height: 1.15; }
+.procedure h3 { font-size: 27px; line-height: 1.2; }
+.procedure :global(.text-muted-foreground) { color: var(--muted-ink); }
+.procedure :global(.text-primary) { color: var(--ink); }
+.procedure :global(.text-foreground) { color: var(--ink); }
+.procedure a[id^="cta-"] { border-radius: 4px; box-shadow: none; font-weight: 600; }
+.procedure a:focus-visible, .procedure summary:focus-visible, .procedure input:focus-visible + p {
+  outline: 2px solid #337b66;
+  outline-offset: 5px;
+}
+
+/* The existing header is restyled only while this homepage is present. */
+:global(body):has(.procedure) :global(header) {
+  background: #fffefa;
+  border-color: #e3e6df;
+  backdrop-filter: none;
+}
+:global(body):has(.procedure) :global(header) > div {
+  max-width: 1240px;
+  padding-inline: 40px;
+  height: 84px;
+}
+:global(body):has(.procedure) :global(header nav) { gap: 28px; font-size: 13px; }
+
+.reviews { background: #fffefa; background-image: none; }
+.reviews h2 { max-width: none; }
+.reviews h2 + p { margin-top: 14px; font-size: 13px; }
+.reviews ul { gap: 0 48px; }
+.reviews li { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; box-shadow: none; padding: 28px 0; }
+.reviews li > p { font-family: Georgia, serif; color: #354b40; font-size: 19px; line-height: 1.65; }
+.reviews li > div:first-child { margin-bottom: 16px; }
+.reviews li > div:first-child > div { font-size: 12px; }
+.reviews li > div[aria-label] { margin-bottom: 16px; }
+.reviews li > div[aria-label] svg { width: 12px; height: 12px; }
+.reviews label { font-size: 12px; }
+.reviews input:focus-visible ~ label { outline: 2px solid #337b66; outline-offset: 2px; }
+
+.faq { border-top: 1px solid var(--rule); }
+.faq :global(.container-page) > div:first-child { max-width: 540px; margin-bottom: 40px; }
+.faq h2 + p { margin-top: 16px; font-size: 14px; line-height: 1.8; }
+.faq details[data-question] { border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; box-shadow: none; background: none; }
+.faq :global(.space-y-4) > * { margin-block: 0; }
+.faq details[data-question] summary { padding: 22px 0; }
+.faq details[data-question] summary > span:first-child > span:first-child { display: none; }
+.faq details[data-question] summary > span:first-child > span:last-child { font-weight: 500; }
+.faq details[data-question] > div { padding: 0 0 24px; }
+.faq details[data-question] > div > div { padding: 0; }
+.faq :global(.container-page) > div:last-of-type > div { border: 0; background: none; }
+:global(body):has(.procedure) :global(footer) { background: #132f29; }
+:global(body):has(.procedure) :global(footer h3) { font-family: Georgia, serif; font-weight: 400; font-size: 25px; }
+:global(body):has(.procedure) :global(footer a[id^="cta-"]) { border-radius: 4px; box-shadow: none; }
+:global(body):has(.procedure) :global(footer a[id$="-wa"]) { background: #315e4f; }
+:global(body):has(.procedure) :global(.fixed.bottom-0):has(a[aria-label="Llamar"]) { background: #fffefaf2; }
+:global(body):has(.procedure) :global(.fixed.bottom-0) a { border-radius: 4px; box-shadow: none; }
+:global(body):has(.procedure) :global(.fixed.bottom-0) a:first-child { background: #244f40; }
+:global(body):has(.procedure) :global(.fixed.bottom-0) a[aria-label="Llamar"] { color: #244f40; border-color: #244f40; }
+:global(body):has(.procedure) :global(.fixed.bottom-0) a[aria-label="Llamar"]:hover { color: white; background: #244f40; }
+
+
+.procedure { --background: 48 71% 99%; --muted: 48 30% 96%; --accent-light: 93 23% 91%; --border: 103 10% 84%; }
+.procedure p, .procedure li { line-height: 1.8; }
+.procedure h3 { font-size: 27px; }
+.procedure :global(.text-sm) { font-size: 15px; }
+.procedure :global(.text-xs) { font-size: 13px; }
+.procedure :global(.text-foreground\/80) { color: var(--muted-ink); }
+.procedure :global(.max-w-5xl) { max-width: 1160px; }
+.procedure :global(.border-border) { border-color: var(--rule); }
+.procedure a[id^="cta-"] { min-height: 48px; font-size: 14px; }
+.procedure a[id$="-call"] { color: var(--ink); border: 1px solid #8aa18f; background: transparent; }
+.procedure a[id$="-wa"] { background: var(--ink); color: white; }
+.procedure a:focus-visible, .procedure button:focus-visible { outline: 2px solid #337b66; outline-offset: 4px; }
+.hero { background: var(--paper); border-bottom: 1px solid var(--rule); }
+.hero :global(.section-padding) { padding-block: 72px; }
+.hero :global(.container-page) > div { gap: 72px; align-items: center; }
+.hero h1 { font-size: clamp(42px,4.7vw,62px); line-height: 1.08; max-width: 700px; }
+.hero h1 + p { font-size: 19px; font-weight: 500; line-height: 1.6; max-width: 520px; }
+.hero h1 + p + p { font-size: 17px; line-height: 1.85; max-width: 540px; }
+.hero :global(.hidden.md\:flex) { gap: 14px 24px; font-size: 13px; }
+.hero :global(.text-muted-foreground) { font-size: 14px; }
+.pricePanel { max-width: 410px; flex-shrink: 0; }
+.pricePanel > div { padding: 0 28px 24px; border: 1px solid #b8c8ba; border-radius: 12px; background: #fffefa; overflow: hidden; }
+.pricePanel > div > div:first-child { margin-inline: -28px; padding: 24px 28px 28px; background: var(--ink); text-align: left; }
+.pricePanel > div > div:first-child > div { display: none; }
+.pricePanel > div > div:first-child > p:first-of-type { color: #d9e4d8; margin: 0 0 8px; font-size: 14px; }
+.pricePanel > div > div:first-child > p:last-child { font-family: Georgia,serif; font-size: 34px; font-weight: 400; line-height: 1.2; color: #fffefa; margin: 0; letter-spacing: -.035em; }
+.pricePanel h3 { text-align: left; font-size: 25px; }
+.pricePanel > div > p:last-child { padding-top: 18px; border-top: 1px solid var(--rule); text-align: left; font-size: 13px; }
+.hero + section { background: #e9eee4; }
+.hero + section :global(.max-w-3xl) { max-width: 1160px; }
+.hero + section a { border-width: 1px; border-radius: 4px; font-size: 14px; }
+.hero + section :global(.font-serif) { font-family: Georgia,serif; font-size: 25px; font-weight: 400; }
+.pricing { background: #fffefa; }
+.pricing h2 { max-width: 920px; }
+.pricing :global(.max-w-5xl) > div:first-child p { max-width: 780px; }
+.benchmarks { gap: 0; border-block: 1px solid var(--rule); }
+.benchmarks > div { border: 0; border-radius: 0; background: none; text-align: left; padding: 28px 24px; }
+.benchmarks > div + div { border-left: 1px solid var(--rule); }
+.benchmarks > div > p:first-child { font-size: 15px; font-weight: 500; min-height: 54px; }
+.benchmarks > div > p:nth-child(2) { font-family: Georgia,serif; font-size: 30px; font-weight: 400; letter-spacing: -.035em; line-height: 1.25; }
+.benchmarks > div:nth-child(3) { background: #e9eee4; }
+.totals { background: var(--paper); border: 0; border-radius: 0; padding: 32px; max-width: 880px; }
+.totals > p:first-child { font-family: Georgia,serif; font-size: 28px; font-weight: 400; }
+.totals :global(.justify-between) { gap: 24px; }
+.totals :global(.justify-between) > span:last-child { flex-shrink: 0; }
+.pricing :global(.max-w-4xl) { max-width: 880px; }
+.pricing :global(.max-w-4xl.border) { border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 32px 0 0; }
+.authority { background: #e9eee4; }
+.authority img { border-radius: 12px; }
+.authority ul li { border: 0; border-radius: 0; background: transparent; padding-left: 0; padding-right: 18px; }
+.authority + section { background: var(--paper); }
+.authority + section article { padding: 28px 0; background: transparent; border: 0; border-top: 1px solid #aab8aa; border-radius: 0; }
+.authority + section article img { border-radius: 12px; }
+.authority + section article > p:first-of-type { font-family: Georgia,serif; font-size: 27px; font-weight: 400; line-height: 1.25; }
+.authority + section article span:global(.rounded-full) { border: 0; border-radius: 0; padding: 4px 0; background: transparent; }
+.procedure :global(#comparacion) { background: #fffefa; }
+.procedure :global(#comparacion) th:last-child, .procedure :global(#comparacion) td:last-child { border: 0; background: #e9eee4; }
+.procedure :global(#comparacion) :global(.md\:hidden) > div { background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 24px 0; }
+.procedure :global(#comparacion) :global(.justify-between) { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+.procedure :global(#comparacion) :global(.justify-between) > span:last-child { text-align: right; }
+.booking { background: #e9eee4; }
+.booking :global(.container-page) { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.booking :global(.container-page) > div:first-child { margin: 0; text-align: left; position: sticky; top: 120px; }
+.booking :global(.container-page) > div:last-child { margin-top: 0; }
+.booking form { border: 1px solid #bdcbbb; box-shadow: none; border-radius: 12px; }
+.booking input, .booking select, .booking button { border-radius: 6px; }
+.intro { background: #fffefa; }
+.intro :global(.max-w-4xl) { max-width: 880px; }
+.diagnosis { background: var(--paper); }
+.diagnosis :global(.grid) { gap: 32px 40px; }
+.diagnosis :global(.grid) > div { border: 0; border-top: 1px solid #aab8aa; background: transparent; border-radius: 0; padding: 24px 0 0; }
+.diagnosis :global(.lg\:grid-cols-4) > div:last-child { border-top: 3px solid var(--ink); }
+.preparation { background: #fffefa; }
+.preparation :global(.md\:grid-cols-3) { gap: 32px; }
+.preparation :global(.md\:grid-cols-3) > div { text-align: left; border-top: 1px solid #aab8aa; padding-top: 20px; }
+.preparation :global(.rounded-full) { background: none; color: #6a8371; font-family: Georgia,serif; font-size: 44px; font-weight: 400; justify-content: flex-start; margin-left: 0; }
+.preparation :global(.md\:grid-cols-2) > :global(.border) { border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 24px 0; background: none; }
+.preparation :global(.inline-flex):has(> span) { flex-wrap: wrap; justify-content: center; border: 0; border-radius: 6px; }
+.preparation :global(.rounded-xl) { border-radius: 6px; }
+.closing { background: var(--ink); }
+.procedure .closing h2 { color: #fffefa; font-size: clamp(38px,4.5vw,56px); }
+.closing a[id$="-wa"] { background: #e7eee1; color: var(--ink); }
+.closing a[id$="-call"] { color: white; border-color: #91a99a; }
+:global(body):has(.procedure) :global(footer) > div:last-child p { color: white; }
+@media (hover:hover) and (pointer:fine) {
+ .procedure a[id^="cta-"] { transition: background-color 180ms,transform 180ms; }
+ .procedure a[id^="cta-"]:hover { transform: translateY(-2px); }
+ .procedure a[id$="-wa"]:hover { background: #315e4f; }
+ .closing a[id$="-wa"]:hover { background: #fffefa; }
+}
+@media (max-width:1023px) {
+ .hero :global(.container-page) > div { gap: 40px; }
+ .pricePanel { max-width: none; }
+ .booking :global(.container-page) { gap: 32px; }
+ .benchmarks > div:nth-child(3) { border-left: 0; }
+}
+@media (max-width:767px) {
+ .procedure :global(.container-page), .reviews > div { padding-inline: 24px; }
+ .procedure :global(.section-padding) { padding-block: 56px; }
+ .procedure h2 { font-size: 32px; }
+ .procedure h3 { font-size: 26px; }
+ .hero :global(.section-padding) { padding-top: 32px; padding-bottom: 40px; }
+ .hero h1 { font-size: 40px; }
+ .hero h1 + p { font-size: 17px; }
+ .hero h1 + p + p { font-size: 16px; }
+ .hero :global(.flex-col.sm\:flex-row) { flex-direction: row; gap: 10px; }
+ .hero a[id$="-wa"] { flex: 1; padding-inline: 12px; font-size: 13px; }
+ .hero a[id$="-call"] { width: auto; padding-inline: 16px; font-size: 13px; }
+ .pricePanel > div { padding-inline: 24px; }
+ .pricePanel > div > div:first-child { margin-inline: -24px; padding-inline: 24px; }
+ .benchmarks > div { padding: 24px 0; }
+ .benchmarks > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+ .benchmarks > div:nth-child(3) { padding: 24px; }
+ .benchmarks > div > p:first-child { min-height: 0; }
+ .totals { padding: 24px 20px; }
+ .totals :global(.justify-between) { gap: 16px; }
+ .booking :global(.container-page) { display: block; }
+ .booking :global(.container-page) > div:first-child { position: static; }
+ .booking :global(.container-page) > div:last-child { margin-top: 28px; }
+ .reviews ul { gap: 0; }
+ :global(body):has(.procedure) :global(header) > div { height: 68px; padding-inline: 20px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .procedure a[id^="cta-"] { transition: none; }
+ .procedure a[id^="cta-"]:hover { transform: none; }
+}
+
+/* Final responsive polish. */
+.authority + section article > p { margin-block: 0; }
+.authority + section article > img { margin-bottom: 8px; }
+.authority + section article > div { margin-top: 8px; }
+.procedure :global(#comparacion) th, .procedure :global(#comparacion) td { border-radius: 0; }
+@media (max-width:767px) {
+ .pricePanel > div > div:first-child > p:last-child { font-size: 28px; }
+}
+/* The calendar is portaled outside the page wrapper. */
+:global(body):has(.procedure) :global([data-radix-popper-content-wrapper]) { --accent: 163 36% 30%; }
+@media (max-width:380px) {
+ :global(body):has(.procedure) :global(.rdp-root) { --rdp-day-width: 36px; --rdp-day_button-width: 34px; }
+ /* Keep "Desde $X MXN" on one line in the narrow cost panel and benchmark card (matches design-pages .panelPrice). */
+ .pricePanel > div > div:first-child > p:last-child { font-size: 24px; white-space: nowrap; }
+ .benchmarks > div > p:nth-child(2) { font-size: 24px; white-space: nowrap; }
+ :global(body):has(.procedure) :global(header a img) { height: 32px; }
+ :global(body):has(.procedure) :global(header img[alt="Hospital Amerimed"]) { height: 16px; }
+}
+.faq, .faq > section { background: var(--paper); }
+.faq details:not([data-question]) > summary { padding: 14px 20px; border: 1px solid #96aa9b; border-radius: 6px; background: #eef2e9; cursor: pointer; }
+@media (min-width:768px) and (max-width:1023px) {
+ :global(body):has(.procedure) :global(header) > div { padding-inline: 24px; }
+ :global(body):has(.procedure) :global(header nav) { gap: 14px; font-size: 12px; }
+ :global(body):has(.procedure) :global(header a img) { height: 32px; }
+ :global(body):has(.procedure) :global(header img[alt="Hospital Amerimed"]) { height: 16px; }
+}
+
+/* Annotated review: compact supporting typography and clear mobile actions. */
+.pricePanel > div > div:first-child { padding-block: 20px; }
+.pricePanel > div > div:first-child > p:first-of-type { margin-bottom: 4px; line-height: 1.5; }
+.hero + section :global(.font-serif) { margin: 0 0 8px; line-height: 1.2; }
+.hero + section p { margin-block: 0; }
+.hero + section :global(.font-serif) + p { margin-top: 8px; line-height: 1.65; }
+.authority { background: #193d35; color: #f4f4eb; }
+.procedure .authority h2 { color: #fffefa; }
+.authority :global(.container-page) > div { gap: 40px; }
+.authority :global(.container-page) > div > img { width: 200px; height: 250px; object-fit: cover; object-position: top; }
+.authority :global(.flex-1) > p { color: #d2dfd3; }
+.authority :global(.flex-1) > p:first-of-type { font-size: 15px; font-weight: 400; margin: 10px 0 24px; }
+.authority :global(.flex-1) > ul { gap: 12px 24px; margin: 0; }
+.authority :global(.flex-1) > ul li { color: #d2dfd3; font-size: 13px; padding: 0; line-height: 1.5; }
+.authority :global(.flex-1) > ul svg { flex-shrink: 0; }
+.authority :global(.flex-1) > div:first-of-type { border-color: #ffffff30; margin-top: 28px; padding-top: 28px; }
+.authority :global(.flex-1) > div:first-of-type > p { color: #d2dfd3; font-family: inherit; font-size: 12px; margin: 0 0 18px; }
+.authority :global(.flex-1) > div:first-of-type ul { gap: 0 24px; margin: 0; }
+.authority :global(.flex-1) > div:first-of-type li { padding: 18px 0; border-top: 1px solid #ffffff30; align-items: center; gap: 16px; }
+.authority :global(.flex-1) > div:first-of-type li > div:first-child { width: 72px; height: 64px; padding: 8px; background: #fffefa; border-radius: 6px; }
+.authority :global(.flex-1) > div:first-of-type li img { border-radius: 0; }
+.authority :global(.flex-1) > div:first-of-type li p { margin: 0; font-family: inherit; font-size: 15px; line-height: 1.45; color: #fffefa; }
+.authority :global(.flex-1) > div:first-of-type li p + p { margin-top: 4px; font-size: 14px; color: #c5d6cb; }
+.authority :global(.flex-1) > div:last-child { gap: 12px; }
+.authority a[id$="-wa"] { background: #e7eee1; color: #193d35; }
+.authority :global(.flex-1) > div:last-child > a:last-child { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border: 1px solid #91a99a; border-radius: 4px; color: #fffefa; padding: 12px 20px; }
+.authority + section :global(.max-w-5xl) > div:last-child > a { min-height: 48px; padding: 12px 16px; border: 1px solid #8aa18f; border-radius: 4px; justify-content: space-between; line-height: 1.5; }
+.authority + section :global(.max-w-5xl) > div:last-child > a svg { flex-shrink: 0; }
+.booking form > div:nth-child(2) { display: flex; align-items: flex-start; border-radius: 0; padding: 12px 0; background: transparent; color: #42604d; border-block: 1px solid var(--rule); font-size: 14px; line-height: 1.55; }
+.booking form > div:nth-child(2) svg { flex-shrink: 0; margin-top: 3px; }
+.procedure .reviews li > p { font-size: 19px; line-height: 1.65; }
+.procedure .reviews h2 + p { font-size: 13px; line-height: 1.5; }
+.procedure .reviews li > div:first-child > div { font-size: 12px; }
+.procedure .reviews li > div:first-child p { font-size: 12px; line-height: 1.5; }
+.closing p a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width:767px) {
+ .hero + section :global(.max-w-3xl) { align-items: stretch; text-align: left; gap: 20px; }
+ .hero + section :global(.max-w-3xl) > div { align-items: flex-start; gap: 12px; }
+ .hero + section :global(.max-w-3xl) > div > svg { margin-top: 3px; width: 20px; height: 20px; }
+ .hero + section :global(.font-serif) { font-size: 24px; }
+ .authority :global(.container-page) > div { gap: 24px; }
+ .authority :global(.container-page) > div > img { width: 160px; height: 200px; }
+ .authority :global(.flex-1) > div:last-child { flex-direction: column; align-items: stretch; }
+ .authority :global(.flex-1) > div:last-child > a { width: 100%; }
+ .procedure :global(#comparacion) :global(.justify-between) { grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: 12px; }
+ .procedure :global(#comparacion) :global(.justify-between):last-child { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 6px; margin: 12px 0 0; }
+ .procedure :global(#comparacion) :global(.justify-between):last-child > span:first-child { white-space: nowrap; font-size: 14px; font-weight: 500; }
+ .procedure :global(#comparacion) :global(.justify-between):last-child > span:last-child { text-align: left; font-size: 16px; line-height: 1.5; }
+}
+@media (hover:hover) {
+ .authority a[id$="-wa"]:hover { background: #fffefa; }
+ .authority :global(.flex-1) > div:last-child > a:last-child:hover { background: #ffffff12; }
+ .authority + section :global(.max-w-5xl) > div:last-child > a:hover { background: #e9eee4; }
+}
+
+/* Desktop annotation follow-up: explicit banner rhythm and compact prices. */
+.hero + section :global(.max-w-3xl) > div { align-items: flex-start; gap: 12px; }
+.hero + section :global(.max-w-3xl) > div > svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 4px; }
+.hero + section :global(.max-w-3xl) > div > div { display: grid; gap: 6px; }
+.hero + section :global(.max-w-3xl) > div p { margin: 0; }
+.totals > p:last-child { margin: 24px 0 0; padding: 2px 0 2px 14px; border-left: 2px solid #80a08f; color: #42604d; font-size: 14px; line-height: 1.65; max-width: 680px; }
+@media (min-width:1024px) {
+ .benchmarks > div { padding-inline: 16px; }
+ .benchmarks > div > p:nth-child(2) { font-size: clamp(20px,2vw,26px); }
+}
+
+/* Semantic body roles use the same rhythm as the homepage. */
+.hero h1 + p + p { font-size: var(--design-body); line-height: 1.75; }
+.authority :global(.flex-1) > p { font-size: var(--design-body); line-height: 1.75; }
+.authority :global(.flex-1) > p:first-of-type { font-size: 15px; }
+.diagnosis p, .intro p, .preparation p { line-height: 1.75; }
+.preparation h3, .diagnosis h3 { font-size: var(--design-subheading); }

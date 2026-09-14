@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
@@ -46,7 +48,7 @@ const stats = [
 
 export default function UltrasonidoEndoscopicoPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── JSON-LD: MedicalProcedure ───────────────────────────────────── */}
       <script
         type="application/ld+json"
@@ -90,10 +92,10 @@ export default function UltrasonidoEndoscopicoPage() {
           SECTION 1: HERO — bg-background
           Quote-only: no price card, single-column layout
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground ${pages.chip}`}>
               {displayFrom("eus")} · Sedación con anestesiólogo
             </div>
 
@@ -111,7 +113,7 @@ export default function UltrasonidoEndoscopicoPage() {
             </p>
 
             {/* Trust chips */}
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
               {trustChips.map((chip) => (
                 <div key={chip} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
@@ -121,7 +123,7 @@ export default function UltrasonidoEndoscopicoPage() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="eus"
                 position="hero"
@@ -144,7 +146,7 @@ export default function UltrasonidoEndoscopicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 2: DEFINITION — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -176,7 +178,7 @@ export default function UltrasonidoEndoscopicoPage() {
           SECTION 3: INDICATIONS — bg-background
           6-item icon list
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <div className="space-y-4">
@@ -205,7 +207,7 @@ export default function UltrasonidoEndoscopicoPage() {
           SECTION 4: AVAILABILITY — bg-muted
           Unique demand-validation section
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-8">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
@@ -227,7 +229,7 @@ export default function UltrasonidoEndoscopicoPage() {
               </p>
             </div>
 
-            <div className="rounded-xl bg-accent-light border border-accent/20 p-6">
+            <div className={`rounded-xl bg-accent-light border border-accent/20 p-6 ${pages.note}`}>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Recibimos pacientes de Cancún, Playa del Carmen, Campeche,
                 Valladolid, Chetumal y toda la Península de Yucatán. El precio
@@ -252,16 +254,16 @@ export default function UltrasonidoEndoscopicoPage() {
           SECTION 5: DR. QUIROZ CREDENTIALS — bg-background
           General endoscopy expertise — no EUS specialization claim
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="flex flex-col sm:flex-row gap-6 sm:items-center mb-8">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0">
+              <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-accent overflow-hidden shrink-0 mx-auto sm:mx-0 ${pages.portrait}`}>
                 <Image
                   src={DOCTOR.photos.headshot}
                   alt={DOCTOR.name}
-                  width={128}
-                  height={128}
+                  width={320}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -276,13 +278,13 @@ export default function UltrasonidoEndoscopicoPage() {
             </div>
 
             {/* Stats */}
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className={`grid gap-6 md:grid-cols-3 ${pages.stats}`}>
               {stats.map((stat) => (
                 <div
                   key={stat.label}
                   className="text-center p-6 rounded-2xl border border-border bg-muted"
                 >
-                  <p className={`text-3xl font-bold ${stat.color} mb-2`}>
+                  <p className={`text-3xl font-bold ${stat.color} mb-2 ${pages.statValue}`}>
                     {stat.value}
                   </p>
                   <p className="text-sm font-medium text-muted-foreground">
@@ -333,25 +335,19 @@ export default function UltrasonidoEndoscopicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: GOOGLE REVIEWS — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: FAQ — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="eus" service="eus" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="eus" service="eus" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 8: RELATED PROCEDURES — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif font-bold tracking-tight text-foreground text-2xl md:text-3xl mb-2">
             Procedimientos relacionados
@@ -361,7 +357,7 @@ export default function UltrasonidoEndoscopicoPage() {
             terapéuticos.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {[
               {
                 name: "CPRE",
@@ -382,7 +378,7 @@ export default function UltrasonidoEndoscopicoPage() {
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group flex flex-col p-6 rounded-2xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group flex flex-col p-6 rounded-2xl border border-border bg-card hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif font-bold text-foreground text-lg mb-2">
                   {proc.name}
@@ -402,7 +398,7 @@ export default function UltrasonidoEndoscopicoPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 9: BOTTOM CTA — bg-primary
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
@@ -414,7 +410,7 @@ export default function UltrasonidoEndoscopicoPage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
               <WhatsAppButton
                 service="eus"
                 position="bottom-cta"
@@ -427,6 +423,6 @@ export default function UltrasonidoEndoscopicoPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

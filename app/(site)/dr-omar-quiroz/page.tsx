@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import Image from "next/image"
 import Link from "next/link"
 import { metaFor } from "@/lib/routes-seo"
@@ -42,7 +44,7 @@ export default async function DoctorOmarQuirozPage() {
   } = await getGoogleReviews({ maxReviews: 1 })
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"
@@ -57,21 +59,21 @@ export default async function DoctorOmarQuirozPage() {
       />
 
       {/* ── Section 1: Hero ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${pages.heroGrid}`}>
             {/* Content */}
             <div className="flex-1 space-y-6">
               <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
                 {DOCTOR.name} — Endoscopista en Mérida
               </h1>
 
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className={`text-lg text-muted-foreground leading-relaxed ${pages.intro}`}>
                 {DOCTOR.bio}
               </p>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 text-sm font-medium text-foreground">
                   <GraduationCap className="h-4 w-4 text-text-accent" />
                   Egresado UNAM
@@ -88,7 +90,7 @@ export default async function DoctorOmarQuirozPage() {
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
                 <WhatsAppButton
                   service="consulta dr quiroz"
                   position="hero"
@@ -109,11 +111,11 @@ export default async function DoctorOmarQuirozPage() {
                 src={DOCTOR.photos.headshot}
                 alt={`${DOCTOR.name} - Endoscopista en Mérida`}
                 width={500}
-                height={600}
-                className="rounded-2xl"
+                height={625}
+                className={`rounded-2xl ${pages.heroPhoto}`}
                 priority
               />
-              <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <div className={`mt-4 flex items-center gap-2 text-sm text-muted-foreground ${pages.location}`}>
                 <MapPin className="h-4 w-4" />
                 <span>
                   {DOCTOR.worksFor.hospital}, Consultorio{" "}
@@ -126,7 +128,7 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 2: About / Specialties ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             Dr. Omar Quiroz — Endoscopista Certificado en Mérida
@@ -141,10 +143,10 @@ export default async function DoctorOmarQuirozPage() {
             HD y anestesiólogo certificado.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             <Link
               href="/endoscopia-merida"
-              className="group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Stethoscope className="h-6 w-6 text-text-accent mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
@@ -162,7 +164,7 @@ export default async function DoctorOmarQuirozPage() {
 
             <Link
               href="/colonoscopia-merida"
-              className="group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Activity className="h-6 w-6 text-text-accent mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
@@ -180,7 +182,7 @@ export default async function DoctorOmarQuirozPage() {
 
             <Link
               href="/cpre-merida"
-              className="group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all"
+              className={`group bg-background border border-border rounded-xl p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
             >
               <Heart className="h-6 w-6 text-text-accent mb-4" />
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
@@ -198,7 +200,7 @@ export default async function DoctorOmarQuirozPage() {
           </div>
 
           {/* Áreas de experiencia — perforation management differentiator */}
-          <div className="mt-8 bg-background border border-border rounded-xl p-8">
+          <div className={`mt-8 bg-background border border-border rounded-xl p-8 ${pages.note}`}>
             <ShieldCheck className="h-6 w-6 text-text-accent mb-4" />
             <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
               Manejo de perforaciones gastrointestinales
@@ -232,7 +234,7 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 3: Credentials & Education ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           {/* Disambiguation (P6): gastroenterólogo vs. endoscopista. Placed atop
               the credentials because the credential list is what answers it. The
@@ -294,7 +296,7 @@ export default async function DoctorOmarQuirozPage() {
                 Certificaciones y Membresías
               </h3>
 
-              <div className="border border-border rounded-xl p-6 space-y-4">
+              <div className={`border border-border rounded-xl p-6 space-y-4 ${pages.plainBox} ${pages.ruleRows}`}>
                 <div className="flex justify-between items-center gap-4 p-4 rounded-lg bg-accent-light/10 border border-accent/20">
                   <span className="font-medium text-foreground">
                     Alta Especialidad — Endoscopia GI
@@ -337,7 +339,7 @@ export default async function DoctorOmarQuirozPage() {
                 </div>
               </div>
 
-              <div className="border border-border rounded-xl p-6">
+              <div className={`border border-border rounded-xl p-6 ${pages.open}`}>
                 <p className="text-sm font-medium text-foreground mb-4">
                   Membresías activas
                 </p>
@@ -362,7 +364,7 @@ export default async function DoctorOmarQuirozPage() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className={`grid grid-cols-3 gap-4 ${pages.statsLight}`}>
                 <div className="flex-1 text-center p-4 rounded-xl bg-muted border border-border">
                   <div className="text-2xl font-bold text-text-accent">500+</div>
                   <div className="text-sm text-muted-foreground">
@@ -391,16 +393,16 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 4: Location & Hospitals ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Consultorio del Dr. Omar Quiroz en Mérida
           </h2>
 
           {/* Primary hospital */}
-          <div className="bg-background border border-border rounded-xl p-8 mb-6">
+          <div className={`bg-background border border-border rounded-xl p-8 mb-6 ${pages.note}`}>
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center px-2 py-1 rounded-lg bg-accent-light text-xs font-medium text-text-accent">
+              <span className={`inline-flex items-center px-2 py-1 rounded-lg bg-accent-light text-xs font-medium text-text-accent ${pages.eyebrow}`}>
                 Consultorio Principal
               </span>
             </div>
@@ -445,9 +447,9 @@ export default async function DoctorOmarQuirozPage() {
             {secondaryHospitals.map((h) => (
               <div
                 key={h.name}
-                className="bg-background/60 border border-border rounded-xl p-6"
+                className={`bg-background/60 border border-border rounded-xl p-6 ${pages.open}`}
               >
-                <span className="inline-flex items-center px-2 py-1 rounded-lg bg-muted text-xs font-medium text-muted-foreground mb-4">
+                <span className={`inline-flex items-center px-2 py-1 rounded-lg bg-muted text-xs font-medium text-muted-foreground mb-4 ${pages.eyebrow}`}>
                   También opera en
                 </span>
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
@@ -466,14 +468,14 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 5: Consultation Pricing ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-accent-light/10 border border-accent/20 rounded-2xl p-8">
+            <div className={`bg-accent-light/10 border border-accent/20 rounded-2xl p-8 ${pages.panelSurface}`}>
               <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-4">
                 Consulta de Valoración
               </h2>
-              <p className="text-3xl font-bold text-text-accent mb-4">
+              <p className={`text-3xl font-bold text-text-accent mb-4 ${pages.priceFigure}`}>
                 Desde {mxn(ADDITIONAL_FEES.consultation.amount)}
               </p>
               <p className="text-foreground/80 mb-6">
@@ -499,7 +501,7 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 6: Reviews ── bg-muted */}
-      <GoogleReviews />
+      <GoogleReviews className={system.reviews} />
 
       {/* ── Section 6B: Su equipo ── bg-muted
           Compact "quién más está en la sala" block. Placed after the reviews
@@ -509,16 +511,19 @@ export default async function DoctorOmarQuirozPage() {
           and forced a background flip through two unrelated sections. Here the
           reviews gradient ends white, so muted → white (FAQ) still alternates.
           ── */}
-      <TeamPresence
-        procedure="endoscopia"
-        variant="compact"
-        tone="muted"
-        heading="Su equipo en cada procedimiento"
-        linkLabel="Conoce a todo el equipo"
-      />
+      <div className={pages.team}>
+        <TeamPresence
+          procedure="endoscopia"
+          variant="compact"
+          tone="muted"
+          avatarSize={128}
+          heading="Su equipo en cada procedimiento"
+          linkLabel="Conoce a todo el equipo"
+        />
+      </div>
 
       {/* ── Section 7: FAQ ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.faq}`}>
         <Faq
           routeKey="doctor"
           heading="Preguntas Frecuentes sobre el Dr. Quiroz"
@@ -527,7 +532,7 @@ export default async function DoctorOmarQuirozPage() {
       </section>
 
       {/* ── Section 8: Bottom CTA ── bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding text-center">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
             ¿Listo para agendar tu consulta?
@@ -536,7 +541,7 @@ export default async function DoctorOmarQuirozPage() {
             Escribe al Dr. Quiroz directamente por WhatsApp — sin
             intermediarios.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="consulta dr quiroz"
               position="cta section"
@@ -551,6 +556,6 @@ export default async function DoctorOmarQuirozPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { CLINIC } from "@/lib/clinic"
 import { DOCTOR } from "@/lib/doctor"
@@ -30,15 +32,15 @@ export const metadata = {
 
 export default function EmergenciasDigestivasPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* ── Section 1: Hero ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-start gap-8 lg:gap-16 ${pages.heroGrid}`}>
             {/* Left — Content */}
             <div className="flex-1 space-y-8">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200">
+                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 ${pages.eyebrow} ${pages.eyebrowAlert}`}>
                   <AlertTriangle className="h-4 w-4 text-red-600" />
                   <span className="text-sm font-medium text-foreground">
                     Atención de Emergencia Disponible
@@ -51,14 +53,14 @@ export default function EmergenciasDigestivasPage() {
                   Emergencias Digestivas en Mérida
                 </h1>
 
-                <p className="text-lg text-foreground/80 max-w-2xl">
+                <p className={`text-lg text-foreground/80 max-w-2xl ${pages.lead}`}>
                   ¿Sangrado digestivo, cálculo biliar atrapado o cuerpo extraño?
                   El {DOCTOR.name} atiende emergencias endoscópicas en Hospital
                   Amerimed — fines de semana y fuera de horario cuando otros
                   especialistas no están disponibles.
                 </p>
 
-                <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+                <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-accent" />
                     <span>Disponible fines de semana y festivos</span>
@@ -74,20 +76,20 @@ export default function EmergenciasDigestivasPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions} ${system.emergency}`} data-sticky-hero-cta>
                 <WhatsAppButton service="urgencias" position="hero" procedureName="Emergencia Digestiva" />
                 <CallButton service="urgencias" position="hero" variant="ghost" />
               </div>
             </div>
 
             {/* Right — Emergency Card */}
-            <div className="w-full lg:max-w-md">
-              <div className="bg-background rounded-2xl border border-border shadow-lg p-8">
-                <div className="text-center space-y-4 mb-6">
+            <div className={`w-full lg:max-w-md ${pages.pricePanel}`}>
+              <div className={`bg-background rounded-2xl border border-border shadow-lg p-8 ${pages.panel}`}>
+                <div className={`text-center space-y-4 mb-6 ${pages.panelHead} ${pages.panelHeadAlert}`}>
                   <div className="text-sm font-medium text-foreground/60">
                     Emergencias 24/7
                   </div>
-                  <div className="text-2xl font-bold text-red-600">
+                  <div className={`text-2xl font-bold text-red-600 ${pages.panelPrice}`}>
                     {CLINIC.phone.display}
                   </div>
                   <div className="text-sm text-foreground/80">
@@ -95,7 +97,7 @@ export default function EmergenciasDigestivasPage() {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className={`space-y-4 ${pages.panelBody} ${pages.alertList}`}>
                   {[
                     "Sangrado digestivo (vómito con sangre, evacuaciones negras)",
                     "Cálculos biliares / ictericia súbita",
@@ -118,7 +120,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 2: ¿Es una Emergencia? ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
@@ -128,9 +130,9 @@ export default function EmergenciasDigestivasPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Immediate */}
-            <div className="rounded-2xl border border-red-200 bg-red-50/50 p-8">
+            <div className={`rounded-2xl border border-red-200 bg-red-50/50 p-8 ${pages.alert} ${pages.alertList} ${system.emergency}`}>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                <div className={`w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center ${pages.iconBox}`}>
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <h3
@@ -161,9 +163,9 @@ export default function EmergenciasDigestivasPage() {
             </div>
 
             {/* Urgent but not immediate */}
-            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8">
+            <div className={`rounded-2xl border border-primary/20 bg-primary/5 p-8 ${pages.panelSurface}`}>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <div className={`w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center ${pages.iconBox}`}>
                   <Clock className="h-6 w-6 text-primary" />
                 </div>
                 <h3
@@ -196,7 +198,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 3: Emergency Procedures ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="mb-8">
             <h2
@@ -209,7 +211,7 @@ export default function EmergenciasDigestivasPage() {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className={`grid gap-8 md:grid-cols-3 ${pages.openGrid}`}>
             {[
               {
                 title: "CPRE de Emergencia",
@@ -235,7 +237,7 @@ export default function EmergenciasDigestivasPage() {
             ].map((proc) => (
               <div
                 key={proc.title}
-                className="rounded-2xl border border-border bg-card p-8 hover:shadow-md transition-shadow"
+                className={`rounded-2xl border border-border bg-card p-8 hover:shadow-md transition-shadow ${pages.open}`}
               >
                 <h3
                   className="font-serif text-lg font-semibold text-foreground mb-4"
@@ -259,15 +261,15 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 4: How It Works ── bg-muted */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
-            className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight text-center mb-8"
+            className={`font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight text-center mb-8 ${pages.textStart}`}
           >
             Cómo Funciona la Atención de Emergencia
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className={`grid gap-8 md:grid-cols-3 ${pages.steps}`}>
             {[
               {
                 step: 1,
@@ -290,10 +292,10 @@ export default function EmergenciasDigestivasPage() {
             ].map((item) => (
               <div
                 key={item.step}
-                className="text-center p-8 rounded-2xl border border-border bg-background"
+                className={`text-center p-8 rounded-2xl border border-border bg-background ${pages.step}`}
               >
                 <div
-                  className={`w-12 h-12 rounded-full ${item.bg} text-white font-bold text-xl flex items-center justify-center mx-auto mb-6`}
+                  className={`w-12 h-12 rounded-full ${item.bg} text-white font-bold text-xl flex items-center justify-center mx-auto mb-6 ${pages.stepNumber}`}
                 >
                   {item.step}
                 </div>
@@ -310,7 +312,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 5: Doctor Credentials ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
@@ -318,14 +320,14 @@ export default function EmergenciasDigestivasPage() {
             Tu Emergencia en Manos Expertas
           </h2>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${pages.portraitRow} ${pages.rowStart}`}>
             <div className="w-full lg:w-auto flex-shrink-0">
               <Image
                 src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={400}
                 height={500}
-                className="rounded-2xl mx-auto"
+                className={`rounded-2xl mx-auto ${pages.portraitImg}`}
               />
             </div>
 
@@ -337,7 +339,7 @@ export default function EmergenciasDigestivasPage() {
               </h3>
               <p className="text-foreground/80">{DOCTOR.bioShort}</p>
 
-              <div className="rounded-xl bg-accent-light/10 border border-accent/20 p-6">
+              <div className={`rounded-xl bg-accent-light/10 border border-accent/20 p-6 ${pages.quietNote}`}>
                 <p className="text-sm text-foreground/80">
                   Cirujano Y endoscopista — puede resolver tu emergencia con
                   endoscopia y, si es necesario, pasar directamente a cirugía sin
@@ -372,7 +374,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 6: Perforación digestiva ── bg-muted ── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">
             Perforación digestiva: esofágica, gástrica e intestinal
@@ -389,9 +391,9 @@ export default function EmergenciasDigestivasPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Señales de alarma */}
-            <div className="rounded-2xl border border-red-200 bg-red-50/50 p-8">
+            <div className={`rounded-2xl border border-red-200 bg-red-50/50 p-8 ${pages.alert} ${pages.alertList} ${system.emergency}`}>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                <div className={`w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center ${pages.iconBox}`}>
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-foreground">
@@ -473,7 +475,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 7: FAQ ── bg-background ── */}
-      <div className="bg-background">
+      <div className={`bg-background ${system.faq}`}>
         <Faq
           routeKey="emergencias"
           service="urgencias"
@@ -482,7 +484,7 @@ export default function EmergenciasDigestivasPage() {
       </div>
 
       {/* ── Section 8: Practical Info + Location ── bg-muted ── */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8"
@@ -495,7 +497,7 @@ export default function EmergenciasDigestivasPage() {
             <div className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <div className={`w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 ${pages.iconBox}`}>
                     <MessageCircle className="h-5 w-5 text-accent" />
                   </div>
                   <div>
@@ -507,7 +509,7 @@ export default function EmergenciasDigestivasPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className={`w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 ${pages.iconBox}`}>
                     <Phone className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -519,7 +521,7 @@ export default function EmergenciasDigestivasPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className={`w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 ${pages.iconBox}`}>
                     <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -535,7 +537,7 @@ export default function EmergenciasDigestivasPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className={`w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 ${pages.iconBox}`}>
                     <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -603,7 +605,7 @@ export default function EmergenciasDigestivasPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-primary/10 border border-primary/20 p-6">
+              <div className={`rounded-xl bg-primary/10 border border-primary/20 p-6 ${pages.note}`}>
                 <p className="text-sm text-foreground/80">
                   <strong>En emergencias no se requiere ayuno previo.</strong> La
                   prioridad es el control inmediato de la urgencia digestiva.
@@ -615,7 +617,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 9: Final CTA ── bg-primary */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing}`}>
         <div className="container-page section-padding text-center">
           <h2
             className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight mb-4"
@@ -626,7 +628,7 @@ export default function EmergenciasDigestivasPage() {
             No esperes — las emergencias digestivas requieren atención inmediata
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8" data-sticky-bottom-cta>
             <WhatsAppButton service="urgencias" position="cta section" procedureName="Emergencia Digestiva" />
             <CallButton
               service="urgencias"
@@ -653,7 +655,7 @@ export default function EmergenciasDigestivasPage() {
       </section>
 
       {/* ── Section 10: Related Procedures ── bg-background */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2
             className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-8"
@@ -661,7 +663,7 @@ export default function EmergenciasDigestivasPage() {
             Procedimientos Relacionados
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className={`grid gap-8 md:grid-cols-3 ${pages.relatedGrid}`}>
             {[
               {
                 title: "CPRE en Mérida",
@@ -685,7 +687,7 @@ export default function EmergenciasDigestivasPage() {
               <Link
                 key={proc.title}
                 href={proc.href}
-                className="group rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3
                   className="font-serif text-lg font-semibold text-foreground mb-2"
@@ -738,6 +740,6 @@ export default function EmergenciasDigestivasPage() {
           ),
         }}
       />
-    </>
+    </div>
   )
 }

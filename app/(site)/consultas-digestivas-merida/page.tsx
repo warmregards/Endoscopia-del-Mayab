@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { ADDITIONAL_FEES, PRICING, mxn } from "@/lib/pricing"
 import { DOCTOR } from "@/lib/doctor"
@@ -32,7 +34,7 @@ export default function ConsultasDigestivasPage() {
   })
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -44,10 +46,10 @@ export default function ConsultasDigestivasPage() {
       />
 
       {/* Section 1: Hero */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 ${pages.eyebrow}`}>
               <Stethoscope className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-foreground">
                 Endoscopia Gastrointestinal
@@ -58,7 +60,7 @@ export default function ConsultasDigestivasPage() {
               Endoscopista en Mérida — Consultas Digestivas
             </h1>
 
-            <p className="text-lg text-muted-foreground">
+            <p className={`text-lg text-muted-foreground ${pages.lead}`}>
               Evaluación especializada con {DOCTOR.name} — Desde{" "}
               {consultationPrice}
             </p>
@@ -78,7 +80,7 @@ export default function ConsultasDigestivasPage() {
               referirte a otro especialista.
             </p>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.chips}`}>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-accent" />
                 <span>Hospital Amerimed, Mérida</span>
@@ -97,12 +99,12 @@ export default function ConsultasDigestivasPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`}>
               <WhatsAppButton service="consultas" position="hero" procedureName="Consulta Digestiva" label="Agendar por WhatsApp" />
               <CallButton service="consultas" position="hero" variant="ghost" />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground pt-2">
+            <div className={`flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground pt-2 ${pages.chips}`}>
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
                 {CLINIC.address.display}
@@ -117,13 +119,13 @@ export default function ConsultasDigestivasPage() {
       </section>
 
       {/* Section 2: Qué Incluye */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-8">
             ¿Qué Incluye la Consulta Digestiva?
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className={`grid gap-6 md:grid-cols-2 ${pages.openGrid}`}>
             {[
               {
                 title: "Historia Clínica Detallada",
@@ -144,7 +146,7 @@ export default function ConsultasDigestivasPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="flex items-start gap-4 p-6 rounded-xl border border-border bg-card"
+                className={`flex items-start gap-4 p-6 rounded-xl border border-border bg-card ${pages.open}`}
               >
                 <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                 <div>
@@ -157,7 +159,7 @@ export default function ConsultasDigestivasPage() {
             ))}
           </div>
 
-          <div className="mt-8 p-4 rounded-xl bg-accent-light border border-accent/20">
+          <div className={`mt-8 p-4 rounded-xl bg-accent-light border border-accent/20 ${pages.note}`}>
             <p className="text-sm text-foreground">
               <span className="font-semibold">
                 Consulta de valoración: {consultationPrice}
@@ -198,7 +200,7 @@ export default function ConsultasDigestivasPage() {
       </section>
 
       {/* Section 3: Tipos de Consulta */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-2">
             Tipos de Consulta Digestiva
@@ -207,10 +209,10 @@ export default function ConsultasDigestivasPage() {
             Tres modalidades alineadas a tus necesidades
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.openGrid}`}>
             <div
               id="valoracion-pre-endoscopica"
-              className="p-6 rounded-xl border border-border bg-card"
+              className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}
             >
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                 Valoración Pre-Endoscópica
@@ -227,7 +229,7 @@ export default function ConsultasDigestivasPage() {
 
             <div
               id="control-post-endoscopia"
-              className="p-6 rounded-xl border border-border bg-card"
+              className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}
             >
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                 Control Post-Endoscopia
@@ -244,7 +246,7 @@ export default function ConsultasDigestivasPage() {
 
             <div
               id="chequeo-digestivo-preventivo"
-              className="p-6 rounded-xl border border-border bg-card"
+              className={`p-6 rounded-xl border border-border bg-card ${pages.open}`}
             >
               <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                 Chequeo Digestivo Preventivo
@@ -263,20 +265,20 @@ export default function ConsultasDigestivasPage() {
       </section>
 
       {/* Section 4: Doctor Credentials */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-8">
             Tu Especialista: {DOCTOR.name}
           </h2>
 
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className={`flex flex-col lg:flex-row gap-8 ${pages.portraitRow}`}>
             <div className="flex-shrink-0">
               <Image
                 src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
                 width={256}
                 height={256}
-                className="w-64 h-64 rounded-2xl object-cover"
+                className={`w-64 h-64 rounded-2xl object-cover ${pages.portraitImg}`}
               />
             </div>
 
@@ -285,7 +287,7 @@ export default function ConsultasDigestivasPage() {
                 {DOCTOR.bioShort}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((c) => (
                   <span
                     key={c}
@@ -321,21 +323,15 @@ export default function ConsultasDigestivasPage() {
       </section>
 
       {/* Section 5: Google Reviews */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* Section 6: FAQ */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <Faq routeKey="consultas" service="consultas" />
-        </div>
+      <section className={`bg-muted ${system.faq}`}>
+        <Faq routeKey="consultas" service="consultas" />
       </section>
 
       {/* Section 7: Related Procedures */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold text-foreground tracking-tight mb-2">
             Procedimientos Relacionados
@@ -345,7 +341,7 @@ export default function ConsultasDigestivasPage() {
             comunes:
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-3 ${pages.relatedGrid}`}>
             {[
               {
                 name: "Endoscopia",
@@ -372,7 +368,7 @@ export default function ConsultasDigestivasPage() {
               <Link
                 key={proc.name}
                 href={proc.href}
-                className="group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+                className={`group p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md hover:border-accent/30 transition-all ${pages.related}`}
               >
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-1">
                   {proc.name}
@@ -394,7 +390,7 @@ export default function ConsultasDigestivasPage() {
       </section>
 
       {/* Section 8: Bottom CTA */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-6">
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-background tracking-tight">
             ¿Listo para Agendar tu Consulta?
@@ -402,7 +398,7 @@ export default function ConsultasDigestivasPage() {
           <p className="text-background/80">
             Escríbenos por WhatsApp — te contesta {DOCTOR.name} directamente
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4" data-sticky-bottom-cta>
             <WhatsAppButton service="consultas" position="bottom-cta" procedureName="Consulta Digestiva" label="Agendar por WhatsApp" />
             <CallButton
               service="consultas"
@@ -412,6 +408,6 @@ export default function ConsultasDigestivasPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

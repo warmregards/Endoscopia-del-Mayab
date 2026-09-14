@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { displayFrom } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -45,7 +47,7 @@ const RELATED_PROCEDURES = [
 
 export default function DiseccionSubmucosaPage() {
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -84,7 +86,7 @@ export default function DiseccionSubmucosaPage() {
       />
 
       {/* Section 1: Hero */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
@@ -96,11 +98,11 @@ export default function DiseccionSubmucosaPage() {
               cirugía mayor. Técnica avanzada en Hospital Amerimed, Mérida, Yucatán.
             </p>
 
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 text-sm font-medium text-text-accent">
+            <div className={`inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-2 text-sm font-medium text-text-accent ${pages.heroPrice}`}>
               {displayFrom("esd")}
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-muted-foreground">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-muted-foreground ${pages.chips}`}>
               {[
                 "Sin cirugía abierta",
                 "Resección en una sesión",
@@ -114,7 +116,7 @@ export default function DiseccionSubmucosaPage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="Disección Submucosa ESD"
                 position="hero"
@@ -134,7 +136,7 @@ export default function DiseccionSubmucosaPage() {
       </section>
 
       {/* Section 2: Qué es la ESD */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             ¿Qué es la Disección Endoscópica Submucosa?
@@ -161,7 +163,7 @@ export default function DiseccionSubmucosaPage() {
       </section>
 
       {/* Section 3: Precio y qué incluye */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
             Costo de Disección Submucosa (ESD) en Mérida
@@ -175,7 +177,7 @@ export default function DiseccionSubmucosaPage() {
               claro antes de programar.
             </p>
 
-            <div className="rounded-xl border border-border bg-muted p-6">
+            <div className={`rounded-xl border border-border bg-muted p-6 ${pages.panelSurface}`}>
               <h3 className="font-serif text-lg font-semibold mb-4">
                 Incluido en tu cotización
               </h3>
@@ -210,15 +212,15 @@ export default function DiseccionSubmucosaPage() {
       </section>
 
       {/* Section 4: Qué esperar */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Qué Esperar de tu Disección Submucosa
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className={`grid gap-8 md:grid-cols-3 ${pages.steps}`}>
             {/* Antes */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
               <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
                 <Clock className="h-5 w-5 text-accent" />
                 Antes
@@ -232,7 +234,7 @@ export default function DiseccionSubmucosaPage() {
             </div>
 
             {/* Durante */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
               <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-accent" />
                 Durante
@@ -246,7 +248,7 @@ export default function DiseccionSubmucosaPage() {
             </div>
 
             {/* Después */}
-            <div className="rounded-xl border border-border bg-card p-6">
+            <div className={`rounded-xl border border-border bg-card p-6 ${pages.step}`}>
               <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
                 <Heart className="h-5 w-5 text-accent" />
                 Después
@@ -263,19 +265,19 @@ export default function DiseccionSubmucosaPage() {
       </section>
 
       {/* Section 5: Doctor */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-8">
             Tu Especialista en Disección Submucosa
           </h2>
 
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className={`flex flex-col md:flex-row gap-8 items-start ${pages.portraitRow}`}>
             <Image
               src={DOCTOR.photos.headshot}
               alt={DOCTOR.name}
               width={280}
               height={350}
-              className="rounded-2xl object-cover"
+              className={`rounded-2xl object-cover ${pages.portraitImg}`}
             />
 
             <div className="space-y-4">
@@ -288,7 +290,7 @@ export default function DiseccionSubmucosaPage() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -321,21 +323,15 @@ export default function DiseccionSubmucosaPage() {
       </section>
 
       {/* Section 6: Google Reviews */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* Section 7: FAQ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="esd" service="Disección Submucosa ESD" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="esd" service="Disección Submucosa ESD" />
       </section>
 
       {/* Section 8: Bottom CTA + Related */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center">
           <h2 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-text-inverse mb-4">
             Agenda tu Evaluación para Disección Submucosa
@@ -345,7 +341,7 @@ export default function DiseccionSubmucosaPage() {
             Escríbenos por WhatsApp o llámanos directamente.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8" data-sticky-bottom-cta>
             <WhatsAppButton
               service="Disección Submucosa ESD"
               position="bottom-cta"
@@ -373,12 +369,12 @@ export default function DiseccionSubmucosaPage() {
           </div>
 
           {/* Related procedures */}
-          <div className="grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto">
+          <div className={`grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto ${pages.relatedGrid}`}>
             {RELATED_PROCEDURES.map((proc) => (
               <Link
                 key={proc.href}
                 href={proc.href}
-                className="group rounded-xl bg-white/10 p-6 text-left transition-colors hover:bg-white/20"
+                className={`group rounded-xl bg-white/10 p-6 text-left transition-colors hover:bg-white/20 ${pages.related}`}
               >
                 <h3 className="font-serif text-lg font-semibold text-text-inverse mb-2">
                   {proc.name}
@@ -397,6 +393,6 @@ export default function DiseccionSubmucosaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

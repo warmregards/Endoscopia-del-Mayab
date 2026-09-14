@@ -1,3 +1,5 @@
+import system from "../design-system.module.css"
+import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
 import { PRICING, mxn, INCLUDED_IN_PRICE, ADDITIONAL_FEES } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
@@ -37,7 +39,7 @@ export default function DilatacionColonicaPage() {
   ])
 
   return (
-    <>
+    <div className={`${pages.page} ${system.system}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -48,7 +50,7 @@ export default function DilatacionColonicaPage() {
       />
 
       {/* SECTION 1: Hero */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
           <div className="max-w-3xl space-y-6">
             <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
@@ -67,7 +69,7 @@ export default function DilatacionColonicaPage() {
               cercanas como Altabrisa, Temozón Norte y Cholul.
             </p>
 
-            <div className="flex flex-wrap gap-4 text-sm font-medium text-foreground/80">
+            <div className={`flex flex-wrap gap-4 text-sm font-medium text-foreground/80 ${pages.chips}`}>
               {[
                 "Alternativa a cirugía de colon",
                 "Sedación incluida",
@@ -81,7 +83,7 @@ export default function DilatacionColonicaPage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={`flex flex-col sm:flex-row gap-4 ${pages.actions}`} data-sticky-hero-cta>
               <WhatsAppButton
                 service="dilatación colónica"
                 position="hero"
@@ -99,7 +101,7 @@ export default function DilatacionColonicaPage() {
       </section>
 
       {/* SECTION 2: Definition + Comparison */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             ¿Qué es la Dilatación Colónica?
@@ -119,7 +121,7 @@ export default function DilatacionColonicaPage() {
                 el calibre intestinal y mejorar el tránsito de forma inmediata.
               </p>
 
-              <div className="p-4 rounded-xl bg-accent-light border border-accent/20">
+              <div className={`p-4 rounded-xl bg-accent-light border border-accent/20 ${pages.note}`}>
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
                   Indicaciones principales
                 </h3>
@@ -140,7 +142,7 @@ export default function DilatacionColonicaPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm h-fit">
+            <div className={`rounded-xl border border-border bg-card p-6 shadow-sm h-fit ${pages.panelSurface}`}>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
                 Dilatación Colónica vs Cirugía Abierta
               </h3>
@@ -170,15 +172,15 @@ export default function DilatacionColonicaPage() {
       </section>
 
       {/* SECTION 3: Pricing */}
-      <section className="bg-background">
+      <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             Costo de Dilatación Colónica
           </h2>
 
-          <div className="max-w-xl mx-auto rounded-xl border border-border bg-card p-8 shadow-sm text-center">
+          <div className={`max-w-xl mx-auto rounded-xl border border-border bg-card p-8 shadow-sm text-center ${pages.panelSurface}`}>
             <p className="text-sm text-muted-foreground mb-2">Desde</p>
-            <p className="text-4xl font-bold text-text-accent mb-2">
+            <p className={`text-4xl font-bold text-text-accent mb-2 ${pages.priceFigure}`}>
               {mxn(PRICING.dilatacion_colonica.from)}
             </p>
             <p className="text-sm text-muted-foreground mb-6">
@@ -213,16 +215,16 @@ export default function DilatacionColonicaPage() {
       </section>
 
       {/* SECTION 4: Preparation — Before / During / After */}
-      <section className="bg-muted">
+      <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             Antes, Durante y Después del Procedimiento
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className={`grid gap-8 md:grid-cols-3 ${pages.steps}`}>
             {/* Before */}
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+            <div className={`rounded-xl border border-border bg-card p-6 shadow-sm ${pages.step}`}>
+              <div className={`w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mb-4 ${pages.iconBox}`}>
                 <Clock className="h-5 w-5 text-accent" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">Antes</h3>
@@ -235,8 +237,8 @@ export default function DilatacionColonicaPage() {
             </div>
 
             {/* During */}
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+            <div className={`rounded-xl border border-border bg-card p-6 shadow-sm ${pages.step}`}>
+              <div className={`w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-4 ${pages.iconBox}`}>
                 <CheckCircle2 className="h-5 w-5 text-primary" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">Durante</h3>
@@ -249,8 +251,8 @@ export default function DilatacionColonicaPage() {
             </div>
 
             {/* After */}
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+            <div className={`rounded-xl border border-border bg-card p-6 shadow-sm ${pages.step}`}>
+              <div className={`w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mb-4 ${pages.iconBox}`}>
                 <CheckCircle2 className="h-5 w-5 text-accent" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-foreground mb-4">Después</h3>
@@ -266,14 +268,14 @@ export default function DilatacionColonicaPage() {
       </section>
 
       {/* SECTION 5: Doctor Credentials */}
-      <section className="bg-background">
+      <section className={`bg-background ${system.doctor} ${pages.inverse}`}>
         <div className="container-page section-padding">
           <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-foreground mb-6">
             Tu Especialista: <Link href="/dr-omar-quiroz" className="text-primary hover:underline">{DOCTOR.name}</Link>
           </h2>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
-            <div className="relative aspect-[3/4] max-w-sm rounded-2xl overflow-hidden">
+          <div className={`grid gap-8 lg:grid-cols-2 items-center ${pages.portraitGrid}`}>
+            <div className={`relative aspect-[3/4] max-w-sm rounded-2xl overflow-hidden ${pages.portrait}`}>
               <Image
                 src={DOCTOR.photos.headshot}
                 alt={DOCTOR.name}
@@ -292,7 +294,7 @@ export default function DilatacionColonicaPage() {
                 quirúrgicas laparoscópicas sin necesidad de referirte a otro especialista.
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${pages.credentials}`}>
                 {DOCTOR.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -324,27 +326,21 @@ export default function DilatacionColonicaPage() {
       </section>
 
       {/* SECTION 6: Google Reviews */}
-      <section className="bg-muted">
-        <div className="container-page section-padding">
-          <GoogleReviews />
-        </div>
-      </section>
+      <GoogleReviews className={system.reviews} />
 
       {/* SECTION 7: FAQ */}
-      <section className="bg-background">
-        <div className="container-page section-padding">
-          <Faq routeKey="dilatacion_colonica" service="dilatación colónica" />
-        </div>
+      <section className={`bg-background ${system.faq}`}>
+        <Faq routeKey="dilatacion_colonica" service="dilatación colónica" />
       </section>
 
       {/* SECTION 8: Related Procedures + Bottom CTA */}
-      <section className="bg-primary">
+      <section className={`bg-primary ${system.closing} ${pages.inverse}`}>
         <div className="container-page section-padding text-center space-y-8">
           {/* Related procedures */}
-          <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+          <h2 className={`text-xl md:text-2xl font-serif font-bold text-white tracking-tight ${system.closingSub}`}>
             Procedimientos Relacionados
           </h2>
-          <div className="grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div className={`grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto ${pages.closingLinks}`}>
             {[
               { name: "Colonoscopia", href: "/colonoscopia-merida" },
               { name: "Dilatación Esofágica", href: "/dilatacion-esofagica-merida" },
@@ -368,7 +364,7 @@ export default function DilatacionColonicaPage() {
             Mejora tu calidad de vida con tratamiento endoscópico especializado en{" "}
             {CLINIC.address.addressLocality}, {CLINIC.address.addressRegion}.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-sticky-bottom-cta>
             <WhatsAppButton
               service="dilatación colónica"
               position="cta section"
@@ -383,6 +379,6 @@ export default function DilatacionColonicaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

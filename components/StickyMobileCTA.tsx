@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Phone } from "lucide-react"
+import { Phone, MessageCircle } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { CLINIC, waHref, telHref } from "@/lib/clinic"
 import { useWhatsAppRef } from "@/lib/useWhatsAppRef"
 import { pushPhoneClick } from "@/lib/gtm"
@@ -15,7 +16,46 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
+// Routes opted into the design refresh use the outlined MessageCircle icon.
+const DESIGN_REFRESH_ROUTES = [
+  "/",
+  "/endoscopia-merida",
+  "/colonoscopia-merida",
+  "/cpre-merida",
+  "/ligadura-varices-esofagicas-merida",
+  "/precios",
+  "/equipo-medico",
+  "/contacto",
+  "/emergencias-digestivas-merida",
+  "/dr-omar-quiroz",
+  "/apc-coagulacion-plasma-argon-merida",
+  "/capsula-endoscopica-merida",
+  "/cierre-fistulas-clips-endoscopicos-merida",
+  "/consultas-digestivas-merida",
+  "/cpre-playa-del-carmen",
+  "/dilatacion-biliar-merida",
+  "/dilatacion-colonica-merida",
+  "/dilatacion-esofagica-merida",
+  "/diseccion-endoscopica-submucosa-esd-merida",
+  "/endoprotesis-biliares-merida",
+  "/endoprotesis-colonicas-merida",
+  "/endoprotesis-duodenales-merida",
+  "/endoprotesis-esofagicas-merida",
+  "/esclerosis-varices-gastricas-merida",
+  "/extraccion-cuerpos-extranos-endoscopia-merida",
+  "/gastrostomia-endoscopica-peg-merida",
+  "/ligadura-hemorroides-internas-merida",
+  "/pacientes-de-fuera-de-merida",
+  "/preparacion-colonoscopia",
+  "/preparacion-endoscopia",
+  "/reseccion-endoscopica-mucosa-emr-merida",
+  "/retiro-balon-gastrico-merida",
+  "/sutura-endoscopica-merida",
+  "/ultrasonido-endoscopico-merida",
+]
+
 export default function StickyMobileCTA() {
+  const pathname = usePathname()
   // Two independent gates: the bar shows once the hero CTAs are out of view,
   // and retracts again while an on-page CTA block it would cover is on screen.
   const [pastHero, setPastHero] = useState(false)
@@ -23,12 +63,16 @@ export default function StickyMobileCTA() {
   const visible = pastHero && !coveringCta
 
   useEffect(() => {
-    const heroCtas = document.getElementById("hero-ctas")
+    setPastHero(false)
+    setCoveringCta(false)
+    const heroCtas =
+      document.querySelector<HTMLElement>("[data-sticky-hero-cta]") ??
+      document.getElementById("hero-ctas")
 
     // If a hero CTA section exists, use IntersectionObserver
     if (heroCtas) {
       const observer = new IntersectionObserver(
-        ([entry]) => setPastHero(!entry.isIntersecting),
+        ([entry]) => setPastHero(!entry.isIntersecting && entry.boundingClientRect.bottom <= 0),
         { threshold: 0 }
       )
       observer.observe(heroCtas)
@@ -40,13 +84,16 @@ export default function StickyMobileCTA() {
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [pathname])
 
   // The bottom CTA section renders its own WhatsApp/Call pair. The fixed bar
   // is ~57px tall and lands right on that pair at a natural scroll resting
   // position, so hide the bar for as long as the section is on screen.
   useEffect(() => {
-    const bottomCta = document.getElementById("bottom-cta")
+    setCoveringCta(false)
+    const bottomCta =
+      document.querySelector<HTMLElement>("[data-sticky-bottom-cta]") ??
+      document.getElementById("bottom-cta")
     if (!bottomCta) return
 
     const observer = new IntersectionObserver(
@@ -55,7 +102,7 @@ export default function StickyMobileCTA() {
     )
     observer.observe(bottomCta)
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
   // Sticky CTA uses the clinic default message; the hook appends the ref line.
   const handleWhatsAppClick = useWhatsAppRef({
@@ -83,7 +130,7 @@ export default function StickyMobileCTA() {
           onClick={handleWhatsAppClick}
           className="flex-1 flex items-center justify-center gap-2 bg-action-primary hover:bg-action-primary-hover text-white min-h-[48px] rounded-xl text-[15px] font-bold shadow-sm transition-colors"
         >
-          <WhatsAppIcon className="h-5 w-5" />
+          {DESIGN_REFRESH_ROUTES.includes(pathname) ? <MessageCircle className="h-4 w-4" /> : <WhatsAppIcon className="h-5 w-5" />}
           WhatsApp
         </a>
         <a
