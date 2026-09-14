@@ -167,10 +167,11 @@ async function GoogleReviewsAsync({
                   </div>
                 </div>
 
-                <div className="mb-2 flex gap-0.5" aria-label={`${stars} de 5 estrellas`}>
+                <div className="mb-2 flex gap-0.5" role="img" aria-label={`${stars} de 5 estrellas`}>
                   {Array.from({ length: stars }).map((_, s) => (
                     <Star
                       key={s}
+                      aria-hidden="true"
                       className="h-4 w-4 fill-feedback-warning text-feedback-warning"
                     />
                   ))}
