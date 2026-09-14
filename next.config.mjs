@@ -15,7 +15,11 @@ const nextConfig = {
     cssChunking: false,
   },
   images: {
-    formats: ['image/avif', 'image/webp'],
+    // WebP only. AVIF decode on low-end Android (Lighthouse's Moto G Power,
+    // 4x CPU slowdown) added ~2s of "element render delay" to the homepage
+    // hero LCP even though the file downloaded in <0.6s (measured 2026-09-14).
+    // WebP costs ~20-30 KB more per hero but paints immediately.
+    formats: ['image/webp'],
     // YouTubeEmbed facade thumbnails (resized + long-cached via /_next/image).
     remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com', pathname: '/vi/**' }],
   },
