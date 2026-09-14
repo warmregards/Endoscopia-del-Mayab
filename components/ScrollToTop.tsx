@@ -17,6 +17,8 @@ export default function ScrollToTop() {
   const firedCtaView = useRef(false)
   const firedPricingView = useRef(false)
 
+  const isFirstMount = useRef(true)
+
   useEffect(() => {
     // Honor in-page deep links (e.g. /precios#endoscopia from an ad) instead
     // of forcing the page back to the top. Defer one frame so the target
@@ -26,15 +28,22 @@ export default function ScrollToTop() {
       requestAnimationFrame(() => {
         document.getElementById(hash)?.scrollIntoView()
       })
-    } else {
+    } else if (!isFirstMount.current) {
+      // Only on client-side route changes: on the initial load the page is
+      // already at the top, and scrolling there forced a layout during boot.
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
+    isFirstMount.current = false
     firedDepths.current.clear()
     firedCtaView.current = false
     firedPricingView.current = false
 
     // --- Scroll depth tracking (25/50/75/90%) ---
-    function handleScroll() {
+    // Layout reads (scrollHeight/innerHeight) run at most once per frame,
+    // inside rAF, never synchronously in the scroll event.
+    let frame = 0
+    function measure() {
+      frame = 0
       const scrollTop = window.scrollY
       const docHeight =
         document.documentElement.scrollHeight - window.innerHeight
@@ -47,6 +56,9 @@ export default function ScrollToTop() {
           pushScrollDepth(threshold, pathname)
         }
       }
+    }
+    function handleScroll() {
+      if (!frame) frame = requestAnimationFrame(measure)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -81,6 +93,7 @@ export default function ScrollToTop() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll)
+      if (frame) cancelAnimationFrame(frame)
       observer.disconnect()
     }
   }, [pathname])
