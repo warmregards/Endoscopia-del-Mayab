@@ -3,8 +3,16 @@
   "placeUrl": "https://maps.google.com/?cid=16209304746338166962&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
   "rating": 5,
   "total": 100,
-  "fetchedAt": "2026-09-15T10:58:04.803Z",
+  "fetchedAt": "2026-09-16T10:45:16.854Z",
   "reviews": [
+    {
+      "author_name": "Mtro. Manuel Antonio Mayo Corzo",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLgoACA3J9ZXJ2k88L5VMUNf8ooXBsDyzyEJbNmsMm8VajeQqE=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "Hace 1 mes",
+      "text": "Excelente trato, profesionalismo por parte del Dr. Omar Quiroz y su equipo de trabajo. Los resultados Endoscopista de las colonoscopia son rápidos y confiables sin reacciones secundarias después de los procedimientos. Recomendado al 100%.",
+      "time": 1785332638
+    },
     {
       "author_name": "Liliana Sabala",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL7rCGknrYi36ksAlePCtaCsbMDH1wZEWr6FwZYDkRRocNdkg=s128-c0x00000000-cc-rp-mo",
@@ -20,14 +28,6 @@
       "relative_time_description": "Hace 2 meses",
       "text": "Quiero agradecer públicamente al Dr. Omar Quiroz por la atención que le dio a mi mamá en Amerimed, desde el primer momento se tomó el tiempo de explicarnos el diagnóstico y el plan de manejo de forma clara, sin tecnicismos innecesarios. *Valoramos mucho que siempre contestó nuestras preguntas, incluso fuera de horario, y que nos dio tranquilidad en un momento difícil.*\n\nSu trato humano, su paciencia para explicar y su seguimiento puntual marcaron la diferencia. Se nota que es un médico actualizado y que realmente le importa el bienestar de sus pacientes.\n\nMi familia y yo estamos muy agradecidos con él. Dios me lo bendiga siempre Doctor Omar.",
       "time": 1782395272
-    },
-    {
-      "author_name": "LMI KARINA LS",
-      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVttxyh3f4frwnJ-OtSGHzKDCBJ0YxpHrLAYnOcT51j6as7N6k-=s128-c0x00000000-cc-rp-mo-ba2",
-      "rating": 5,
-      "relative_time_description": "Hace 3 meses",
-      "text": "El dia de hoy fuimos atendidos por el Dr. Omar , muy profesional . y amable. nos explico a detalle el procedimiento de endoscopia. Recomiendo ampliamente",
-      "time": 1779998175
     },
     {
       "author_name": "Emily Bench",
