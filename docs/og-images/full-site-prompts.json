@@ -1,0 +1,280 @@
+{
+  "tool": "Built-in image_gen",
+  "prompts": [
+    {
+      "slug": "capsula-endoscopica",
+      "route": "/capsula-endoscopica-merida",
+      "headline": "Cápsula / endoscópica",
+      "subtitle": "Exploración del intestino delgado",
+      "visual": "ivory capsule camera with a dark green glass lens floating above a loosely coiled ivory intestinal ribbon",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Cápsula\nendoscópica\". Supporting text exactly \"Exploración del intestino delgado\". Right panel visual: ivory capsule camera with a dark green glass lens floating above a loosely coiled ivory intestinal ribbon.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "cpre-playa-del-carmen",
+      "route": "/cpre-playa-del-carmen",
+      "headline": "CPRE para / Quintana Roo",
+      "subtitle": "Atención especializada en Mérida",
+      "visual": "an ivory sculptural liver with fine green biliary branches paired with a small discreet travel route arc; no map, labels or invented hospital",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"CPRE para\nQuintana Roo\". Supporting text exactly \"Atención especializada en Mérida\". Right panel visual: an ivory sculptural liver with fine green biliary branches paired with a small discreet travel route arc; no map, labels or invented hospital.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "esclerosis-varices",
+      "route": "/esclerosis-varices-gastricas-merida",
+      "headline": "Esclerosis de / várices gástricas",
+      "subtitle": "Endoscopia terapéutica en Mérida",
+      "visual": "ivory ceramic stomach with subtle green branching vessel motif across its upper curve, no needle or procedural depiction",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Esclerosis de\nvárices gástricas\". Supporting text exactly \"Endoscopia terapéutica en Mérida\". Right panel visual: ivory ceramic stomach with subtle green branching vessel motif across its upper curve, no needle or procedural depiction.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "gastrostomia",
+      "route": "/gastrostomia-endoscopica-peg-merida",
+      "headline": "Gastrostomía / endoscópica",
+      "subtitle": "Soporte nutricional · PEG",
+      "visual": "ivory sculptural stomach with a single delicate forest green feeding tube exiting its side and a small ivory circular port",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Gastrostomía\nendoscópica\". Supporting text exactly \"Soporte nutricional · PEG\". Right panel visual: ivory sculptural stomach with a single delicate forest green feeding tube exiting its side and a small ivory circular port.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "extraccion-cuerpos-extranos",
+      "route": "/extraccion-cuerpos-extranos-endoscopia-merida",
+      "headline": "Extracción de / cuerpos extraños",
+      "subtitle": "Endoscopia terapéutica en Mérida",
+      "visual": "fine forest green retrieval basket cradling a small ivory sphere, refined sculptural abstraction",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Extracción de\ncuerpos extraños\". Supporting text exactly \"Endoscopia terapéutica en Mérida\". Right panel visual: fine forest green retrieval basket cradling a small ivory sphere, refined sculptural abstraction.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "dilatacion-esofagica",
+      "route": "/dilatacion-esofagica-merida",
+      "headline": "Dilatación / esofágica",
+      "subtitle": "Atención especializada en Mérida",
+      "visual": "upright ivory tubular sculpture with a gentle narrowed waist and an elegant forest green spindle-shaped balloon within, abstract and non-graphic",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Dilatación\nesofágica\". Supporting text exactly \"Atención especializada en Mérida\". Right panel visual: upright ivory tubular sculpture with a gentle narrowed waist and an elegant forest green spindle-shaped balloon within, abstract and non-graphic.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "dilatacion-biliar",
+      "route": "/dilatacion-biliar-merida",
+      "headline": "Dilatación / biliar",
+      "subtitle": "Endoscopia de las vías biliares",
+      "visual": "delicate ivory Y-shaped biliary branching tube sculpture with a tiny green elongated balloon accent in its main stem",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Dilatación\nbiliar\". Supporting text exactly \"Endoscopia de las vías biliares\". Right panel visual: delicate ivory Y-shaped biliary branching tube sculpture with a tiny green elongated balloon accent in its main stem.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "dilatacion-colonica",
+      "route": "/dilatacion-colonica-merida",
+      "headline": "Dilatación / colónica",
+      "subtitle": "Endoscopia terapéutica en Mérida",
+      "visual": "ivory curved segmented colon arch, a subtle green spindle-shaped balloon accent at its curved lower end",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Dilatación\ncolónica\". Supporting text exactly \"Endoscopia terapéutica en Mérida\". Right panel visual: ivory curved segmented colon arch, a subtle green spindle-shaped balloon accent at its curved lower end.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "retiro-balon-gastrico",
+      "route": "/retiro-balon-gastrico-merida",
+      "headline": "Retiro de / balón gástrico",
+      "subtitle": "Atención endoscópica en Mérida",
+      "visual": "ivory open stomach silhouette with a soft partly deflated sage balloon and fine forest green line lifting it, conceptual sculpture",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Retiro de\nbalón gástrico\". Supporting text exactly \"Atención endoscópica en Mérida\". Right panel visual: ivory open stomach silhouette with a soft partly deflated sage balloon and fine forest green line lifting it, conceptual sculpture.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "apc",
+      "route": "/apc-coagulacion-plasma-argon-merida",
+      "headline": "Plasma de / argón · APC",
+      "subtitle": "Endoscopia terapéutica en Mérida",
+      "visual": "fine forest green probe hovering above a smooth folded ivory surface with a tiny delicate sage luminous point, no sparks, fire or tissue",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Plasma de\nargón · APC\". Supporting text exactly \"Endoscopia terapéutica en Mérida\". Right panel visual: fine forest green probe hovering above a smooth folded ivory surface with a tiny delicate sage luminous point, no sparks, fire or tissue.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "endoprotesis-esofagicas",
+      "route": "/endoprotesis-esofagicas-merida",
+      "headline": "Endoprótesis / esofágicas",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "vertical elegant ivory esophageal tube with a finely woven forest green cylindrical stent, precise delicate lattice",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Endoprótesis\nesofágicas\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: vertical elegant ivory esophageal tube with a finely woven forest green cylindrical stent, precise delicate lattice.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "endoprotesis-biliares",
+      "route": "/endoprotesis-biliares-merida",
+      "headline": "Endoprótesis / biliares",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "slender branching ivory biliary sculpture with a delicate small forest green mesh stent in the central vertical duct",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Endoprótesis\nbiliares\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: slender branching ivory biliary sculpture with a delicate small forest green mesh stent in the central vertical duct.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "endoprotesis-duodenales",
+      "route": "/endoprotesis-duodenales-merida",
+      "headline": "Endoprótesis / duodenales",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "ivory C-shaped duodenal curve connected to partial stomach silhouette, elegant forest green mesh stent following curve",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Endoprótesis\nduodenales\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: ivory C-shaped duodenal curve connected to partial stomach silhouette, elegant forest green mesh stent following curve.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "endoprotesis-colonicas",
+      "route": "/endoprotesis-colonicas-merida",
+      "headline": "Endoprótesis / colónicas",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "ivory softly segmented colon bend with a larger curved forest green woven stent insert",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Endoprótesis\ncolónicas\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: ivory softly segmented colon bend with a larger curved forest green woven stent insert.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "cierre-fistulas",
+      "route": "/cierre-fistulas-clips-endoscopicos-merida",
+      "headline": "Cierre de / fístulas",
+      "subtitle": "Clips endoscópicos · Mérida",
+      "visual": "two smooth ivory sculptural folds brought together by one small elegant forest green metallic clip, non-graphic abstract repair motif",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Cierre de\nfístulas\". Supporting text exactly \"Clips endoscópicos · Mérida\". Right panel visual: two smooth ivory sculptural folds brought together by one small elegant forest green metallic clip, non-graphic abstract repair motif.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "sutura-endoscopica",
+      "route": "/sutura-endoscopica-merida",
+      "headline": "Sutura / endoscópica",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "smooth ivory folded ceramic surface crossed by three delicate forest green thread stitches, abstract and no realistic tissue",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Sutura\nendoscópica\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: smooth ivory folded ceramic surface crossed by three delicate forest green thread stitches, abstract and no realistic tissue.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "esd",
+      "route": "/diseccion-endoscopica-submucosa-esd-merida",
+      "headline": "Disección / submucosa · ESD",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "layered ivory sculptural curved sheets with a broad thin top layer gently lifted from its sage base, fine green precision instrument beside it, non-instructional abstraction",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Disección\nsubmucosa · ESD\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: layered ivory sculptural curved sheets with a broad thin top layer gently lifted from its sage base, fine green precision instrument beside it, non-instructional abstraction.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "emr",
+      "route": "/reseccion-endoscopica-mucosa-emr-merida",
+      "headline": "Resección / mucosa · EMR",
+      "subtitle": "Endoscopia avanzada en Mérida",
+      "visual": "small raised ivory rounded polyp-like ceramic form on a smooth ivory surface, circled by a fine forest green snare loop, non-graphic editorial sculpture",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Resección\nmucosa · EMR\". Supporting text exactly \"Endoscopia avanzada en Mérida\". Right panel visual: small raised ivory rounded polyp-like ceramic form on a smooth ivory surface, circled by a fine forest green snare loop, non-graphic editorial sculpture.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "ultrasonido-endoscopico",
+      "route": "/ultrasonido-endoscopico-merida",
+      "headline": "Ultrasonido / endoscópico",
+      "subtitle": "Evaluación digestiva especializada",
+      "visual": "forest green curved ultrasound endoscope tip with three sculptural pale sage concentric acoustic arcs over an ivory rounded form",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Ultrasonido\nendoscópico\". Supporting text exactly \"Evaluación digestiva especializada\". Right panel visual: forest green curved ultrasound endoscope tip with three sculptural pale sage concentric acoustic arcs over an ivory rounded form.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "emergencias-digestivas",
+      "route": "/emergencias-digestivas-merida",
+      "headline": "Emergencias / digestivas",
+      "subtitle": "Atención especializada en Mérida",
+      "visual": "refined ivory medical cross sculpture with a single forest green pulse line and understated circular ring, calm reassuring no alarming red",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Emergencias\ndigestivas\". Supporting text exactly \"Atención especializada en Mérida\". Right panel visual: refined ivory medical cross sculpture with a single forest green pulse line and understated circular ring, calm reassuring no alarming red.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "consultas-digestivas",
+      "route": "/consultas-digestivas-merida",
+      "headline": "Consultas / digestivas",
+      "subtitle": "Valoración con el Dr. Omar Quiroz",
+      "visual": "elegant dark green stethoscope loosely curved beside an ivory consultation notebook, calm editorial still life, no people or extra text",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Consultas\ndigestivas\". Supporting text exactly \"Valoración con el Dr. Omar Quiroz\". Right panel visual: elegant dark green stethoscope loosely curved beside an ivory consultation notebook, calm editorial still life, no people or extra text.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "pacientes-fuera-merida",
+      "route": "/pacientes-de-fuera-de-merida",
+      "headline": "¿Vienes de / fuera de Mérida?",
+      "subtitle": "Planea tu visita con nosotros",
+      "visual": "ivory travel route sculpture connecting two location pins with a fine forest green curved path, no geographic map, a small minimalist ivory travel bag",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"¿Vienes de\nfuera de Mérida?\". Supporting text exactly \"Planea tu visita con nosotros\". Right panel visual: ivory travel route sculpture connecting two location pins with a fine forest green curved path, no geographic map, a small minimalist ivory travel bag.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "preparacion-endoscopia",
+      "route": "/preparacion-endoscopia",
+      "headline": "Prepara tu / endoscopia",
+      "subtitle": "Información para tu procedimiento",
+      "visual": "ivory calendar page with fine green checkmark, minimal ivory clock and small sculptural stomach accent, no clock numbers, no fasting times or medical instructions",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Prepara tu\nendoscopia\". Supporting text exactly \"Información para tu procedimiento\". Right panel visual: ivory calendar page with fine green checkmark, minimal ivory clock and small sculptural stomach accent, no clock numbers, no fasting times or medical instructions.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "preparacion-colonoscopia",
+      "route": "/preparacion-colonoscopia",
+      "headline": "Prepara tu / colonoscopia",
+      "subtitle": "Información para tu procedimiento",
+      "visual": "clear glass of water, ivory checklist with green checkmarks and small conceptual ivory colon sculpture, no medical instructions, no drugs or extra text",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Prepara tu\ncolonoscopia\". Supporting text exactly \"Información para tu procedimiento\". Right panel visual: clear glass of water, ivory checklist with green checkmarks and small conceptual ivory colon sculpture, no medical instructions, no drugs or extra text.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    },
+    {
+      "slug": "contacto",
+      "route": "/contacto",
+      "headline": "Estamos / para ayudarte",
+      "subtitle": "Agenda tu cita en Mérida",
+      "visual": "elegant ivory telephone handset and sculptural forest green location pin arranged on a calm sage panel, no phone digits or invented address",
+      "prompt": "Use case: ads-marketing. Generate ONE finished professional Open Graph card, landscape 1200x630. Input is STYLE REFERENCE only: match its layout, warm ivory #f8f7f2 background, dark forest green #193d35 regular Georgia-style serif heading, clean sans serif support text, fine horizontal rules, right rounded pale sage #e9eee4 panel and beautiful ivory ceramic medical sculpture. Quiet editorial style, generous spacing. Top left exactly \"Endoscopia del Mayab\". Bottom left exactly \"Hospital Amerimed · Mérida, Yucatán\". Safe margins 48px minimum. Left 55% text, right 40% visual. Large readable headlines, reduce to fit long words. No extra text, badges, watermark, mockup, prices, procedural instructions. Medical motifs conceptual non-graphic sculptures, not instructional diagrams. Headline exactly \"Estamos\npara ayudarte\". Supporting text exactly \"Agenda tu cita en Mérida\". Right panel visual: elegant ivory telephone handset and sculptural forest green location pin arranged on a calm sage panel, no phone digits or invented address.",
+      "references": [
+        "/Users/sanel/dev/personal/endoscopia-del-mayab/public/og/endoscopia.jpg"
+      ]
+    }
+  ]
+}

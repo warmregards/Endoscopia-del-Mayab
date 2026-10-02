@@ -1,3 +1,4 @@
+import { socialImagesForPath } from "@/lib/og-images";
 import type { Metadata } from "next";
 import {
   Star,
@@ -37,6 +38,7 @@ import pages from "../../../(site)/design-pages.module.css";
 // second variable onto the bid test. See 04_MANUAL_ITEMS for the swap steps.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
+  ...socialImagesForPath("/colonoscopia-merida", "Colonoscopia en Mérida"),
   title: `Colonoscopia en Mérida ${displayFrom("colonoscopia", "desde")} | Dr. Omar Quiroz`,
   description: `Colonoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado ${displayFrom("colonoscopia", "desde")}, retiro de pólipos en la misma sesión. Agenda por WhatsApp.`,
   robots: { index: false, follow: false },

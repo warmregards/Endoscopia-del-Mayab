@@ -1,3 +1,4 @@
+import { socialImagesForPath } from "@/lib/og-images";
 import type { Metadata } from "next";
 import {
   Star,
@@ -29,6 +30,7 @@ import pages from "../../../(site)/design-pages.module.css";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
+  ...socialImagesForPath("/endoscopia-merida", "Endoscopia en Mérida"),
   title: `Endoscopia en Mérida ${displayFrom("endoscopia", "desde")} | Dr. Omar Quiroz`,
   description: `Endoscopia con sedación en Hospital Amerimed, Mérida. Precio cerrado ${displayFrom("endoscopia", "desde")}, reporte el mismo día. Agenda por WhatsApp con el Dr. Omar Quiroz.`,
   robots: { index: false, follow: false },

@@ -1,3 +1,4 @@
+import { socialImagesForPath } from "@/lib/og-images";
 import type { Metadata } from "next";
 import {
   Star,
@@ -28,6 +29,7 @@ import pages from "../../../(site)/design-pages.module.css";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
+  ...socialImagesForPath("/ligadura-hemorroides-internas-merida", "Ligadura de hemorroides internas"),
   title: "Ligadura de hemorroides en Mérida sin cirugía | Dr. Omar Quiroz",
   description:
     "Ligadura de hemorroides internas en Mérida, sin cirugía mayor ni hospitalización, con sedación. Atención discreta con el Dr. Quiroz. Agenda por WhatsApp.",

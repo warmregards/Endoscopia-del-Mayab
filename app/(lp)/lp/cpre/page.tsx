@@ -1,3 +1,4 @@
+import { socialImagesForPath } from "@/lib/og-images";
 import type { Metadata } from "next";
 import {
   Star,
@@ -28,6 +29,7 @@ import pages from "../../../(site)/design-pages.module.css";
 // for the ad crawl + browser tab and must not leak into the indexed SEO system.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
+  ...socialImagesForPath("/cpre-merida", "CPRE en Mérida"),
   title: "CPRE en Mérida sin cirugía abierta | Dr. Omar Quiroz",
   description:
     "CPRE endoscópica en Hospital Amerimed, Mérida: extracción de cálculos y desobstrucción biliar sin cirugía abierta, con sedación. Agenda por WhatsApp.",

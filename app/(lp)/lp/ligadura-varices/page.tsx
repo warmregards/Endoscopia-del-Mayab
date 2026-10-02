@@ -1,3 +1,4 @@
+import { socialImagesForPath } from "@/lib/og-images";
 import type { Metadata } from "next";
 import {
   Star,
@@ -32,6 +33,7 @@ import pages from "../../../(site)/design-pages.module.css";
 // mention, merge, or cross-link to esclerosis/gástricas anywhere here.
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
+  ...socialImagesForPath("/ligadura-varices-esofagicas-merida", "Ligadura de várices esofágicas"),
   title: "Ligadura de várices esofágicas en Mérida | Dr. Omar Quiroz",
   description:
     "Ligadura endoscópica de várices esofágicas en Hospital Amerimed, Mérida, con sedación. Control y prevención de sangrado. Agenda por WhatsApp.",
