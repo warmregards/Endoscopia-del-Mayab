@@ -37,7 +37,7 @@ export const DOCTOR = {
     /** Team cards (/equipo-medico, <TeamPresence>) — same file as `headshot`. */
     team: "/equipo/omar-quiroz-portrait.webp",
     /** OG/Twitter card image (1200×630) — falls back to headshot if not set */
-    og: "/omar-open-graph.jpg",
+    og: "/og/dr-omar-quiroz.jpg",
   },
 
   // ── Workplace reference ─────────────────────────────────────────────────

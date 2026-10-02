@@ -1,0 +1,9 @@
+{
+  "tool": "Built-in image_gen",
+  "prompts": [
+    {
+      "slug": "endoscopia",
+      "prompt": "Use case: ads-marketing. Create a finished professional website Open Graph card, landscape exactly 1200x630 pixels. Website Endoscopia del Mayab's established visual design: warm ivory #f8f7f2, forest green #193d35, pale sage #e9eee4, delicate rules #d5dcd4, Georgia-style regular serif headings with tight tracking and clean Open Sans-style supporting typography. Sophisticated quiet editorial medicine, flat color, large legible type and generous whitespace, no gradients, no fake logos, no watermarks. Keep all text at least 64 pixels from edges. Top left small wordmark text \"Endoscopia del Mayab\". Main heading left, very large on two lines: \"Endoscopia\" / \"en Mérida\". Below smaller text \"Evaluación del tracto digestivo superior\". Bottom left \"Hospital Amerimed · Mérida, Yucatán\". Right 40%: refined sculptural ivory ceramic stomach with a short esophagus and duodenal curve, a single dark green flexible endoscope line approaching the esophagus; pale sage rounded rectangular backdrop, restrained clinical editorial illustration, non-graphic. Anatomical motif is conceptual, no labels or educational instructions. Single card, no website mockup, no device frame."
+    }
+  ]
+}

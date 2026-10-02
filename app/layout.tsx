@@ -1,3 +1,4 @@
+import { DEFAULT_OG_IMAGE } from "@/lib/og-images"
 import type React from "react";
 import { Suspense } from "react";
 import type { Metadata } from "next";
@@ -32,7 +33,7 @@ const openSans = Open_Sans({
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.endoscopiadelmayab.com").replace(/\/$/, "");
 const isProd = process.env.NODE_ENV === "production";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const defaultOg = `${siteUrl}/omar-open-graph.jpg`;
+const defaultOg = `${siteUrl}${DEFAULT_OG_IMAGE}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

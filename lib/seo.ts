@@ -13,7 +13,7 @@
 import type { Metadata } from "next"
 import { PRICING, hasPrice, mxn, type ServiceKey } from "@/lib/pricing"
 import { CLINIC } from "@/lib/clinic"
-import { DOCTOR } from "@/lib/doctor"
+import { ogImageForPath } from "@/lib/og-images"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -60,7 +60,6 @@ interface BuildMetaParams {
 const BRAND = "Endoscopia del Mayab"
 const BRAND_SUFFIX = ` | ${BRAND}` // " | Endoscopia del Mayab" = 23 chars
 const DEFAULT_SITE = "https://www.endoscopiadelmayab.com"
-const DEFAULT_OG_REL = "/omar-open-graph.jpg"
 
 // Google measures title width in pixels (~580px), not characters.
 // 70 chars is a safe ceiling that lets Google truncate the brand
@@ -126,7 +125,7 @@ export function buildMeta({
   title,
   description,
   path,
-  ogImage = DEFAULT_OG_REL,
+  ogImage = ogImageForPath(path),
   siteName = BRAND,
   locale = "es_MX",
   ogType = "website",
@@ -344,8 +343,7 @@ export function buildDoctorMeta(
  * Title: Equipo médico | Endoscopista, anestesiólogo y enfermera certificados
  * Description: who is in the room + verifiable credentials (Persona 3 + 5).
  *
- * No OG composite exists yet — falls back to the doctor card image. Swap in a
- * 1200×630 group shot via `overrides.ogImage` once one is produced.
+ * Uses the dedicated team social card selected by buildMeta from its route.
  */
 export function buildTeamMeta(
   overrides?: Partial<BuildMetaParams>
@@ -359,7 +357,6 @@ export function buildTeamMeta(
     ]),
     path: "/equipo-medico",
     ogType: "website",
-    ogImage: DOCTOR.photos.og,
     ...overrides,
   })
 }
