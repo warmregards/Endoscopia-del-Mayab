@@ -1,3 +1,4 @@
+import { PrepHeading, PrepIllustration } from "@/components/PrepIllustration"
 import system from "../design-system.module.css"
 import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
@@ -16,7 +17,6 @@ import {
   MessageSquare,
   ShoppingBag,
   Snowflake,
-  UtensilsCrossed,
 } from "lucide-react"
 import Faq from "@/components/Faq"
 import WhatsAppButton from "@/components/WhatsAppButton"
@@ -157,10 +157,11 @@ export default function PreparacionColonoscopiaPage() {
             </div>
 
             <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
-              <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight flex items-center gap-2">
-                <UtensilsCrossed className="h-6 w-6 text-accent" aria-hidden />
-                El día anterior
-              </h2>
+              <PrepHeading motif="liquids">
+                <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight flex items-center gap-2">
+                  El día anterior
+                </h2>
+              </PrepHeading>
               <p className="text-foreground/80 leading-relaxed">
                 Solo líquidos claros: agua, té, gelatina, jugo, caldos o sopas sin
                 verdura ni carne.
@@ -206,7 +207,10 @@ export default function PreparacionColonoscopiaPage() {
                   <span className={`font-serif font-bold text-text-accent whitespace-nowrap sm:w-24 ${pages.serifFigure}`}>
                     {s.time}
                   </span>
-                  <span className="font-semibold text-foreground">{s.step}</span>
+                  <span className="flex items-center gap-2 font-semibold text-foreground">
+                    <PrepIllustration motif={s.strong ? "fasting" : s.step === "Descanso" ? "liquids" : "jug"} small />
+                    {s.step}
+                  </span>
                   {s.note && (
                     <span className="text-sm text-muted-foreground sm:ml-auto">{s.note}</span>
                   )}
@@ -274,11 +278,9 @@ export default function PreparacionColonoscopiaPage() {
                   Si tienes diabetes
                 </h3>
                 <p className="text-foreground/80 leading-relaxed">
-                  Ayuno máximo de 4 horas. No apliques insulina ni tomes pastillas
-                  la mañana del estudio; trae tus medicamentos.{" "}
-                  <strong className="font-semibold text-foreground">
-                    Monitorea tu glucosa durante la preparación.
-                  </strong>
+                  Los ajustes de ayuno, insulina y pastillas son personales.
+                  Sigue las indicaciones de tu hoja de preparación y consulta
+                  al doctor si tienes alguna duda antes de cambiar tus medicamentos.
                 </p>
               </div>
               <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
@@ -316,9 +318,11 @@ export default function PreparacionColonoscopiaPage() {
       <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
-              Al llegar al hospital
-            </h2>
+            <PrepHeading motif="arrival">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
+                Al llegar al hospital
+              </h2>
+            </PrepHeading>
 
             <ul className="space-y-4 text-foreground/80 leading-relaxed">
               <li className="flex items-start gap-2">

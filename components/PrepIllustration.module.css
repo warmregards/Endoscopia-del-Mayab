@@ -1,0 +1,10 @@
+.art { display: block; width: 150px; height: auto; flex: 0 0 auto; color: #213c35; }
+.small { display: block; width: 56px; height: 44px; flex: 0 0 auto; color: #213c35; }
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.heading > div { min-width: 0; }
+.heading h2, .heading h3 { margin: 0; }
+@media (max-width: 600px) {
+  .art { width: 96px; }
+  .heading { gap: 16px; }
+}
+@media print { .art { width: 90px; } }

@@ -1,3 +1,4 @@
+import { PrepHeading } from "@/components/PrepIllustration"
 import system from "../design-system.module.css"
 import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
@@ -136,9 +137,11 @@ export default function PreparacionEndoscopiaPage() {
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
             <div className="space-y-2">
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
-                El día anterior
-              </h2>
+              <PrepHeading motif="liquids">
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
+                  El día anterior
+                </h2>
+              </PrepHeading>
               <p className="text-foreground/80 leading-relaxed">
                 La cena, solo líquidos claros: agua, té o gelatina. Después
                 empieza el ayuno total: nada de comer ni de beber. Así tu
@@ -163,9 +166,11 @@ export default function PreparacionEndoscopiaPage() {
             </div>
 
             <div className={`bg-card border border-border rounded-xl p-6 space-y-2 ${pages.open}`}>
-              <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
-                El día del estudio
-              </h3>
+              <PrepHeading motif="fasting">
+                <h3 className="font-serif font-semibold text-foreground text-lg tracking-tight">
+                  El día del estudio
+                </h3>
+              </PrepHeading>
               <p className="text-foreground/80 leading-relaxed">
                 Ayuno total hasta tu cita. Si tomas medicamento para la presión,
                 sí tómalo esa mañana, con muy poca agua, y nada más.
@@ -196,9 +201,9 @@ export default function PreparacionEndoscopiaPage() {
                   Si tienes diabetes
                 </h3>
                 <p className="text-foreground/80 leading-relaxed">
-                  Ayuno máximo de 6 horas. No apliques insulina ni tomes pastillas
-                  para la diabetes la mañana del estudio. Trae tus medicamentos
-                  para tomarlos después.
+                  Los ajustes de ayuno, insulina y pastillas son personales.
+                  Sigue las indicaciones de tu hoja de preparación y consulta
+                  al doctor si tienes alguna duda antes de cambiar tus medicamentos.
                 </p>
               </div>
               <div className={`bg-card border border-border rounded-xl p-6 space-y-4 ${pages.open}`}>
@@ -236,9 +241,11 @@ export default function PreparacionEndoscopiaPage() {
       <section className={`bg-muted ${pages.surface}`}>
         <div className="container-page section-padding">
           <div className="max-w-4xl space-y-8">
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
-              Al llegar al hospital
-            </h2>
+            <PrepHeading motif="arrival">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground tracking-tight">
+                Al llegar al hospital
+              </h2>
+            </PrepHeading>
 
             <ul className="space-y-4 text-foreground/80 leading-relaxed">
               <li className="flex items-start gap-2">
