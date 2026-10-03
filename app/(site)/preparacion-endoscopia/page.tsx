@@ -1,4 +1,5 @@
-import { PrepHeading } from "@/components/PrepIllustration"
+import prep from "@/components/PrepIllustration.module.css"
+import { PrepAnatomy, PrepCompanion, PrepHeading } from "@/components/PrepIllustration"
 import system from "../design-system.module.css"
 import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
@@ -79,53 +80,57 @@ export default function PreparacionEndoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="max-w-3xl space-y-6">
-            <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
-              Cómo prepararte para tu endoscopia
-            </h1>
+          <div className={prep.hero}>
+            <div className="space-y-6">
+              <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
+                Cómo prepararte para tu endoscopia
+              </h1>
 
-            <p className="text-lg text-foreground leading-relaxed">
-              Preparación para tu estudio con el {DOCTOR.name} en{" "}
-              {CLINIC.hospitalName}, {CLINIC.address.addressLocality}.
-            </p>
-
-            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-2 ${pages.note}`}>
-              <p className="text-sm font-medium text-muted-foreground">Regla principal</p>
-              <p className={`font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight ${pages.serifFigure}`}>
-                Ayuno total de 8 horas antes del estudio — sin comer ni beber
-                nada, ni agua.
+              <p className="text-lg text-foreground leading-relaxed">
+                Preparación para tu estudio con el {DOCTOR.name} en{" "}
+                {CLINIC.hospitalName}, {CLINIC.address.addressLocality}.
               </p>
+
+              <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-2 ${pages.note}`}>
+                <p className="text-sm font-medium text-muted-foreground">Regla principal</p>
+                <p className={`font-serif font-bold text-foreground text-xl md:text-2xl tracking-tight ${pages.serifFigure}`}>
+                  Ayuno total de 8 horas antes del estudio — sin comer ni beber
+                  nada, ni agua.
+                </p>
+              </div>
+
+              <p className="text-foreground/80 leading-relaxed">
+                Esta es la preparación general. Tus horarios exactos dependen de la
+                hora de tu cita y de tus medicamentos.{" "}
+                <strong className="font-semibold text-foreground">
+                  Las instrucciones detalladas se envían por WhatsApp al agendar.
+                </strong>
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
+                <WhatsAppButton
+                  service={SERVICE}
+                  position="hero"
+                  label="Agendar y recibir instrucciones"
+                  message={WA_MESSAGE}
+                  className="sm:px-8"
+                />
+                <CallButton service={SERVICE} position="hero" variant="ghost" />
+              </div>
             </div>
-
-            <p className="text-foreground/80 leading-relaxed">
-              Esta es la preparación general. Tus horarios exactos dependen de la
-              hora de tu cita y de tus medicamentos.{" "}
-              <strong className="font-semibold text-foreground">
-                Las instrucciones detalladas se envían por WhatsApp al agendar.
-              </strong>
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
-              <WhatsAppButton
-                service={SERVICE}
-                position="hero"
-                label="Agendar y recibir instrucciones"
-                message={WA_MESSAGE}
-                className="sm:px-8"
-              />
-              <CallButton service={SERVICE} position="hero" variant="ghost" />
-            </div>
-
-            <p className="flex items-start gap-2 text-foreground/80 leading-relaxed">
-              <FileText className="h-5 w-5 text-accent flex-shrink-0 mt-1" aria-hidden />
-              <span>
-                <strong className="font-semibold text-foreground">¿Ya tienes tu cita?</strong>{" "}
-                Junto con tu hoja de preparación te enviamos un video guía del{" "}
-                {DOCTOR.name}. Tu hoja trae tu fecha, tu hora y tus indicaciones
-                personales: tenla a la mano. Si algo aquí es distinto a tu hoja,
-                sigue tu hoja.
-              </span>
-            </p>
+            <aside className={prep.heroAside}>
+              <PrepAnatomy procedure="endoscopia" />
+              <p className="flex items-start gap-2 text-foreground/80 leading-relaxed">
+                <FileText className="h-5 w-5 text-accent flex-shrink-0 mt-1" aria-hidden />
+                <span>
+                  <strong className="font-semibold text-foreground">¿Ya tienes tu cita?</strong>{" "}
+                  Junto con tu hoja de preparación te enviamos un video guía del{" "}
+                  {DOCTOR.name}. Tu hoja trae tu fecha, tu hora y tus indicaciones
+                  personales: tenla a la mano. Si algo aquí es distinto a tu hoja,
+                  sigue tu hoja.
+                </span>
+              </p>
+            </aside>
           </div>
         </div>
       </section>
@@ -349,6 +354,8 @@ export default function PreparacionEndoscopiaPage() {
                 </p>
               </div>
             </div>
+
+            <PrepCompanion />
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
               <Link

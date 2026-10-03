@@ -1,4 +1,5 @@
-import { PrepHeading, PrepIllustration } from "@/components/PrepIllustration"
+import prep from "@/components/PrepIllustration.module.css"
+import { PrepAnatomy, PrepCompanion, PrepHeading, PrepIllustration } from "@/components/PrepIllustration"
 import system from "../design-system.module.css"
 import pages from "../design-pages.module.css"
 import { metaFor } from "@/lib/routes-seo"
@@ -76,53 +77,57 @@ export default function PreparacionColonoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className={`bg-background ${pages.hero} ${system.hero}`}>
         <div className="container-page section-padding">
-          <div className="max-w-3xl space-y-6">
-            <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
-              Cómo prepararte para tu colonoscopia
-            </h1>
+          <div className={prep.hero}>
+            <div className="space-y-6">
+              <h1 className="font-serif font-extrabold tracking-tight text-foreground text-3xl md:text-4xl lg:text-5xl">
+                Cómo prepararte para tu colonoscopia
+              </h1>
 
-            <p className="text-lg text-foreground leading-relaxed">
-              Preparación para tu estudio con el {DOCTOR.name} en{" "}
-              {CLINIC.hospitalName}, {CLINIC.address.addressLocality}. Una buena limpieza del colon es clave para un estudio completo. Si
-              la preparación no es adecuada, el estudio puede tener que
-              reprogramarse.
-            </p>
-
-            <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
-              <p className={`font-serif font-bold text-foreground text-xl tracking-tight ${pages.serifFigure}`}>
-                La preparación para colonoscopia se coordina siempre con nosotros.
+              <p className="text-lg text-foreground leading-relaxed">
+                Preparación para tu estudio con el {DOCTOR.name} en{" "}
+                {CLINIC.hospitalName}, {CLINIC.address.addressLocality}. Una buena limpieza del colon es clave para un estudio completo. Si
+                la preparación no es adecuada, el estudio puede tener que
+                reprogramarse.
               </p>
-              <p className="text-foreground/80 leading-relaxed">
-                La cantidad de solución, los horarios y los ajustes de
-                medicamentos dependen de tu caso y de la hora de tu cita.{" "}
-                <strong className="font-semibold text-foreground">
-                  Llámanos o escríbenos y te enviamos tu cronograma exacto.
-                </strong>{" "}
-                Las instrucciones detalladas se envían por WhatsApp al agendar.
+
+              <div className={`bg-accent-light border border-accent/20 rounded-xl p-6 space-y-4 ${pages.note}`}>
+                <p className={`font-serif font-bold text-foreground text-xl tracking-tight ${pages.serifFigure}`}>
+                  La preparación para colonoscopia se coordina siempre con nosotros.
+                </p>
+                <p className="text-foreground/80 leading-relaxed">
+                  La cantidad de solución, los horarios y los ajustes de
+                  medicamentos dependen de tu caso y de la hora de tu cita.{" "}
+                  <strong className="font-semibold text-foreground">
+                    Llámanos o escríbenos y te enviamos tu cronograma exacto.
+                  </strong>{" "}
+                  Las instrucciones detalladas se envían por WhatsApp al agendar.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
+                <WhatsAppButton
+                  service={SERVICE}
+                  position="hero"
+                  label="Recibir mi cronograma"
+                  message={WA_MESSAGE}
+                  className="sm:px-8"
+                />
+                <CallButton service={SERVICE} position="hero" variant="ghost" />
+              </div>
+            </div>
+            <aside className={prep.heroAside}>
+              <PrepAnatomy procedure="colonoscopia" />
+              <p className="flex items-start gap-2 text-foreground/80 leading-relaxed">
+                <FileText className="h-5 w-5 text-accent flex-shrink-0 mt-1" aria-hidden />
+                <span>
+                  <strong className="font-semibold text-foreground">¿Ya tienes tu cita?</strong>{" "}
+                  Junto con tu hoja de preparación te enviamos un video guía del{" "}
+                  {DOCTOR.name}. Tu hoja trae tu fecha, tu hora y tus indicaciones
+                  personales: tenla a la mano. Si algo aquí es distinto a tu hoja,
+                  sigue tu hoja.
+                </span>
               </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4" data-sticky-hero-cta>
-              <WhatsAppButton
-                service={SERVICE}
-                position="hero"
-                label="Recibir mi cronograma"
-                message={WA_MESSAGE}
-                className="sm:px-8"
-              />
-              <CallButton service={SERVICE} position="hero" variant="ghost" />
-            </div>
-
-            <p className="flex items-start gap-2 text-foreground/80 leading-relaxed">
-              <FileText className="h-5 w-5 text-accent flex-shrink-0 mt-1" aria-hidden />
-              <span>
-                <strong className="font-semibold text-foreground">¿Ya tienes tu cita?</strong>{" "}
-                Junto con tu hoja de preparación te enviamos un video guía del{" "}
-                {DOCTOR.name}. Tu hoja trae tu fecha, tu hora y tus indicaciones
-                personales: tenla a la mano. Si algo aquí es distinto a tu hoja,
-                sigue tu hoja.
-              </span>
-            </p>
+            </aside>
           </div>
         </div>
       </section>
@@ -177,7 +182,7 @@ export default function PreparacionColonoscopiaPage() {
           ══════════════════════════════════════════════════════════════════ */}
       <section className={`bg-background ${pages.paper}`}>
         <div className="container-page section-padding">
-          <div className="max-w-3xl space-y-8">
+          <div className="max-w-5xl space-y-8">
             <div className="space-y-2">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground tracking-tight">
                 Cronograma de ejemplo
@@ -196,24 +201,14 @@ export default function PreparacionColonoscopiaPage() {
               </p>
             </div>
 
-            <ol className="border border-border rounded-xl overflow-hidden bg-card">
-              {exampleSchedule.map((s, i) => (
-                <li
-                  key={s.time}
-                  className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 p-6 ${
-                    i < exampleSchedule.length - 1 ? "border-b border-border" : ""
-                  } ${s.strong ? "bg-accent-light" : ""}`}
-                >
-                  <span className={`font-serif font-bold text-text-accent whitespace-nowrap sm:w-24 ${pages.serifFigure}`}>
-                    {s.time}
-                  </span>
-                  <span className="flex items-center gap-2 font-semibold text-foreground">
-                    <PrepIllustration motif={s.strong ? "fasting" : s.step === "Descanso" ? "liquids" : "jug"} small />
-                    {s.step}
-                  </span>
-                  {s.note && (
-                    <span className="text-sm text-muted-foreground sm:ml-auto">{s.note}</span>
-                  )}
+            <ol className={prep.schedule} aria-label="Ejemplo de preparación para una cita a las 8:00 AM">
+              {exampleSchedule.map((s) => (
+                <li key={s.time} className={s.strong ? prep.fast : s.step === "Descanso" ? prep.rest : undefined}>
+                  <span className={prep.time}>{s.time}</span>
+                  <PrepIllustration motif={s.strong ? "fasting" : s.step === "Descanso" ? "liquids" : "jug"} />
+                  <span className={prep.step}>{s.step}</span>
+                  {s.note && <span className={prep.note}>{s.note}</span>}
+                  {s.strong && <span className={prep.note}>Hasta tu cita, sin comer ni beber.</span>}
                 </li>
               ))}
             </ol>
@@ -439,6 +434,8 @@ export default function PreparacionColonoscopiaPage() {
                 </p>
               </div>
             </div>
+
+            <PrepCompanion />
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
               <Link
