@@ -221,7 +221,7 @@ export const endoscopiaFaqs: FAQ[] = [
   {
     question: "¿Cuánto dura una endoscopia?",
     answer:
-      "El procedimiento dura 15–20 minutos. La estancia total en el hospital es de 2–3 horas (incluye preparación y recuperación). Entregamos resumen con fotos el mismo día. Si hay biopsias, patología en 5–7 días. Agenda por WhatsApp y el Dr. Quiroz te explica los tiempos para tu caso.",
+      "El procedimiento dura 15–20 minutos. La estancia total en el hospital es de 2–3 horas (incluye preparación y recuperación). Entregamos resumen con fotos el mismo día. Si hay biopsias, el resultado de patología tarda de 5 a 10 días hábiles. Agenda por WhatsApp y el Dr. Quiroz te explica los tiempos para tu caso.",
   },
   {
     question: "¿Es peligrosa la endoscopia?",

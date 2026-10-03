@@ -793,11 +793,11 @@ export default function ColonoscopiaPage() {
 
                 <div className="bg-card border border-border rounded-xl p-6">
                   <h3 className="font-serif font-semibold text-foreground mb-2">
-                    5–7 días (solo si hubo biopsias)
+                    5 a 10 días hábiles (solo si hubo biopsias)
                   </h3>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Si se tomaron biopsias, los resultados de patología se
-                    entregan en 5–7 días. El {DOCTOR.name} te contacta
+                    entregan en 5 a 10 días hábiles. El {DOCTOR.name} te contacta
                     personalmente por WhatsApp para explicar los resultados y
                     definir el siguiente paso.
                   </p>

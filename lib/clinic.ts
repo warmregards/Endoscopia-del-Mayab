@@ -48,6 +48,14 @@ export const CLINIC = {
     neighborhood: "Chichi Suárez",
   },
 
+  // ── Office inside the hospital (arrival instructions on the prep pages) ─
+  office: {
+    /** Consultorio number — also part of address.display */
+    number: "517",
+    /** Spoken/written floor, as the prep videos say it */
+    floor: "quinto piso",
+  },
+
   // ── Phone (three canonical formats) ─────────────────────────────────────
   phone: {
     /** Human-readable display: "999 236 0153" */
