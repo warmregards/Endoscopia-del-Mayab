@@ -340,21 +340,22 @@ Before shipping any component or page change:
 
 These rules govern all visual implementation. They are non-negotiable.
 
-### Spatial System: 8-Point Grid
+### Spatial System: 4-Point Grid
 
-ALL spacing values must be multiples of 8px. The only exception is 4px for
-tight typography pairs (heading directly above its subtitle).
+ALL spacing values must be multiples of 4px — any whole-number Tailwind step
+(`1`, `2`, `3`, `4`, `5`, `6`, …) is allowed. These are the common ones:
 
 | Tailwind | Pixels | Use |
 |----------|--------|-----|
-| `1` | 4px | Tight pairs only: heading → subtitle |
+| `1` | 4px | Tight pairs: heading → subtitle |
 | `2` | 8px | Minimum gap between any elements |
+| `3` | 12px | Compact gaps (icon/illustration ↔ label, arrow slides) |
 | `4` | 16px | Standard element gap within a section |
 | `6` | 24px | Between visual groups within a section |
 | `8` | 32px | Between sections or major content breaks |
 
-**Banned values:** `mb-1.5` (6px), `mb-3` (12px), `mb-5` (20px), `mb-7` (28px),
-`py-2.5` (10px), `py-3.5` (14px), `gap-3` (12px), `gap-5` (20px), `gap-7` (28px).
+**Off-grid (avoid):** half steps — `*-0.5` (2px), `*-1.5` (6px), `*-2.5` (10px),
+`*-3.5` (14px) — and arbitrary px values that aren't multiples of 4.
 
 **Rule: Internal ≤ External.** Padding inside a component must be ≤ margin
 between components. Card internal padding of 24px means cards must be spaced
@@ -362,7 +363,7 @@ between components. Card internal padding of 24px means cards must be spaced
 
 ### Icon Sizes
 
-Icons follow the same 8px grid: `16px` (h-4), `20px` (h-5), `24px` (h-6), `32px` (h-8).
+Icons follow the same 4px grid: `16px` (h-4), `20px` (h-5), `24px` (h-6), `32px` (h-8).
 
 | Context | Size | Tailwind |
 |---------|------|----------|
@@ -733,7 +734,7 @@ The MCP server is read-only. Offline conversion uploads stay in `reconcile-conve
 Run through this before every `git commit`:
 
 - [ ] `pnpm build` passes with zero errors
-- [ ] All spacing values are 8px grid multiples (no `mb-3`, `mb-5`, `py-2.5`, etc.)
+- [ ] All spacing values are 4px grid multiples (no half steps like `py-2.5`, `mb-1.5`)
 - [ ] All color classes exist in `@theme inline` (no silent Tailwind failures)
 - [ ] Prefer semantic tokens over primitives in components
 - [ ] CTA hierarchy: WhatsApp primary (wider, filled), Call secondary (narrower, ghost/outline)
