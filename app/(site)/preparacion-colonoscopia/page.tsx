@@ -204,11 +204,23 @@ export default function PreparacionColonoscopiaPage() {
             <ol className={prep.schedule} aria-label="Ejemplo de preparación para una cita a las 8:00 AM">
               {exampleSchedule.map((s) => (
                 <li key={s.time} className={s.strong ? prep.fast : s.step === "Descanso" ? prep.rest : undefined}>
-                  <span className={prep.time}>{s.time}</span>
-                  <PrepIllustration motif={s.strong ? "fasting" : s.step === "Descanso" ? "liquids" : "jug"} />
-                  <span className={prep.step}>{s.step}</span>
-                  {s.note && <span className={prep.note}>{s.note}</span>}
-                  {s.strong && <span className={prep.note}>Hasta tu cita, sin comer ni beber.</span>}
+                  {s.strong ? (
+                    <>
+                      <PrepIllustration motif="fasting" />
+                      <div className={prep.fastCopy}>
+                        <span className={prep.time}>Desde las {s.time}</span>
+                        <h3>{s.step}</h3>
+                        <p>Hasta tu cita, sin comer ni beber. Ni agua.</p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className={prep.time}>{s.time}</span>
+                      <PrepIllustration motif={s.step === "Descanso" ? "liquids" : "jug"} />
+                      <span className={prep.step}>{s.step}</span>
+                      {s.note && <span className={prep.note}>{s.note}</span>}
+                    </>
+                  )}
                 </li>
               ))}
             </ol>
@@ -385,7 +397,9 @@ export default function PreparacionColonoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: TU EQUIPO — bg-muted
           ══════════════════════════════════════════════════════════════════ */}
-      <TeamPresence procedure="colonoscopia" tone="muted" variant="compact" />
+      <div className={`${pages.team} ${prep.team}`}>
+        <TeamPresence procedure="colonoscopia" tone="muted" avatarSize={128} />
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 7: DURANTE Y DESPUÉS — bg-background

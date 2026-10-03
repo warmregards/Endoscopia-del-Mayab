@@ -305,7 +305,9 @@ export default function PreparacionEndoscopiaPage() {
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 5: TU EQUIPO — bg-background
           ══════════════════════════════════════════════════════════════════ */}
-      <TeamPresence procedure="endoscopia" tone="background" variant="compact" />
+      <div className={`${pages.team} ${prep.team}`}>
+        <TeamPresence procedure="endoscopia" tone="background" avatarSize={128} />
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 6: DURANTE Y DESPUÉS — bg-muted

@@ -25,9 +25,15 @@
 .schedule .step { font-family: Georgia, serif; font-size: 25px; color: var(--ink); }
 .schedule .note { margin-top: 8px; font-size: 13px; line-height: 1.6; color: var(--muted-ink); }
 .schedule .rest { background: var(--sage); border-radius: 6px; }
-.schedule .fast { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 20px; margin-top: 20px; padding: 20px 24px; border-top: 1px solid var(--rule); text-align: left; }
-.schedule .fast > svg { width: 64px; margin: 0; }
-.schedule .fast .note { margin: 0 0 0 auto; }
+.schedule .fast { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 28px; margin-top: 24px; padding: 32px; border-radius: 6px; background: var(--ink, #193d35); color: var(--inverse, #fffefa); text-align: left; --paper: #193d35; }
+.schedule .fast > svg { width: 100px; margin: 0; color: var(--inverse, #fffefa); }
+.fastCopy { min-width: 0; }
+.schedule .fast .time { color: var(--inverse-muted, #d2dfd3); font-size: 15px; }
+.schedule .fast h3 { color: var(--inverse, #fffefa); font-size: 36px; line-height: 1.15; margin: 6px 0 10px; }
+.schedule .fast p { color: var(--inverse, #fffefa); font-size: 18px; line-height: 1.5; margin: 0; }
+.team.team article { gap: 12px; }
+.team.team article > img { margin-bottom: 12px; }
+.team :global(.grid) { column-gap: 48px; row-gap: 32px; }
 @media (max-width: 1000px) {
   .hero { grid-template-columns: 1fr; gap: 32px; }
   .heroAside { flex-direction: row; align-items: center; }
@@ -40,10 +46,19 @@
   .schedule .rest > svg { grid-column: 1; grid-row: 1 / 4; width: 80px; margin: 0; }
   .schedule .rest > span { grid-column: 2; }
   .schedule .rest .note { margin-top: 0; }
-  .schedule .fast { flex-wrap: wrap; gap: 12px; padding-inline: 12px; }
-  .schedule .fast .note { width: 100%; margin: 0; }
+  .schedule .fast { gap: 20px; padding: 28px; }
 }
 @media (max-width: 540px) {
+  .schedule { grid-template-columns: 1fr; }
+  .schedule > li, .schedule .rest { display: grid; grid-template-columns: 80px minmax(0, 1fr); column-gap: 20px; padding: 20px 16px; text-align: left; align-items: center; border-bottom: 1px solid var(--rule); }
+  .schedule > li > svg { grid-column: 1; grid-row: 1 / 4; width: 80px; margin: 0; }
+  .schedule > li > span { grid-column: 2; }
+  .schedule > li .note { margin-top: 0; }
+  .schedule .fast { display: flex; flex-direction: row; align-items: flex-start; gap: 12px; padding: 24px 16px; border: 0; }
+  .schedule .fast > svg { width: 64px; }
+  .schedule .fast h3 { font-size: 30px; }
+  .schedule .fast p { font-size: 16px; }
+
   .heroAside { gap: 16px; align-items: flex-start; }
   .heroAside .anatomy { flex-basis: 100px; width: 100px; }
   .companion { gap: 16px; align-items: center; }
@@ -53,4 +68,6 @@
   .hero { grid-template-columns: 1fr 180px; gap: 24px; }
   .anatomy { width: 180px; }
   .schedule > li { break-inside: avoid; }
+  .schedule .fast { background: white; border: 2px solid #193d35; --paper: white; }
+  .schedule .fast > svg, .schedule .fast .time, .schedule .fast h3, .schedule .fast p { color: #193d35; }
 }
