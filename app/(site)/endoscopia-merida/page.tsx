@@ -678,7 +678,7 @@ export default function EndoscopiaPage() {
                   <li>Resultados con fotos el mismo día</li>
                   <li>Reporte completo entregado</li>
                   <li>Seguimiento por WhatsApp para dudas</li>
-                  <li>Si biopsia: patología en 5–10 días</li>
+                  <li>Si biopsia: patología en 5 a 10 días hábiles</li>
                 </ul>
               </div>
             </div>
@@ -746,7 +746,7 @@ export default function EndoscopiaPage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground">5–10 días:</strong> Resultado de patología (si hubo biopsias)</span>
+                  <span><strong className="text-foreground">5 a 10 días hábiles:</strong> Resultado de patología (si hubo biopsias)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />

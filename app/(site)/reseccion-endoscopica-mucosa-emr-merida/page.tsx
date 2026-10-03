@@ -302,7 +302,7 @@ export default function EmrPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent-strong mt-0.5 flex-shrink-0" />
-                  <span>Patología: 7–10 días</span>
+                  <span>Patología: 5 a 10 días hábiles</span>
                 </li>
               </ul>
             </div>
